@@ -1,0 +1,5 @@
+package mu
+
+
+class KLogger {
+}
