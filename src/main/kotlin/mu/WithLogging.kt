@@ -4,10 +4,12 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import kotlin.reflect.companionObject
 
-abstract class WithLogging: HasLogging {
-    val logger = logger()
+open class WithLogging: HasLogging {
+    override val logger: KLogger = logger()
 }
 interface HasLogging {
+
+    val logger: KLogger
 
     fun logger(): KLogger = KLogger(jLogger(this.javaClass))
 

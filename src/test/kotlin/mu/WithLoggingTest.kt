@@ -4,20 +4,24 @@ import org.junit.Assert.*
 import org.junit.Test
 
 class ClassWithLogging {
-    companion object: WithLogging()
-    fun log(message: String) = logger.info(message)
-    fun log(message: () -> String) = logger.info(message)
+    companion object: Any(), HasLogging by WithLogging()
+    fun test() {
+        logger.info{"hi11"}
+        logger.info("hi111")
+    }
 }
 class ChildClassWithLogging {
     companion object: WithLogging()
-    fun log(message: String) = logger.info(message)
+    fun test() {
+        ClassWithLogging.logger.info{"hi22"}
+        ClassWithLogging.logger.info("hi222")
+    }
 }
 class WithLoggingTest {
     @Test
     fun getLogger() {
-        ClassWithLogging().log("hi1")
-        ClassWithLogging().log{"hi2"}
-        ChildClassWithLogging().log("hi3")
+        ClassWithLogging().test()
+        ChildClassWithLogging().test()
     }
 
 }
