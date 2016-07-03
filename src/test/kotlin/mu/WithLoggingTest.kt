@@ -3,8 +3,15 @@ package mu
 import org.junit.Assert.*
 import org.junit.Test
 
+class ClassWithNamedLogging {
+    companion object: Any(), HasLogging by WithNamedLogging("mu.ClassWithNamedLogging")
+    fun test() {
+        logger.info{"hi33"}
+        logger.info("hi333")
+    }
+}
 class ClassWithLogging {
-    companion object: Any(), HasLogging by WithLogging()
+    companion object: WithLogging()
     fun test() {
         logger.info{"hi11"}
         logger.info("hi111")
@@ -22,6 +29,7 @@ class WithLoggingTest {
     fun getLogger() {
         ClassWithLogging().test()
         ChildClassWithLogging().test()
+        ClassWithNamedLogging().test()
     }
 
 }
