@@ -35,18 +35,7 @@ interface HasLogging {
             ofClass
         }
     }
-//
-//    import kotlin.reflect.KClass
 
-//    // unwrap companion class to enclosing class given a Kotlin Class
-//    private fun <T: Any> unwrapCompanionClass(ofClass: KClass<T>): KClass<*> {
-//        return unwrapCompanionClass(ofClass.java).kotlin
-//    }
-//
-//    // Return logger for Kotlin class
-//    private fun <T: Any> logger(forClass: KClass<T>): Logger {
-//        return logger(forClass.java)
-//    }
 }
 
 
