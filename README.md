@@ -6,7 +6,8 @@ Used as a wrapper for [slf4j](http://www.slf4j.org/) with kotlin extensions.
 # Install
 
 Add the below dependency to start using kotlin-logging, which is hosted on bintray.
-kotlin-logging is already depend on slf4j-api, but it is also required to depend on logging implementation like explained [here](http://saltnlight5.blogspot.co.il/2013/08/how-to-configure-slf4j-with-different.html).
+
+**Important Note: kotlin-logging is already depend on slf4j-api, but it is also required to depend on logging implementation like explained [here](http://saltnlight5.blogspot.co.il/2013/08/how-to-configure-slf4j-with-different.html).**
 
 ## Maven
 ```
