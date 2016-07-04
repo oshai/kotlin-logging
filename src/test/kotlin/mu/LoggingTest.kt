@@ -21,6 +21,14 @@ class ClassWithNamedLogging {
         logger.info{"test ClassWithNamedLogging"}
     }
 }
+class CompanionHasLogging {
+    companion object: Any(), HasLogging {
+        override val logger = logger()
+    }
+    fun test() {
+        logger.info{"test CompanionHasLogging"}
+    }
+}
 class ChildClassWithLogging {
     companion object: WithLogging()
     fun test() {
@@ -35,6 +43,7 @@ class LoggingTest {
         assertEquals("mu.ChildClassWithLogging", ChildClassWithLogging.logger.name)
         assertEquals("mu.ClassWithNamedLogging", ClassWithNamedLogging.logger.name)
         assertEquals("mu.ClassHasLogging", ClassHasLogging().logger.name)
+        assertEquals("mu.CompanionHasLogging", CompanionHasLogging.logger.name)
     }
 
     @Test
@@ -43,6 +52,7 @@ class LoggingTest {
         ChildClassWithLogging().test()
         ClassWithNamedLogging().test()
         ClassHasLogging().test()
+        CompanionHasLogging().test()
     }
 
 }
