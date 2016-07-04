@@ -41,7 +41,7 @@ class FooWithLogging {
 
 # Overview
 
-After seeing many questions like [Idiomatic way of logging in Kotlin](http://stackoverflow.com/questions/34416869/idiomatic-way-of-logging-in-kotlin), It seems like there should be a standard for that in the kotlin language. kotlin-logging provide a wrapper for slf4j api to be used by kotlin classes with the following advantages:
+After seeing many questions like [Idiomatic way of logging in Kotlin](http://stackoverflow.com/questions/34416869/idiomatic-way-of-logging-in-kotlin), It seems like there should be a standard for logging and obtaining a logger in kotlin. kotlin-logging provide a wrapper for slf4j api to be used by kotlin classes with the following advantages:
   - No need to write the logger and class name or logger name boileplates.
   - A straight forward way to log messages with lazy-evaluated string using lambda expression `{}`.
   - All previous slf4j implementation still can be used.
