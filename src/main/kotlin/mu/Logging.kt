@@ -4,12 +4,27 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import kotlin.reflect.companionObject
 
+/**
+ * An class with logging capabilities
+ * usage example:
+ * class ClassWithLogging {
+ *   companion object: WithLogging()
+ *   fun test() {
+ *     logger.info{"test ClassWithLogging"}
+ *   }
+ * }
+ */
 open class WithLogging: HasLogging {
     override val logger: KLogger = logger()
 }
 open class WithNamedLogging(name: String): HasLogging {
     override val logger: KLogger = logger(name)
 }
+/**
+ * An interface representing class with logging capabilities
+ * implemented using a logger
+ * obtain a logger with logger() method
+ */
 interface HasLogging {
 
     val logger: KLogger
