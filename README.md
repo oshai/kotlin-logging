@@ -15,7 +15,6 @@ Add the below dependency to start using kotlin-logging, which is hosted on bintr
   <groupId>microutils</groupId>
   <artifactId>kotlin.logging</artifactId>
   <version>0.1</version>
-  <type>pom</type>
 </dependency>
 ```
 ## Gradle
