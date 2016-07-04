@@ -1,7 +1,12 @@
-# kotlin.logging
-logging framework for kotlin
+# [kotlin.logging](https://github.com/MicroUtils/kotlin.logging)
+
+Logging framework for kotlin.
+Used as a wrapper for [slf4j](http://www.slf4j.org/) with kotlin extensions.
 
 # Install
+
+Add the below dependency to start using kotlin-logging, which is hosted on bintray.
+kotlin-logging is already depend on slf4j-api, but it is also required to depend on logging implementation like explained [here](http://saltnlight5.blogspot.co.il/2013/08/how-to-configure-slf4j-with-different.html).
 
 ## Maven
 ```
@@ -23,30 +28,43 @@ compile 'microutils:kotlin.logging:0.1'
 </dependency>
 ```
 
-# Usage
+# Getting started
+ 
 ```Kotlin
-class ClassWithLogging {
+class FooWithLogging {
     companion object: WithLogging()
-    fun test() {
-        logger.info{"test ClassWithLogging"}
+    fun bar() {
+        logger.info("info FooWithLogging")
     }
 }
-class ClassHasLogging: HasLogging {
-    override val logger = logger()
-    fun test() {
-        logger.info{"test ClassHasLogging"}
-    }
-}
-class ClassWithNamedLogging {
-    companion object: Any(), HasLogging by WithNamedLogging("mu.ClassWithNamedLogging")
-    fun test() {
-        logger.info{"test ClassWithNamedLogging"}
-    }
-}
-class ChildClassWithLogging {
-    companion object: WithLogging()
-    fun test() {
-        logger.info{"test ChildClassWithLogging"}
-    }
-}
+```
+
+# Overview
+
+After seeing many questions like [Idiomatic way of logging in Kotlin](http://stackoverflow.com/questions/34416869/idiomatic-way-of-logging-in-kotlin), It seems like there should be a standard for that in the kotlin language. kotlin-logging provide a wrapper for slf4j api to be used by kotlin classes with the following advantages:
+  - No need to write the logger and class name or logger name boileplates.
+  - A straight forward way to log messages with lazy-evaluated string using lambda expression `{}`
+  - All previous slf4j implementation still can be used
+
+# Usage
+
+The recommended usage is have the `Companion` object extends `WithLogging()` and using the `logger` value in the class like that:
+```Kotlin
+companion object: WithLogging()
+```
+The using freely the `logger` like that:
+```Kotlin
+logger.info("test ClassWithLogging")
+```
+And also for debugging of lazy evaluated messages:
+```Kotlin
+logger.debug{"lazy eavluated $message"}
+```
+(gets evaluated only for printed log levels)
+
+In cases the Companion object already extending other class it is recommend to implement the `HasLogging` interface:
+```Kotlin
+companion object: Any(), HasLogging {
+        override val logger = logger()
+  }
 ```
