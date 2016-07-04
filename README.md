@@ -48,7 +48,7 @@ After seeing many questions like [Idiomatic way of logging in Kotlin](http://sta
 
 # Usage
 
-The recommended usage is have the `Companion` object extends `WithLogging()` and using the `logger` value in the class like that:
+The recommended usage is have the `Companion` object extends `WithLogging()` and using the `logger` value in the class:
 ```Kotlin
 companion object: WithLogging()
 ```
@@ -65,6 +65,21 @@ logger.debug{"lazy eavluated $message"}
 In cases the Companion object already extending other class it is recommend to implement the `HasLogging` interface:
 ```Kotlin
 companion object: Any(), HasLogging {
-        override val logger = logger()
-  }
+  override val logger = logger()
+  ...
+}
+```
+
+Other (less recommended) alternatives are:
+```Kotlin
+companion object: Any(), HasLogging by WithNamedLogging("mu.ClassWithNamedLogging")
+```
+Or implementing it as a non static member:
+```Kotlin
+class ClassHasLogging: HasLogging {
+    override val logger = logger()
+    fun test() {
+        logger.info{"test ClassHasLogging"}
+    }
+}
 ```
