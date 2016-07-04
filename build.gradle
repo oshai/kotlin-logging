@@ -1,6 +1,10 @@
 group 'MicroUtils'
 version '1.0-SNAPSHOT'
 
+plugins {
+    id "com.jfrog.bintray" version "1.7"
+}
+
 buildscript {
     ext.kotlin_version = '1.0.3'
 
@@ -13,6 +17,11 @@ buildscript {
 }
 
 apply plugin: 'kotlin'
+// Apply the java plugin to add support for Java
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+sourceCompatibility = 1.6
 
 repositories {
     mavenCentral()
@@ -25,4 +34,33 @@ dependencies {
     compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.21'
     testCompile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.21'
     testCompile 'junit:junit:4.12'
+}
+
+//https://github.com/bintray/gradle-bintray-plugin
+bintray {
+    user = 'oshai'
+    key = 'mykey'
+    publications = ['MyPublication']
+    pkg {
+        repo = 'kotlin.logging'
+        name = 'kotlin.logging'
+        userOrg = 'microutils'
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/MicroUtils/kotlin.logging'
+        version {
+            name = '0.1-Final'
+            desc = 'kotlin.logging 0.1 final'
+            released  = new Date()
+        }
+    }
+}
+publishing {
+    publications {
+        MyPublication(MavenPublication) {
+            from components.java
+            groupId 'microutils'
+            artifactId 'kotlin.logging'
+            version '0.1'
+        }
+    }
 }
