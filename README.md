@@ -48,19 +48,19 @@ After seeing many questions like [Idiomatic way of logging in Kotlin](http://sta
 
 # Usage
 
-The recommended usage is have the `Companion` object extends `WithLogging()` and using the `logger` value in the class:
+The recommended usage is to have the `Companion` object extends `WithLogging()` and using the `logger` member in the class like that:
 ```Kotlin
 companion object: WithLogging()
 ```
-The using freely the `logger`:
+Then using the `logger`:
 ```Kotlin
 logger.info("test ClassWithLogging")
 ```
-And also for debugging of lazy evaluated messages:
+For seuqnces that are expected to be frequently used prefer lazy evaluated messages:
 ```Kotlin
 logger.debug{"lazy eavluated $message"}
 ```
-(gets evaluated only if the log level is enabled at runtime)
+(String is inside a method and gets evaluated only if debug log level is enabled at runtime)
 
 In cases the `Companion` object already extending other class it is recommend to implement the `HasLogging` interface:
 ```Kotlin
