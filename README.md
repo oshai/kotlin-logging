@@ -5,7 +5,6 @@ Used as a wrapper for [slf4j](http://www.slf4j.org/) with kotlin extensions.
 
 [![Build Status](https://travis-ci.org/MicroUtils/kotlin.logging.png?branch=master)](https://travis-ci.org/MicroUtils/kotlin.logging)
 
-
 # Install
 
 Add the below dependency to start using kotlin-logging, which is hosted on [bintray](https://bintray.com/microutils/kotlin.logging/kotlin.logging/view).
