@@ -1,7 +1,7 @@
 # [kotlin.logging](https://github.com/MicroUtils/kotlin.logging)
 
-Logging framework for kotlin.
-Used as a wrapper for [slf4j](http://www.slf4j.org/) with kotlin extensions.
+Logging framework for Kotlin.
+Used as a wrapper for [slf4j](http://www.slf4j.org/) with Kotlin extensions.
 
 [![Build Status](https://travis-ci.org/MicroUtils/kotlin.logging.png?branch=master)](https://travis-ci.org/MicroUtils/kotlin.logging)
 
