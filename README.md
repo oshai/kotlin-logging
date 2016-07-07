@@ -4,6 +4,7 @@ Logging framework for Kotlin.
 Used as a wrapper for [slf4j](http://www.slf4j.org/) with Kotlin extensions.
 
 [![Build Status](https://travis-ci.org/MicroUtils/kotlin.logging.png?branch=master)](https://travis-ci.org/MicroUtils/kotlin.logging)
+[ ![Download](https://api.bintray.com/packages/microutils/kotlin.logging/kotlin.logging/images/download.svg) ](https://bintray.com/microutils/kotlin.logging/kotlin.logging/_latestVersion)
 
 # Install
 
