@@ -37,7 +37,7 @@ compile 'microutils:kotlin.logging:0.1'
 class FooWithLogging {
     companion object: WithLogging()
     fun bar() {
-        logger.info("info FooWithLogging")
+        logger.info("hello message")
     }
 }
 ```
@@ -57,11 +57,11 @@ companion object: WithLogging()
 ```
 Then using the `logger`:
 ```Kotlin
-logger.info("test ClassWithLogging")
+logger.info("hello message")
 ```
-For seuqnces that are expected to be frequently used prefer lazy evaluated messages:
+For sequences that are expected to be frequently used prefer lazy evaluated messages:
 ```Kotlin
-logger.debug{"lazy eavluated $message"}
+logger.debug{"lazy evaluated $hello message"}
 ```
 (String is inside a method and gets evaluated only if debug log level is enabled at runtime)
 
@@ -75,14 +75,14 @@ companion object: Any(), HasLogging {
 
 Other (less recommended) alternatives are:
 ```Kotlin
-companion object: Any(), HasLogging by WithNamedLogging("mu.ClassWithNamedLogging")
+companion object: Any(), HasLogging by WithNamedLogging("com.MyClass")
 ```
 Or implementing it as a non static member:
 ```Kotlin
 class ClassHasLogging: HasLogging {
     override val logger = logger()
     fun test() {
-        logger.info{"test ClassHasLogging"}
+        logger.info{"hello message"}
     }
 }
 ```
