@@ -4,25 +4,25 @@ import org.junit.Assert.*
 import org.junit.Test
 
 class ClassWithLogging {
-    companion object: WithLogging()
+    companion object: KLogging()
     fun test() {
         logger.info{"test ClassWithLogging"}
     }
 }
-class ClassHasLogging: HasLogging {
+class ClassHasLogging: KLoggable {
     override val logger = logger()
     fun test() {
         logger.info{"test ClassHasLogging"}
     }
 }
 class ClassWithNamedLogging {
-    companion object: Any(), HasLogging by WithNamedLogging("mu.ClassWithNamedLogging")
+    companion object: Any(), KLoggable by NamedKLogging("mu.ClassWithNamedLogging")
     fun test() {
         logger.info{"test ClassWithNamedLogging"}
     }
 }
 class CompanionHasLogging {
-    companion object: Any(), HasLogging {
+    companion object: Any(), KLoggable {
         override val logger = logger()
     }
     fun test() {
@@ -30,7 +30,7 @@ class CompanionHasLogging {
     }
 }
 class ChildClassWithLogging {
-    companion object: WithLogging()
+    companion object: KLogging()
     fun test() {
         logger.info{"test ChildClassWithLogging"}
     }

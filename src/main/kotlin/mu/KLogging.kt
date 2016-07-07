@@ -8,30 +8,30 @@ import kotlin.reflect.companionObject
  * An class with logging capabilities
  * usage example:
  * class ClassWithLogging {
- *   companion object: WithLogging()
+ *   companion object: KLogging()
  *   fun test() {
  *     logger.info{"test ClassWithLogging"}
  *   }
  * }
  */
-open class WithLogging: HasLogging {
+open class KLogging : KLoggable {
     override val logger: KLogger = logger()
 }
-open class WithNamedLogging(name: String): HasLogging {
+open class NamedKLogging(name: String): KLoggable {
     override val logger: KLogger = logger(name)
 }
+
 /**
  * An interface representing class with logging capabilities
  * implemented using a logger
  * obtain a logger with logger() method
  */
-interface HasLogging {
+interface KLoggable {
 
     val logger: KLogger
 
     fun logger(): KLogger = KLogger(jLogger(this.javaClass))
     fun logger(name: String): KLogger = KLogger(jLogger(name))
-
 
     ///////////////////////////// private
     private fun <T: Any> jLogger(forClass: Class<T>): Logger {
