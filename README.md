@@ -86,3 +86,12 @@ class ClassHasLogging: HasLogging {
     }
 }
 ```
+# Support
+
+- Slack channel: https://kotlinlang.slack.com/messages/kotlin-logging/details/
+- Issues: https://github.com/MicroUtils/kotlin.logging/issues
+
+# Contributing
+
+TBD
+
