@@ -14,7 +14,7 @@ plugins {
 }
 
 group 'MicroUtils'
-version '0.2-SNAPSHOT'
+version '1.1-SNAPSHOT'
 
 
 
@@ -51,8 +51,8 @@ bintray {
         licenses = ['Apache-2.0']
         vcsUrl = 'https://github.com/MicroUtils/kotlin.logging'
         version {
-            name = '0.1-Final'
-            desc = 'kotlin.logging 0.1 final'
+            name = '1.1-Final'
+            desc = 'kotlin.logging 1.1 final'
             released  = new Date()
         }
     }
@@ -63,7 +63,7 @@ publishing {
             from components.java
             groupId 'microutils'
             artifactId 'kotlin.logging'
-            version '0.1'
+            version '1.1'
         }
     }
 }
