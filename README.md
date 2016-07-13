@@ -17,16 +17,16 @@ Add the below dependency to start using kotlin.logging, which is hosted on [bint
 <dependency>
   <groupId>microutils</groupId>
   <artifactId>kotlin.logging</artifactId>
-  <version>0.1</version>
+  <version>1.1</version>
 </dependency>
 ```
 ## Gradle
 ```
-compile 'microutils:kotlin.logging:0.1'
+compile 'microutils:kotlin.logging:1.1'
 ```
 ## Ivy
 ```
-<dependency org='microutils' name='kotlin.logging' rev='0.1'>
+<dependency org='microutils' name='kotlin.logging' rev='1.1'>
   <artifact name='$AID' ext='pom'></artifact>
 </dependency>
 ```
@@ -35,7 +35,7 @@ compile 'microutils:kotlin.logging:0.1'
  
 ```Kotlin
 class FooWithLogging {
-    companion object: WithLogging()
+    companion object: KLogging()
     fun bar() {
         logger.info("hello message")
     }
@@ -51,9 +51,9 @@ After seeing many questions like [Idiomatic way of logging in Kotlin](http://sta
 
 # Usage
 
-The recommended usage is to have the `Companion` object extends `WithLogging()` and using the `logger` member in the class like that:
+The recommended usage is to have the `Companion` object extends `KLogging()` and using the `logger` member in the class like that:
 ```Kotlin
-companion object: WithLogging()
+companion object: KLogging()
 ```
 Then using the `logger`:
 ```Kotlin
@@ -65,9 +65,9 @@ logger.debug{"lazy evaluated $hello message"}
 ```
 (String is inside a method and gets evaluated only if debug log level is enabled at runtime)
 
-In cases the `Companion` object already extending other class it is recommend to implement the `HasLogging` interface:
+In cases the `Companion` object already extending other class it is recommend to implement the `KLoggable` interface:
 ```Kotlin
-companion object: Any(), HasLogging {
+companion object: Any(), KLoggable {
   override val logger = logger()
   ...
 }
@@ -75,11 +75,11 @@ companion object: Any(), HasLogging {
 
 Other (less recommended) alternatives are:
 ```Kotlin
-companion object: Any(), HasLogging by WithNamedLogging("com.MyClass")
+companion object: Any(), KLoggable by NamedKLogging("com.MyClass")
 ```
 Or implementing it as a non static member:
 ```Kotlin
-class ClassHasLogging: HasLogging {
+class ClassHasLogging: KLoggable {
     override val logger = logger()
     fun test() {
         logger.info{"hello message"}
