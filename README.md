@@ -12,7 +12,7 @@ Add the below dependency to start using kotlin.logging, which is hosted on [bint
 
 **Important Note:** kotlin.logging already depends on slf4j-api, but it is also required to depend on a logging implementation like explained [here](http://saltnlight5.blogspot.co.il/2013/08/how-to-configure-slf4j-with-different.html).
 
-## Maven
+### Maven
 ```
 <dependency>
   <groupId>microutils</groupId>
@@ -20,11 +20,11 @@ Add the below dependency to start using kotlin.logging, which is hosted on [bint
   <version>1.1</version>
 </dependency>
 ```
-## Gradle
+### Gradle
 ```
 compile 'microutils:kotlin.logging:1.1'
 ```
-## Ivy
+### Ivy
 ```
 <dependency org='microutils' name='kotlin.logging' rev='1.1'>
   <artifact name='$AID' ext='pom'></artifact>
