@@ -93,5 +93,5 @@ class ClassHasLogging: KLoggable {
 
 # Contributing
 
-TBD
+Pull requests are welcome!
 
