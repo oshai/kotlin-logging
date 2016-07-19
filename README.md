@@ -10,7 +10,7 @@ Used as a wrapper for [slf4j](http://www.slf4j.org/) with Kotlin extensions.
 
 Add the below dependency to start using kotlin.logging, which is hosted on [bintray](https://bintray.com/microutils/kotlin.logging/kotlin.logging/view).
 
-**Important note:** kotlin.logging already depends on slf4j-api, but it is also required to depend on a logging implementation like explained [here](http://saltnlight5.blogspot.co.il/2013/08/how-to-configure-slf4j-with-different.html).
+**Important note:** kotlin.logging depends on slf4j-api, but it is also required to depend on a logging implementation in runtime. More details [here](http://saltnlight5.blogspot.co.il/2013/08/how-to-configure-slf4j-with-different.html).
 
 ### Maven
 ```
