@@ -14,7 +14,7 @@ plugins {
 }
 
 group 'MicroUtils'
-version '1.2-SNAPSHOT'
+version '1.3-FINAL'
 
 
 
@@ -51,8 +51,8 @@ bintray {
         licenses = ['Apache-2.0']
         vcsUrl = 'https://github.com/MicroUtils/kotlin.logging'
         version {
-            name = '1.2-Final'
-            desc = 'kotlin.logging 1.2 final'
+            name = '1.3-Final'
+            desc = 'kotlin.logging 1.3 Final - Lightweight logging framework for Kotlin'
             released  = new Date()
         }
     }
@@ -79,7 +79,7 @@ publishing {
             from components.java
             groupId 'microutils'
             artifactId 'kotlin.logging'
-            version '1.2'
+            version '1.3'
 
             artifact sourcesJar
             artifact javadocJar
