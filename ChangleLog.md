@@ -1,3 +1,7 @@
+# 1.2
+
+* Added KLogger method inline - better for Android methods count
+
 # 1.1.1
 
 * Added documentation and sources jars to release
