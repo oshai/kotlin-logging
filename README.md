@@ -17,16 +17,16 @@ Add the below dependency to start using kotlin.logging, which is hosted on [bint
 <dependency>
   <groupId>microutils</groupId>
   <artifactId>kotlin.logging</artifactId>
-  <version>1.1.1</version>
+  <version>1.2</version>
 </dependency>
 ```
 ### Gradle
 ```
-compile 'microutils:kotlin.logging:1.1.1'
+compile 'microutils:kotlin.logging:1.2'
 ```
 ### Ivy
 ```
-<dependency org='microutils' name='kotlin.logging' rev='1.1.1'>
+<dependency org='microutils' name='kotlin.logging' rev='1.2'>
   <artifact name='$AID' ext='pom'></artifact>
 </dependency>
 ```
