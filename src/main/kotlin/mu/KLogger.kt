@@ -9,19 +9,19 @@ import org.slf4j.Logger
  */
 class KLogger(jLogger: Logger): Logger by jLogger{
 
-    fun trace(msg: () -> Any?) {
+    inline fun trace(msg: () -> Any?) {
         if (isTraceEnabled) trace(msg.invoke().toString())
     }
-    fun debug(msg: () -> Any?) {
+    inline fun debug(msg: () -> Any?) {
         if (isDebugEnabled) debug(msg.invoke().toString())
     }
-    fun info(msg: () -> Any?) {
+    inline fun info(msg: () -> Any?) {
         if (isInfoEnabled) info(msg.invoke().toString())
     }
-    fun warn(msg: () -> Any?) {
+    inline fun warn(msg: () -> Any?) {
         if (isWarnEnabled) warn(msg.invoke().toString())
     }
-    fun error(msg: () -> Any?) {
+    inline fun error(msg: () -> Any?) {
         if (isErrorEnabled) error(msg.invoke().toString())
     }
 }
