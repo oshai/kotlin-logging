@@ -58,7 +58,7 @@ After seeing many questions like [Idiomatic way of logging in Kotlin](http://sta
 
 ## Support
 
-- Slack channel: https://kotlinlang.slack.com/messages/kotlin-logging/details/
+- Slack channel: https://kotlinlang.slack.com/messages/kotlin-logging
 - Issues: https://github.com/kotlin-logging/kotlin-logging/issues
 
 ## More links
