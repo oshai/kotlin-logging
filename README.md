@@ -67,5 +67,6 @@ After seeing many questions like [Idiomatic way of logging in Kotlin](http://sta
 
 ## Contributing
 
-Pull requests are welcome!
+- Pull requests are welcome!
+- Stars as well!
 
