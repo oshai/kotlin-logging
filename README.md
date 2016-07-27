@@ -1,10 +1,11 @@
 <img alt="kotlin-logging" src="https://raw.githubusercontent.com/kotlin-logging/kotlin-logging/master/kotlin-logging.png">
-
 [![Slack channel](https://img.shields.io/badge/Chat-Slack-green.svg)](https://kotlinlang.slack.com/messages/kotlin-logging/)
 [![GitHub issues](https://img.shields.io/github/issues/kotlin-logging/kotlin-logging.svg)](https://github.com/kotlin-logging/kotlin-logging/issues)
 [![Build Status](https://travis-ci.org/MicroUtils/kotlin.logging.png?branch=master)](https://travis-ci.org/MicroUtils/kotlin.logging)
 [ ![Download](https://api.bintray.com/packages/microutils/kotlin.logging/kotlin.logging/images/download.svg) ](https://bintray.com/microutils/kotlin.logging/kotlin.logging/_latestVersion)
 [![Apache License V.2](https://img.shields.io/github/license/kotlin-logging/kotlin-logging.svg)](https://github.com/kotlin-logging/kotlin-logging/blob/master/LICENSE.txt)
+
+<img alt="kotlin-logging" src="https://github.com/kotlin-logging/kotlin-logging/blob/master/sleepingstars.gif">
 
 # [kotlin-logging](https://github.com/kotlin-logging/kotlin-logging)
 
