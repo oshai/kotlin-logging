@@ -45,45 +45,12 @@ After seeing many questions like [Idiomatic way of logging in Kotlin](http://sta
 
 ## FAQ
 
-- Why not use sl4j like before? That is possible but you get more power and less boilerplates with kotlin-logging.
+- Why not use slf4j like before? That is possible but you get more power and less boilerplates with kotlin-logging.
 
 ## Usage
 
-The recommended usage is to have the `Companion` object extends `KLogging()` and using the `logger` member in the class like that:
-```Kotlin
-companion object: KLogging()
-```
-Then using the `logger`:
-```Kotlin
-logger.info("hello message")
-```
-For sequences that are expected to be frequently used prefer lazy evaluated messages:
-```Kotlin
-logger.debug{"lazy evaluated $hello message"}
-```
-(String is inside a method and gets evaluated only if debug log level is enabled at runtime)
+- See [wiki](https://github.com/kotlin-logging/kotlin-logging/wiki).
 
-In cases the `Companion` object already extending other class it is recommend to implement the `KLoggable` interface:
-```Kotlin
-companion object: Any(), KLoggable {
-  override val logger = logger()
-  ...
-}
-```
-
-Other (less recommended) alternatives are:
-```Kotlin
-companion object: Any(), KLoggable by NamedKLogging("com.MyClass")
-```
-Or implementing it as a non static member:
-```Kotlin
-class ClassHasLogging: KLoggable {
-    override val logger = logger()
-    fun test() {
-        logger.info{"hello message"}
-    }
-}
-```
 ## Support
 
 - Slack channel: https://kotlinlang.slack.com/messages/kotlin-logging/details/
