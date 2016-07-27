@@ -37,7 +37,7 @@ compile 'microutils:kotlin.logging:1.2'
 class FooWithLogging {
     companion object: KLogging()
     fun bar() {
-        logger.info("hello message")
+        logger.info { "hello message" }
     }
 }
 ```
