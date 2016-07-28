@@ -1,13 +1,13 @@
-<img alt="kotlin-logging" src="https://raw.githubusercontent.com/kotlin-logging/kotlin-logging/master/src/main/resources/kotlin-logging.png">
+<img alt="kotlin-logging" src="https://raw.githubusercontent.com/MicroUtils/kotlin-logging/master/src/main/resources/kotlin-logging.png">
 [![Slack channel](https://img.shields.io/badge/Chat-Slack-green.svg)](https://kotlinlang.slack.com/messages/kotlin-logging/)
-[![GitHub issues](https://img.shields.io/github/issues/kotlin-logging/kotlin-logging.svg)](https://github.com/kotlin-logging/kotlin-logging/issues)
+[![GitHub issues](https://img.shields.io/github/issues/MicroUtils/kotlin-logging.svg)](https://github.com/MicroUtils/kotlin-logging/issues)
 [![Build Status](https://travis-ci.org/MicroUtils/kotlin.logging.png?branch=master)](https://travis-ci.org/MicroUtils/kotlin.logging)
 [ ![Download](https://api.bintray.com/packages/microutils/kotlin.logging/kotlin.logging/images/download.svg) ](https://bintray.com/microutils/kotlin.logging/kotlin.logging/_latestVersion)
-[![Apache License V.2](https://img.shields.io/github/license/kotlin-logging/kotlin-logging.svg)](https://github.com/kotlin-logging/kotlin-logging/blob/master/LICENSE.txt)
+[![Apache License V.2](https://img.shields.io/github/license/MicroUtils/kotlin-logging.svg)](https://github.com/MicroUtils/kotlin-logging/blob/master/LICENSE.txt)
 
-<img alt="kotlin-logging" src="https://github.com/kotlin-logging/kotlin-logging/blob/master/src/main/resources/sleeping-stars.gif">
+<img alt="kotlin-logging" src="https://github.com/MicroUtils/kotlin-logging/blob/master/src/main/resources/sleeping-stars.gif">
 
-# [kotlin-logging](https://github.com/kotlin-logging/kotlin-logging)
+# [kotlin-logging](https://github.com/MicroUtils/kotlin-logging)
 
 Lightweight logging framework for Kotlin.
 Used as a wrapper for [slf4j](http://www.slf4j.org/) with Kotlin extensions.
@@ -55,16 +55,16 @@ After seeing many questions like [Idiomatic way of logging in Kotlin](http://sta
 
 ## Usage
 
-- See [wiki](https://github.com/kotlin-logging/kotlin-logging/wiki).
+- See [wiki](https://github.com/MicroUtils/kotlin-logging/wiki).
 
 ## Support
 
+- Issues: https://github.com/MicroUtils/kotlin-logging/issues
 - Slack channel: https://kotlinlang.slack.com/messages/kotlin-logging
-- Issues: https://github.com/kotlin-logging/kotlin-logging/issues
 
 ## More links
 
-- kotlin-logging is hosted on [bintray](https://bintray.com/microutils/kotlin.logging/kotlin.logging/view).
+- kotlin-logging is hosted on [bintray](https://bintray.com/microutils/kotlin.logging/kotlin-logging/view).
 
 ## Contributing
 
