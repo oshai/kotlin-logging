@@ -60,6 +60,7 @@ After seeing many questions like [Idiomatic way of logging in Kotlin](http://sta
 ## Support
 
 - Issues: https://github.com/MicroUtils/kotlin-logging/issues
+- Ask question in StackOverflow with kotlin-logging tag: http://stackoverflow.com/tags/kotlin-logging/info
 - Slack channel: https://kotlinlang.slack.com/messages/kotlin-logging
 
 ## More links
