@@ -1,7 +1,7 @@
 <img alt="kotlin-logging" src="https://raw.githubusercontent.com/MicroUtils/kotlin-logging/master/src/main/resources/kotlin-logging.png">
 [![Slack channel](https://img.shields.io/badge/Chat-Slack-green.svg)](https://kotlinlang.slack.com/messages/kotlin-logging/)
 [![GitHub issues](https://img.shields.io/github/issues/MicroUtils/kotlin-logging.svg)](https://github.com/MicroUtils/kotlin-logging/issues)
-[![Build Status](https://travis-ci.org/MicroUtils/kotlin.logging.png?branch=master)](https://travis-ci.org/MicroUtils/kotlin.logging)
+[![Build Status](https://travis-ci.org/MicroUtils/kotlin-logging.png?branch=master)](https://travis-ci.org/MicroUtils/kotlin-logging)
 [ ![Download](https://api.bintray.com/packages/microutils/kotlin.logging/kotlin-logging/images/download.svg) ](https://bintray.com/microutils/kotlin.logging/kotlin.logging/_latestVersion)
 [![Apache License V.2](https://img.shields.io/github/license/MicroUtils/kotlin-logging.svg)](https://github.com/MicroUtils/kotlin-logging/blob/master/LICENSE.txt)
 
