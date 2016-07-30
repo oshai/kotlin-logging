@@ -16,6 +16,10 @@ Used as a wrapper for [slf4j](http://www.slf4j.org/) with Kotlin extensions.
 
 Add the below dependency to start using kotlin-logging.
 
+### Download
+
+Download jar from [github](https://github.com/MicroUtils/kotlin-logging/releases/latest) or [bintray](https://dl.bintray.com/microutils/kotlin.logging/microutils/kotlin.logging/).
+
 ### Maven
 ```
 <dependency>
