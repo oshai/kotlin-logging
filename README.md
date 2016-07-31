@@ -17,7 +17,7 @@ A wrapper for [slf4j](http://www.slf4j.org/) with Kotlin extensions. Show your :
 class FooWithLogging {
     companion object: KLogging()
     fun bar() {
-        logger.info { "Twinkle Twinkle $Little Star" }
+        logger.info { "twinkle twinkle $little star" }
     }
 }
 ```
