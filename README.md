@@ -11,11 +11,18 @@ A wrapper for [slf4j](http://www.slf4j.org/) with Kotlin extensions. Show your :
 [ ![Download](https://api.bintray.com/packages/microutils/kotlin.logging/kotlin-logging/images/download.svg) ](https://bintray.com/microutils/kotlin.logging/kotlin-logging/_latestVersion)
 [![Apache License V.2](https://img.shields.io/github/license/MicroUtils/kotlin-logging.svg)](https://github.com/MicroUtils/kotlin-logging/blob/master/LICENSE)
 
-## Install
+## Getting started
+ 
+```Kotlin
+class FooWithLogging {
+    companion object: KLogging()
+    fun bar() {
+        logger.info { "hello message" }
+    }
+}
+```
 
-Add the below dependency to start using kotlin-logging.
-
-### Download
+## Download
 
 Download jar from [github](https://github.com/MicroUtils/kotlin-logging/releases/latest) or [bintray](https://dl.bintray.com/microutils/kotlin.logging/microutils/kotlin.logging/).
 
@@ -33,17 +40,6 @@ compile 'microutils:kotlin.logging:1.2'
 ```
 
 **Important note:** kotlin-logging depends on slf4j-api, but it is also required to depend on a logging implementation in runtime. More details [here](http://saltnlight5.blogspot.co.il/2013/08/how-to-configure-slf4j-with-different.html).
-
-## Getting started
- 
-```Kotlin
-class FooWithLogging {
-    companion object: KLogging()
-    fun bar() {
-        logger.info { "hello message" }
-    }
-}
-```
 
 ## Overview
 
