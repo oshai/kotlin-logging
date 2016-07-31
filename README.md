@@ -65,6 +65,7 @@ After seeing many questions like [Idiomatic way of logging in Kotlin](http://sta
 ## More links
 
 - kotlin-logging is hosted on [bintray](https://bintray.com/microutils/kotlin.logging/kotlin-logging/view).
+- https://medium.com/@OhadShai/logging-in-kotlin-95a4e76388f2
 
 ## Contributing
 
