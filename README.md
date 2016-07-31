@@ -1,11 +1,9 @@
-<img alt="kotlin-logging" src="https://raw.githubusercontent.com/MicroUtils/kotlin-logging/master/images/kotlin-logging.png">
+# [kotlin-logging](https://github.com/MicroUtils/kotlin-logging)
 
 Lightweight logging framework for Kotlin.
 A wrapper for [slf4j](http://www.slf4j.org/) with Kotlin extensions. Show your :heart: with a :star: ^^^
 
 <img alt="sleeping-stars" src="https://github.com/MicroUtils/kotlin-logging/blob/master/images/sleeping-stars.gif">
-
-# [kotlin-logging](https://github.com/MicroUtils/kotlin-logging)
 
 [![Slack channel](https://img.shields.io/badge/Chat-Slack-green.svg)](https://kotlinlang.slack.com/messages/kotlin-logging/)
 [![GitHub issues](https://img.shields.io/github/issues/MicroUtils/kotlin-logging.svg)](https://github.com/MicroUtils/kotlin-logging/issues)
@@ -75,5 +73,5 @@ After seeing many questions like [Idiomatic way of logging in Kotlin](http://sta
 ## Contributing
 
 - Pull requests are welcome!
-- Stars as well!
+- :star: as well!
 
