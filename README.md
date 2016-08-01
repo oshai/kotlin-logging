@@ -1,4 +1,4 @@
-# [kotlin-logging](https://github.com/MicroUtils/kotlin-logging)
+# <img alt="kotlin-logging" src="https://raw.githubusercontent.com/MicroUtils/kotlin-logging/master/images/kotlin-logging.png"> [kotlin-logging](https://github.com/MicroUtils/kotlin-logging)
 
 Lightweight logging framework for Kotlin.
 A wrapper for [slf4j](http://www.slf4j.org/) with Kotlin extensions.
