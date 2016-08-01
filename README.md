@@ -1,13 +1,10 @@
 # [kotlin-logging](https://github.com/MicroUtils/kotlin-logging)
 
 Lightweight logging framework for Kotlin.
-A wrapper for [slf4j](http://www.slf4j.org/) with Kotlin extensions. Show your :heart: with a :star: ^^^
+A wrapper for [slf4j](http://www.slf4j.org/) with Kotlin extensions.
 
-<img alt="sleeping-stars" src="https://github.com/MicroUtils/kotlin-logging/blob/master/images/sleeping-stars.gif">
-
-[![Slack channel](https://img.shields.io/badge/Chat-Slack-blue.svg)](https://kotlinlang.slack.com/messages/kotlin-logging/)
-[![GitHub issues](https://img.shields.io/github/issues/MicroUtils/kotlin-logging.svg)](https://github.com/MicroUtils/kotlin-logging/issues)
 [![Build Status](https://travis-ci.org/MicroUtils/kotlin-logging.png?branch=master)](https://travis-ci.org/MicroUtils/kotlin-logging)
+[![Slack channel](https://img.shields.io/badge/Chat-Slack-blue.svg)](https://kotlinlang.slack.com/messages/kotlin-logging/)
 [ ![Download](https://api.bintray.com/packages/microutils/kotlin.logging/kotlin-logging/images/download.svg) ](https://bintray.com/microutils/kotlin.logging/kotlin-logging/_latestVersion)
 [![Apache License V.2](https://img.shields.io/github/license/MicroUtils/kotlin-logging.svg)](https://github.com/MicroUtils/kotlin-logging/blob/master/LICENSE)
 [![Pure Kotlin](https://img.shields.io/badge/100%25-kotlin-blue.svg)](https://kotlinlang.org/)
@@ -71,5 +68,5 @@ After seeing many questions like [Idiomatic way of logging in Kotlin](http://sta
 ## Contributing
 
 - Pull requests are welcome!
-- :star: as well!
+- Show your :heart: with a :star: ^^^
 
