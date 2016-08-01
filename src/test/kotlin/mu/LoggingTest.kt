@@ -9,12 +9,20 @@ class ClassWithLogging {
         logger.info{"test ClassWithLogging"}
     }
 }
-class ClassHasLogging: KLoggable {
+open class ClassHasLogging: KLoggable {
     override val logger = logger()
     fun test() {
         logger.info{"test ClassHasLogging"}
     }
 }
+
+/**
+ * This class demonstrates the disadvantage of inheriting KLoggable in a class instead of companion object
+ * the logger name will be of the sub-class
+ * ie: it is not possible to log with parent class name this way
+ */
+class ClassInheritLogging: ClassHasLogging()
+
 class ClassWithNamedLogging {
     companion object: Any(), KLoggable by NamedKLogging("mu.ClassWithNamedLogging")
     fun test() {
@@ -40,6 +48,7 @@ class LoggingTest {
     @Test
     fun testNames() {
         assertEquals("mu.ClassWithLogging", ClassWithLogging.logger.name)
+        assertEquals("mu.ClassInheritLogging", ClassInheritLogging().logger.name)
         assertEquals("mu.ChildClassWithLogging", ChildClassWithLogging.logger.name)
         assertEquals("mu.ClassWithNamedLogging", ClassWithNamedLogging.logger.name)
         assertEquals("mu.ClassHasLogging", ClassHasLogging().logger.name)
@@ -49,6 +58,7 @@ class LoggingTest {
     @Test
     fun testMessages() {
         ClassWithLogging().test()
+        ClassInheritLogging().test()
         ChildClassWithLogging().test()
         ClassWithNamedLogging().test()
         ClassHasLogging().test()
