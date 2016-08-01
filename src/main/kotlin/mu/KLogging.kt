@@ -1,8 +1,6 @@
 package mu
 
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
-import kotlin.reflect.companionObject
+import mu.internal.LogHelper
 
 /**
  * An class with logging capabilities
@@ -17,6 +15,10 @@ import kotlin.reflect.companionObject
 open class KLogging : KLoggable {
     override val logger: KLogger = logger()
 }
+
+/**
+ * An class with logging capabilities and explicit logger name
+ */
 open class NamedKLogging(name: String): KLoggable {
     override val logger: KLogger = logger(name)
 }
@@ -28,29 +30,20 @@ open class NamedKLogging(name: String): KLoggable {
  */
 interface KLoggable {
 
+    /**
+     * The member that performs the actual logging
+     */
     val logger: KLogger
 
-    fun logger(): KLogger = KLogger(jLogger(this.javaClass))
-    fun logger(name: String): KLogger = KLogger(jLogger(name))
+    /**
+     * get logger for the class
+     */
+    fun logger(): KLogger = LogHelper.logger(this)
 
-    ///////////////////////////// private
-    private fun <T: Any> jLogger(forClass: Class<T>): Logger {
-        return LoggerFactory.getLogger(unwrapCompanionClass(forClass).name)
-    }
-
-    private fun jLogger(name: String): Logger {
-        return LoggerFactory.getLogger(name)
-    }
-
-    // unwrap companion class to enclosing class given a Java Class
-    private fun <T: Any> unwrapCompanionClass(ofClass: Class<T>): Class<*> {
-        return if (ofClass.enclosingClass != null && ofClass.enclosingClass.kotlin.companionObject?.java == ofClass) {
-            ofClass.enclosingClass
-        } else {
-            ofClass
-        }
-    }
-
+    /**
+     * get logger by explicit name
+     */
+    fun logger(name: String): KLogger = LogHelper.logger(name)
 }
 
 

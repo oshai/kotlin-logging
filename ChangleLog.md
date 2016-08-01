@@ -1,3 +1,9 @@
+# 1.3
+
+* Added tests for class name in logger
+* Added LogHelper
+* Added documentation
+
 # 1.2
 
 * Added KLogger method inline - better for Android methods count
