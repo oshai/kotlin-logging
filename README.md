@@ -68,5 +68,5 @@ After seeing many questions like [Idiomatic way of logging in Kotlin](http://sta
 ## Contributing
 
 - Pull requests are welcome!
-- Show your :heart: with a :star: ^^^
+- Show your :heart: with a :star: ^^^ [![Github Stars](http://github-svg-buttons.herokuapp.com/star.svg?user=MicroUtils&repo=kotlin-logging)](https://github.com/MicroUtils/kotlin-logging/stargazers)
 
