@@ -24,6 +24,8 @@ class FooWithLogging {
 
 Download jar from [github](https://github.com/MicroUtils/kotlin-logging/releases/latest) or [bintray](https://dl.bintray.com/microutils/kotlin.logging/microutils/kotlin.logging/).
 
+**Important note:** kotlin-logging depends on slf4j-api, but it is also required to depend on a logging implementation in runtime. More details [here](http://saltnlight5.blogspot.co.il/2013/08/how-to-configure-slf4j-with-different.html).
+
 ### Maven
 ```xml
 <dependency>
@@ -46,7 +48,6 @@ Download jar from [github](https://github.com/MicroUtils/kotlin-logging/releases
 compile 'microutils:kotlin.logging:1.2'
 ```
 
-**Important note:** kotlin-logging depends on slf4j-api, but it is also required to depend on a logging implementation in runtime. More details [here](http://saltnlight5.blogspot.co.il/2013/08/how-to-configure-slf4j-with-different.html).
 
 ## Overview
 
