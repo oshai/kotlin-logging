@@ -25,15 +25,24 @@ class FooWithLogging {
 Download jar from [github](https://github.com/MicroUtils/kotlin-logging/releases/latest) or [bintray](https://dl.bintray.com/microutils/kotlin.logging/microutils/kotlin.logging/).
 
 ### Maven
-```
+```xml
 <dependency>
   <groupId>microutils</groupId>
   <artifactId>kotlin.logging</artifactId>
   <version>1.2</version>
 </dependency>
 ```
-### Gradle
+**Important note:** You might need to configure your ```pom.xml``` file to use JCenter repository
+```xml
+<repository>
+    <id>central</id>
+    <name>bintray</name>
+    <url>http://jcenter.bintray.com</url>
+</repository>
 ```
+
+### Gradle
+```Groovy
 compile 'microutils:kotlin.logging:1.2'
 ```
 
