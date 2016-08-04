@@ -1,7 +1,7 @@
 # 1.3
 
-* Added tests for class name in logger
-* Added LogHelper
+* Added tests for class name in logger in KLoggerNameResolverTest
+* Added KLoggerNameResolver and KLoggerFactory
 * Added documentation
 
 # 1.2

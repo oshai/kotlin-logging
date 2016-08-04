@@ -1,6 +1,6 @@
 package mu
 
-import mu.internal.LogHelper
+import mu.internal.KLoggerFactory
 
 /**
  * An class with logging capabilities
@@ -38,12 +38,12 @@ interface KLoggable {
     /**
      * get logger for the class
      */
-    fun logger(): KLogger = LogHelper.logger(this)
+    fun logger(): KLogger = KLoggerFactory.logger(this)
 
     /**
      * get logger by explicit name
      */
-    fun logger(name: String): KLogger = LogHelper.logger(name)
+    fun logger(name: String): KLogger = KLoggerFactory.logger(name)
 }
 
 
