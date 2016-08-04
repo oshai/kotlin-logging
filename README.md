@@ -34,7 +34,9 @@ Download jar from [github](https://github.com/MicroUtils/kotlin-logging/releases
   <version>1.2</version>
 </dependency>
 ```
-**Important note:** You might need to configure your ```pom.xml``` file to use JCenter repository
+See full example in [kotlin-logging-example-maven](https://github.com/MicroUtils/kotlin-logging-example-maven).  
+
+**Note:** You might need to configure your ```pom.xml``` file to use JCenter repository
 ```xml
 <repository>
     <id>central</id>
