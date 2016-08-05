@@ -3,7 +3,7 @@ package mu
 import mu.internal.KLoggerFactory
 
 /**
- * An class with logging capabilities
+ * A class with logging capabilities
  * usage example:
  * class ClassWithLogging {
  *   companion object: KLogging()
@@ -17,7 +17,7 @@ open class KLogging : KLoggable {
 }
 
 /**
- * An class with logging capabilities and explicit logger name
+ * A class with logging capabilities and explicit logger name
  */
 open class NamedKLogging(name: String): KLoggable {
     override val logger: KLogger = logger(name)
