@@ -31,7 +31,7 @@ Download jar from [github](https://github.com/MicroUtils/kotlin-logging/releases
 <dependency>
   <groupId>microutils</groupId>
   <artifactId>kotlin.logging</artifactId>
-  <version>1.2</version>
+  <version>1.2.1</version>
 </dependency>
 ```
 See full example in [kotlin-logging-example-maven](https://github.com/MicroUtils/kotlin-logging-example-maven).  
@@ -47,7 +47,7 @@ See full example in [kotlin-logging-example-maven](https://github.com/MicroUtils
 
 ### Gradle
 ```Groovy
-compile 'microutils:kotlin.logging:1.2'
+compile 'microutils:kotlin.logging:1.2.1'
 ```
 
 
@@ -80,5 +80,5 @@ After seeing many questions like [Idiomatic way of logging in Kotlin](http://sta
 ## Contributing
 
 - Pull requests are welcome!
-- Show your :heart: with a :star: @ [![Github Stars](http://github-svg-buttons.herokuapp.com/star.svg?user=MicroUtils&repo=kotlin-logging)](https://github.com/MicroUtils/kotlin-logging/stargazers)
+- :star: -> Show your :heart: with a [![Github Stars](http://github-svg-buttons.herokuapp.com/star.svg?user=MicroUtils&repo=kotlin-logging)](https://github.com/MicroUtils/kotlin-logging/stargazers)
 
