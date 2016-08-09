@@ -20,7 +20,7 @@ class FooWithLogging {
 }
 ```
 
-An `Android` example project with kotlin logging can be found in [kotlin-logging-example-android](https://github.com/MicroUtils/kotlin-logging-example-android)
+An `Android` example project with kotlin logging can be found in [kotlin-logging-example-android](https://github.com/MicroUtils/kotlin-logging-example-android).
 
 ## Download
 
