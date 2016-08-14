@@ -1,4 +1,4 @@
-# 1.2.2
+# 1.2.2 (broken) / 1.3
 
 * Changed artifactId and jar name from kotlin.logging to kotlin-logging
 
