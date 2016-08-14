@@ -45,7 +45,7 @@ bintray {
     key = 'my_key' //https://bintray.com/profile/edit
     publications = ['MyPublication']
     pkg {
-        repo = 'kotlin.logging'
+        repo = 'kotlin-logging'
         name = 'kotlin-logging'
         userOrg = 'microutils'
         licenses = ['Apache-2.0']
