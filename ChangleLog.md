@@ -1,3 +1,6 @@
+# 1.2.2
+
+* Changed artifactId and jar name from kotlin.logging to kotlin-logging
 
 # 1.2.1
 
