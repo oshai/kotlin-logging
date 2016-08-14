@@ -32,8 +32,8 @@ Download jar from [github](https://github.com/MicroUtils/kotlin-logging/releases
 ```xml
 <dependency>
   <groupId>microutils</groupId>
-  <artifactId>kotlin-logging</artifactId>
-  <version>1.2.2</version>
+  <artifactId>kotlin.logging</artifactId>
+  <version>1.2.1</version>
 </dependency>
 ```
 See full example in [kotlin-logging-example-maven](https://github.com/MicroUtils/kotlin-logging-example-maven).  
@@ -51,7 +51,7 @@ See full example in [kotlin-logging-example-maven](https://github.com/MicroUtils
 
 ### Gradle
 ```Groovy
-compile 'microutils:kotlin-logging:1.2.2'
+compile 'microutils:kotlin.logging:1.2.1'
 ```
 
 
