@@ -24,7 +24,7 @@ An `Android` example project with kotlin logging can be found in [kotlin-logging
 
 ## Download
 
-Download jar from [github](https://github.com/MicroUtils/kotlin-logging/releases/latest) or [bintray](https://dl.bintray.com/microutils/kotlin.logging/microutils/kotlin.logging/).
+Download jar from [github](https://github.com/MicroUtils/kotlin-logging/releases/latest) or [bintray](https://dl.bintray.com/microutils/kotlin.logging/microutils/kotlin-logging/).
 
 **Important note:** kotlin-logging depends on slf4j-api, but it is also required to depend on a logging implementation in runtime. More details [here](http://saltnlight5.blogspot.co.il/2013/08/how-to-configure-slf4j-with-different.html).
 
@@ -32,8 +32,8 @@ Download jar from [github](https://github.com/MicroUtils/kotlin-logging/releases
 ```xml
 <dependency>
   <groupId>microutils</groupId>
-  <artifactId>kotlin.logging</artifactId>
-  <version>1.2.1</version>
+  <artifactId>kotlin-logging</artifactId>
+  <version>1.2.2</version>
 </dependency>
 ```
 See full example in [kotlin-logging-example-maven](https://github.com/MicroUtils/kotlin-logging-example-maven).  
@@ -51,7 +51,7 @@ See full example in [kotlin-logging-example-maven](https://github.com/MicroUtils
 
 ### Gradle
 ```Groovy
-compile 'microutils:kotlin.logging:1.2.1'
+compile 'microutils:kotlin-logging:1.2.2'
 ```
 
 
@@ -83,6 +83,7 @@ After seeing many questions like [Idiomatic way of logging in Kotlin](http://sta
 
 - kotlin-logging is hosted on [bintray](https://bintray.com/microutils/kotlin.logging/kotlin-logging/view).
 - https://medium.com/@OhadShai/logging-in-kotlin-95a4e76388f2
+- [kotlin-logging vs AnkoLogger for Android](https://medium.com/@OhadShai/logging-in-android-ankologger-vs-kotlin-logging-bb693671442a)
 
 ## Contributing
 
