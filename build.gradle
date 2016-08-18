@@ -77,7 +77,7 @@ publishing {
     publications {
         MyPublication(MavenPublication) {
             from components.java
-            groupId 'microutils'
+            groupId 'io.github.microutils'
             artifactId 'kotlin-logging'
             version '1.3'
 
