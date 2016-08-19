@@ -5,7 +5,7 @@ A wrapper for [slf4j](http://www.slf4j.org/) with Kotlin extensions.
 
 [![Build Status](https://travis-ci.org/MicroUtils/kotlin-logging.png?branch=master)](https://travis-ci.org/MicroUtils/kotlin-logging)
 [![Slack channel](https://img.shields.io/badge/Chat-Slack-blue.svg)](https://kotlinlang.slack.com/messages/kotlin-logging/)
-[ ![Download](https://api.bintray.com/packages/microutils/kotlin.logging/kotlin-logging/images/download.svg) ](https://bintray.com/microutils/kotlin.logging/kotlin-logging/_latestVersion)
+[ ![Download](https://api.bintray.com/packages/microutils/kotlin-logging/kotlin-logging/images/download.svg) ](https://bintray.com/microutils/kotlin-logging/kotlin-logging/_latestVersion)
 [![Apache License V.2](https://img.shields.io/badge/license-Apache%20V.2-blue.svg)](https://github.com/MicroUtils/kotlin-logging/blob/master/LICENSE)
 [![Pure Kotlin](https://img.shields.io/badge/100%25-kotlin-blue.svg)](https://kotlinlang.org/)
 
@@ -24,16 +24,16 @@ An `Android` example project with kotlin logging can be found in [kotlin-logging
 
 ## Download
 
-Download jar from [github](https://github.com/MicroUtils/kotlin-logging/releases/latest) or [bintray](https://dl.bintray.com/microutils/kotlin.logging/microutils/kotlin-logging/).
+Download jar from [github](https://github.com/MicroUtils/kotlin-logging/releases/latest) or [bintray](https://dl.bintray.com/microutils/kotlin-logging/microutils/kotlin-logging/).
 
 **Important note:** kotlin-logging depends on slf4j-api, but it is also required to depend on a logging implementation in runtime. More details [here](http://saltnlight5.blogspot.co.il/2013/08/how-to-configure-slf4j-with-different.html).
 
 ### Maven
 ```xml
 <dependency>
-  <groupId>microutils</groupId>
-  <artifactId>kotlin.logging</artifactId>
-  <version>1.2.1</version>
+  <groupId>io.github.microutils</groupId>
+  <artifactId>kotlin-logging</artifactId>
+  <version>1.3</version>
 </dependency>
 ```
 See full example in [kotlin-logging-example-maven](https://github.com/MicroUtils/kotlin-logging-example-maven).  
@@ -51,7 +51,7 @@ See full example in [kotlin-logging-example-maven](https://github.com/MicroUtils
 
 ### Gradle
 ```Groovy
-compile 'microutils:kotlin.logging:1.2.1'
+compile 'io.github.microutils:kotlin-logging:1.3'
 ```
 
 
@@ -81,7 +81,7 @@ After seeing many questions like [Idiomatic way of logging in Kotlin](http://sta
 
 ## More links
 
-- kotlin-logging is hosted on [bintray](https://bintray.com/microutils/kotlin.logging/kotlin-logging/view).
+- kotlin-logging is hosted on [bintray](https://bintray.com/microutils/kotlin-logging/kotlin-logging/view).
 - https://medium.com/@OhadShai/logging-in-kotlin-95a4e76388f2
 - [kotlin-logging vs AnkoLogger for Android](https://medium.com/@OhadShai/logging-in-android-ankologger-vs-kotlin-logging-bb693671442a)
 
