@@ -40,13 +40,13 @@ See full example in [kotlin-logging-example-maven](https://github.com/MicroUtils
 
 **Note:** You might need to configure your ```pom.xml``` file to use JCenter repository
 ```xml
-  <repositories>
-    <repository>
-      <id>central</id>
-      <name>bintray</name>
-      <url>http://jcenter.bintray.com</url>
-    </repository>
-  </repositories>
+<repositories>
+  <repository>
+    <id>central</id>
+    <name>bintray</name>
+    <url>http://jcenter.bintray.com</url>
+  </repository>
+</repositories>
 ```
 
 ### Gradle
