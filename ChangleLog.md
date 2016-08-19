@@ -1,6 +1,7 @@
-# 1.2.2 (broken) / 1.3
+# 1.3
 
-* Changed artifactId and jar name from kotlin.logging to kotlin-logging
+* Changed artifactId and jar name from kotlin.logging to kotlin-logging and changed groupId to io.github.microutils
+* Moved the bintray path
 
 # 1.2.1
 
