@@ -14,8 +14,9 @@ A wrapper for [slf4j](http://www.slf4j.org/) with Kotlin extensions.
 ```Kotlin
 class FooWithLogging {
     companion object: KLogging()
+    val world = "world"
     fun bar() {
-        logger.info { "twinkle twinkle $little star" }
+        logger.info { "hello $world" }
     }
 }
 ```
@@ -24,7 +25,7 @@ An `Android` example project with kotlin logging can be found in [kotlin-logging
 
 ## Download
 
-Download jar from [github](https://github.com/MicroUtils/kotlin-logging/releases/latest) or [bintray](https://dl.bintray.com/microutils/kotlin-logging/microutils/kotlin-logging/).
+Download jar from [github](https://github.com/MicroUtils/kotlin-logging/releases/latest) or [bintray](https://dl.bintray.com/microutils/kotlin-logging/io/github/microutils/kotlin-logging/).
 
 **Important note:** kotlin-logging depends on slf4j-api, but it is also required to depend on a logging implementation in runtime. More details [here](http://saltnlight5.blogspot.co.il/2013/08/how-to-configure-slf4j-with-different.html).
 
