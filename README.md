@@ -14,9 +14,9 @@ A wrapper for [slf4j](http://www.slf4j.org/) with Kotlin extensions.
 ```Kotlin
 class FooWithLogging {
     companion object: KLogging()
-    val world = "world"
+    val message = "world"
     fun bar() {
-        logger.info { "hello $world" }
+        logger.info { "hello $message" }
     }
 }
 ```
