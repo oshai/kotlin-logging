@@ -1,6 +1,10 @@
+# 1.3.2
+
+* Published artifacts to maven-central.
+
 # 1.3.1
 
-* Add lazy evaluated message methods for throwables: https://github.com/MicroUtils/kotlin-logging/pull/7.
+* Added lazy evaluated message methods for throwables: https://github.com/MicroUtils/kotlin-logging/pull/7.
 
 # 1.3
 
