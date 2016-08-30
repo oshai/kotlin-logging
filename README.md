@@ -34,25 +34,14 @@ Download jar from [github](https://github.com/MicroUtils/kotlin-logging/releases
 <dependency>
   <groupId>io.github.microutils</groupId>
   <artifactId>kotlin-logging</artifactId>
-  <version>1.3</version>
+  <version>1.3.2</version>
 </dependency>
 ```
 See full example in [kotlin-logging-example-maven](https://github.com/MicroUtils/kotlin-logging-example-maven).  
 
-**Note:** You might need to configure your ```pom.xml``` file to use JCenter repository
-```xml
-<repositories>
-  <repository>
-    <id>central</id>
-    <name>bintray</name>
-    <url>http://jcenter.bintray.com</url>
-  </repository>
-</repositories>
-```
-
 ### Gradle
 ```Groovy
-compile 'io.github.microutils:kotlin-logging:1.3'
+compile 'io.github.microutils:kotlin-logging:1.3.2'
 ```
 
 
