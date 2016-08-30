@@ -1,3 +1,7 @@
+# 1.3.1
+
+* Add lazy evaluated message methods for throwables: https://github.com/MicroUtils/kotlin-logging/pull/7.
+
 # 1.3
 
 * Changed artifactId and jar name from kotlin.logging to kotlin-logging and changed groupId to io.github.microutils
