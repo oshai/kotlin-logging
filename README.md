@@ -71,7 +71,7 @@ After seeing many questions like [Idiomatic way of logging in Kotlin](http://sta
 
 ## More links
 
-- kotlin-logging is hosted on [bintray](https://bintray.com/microutils/kotlin-logging/kotlin-logging/view).
+- kotlin-logging is hosted on [bintray](https://bintray.com/microutils/kotlin-logging/kotlin-logging/view) and [maven central](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22kotlin-logging%22).
 - https://medium.com/@OhadShai/logging-in-kotlin-95a4e76388f2
 - [kotlin-logging vs AnkoLogger for Android](https://medium.com/@OhadShai/logging-in-android-ankologger-vs-kotlin-logging-bb693671442a)
 
