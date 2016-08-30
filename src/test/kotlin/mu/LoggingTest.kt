@@ -8,6 +8,10 @@ class ClassWithLogging {
     fun test() {
         logger.info{"test ClassWithLogging"}
     }
+    fun testThrowable() {
+        val ex = Throwable()
+        logger.trace(ex){"test ChildClassWithLogging"}
+    }
 }
 open class ClassHasLogging: KLoggable {
     override val logger = logger()
@@ -57,7 +61,10 @@ class LoggingTest {
 
     @Test
     fun testMessages() {
-        ClassWithLogging().test()
+        ClassWithLogging().apply {
+            test()
+            testThrowable()
+        }
         ClassInheritLogging().test()
         ChildClassWithLogging().test()
         ClassWithNamedLogging().test()

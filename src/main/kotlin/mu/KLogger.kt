@@ -43,4 +43,39 @@ class KLogger(jLogger: Logger): Logger by jLogger{
     inline fun error(msg: () -> Any?) {
         if (isErrorEnabled) error(msg.invoke().toString())
     }
+
+    /**
+     * Lazy add a log message with throwable payload if isTraceEnabled is true
+     */
+    inline fun trace(t: Throwable, msg: () -> Any?) {
+        if (isTraceEnabled) trace(msg.invoke().toString(), t)
+    }
+
+    /**
+     * Lazy add a log message with throwable payload if isDebugEnabled is true
+     */
+    inline fun debug(t: Throwable, msg: () -> Any?) {
+        if (isDebugEnabled) debug(msg.invoke().toString(), t)
+    }
+
+    /**
+     * Lazy add a log message with throwable payload if isInfoEnabled is true
+     */
+    inline fun info(t: Throwable, msg: () -> Any?) {
+        if (isInfoEnabled) info(msg.invoke().toString(), t)
+    }
+
+    /**
+     * Lazy add a log message with throwable payload if isWarnEnabled is true
+     */
+    inline fun warn(t: Throwable, msg: () -> Any?) {
+        if (isWarnEnabled) warn(msg.invoke().toString(), t)
+    }
+
+    /**
+     * Lazy add a log message with throwable payload if isErrorEnabled is true
+     */
+    inline fun error(t: Throwable, msg: () -> Any?) {
+        if (isErrorEnabled) error(msg.invoke().toString(), t)
+    }
 }
