@@ -1,0 +1,26 @@
+<name>kotlin-logging</name>
+<description>Lightweight logging framework for Kotlin</description>
+<url>https://github.com/MicroUtils/kotlin-logging</url>
+<licenses>
+<license>
+    <name>The Apache License, Version 2.0</name>
+    <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+</license>
+</licenses>
+<developers>
+<developer>
+    <name>Ohad Shai</name>
+    <email>ohadshai@gmail.com</email>
+    <organization>github</organization>
+    <organizationUrl>http://www.github.com</organizationUrl>
+</developer>
+</developers>
+<scm>
+<connection>scm:git:git://github.com/MicroUtils/kotlin-logging.git</connection>
+<developerConnection>scm:git:ssh://github.com:MicroUtils/kotlin-logging.git</developerConnection>
+<url>http://github.com/MicroUtils/kotlin-logging/tree/master</url>
+</scm>
+
+
+.\gradlew generatePomFileForMyPublicationPublication
+.\gradlew bintrayUpload -x generatePomFileForMyPublicationPublication
