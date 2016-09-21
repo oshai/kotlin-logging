@@ -25,6 +25,7 @@ internal object KLoggerNameResolver {
                 val field = clazz.enclosingClass.getField(clazz.simpleName)
                 if (Modifier.isStatic(field.modifiers) && field.type == clazz ) {
                     // && field.get(null) === obj
+                    // the above might be safer but problematic with initialization order
                     return clazz.enclosingClass
                 }
             } catch(e: Exception) {
