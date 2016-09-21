@@ -1,7 +1,5 @@
 package mu.internal
 
-import java.lang.reflect.Modifier
-
 
 /**
  * Resolves name of classes using reflection
@@ -10,27 +8,23 @@ import java.lang.reflect.Modifier
 internal object KLoggerNameResolver {
 
     /**
-     * get class name for obj, if companion object, get the class name of the enclosing class
+     * get class name for java class (that usually represents kotlin class)
      */
-    inline internal fun <T : Any> name(obj : T): String =
-            unwrapCompanionClass(obj).name
+    inline internal fun <T : Any> name(forClass: Class<T>): String =
+            unwrapCompanionClass(forClass).name
 
 
     /**
      * unwrap companion class to enclosing class given a Java Class
      */
-    inline private fun <T : Any> unwrapCompanionClass(obj: T): Class<*> {
-        val clazz: Class<T> = obj.javaClass
-        if (clazz.enclosingClass != null) {
+    inline private fun <T : Any> unwrapCompanionClass(ofClass: Class<T>): Class<*> {
+        if (ofClass.enclosingClass != null) {
             try {
-                val field = clazz.enclosingClass.getField(clazz.simpleName)
-                if (Modifier.isStatic(field.modifiers) && field.type == clazz && field.get(null) === obj) {
-                    return clazz.enclosingClass
-                }
-            } catch(e: Exception) {
-                //ok, it is not a companion object
+                ofClass.enclosingClass.getField(ofClass.simpleName)
+                return ofClass.enclosingClass
+            } catch(e: NoSuchFieldException) {
             }
         }
-        return clazz
+        return ofClass
     }
 }

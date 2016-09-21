@@ -15,7 +15,7 @@ internal object KLoggerFactory {
      * get logger for the class
      */
     inline internal fun logger(loggable: KLoggable): KLogger =
-            KLogger(jLogger(KLoggerNameResolver.name(loggable)))
+            KLogger(jLogger(KLoggerNameResolver.name(loggable.javaClass)))
 
     /**
      * get logger by explicit name
