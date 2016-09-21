@@ -17,12 +17,20 @@ class KLoggerNameResolverTest {
         assertEquals("mu.internal.MyInterface", KLoggerNameResolver.name(MyInterface::class.java))
         assertEquals("java.lang.Object", KLoggerNameResolver.name(Any().javaClass))
         assertEquals("mu.internal.KLoggerNameResolverTest\$testNames$1", KLoggerNameResolver.name(object {}.javaClass))
+        assertEquals("mu.internal.BaseClass\$InnerClass\$Obj", KLoggerNameResolver.name(BaseClass.InnerClass.Obj::class.java))
+        assertEquals("mu.internal.BaseClass\$InnerClass\$Obj", KLoggerNameResolver.name(BaseClass.InnerClass.Obj.javaClass))
+        assertEquals("mu.internal.BaseClass\$InnerClass", KLoggerNameResolver.name(BaseClass.InnerClass.CmpObj::class.java))
+        assertEquals("mu.internal.BaseClass\$InnerClass", KLoggerNameResolver.name(BaseClass.InnerClass.CmpObj::class.java))
 
     }
 }
 
 open class BaseClass{
     companion object
+    class InnerClass {
+        object Obj
+        companion object CmpObj
+    }
 }
 class ChildClass: BaseClass(){
     companion object
