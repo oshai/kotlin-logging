@@ -1,3 +1,8 @@
+# 1.3.3
+
+* Remove dependency on kotlin reflection to make it even more lightweight.
+
+
 # 1.3.2
 
 * Published artifacts to maven-central.
