@@ -21,7 +21,11 @@ class KLoggerNameResolverTest {
         assertEquals("mu.internal.BaseClass\$InnerClass\$Obj", KLoggerNameResolver.name(BaseClass.InnerClass.Obj.javaClass))
         assertEquals("mu.internal.BaseClass\$InnerClass", KLoggerNameResolver.name(BaseClass.InnerClass.CmpObj::class.java))
         assertEquals("mu.internal.BaseClass\$InnerClass", KLoggerNameResolver.name(BaseClass.InnerClass.CmpObj::class.java))
-
+        assertEquals("mu.internal.Foo\$Bar", KLoggerNameResolver.name(Foo.Bar::class.java))
+        assertEquals("""
+                        This is a known issue that we currently do not have a solution for
+                        Foo.Bar2 is not a companion object, but still unwrapping occurs
+                        """, "mu.internal.Foo", KLoggerNameResolver.name(Foo.Bar2::class.java))
     }
 }
 
@@ -38,3 +42,18 @@ class ChildClass: BaseClass(){
 object Singleton
 interface MyInterface
 
+
+@Suppress("unused")
+class Foo {
+    object Bar
+    object Bar2
+    val z = Bar2
+
+    companion object {
+        @JvmField
+        val Bar = this
+
+        @JvmField
+        val Bar2 = Foo().z
+    }
+}
