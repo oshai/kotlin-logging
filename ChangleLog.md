@@ -1,6 +1,7 @@
 # 1.3.3
 
 * Remove dependency on kotlin reflection to make it even more lightweight.
+* Update to kotlin 1.0.4.
 
 
 # 1.3.2
