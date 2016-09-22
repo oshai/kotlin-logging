@@ -14,7 +14,7 @@ plugins {
 }
 
 group 'MicroUtils'
-version '1.3.2'
+version '1.3.3'
 
 
 
@@ -50,8 +50,8 @@ bintray {
         licenses = ['Apache-2.0']
         vcsUrl = 'https://github.com/MicroUtils/kotlin-logging'
         version {
-            name = '1.3.2'
-            desc = 'kotlin-logging 1.3.2 - Lightweight logging framework for Kotlin'
+            name = "1.3.3"
+            desc = "kotlin-logging 1.3.3 - Lightweight logging framework for Kotlin"
             released  = new Date()
         }
     }
@@ -72,16 +72,49 @@ artifacts {
     archives sourcesJar, javadocJar
 }
 
+def pomConfig = {
+    name "kotlin-logging"
+    description "kotlin-logging $version - Lightweight logging framework for Kotlin"
+    url "https://github.com/MicroUtils/kotlin-logging"
+
+    scm {
+        url "http://github.com/MicroUtils/kotlin-logging/tree/master"
+        connection "scm:git:git://github.com/MicroUtils/kotlin-logging.git"
+        developerConnection "scm:git:ssh://github.com:MicroUtils/kotlin-logging.git"
+    }
+    licenses {
+        license {
+            name "The Apache Software License, Version 2.0"
+            url "http://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+    }
+    developers {
+        developer {
+            name "Ohad Shai"
+            email "ohadshai@gmail.com"
+            organization "github"
+            organizationUrl "http://www.github.com"
+        }
+    }
+}
+
 publishing {
     publications {
         MyPublication(MavenPublication) {
+            pom.withXml {
+                def root = asNode()
+                root.appendNode('description', "kotlin-logging 1.3.3 - Lightweight logging framework for Kotlin")
+                root.children().last() + pomConfig
+            }
             from components.java
             groupId 'io.github.microutils'
             artifactId 'kotlin-logging'
-            version '1.3.2'
+            version "1.3.3"
 
             artifact sourcesJar
             artifact javadocJar
         }
     }
 }
+
+
