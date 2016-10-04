@@ -25,7 +25,7 @@ An `Android` example project with kotlin logging can be found in [kotlin-logging
 
 ## Download
 
-Download jar from [github](https://github.com/MicroUtils/kotlin-logging/releases/latest) or [bintray](https://dl.bintray.com/microutils/kotlin-logging/io/github/microutils/kotlin-logging/).
+Download jar from [github](https://github.com/MicroUtils/kotlin-logging/releases/latest) or [bintray](https://dl.bintray.com/microutils/kotlin-logging/io/github/microutils/kotlin-logging/) or [maven-central](http://repo1.maven.org/maven2/io/github/microutils/kotlin-logging/).
 
 **Important note:** kotlin-logging depends on slf4j-api. In runtime, it is also required to depend on a logging implementation. More details [here](http://saltnlight5.blogspot.co.il/2013/08/how-to-configure-slf4j-with-different.html).
 
