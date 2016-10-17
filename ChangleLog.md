@@ -1,3 +1,8 @@
+# 1.4
+
+* Changed KLogger to be an interface
+* Fix issue #11 - Location Awerness of logger
+
 # 1.3.3
 
 * Remove dependency on kotlin reflection to make it even more lightweight.
