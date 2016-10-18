@@ -53,7 +53,7 @@ class ChildClassWithLogging {
     }
 }
 class LoggingTest {
-    private var appenderWithWriter = AppenderWithWriter()
+    private lateinit var appenderWithWriter: AppenderWithWriter
 
     @Before
     fun setupAppender() {
