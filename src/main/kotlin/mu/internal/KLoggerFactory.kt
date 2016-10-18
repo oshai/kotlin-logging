@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory
 import org.slf4j.spi.LocationAwareLogger
 
 /**
- * factory methods to obtain a logger
+ * factory methods to obtain a [Logger]
  */
 @Suppress("NOTHING_TO_INLINE")
 internal object KLoggerFactory {
