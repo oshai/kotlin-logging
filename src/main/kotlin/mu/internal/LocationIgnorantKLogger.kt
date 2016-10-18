@@ -9,6 +9,6 @@ import org.slf4j.Logger
  * the rest of the methods are delegated to [Logger]
  * Hence no implemented methods
  */
-class LocationIgnorantKLogger(jLogger: Logger): KLogger, Logger by jLogger {
+internal class LocationIgnorantKLogger(jLogger: Logger): KLogger, Logger by jLogger {
 
 }

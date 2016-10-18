@@ -1,7 +1,5 @@
 package mu
 
-import org.slf4j.LoggerFactory
-
 class ClassWithLoggingForLocationTesting {
     companion object : KLogging()
 
