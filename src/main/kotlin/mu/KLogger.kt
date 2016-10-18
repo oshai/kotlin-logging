@@ -3,7 +3,7 @@ package mu
 import org.slf4j.Logger
 
 /**
- * An extension for org.slf4j.Logger with Lazy message evaluation
+ * An extension for [Logger] with Lazy message evaluation
  * example:
  * logger.info{"this is $lazy evaluated string"}
  */

@@ -2,8 +2,6 @@ package mu.internal
 
 import mu.KLoggable
 import mu.KLogger
-import mu.internal.LocationAwareKLogger
-import mu.internal.LocationIgnorantKLogger
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.slf4j.spi.LocationAwareLogger
@@ -31,9 +29,9 @@ internal object KLoggerFactory {
     inline internal fun jLogger(name: String): Logger = LoggerFactory.getLogger(name)
 
     /**
-     * wrap java logger based on location awerness
+     * wrap java logger based on location awareness
      */
-    private fun wrapJLogger(jLogger: Logger): KLogger =
+    inline private fun wrapJLogger(jLogger: Logger): KLogger =
             if (jLogger is LocationAwareLogger)
                 LocationAwareKLogger(jLogger)
             else
