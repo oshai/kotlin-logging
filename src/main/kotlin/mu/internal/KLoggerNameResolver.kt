@@ -4,7 +4,7 @@ import java.lang.reflect.Modifier
 
 
 /**
- * Resolves name of classes using reflection
+ * Resolves name of java classes
  */
 @Suppress("NOTHING_TO_INLINE")
 internal object KLoggerNameResolver {
