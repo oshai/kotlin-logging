@@ -29,12 +29,12 @@ class LoggingWithLocationTest {
     @Test
     fun testLoggingWithLocation() {
         ClassWithLoggingForLocationTesting().log()
-        Assert.assertEquals("INFO ClassWithLoggingForLocationTesting.log(9) - test", writer.toString().trim())
+        Assert.assertEquals("INFO ClassWithLoggingForLocationTesting.log(7) - test", writer.toString().trim())
     }
     @Test
     fun testLazyLoggingWithLocation() {
         ClassWithLoggingForLocationTesting().logLazy()
-        Assert.assertEquals("INFO ClassWithLoggingForLocationTesting.logLazy(13) - test", writer.toString().trim())
+        Assert.assertEquals("INFO ClassWithLoggingForLocationTesting.logLazy(11) - test", writer.toString().trim())
     }
 }
 
