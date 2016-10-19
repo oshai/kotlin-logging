@@ -34,14 +34,14 @@ Download jar from [github](https://github.com/MicroUtils/kotlin-logging/releases
 <dependency>
   <groupId>io.github.microutils</groupId>
   <artifactId>kotlin-logging</artifactId>
-  <version>1.3.3</version>
+  <version>1.4</version>
 </dependency>
 ```
 See full example in [kotlin-logging-example-maven](https://github.com/MicroUtils/kotlin-logging-example-maven).  
 
 ### Gradle
 ```Groovy
-compile 'io.github.microutils:kotlin-logging:1.3.3'
+compile 'io.github.microutils:kotlin-logging:1.4'
 ```
 
 
