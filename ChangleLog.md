@@ -1,7 +1,7 @@
 # 1.4
 
 * Changed KLogger to be an interface
-* Fix issue #11 - Location Awerness of logger
+* Fix issue [#11](https://github.com/MicroUtils/kotlin-logging/issues/11) - Location Awerness of logger
 
 # 1.3.3
 
