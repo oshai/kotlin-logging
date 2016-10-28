@@ -54,10 +54,9 @@ After seeing many questions like [Idiomatic way of logging in Kotlin](http://sta
 
 ## FAQ
 
-- Why not use plain slf4j? That is possible but you get more power and less boilerplates with kotlin-logging.
-- Is all slf4j implementation supported (Markers, params, etc')? Yes, KLogger inherits Logger and supports all methods.
-- Why should I have a lib for that? Go ahead and just copy-paste if that's easier for you.
-- Is location logging supported? Yes, support was added in 1.4.
+- Why not use plain slf4j? kotlin-logging has better native kotlin support. It adds more functionality and enable less boilerplates.
+- Is all slf4j implementation supported (Markers, params, etc')? Yes, KLogger inherits Logger and all methods are supported.
+- Is location logging possible? Yes, location awerness was added in kotlin-logging 1.4.
 
 ## Usage
 
