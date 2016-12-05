@@ -1,13 +1,30 @@
 # <img height="30" width="30" alt="kotlin-logging" src="https://raw.githubusercontent.com/MicroUtils/kotlin-logging/master/misc/images/kotlin-logging.png"> [kotlin-logging](https://github.com/MicroUtils/kotlin-logging)
 
 Lightweight logging framework for Kotlin.
-A wrapper for [slf4j](http://www.slf4j.org/) with Kotlin extensions.
+A convenient and performant logging library wrapping [slf4j](http://www.slf4j.org/) with Kotlin extensions.
 
 [![Build Status](https://travis-ci.org/MicroUtils/kotlin-logging.png?branch=master)](https://travis-ci.org/MicroUtils/kotlin-logging)
 [![Slack channel](https://img.shields.io/badge/Chat-Slack-blue.svg)](https://kotlinlang.slack.com/messages/kotlin-logging/)
 [ ![Download](https://api.bintray.com/packages/microutils/kotlin-logging/kotlin-logging/images/download.svg) ](https://bintray.com/microutils/kotlin-logging/kotlin-logging/_latestVersion)
 [![Apache License V.2](https://img.shields.io/badge/license-Apache%20V.2-blue.svg)](https://github.com/MicroUtils/kotlin-logging/blob/master/LICENSE)
 [![Pure Kotlin](https://img.shields.io/badge/100%25-kotlin-blue.svg)](https://kotlinlang.org/)
+
+Call log methods, without checking whether the respective log level is enabled:
+```Kotlin
+logger.debug { "Some $expensive message!" }
+```
+Behind the scenes the expensive message do not get evaluated if debug is not enabled:
+```Kotlin
+if (logger.isDebugEnabled) logger.debug("Some $expensive message!")
+```
+Define the logger, without explicitly specifiying the class name:
+```Kotlin
+companion object: KLogging()
+```
+Behind the scenes `val logger` will be created in the class:
+```Kotlin
+val logger = LoggerFactory.getLogger("class name")
+```
 
 ## Getting started
  
@@ -24,8 +41,6 @@ class FooWithLogging {
 An `Android` example project with kotlin logging can be found in [kotlin-logging-example-android](https://github.com/MicroUtils/kotlin-logging-example-android).
 
 ## Download
-
-Download jar from [github](https://github.com/MicroUtils/kotlin-logging/releases/latest) or [bintray](https://dl.bintray.com/microutils/kotlin-logging/io/github/microutils/kotlin-logging/) or [maven-central](http://repo1.maven.org/maven2/io/github/microutils/kotlin-logging/).
 
 **Important note:** kotlin-logging depends on slf4j-api. In runtime, it is also required to depend on a logging implementation. More details [here](http://saltnlight5.blogspot.co.il/2013/08/how-to-configure-slf4j-with-different.html).
 
@@ -44,6 +59,8 @@ See full example in [kotlin-logging-example-maven](https://github.com/MicroUtils
 compile 'io.github.microutils:kotlin-logging:1.4'
 ```
 
+Or alternatively, download jar from [github](https://github.com/MicroUtils/kotlin-logging/releases/latest) or [bintray](https://dl.bintray.com/microutils/kotlin-logging/io/github/microutils/kotlin-logging/) or [maven-central](http://repo1.maven.org/maven2/io/github/microutils/kotlin-logging/).
+
 
 ## Overview
 
@@ -60,13 +77,13 @@ After seeing many questions like [Idiomatic way of logging in Kotlin](http://sta
 
 ## Usage
 
-- See [wiki](https://github.com/MicroUtils/kotlin-logging/wiki).
+- See [wiki](https://github.com/MicroUtils/kotlin-logging/wiki) for more examples.
 
 ## Support
 
-- Issues: https://github.com/MicroUtils/kotlin-logging/issues
-- Ask question in StackOverflow with [kotlin-logging tag](http://stackoverflow.com/tags/kotlin-logging/info).
-- Slack channel: https://kotlinlang.slack.com/messages/kotlin-logging
+- Open an issue here: https://github.com/MicroUtils/kotlin-logging/issues
+- Ask a question in StackOverflow with [kotlin-logging tag](http://stackoverflow.com/tags/kotlin-logging/info).
+- Chat on Slack channel: https://kotlinlang.slack.com/messages/kotlin-logging
 
 ## More links
 
