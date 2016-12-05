@@ -1,13 +1,9 @@
-# <img height="30" width="30" alt="kotlin-logging" src="https://raw.githubusercontent.com/MicroUtils/kotlin-logging/master/misc/images/kotlin-logging.png"> [kotlin-logging](https://github.com/MicroUtils/kotlin-logging)
+# <img height="30" width="30" alt="kotlin-logging" src="https://raw.githubusercontent.com/MicroUtils/kotlin-logging/master/misc/images/kotlin-logging.png"> [kotlin-logging](https://github.com/MicroUtils/kotlin-logging) [![Build Status](https://travis-ci.org/MicroUtils/kotlin-logging.png?branch=master)](https://travis-ci.org/MicroUtils/kotlin-logging) [![Slack channel](https://img.shields.io/badge/Chat-Slack-blue.svg)](https://kotlinlang.slack.com/messages/kotlin-logging/) [ ![Download](https://api.bintray.com/packages/microutils/kotlin-logging/kotlin-logging/images/download.svg) ](https://bintray.com/microutils/kotlin-logging/kotlin-logging/_latestVersion) [![Apache License V.2](https://img.shields.io/badge/license-Apache%20V.2-blue.svg)](https://github.com/MicroUtils/kotlin-logging/blob/master/LICENSE) [![Pure Kotlin](https://img.shields.io/badge/100%25-kotlin-blue.svg)](https://kotlinlang.org/)
 
 Lightweight logging framework for Kotlin.
 A convenient and performant logging library wrapping [slf4j](http://www.slf4j.org/) with Kotlin extensions.
 
-[![Build Status](https://travis-ci.org/MicroUtils/kotlin-logging.png?branch=master)](https://travis-ci.org/MicroUtils/kotlin-logging)
-[![Slack channel](https://img.shields.io/badge/Chat-Slack-blue.svg)](https://kotlinlang.slack.com/messages/kotlin-logging/)
-[ ![Download](https://api.bintray.com/packages/microutils/kotlin-logging/kotlin-logging/images/download.svg) ](https://bintray.com/microutils/kotlin-logging/kotlin-logging/_latestVersion)
-[![Apache License V.2](https://img.shields.io/badge/license-Apache%20V.2-blue.svg)](https://github.com/MicroUtils/kotlin-logging/blob/master/LICENSE)
-[![Pure Kotlin](https://img.shields.io/badge/100%25-kotlin-blue.svg)](https://kotlinlang.org/)
+Show your :heart: with a [:star:](https://github.com/MicroUtils/kotlin-logging/stargazers)
 
 Call log methods, without checking whether the respective log level is enabled:
 ```Kotlin
@@ -95,5 +91,5 @@ After seeing many questions like [Idiomatic way of logging in Kotlin](http://sta
 ## Contributing
 
 - Pull requests are welcome!
-- Show your :heart: with a [:star:](https://github.com/MicroUtils/kotlin-logging/stargazers)
+
 
