@@ -11,7 +11,7 @@ logger.debug { "Some $expensive message!" }
 ```
 Behind the scenes the expensive message do not get evaluated if debug is not enabled:
 ```Kotlin
-if (logger.isDebugEnabled) logger.debug("Some $expensive message!")
+if (logger.isDebugEnabled()) logger.debug("Some $expensive message!")
 ```
 Define the logger, without explicitly specifiying the class name:
 ```Kotlin
