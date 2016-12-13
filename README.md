@@ -15,6 +15,10 @@ if (logger.isDebugEnabled()) logger.debug("Some $expensive message!")
 ```
 Define the logger, without explicitly specifiying the class name:
 ```Kotlin
+val logger = KotlinLogging.logger {}
+```
+or
+```Kotlin
 companion object: KLogging()
 ```
 Behind the scenes `val logger` will be created in the class:
@@ -25,8 +29,8 @@ val logger = LoggerFactory.getLogger("class name")
 ## Getting started
  
 ```Kotlin
+val logger = KotlinLogging.logger {} 
 class FooWithLogging {
-    companion object: KLogging()
     val message = "world"
     fun bar() {
         logger.info { "hello $message" }
@@ -45,14 +49,14 @@ An `Android` example project with kotlin logging can be found in [kotlin-logging
 <dependency>
   <groupId>io.github.microutils</groupId>
   <artifactId>kotlin-logging</artifactId>
-  <version>1.4</version>
+  <version>1.4.1</version>
 </dependency>
 ```
 See full example in [kotlin-logging-example-maven](https://github.com/MicroUtils/kotlin-logging-example-maven).  
 
 ### Gradle
 ```Groovy
-compile 'io.github.microutils:kotlin-logging:1.4'
+compile 'io.github.microutils:kotlin-logging:1.4.1'
 ```
 
 Or alternatively, download jar from [github](https://github.com/MicroUtils/kotlin-logging/releases/latest) or [bintray](https://dl.bintray.com/microutils/kotlin-logging/io/github/microutils/kotlin-logging/) or [maven-central](http://repo1.maven.org/maven2/io/github/microutils/kotlin-logging/).
