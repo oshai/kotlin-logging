@@ -3,7 +3,7 @@
 ```kotlin
 val logger = KotlinLogging.logger {}
 ```
-see issue #12 and PR #13
+see issue [#12](https://github.com/MicroUtils/kotlin-logging/issues/12) and PR [#13](https://github.com/MicroUtils/kotlin-logging/issues/13)
 
 # 1.4
 
