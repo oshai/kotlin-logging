@@ -21,7 +21,7 @@ or
 ```Kotlin
 companion object: KLogging()
 ```
-Behind the scenes `val logger` will be created in the class:
+Behind the scenes `val logger` will be created in the class, with the class/file name:
 ```Kotlin
 val logger = LoggerFactory.getLogger("class name")
 ```
