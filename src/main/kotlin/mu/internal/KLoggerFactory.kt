@@ -16,7 +16,7 @@ internal object KLoggerFactory {
      * get logger for the class
      */
     inline internal fun logger(loggable: KLoggable): KLogger =
-            wrapJLogger(jLogger(KLoggerNameResolver.name(loggable.javaClass)))
+            logger(KLoggerNameResolver.name(loggable.javaClass))
 
     /**
      * get logger by explicit name
@@ -24,9 +24,15 @@ internal object KLoggerFactory {
     inline internal fun logger(name: String): KLogger = wrapJLogger(jLogger(name))
 
     /**
+     * get logger for the method, assuming it was declared at the logger file/class
+     */
+    inline internal fun logger(noinline func: () -> Unit): KLogger =
+            logger(KLoggerNameResolver.name(func))
+
+    /**
      * get a java logger by name
      */
-    inline internal fun jLogger(name: String): Logger = LoggerFactory.getLogger(name)
+    inline private fun jLogger(name: String): Logger = LoggerFactory.getLogger(name)
 
     /**
      * wrap java logger based on location awareness
@@ -36,7 +42,6 @@ internal object KLoggerFactory {
                 LocationAwareKLogger(jLogger)
             else
                 LocationIgnorantKLogger(jLogger)
-
 
 }
 
