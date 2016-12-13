@@ -3,6 +3,7 @@
 ```kotlin
 val logger = KotlinLogging.logger {}
 ```
+see issue #12 and PR #13
 
 # 1.4
 
