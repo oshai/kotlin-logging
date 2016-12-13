@@ -1,3 +1,9 @@
+# 1.4.1
+* Added KotlinLogging object allow getting a logger in the following way:
+```kotlin
+val logger = KotlinLogging.logger {}
+```
+
 # 1.4
 
 * Changed KLogger to be an interface
