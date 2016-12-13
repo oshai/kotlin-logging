@@ -14,7 +14,7 @@ plugins {
 }
 
 group 'MicroUtils'
-version '1.3.3'
+version '1.4.1'
 
 
 
@@ -51,8 +51,8 @@ bintray {
         licenses = ['Apache-2.0']
         vcsUrl = 'https://github.com/MicroUtils/kotlin-logging'
         version {
-            name = "1.3.3"
-            desc = "kotlin-logging 1.3.3 - Lightweight logging framework for Kotlin"
+            name = "1.4.1"
+            desc = "kotlin-logging 1.4.1 - Lightweight logging framework for Kotlin"
             released  = new Date()
         }
     }
@@ -104,13 +104,13 @@ publishing {
         MyPublication(MavenPublication) {
             pom.withXml {
                 def root = asNode()
-                root.appendNode('description', "kotlin-logging 1.3.3 - Lightweight logging framework for Kotlin")
+                root.appendNode('description', "kotlin-logging 1.4.1 - Lightweight logging framework for Kotlin")
                 root.children().last() + pomConfig
             }
             from components.java
             groupId 'io.github.microutils'
             artifactId 'kotlin-logging'
-            version "1.3.3"
+            version "1.4.1"
 
             artifact sourcesJar
             artifact javadocJar
