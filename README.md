@@ -5,7 +5,7 @@ A convenient and performant logging library wrapping [slf4j](http://www.slf4j.or
 
 Show your :heart: with a [:star:](https://github.com/MicroUtils/kotlin-logging/stargazers)
 
-Call log methods, without checking whether the respective log level is enabled:
+* Call log methods, without checking whether the respective log level is enabled:
 ```Kotlin
 logger.debug { "Some $expensive message!" }
 ```
@@ -13,7 +13,7 @@ Behind the scenes the expensive message do not get evaluated if debug is not ena
 ```Kotlin
 if (logger.isDebugEnabled()) logger.debug("Some $expensive message!")
 ```
-Define the logger, without explicitly specifiying the class name:
+* Define the logger, without explicitly specifiying the class name:
 ```Kotlin
 val logger = KotlinLogging.logger {}
 ```
@@ -24,6 +24,11 @@ companion object: KLogging()
 Behind the scenes `val logger` will be created in the class, with the class/file name:
 ```Kotlin
 val logger = LoggerFactory.getLogger("class name")
+```
+
+* Log exceptions `Kotlin`-sty
+```Kotlin
+logger.error(exception) { "a $fancy message about the $exception" }
 ```
 
 ## Getting started
