@@ -26,7 +26,7 @@ Behind the scenes `val logger` will be created in the class, with the class/file
 val logger = LoggerFactory.getLogger("class name")
 ```
 
-* Log exceptions `Kotlin`-sty
+* Log exceptions in a Kotlin-style
 ```Kotlin
 logger.error(exception) { "a $fancy message about the $exception" }
 ```
