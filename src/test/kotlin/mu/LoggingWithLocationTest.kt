@@ -36,6 +36,11 @@ class LoggingWithLocationTest {
         ClassWithLoggingForLocationTesting().logLazy()
         Assert.assertEquals("INFO ClassWithLoggingForLocationTesting.logLazy(11) - test", writer.toString().trim())
     }
+    @Test
+    fun testNullLoggingWithLocation() {
+        ClassWithLoggingForLocationTesting().logNull()
+        Assert.assertEquals("INFO ClassWithLoggingForLocationTesting.logNull(15) -", writer.toString().trim())
+    }
 }
 
 

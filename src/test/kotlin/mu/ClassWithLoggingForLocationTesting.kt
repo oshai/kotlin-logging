@@ -8,6 +8,10 @@ class ClassWithLoggingForLocationTesting {
     }
 
     fun logLazy() {
-        logger.info{"test"}
+        logger.info { "test" }
+    }
+
+    fun logNull() {
+        logger.info(null)
     }
 }
