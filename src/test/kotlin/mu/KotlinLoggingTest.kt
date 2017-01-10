@@ -3,7 +3,7 @@ package mu
 import org.junit.Assert.*
 import org.junit.Test
 
-val logger = KotlinLogging.logger {  }
+private val logger = KotlinLogging.logger {  }
 
 class ForKotlinLoggingTest {
     val loggerInClass = KotlinLogging.logger {  }
