@@ -15,7 +15,7 @@ if (logger.isDebugEnabled) logger.debug("Some $expensive message!")
 ```
 * Define the logger, without explicitly specifiying the class name:
 ```Kotlin
-val logger = KotlinLogging.logger {}
+private val logger = KotlinLogging.logger {}
 ```
 or
 ```Kotlin
