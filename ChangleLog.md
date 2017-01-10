@@ -1,5 +1,5 @@
 # 1.4.2
-* Supported null values in parameters that allows it in slf4j
+* Supported `null` values in parameters that allows it in slf4j
 
 # 1.4.1
 * Added KotlinLogging object allow getting a logger in the following way:
