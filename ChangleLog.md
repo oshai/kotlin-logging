@@ -1,7 +1,10 @@
+# 1.4.2
+* Supported null values in parameters that allows it in slf4j
+
 # 1.4.1
 * Added KotlinLogging object allow getting a logger in the following way:
 ```kotlin
-val logger = KotlinLogging.logger {}
+private val logger = KotlinLogging.logger {}
 ```
 see issue [#12](https://github.com/MicroUtils/kotlin-logging/issues/12) and PR [#13](https://github.com/MicroUtils/kotlin-logging/issues/13)
 
