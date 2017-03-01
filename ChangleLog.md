@@ -1,3 +1,6 @@
+# 1.4.3
+* Fixed issue #17 - bad location in some logging methods.
+
 # 1.4.2
 * Supported `null` values in parameters that allows it in slf4j.
 * Update to kotlin 1.0.6.
