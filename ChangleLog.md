@@ -1,5 +1,5 @@
 # 1.4.3
-* Fixed issue #17 - bad location in some logging methods.
+* Fixed issue [#17](https://github.com/MicroUtils/kotlin-logging/issues/17) - bad location in some logging methods.
 
 # 1.4.2
 * Supported `null` values in parameters that allows it in slf4j.
