@@ -21,7 +21,7 @@ class KLoggerNameResolverTest {
         assertEquals("mu.internal.BaseClass\$InnerClass\$Obj", KLoggerNameResolver.name(BaseClass.InnerClass.Obj.javaClass))
         assertEquals("mu.internal.BaseClass\$InnerClass", KLoggerNameResolver.name(BaseClass.InnerClass.CmpObj::class.java))
         assertEquals("mu.internal.BaseClass\$InnerClass", KLoggerNameResolver.name(BaseClass.InnerClass.CmpObj::class.java))
-        assertEquals("mu.internal.Foo\$Bar", KLoggerNameResolver.name(Foo.Bar::class.java))
+        assertEquals("mu.internal.Foo", KLoggerNameResolver.name(Foo.Bar::class.java))
         assertEquals("""
                         This is a known issue that we currently do not have a solution for
                         Foo.Bar2 is not a companion object, but still unwrapping occurs
