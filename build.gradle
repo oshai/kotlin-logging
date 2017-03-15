@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlin_version = '1.0.6'
+    ext.kotlin_version = '1.1.0'
 
     repositories {
         mavenCentral()
@@ -57,6 +57,15 @@ bintray {
         }
     }
 }
+
+// kotlin compiler compatibility options
+compileKotlin {
+    kotlinOptions {
+        apiVersion = "1.0"
+        languageVersion = "1.0"
+    }
+}
+
 // custom tasks for creating source/javadoc jars
 task sourcesJar(type: Jar, dependsOn: classes) {
     classifier = 'sources'
