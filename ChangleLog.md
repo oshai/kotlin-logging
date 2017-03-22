@@ -1,3 +1,6 @@
+# 1.4.4
+* Upgrade to Kotlin 1.1.
+
 # 1.4.3
 * Fixed issue [#17](https://github.com/MicroUtils/kotlin-logging/issues/17) - bad location in some logging methods.
 
