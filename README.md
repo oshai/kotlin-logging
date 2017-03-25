@@ -97,7 +97,7 @@ After seeing many questions like [Idiomatic way of logging in Kotlin](http://sta
 
 ## Contributing
 
-Pull requests are welcome!
+Pull requests are welcome!  
 Show your :heart: with a [:star:](https://github.com/MicroUtils/kotlin-logging/stargazers)
 
 
