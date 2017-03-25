@@ -3,8 +3,6 @@
 Lightweight logging framework for Kotlin, written in [![Pure Kotlin](https://img.shields.io/badge/100%25-kotlin-blue.svg)](https://kotlinlang.org/).  
 A convenient and performant logging library wrapping [slf4j](http://www.slf4j.org/) with Kotlin extensions.
 
-Show your :heart: with a [:star:](https://github.com/MicroUtils/kotlin-logging/stargazers)
-
 * Call log methods, without checking whether the respective log level is enabled:
 ```Kotlin
 logger.debug { "Some $expensive message!" }
@@ -99,6 +97,7 @@ After seeing many questions like [Idiomatic way of logging in Kotlin](http://sta
 
 ## Contributing
 
-- Pull requests are welcome!
+Pull requests are welcome!
+Show your :heart: with a [:star:](https://github.com/MicroUtils/kotlin-logging/stargazers)
 
 
