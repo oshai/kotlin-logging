@@ -52,6 +52,22 @@ class ChildClassWithLogging {
         logger.info{"test ChildClassWithLogging"}
     }
 }
+
+data class ClassWithIncorrectToString(val someVariable : String? = null){
+    override fun toString(): String {
+        return someVariable!!.toString()
+    }
+}
+
+class LambdaRaisesError {
+    companion object: KLogging()
+    fun test() {
+        val problematicClass = ClassWithIncorrectToString()
+
+        logger.info{" $problematicClass"}
+    }
+}
+
 class LoggingTest {
     private lateinit var appenderWithWriter: AppenderWithWriter
 
@@ -102,6 +118,12 @@ class LoggingTest {
     fun testMessages6() {
         CompanionHasLogging().test()
         Assert.assertEquals("INFO  mu.CompanionHasLogging  - test CompanionHasLogging", appenderWithWriter.writer.toString().trim())
+    }
+
+    @Test
+    fun shouldNotFailForFailingLambdas(){
+        LambdaRaisesError().test()
+        Assert.assertEquals("INFO  mu.LambdaRaisesError  - Execution of Function0<java.lang.String> failed: kotlin.KotlinNullPointerException", appenderWithWriter.writer.toString().trim())
     }
 }
 class LoggingNameTest {
