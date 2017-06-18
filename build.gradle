@@ -15,7 +15,7 @@ plugins {
 }
 
 group 'MicroUtils'
-version '1.4.4'
+version '1.4.5'
 
 
 
@@ -120,7 +120,7 @@ publishing {
             from components.java
             groupId 'io.github.microutils'
             artifactId 'kotlin-logging'
-            version "1.4.4"
+            version version
 
             artifact sourcesJar
             artifact javadocJar
