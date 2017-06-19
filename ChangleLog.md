@@ -1,3 +1,6 @@
+# 1.4.5
+* Fixed issue [#22](https://github.com/MicroUtils/kotlin-logging/pull/22) - Suppress exceptions from toString methods.
+
 # 1.4.4
 * Upgrade to Kotlin 1.1.
 
