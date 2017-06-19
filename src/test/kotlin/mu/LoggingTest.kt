@@ -123,7 +123,7 @@ class LoggingTest {
     @Test
     fun shouldNotFailForFailingLambdas(){
         LambdaRaisesError().test()
-        Assert.assertEquals("INFO  mu.LambdaRaisesError  - Execution of Function0<java.lang.String> failed: kotlin.KotlinNullPointerException", appenderWithWriter.writer.toString().trim())
+        Assert.assertEquals("INFO  mu.LambdaRaisesError  - Log message invocation failed: kotlin.KotlinNullPointerException", appenderWithWriter.writer.toString().trim())
     }
 }
 class LoggingNameTest {
