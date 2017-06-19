@@ -25,6 +25,8 @@ gradle-app.setting
 .idea/dictionaries
 .idea/vcs.xml
 .idea/jsLibraryMappings.xml
+local.properties
+kotlin-logging.iml
 
 # Sensitive or high-churn files:
 .idea/dataSources.ids

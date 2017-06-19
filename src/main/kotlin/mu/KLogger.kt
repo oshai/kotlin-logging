@@ -1,5 +1,6 @@
 package mu
 
+import mu.internal.toStringSafe
 import org.slf4j.Logger
 
 /**
@@ -13,69 +14,69 @@ interface KLogger: Logger{
      * Lazy add a log message if isTraceEnabled is true
      */
     fun trace(msg: () -> Any?) {
-        if (isTraceEnabled) trace(msg.invoke().toString())
+        if (isTraceEnabled) trace(msg.toStringSafe())
     }
 
     /**
      * Lazy add a log message if isDebugEnabled is true
      */
     fun debug(msg: () -> Any?) {
-        if (isDebugEnabled) debug(msg.invoke().toString())
+        if (isDebugEnabled) debug(msg.toStringSafe())
     }
 
     /**
      * Lazy add a log message if isInfoEnabled is true
      */
     fun info(msg: () -> Any?) {
-        if (isInfoEnabled) info(msg.invoke().toString())
+        if (isInfoEnabled) info(msg.toStringSafe())
     }
 
     /**
      * Lazy add a log message if isWarnEnabled is true
      */
     fun warn(msg: () -> Any?) {
-        if (isWarnEnabled) warn(msg.invoke().toString())
+        if (isWarnEnabled) warn(msg.toStringSafe())
     }
 
     /**
      * Lazy add a log message if isErrorEnabled is true
      */
     fun error(msg: () -> Any?) {
-        if (isErrorEnabled) error(msg.invoke().toString())
+        if (isErrorEnabled) error(msg.toStringSafe())
     }
 
     /**
      * Lazy add a log message with throwable payload if isTraceEnabled is true
      */
     fun trace(t: Throwable, msg: () -> Any?) {
-        if (isTraceEnabled) trace(msg.invoke().toString(), t)
+        if (isTraceEnabled) trace(msg.toStringSafe(), t)
     }
 
     /**
      * Lazy add a log message with throwable payload if isDebugEnabled is true
      */
     fun debug(t: Throwable, msg: () -> Any?) {
-        if (isDebugEnabled) debug(msg.invoke().toString(), t)
+        if (isDebugEnabled) debug(msg.toStringSafe(), t)
     }
 
     /**
      * Lazy add a log message with throwable payload if isInfoEnabled is true
      */
     fun info(t: Throwable, msg: () -> Any?) {
-        if (isInfoEnabled) info(msg.invoke().toString(), t)
+        if (isInfoEnabled) info(msg.toStringSafe(), t)
     }
 
     /**
      * Lazy add a log message with throwable payload if isWarnEnabled is true
      */
     fun warn(t: Throwable, msg: () -> Any?) {
-        if (isWarnEnabled) warn(msg.invoke().toString(), t)
+        if (isWarnEnabled) warn(msg.toStringSafe(), t)
     }
 
     /**
      * Lazy add a log message with throwable payload if isErrorEnabled is true
      */
     fun error(t: Throwable, msg: () -> Any?) {
-        if (isErrorEnabled) error(msg.invoke().toString(), t)
+        if (isErrorEnabled) error(msg.toStringSafe(), t)
     }
 }
