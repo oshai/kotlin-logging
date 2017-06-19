@@ -1,9 +1,10 @@
 package mu.internal
 
-internal fun (() -> Any?).toStringSafe(): String {
-    try{
+@Suppress("NOTHING_TO_INLINE")
+internal inline fun (() -> Any?).toStringSafe(): String {
+    try {
         return invoke().toString()
-    }catch (ex: Exception){
-        return "Execution of $this failed: $ex"
+    } catch (e: Exception) {
+        return "Log message invocation failed: $e"
     }
 }
