@@ -22,7 +22,7 @@ class KLoggerNameResolverTest {
         assertEquals("mu.internal.BaseClass\$InnerClass", KLoggerNameResolver.name(BaseClass.InnerClass.CmpObj::class.java))
         assertEquals("mu.internal.BaseClass\$InnerClass", KLoggerNameResolver.name(BaseClass.InnerClass.CmpObj::class.java))
         assertEquals("mu.internal.Foo\$Bar", KLoggerNameResolver.name(Foo.Bar::class.java))
-        assertEquals("mu.internal.Foo\$Bar2", KLoggerNameResolver.name(Foo.Bar3::class.java))
+        assertEquals("mu.internal.Foo\$Bar2", KLoggerNameResolver.name(Foo.Bar3.javaClass))
     }
 }
 
