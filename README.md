@@ -59,7 +59,7 @@ See full example in [kotlin-logging-example-maven](https://github.com/MicroUtils
 
 ### Gradle
 ```Groovy
-compile 'io.github.microutils:kotlin-logging:1.4.4'
+compile 'io.github.microutils:kotlin-logging:1.4.5'
 ```
 
 Or alternatively, download jar from [github](https://github.com/MicroUtils/kotlin-logging/releases/latest) or [bintray](https://dl.bintray.com/microutils/kotlin-logging/io/github/microutils/kotlin-logging/) or [maven-central](http://repo1.maven.org/maven2/io/github/microutils/kotlin-logging/).
