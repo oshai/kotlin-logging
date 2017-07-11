@@ -11,6 +11,11 @@ import org.slf4j.Logger
 interface KLogger: Logger{
 
     /**
+     * The actual logger execution is delegated into
+     */
+    val underlyingLogger: Logger
+
+    /**
      * Lazy add a log message if isTraceEnabled is true
      */
     fun trace(msg: () -> Any?) {

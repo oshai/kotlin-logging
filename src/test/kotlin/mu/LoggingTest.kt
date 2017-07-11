@@ -125,6 +125,11 @@ class LoggingTest {
         LambdaRaisesError().test()
         Assert.assertEquals("INFO  mu.LambdaRaisesError  - Log message invocation failed: kotlin.KotlinNullPointerException", appenderWithWriter.writer.toString().trim())
     }
+    @Test
+    fun `check underlyingLogger property`() {
+        ClassHasLogging().logger.underlyingLogger
+        Assert.assertTrue(ClassHasLogging().logger.underlyingLogger is org.slf4j.Logger)
+    }
 }
 class LoggingNameTest {
     @Test
