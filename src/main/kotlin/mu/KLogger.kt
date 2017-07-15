@@ -11,7 +11,7 @@ import org.slf4j.Logger
 interface KLogger: Logger{
 
     /**
-     * The actual logger execution is delegated into
+     * The actual logger executing logging
      */
     val underlyingLogger: Logger
 
