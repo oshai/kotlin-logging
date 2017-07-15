@@ -1,3 +1,6 @@
+# 1.4.6
+* Fixed issue [#20](https://github.com/MicroUtils/kotlin-logging/issues/20) - add `KLogger.underlyingLogger` that provides the Logger actual implementation. Can help in operations such as setting log level.
+
 # 1.4.5
 * Fixed issue [#22](https://github.com/MicroUtils/kotlin-logging/pull/22) - Suppress exceptions from toString methods.
 
