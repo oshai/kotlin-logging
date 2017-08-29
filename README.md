@@ -5,7 +5,7 @@ A convenient and performant logging library wrapping [slf4j](http://www.slf4j.or
 
 * Call log methods, without checking whether the respective log level is enabled:
 ```Kotlin
-logger.debug("Some $expensive message!")
+logger.debug { "Some $expensive message!" }
 ```
 Behind the scenes the expensive message do not get evaluated if debug is not enabled:
 ```Kotlin
