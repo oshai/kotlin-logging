@@ -97,9 +97,16 @@ After seeing many questions like [Idiomatic way of logging in Kotlin](http://sta
 - [kotlin-logging vs AnkoLogger for Android](https://medium.com/@OhadShai/logging-in-android-ankologger-vs-kotlin-logging-bb693671442a)
 - [How kotlin-logging was published](https://medium.com/@OhadShai/no-forks-one-star-now-what-how-i-published-my-open-source-projects-8a5b5ae35d2c#.e3ygj6uf3)
 
+## Contributors
+
+- Ohad Shai
+- Pavel Nikitin [JetBrains]
+- Christoph Gritschenberger
+- Igor Manushin
+
 ## Contributing
 
 Pull requests are welcome!  
-Show your :heart: with a [:star:](https://github.com/MicroUtils/kotlin-logging/stargazers)
+Show your  :heart:  with a  [:star:](https://github.com/MicroUtils/kotlin-logging/stargazers)
 
 
