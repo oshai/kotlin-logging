@@ -107,6 +107,6 @@ After seeing many questions like [Idiomatic way of logging in Kotlin](http://sta
 ## Contributing
 
 Pull requests are welcome!  
-Show your [❤](https://github.com/MicroUtils/kotlin-logging/stargazers) with a [:star:](https://github.com/MicroUtils/kotlin-logging/stargazers)
+[Show your ❤ with a :star:](https://github.com/MicroUtils/kotlin-logging/stargazers)
 
 
