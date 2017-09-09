@@ -96,6 +96,7 @@ After seeing many questions like [Idiomatic way of logging in Kotlin](http://sta
 - https://medium.com/@OhadShai/logging-in-kotlin-95a4e76388f2
 - [kotlin-logging vs AnkoLogger for Android](https://medium.com/@OhadShai/logging-in-android-ankologger-vs-kotlin-logging-bb693671442a)
 - [How kotlin-logging was published](https://medium.com/@OhadShai/no-forks-one-star-now-what-how-i-published-my-open-source-projects-8a5b5ae35d2c#.e3ygj6uf3)
+- [Kotlin Logging Without the Fuss](https://realjenius.com/2017/08/31/logging-in-kotlin/)
 
 ## Contributors
 
