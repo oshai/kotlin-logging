@@ -13,6 +13,7 @@ if (logger.isDebugEnabled) logger.debug("Some $expensive message!")
 ```
 * Define the logger, without explicitly specifiying the class name:
 ```Kotlin
+// Place definition above class declaration to make field static
 private val logger = KotlinLogging.logger {}
 ```
 or
