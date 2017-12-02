@@ -1,3 +1,6 @@
+# 1.4.7
+* Upgrade to Kotlin 1.2.0.
+
 # 1.4.6
 * Fixed issue [#20](https://github.com/MicroUtils/kotlin-logging/issues/20) - add `KLogger.underlyingLogger` that provides the Logger actual implementation. Can help in operations such as setting log level.
 
