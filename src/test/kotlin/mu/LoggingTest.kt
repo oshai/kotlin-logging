@@ -127,8 +127,7 @@ class LoggingTest {
     }
     @Test
     fun `check underlyingLogger property`() {
-        ClassHasLogging().logger.underlyingLogger
-        Assert.assertTrue(ClassHasLogging().logger.underlyingLogger is org.slf4j.Logger)
+        Assert.assertEquals("mu.ClassHasLogging", ClassHasLogging().logger.underlyingLogger.name)
     }
 }
 class LoggingNameTest {
