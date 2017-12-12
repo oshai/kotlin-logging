@@ -1,3 +1,6 @@
+# 1.4.8
+* 1.4.7 was broken see issue [#30](https://github.com/MicroUtils/kotlin-logging/issues/30)
+
 # 1.4.7
 * Upgrade to Kotlin 1.2.0.
 
