@@ -1,5 +1,6 @@
+apply plugin: 'kotlin-platform-jvm'
+
 buildscript {
-    ext.kotlin_version = '1.2.10'
 
     repositories {
         mavenCentral()
@@ -8,123 +9,28 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
-
-plugins {
-    id "com.jfrog.bintray" version "1.7"
-}
-
-group 'MicroUtils'
-version '1.4.8'
-
-
-
-
-apply plugin: 'kotlin-platform-jvm'
-
-apply plugin: 'maven'
-apply plugin: 'maven-publish'
 sourceCompatibility = 1.6
 
 repositories {
     mavenCentral()
 }
 
+sourceSets {
+    main {
+        kotlin {
+            srcDirs = ['src', '../kotlin-logging-common/src']
+        }
+    }
+}
+
 dependencies {
     expectedBy project(':kotlin-logging-common')
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    compile "org.slf4j:slf4j-api:1.7.25"
-    testCompile "org.slf4j:slf4j-log4j12:1.7.25"
+    compile "org.slf4j:slf4j-api:$sl4j_version"
+    testCompile "org.slf4j:slf4j-log4j12:$sl4j_version"
     testCompile "log4j:log4j:1.2.17"
     testCompile "org.mockito:mockito-all:1.10.19"
     testCompile 'junit:junit:4.12'
-}
-
-//https://github.com/bintray/gradle-bintray-plugin
-bintray {
-    user = 'oshai'
-    key = 'my_key' //https://bintray.com/profile/edit
-    publications = ['MyPublication']
-    pkg {
-        repo = 'kotlin-logging'
-        name = 'kotlin-logging'
-        userOrg = 'microutils'
-        licenses = ['Apache-2.0']
-        vcsUrl = 'https://github.com/MicroUtils/kotlin-logging'
-        version {
-            name = '1.4.8'
-            desc = "kotlin-logging 1.4.8 - Lightweight logging framework for Kotlin"
-            released  = new Date()
-        }
-    }
-}
-
-// kotlin compiler compatibility options
-compileKotlin {
-    kotlinOptions {
-        apiVersion = "1.0"
-        languageVersion = "1.0"
-    }
-}
-
-// custom tasks for creating source/javadoc jars
-task sourcesJar(type: Jar, dependsOn: classes) {
-    classifier = 'sources'
-    from sourceSets.main.allSource
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
-
-// add javadoc/source jar tasks as artifacts
-artifacts {
-    archives sourcesJar, javadocJar
-}
-
-def pomConfig = {
-    name "kotlin-logging"
-    description "kotlin-logging $version - Lightweight logging framework for Kotlin"
-    url "https://github.com/MicroUtils/kotlin-logging"
-
-    scm {
-        url "http://github.com/MicroUtils/kotlin-logging/tree/master"
-        connection "scm:git:git://github.com/MicroUtils/kotlin-logging.git"
-        developerConnection "scm:git:ssh://github.com:MicroUtils/kotlin-logging.git"
-    }
-    licenses {
-        license {
-            name "The Apache Software License, Version 2.0"
-            url "http://www.apache.org/licenses/LICENSE-2.0.txt"
-        }
-    }
-    developers {
-        developer {
-            name "Ohad Shai"
-            email "ohadshai@gmail.com"
-            organization "github"
-            organizationUrl "http://www.github.com"
-        }
-    }
-}
-
-publishing {
-    publications {
-        MyPublication(MavenPublication) {
-            pom.withXml {
-                def root = asNode()
-                root.appendNode('description', "kotlin-logging $version - Lightweight logging framework for Kotlin")
-                root.children().last() + pomConfig
-            }
-            from components.java
-            groupId 'io.github.microutils'
-            artifactId 'kotlin-logging'
-            version version
-
-            artifact sourcesJar
-            artifact javadocJar
-        }
-    }
 }
 
 
