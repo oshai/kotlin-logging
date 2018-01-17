@@ -2,13 +2,12 @@ apply plugin: 'kotlin-platform-js'
 
 repositories {
     mavenCentral()
-    jcenter()
 }
 
 sourceSets {
     main {
         kotlin {
-            srcDirs = ['src', '../klogging.common/src']
+            srcDirs = ['src', '../kotlin-logging-common/src']
         }
     }
 }
@@ -22,7 +21,7 @@ def target = "${projectDir}/build/classes/main"
 
 compileKotlin2Js {
     kotlinOptions.metaInfo = true
-    kotlinOptions.outputFile = "$target/klogging.js"
+    kotlinOptions.outputFile = "$target/kotlin-logging.js"
     kotlinOptions.sourceMap = true
     kotlinOptions.moduleKind = 'umd'
 }
