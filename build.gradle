@@ -23,8 +23,8 @@ apply plugin: "maven-publish"
 //https://github.com/bintray/gradle-bintray-plugin
 bintray {
     user = 'oshai'
-    key = '---' //https://bintray.com/profile/edit
-    publications = ['MyPublication']
+    key = 'my-key' //https://bintray.com/profile/edit
+    publications = ['jvm']
     pkg {
         repo = 'kotlin-logging'
         name = 'kotlin-logging'
