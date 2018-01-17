@@ -1,3 +1,7 @@
+# 1.4.9
+* Add MDC Support [#31](https://github.com/MicroUtils/kotlin-logging/issues/31)
+* Upgrade to Kotlin 1.2.10.
+
 # 1.4.8
 * 1.4.7 was broken see issue [#30](https://github.com/MicroUtils/kotlin-logging/issues/30)
 
