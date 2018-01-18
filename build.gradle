@@ -3,95 +3,130 @@ buildscript {
 
     repositories {
         mavenCentral()
+        jcenter()
     }
 
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
     }
 }
 
-plugins {
-    id "com.jfrog.bintray" version "1.7"
+allprojects {
+    group 'io.github.microutils'
+    version '1.5.3'
+
+    repositories {
+        mavenCentral()
+    }
 }
 
-group 'MicroUtils'
-version '1.5.0'
+apply plugin: 'kotlin'
 
-apply plugin: "maven"
-apply plugin: "maven-publish"
+subprojects {
 
-//https://github.com/bintray/gradle-bintray-plugin
-bintray {
-    user = 'oshai'
-    key = 'my-key' //https://bintray.com/profile/edit
-    publications = ['jvm']
-    pkg {
-        repo = 'kotlin-logging'
-        name = 'kotlin-logging'
-        userOrg = 'microutils'
-        licenses = ['Apache-2.0']
-        vcsUrl = 'https://github.com/MicroUtils/kotlin-logging'
-        version {
-            name = '1.5.0'
-            desc = "kotlin-logging 1.5.0 - Lightweight logging framework for Kotlin"
-            released = new Date()
+    apply plugin: 'maven-publish'
+    apply plugin: 'com.jfrog.bintray'
+
+    def varintName = "kotlin-logging"
+
+    if (project.name != "kotlin-logging-jvm") {
+        varintName = "${project.name}"
+    }
+
+    afterEvaluate {
+        task sourceJar(type: Jar, dependsOn: classes) {
+            classifier 'sources'
+            from sourceSets.main.kotlin
+            duplicatesStrategy = "exclude"
+            def platformSrc = sourceSets.main.kotlin
+            def commonSrc = project(':kotlin-logging-common').sourceSets.main.kotlin
+            from (platformSrc + commonSrc)
+        }
+
+        task javadocJar(type: Jar, dependsOn: javadoc) {
+            classifier = 'javadoc'
+            from javadoc.destinationDir
         }
     }
-}
 
-
-def pomConfig = {
-    name "kotlin-logging"
-    description "kotlin-logging $version - Lightweight logging framework for Kotlin"
-    url "https://github.com/MicroUtils/kotlin-logging"
-
-    scm {
-        url "http://github.com/MicroUtils/kotlin-logging/tree/master"
-        connection "scm:git:git://github.com/MicroUtils/kotlin-logging.git"
-        developerConnection "scm:git:ssh://github.com:MicroUtils/kotlin-logging.git"
+    tasks.withType(Jar) {
+        archivesBaseName = varintName
     }
-    licenses {
-        license {
-            name "The Apache Software License, Version 2.0"
-            url "http://www.apache.org/licenses/LICENSE-2.0.txt"
+
+    def pomConfig = {
+        name "kotlin-logging"
+        description "kotlin-logging $version - Lightweight logging framework for Kotlin"
+        url "https://github.com/MicroUtils/kotlin-logging"
+
+        scm {
+            url "http://github.com/MicroUtils/kotlin-logging/tree/master"
+            connection "scm:git:git://github.com/MicroUtils/kotlin-logging.git"
+            developerConnection "scm:git:ssh://github.com:MicroUtils/kotlin-logging.git"
         }
-    }
-    developers {
-        developer {
-            name "Ohad Shai"
-            email "ohadshai@gmail.com"
-            organization "github"
-            organizationUrl "http://www.github.com"
-        }
-    }
-}
-
-
-publishing {
-    publications {
-        jvm(MavenPublication) {
-            from findProject("kotlin-logging-jvm").components.java
-            pom.withXml {
-                def root = asNode()
-                root.appendNode('description', "kotlin-logging $version - Lightweight logging framework for Kotlin")
-                root.children().last() + pomConfig
+        licenses {
+            license {
+                name "The Apache Software License, Version 2.0"
+                url "http://www.apache.org/licenses/LICENSE-2.0.txt"
             }
-            groupId 'io.github.microutils'
-            artifactId 'kotlin-logging'
-            version version
-
-            Artifact sourcesJar
-            Artifact javadocJar
         }
-
-        js(MavenPublication) {
-            artifactId 'kotlin-logging-js'
-            from findProject("kotlin-logging-js").components.java
+        developers {
+            developer {
+                name "Ohad Shai"
+                email "ohadshai@gmail.com"
+                organization "github"
+                organizationUrl "http://www.github.com"
+            }
         }
+    }
 
-        common(MavenPublication) {
-            artifactId 'kotlin-logging-common'
-            from findProject("kotlin-logging-common").components.java
+    publishing {
+        publications {
+            mavenProject(MavenPublication) {
+                from components.java
+                groupId project.group
+                artifactId varintName
+                version project.version
+
+                pom.withXml {
+                    def root = asNode()
+                    root.appendNode('description', "kotlin-logging $version - Lightweight logging framework for Kotlin")
+                    root.children().last() + pomConfig
+                }
+
+
+                artifact sourceJar {
+                    classifier "sources"
+                }
+                artifact javadocJar {
+                    classifier "javadoc"
+                }
+            }
+        }
+    }
+
+    bintray {
+        user = 'oshai'//project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
+        key = 'mykey' //https://bintray.com/profile/edit
+        // project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
+        publications = ['mavenProject']
+        pkg {
+            repo = 'kotlin-logging'
+            name = 'kotlin-logging'
+            userOrg = 'microutils'
+            licenses = ['Apache-2.0']
+            vcsUrl = 'https://github.com/MicroUtils/kotlin-logging'
+            websiteUrl = 'https://github.com/MicroUtils/kotlin-logging'
+            issueTrackerUrl = 'https://github.com/MicroUtils/kotlin-logging/issues'
+
+            githubRepo = 'MicroUtils/kotlin-logging'
+            version {
+                name = project.version
+                desc = "kotlin-logging - Lightweight logging framework for Kotlin"
+                released = new Date()
+            }
         }
     }
 }
+
+
