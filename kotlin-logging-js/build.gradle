@@ -1,0 +1,27 @@
+apply plugin: 'kotlin-platform-js'
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+    main {
+        kotlin {
+            srcDirs = ['src', '../kotlin-logging-common/src']
+        }
+    }
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
+    expectedBy project(':kotlin-logging-common')
+}
+
+def target = "${projectDir}/build/classes/main"
+
+compileKotlin2Js {
+    kotlinOptions.metaInfo = true
+    kotlinOptions.outputFile = "$target/kotlin-logging.js"
+    kotlinOptions.sourceMap = true
+    kotlinOptions.moduleKind = 'umd'
+}
