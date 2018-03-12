@@ -1,3 +1,8 @@
+# 1.5.3
+* Add Partial support for multiplatform [#21](https://github.com/MicroUtils/kotlin-logging/issues/21)
+  * Split directories.
+  * Currently only jvm artifact is deployed.
+
 # 1.4.9
 * Add MDC Support [#31](https://github.com/MicroUtils/kotlin-logging/issues/31)
 * Upgrade to Kotlin 1.2.10.
