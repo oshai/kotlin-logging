@@ -17,6 +17,10 @@ class ClassWithLogging {
         val ex = Throwable()
         logger.trace(ex){"test ChildClassWithLogging"}
     }
+    fun testNullableThrowable() {
+        val ex:Throwable? = null
+        logger.trace(ex){"test ChildClassWithLogging"}
+    }
 }
 open class ClassHasLogging: KLoggable {
     override val logger = logger()
@@ -87,12 +91,14 @@ class LoggingTest {
         ClassWithLogging().apply {
             test()
             testThrowable()
+            testNullableThrowable()
         }
         val lines = appenderWithWriter.writer.toString().trim().replace("\r", "\n").replace("\n\n", "\n").split("\n")
         Assert.assertEquals("INFO  mu.ClassWithLogging  - test ClassWithLogging", lines[0].trim())
         Assert.assertEquals("TRACE mu.ClassWithLogging  - test ChildClassWithLogging", lines[1].trim())
         Assert.assertEquals("java.lang.Throwable", lines[2].trim())
         Assert.assertTrue(lines[3].trim().startsWith("at mu.ClassWithLogging.testThrowable("))
+        Assert.assertEquals("TRACE mu.ClassWithLogging  - test ChildClassWithLogging", lines[lines.size-1].trim())
     }
     @Test
     fun testMessages2() {
