@@ -512,35 +512,35 @@ internal class LocationAwareKLogger(override val underlyingLogger: LocationAware
     /**
      * Lazy add a log message with throwable payload if isTraceEnabled is true
      */
-    override fun trace(t: Throwable, msg: () -> Any?) {
+    override fun trace(t: Throwable?, msg: () -> Any?) {
         if (isTraceEnabled) trace(msg.toStringSafe(), t)
     }
 
     /**
      * Lazy add a log message with throwable payload if isDebugEnabled is true
      */
-    override fun debug(t: Throwable, msg: () -> Any?) {
+    override fun debug(t: Throwable?, msg: () -> Any?) {
         if (isDebugEnabled) debug(msg.toStringSafe(), t)
     }
 
     /**
      * Lazy add a log message with throwable payload if isInfoEnabled is true
      */
-    override fun info(t: Throwable, msg: () -> Any?) {
+    override fun info(t: Throwable?, msg: () -> Any?) {
         if (isInfoEnabled) info(msg.toStringSafe(), t)
     }
 
     /**
      * Lazy add a log message with throwable payload if isWarnEnabled is true
      */
-    override fun warn(t: Throwable, msg: () -> Any?) {
+    override fun warn(t: Throwable?, msg: () -> Any?) {
         if (isWarnEnabled) warn(msg.toStringSafe(), t)
     }
 
     /**
      * Lazy add a log message with throwable payload if isErrorEnabled is true
      */
-    override fun error(t: Throwable, msg: () -> Any?) {
+    override fun error(t: Throwable?, msg: () -> Any?) {
         if (isErrorEnabled) error(msg.toStringSafe(), t)
     }
 }

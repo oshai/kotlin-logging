@@ -53,35 +53,35 @@ interface KLogger : Logger {
   /**
    * Lazy add a log message with throwable payload if isTraceEnabled is true
    */
-  fun trace(t: Throwable, msg: () -> Any?) {
+  fun trace(t: Throwable?, msg: () -> Any?) {
     if (isTraceEnabled) trace(msg.toStringSafe(), t)
   }
 
   /**
    * Lazy add a log message with throwable payload if isDebugEnabled is true
    */
-  fun debug(t: Throwable, msg: () -> Any?) {
+  fun debug(t: Throwable?, msg: () -> Any?) {
     if (isDebugEnabled) debug(msg.toStringSafe(), t)
   }
 
   /**
    * Lazy add a log message with throwable payload if isInfoEnabled is true
    */
-  fun info(t: Throwable, msg: () -> Any?) {
+  fun info(t: Throwable?, msg: () -> Any?) {
     if (isInfoEnabled) info(msg.toStringSafe(), t)
   }
 
   /**
    * Lazy add a log message with throwable payload if isWarnEnabled is true
    */
-  fun warn(t: Throwable, msg: () -> Any?) {
+  fun warn(t: Throwable?, msg: () -> Any?) {
     if (isWarnEnabled) warn(msg.toStringSafe(), t)
   }
 
   /**
    * Lazy add a log message with throwable payload if isErrorEnabled is true
    */
-  fun error(t: Throwable, msg: () -> Any?) {
+  fun error(t: Throwable?, msg: () -> Any?) {
     if (isErrorEnabled) error(msg.toStringSafe(), t)
   }
 }
