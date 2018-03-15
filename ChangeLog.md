@@ -1,3 +1,6 @@
+# 1.5.4
+* Accept nullable Throwables [#38](https://github.com/MicroUtils/kotlin-logging/issues/38) [#39](https://github.com/MicroUtils/kotlin-logging/issues/39)
+
 # 1.5.3
 * Add Partial support for multiplatform [#21](https://github.com/MicroUtils/kotlin-logging/issues/21)
   * Split directories.
