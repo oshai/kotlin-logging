@@ -105,6 +105,9 @@ After seeing many questions like [Idiomatic way of logging in Kotlin](http://sta
 - Pavel Nikitin [JetBrains]
 - Christoph Gritschenberger
 - Igor Manushin
+- krokofant
+- ravikumar-n
+- Dario Seidl
 
 ## Contributing
 
