@@ -51,6 +51,46 @@ interface KLogger : Logger {
   }
 
   /**
+   * Lazy add a log message if isTraceEnabled is true and return `returnValue`
+   */
+  fun<T> trace(msg: () -> Any?, returnValue: T): T {
+    if (isTraceEnabled) trace(msg.toStringSafe())
+    return returnValue
+  }
+
+  /**
+   * Lazy add a log message if isDebugEnabled is true and return `returnValue`
+   */
+  fun<T> debug(msg: () -> Any?, returnValue: T): T {
+    if (isDebugEnabled) debug(msg.toStringSafe())
+    return returnValue
+  }
+
+  /**
+   * Lazy add a log message if isInfoEnabled is true and return `returnValue`
+   */
+  fun<T> info(msg: () -> Any?, returnValue: T): T {
+    if (isInfoEnabled) info(msg.toStringSafe())
+    return returnValue
+  }
+
+  /**
+   * Lazy add a log message if isWarnEnabled is true and return `returnValue`
+   */
+  fun<T> warn(msg: () -> Any?, returnValue: T): T {
+    if (isWarnEnabled) warn(msg.toStringSafe())
+    return returnValue
+  }
+
+  /**
+   * Lazy add a log message if isErrorEnabled is true and return `returnValue`
+   */
+  fun<T> error(msg: () -> Any?, returnValue: T): T {
+    if (isErrorEnabled) error(msg.toStringSafe())
+    return returnValue
+  }
+
+  /**
    * Lazy add a log message with throwable payload if isTraceEnabled is true
    */
   fun trace(t: Throwable?, msg: () -> Any?) {
