@@ -85,6 +85,10 @@ After seeing many questions like [Idiomatic way of logging in Kotlin](http://sta
 
 - See [wiki](https://github.com/MicroUtils/kotlin-logging/wiki) for more examples.
 
+It is possible to configure Intellij live template. For file level logger configure the following:
+- Text template: `private val logger = mu.KotlinLogging.logger {}`.
+- Applicable in `Kotlin: top-level`.
+
 ## Support
 
 - Open an issue here: https://github.com/MicroUtils/kotlin-logging/issues
