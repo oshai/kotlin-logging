@@ -73,6 +73,17 @@ After seeing many questions like [Idiomatic way of logging in Kotlin](http://sta
   - A straight forward way to log messages with lazy-evaluated string using lambda expression `{}`.
   - All previous slf4j implementation still can be used.
 
+## Who is using it
+
+- https://www.jetbrains.com/youtrack/ (https://www.jetbrains.com/help/youtrack/standalone/Third-Party-Software-Used-by-YouTrack.html)
+- https://github.com/DiUS/pact-jvm
+- https://github.com/AsynkronIT/protoactor-kotlin
+- https://github.com/square/misk
+- https://github.com/openrndr/openrndr
+- https://github.com/JetBrains/xodus
+
+And many more... (add your name above)
+
 ## FAQ
 
 - Why not use plain slf4j? kotlin-logging has better native kotlin support. It adds more functionality and enable less boilerplates.
@@ -104,6 +115,7 @@ It is possible to configure Intellij live template. For file level logger config
 - [Kotlin Logging Without the Fuss](https://realjenius.com/2017/08/31/logging-in-kotlin/)
 - [DropWizard + Kotlin = Project Kronslott](https://medium.com/@davideriksson_91895/dropwizard-kotlin-project-kronslott-e2aa51b277b8)
 - [Logging in Kotlin – the right approach](https://amarszalek.net/blog/2018/05/13/logging-in-kotlin-right-approach/)
+- https://bednarek.wroclaw.pl/log4j-in-kotlin/
 
 ## Contributors
 
