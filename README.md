@@ -105,6 +105,7 @@ It is possible to configure Intellij live template. For file level logger config
 - Open an issue here: https://github.com/MicroUtils/kotlin-logging/issues
 - Ask a question in StackOverflow with [kotlin-logging tag](http://stackoverflow.com/tags/kotlin-logging/info).
 - Chat on Slack channel: https://kotlinlang.slack.com/messages/kotlin-logging
+- Chat on Telegram channel: https://t.me/klogging
 
 ## More links
 
