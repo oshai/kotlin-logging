@@ -76,7 +76,7 @@ After seeing many questions like [Idiomatic way of logging in Kotlin](http://sta
 ## Multiplatform
 
 An experimental common & js support is available.  
-More info on [wiki](https://github.com/MicroUtils/kotlin-logging/wiki/Multiplatform-support).
+More info on [wiki](https://github.com/MicroUtils/kotlin-logging/wiki/Multiplatform-support) and issue [#21](https://github.com/MicroUtils/kotlin-logging/issues/21).
 
 ## Who is using it
 
