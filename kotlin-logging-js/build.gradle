@@ -23,5 +23,6 @@ compileKotlin2Js {
     kotlinOptions.metaInfo = true
     kotlinOptions.outputFile = "$target/kotlin-logging.js"
     kotlinOptions.sourceMap = true
+    kotlinOptions.verbose = true
     kotlinOptions.moduleKind = 'umd'
 }
