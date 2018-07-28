@@ -73,10 +73,10 @@ After seeing many questions like [Idiomatic way of logging in Kotlin](http://sta
   - A straight forward way to log messages with lazy-evaluated string using lambda expression `{}`.
   - All previous slf4j implementation still can be used.
 
-## Multiplatform support
+## Multiplatform
 
 An experimental common & js support is available.  
-More info in [wiki](https://github.com/MicroUtils/kotlin-logging/wiki/Multiplatform-support).
+More info on [wiki](https://github.com/MicroUtils/kotlin-logging/wiki/Multiplatform-support).
 
 ## Who is using it
 
