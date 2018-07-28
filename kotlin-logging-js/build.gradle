@@ -7,7 +7,7 @@ repositories {
 sourceSets {
     main {
         kotlin {
-            srcDirs = ['src', '../kotlin-logging-common/src']
+            srcDirs = ['src/main/kotlin', '../kotlin-logging-common/src/main/kotlin']
         }
     }
 }
