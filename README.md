@@ -53,14 +53,14 @@ An `Android` example project with kotlin logging can be found in [kotlin-logging
 <dependency>
   <groupId>io.github.microutils</groupId>
   <artifactId>kotlin-logging</artifactId>
-  <version>1.5.4</version>
+  <version>1.5.5</version>
 </dependency>
 ```
 See full example in [kotlin-logging-example-maven](https://github.com/MicroUtils/kotlin-logging-example-maven).  
 
 ### Gradle
 ```Groovy
-compile 'io.github.microutils:kotlin-logging:1.5.4'
+compile 'io.github.microutils:kotlin-logging:1.5.5'
 ```
 
 Or alternatively, download jar from [github](https://github.com/MicroUtils/kotlin-logging/releases/latest) or [bintray](https://dl.bintray.com/microutils/kotlin-logging/io/github/microutils/kotlin-logging/) or [maven-central](http://repo1.maven.org/maven2/io/github/microutils/kotlin-logging/).
@@ -72,6 +72,11 @@ After seeing many questions like [Idiomatic way of logging in Kotlin](http://sta
   - No need to write the logger and class name or logger name boileplates.
   - A straight forward way to log messages with lazy-evaluated string using lambda expression `{}`.
   - All previous slf4j implementation still can be used.
+
+## Multiplatform support
+
+An experimental common & js support is available.  
+More info in [wiki](https://github.com/MicroUtils/kotlin-logging/wiki/Multiplatform-support).
 
 ## Who is using it
 
