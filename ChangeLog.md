@@ -1,3 +1,8 @@
+# 1.5.5
+* Add Partial support for multiplatform [#21](https://github.com/MicroUtils/kotlin-logging/issues/21)
+  * common and js implementation.
+  * Currently js and common artifacts are deployed here: https://github.com/MicroUtils/kotlin-logging/releases/tag/1.5.5
+
 # 1.5.4
 * Accept nullable Throwables [#38](https://github.com/MicroUtils/kotlin-logging/issues/38) [#39](https://github.com/MicroUtils/kotlin-logging/issues/39)
 
