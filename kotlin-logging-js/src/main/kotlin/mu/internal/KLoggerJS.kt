@@ -4,7 +4,7 @@ import mu.KLogger
 import mu.KotlinLoggingLevel
 import mu.isLoggingEnabled
 
-class KLoggerJS(private val loggerName: String) : KLogger {
+internal class KLoggerJS(private val loggerName: String) : KLogger {
 
     override fun trace(msg: () -> Any?) {
         if (KotlinLoggingLevel.TRACE.isLoggingEnabled()) {
