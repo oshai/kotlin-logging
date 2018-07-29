@@ -1,7 +1,7 @@
-# 1.5.5
+# 1.5.6
 * Add Partial support for multiplatform [#21](https://github.com/MicroUtils/kotlin-logging/issues/21)
   * common and js implementation.
-  * Currently js and common artifacts are deployed here: https://github.com/MicroUtils/kotlin-logging/releases/tag/1.5.5
+* kotlin version is now 1.2.30, when tried to upgrade an additional (unneeded) dependency in pom.xml on common module was created.
 
 # 1.5.4
 * Accept nullable Throwables [#38](https://github.com/MicroUtils/kotlin-logging/issues/38) [#39](https://github.com/MicroUtils/kotlin-logging/issues/39)
