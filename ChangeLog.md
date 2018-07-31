@@ -1,3 +1,7 @@
+# 1.5.8
+* Refactor - move toStringSafe() to common lib.
+* This version (+1.5.7 which has no changes) are mostly deployed for multiplatform checks.
+
 # 1.5.6
 * Add Partial support for multiplatform [#21](https://github.com/MicroUtils/kotlin-logging/issues/21)
   * common and js implementation.
