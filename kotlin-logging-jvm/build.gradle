@@ -27,6 +27,8 @@ dependencies {
     testCompile "log4j:log4j:1.2.17"
     testCompile "org.mockito:mockito-all:1.10.19"
     testCompile 'junit:junit:4.12'
+    testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+    testCompile "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
 }
 
 // kotlin compiler compatibility options
