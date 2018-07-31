@@ -66,14 +66,6 @@ internal class KLoggerJS(private val loggerName: String) : KLogger {
         }
     }
 
-    private fun (() -> Any?).toStringSafe(): String {
-        try {
-            return invoke().toString()
-        } catch (e: Exception) {
-            return "Log message invocation failed: $e"
-        }
-    }
-
     private fun Throwable?.throwableToString(): String {
         if (this == null) {
             return ""
