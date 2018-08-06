@@ -30,14 +30,3 @@ dependencies {
     testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
     testCompile "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
 }
-
-// kotlin compiler compatibility options
-compileKotlin {
-    kotlinOptions {
-        apiVersion = "1.0"
-        languageVersion = "1.0"
-    }
-}
-
-
-

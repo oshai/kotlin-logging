@@ -4,14 +4,6 @@ repositories {
     mavenCentral()
 }
 
-sourceSets {
-    main {
-        kotlin {
-            srcDirs = ['src/main/kotlin', '../kotlin-logging-common/src/main/kotlin']
-        }
-    }
-}
-
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
     expectedBy project(':kotlin-logging-common')
