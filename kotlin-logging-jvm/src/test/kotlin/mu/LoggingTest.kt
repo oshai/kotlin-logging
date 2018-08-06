@@ -15,11 +15,20 @@ class ClassWithLogging {
     }
     fun testThrowable() {
         val ex = Throwable()
-        logger.trace(ex){"test ChildClassWithLogging"}
+        logger.trace(ex){"test ClassWithLogging"}
     }
     fun testNullableThrowable() {
         val ex:Throwable? = null
-        logger.trace(ex){"test ChildClassWithLogging"}
+        logger.trace(ex){"test ClassWithLogging"}
+    }
+    fun testMarker() {
+        val marker = KMarkerFactory.getMarker("MARKER")
+        logger.trace(marker){"test ClassWithLogging"}
+    }
+    fun testMarkerThrowable() {
+        val marker = KMarkerFactory.getMarker("MARKER")
+        val ex = Throwable()
+        logger.trace(marker, ex){"test ClassWithLogging"}
     }
 }
 open class ClassHasLogging: KLoggable {
@@ -87,7 +96,7 @@ class LoggingTest {
     }
 
     @Test
-    fun testMessages1() {
+    fun testMessages0() {
         ClassWithLogging().apply {
             test()
             testThrowable()
@@ -95,10 +104,22 @@ class LoggingTest {
         }
         val lines = appenderWithWriter.writer.toString().trim().replace("\r", "\n").replace("\n\n", "\n").split("\n")
         Assert.assertEquals("INFO  mu.ClassWithLogging  - test ClassWithLogging", lines[0].trim())
-        Assert.assertEquals("TRACE mu.ClassWithLogging  - test ChildClassWithLogging", lines[1].trim())
+        Assert.assertEquals("TRACE mu.ClassWithLogging  - test ClassWithLogging", lines[1].trim())
         Assert.assertEquals("java.lang.Throwable", lines[2].trim())
         Assert.assertTrue(lines[3].trim().startsWith("at mu.ClassWithLogging.testThrowable("))
-        Assert.assertEquals("TRACE mu.ClassWithLogging  - test ChildClassWithLogging", lines[lines.size-1].trim())
+        Assert.assertEquals("TRACE mu.ClassWithLogging  - test ClassWithLogging", lines[lines.size-1].trim())
+    }
+    @Test
+    fun testMessages1() {
+        ClassWithLogging().apply {
+            testMarker()
+            testMarkerThrowable()
+        }
+        val lines = appenderWithWriter.writer.toString().trim().replace("\r", "\n").replace("\n\n", "\n").split("\n")
+        Assert.assertEquals("TRACE mu.ClassWithLogging  - test ClassWithLogging", lines[0].trim())
+        Assert.assertEquals("TRACE mu.ClassWithLogging  - test ClassWithLogging", lines[1].trim())
+        Assert.assertEquals("java.lang.Throwable", lines[2].trim())
+        Assert.assertTrue(lines[3].trim().startsWith("at mu.ClassWithLogging.testMarkerThrowable("))
     }
     @Test
     fun testMessages2() {
