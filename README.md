@@ -114,7 +114,7 @@ It is possible to configure Intellij live template. For file level logger config
 
 ## More links
 
-- kotlin-logging is hosted on [bintray](https://bintray.com/microutils/kotlin-logging/kotlin-logging/view) and [maven central](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22kotlin-logging%22).
+- kotlin-logging is hosted on [bintray](https://bintray.com/microutils/kotlin-logging/kotlin-logging/view) and [maven central](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22io.github.microutils%22).
 - https://medium.com/@OhadShai/logging-in-kotlin-95a4e76388f2
 - [kotlin-logging vs AnkoLogger for Android](https://medium.com/@OhadShai/logging-in-android-ankologger-vs-kotlin-logging-bb693671442a)
 - [How kotlin-logging was published](https://medium.com/@OhadShai/no-forks-one-star-now-what-how-i-published-my-open-source-projects-8a5b5ae35d2c#.e3ygj6uf3)
