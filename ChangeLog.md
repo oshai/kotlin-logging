@@ -1,3 +1,6 @@
+# 1.5.9
+* Back to Kotlin 1.2.60, created 3 artifacts on maven central.
+
 # 1.5.8
 * Refactor - move toStringSafe() to common lib.
 * This version (+1.5.7 which has no changes) are mostly deployed for multiplatform checks.

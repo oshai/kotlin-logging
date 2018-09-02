@@ -53,14 +53,14 @@ An `Android` example project with kotlin logging can be found in [kotlin-logging
 <dependency>
   <groupId>io.github.microutils</groupId>
   <artifactId>kotlin-logging</artifactId>
-  <version>1.5.6</version>
+  <version>1.5.9</version>
 </dependency>
 ```
 See full example in [kotlin-logging-example-maven](https://github.com/MicroUtils/kotlin-logging-example-maven).  
 
 ### Gradle
 ```Groovy
-compile 'io.github.microutils:kotlin-logging:1.5.6'
+compile 'io.github.microutils:kotlin-logging:1.5.9'
 ```
 
 Or alternatively, download jar from [github](https://github.com/MicroUtils/kotlin-logging/releases/latest) or [bintray](https://dl.bintray.com/microutils/kotlin-logging/io/github/microutils/kotlin-logging/) or [maven-central](http://repo1.maven.org/maven2/io/github/microutils/kotlin-logging/).
@@ -114,7 +114,7 @@ It is possible to configure Intellij live template. For file level logger config
 
 ## More links
 
-- kotlin-logging is hosted on [bintray](https://bintray.com/microutils/kotlin-logging/kotlin-logging/view) and [maven central](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22kotlin-logging%22).
+- kotlin-logging is hosted on [bintray](https://bintray.com/microutils/kotlin-logging/kotlin-logging/view) and [maven central](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22io.github.microutils%22).
 - https://medium.com/@OhadShai/logging-in-kotlin-95a4e76388f2
 - [kotlin-logging vs AnkoLogger for Android](https://medium.com/@OhadShai/logging-in-android-ankologger-vs-kotlin-logging-bb693671442a)
 - [How kotlin-logging was published](https://medium.com/@OhadShai/no-forks-one-star-now-what-how-i-published-my-open-source-projects-8a5b5ae35d2c#.e3ygj6uf3)
@@ -132,6 +132,8 @@ It is possible to configure Intellij live template. For file level logger config
 - krokofant
 - ravikumar-n
 - Dario Seidl
+
+See also here: https://github.com/MicroUtils/kotlin-logging/graphs/contributors
 
 ## Contributing
 
