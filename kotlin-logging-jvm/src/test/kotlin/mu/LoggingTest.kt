@@ -130,8 +130,8 @@ class LoggingTest {
             testMarkerThrowable()
         }
         val lines = appenderWithWriter.writer.toString().trim().replace("\r", "\n").replace("\n\n", "\n").split("\n")
-        Assert.assertEquals("TRACE mu.ClassWithLogging  - test ClassWithLogging", lines[0].trim())
-        Assert.assertEquals("TRACE mu.ClassWithLogging  - test ClassWithLogging", lines[1].trim())
+        Assert.assertEquals("TRACE mu.ClassWithLogging MARKER - test ClassWithLogging", lines[0].trim())
+        Assert.assertEquals("TRACE mu.ClassWithLogging MARKER - test ClassWithLogging", lines[1].trim())
         Assert.assertEquals("java.lang.Throwable: null", lines[2].trim())
         Assert.assertTrue(lines[3].trim().startsWith("at mu.ClassWithLogging.testMarkerThrowable("))
     }
@@ -183,7 +183,7 @@ class LoggingNameTest {
     }
 }
 data class AppenderWithWriter(
-        val pattern: String = "%-5p %c  - %m%n",
+        val pattern: String = "%-5p %c %marker - %m%n",
         val writer: StringWriter = StringWriter(),
         val appender: Appender = WriterAppender.createAppender(newPatternLayout(pattern), null, writer, "writer", false, true)
 )

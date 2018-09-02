@@ -3,7 +3,7 @@
     <Appenders>
         <!-- A1 is a ConsoleAppender, using PatternLayout. -->
         <Console name="A1" target="SYSTEM_OUT">
-            <PatternLayout pattern="%-4r [%t] %-5p %c %x - %m%n" />
+            <PatternLayout pattern="%-4r [%t] %-5p %c %marker - %m%n" />
         </Console>
     </Appenders>
     <Loggers>
