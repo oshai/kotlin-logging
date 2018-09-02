@@ -1,45 +1,37 @@
 package mu
 
-import org.apache.log4j.*
 import org.junit.After
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
-import java.io.StringWriter
-import java.util.*
 
 class LoggingWithLocationTest {
-    private val appenders: Vector<Appender> = Vector<Appender>(2)
-    private val writer = StringWriter()
+    private val appenderWithWriter: AppenderWithWriter = AppenderWithWriter("%p %C{1}.%M(%L) - %m%n")
 
     @Before
     fun setupAppender() {
-        appenders.add(ConsoleAppender(PatternLayout("%p %C{1}.%M(%L) - %m%n")))
-        appenders.add(WriterAppender(PatternLayout("%p %C{1}.%M(%L) - %m%n"), writer))
-        Logger.getRootLogger().addAppender(appenders[0])
-        Logger.getRootLogger().addAppender(appenders[1])
+        addAppender(appenderWithWriter.appender)
     }
 
     @After
     fun removeAppender() {
-        Logger.getRootLogger().removeAppender(appenders[0])
-        Logger.getRootLogger().removeAppender(appenders[1])
+        removeAppender(appenderWithWriter.appender)
     }
 
     @Test
     fun testLoggingWithLocation() {
         ClassWithLoggingForLocationTesting().log()
-        Assert.assertEquals("INFO ClassWithLoggingForLocationTesting.log(7) - test", writer.toString().trim())
+        Assert.assertEquals("INFO ClassWithLoggingForLocationTesting.log(7) - test", appenderWithWriter.writer.toString().trim())
     }
     @Test
     fun testLazyLoggingWithLocation() {
         ClassWithLoggingForLocationTesting().logLazy()
-        Assert.assertEquals("INFO ClassWithLoggingForLocationTesting.logLazy(11) - test", writer.toString().trim())
+        Assert.assertEquals("INFO ClassWithLoggingForLocationTesting.logLazy(11) - test", appenderWithWriter.writer.toString().trim())
     }
     @Test
     fun testNullLoggingWithLocation() {
         ClassWithLoggingForLocationTesting().logNull()
-        Assert.assertEquals("INFO ClassWithLoggingForLocationTesting.logNull(15) -", writer.toString().trim())
+        Assert.assertEquals("INFO ClassWithLoggingForLocationTesting.logNull(15) - null", appenderWithWriter.writer.toString().trim())
     }
 }
 

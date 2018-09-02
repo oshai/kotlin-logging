@@ -1,9 +1,12 @@
 package mu
 
-import org.apache.log4j.*
+import org.apache.logging.log4j.LogManager
+import org.apache.logging.log4j.core.Appender
+import org.apache.logging.log4j.core.appender.WriterAppender
+import org.apache.logging.log4j.core.layout.PatternLayout
 import org.junit.After
 import org.junit.Assert
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import java.io.StringWriter
@@ -15,11 +18,20 @@ class ClassWithLogging {
     }
     fun testThrowable() {
         val ex = Throwable()
-        logger.trace(ex){"test ChildClassWithLogging"}
+        logger.trace(ex){"test ClassWithLogging"}
     }
     fun testNullableThrowable() {
         val ex:Throwable? = null
-        logger.trace(ex){"test ChildClassWithLogging"}
+        logger.trace(ex){"test ClassWithLogging"}
+    }
+    fun testMarker() {
+        val marker = KMarkerFactory.getMarker("MARKER")
+        logger.trace(marker){"test ClassWithLogging"}
+    }
+    fun testMarkerThrowable() {
+        val marker = KMarkerFactory.getMarker("MARKER")
+        val ex = Throwable()
+        logger.trace(marker, ex){"test ClassWithLogging"}
     }
 }
 open class ClassHasLogging: KLoggable {
@@ -72,22 +84,33 @@ class LambdaRaisesError {
     }
 }
 
+fun newPatternLayout(pattern: String): PatternLayout = PatternLayout.newBuilder().withPattern(pattern).build()
+
+fun addAppender(appender: Appender) {
+    val context = LogManager.getContext(false) as org.apache.logging.log4j.core.LoggerContext
+    context.configuration.rootLogger.addAppender(appender, null, null)
+}
+
+fun removeAppender(appender: Appender) {
+    val context = LogManager.getContext(false) as org.apache.logging.log4j.core.LoggerContext
+    context.configuration.rootLogger.removeAppender(appender.name)
+}
+
 class LoggingTest {
-    private lateinit var appenderWithWriter: AppenderWithWriter
+    private val appenderWithWriter: AppenderWithWriter = AppenderWithWriter()
 
     @Before
     fun setupAppender() {
-        appenderWithWriter = AppenderWithWriter()
-        Logger.getRootLogger().addAppender(appenderWithWriter.appender)
+        addAppender(appenderWithWriter.appender)
     }
 
     @After
     fun removeAppender() {
-        Logger.getRootLogger().removeAppender(appenderWithWriter.appender)
+        removeAppender(appenderWithWriter.appender)
     }
 
     @Test
-    fun testMessages1() {
+    fun testMessages0() {
         ClassWithLogging().apply {
             test()
             testThrowable()
@@ -95,10 +118,22 @@ class LoggingTest {
         }
         val lines = appenderWithWriter.writer.toString().trim().replace("\r", "\n").replace("\n\n", "\n").split("\n")
         Assert.assertEquals("INFO  mu.ClassWithLogging  - test ClassWithLogging", lines[0].trim())
-        Assert.assertEquals("TRACE mu.ClassWithLogging  - test ChildClassWithLogging", lines[1].trim())
-        Assert.assertEquals("java.lang.Throwable", lines[2].trim())
+        Assert.assertEquals("TRACE mu.ClassWithLogging  - test ClassWithLogging", lines[1].trim())
+        Assert.assertEquals("java.lang.Throwable: null", lines[2].trim())
         Assert.assertTrue(lines[3].trim().startsWith("at mu.ClassWithLogging.testThrowable("))
-        Assert.assertEquals("TRACE mu.ClassWithLogging  - test ChildClassWithLogging", lines[lines.size-1].trim())
+        Assert.assertEquals("TRACE mu.ClassWithLogging  - test ClassWithLogging", lines[lines.size-1].trim())
+    }
+    @Test
+    fun testMessages1() {
+        ClassWithLogging().apply {
+            testMarker()
+            testMarkerThrowable()
+        }
+        val lines = appenderWithWriter.writer.toString().trim().replace("\r", "\n").replace("\n\n", "\n").split("\n")
+        Assert.assertEquals("TRACE mu.ClassWithLogging MARKER - test ClassWithLogging", lines[0].trim())
+        Assert.assertEquals("TRACE mu.ClassWithLogging MARKER - test ClassWithLogging", lines[1].trim())
+        Assert.assertEquals("java.lang.Throwable: null", lines[2].trim())
+        Assert.assertTrue(lines[3].trim().startsWith("at mu.ClassWithLogging.testMarkerThrowable("))
     }
     @Test
     fun testMessages2() {
@@ -147,6 +182,8 @@ class LoggingNameTest {
         assertEquals("mu.CompanionHasLogging", CompanionHasLogging.logger.name)
     }
 }
-data class AppenderWithWriter(val writer: StringWriter = StringWriter(), val appender: Appender =  WriterAppender(PatternLayout("%-5p %c %x - %m%n"), writer)) {
-
-}
+data class AppenderWithWriter(
+        val pattern: String = "%-5p %c %marker - %m%n",
+        val writer: StringWriter = StringWriter(),
+        val appender: Appender = WriterAppender.createAppender(newPatternLayout(pattern), null, writer, "writer", false, true)
+)

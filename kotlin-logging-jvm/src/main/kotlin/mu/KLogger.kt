@@ -64,5 +64,54 @@ actual interface KLogger : Logger {
    */
   actual fun error(t: Throwable?, msg: () -> Any?)
 
+  /**
+   * Lazy add a log message if isTraceEnabled is true
+   */
+  actual fun trace(marker: Marker?, msg: () -> Any?)
+
+  /**
+   * Lazy add a log message if isDebugEnabled is true
+   */
+  actual fun debug(marker: Marker?, msg: () -> Any?)
+
+  /**
+   * Lazy add a log message if isInfoEnabled is true
+   */
+  actual fun info(marker: Marker?, msg: () -> Any?)
+
+  /**
+   * Lazy add a log message if isWarnEnabled is true
+   */
+  actual fun warn(marker: Marker?, msg: () -> Any?)
+
+  /**
+   * Lazy add a log message if isErrorEnabled is true
+   */
+  actual fun error(marker: Marker?, msg: () -> Any?)
+
+  /**
+   * Lazy add a log message with throwable payload if isTraceEnabled is true
+   */
+  actual fun trace(marker: Marker?, t: Throwable?, msg: () -> Any?)
+
+  /**
+   * Lazy add a log message with throwable payload if isDebugEnabled is true
+   */
+  actual fun debug(marker: Marker?, t: Throwable?, msg: () -> Any?)
+
+  /**
+   * Lazy add a log message with throwable payload if isInfoEnabled is true
+   */
+  actual fun info(marker: Marker?, t: Throwable?, msg: () -> Any?)
+
+  /**
+   * Lazy add a log message with throwable payload if isWarnEnabled is true
+   */
+  actual fun warn(marker: Marker?, t: Throwable?, msg: () -> Any?)
+
+  /**
+   * Lazy add a log message with throwable payload if isErrorEnabled is true
+   */
+  actual fun error(marker: Marker?, t: Throwable?, msg: () -> Any?)
 
 }
