@@ -1,3 +1,7 @@
+# 1.6.0 + 1.6.10
+* Add Markers support for multiplatform [#48](https://github.com/MicroUtils/kotlin-logging/pull/48)
+* Improvement to version upload automation [#46](https://github.com/MicroUtils/kotlin-logging/issues/46)
+
 # 1.5.9
 * Back to Kotlin 1.2.60, created 3 artifacts on maven central.
 

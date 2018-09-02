@@ -8,13 +8,13 @@ buildscript {
 
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
     }
 }
 
 allprojects {
     group 'io.github.microutils'
-    version '1.5.6'
+    version '1.6.10'
 
     repositories {
         mavenCentral()
@@ -110,6 +110,7 @@ subprojects {
         key = 'mykey' //https://bintray.com/profile/edit
         // project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
         publications = ['mavenProject']
+        publish = true //[Default: false] Whether version should be auto published after an upload
         pkg {
             repo = 'kotlin-logging'
             name = 'kotlin-logging'
@@ -120,10 +121,20 @@ subprojects {
             issueTrackerUrl = 'https://github.com/MicroUtils/kotlin-logging/issues'
 
             githubRepo = 'MicroUtils/kotlin-logging'
+            githubReleaseNotesFile = 'ChangeLog.md'
             version {
                 name = project.version
                 desc = "kotlin-logging - Lightweight logging framework for Kotlin"
                 released = new Date()
+                gpg {
+                    sign = true //Determines whether to GPG sign the files. The default is false
+                }
+                mavenCentralSync {
+                    sync = true //[Default: true] Determines whether to sync the version to Maven Central.
+                    user = 'token' //OSS user token: mandatory
+                    password = 'pass' //OSS user password: mandatory
+                    close = '1' //Optional property. By default the staging repository is closed and artifacts are released to Maven Central. You can optionally turn this behaviour off (by puting 0 as value) and release the version manually.
+                }
             }
         }
     }
