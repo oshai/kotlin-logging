@@ -46,7 +46,7 @@ An `Android` example project with kotlin logging can be found in [kotlin-logging
 
 ## Download
 
-**Important note:** kotlin-logging depends on slf4j-api. In runtime, it is also required to depend on a logging implementation. More details [how-to-configure-slf4j](http://saltnlight5.blogspot.co.il/2013/08/how-to-configure-slf4j-with-different.html). And an excelent detailed explanation in [a-guide-to-logging-in-java](https://www.marcobehler.com/guides/a-guide-to-logging-in-java). 
+**Important note:** kotlin-logging depends on slf4j-api. In runtime, it is also required to depend on a logging implementation. More details in [how-to-configure-slf4j](http://saltnlight5.blogspot.co.il/2013/08/how-to-configure-slf4j-with-different.html). And an excelent detailed explanation in [a-guide-to-logging-in-java](https://www.marcobehler.com/guides/a-guide-to-logging-in-java). 
 
 ### Maven
 ```xml
