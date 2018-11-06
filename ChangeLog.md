@@ -1,3 +1,7 @@
+# 1.6.20
+
+* Compile with Kotlin 1.3.0: https://github.com/MicroUtils/kotlin-logging/pull/55 thanks @walokra.
+
 # 1.6.0 + 1.6.10
 * Add Markers support for multiplatform [#48](https://github.com/MicroUtils/kotlin-logging/pull/48)
 * Improvement to version upload automation [#46](https://github.com/MicroUtils/kotlin-logging/issues/46)
