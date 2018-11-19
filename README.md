@@ -3,30 +3,32 @@
 Lightweight logging framework for Kotlin, written in [![Pure Kotlin](https://img.shields.io/badge/100%25-kotlin-blue.svg)](https://kotlinlang.org/).  
 A convenient and performant logging library wrapping [slf4j](http://www.slf4j.org/) with Kotlin extensions.
 
-* Call log methods, without checking whether the respective log level is enabled:
+#### Call log methods, without checking whether the respective log level is enabled
 ```Kotlin
 logger.debug { "Some $expensive message!" }
 ```
+
 Behind the scenes the expensive message do not get evaluated if debug is not enabled:
 ```Kotlin
+// This is what happens when you write the above ^^^
 if (logger.isDebugEnabled) logger.debug("Some $expensive message!")
 ```
-* Define the logger, without explicitly specifiying the class name:
+
+#### Define the logger, without explicitly specifiying the class name
 ```Kotlin
 // Place definition above class declaration to make field static
 private val logger = KotlinLogging.logger {}
 ```
-or
-```Kotlin
-companion object: KLogging()
-```
+
 Behind the scenes `val logger` will be created in the class, with the class/file name:
 ```Kotlin
-val logger = LoggerFactory.getLogger("class name")
+// This is what happens when you write the above ^^^
+val logger = LoggerFactory.getLogger("package.ClassName")
 ```
 
-* Log exceptions in a Kotlin-style
+#### Log exceptions in a Kotlin-style
 ```Kotlin
+// exception as first parameter with message as lambda
 logger.error(exception) { "a $fancy message about the $exception" }
 ```
 
@@ -37,7 +39,7 @@ private val logger = KotlinLogging.logger {}
 class FooWithLogging {
     val message = "world"
     fun bar() {
-        logger.info { "hello $message" }
+        logger.debug { "hello $message" }
     }
 }
 ```
