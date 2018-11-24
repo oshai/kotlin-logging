@@ -134,6 +134,7 @@ It is possible to configure Intellij live template. For file level logger config
 - krokofant
 - ravikumar-n
 - Dario Seidl
+- b14ckyfox
 
 See also here: https://github.com/MicroUtils/kotlin-logging/graphs/contributors
 
