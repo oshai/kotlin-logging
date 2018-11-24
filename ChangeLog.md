@@ -1,3 +1,8 @@
+# 1.6.22
+
+* Fix log levels in JS: https://github.com/MicroUtils/kotlin-logging/pull/57
+* Update kotlin to 1.3.10.
+
 # 1.6.20
 
 * Compile with Kotlin 1.3.0: https://github.com/MicroUtils/kotlin-logging/pull/55 thanks @walokra.
