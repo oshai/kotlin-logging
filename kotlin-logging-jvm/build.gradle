@@ -23,10 +23,10 @@ dependencies {
     expectedBy project(':kotlin-logging-common')
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     compile "org.slf4j:slf4j-api:$sl4j_version"
-    testCompile "org.apache.logging.log4j:log4j-slf4j-impl:2.11.1"
-    testCompile "org.apache.logging.log4j:log4j-api:2.11.1"
-    testCompile "org.mockito:mockito-all:1.10.19"
-    testCompile 'junit:junit:4.12'
+    testCompile "org.apache.logging.log4j:log4j-slf4j-impl:$log4j_version"
+    testCompile "org.apache.logging.log4j:log4j-api:$log4j_version"
+    testCompile "org.mockito:mockito-all:$mockito_version"
+    testCompile "junit:junit:$junit_version"
     testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
     testCompile "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
 }
