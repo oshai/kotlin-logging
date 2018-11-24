@@ -14,25 +14,25 @@ internal class KLoggerJS(private val loggerName: String) : KLogger {
     }
 
     override fun debug(msg: () -> Any?) {
-        if (KotlinLoggingLevel.TRACE.isLoggingEnabled()) {
+        if (KotlinLoggingLevel.DEBUG.isLoggingEnabled()) {
             console.log("DEBUG: [$loggerName] ${msg.toStringSafe()}")
         }
     }
 
     override fun info(msg: () -> Any?) {
-        if (KotlinLoggingLevel.TRACE.isLoggingEnabled()) {
+        if (KotlinLoggingLevel.INFO.isLoggingEnabled()) {
             console.info("INFO: [$loggerName] ${msg.toStringSafe()}")
         }
     }
 
     override fun warn(msg: () -> Any?) {
-        if (KotlinLoggingLevel.TRACE.isLoggingEnabled()) {
+        if (KotlinLoggingLevel.WARN.isLoggingEnabled()) {
             console.warn("WARN: [$loggerName] ${msg.toStringSafe()}")
         }
     }
 
     override fun error(msg: () -> Any?) {
-        if (KotlinLoggingLevel.TRACE.isLoggingEnabled()) {
+        if (KotlinLoggingLevel.ERROR.isLoggingEnabled()) {
             console.error("ERROR: [$loggerName] ${msg.toStringSafe()}")
         }
     }
@@ -44,25 +44,25 @@ internal class KLoggerJS(private val loggerName: String) : KLogger {
     }
 
     override fun debug(t: Throwable?, msg: () -> Any?) {
-        if (KotlinLoggingLevel.TRACE.isLoggingEnabled()) {
+        if (KotlinLoggingLevel.DEBUG.isLoggingEnabled()) {
             console.log("DEBUG: [$loggerName] ${msg.toStringSafe()}${t.throwableToString()}")
         }
     }
 
     override fun info(t: Throwable?, msg: () -> Any?) {
-        if (KotlinLoggingLevel.TRACE.isLoggingEnabled()) {
+        if (KotlinLoggingLevel.INFO.isLoggingEnabled()) {
             console.info("INFO: [$loggerName] ${msg.toStringSafe()}${t.throwableToString()}")
         }
     }
 
     override fun warn(t: Throwable?, msg: () -> Any?) {
-        if (KotlinLoggingLevel.TRACE.isLoggingEnabled()) {
+        if (KotlinLoggingLevel.WARN.isLoggingEnabled()) {
             console.warn("WARN: [$loggerName] ${msg.toStringSafe()}${t.throwableToString()}")
         }
     }
 
     override fun error(t: Throwable?, msg: () -> Any?) {
-        if (KotlinLoggingLevel.TRACE.isLoggingEnabled()) {
+        if (KotlinLoggingLevel.ERROR.isLoggingEnabled()) {
             console.error("ERROR: [$loggerName] ${msg.toStringSafe()}${t.throwableToString()}")
         }
     }
@@ -74,25 +74,25 @@ internal class KLoggerJS(private val loggerName: String) : KLogger {
     }
 
     override fun debug(marker: Marker?, msg: () -> Any?) {
-        if (KotlinLoggingLevel.TRACE.isLoggingEnabled()) {
+        if (KotlinLoggingLevel.DEBUG.isLoggingEnabled()) {
             console.log("DEBUG: [$loggerName] ${marker?.getName()} ${msg.toStringSafe()}")
         }
     }
 
     override fun info(marker: Marker?, msg: () -> Any?) {
-        if (KotlinLoggingLevel.TRACE.isLoggingEnabled()) {
+        if (KotlinLoggingLevel.INFO.isLoggingEnabled()) {
             console.info("INFO: [$loggerName] ${marker?.getName()} ${msg.toStringSafe()}")
         }
     }
 
     override fun warn(marker: Marker?, msg: () -> Any?) {
-        if (KotlinLoggingLevel.TRACE.isLoggingEnabled()) {
+        if (KotlinLoggingLevel.WARN.isLoggingEnabled()) {
             console.warn("WARN: [$loggerName] ${marker?.getName()} ${msg.toStringSafe()}")
         }
     }
 
     override fun error(marker: Marker?, msg: () -> Any?) {
-        if (KotlinLoggingLevel.TRACE.isLoggingEnabled()) {
+        if (KotlinLoggingLevel.ERROR.isLoggingEnabled()) {
             console.error("ERROR: [$loggerName] ${marker?.getName()} ${msg.toStringSafe()}")
         }
     }
@@ -104,25 +104,25 @@ internal class KLoggerJS(private val loggerName: String) : KLogger {
     }
 
     override fun debug(marker: Marker?, t: Throwable?, msg: () -> Any?) {
-        if (KotlinLoggingLevel.TRACE.isLoggingEnabled()) {
+        if (KotlinLoggingLevel.DEBUG.isLoggingEnabled()) {
             console.log("DEBUG: [$loggerName] ${marker?.getName()} ${msg.toStringSafe()}${t.throwableToString()}")
         }
     }
 
     override fun info(marker: Marker?, t: Throwable?, msg: () -> Any?) {
-        if (KotlinLoggingLevel.TRACE.isLoggingEnabled()) {
+        if (KotlinLoggingLevel.INFO.isLoggingEnabled()) {
             console.info("INFO: [$loggerName] ${marker?.getName()} ${msg.toStringSafe()}${t.throwableToString()}")
         }
     }
 
     override fun warn(marker: Marker?, t: Throwable?, msg: () -> Any?) {
-        if (KotlinLoggingLevel.TRACE.isLoggingEnabled()) {
+        if (KotlinLoggingLevel.WARN.isLoggingEnabled()) {
             console.warn("WARN: [$loggerName] ${marker?.getName()} ${msg.toStringSafe()}${t.throwableToString()}")
         }
     }
 
     override fun error(marker: Marker?, t: Throwable?, msg: () -> Any?) {
-        if (KotlinLoggingLevel.TRACE.isLoggingEnabled()) {
+        if (KotlinLoggingLevel.ERROR.isLoggingEnabled()) {
             console.error("ERROR: [$loggerName] ${marker?.getName()} ${msg.toStringSafe()}${t.throwableToString()}")
         }
     }
