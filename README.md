@@ -50,23 +50,28 @@ An `Android` example project with kotlin logging can be found in [kotlin-logging
 
 **Important note:** kotlin-logging depends on slf4j-api. In runtime, it is also required to depend on a logging implementation. More details in [how-to-configure-slf4j](http://saltnlight5.blogspot.co.il/2013/08/how-to-configure-slf4j-with-different.html). And an excelent detailed explanation in [a-guide-to-logging-in-java](https://www.marcobehler.com/guides/a-guide-to-logging-in-java). 
 
+**Multiplatform:** See the section below.
 ### Maven
 ```xml
 <dependency>
   <groupId>io.github.microutils</groupId>
   <artifactId>kotlin-logging</artifactId>
-  <version>1.6.20</version>
+  <version>1.6.22</version>
 </dependency>
 ```
 See full example in [kotlin-logging-example-maven](https://github.com/MicroUtils/kotlin-logging-example-maven).  
 
 ### Gradle
 ```Groovy
-compile 'io.github.microutils:kotlin-logging:1.6.20'
+compile 'io.github.microutils:kotlin-logging:1.6.22'
 ```
 
 Or alternatively, download jar from [github](https://github.com/MicroUtils/kotlin-logging/releases/latest) or [bintray](https://dl.bintray.com/microutils/kotlin-logging/io/github/microutils/kotlin-logging/) or [maven-central](http://repo1.maven.org/maven2/io/github/microutils/kotlin-logging/).
 
+## Multiplatform
+
+An experimental common & js support is available.  
+More info on [wiki](https://github.com/MicroUtils/kotlin-logging/wiki/Multiplatform-support) and issue [#21](https://github.com/MicroUtils/kotlin-logging/issues/21).
 
 ## Overview
 
@@ -74,11 +79,6 @@ After seeing many questions like [Idiomatic way of logging in Kotlin](http://sta
   - No need to write the logger and class name or logger name boileplates.
   - A straight forward way to log messages with lazy-evaluated string using lambda expression `{}`.
   - All previous slf4j implementation still can be used.
-
-## Multiplatform
-
-An experimental common & js support is available.  
-More info on [wiki](https://github.com/MicroUtils/kotlin-logging/wiki/Multiplatform-support) and issue [#21](https://github.com/MicroUtils/kotlin-logging/issues/21).
 
 ## Who is using it
 
