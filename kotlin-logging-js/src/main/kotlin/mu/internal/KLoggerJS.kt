@@ -51,25 +51,25 @@ internal class KLoggerJS(
 
     private fun KotlinLoggingLevel.logIfEnabled(msg: () -> Any?, logFunction: (Any?) -> Unit) {
         if (isLoggingEnabled()) {
-            logFunction(formatMessage(this, msg, loggerName))
+            logFunction(formatMessage(this, loggerName, msg))
         }
     }
 
     private fun KotlinLoggingLevel.logIfEnabled(msg: () -> Any?, t: Throwable?, logFunction: (Any?) -> Unit) {
         if (isLoggingEnabled()) {
-            logFunction(formatMessage(this, msg, t, loggerName))
+            logFunction(formatMessage(this, loggerName, t, msg))
         }
     }
 
     private fun KotlinLoggingLevel.logIfEnabled(marker: Marker?, msg: () -> Any?, logFunction: (Any?) -> Unit) {
         if (isLoggingEnabled()) {
-            logFunction(formatMessage(this, marker, msg, loggerName))
+            logFunction(formatMessage(this, loggerName, marker, msg))
         }
     }
 
     private fun KotlinLoggingLevel.logIfEnabled(marker: Marker?, msg: () -> Any?, t: Throwable?, logFunction: (Any?) -> Unit) {
         if (isLoggingEnabled()) {
-            logFunction(formatMessage(this, marker, msg, t, loggerName))
+            logFunction(formatMessage(this, loggerName, marker, t, msg))
         }
     }
 
