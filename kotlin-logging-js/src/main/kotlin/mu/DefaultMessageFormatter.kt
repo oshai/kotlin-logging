@@ -3,16 +3,16 @@ package mu
 import mu.internal.toStringSafe
 
 object DefaultMessageFormatter : MessageFormatter {
-    override fun formatMessage(level: KotlinLoggingLevel, msg: () -> Any?, loggerName: String) =
+    override fun formatMessage(level: KotlinLoggingLevel, loggerName: String, msg: () -> Any?) =
             "${level.name}: [$loggerName] ${msg.toStringSafe()}"
 
-    override fun formatMessage(level: KotlinLoggingLevel, msg: () -> Any?, t: Throwable?, loggerName: String) =
+    override fun formatMessage(level: KotlinLoggingLevel, loggerName: String, t: Throwable?, msg: () -> Any?) =
             "${level.name}: [$loggerName] ${msg.toStringSafe()}${t.throwableToString()}"
 
-    override fun formatMessage(level: KotlinLoggingLevel, marker: Marker?, msg: () -> Any?, loggerName: String) =
+    override fun formatMessage(level: KotlinLoggingLevel, loggerName: String, marker: Marker?, msg: () -> Any?) =
             "${level.name}: [$loggerName] ${marker?.getName()} ${msg.toStringSafe()}"
 
-    override fun formatMessage(level: KotlinLoggingLevel, marker: Marker?, msg: () -> Any?, t: Throwable?, loggerName: String) =
+    override fun formatMessage(level: KotlinLoggingLevel, loggerName: String, marker: Marker?, t: Throwable?, msg: () -> Any?) =
             "${level.name}: [$loggerName] ${marker?.getName()} ${msg.toStringSafe()}${t.throwableToString()}"
 
     private fun Throwable?.throwableToString(): String {
