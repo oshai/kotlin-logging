@@ -1,142 +1,76 @@
 package mu.internal
 
-import mu.KLogger
-import mu.KotlinLoggingLevel
-import mu.Marker
-import mu.isLoggingEnabled
+import mu.*
+import mu.KotlinLoggingLevel.*
 
-internal class KLoggerJS(private val loggerName: String) : KLogger {
+internal class KLoggerJS(
+        private val loggerName: String,
+        private val pipes: OutputPipes = outputPipes,
+        private val formatter: MessageFormatter = messageFormatter
+) : KLogger, MessageFormatter by formatter {
 
-    override fun trace(msg: () -> Any?) {
-        if (KotlinLoggingLevel.TRACE.isLoggingEnabled()) {
-            console.log("TRACE: [$loggerName] ${msg.toStringSafe()}")
+    override fun trace(msg: () -> Any?) = TRACE.logIfEnabled(msg, pipes::trace)
+
+    override fun debug(msg: () -> Any?) = DEBUG.logIfEnabled(msg, pipes::debug)
+
+    override fun info(msg: () -> Any?) = INFO.logIfEnabled(msg, pipes::info)
+
+    override fun warn(msg: () -> Any?) = WARN.logIfEnabled(msg, pipes::warn)
+
+    override fun error(msg: () -> Any?) = ERROR.logIfEnabled(msg, pipes::error)
+
+    override fun trace(t: Throwable?, msg: () -> Any?) = TRACE.logIfEnabled(msg, t, pipes::trace)
+
+    override fun debug(t: Throwable?, msg: () -> Any?) = DEBUG.logIfEnabled(msg, t, pipes::debug)
+
+    override fun info(t: Throwable?, msg: () -> Any?) = INFO.logIfEnabled(msg, t, pipes::info)
+
+    override fun warn(t: Throwable?, msg: () -> Any?) = WARN.logIfEnabled(msg, t, pipes::warn)
+
+    override fun error(t: Throwable?, msg: () -> Any?) = ERROR.logIfEnabled(msg, t, pipes::error)
+
+    override fun trace(marker: Marker?, msg: () -> Any?) = TRACE.logIfEnabled(marker, msg, pipes::trace)
+
+    override fun debug(marker: Marker?, msg: () -> Any?) = DEBUG.logIfEnabled(marker, msg, pipes::debug)
+
+    override fun info(marker: Marker?, msg: () -> Any?) = INFO.logIfEnabled(marker, msg, pipes::info)
+
+    override fun warn(marker: Marker?, msg: () -> Any?) = WARN.logIfEnabled(marker, msg, pipes::warn)
+
+    override fun error(marker: Marker?, msg: () -> Any?) = ERROR.logIfEnabled(marker, msg, pipes::error)
+
+    override fun trace(marker: Marker?, t: Throwable?, msg: () -> Any?) = TRACE.logIfEnabled(marker, msg, t, pipes::trace)
+
+    override fun debug(marker: Marker?, t: Throwable?, msg: () -> Any?) = DEBUG.logIfEnabled(marker, msg, t, pipes::debug)
+
+    override fun info(marker: Marker?, t: Throwable?, msg: () -> Any?) = INFO.logIfEnabled(marker, msg, t, pipes::info)
+
+    override fun warn(marker: Marker?, t: Throwable?, msg: () -> Any?) = WARN.logIfEnabled(marker, msg, t, pipes::warn)
+
+    override fun error(marker: Marker?, t: Throwable?, msg: () -> Any?) = ERROR.logIfEnabled(marker, msg, t, pipes::error)
+
+    private fun KotlinLoggingLevel.logIfEnabled(msg: () -> Any?, logFunction: (Any?) -> Unit) {
+        if (isLoggingEnabled()) {
+            logFunction(formatMessage(this, msg, loggerName))
         }
     }
 
-    override fun debug(msg: () -> Any?) {
-        if (KotlinLoggingLevel.DEBUG.isLoggingEnabled()) {
-            console.log("DEBUG: [$loggerName] ${msg.toStringSafe()}")
+    private fun KotlinLoggingLevel.logIfEnabled(msg: () -> Any?, t: Throwable?, logFunction: (Any?) -> Unit) {
+        if (isLoggingEnabled()) {
+            logFunction(formatMessage(this, msg, t, loggerName))
         }
     }
 
-    override fun info(msg: () -> Any?) {
-        if (KotlinLoggingLevel.INFO.isLoggingEnabled()) {
-            console.info("INFO: [$loggerName] ${msg.toStringSafe()}")
+    private fun KotlinLoggingLevel.logIfEnabled(marker: Marker?, msg: () -> Any?, logFunction: (Any?) -> Unit) {
+        if (isLoggingEnabled()) {
+            logFunction(formatMessage(this, marker, msg, loggerName))
         }
     }
 
-    override fun warn(msg: () -> Any?) {
-        if (KotlinLoggingLevel.WARN.isLoggingEnabled()) {
-            console.warn("WARN: [$loggerName] ${msg.toStringSafe()}")
+    private fun KotlinLoggingLevel.logIfEnabled(marker: Marker?, msg: () -> Any?, t: Throwable?, logFunction: (Any?) -> Unit) {
+        if (isLoggingEnabled()) {
+            logFunction(formatMessage(this, marker, msg, t, loggerName))
         }
     }
 
-    override fun error(msg: () -> Any?) {
-        if (KotlinLoggingLevel.ERROR.isLoggingEnabled()) {
-            console.error("ERROR: [$loggerName] ${msg.toStringSafe()}")
-        }
-    }
-
-    override fun trace(t: Throwable?, msg: () -> Any?) {
-        if (KotlinLoggingLevel.TRACE.isLoggingEnabled()) {
-            console.log("TRACE: [$loggerName] ${msg.toStringSafe()}${t.throwableToString()}")
-        }
-    }
-
-    override fun debug(t: Throwable?, msg: () -> Any?) {
-        if (KotlinLoggingLevel.DEBUG.isLoggingEnabled()) {
-            console.log("DEBUG: [$loggerName] ${msg.toStringSafe()}${t.throwableToString()}")
-        }
-    }
-
-    override fun info(t: Throwable?, msg: () -> Any?) {
-        if (KotlinLoggingLevel.INFO.isLoggingEnabled()) {
-            console.info("INFO: [$loggerName] ${msg.toStringSafe()}${t.throwableToString()}")
-        }
-    }
-
-    override fun warn(t: Throwable?, msg: () -> Any?) {
-        if (KotlinLoggingLevel.WARN.isLoggingEnabled()) {
-            console.warn("WARN: [$loggerName] ${msg.toStringSafe()}${t.throwableToString()}")
-        }
-    }
-
-    override fun error(t: Throwable?, msg: () -> Any?) {
-        if (KotlinLoggingLevel.ERROR.isLoggingEnabled()) {
-            console.error("ERROR: [$loggerName] ${msg.toStringSafe()}${t.throwableToString()}")
-        }
-    }
-
-    override fun trace(marker: Marker?, msg: () -> Any?) {
-        if (KotlinLoggingLevel.TRACE.isLoggingEnabled()) {
-            console.log("TRACE: [$loggerName] ${marker?.getName()} ${msg.toStringSafe()}")
-        }
-    }
-
-    override fun debug(marker: Marker?, msg: () -> Any?) {
-        if (KotlinLoggingLevel.DEBUG.isLoggingEnabled()) {
-            console.log("DEBUG: [$loggerName] ${marker?.getName()} ${msg.toStringSafe()}")
-        }
-    }
-
-    override fun info(marker: Marker?, msg: () -> Any?) {
-        if (KotlinLoggingLevel.INFO.isLoggingEnabled()) {
-            console.info("INFO: [$loggerName] ${marker?.getName()} ${msg.toStringSafe()}")
-        }
-    }
-
-    override fun warn(marker: Marker?, msg: () -> Any?) {
-        if (KotlinLoggingLevel.WARN.isLoggingEnabled()) {
-            console.warn("WARN: [$loggerName] ${marker?.getName()} ${msg.toStringSafe()}")
-        }
-    }
-
-    override fun error(marker: Marker?, msg: () -> Any?) {
-        if (KotlinLoggingLevel.ERROR.isLoggingEnabled()) {
-            console.error("ERROR: [$loggerName] ${marker?.getName()} ${msg.toStringSafe()}")
-        }
-    }
-
-    override fun trace(marker: Marker?, t: Throwable?, msg: () -> Any?) {
-        if (KotlinLoggingLevel.TRACE.isLoggingEnabled()) {
-            console.log("TRACE: [$loggerName] ${marker?.getName()} ${msg.toStringSafe()}${t.throwableToString()}")
-        }
-    }
-
-    override fun debug(marker: Marker?, t: Throwable?, msg: () -> Any?) {
-        if (KotlinLoggingLevel.DEBUG.isLoggingEnabled()) {
-            console.log("DEBUG: [$loggerName] ${marker?.getName()} ${msg.toStringSafe()}${t.throwableToString()}")
-        }
-    }
-
-    override fun info(marker: Marker?, t: Throwable?, msg: () -> Any?) {
-        if (KotlinLoggingLevel.INFO.isLoggingEnabled()) {
-            console.info("INFO: [$loggerName] ${marker?.getName()} ${msg.toStringSafe()}${t.throwableToString()}")
-        }
-    }
-
-    override fun warn(marker: Marker?, t: Throwable?, msg: () -> Any?) {
-        if (KotlinLoggingLevel.WARN.isLoggingEnabled()) {
-            console.warn("WARN: [$loggerName] ${marker?.getName()} ${msg.toStringSafe()}${t.throwableToString()}")
-        }
-    }
-
-    override fun error(marker: Marker?, t: Throwable?, msg: () -> Any?) {
-        if (KotlinLoggingLevel.ERROR.isLoggingEnabled()) {
-            console.error("ERROR: [$loggerName] ${marker?.getName()} ${msg.toStringSafe()}${t.throwableToString()}")
-        }
-    }
-
-    private fun Throwable?.throwableToString(): String {
-        if (this == null) {
-            return ""
-        }
-        var msg = ""
-        var current = this
-        while (current != null && current.cause != current) {
-            msg += ", Caused by: '${current.message}'"
-            current = current.cause
-        }
-        return msg
-    }
 }
