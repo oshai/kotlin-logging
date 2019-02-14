@@ -57,14 +57,14 @@ An `Android` example project with kotlin logging can be found in [kotlin-logging
 <dependency>
   <groupId>io.github.microutils</groupId>
   <artifactId>kotlin-logging</artifactId>
-  <version>1.6.22</version>
+  <version>1.6.24</version>
 </dependency>
 ```
 See full example in [kotlin-logging-example-maven](https://github.com/MicroUtils/kotlin-logging-example-maven).  
 
 ### Gradle
 ```Groovy
-compile 'io.github.microutils:kotlin-logging:1.6.22'
+compile 'io.github.microutils:kotlin-logging:1.6.24'
 ```
 
 Or alternatively, download jar from [github](https://github.com/MicroUtils/kotlin-logging/releases/latest) or [bintray](https://dl.bintray.com/microutils/kotlin-logging/io/github/microutils/kotlin-logging/) or [maven-central](http://repo1.maven.org/maven2/io/github/microutils/kotlin-logging/).
@@ -136,6 +136,7 @@ It is possible to configure Intellij live template. For file level logger config
 - ravikumar-n
 - Dario Seidl
 - b14ckyfox
+- robertfmurdock
 
 See also here: https://github.com/MicroUtils/kotlin-logging/graphs/contributors
 
