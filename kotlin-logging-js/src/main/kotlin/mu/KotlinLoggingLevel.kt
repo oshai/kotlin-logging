@@ -12,5 +12,5 @@ enum class KotlinLoggingLevel {
 
 fun KotlinLoggingLevel.isLoggingEnabled() = this.ordinal >= LOG_LEVEL.ordinal
 
-var outputPipes = ConsoleOutputPipes
-var messageFormatter = DefaultMessageFormatter
+var outputPipes: OutputPipes = ConsoleOutputPipes
+var messageFormatter: MessageFormatter = DefaultMessageFormatter
