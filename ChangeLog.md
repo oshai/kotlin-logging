@@ -1,3 +1,7 @@
+# 1.6.24
+
+* Javascript - Extracting Message Formatter interface: https://github.com/MicroUtils/kotlin-logging/pull/63
+
 # 1.6.23
 
 * Update kotlin to 1.3.20.
