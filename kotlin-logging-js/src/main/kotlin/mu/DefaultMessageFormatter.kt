@@ -2,7 +2,7 @@ package mu
 
 import mu.internal.toStringSafe
 
-object DefaultMessageFormatter : MessageFormatter {
+object DefaultMessageFormatter : Formatter {
     override fun formatMessage(level: KotlinLoggingLevel, loggerName: String, msg: () -> Any?) =
             "${level.name}: [$loggerName] ${msg.toStringSafe()}"
 

@@ -1,6 +1,6 @@
 package mu
 
-interface OutputPipes {
+interface Appender {
     fun trace(message: Any?)
     fun debug(message: Any?)
     fun info(message: Any?)
