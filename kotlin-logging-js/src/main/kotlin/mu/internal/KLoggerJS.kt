@@ -1,8 +1,8 @@
 package mu.internal
 
 import mu.KLogger
-import mu.KotlinLoggingConfiguration.MESSAGE_FORMATTER
-import mu.KotlinLoggingConfiguration.OUTPUT_PIPES
+import mu.KotlinLoggingConfiguration.APPENDER
+import mu.KotlinLoggingConfiguration.FORMATTER
 import mu.KotlinLoggingLevel
 import mu.KotlinLoggingLevel.DEBUG
 import mu.KotlinLoggingLevel.ERROR
@@ -10,77 +10,73 @@ import mu.KotlinLoggingLevel.INFO
 import mu.KotlinLoggingLevel.TRACE
 import mu.KotlinLoggingLevel.WARN
 import mu.Marker
-import mu.MessageFormatter
-import mu.OutputPipes
 import mu.isLoggingEnabled
 
 internal class KLoggerJS(
-    private val loggerName: String,
-    private val pipes: OutputPipes = OUTPUT_PIPES,
-    private val formatter: MessageFormatter = MESSAGE_FORMATTER
-) : KLogger, MessageFormatter by formatter {
+    private val loggerName: String
+) : KLogger {
 
-    override fun trace(msg: () -> Any?) = TRACE.logIfEnabled(msg, pipes::trace)
+    override fun trace(msg: () -> Any?) = TRACE.logIfEnabled(msg, APPENDER::trace)
 
-    override fun debug(msg: () -> Any?) = DEBUG.logIfEnabled(msg, pipes::debug)
+    override fun debug(msg: () -> Any?) = DEBUG.logIfEnabled(msg, APPENDER::debug)
 
-    override fun info(msg: () -> Any?) = INFO.logIfEnabled(msg, pipes::info)
+    override fun info(msg: () -> Any?) = INFO.logIfEnabled(msg, APPENDER::info)
 
-    override fun warn(msg: () -> Any?) = WARN.logIfEnabled(msg, pipes::warn)
+    override fun warn(msg: () -> Any?) = WARN.logIfEnabled(msg, APPENDER::warn)
 
-    override fun error(msg: () -> Any?) = ERROR.logIfEnabled(msg, pipes::error)
+    override fun error(msg: () -> Any?) = ERROR.logIfEnabled(msg, APPENDER::error)
 
-    override fun trace(t: Throwable?, msg: () -> Any?) = TRACE.logIfEnabled(msg, t, pipes::trace)
+    override fun trace(t: Throwable?, msg: () -> Any?) = TRACE.logIfEnabled(msg, t, APPENDER::trace)
 
-    override fun debug(t: Throwable?, msg: () -> Any?) = DEBUG.logIfEnabled(msg, t, pipes::debug)
+    override fun debug(t: Throwable?, msg: () -> Any?) = DEBUG.logIfEnabled(msg, t, APPENDER::debug)
 
-    override fun info(t: Throwable?, msg: () -> Any?) = INFO.logIfEnabled(msg, t, pipes::info)
+    override fun info(t: Throwable?, msg: () -> Any?) = INFO.logIfEnabled(msg, t, APPENDER::info)
 
-    override fun warn(t: Throwable?, msg: () -> Any?) = WARN.logIfEnabled(msg, t, pipes::warn)
+    override fun warn(t: Throwable?, msg: () -> Any?) = WARN.logIfEnabled(msg, t, APPENDER::warn)
 
-    override fun error(t: Throwable?, msg: () -> Any?) = ERROR.logIfEnabled(msg, t, pipes::error)
+    override fun error(t: Throwable?, msg: () -> Any?) = ERROR.logIfEnabled(msg, t, APPENDER::error)
 
-    override fun trace(marker: Marker?, msg: () -> Any?) = TRACE.logIfEnabled(marker, msg, pipes::trace)
+    override fun trace(marker: Marker?, msg: () -> Any?) = TRACE.logIfEnabled(marker, msg, APPENDER::trace)
 
-    override fun debug(marker: Marker?, msg: () -> Any?) = DEBUG.logIfEnabled(marker, msg, pipes::debug)
+    override fun debug(marker: Marker?, msg: () -> Any?) = DEBUG.logIfEnabled(marker, msg, APPENDER::debug)
 
-    override fun info(marker: Marker?, msg: () -> Any?) = INFO.logIfEnabled(marker, msg, pipes::info)
+    override fun info(marker: Marker?, msg: () -> Any?) = INFO.logIfEnabled(marker, msg, APPENDER::info)
 
-    override fun warn(marker: Marker?, msg: () -> Any?) = WARN.logIfEnabled(marker, msg, pipes::warn)
+    override fun warn(marker: Marker?, msg: () -> Any?) = WARN.logIfEnabled(marker, msg, APPENDER::warn)
 
-    override fun error(marker: Marker?, msg: () -> Any?) = ERROR.logIfEnabled(marker, msg, pipes::error)
+    override fun error(marker: Marker?, msg: () -> Any?) = ERROR.logIfEnabled(marker, msg, APPENDER::error)
 
-    override fun trace(marker: Marker?, t: Throwable?, msg: () -> Any?) = TRACE.logIfEnabled(marker, msg, t, pipes::trace)
+    override fun trace(marker: Marker?, t: Throwable?, msg: () -> Any?) = TRACE.logIfEnabled(marker, msg, t, APPENDER::trace)
 
-    override fun debug(marker: Marker?, t: Throwable?, msg: () -> Any?) = DEBUG.logIfEnabled(marker, msg, t, pipes::debug)
+    override fun debug(marker: Marker?, t: Throwable?, msg: () -> Any?) = DEBUG.logIfEnabled(marker, msg, t, APPENDER::debug)
 
-    override fun info(marker: Marker?, t: Throwable?, msg: () -> Any?) = INFO.logIfEnabled(marker, msg, t, pipes::info)
+    override fun info(marker: Marker?, t: Throwable?, msg: () -> Any?) = INFO.logIfEnabled(marker, msg, t, APPENDER::info)
 
-    override fun warn(marker: Marker?, t: Throwable?, msg: () -> Any?) = WARN.logIfEnabled(marker, msg, t, pipes::warn)
+    override fun warn(marker: Marker?, t: Throwable?, msg: () -> Any?) = WARN.logIfEnabled(marker, msg, t, APPENDER::warn)
 
-    override fun error(marker: Marker?, t: Throwable?, msg: () -> Any?) = ERROR.logIfEnabled(marker, msg, t, pipes::error)
+    override fun error(marker: Marker?, t: Throwable?, msg: () -> Any?) = ERROR.logIfEnabled(marker, msg, t, APPENDER::error)
 
     private fun KotlinLoggingLevel.logIfEnabled(msg: () -> Any?, logFunction: (Any?) -> Unit) {
         if (isLoggingEnabled()) {
-            logFunction(formatMessage(this, loggerName, msg))
+            logFunction(FORMATTER.formatMessage(this, loggerName, msg))
         }
     }
 
     private fun KotlinLoggingLevel.logIfEnabled(msg: () -> Any?, t: Throwable?, logFunction: (Any?) -> Unit) {
         if (isLoggingEnabled()) {
-            logFunction(formatMessage(this, loggerName, t, msg))
+            logFunction(FORMATTER.formatMessage(this, loggerName, t, msg))
         }
     }
 
     private fun KotlinLoggingLevel.logIfEnabled(marker: Marker?, msg: () -> Any?, logFunction: (Any?) -> Unit) {
         if (isLoggingEnabled()) {
-            logFunction(formatMessage(this, loggerName, marker, msg))
+            logFunction(FORMATTER.formatMessage(this, loggerName, marker, msg))
         }
     }
 
     private fun KotlinLoggingLevel.logIfEnabled(marker: Marker?, msg: () -> Any?, t: Throwable?, logFunction: (Any?) -> Unit) {
         if (isLoggingEnabled()) {
-            logFunction(formatMessage(this, loggerName, marker, t, msg))
+            logFunction(FORMATTER.formatMessage(this, loggerName, marker, t, msg))
         }
     }
 
