@@ -1,12 +1,23 @@
 package mu.internal
 
-import mu.*
-import mu.KotlinLoggingLevel.*
+import mu.KLogger
+import mu.KotlinLoggingConfiguration.MESSAGE_FORMATTER
+import mu.KotlinLoggingConfiguration.OUTPUT_PIPES
+import mu.KotlinLoggingLevel
+import mu.KotlinLoggingLevel.DEBUG
+import mu.KotlinLoggingLevel.ERROR
+import mu.KotlinLoggingLevel.INFO
+import mu.KotlinLoggingLevel.TRACE
+import mu.KotlinLoggingLevel.WARN
+import mu.Marker
+import mu.MessageFormatter
+import mu.OutputPipes
+import mu.isLoggingEnabled
 
 internal class KLoggerJS(
-        private val loggerName: String,
-        private val pipes: OutputPipes = outputPipes,
-        private val formatter: MessageFormatter = messageFormatter
+    private val loggerName: String,
+    private val pipes: OutputPipes = OUTPUT_PIPES,
+    private val formatter: MessageFormatter = MESSAGE_FORMATTER
 ) : KLogger, MessageFormatter by formatter {
 
     override fun trace(msg: () -> Any?) = TRACE.logIfEnabled(msg, pipes::trace)

@@ -1,6 +1,6 @@
 package mu
 
-var LOG_LEVEL = KotlinLoggingLevel.INFO
+import mu.KotlinLoggingConfiguration.LOG_LEVEL
 
 enum class KotlinLoggingLevel {
     TRACE,
@@ -12,5 +12,3 @@ enum class KotlinLoggingLevel {
 
 fun KotlinLoggingLevel.isLoggingEnabled() = this.ordinal >= LOG_LEVEL.ordinal
 
-var outputPipes: OutputPipes = ConsoleOutputPipes
-var messageFormatter: MessageFormatter = DefaultMessageFormatter
