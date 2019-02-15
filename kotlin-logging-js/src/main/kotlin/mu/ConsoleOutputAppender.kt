@@ -1,6 +1,6 @@
 package mu
 
-object ConsoleOutputPipes : OutputPipes {
+object ConsoleOutputAppender : Appender {
     override fun trace(message: Any?) = console.log(message)
     override fun debug(message: Any?) = console.log(message)
     override fun info(message: Any?) = console.info(message)
