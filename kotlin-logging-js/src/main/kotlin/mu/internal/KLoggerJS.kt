@@ -12,7 +12,7 @@ import mu.KotlinLoggingLevel.WARN
 import mu.Marker
 import mu.isLoggingEnabled
 
-internal class KLoggerJS(
+internal open class KLoggerJS(
     private val loggerName: String
 ) : KLogger {
 
@@ -56,25 +56,25 @@ internal class KLoggerJS(
 
     override fun error(marker: Marker?, t: Throwable?, msg: () -> Any?) = ERROR.logIfEnabled(marker, msg, t, APPENDER::error)
 
-    private fun KotlinLoggingLevel.logIfEnabled(msg: () -> Any?, logFunction: (Any?) -> Unit) {
+    internal fun KotlinLoggingLevel.logIfEnabled(msg: () -> Any?, logFunction: (Any?) -> Unit) {
         if (isLoggingEnabled()) {
             logFunction(FORMATTER.formatMessage(this, loggerName, msg))
         }
     }
 
-    private fun KotlinLoggingLevel.logIfEnabled(msg: () -> Any?, t: Throwable?, logFunction: (Any?) -> Unit) {
+    internal fun KotlinLoggingLevel.logIfEnabled(msg: () -> Any?, t: Throwable?, logFunction: (Any?) -> Unit) {
         if (isLoggingEnabled()) {
             logFunction(FORMATTER.formatMessage(this, loggerName, t, msg))
         }
     }
 
-    private fun KotlinLoggingLevel.logIfEnabled(marker: Marker?, msg: () -> Any?, logFunction: (Any?) -> Unit) {
+    internal fun KotlinLoggingLevel.logIfEnabled(marker: Marker?, msg: () -> Any?, logFunction: (Any?) -> Unit) {
         if (isLoggingEnabled()) {
             logFunction(FORMATTER.formatMessage(this, loggerName, marker, msg))
         }
     }
 
-    private fun KotlinLoggingLevel.logIfEnabled(marker: Marker?, msg: () -> Any?, t: Throwable?, logFunction: (Any?) -> Unit) {
+    internal fun KotlinLoggingLevel.logIfEnabled(marker: Marker?, msg: () -> Any?, t: Throwable?, logFunction: (Any?) -> Unit) {
         if (isLoggingEnabled()) {
             logFunction(FORMATTER.formatMessage(this, loggerName, marker, t, msg))
         }

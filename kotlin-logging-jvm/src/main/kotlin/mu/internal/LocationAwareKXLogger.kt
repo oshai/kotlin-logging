@@ -1,6 +1,7 @@
 package mu.internal
 
-import mu.KLogger
+import mu.KMarkerFactory
+import mu.KXLogger
 import org.slf4j.Logger
 import org.slf4j.Marker
 import org.slf4j.helpers.MessageFormatter
@@ -10,9 +11,62 @@ import org.slf4j.spi.LocationAwareLogger
  * A class wrapping a [LocationAwareLogger] instance preserving
  * location information with the correct fully qualified class name.
  */
-internal open class LocationAwareKLogger(override val underlyingLogger: LocationAwareLogger) : KLogger, Logger by underlyingLogger {
+internal class LocationAwareKXLogger(override val underlyingLogger: LocationAwareLogger) : LocationAwareKLogger(underlyingLogger), KXLogger, Logger by underlyingLogger {
 
-    private val fqcn: String = LocationAwareKLogger::class.java.name
+    private val fqcn: String = LocationAwareKXLogger::class.java.name
+    private val ENTRY = KMarkerFactory.getMarker("ENTRY")
+    private val EXIT = KMarkerFactory.getMarker("EXIT")
+
+    private val THROWING = KMarkerFactory.getMarker("THROWING")
+    private val CATCHING = KMarkerFactory.getMarker("CATCHING")
+    private val EXITONLY = "exit"
+    private val EXITMESSAGE = "exit with ({})"
+
+
+    override fun  <T : Throwable> catching(throwable: T) {
+        if (underlyingLogger.isErrorEnabled) {
+            underlyingLogger.log(CATCHING, fqcn, LocationAwareLogger.ERROR_INT, "catching", null, throwable)
+        }
+    }
+
+    override fun entry(vararg argArray: Any) {
+        if (underlyingLogger.isTraceEnabled(ENTRY)) {
+            val formattedMessage = MessageFormatter.format(buildMessagePattern(argArray.size), argArray).message
+            val tp = MessageFormatter.arrayFormat(formattedMessage, argArray)
+            underlyingLogger.log(ENTRY, fqcn, LocationAwareLogger.TRACE_INT, tp.message, argArray, tp.throwable);
+        }
+    }
+
+    override fun exit() {
+        if (underlyingLogger.isTraceEnabled(EXIT)) {
+            underlyingLogger.log(EXIT, fqcn, LocationAwareLogger.TRACE_INT, EXITONLY, null, null)
+        }
+    }
+
+    override fun <T: Any> exit(retval: T): T  {
+        if (underlyingLogger.isTraceEnabled(EXIT)) {
+            val tp = MessageFormatter.format(EXITMESSAGE, retval)
+            underlyingLogger.log(EXIT, fqcn, LocationAwareLogger.TRACE_INT, tp.message, arrayOf<Any>(retval), tp.throwable)
+        }
+        return retval
+    }
+
+    override fun  <T : Throwable> throwing(throwable: T): T {
+        underlyingLogger.log(THROWING, fqcn, LocationAwareLogger.ERROR_INT, "throwing", null, throwable)
+        throw throwable
+    }
+
+    private fun buildMessagePattern(len: Int): String {
+        val sb = StringBuilder()
+        sb.append(" entry with (")
+        for (i in 0 until len) {
+            sb.append("{}")
+            if (i != len - 1)
+                sb.append(", ")
+        }
+        sb.append(')')
+        return sb.toString()
+    }
 
     override fun trace(msg: String?) {
         if (!underlyingLogger.isTraceEnabled)
@@ -609,5 +663,49 @@ internal open class LocationAwareKLogger(override val underlyingLogger: Location
      */
     override fun error(marker: Marker?, t: Throwable?, msg: () -> Any?) {
         if (isErrorEnabled) error(marker, msg.toStringSafe(), t)
+    }
+
+    override fun getName(): String {
+        return super.getName()
+    }
+
+    override fun isErrorEnabled(): Boolean {
+        return super.isErrorEnabled()
+    }
+
+    override fun isErrorEnabled(marker: Marker?): Boolean {
+        return super.isErrorEnabled(marker)
+    }
+
+    override fun isDebugEnabled(): Boolean {
+        return super.isDebugEnabled()
+    }
+
+    override fun isDebugEnabled(marker: Marker?): Boolean {
+        return super.isDebugEnabled(marker)
+    }
+
+    override fun isInfoEnabled(marker: Marker?): Boolean {
+        return super.isInfoEnabled(marker)
+    }
+
+    override fun isInfoEnabled(): Boolean {
+        return super.isInfoEnabled()
+    }
+
+    override fun isWarnEnabled(): Boolean {
+        return super.isWarnEnabled()
+    }
+
+    override fun isWarnEnabled(marker: Marker?): Boolean {
+        return super.isWarnEnabled(marker)
+    }
+
+    override fun isTraceEnabled(marker: Marker?): Boolean {
+        return super.isTraceEnabled(marker)
+    }
+
+    override fun isTraceEnabled(): Boolean {
+        return super.isTraceEnabled()
     }
 }

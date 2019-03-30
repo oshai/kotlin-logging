@@ -1,6 +1,7 @@
 package mu
 
 import mu.internal.KLoggerJS
+import mu.internal.KXLoggerJS
 
 
 actual object KotlinLogging {
@@ -11,4 +12,8 @@ actual object KotlinLogging {
     actual fun logger(func: () -> Unit): KLogger = KLoggerJS(func::class.js.name)
 
     actual fun logger(name: String): KLogger = KLoggerJS(name)
+
+    actual fun xlogger(name: String): KXLogger = KXLoggerJS(name)
+
+    actual fun xlogger(func: () -> Unit): KXLogger = KXLoggerJS(func::class.js.name)
 }

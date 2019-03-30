@@ -1,7 +1,6 @@
 package mu
 
 
-
 expect object KotlinLogging {
     /**
      * This method allow defining the logger in a file in the following way:
@@ -10,4 +9,8 @@ expect object KotlinLogging {
     fun logger(func: () -> Unit): KLogger
 
     fun logger(name: String): KLogger
+
+    fun xlogger(func: () -> Unit): KXLogger
+
+    fun xlogger(name: String): KXLogger
 }
