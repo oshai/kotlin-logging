@@ -14,4 +14,10 @@ class ClassWithLoggingForLocationTesting {
     fun logNull() {
         logger.info(null)
     }
+
+    fun logEntry() {
+        logger.entry(1, 2)
+        logger.info("log entry body")
+        logger.exit(2)
+    }
 }

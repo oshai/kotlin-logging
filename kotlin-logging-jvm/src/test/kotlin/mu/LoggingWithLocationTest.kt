@@ -33,6 +33,13 @@ class LoggingWithLocationTest {
         ClassWithLoggingForLocationTesting().logNull()
         Assert.assertEquals("INFO ClassWithLoggingForLocationTesting.logNull(15) - null", appenderWithWriter.writer.toString().trim())
     }
+    @Test
+    fun testNullLoggingWithLocationEntryExit() {
+        ClassWithLoggingForLocationTesting().logEntry()
+        Assert.assertEquals("TRACE ClassWithLoggingForLocationTesting.logEntry(19) -  entry with (1, 2)\n" +
+                "INFO ClassWithLoggingForLocationTesting.logEntry(20) - log entry body\n" +
+                "TRACE ClassWithLoggingForLocationTesting.logEntry(21) - exit with (2)", appenderWithWriter.writer.toString().trim())
+    }
 }
 
 

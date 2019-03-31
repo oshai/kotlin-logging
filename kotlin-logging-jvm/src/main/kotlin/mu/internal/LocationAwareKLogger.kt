@@ -1,6 +1,7 @@
 package mu.internal
 
 import mu.KLogger
+import mu.KMarkerFactory
 import org.slf4j.Logger
 import org.slf4j.Marker
 import org.slf4j.helpers.MessageFormatter
@@ -13,6 +14,13 @@ import org.slf4j.spi.LocationAwareLogger
 internal class LocationAwareKLogger(override val underlyingLogger: LocationAwareLogger) : KLogger, Logger by underlyingLogger {
 
     private val fqcn: String = LocationAwareKLogger::class.java.name
+    private val ENTRY = KMarkerFactory.getMarker("ENTRY")
+    private val EXIT = KMarkerFactory.getMarker("EXIT")
+
+    private val THROWING = KMarkerFactory.getMarker("THROWING")
+    private val CATCHING = KMarkerFactory.getMarker("CATCHING")
+    private val EXITONLY = "exit"
+    private val EXITMESSAGE = "exit with ({})"
 
     override fun trace(msg: String?) {
         if (!underlyingLogger.isTraceEnabled)
@@ -613,4 +621,49 @@ internal class LocationAwareKLogger(override val underlyingLogger: LocationAware
     override fun error(marker: Marker?, t: Throwable?, msg: () -> Any?) {
         if (isErrorEnabled) error(marker, msg.toStringSafe(), t)
     }
+
+    override fun  <T : Throwable> catching(throwable: T) {
+        if (underlyingLogger.isErrorEnabled) {
+            underlyingLogger.log(CATCHING, fqcn, LocationAwareLogger.ERROR_INT, "catching", null, throwable)
+        }
+    }
+
+    override fun entry(vararg argArray: Any) {
+        if (underlyingLogger.isTraceEnabled(ENTRY)) {
+            val tp = MessageFormatter.arrayFormat(buildMessagePattern(argArray.size), argArray)
+            underlyingLogger.log(ENTRY, fqcn, LocationAwareLogger.TRACE_INT, tp.message, null, null);
+        }
+    }
+
+    override fun exit() {
+        if (underlyingLogger.isTraceEnabled(EXIT)) {
+            underlyingLogger.log(EXIT, fqcn, LocationAwareLogger.TRACE_INT, EXITONLY, null, null)
+        }
+    }
+
+    override fun <T: Any> exit(retval: T): T  {
+        if (underlyingLogger.isTraceEnabled(EXIT)) {
+            val tp = MessageFormatter.format(EXITMESSAGE, retval)
+            underlyingLogger.log(EXIT, fqcn, LocationAwareLogger.TRACE_INT, tp.message, arrayOf<Any>(retval), tp.throwable)
+        }
+        return retval
+    }
+
+    override fun  <T : Throwable> throwing(throwable: T): T {
+        underlyingLogger.log(THROWING, fqcn, LocationAwareLogger.ERROR_INT, "throwing", null, throwable)
+        throw throwable
+    }
+
+    private fun buildMessagePattern(len: Int): String {
+        val sb = StringBuilder()
+        sb.append(" entry with (")
+        for (i in 0 until len) {
+            sb.append("{}")
+            if (i != len - 1)
+                sb.append(", ")
+        }
+        sb.append(')')
+        return sb.toString()
+    }
+
 }
