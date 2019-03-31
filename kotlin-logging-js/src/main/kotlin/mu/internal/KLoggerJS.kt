@@ -4,16 +4,12 @@ import mu.KLogger
 import mu.KotlinLoggingConfiguration.APPENDER
 import mu.KotlinLoggingConfiguration.FORMATTER
 import mu.KotlinLoggingLevel
-import mu.KotlinLoggingLevel.DEBUG
-import mu.KotlinLoggingLevel.ERROR
-import mu.KotlinLoggingLevel.INFO
-import mu.KotlinLoggingLevel.TRACE
-import mu.KotlinLoggingLevel.WARN
+import mu.KotlinLoggingLevel.*
 import mu.Marker
 import mu.isLoggingEnabled
 
 internal class KLoggerJS(
-    private val loggerName: String
+        private val loggerName: String
 ) : KLogger {
 
     override fun trace(msg: () -> Any?) = TRACE.logIfEnabled(msg, APPENDER::trace)
@@ -80,4 +76,25 @@ internal class KLoggerJS(
         }
     }
 
+    override fun entry(vararg argArray: Any) {
+        TRACE.logIfEnabled({ "entry($argArray)" }, APPENDER::trace)
+    }
+
+    override fun exit() {
+        TRACE.logIfEnabled({ "exit()" }, APPENDER::trace)
+    }
+
+    override fun <T : Any> exit(retval: T): T {
+        TRACE.logIfEnabled({ "exut($retval)" }, APPENDER::trace)
+        return retval
+    }
+
+    override fun <T : Throwable> throwing(throwable: T): T {
+        ERROR.logIfEnabled({ "throwing($throwable" }, throwable, APPENDER::error)
+        return throwable
+    }
+
+    override fun <T : Throwable> catching(throwable: T) {
+        ERROR.logIfEnabled({ "catching($throwable" }, throwable, APPENDER::error)
+    }
 }
