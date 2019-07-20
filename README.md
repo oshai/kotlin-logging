@@ -76,7 +76,7 @@ More information is available on the [wiki](https://github.com/MicroUtils/kotlin
 
 ## Overview
 
-After seeing many questions like [Idiomatic way of logging in Kotlin](http://stackoverflow.com/questions/34416869/idiomatic-way-of-logging-in-kotlin) and [Best practices for loggers](https://discuss.kotlinlang.org/t/best-practices-for-loggers/226/15), it seems like there should be a standard for logging and obtaining a logger in Kotlin. kotlin-logging provides a wrapper for the slf4j API to be used by Kotlin classes with the following advantages:
+After seeing many questions like [Idiomatic way of logging in Kotlin](http://stackoverflow.com/questions/34416869/idiomatic-way-of-logging-in-kotlin) and [Best practices for loggers](https://discuss.kotlinlang.org/t/best-practices-for-loggers/226/15), it seems like there should be a standard for logging and obtaining a logger in Kotlin. kotlin-logging provides a wrapper for slf4j-api to be used by Kotlin classes with the following advantages:
   - No need to write the logger and class name or logger name boilerplate code.
   - A straight forward way to log messages with lazy-evaluated string using lambda expression `{}`.
   - All previous slf4j implementation can still be used.
