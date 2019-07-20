@@ -44,11 +44,11 @@ class FooWithLogging {
 }
 ```
 
-An `Android` example project with kotlin logging can be found in [kotlin-logging-example-android](https://github.com/MicroUtils/kotlin-logging-example-android).
+An `Android` example project with kotlin-logging can be found in [kotlin-logging-example-android](https://github.com/MicroUtils/kotlin-logging-example-android).
 
 ## Download
 
-**Important note:** kotlin-logging depends on slf4j-api (In the JVM artifact). In runtime, it is also required to depend on a logging implementation. More details in [how-to-configure-slf4j](http://saltnlight5.blogspot.co.il/2013/08/how-to-configure-slf4j-with-different.html). And an excellent detailed explanation in [a-guide-to-logging-in-java](https://www.marcobehler.com/guides/a-guide-to-logging-in-java). 
+**Important note:** kotlin-logging depends on slf4j-api (in the JVM artifact). In runtime, it is also required to depend on a logging implementation. More details in [how-to-configure-slf4j](http://saltnlight5.blogspot.co.il/2013/08/how-to-configure-slf4j-with-different.html). And an excellent detailed explanation in [a-guide-to-logging-in-java](https://www.marcobehler.com/guides/a-guide-to-logging-in-java). 
 
 **Multiplatform:** See the [section below](https://github.com/MicroUtils/kotlin-logging/blob/master/README.md#multiplatform).
 
@@ -60,26 +60,26 @@ An `Android` example project with kotlin logging can be found in [kotlin-logging
   <version>1.6.26</version>
 </dependency>
 ```
-See full example in [kotlin-logging-example-maven](https://github.com/MicroUtils/kotlin-logging-example-maven).  
+See the full example in [kotlin-logging-example-maven](https://github.com/MicroUtils/kotlin-logging-example-maven).  
 
 ### Gradle
 ```Groovy
 compile 'io.github.microutils:kotlin-logging:1.6.26'
 ```
 
-Or alternatively, download jar from [github](https://github.com/MicroUtils/kotlin-logging/releases/latest) or [bintray](https://dl.bintray.com/microutils/kotlin-logging/io/github/microutils/kotlin-logging/) or [maven-central](http://repo1.maven.org/maven2/io/github/microutils/kotlin-logging/).
+Alternatively, download the JAR from [github](https://github.com/MicroUtils/kotlin-logging/releases/latest) or [bintray](https://dl.bintray.com/microutils/kotlin-logging/io/github/microutils/kotlin-logging/) or [maven-central](http://repo1.maven.org/maven2/io/github/microutils/kotlin-logging/).
 
 ## Multiplatform
 
-An experimental common & js support is available.  
-More info on [wiki](https://github.com/MicroUtils/kotlin-logging/wiki/Multiplatform-support) and issue [#21](https://github.com/MicroUtils/kotlin-logging/issues/21).
+An experimental common & JS support is available.  
+More information is available on the [wiki](https://github.com/MicroUtils/kotlin-logging/wiki/Multiplatform-support) and issue [#21](https://github.com/MicroUtils/kotlin-logging/issues/21).
 
 ## Overview
 
-After seeing many questions like [Idiomatic way of logging in Kotlin](http://stackoverflow.com/questions/34416869/idiomatic-way-of-logging-in-kotlin) and [Best practices for loggers](https://discuss.kotlinlang.org/t/best-practices-for-loggers/226/15), It seems like there should be a standard for logging and obtaining a logger in kotlin. kotlin-logging provide a wrapper for slf4j api to be used by kotlin classes with the following advantages:
-  - No need to write the logger and class name or logger name boileplates.
+After seeing many questions like [Idiomatic way of logging in Kotlin](http://stackoverflow.com/questions/34416869/idiomatic-way-of-logging-in-kotlin) and [Best practices for loggers](https://discuss.kotlinlang.org/t/best-practices-for-loggers/226/15), it seems like there should be a standard for logging and obtaining a logger in Kotlin. kotlin-logging provides a wrapper for slf4j-api to be used by Kotlin classes with the following advantages:
+  - No need to write the logger and class name or logger name boilerplate code.
   - A straight forward way to log messages with lazy-evaluated string using lambda expression `{}`.
-  - All previous slf4j implementation still can be used.
+  - All previous slf4j implementation can still be used.
 
 ## Who is using it
 
@@ -94,17 +94,17 @@ And many more... (add your name above)
 
 ## FAQ
 
-- Why not use plain slf4j? kotlin-logging has better native kotlin support. It adds more functionality and enable less boilerplates.
-- Is all slf4j implementation supported (Markers, params, etc')? Yes, KLogger inherits Logger and all methods are supported.
-- Is location logging possible? Yes, location awerness was added in kotlin-logging 1.4.
-- When I do `logger.debug`, my IntelliJ IDEA run console doesn't show any output. Do you know how I could set the console logger to debug or trace levels? Is this an IDE setting, or can it be set in the call to KLogging()? Setting log level is done per implementation. Kotlin-logging and slf4j are just facades for the underlying logging lib (log4j, logback etc') more details [here](http://stackoverflow.com/questions/43146977/how-to-configure-kotlin-logging-logger).
+- Why not use plain slf4j? kotlin-logging has better native Kotlin support. It adds more functionality and enables less boilerplate code.
+- Is all slf4j implementation supported (Markers, params, etc')? Yes, kotlin-logging inherits Logger and all methods are supported.
+- Is location logging possible? Yes, location awareness was added in kotlin-logging 1.4.
+- When I do `logger.debug`, my IntelliJ IDEA run console doesn't show any output. Do you know how I could set the console logger to debug or trace levels? Is this an IDE setting, or can it be set in the call to KLogging()? Setting log level is done per implementation. kotlin-logging and slf4j are just facades for the underlying logging lib (log4j, logback etc') more details [here](http://stackoverflow.com/questions/43146977/how-to-configure-kotlin-logging-logger).
 - Can I access the actual logger? Yes, via `KLogger.underlyingLogger` property.
 
 ## Usage
 
 - See [wiki](https://github.com/MicroUtils/kotlin-logging/wiki) for more examples.
 
-It is possible to configure Intellij live template. For file level logger configure the following:
+It is possible to configure IntelliJ live templates. For file level logger configure the following:
 - Text template: `private val logger = mu.KotlinLogging.logger {}`.
 - Applicable in `Kotlin: top-level`.
 
