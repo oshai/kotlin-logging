@@ -1,3 +1,0 @@
-include ':kotlin-logging-jvm'
-include ':kotlin-logging-js'
-include ':kotlin-logging-common'
