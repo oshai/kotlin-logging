@@ -128,18 +128,7 @@ It is possible to configure IntelliJ live templates. For file level logger confi
 
 ## Contributors
 
-- Ohad Shai
-- Pavel Nikitin [JetBrains]
-- Christoph Gritschenberger
-- Igor Manushin
-- krokofant
-- ravikumar-n
-- Dario Seidl
-- b14ckyfox
-- robertfmurdock
-- Corneil du Plessis
-
-See also here: https://github.com/MicroUtils/kotlin-logging/graphs/contributors
+Any contribution is appreciated. See the contributors list in: https://github.com/MicroUtils/kotlin-logging/graphs/contributors
 
 ## Contributing
 
