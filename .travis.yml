@@ -4,3 +4,4 @@ jdk:
  - oraclejdk8
 
 script: ./gradlew check
+dist: trusty
