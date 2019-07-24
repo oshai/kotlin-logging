@@ -1,3 +1,11 @@
+# 1.7.1
+
+* Convert project to new MPP format: https://github.com/MicroUtils/kotlin-logging/issues/64
+
+# 1.6.26
+
+* Add support for slf4j-ext: https://github.com/MicroUtils/kotlin-logging/pull/73
+
 # 1.6.25
 
 * Javascript - Extracting Message Formatter interface (more changes):https://github.com/MicroUtils/kotlin-logging/pull/66
