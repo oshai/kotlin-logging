@@ -1,4 +1,4 @@
-import java.util.Date
+import java.util.*
 
 plugins {
     kotlin("multiplatform") version "1.3.41"
@@ -72,7 +72,7 @@ kotlin {
         named("jvmMain") {
             dependencies {
                 implementation(kotlin("stdlib"))
-                implementation("org.slf4j:slf4j-api:${extra["sl4j_version"]}")
+                api("org.slf4j:slf4j-api:${extra["sl4j_version"]}")
             }
         }
         named("jvmTest") {
