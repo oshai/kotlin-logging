@@ -57,14 +57,14 @@ An `Android` example project with kotlin-logging can be found in [kotlin-logging
 <dependency>
   <groupId>io.github.microutils</groupId>
   <artifactId>kotlin-logging</artifactId>
-  <version>1.7.1</version>
+  <version>1.7.2</version>
 </dependency>
 ```
 See the full example in [kotlin-logging-example-maven](https://github.com/MicroUtils/kotlin-logging-example-maven).  
 
 ### Gradle
 ```Groovy
-compile 'io.github.microutils:kotlin-logging:1.7.1'
+compile 'io.github.microutils:kotlin-logging:1.7.2'
 ```
 
 Alternatively, download the JAR from [github](https://github.com/MicroUtils/kotlin-logging/releases/latest) or [bintray](https://dl.bintray.com/microutils/kotlin-logging/io/github/microutils/kotlin-logging/) or [maven-central](http://repo1.maven.org/maven2/io/github/microutils/kotlin-logging/).

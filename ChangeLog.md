@@ -1,3 +1,7 @@
+# 1.7.2
+
+* Fixed missing slf4j dependency - https://github.com/MicroUtils/kotlin-logging/issues/83
+
 # 1.7.1
 
 * Convert project to new MPP format: https://github.com/MicroUtils/kotlin-logging/issues/64
