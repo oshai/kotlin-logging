@@ -118,7 +118,7 @@ expect interface KLogger {
   /**
    * Add a log message with the return value of a method
    */
-  fun <T> exit(retval: T): T where T : Any
+  fun <T> exit(retval: T?): T? where T : Any
 
   /**
    * Add a log message indicating an exception will be thrown along with the stack trace.
