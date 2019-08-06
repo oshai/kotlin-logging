@@ -641,10 +641,10 @@ internal class LocationAwareKLogger(override val underlyingLogger: LocationAware
         }
     }
 
-    override fun <T: Any> exit(retval: T): T  {
+    override fun <T: Any> exit(retval: T?): T?  {
         if (underlyingLogger.isTraceEnabled(EXIT)) {
             val tp = MessageFormatter.format(EXITMESSAGE, retval)
-            underlyingLogger.log(EXIT, fqcn, LocationAwareLogger.TRACE_INT, tp.message, arrayOf<Any>(retval), tp.throwable)
+            underlyingLogger.log(EXIT, fqcn, LocationAwareLogger.TRACE_INT, tp.message, arrayOf<Any?>(retval), tp.throwable)
         }
         return retval
     }

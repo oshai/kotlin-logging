@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="INFO">
+<Configuration status="TRACE">
     <Appenders>
         <!-- A1 is a ConsoleAppender, using PatternLayout. -->
         <Console name="A1" target="SYSTEM_OUT">
-            <PatternLayout pattern="%-4r [%t] %-5p %c %marker - %m%n" />
+            <PatternLayout pattern="%-4r [%t] %-5p %c %marker - %m%n"/>
         </Console>
     </Appenders>
     <Loggers>
         <!-- Set root logger level to TRACE and its only appender to A1. -->
         <Root level="TRACE">
-            <AppenderRef ref="A1" />
+            <AppenderRef ref="A1"/>
         </Root>
     </Loggers>
 </Configuration>

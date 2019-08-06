@@ -164,7 +164,7 @@ internal class LocationIgnorantKLogger(override val underlyingLogger: Logger)
         }
     }
 
-    override inline fun <T : Any> exit(retval: T): T {
+    override inline fun <T : Any> exit(retval: T?): T? {
         if (underlyingLogger.isTraceEnabled) {
             underlyingLogger.trace("exit({}}", retval)
         }
