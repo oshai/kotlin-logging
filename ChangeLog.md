@@ -1,3 +1,7 @@
+# 1.7.3
+
+* Fixed nullability in exit signature: https://github.com/MicroUtils/kotlin-logging/issues/84
+
 # 1.7.2
 
 * Fixed missing slf4j dependency - https://github.com/MicroUtils/kotlin-logging/issues/83
