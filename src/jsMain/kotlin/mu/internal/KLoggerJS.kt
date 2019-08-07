@@ -84,12 +84,7 @@ internal class KLoggerJS(
         TRACE.logIfEnabled({ "exit()" }, APPENDER::trace)
     }
 
-    override fun <T : Any> exit(retval: T): T {
-        TRACE.logIfEnabled({ "exit($retval)" }, APPENDER::trace)
-        return retval
-    }
-
-    override fun <T : Any> exitOpt(retval: T?): T? {
+    override fun <T : Any?> exit(retval: T): T {
         TRACE.logIfEnabled({ "exit($retval)" }, APPENDER::trace)
         return retval
     }
