@@ -15,12 +15,13 @@ class ClassWithLoggingForLocationTesting {
         logger.info(null)
     }
 
-    fun logEntry(): Pair<Int,Int> {
+    fun logEntry(): Pair<Int, Int> {
         logger.entry(1, 2)
         logger.info("log entry body")
         return logger.exit(2 to 1)
     }
-    fun logExitOpt(): Pair<Int,Int>? {
+
+    fun logExitOpt(): Pair<Int, Int>? {
         logger.entry(1, 2)
         logger.info("log entry body")
         return logger.exit(null)
