@@ -46,20 +46,15 @@ internal class KLoggerJS(
 
     override fun error(marker: Marker?, msg: () -> Any?) = ERROR.logIfEnabled(marker, msg, APPENDER::error)
 
-    override fun trace(marker: Marker?, t: Throwable?, msg: () -> Any?) =
-        TRACE.logIfEnabled(marker, msg, t, APPENDER::trace)
+    override fun trace(marker: Marker?, t: Throwable?, msg: () -> Any?) = TRACE.logIfEnabled(marker, msg, t, APPENDER::trace)
 
-    override fun debug(marker: Marker?, t: Throwable?, msg: () -> Any?) =
-        DEBUG.logIfEnabled(marker, msg, t, APPENDER::debug)
+    override fun debug(marker: Marker?, t: Throwable?, msg: () -> Any?) = DEBUG.logIfEnabled(marker, msg, t, APPENDER::debug)
 
-    override fun info(marker: Marker?, t: Throwable?, msg: () -> Any?) =
-        INFO.logIfEnabled(marker, msg, t, APPENDER::info)
+    override fun info(marker: Marker?, t: Throwable?, msg: () -> Any?) = INFO.logIfEnabled(marker, msg, t, APPENDER::info)
 
-    override fun warn(marker: Marker?, t: Throwable?, msg: () -> Any?) =
-        WARN.logIfEnabled(marker, msg, t, APPENDER::warn)
+    override fun warn(marker: Marker?, t: Throwable?, msg: () -> Any?) = WARN.logIfEnabled(marker, msg, t, APPENDER::warn)
 
-    override fun error(marker: Marker?, t: Throwable?, msg: () -> Any?) =
-        ERROR.logIfEnabled(marker, msg, t, APPENDER::error)
+    override fun error(marker: Marker?, t: Throwable?, msg: () -> Any?) = ERROR.logIfEnabled(marker, msg, t, APPENDER::error)
 
     private fun KotlinLoggingLevel.logIfEnabled(msg: () -> Any?, logFunction: (Any?) -> Unit) {
         if (isLoggingEnabled()) {
@@ -80,10 +75,7 @@ internal class KLoggerJS(
     }
 
     private fun KotlinLoggingLevel.logIfEnabled(
-        marker: Marker?,
-        msg: () -> Any?,
-        t: Throwable?,
-        logFunction: (Any?) -> Unit
+        marker: Marker?, msg: () -> Any?, t: Throwable?, logFunction: (Any?) -> Unit
     ) {
         if (isLoggingEnabled()) {
             logFunction(FORMATTER.formatMessage(this, loggerName, marker, t, msg))
