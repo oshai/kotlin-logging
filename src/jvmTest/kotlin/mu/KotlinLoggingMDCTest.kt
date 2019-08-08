@@ -1,11 +1,16 @@
 package mu
 
+import org.apache.logging.log4j.Level
+import org.apache.logging.log4j.core.config.Configurator
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Test
 import org.slf4j.MDC
 
 class KotlinLoggingMDCTest {
+    init {
+        Configurator.setRootLevel(Level.TRACE)
+    }
 
     @Test
     fun `simple pair withLoggingContext`() {

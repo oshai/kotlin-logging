@@ -1,5 +1,7 @@
 package mu
 
+import org.apache.logging.log4j.Level
+import org.apache.logging.log4j.core.config.Configurator
 import org.junit.After
 import org.junit.Assert
 import org.junit.Before
@@ -7,6 +9,10 @@ import org.junit.Test
 
 class LoggingWithLocationTest {
     private val appenderWithWriter: AppenderWithWriter = AppenderWithWriter("%p %C{1}.%M(%L) - %m%n")
+
+    init {
+        Configurator.setRootLevel(Level.TRACE)
+    }
 
     @Before
     fun setupAppender() {
@@ -22,8 +28,7 @@ class LoggingWithLocationTest {
     fun testLoggingWithLocation() {
         ClassWithLoggingForLocationTesting().log()
         Assert.assertEquals(
-            "INFO ClassWithLoggingForLocationTesting.log(7) - test",
-            appenderWithWriter.writer.toString().trim()
+            "INFO ClassWithLoggingForLocationTesting.log(7) - test", appenderWithWriter.writer.toString().trim()
         )
     }
 
@@ -31,8 +36,7 @@ class LoggingWithLocationTest {
     fun testLazyLoggingWithLocation() {
         ClassWithLoggingForLocationTesting().logLazy()
         Assert.assertEquals(
-            "INFO ClassWithLoggingForLocationTesting.logLazy(11) - test",
-            appenderWithWriter.writer.toString().trim()
+            "INFO ClassWithLoggingForLocationTesting.logLazy(11) - test", appenderWithWriter.writer.toString().trim()
         )
     }
 
@@ -40,18 +44,24 @@ class LoggingWithLocationTest {
     fun testNullLoggingWithLocation() {
         ClassWithLoggingForLocationTesting().logNull()
         Assert.assertEquals(
-            "INFO ClassWithLoggingForLocationTesting.logNull(15) - null",
+            "INFO ClassWithLoggingForLocationTesting.logNull(15) - null", appenderWithWriter.writer.toString().trim()
+        )
+    }
+
+    @Test
+    fun testNullLoggingWithLocationEntry() {
+        ClassWithLoggingForLocationTesting().logEntry()
+        Assert.assertEquals(
+            "TRACE ClassWithLoggingForLocationTesting.logEntry(19) -  entry with (1, 2)" + System.lineSeparator() + "INFO " + "ClassWithLoggingForLocationTesting.logEntry(20) - log entry body" + System.lineSeparator() + "TRACE " + "ClassWithLoggingForLocationTesting.logEntry(21) - exit with ((2, 1))",
             appenderWithWriter.writer.toString().trim()
         )
     }
 
     @Test
-    fun testNullLoggingWithLocationEntryExit() {
-        ClassWithLoggingForLocationTesting().logEntry()
+    fun testNullLoggingWithLocationExit() {
+        ClassWithLoggingForLocationTesting().logExit()
         Assert.assertEquals(
-            "TRACE ClassWithLoggingForLocationTesting.logEntry(19) -  entry with (1, 2)\n" +
-                    "INFO ClassWithLoggingForLocationTesting.logEntry(20) - log entry body\n" +
-                    "TRACE ClassWithLoggingForLocationTesting.logEntry(21) - exit with (2)",
+            "TRACE ClassWithLoggingForLocationTesting.logExit(25) -  entry with (1, 2)" + System.lineSeparator() + "INFO ClassWithLoggingForLocationTesting.logExit(26) - log entry body" + System.lineSeparator() + "TRACE ClassWithLoggingForLocationTesting.logExit(27) - exit with (null)",
             appenderWithWriter.writer.toString().trim()
         )
     }

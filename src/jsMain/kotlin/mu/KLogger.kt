@@ -1,8 +1,6 @@
 package mu
 
-
 actual interface KLogger {
-
 
     /**
      * Lazy add a log message if isTraceEnabled is true
@@ -117,7 +115,7 @@ actual interface KLogger {
     /**
      * Add a log message with the return value of a method
      */
-    actual fun <T> exit(retval: T?): T? where T : Any
+    actual fun <T> exit(retval: T): T where T : Any?
 
     /**
      * Add a log message indicating an exception will be thrown along with the stack trace.

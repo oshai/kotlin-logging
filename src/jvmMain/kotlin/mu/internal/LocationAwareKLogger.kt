@@ -24,562 +24,408 @@ internal class LocationAwareKLogger(override val underlyingLogger: LocationAware
     private val EXITMESSAGE = "exit with ({})"
 
     override fun trace(msg: String?) {
-        if (!underlyingLogger.isTraceEnabled)
-            return
+        if (!underlyingLogger.isTraceEnabled) return
 
         underlyingLogger.log(
-            null, fqcn,
-            LocationAwareLogger.TRACE_INT, msg, null, null
+            null, fqcn, LocationAwareLogger.TRACE_INT, msg, null, null
         )
     }
-
 
     override fun trace(format: String?, arg: Any?) {
-        if (!underlyingLogger.isTraceEnabled)
-            return
+        if (!underlyingLogger.isTraceEnabled) return
 
         val formattedMessage = MessageFormatter.format(format, arg).message
         underlyingLogger.log(
-            null, fqcn,
-            LocationAwareLogger.TRACE_INT, formattedMessage,
-            arrayOf(arg), null
+            null, fqcn, LocationAwareLogger.TRACE_INT, formattedMessage, arrayOf(arg), null
         )
     }
-
 
     override fun trace(format: String?, arg1: Any?, arg2: Any?) {
-        if (!underlyingLogger.isTraceEnabled)
-            return
+        if (!underlyingLogger.isTraceEnabled) return
 
         val formattedMessage = MessageFormatter.format(format, arg1, arg2).message
         underlyingLogger.log(
-            null, fqcn,
-            LocationAwareLogger.TRACE_INT, formattedMessage, arrayOf(arg1, arg2), null
+            null, fqcn, LocationAwareLogger.TRACE_INT, formattedMessage, arrayOf(arg1, arg2), null
         )
     }
-
 
     override fun trace(format: String?, argArray: Array<Any?>) {
-        if (!underlyingLogger.isTraceEnabled)
-            return
+        if (!underlyingLogger.isTraceEnabled) return
 
         val formattedMessage = MessageFormatter.arrayFormat(format, argArray).message
         underlyingLogger.log(
-            null, fqcn,
-            LocationAwareLogger.TRACE_INT, formattedMessage, argArray, null
+            null, fqcn, LocationAwareLogger.TRACE_INT, formattedMessage, argArray, null
         )
     }
-
 
     override fun trace(msg: String?, t: Throwable?) {
-        if (!underlyingLogger.isTraceEnabled)
-            return
+        if (!underlyingLogger.isTraceEnabled) return
 
         underlyingLogger.log(
-            null, fqcn,
-            LocationAwareLogger.TRACE_INT, msg, null, t
+            null, fqcn, LocationAwareLogger.TRACE_INT, msg, null, t
         )
     }
-
 
     override fun trace(marker: Marker?, msg: String?) {
-        if (!underlyingLogger.isTraceEnabled)
-            return
+        if (!underlyingLogger.isTraceEnabled) return
         underlyingLogger.log(
-            marker, fqcn,
-            LocationAwareLogger.TRACE_INT, msg, null, null
+            marker, fqcn, LocationAwareLogger.TRACE_INT, msg, null, null
         )
     }
-
 
     override fun trace(marker: Marker?, format: String?, arg: Any?) {
-        if (!underlyingLogger.isTraceEnabled)
-            return
+        if (!underlyingLogger.isTraceEnabled) return
         val formattedMessage = MessageFormatter.format(format, arg).message
         underlyingLogger.log(
-            marker, fqcn,
-            LocationAwareLogger.TRACE_INT, formattedMessage,
-            arrayOf(arg), null
+            marker, fqcn, LocationAwareLogger.TRACE_INT, formattedMessage, arrayOf(arg), null
         )
     }
-
 
     override fun trace(marker: Marker?, format: String?, arg1: Any?, arg2: Any?) {
-        if (!underlyingLogger.isTraceEnabled)
-            return
+        if (!underlyingLogger.isTraceEnabled) return
         val formattedMessage = MessageFormatter.format(format, arg1, arg2).message
         underlyingLogger.log(
-            marker, fqcn,
-            LocationAwareLogger.TRACE_INT, formattedMessage, arrayOf(arg1, arg2), null
+            marker, fqcn, LocationAwareLogger.TRACE_INT, formattedMessage, arrayOf(arg1, arg2), null
         )
     }
-
 
     override fun trace(marker: Marker?, format: String?, argArray: Array<Any?>) {
-        if (!underlyingLogger.isTraceEnabled)
-            return
+        if (!underlyingLogger.isTraceEnabled) return
         val formattedMessage = MessageFormatter.arrayFormat(format, argArray).message
         underlyingLogger.log(
-            marker, fqcn,
-            LocationAwareLogger.TRACE_INT, formattedMessage, argArray, null
+            marker, fqcn, LocationAwareLogger.TRACE_INT, formattedMessage, argArray, null
         )
     }
 
-
     override fun trace(marker: Marker?, msg: String?, t: Throwable?) {
-        if (!underlyingLogger.isTraceEnabled)
-            return
+        if (!underlyingLogger.isTraceEnabled) return
         underlyingLogger.log(
-            marker, fqcn,
-            LocationAwareLogger.TRACE_INT, msg, null, t
+            marker, fqcn, LocationAwareLogger.TRACE_INT, msg, null, t
         )
     }
 
     override fun debug(msg: String?) {
-        if (!underlyingLogger.isDebugEnabled)
-            return
+        if (!underlyingLogger.isDebugEnabled) return
 
         underlyingLogger.log(
-            null, fqcn,
-            LocationAwareLogger.DEBUG_INT, msg, null, null
+            null, fqcn, LocationAwareLogger.DEBUG_INT, msg, null, null
         )
     }
 
-
     override fun debug(format: String?, arg: Any?) {
-        if (!underlyingLogger.isDebugEnabled)
-            return
+        if (!underlyingLogger.isDebugEnabled) return
 
         val formattedMessage = MessageFormatter.format(format, arg).message
         underlyingLogger.log(
-            null, fqcn,
-            LocationAwareLogger.DEBUG_INT, formattedMessage,
-            arrayOf(arg), null
+            null, fqcn, LocationAwareLogger.DEBUG_INT, formattedMessage, arrayOf(arg), null
         )
     }
-
 
     override fun debug(format: String?, arg1: Any?, arg2: Any?) {
-        if (!underlyingLogger.isDebugEnabled)
-            return
+        if (!underlyingLogger.isDebugEnabled) return
 
         val formattedMessage = MessageFormatter.format(format, arg1, arg2).message
         underlyingLogger.log(
-            null, fqcn,
-            LocationAwareLogger.DEBUG_INT, formattedMessage, arrayOf(arg1, arg2), null
+            null, fqcn, LocationAwareLogger.DEBUG_INT, formattedMessage, arrayOf(arg1, arg2), null
         )
     }
-
 
     override fun debug(format: String?, argArray: Array<Any?>) {
-        if (!underlyingLogger.isDebugEnabled)
-            return
+        if (!underlyingLogger.isDebugEnabled) return
 
         val ft = MessageFormatter.arrayFormat(format, argArray)
         underlyingLogger.log(
-            null, fqcn,
-            LocationAwareLogger.DEBUG_INT, ft.message, ft.argArray, ft.throwable
+            null, fqcn, LocationAwareLogger.DEBUG_INT, ft.message, ft.argArray, ft.throwable
         )
     }
-
 
     override fun debug(msg: String?, t: Throwable?) {
-        if (!underlyingLogger.isDebugEnabled)
-            return
+        if (!underlyingLogger.isDebugEnabled) return
 
         underlyingLogger.log(
-            null, fqcn,
-            LocationAwareLogger.DEBUG_INT, msg, null, t
+            null, fqcn, LocationAwareLogger.DEBUG_INT, msg, null, t
         )
     }
-
 
     override fun debug(marker: Marker?, msg: String?) {
-        if (!underlyingLogger.isDebugEnabled)
-            return
+        if (!underlyingLogger.isDebugEnabled) return
         underlyingLogger.log(
-            marker, fqcn,
-            LocationAwareLogger.DEBUG_INT, msg, null, null
+            marker, fqcn, LocationAwareLogger.DEBUG_INT, msg, null, null
         )
     }
-
 
     override fun debug(marker: Marker?, format: String?, arg: Any?) {
-        if (!underlyingLogger.isDebugEnabled)
-            return
+        if (!underlyingLogger.isDebugEnabled) return
         val ft = MessageFormatter.format(format, arg)
         underlyingLogger.log(
-            marker, fqcn,
-            LocationAwareLogger.DEBUG_INT, ft.message, ft.argArray, ft.throwable
+            marker, fqcn, LocationAwareLogger.DEBUG_INT, ft.message, ft.argArray, ft.throwable
         )
     }
-
 
     override fun debug(marker: Marker?, format: String?, arg1: Any?, arg2: Any?) {
-        if (!underlyingLogger.isDebugEnabled)
-            return
+        if (!underlyingLogger.isDebugEnabled) return
         val formattedMessage = MessageFormatter.format(format, arg1, arg2).message
         underlyingLogger.log(
-            marker, fqcn,
-            LocationAwareLogger.DEBUG_INT, formattedMessage, arrayOf(arg1, arg2), null
+            marker, fqcn, LocationAwareLogger.DEBUG_INT, formattedMessage, arrayOf(arg1, arg2), null
         )
     }
 
-
     override fun debug(marker: Marker?, format: String?, argArray: Array<Any?>) {
-        if (!underlyingLogger.isDebugEnabled)
-            return
+        if (!underlyingLogger.isDebugEnabled) return
 
         val ft = MessageFormatter.arrayFormat(format, argArray)
         underlyingLogger.log(
-            marker, fqcn,
-            LocationAwareLogger.DEBUG_INT, ft.message, argArray, ft.throwable
+            marker, fqcn, LocationAwareLogger.DEBUG_INT, ft.message, argArray, ft.throwable
         )
     }
 
-
     override fun debug(marker: Marker?, msg: String?, t: Throwable?) {
-        if (!underlyingLogger.isDebugEnabled)
-            return
+        if (!underlyingLogger.isDebugEnabled) return
         underlyingLogger.log(
-            marker, fqcn,
-            LocationAwareLogger.DEBUG_INT, msg, null, t
+            marker, fqcn, LocationAwareLogger.DEBUG_INT, msg, null, t
         )
     }
 
     override fun info(msg: String?) {
-        if (!underlyingLogger.isInfoEnabled)
-            return
+        if (!underlyingLogger.isInfoEnabled) return
 
         underlyingLogger.log(
-            null, fqcn,
-            LocationAwareLogger.INFO_INT, msg, null, null
+            null, fqcn, LocationAwareLogger.INFO_INT, msg, null, null
         )
     }
-
 
     override fun info(format: String?, arg: Any?) {
-        if (!underlyingLogger.isInfoEnabled)
-            return
+        if (!underlyingLogger.isInfoEnabled) return
 
         val formattedMessage = MessageFormatter.format(format, arg).message
         underlyingLogger.log(
-            null, fqcn,
-            LocationAwareLogger.INFO_INT, formattedMessage, arrayOf(arg),
-            null
+            null, fqcn, LocationAwareLogger.INFO_INT, formattedMessage, arrayOf(arg), null
         )
     }
-
 
     override fun info(format: String?, arg1: Any?, arg2: Any?) {
-        if (!underlyingLogger.isInfoEnabled)
-            return
+        if (!underlyingLogger.isInfoEnabled) return
 
         val formattedMessage = MessageFormatter.format(format, arg1, arg2).message
         underlyingLogger.log(
-            null, fqcn,
-            LocationAwareLogger.INFO_INT, formattedMessage, arrayOf(arg1, arg2), null
+            null, fqcn, LocationAwareLogger.INFO_INT, formattedMessage, arrayOf(arg1, arg2), null
         )
     }
-
 
     override fun info(format: String?, argArray: Array<Any?>) {
-        if (!underlyingLogger.isInfoEnabled)
-            return
+        if (!underlyingLogger.isInfoEnabled) return
 
         val formattedMessage = MessageFormatter.arrayFormat(format, argArray).message
         underlyingLogger.log(
-            null, fqcn,
-            LocationAwareLogger.INFO_INT, formattedMessage, argArray, null
+            null, fqcn, LocationAwareLogger.INFO_INT, formattedMessage, argArray, null
         )
     }
-
 
     override fun info(msg: String?, t: Throwable?) {
-        if (!underlyingLogger.isInfoEnabled)
-            return
+        if (!underlyingLogger.isInfoEnabled) return
 
         underlyingLogger.log(
-            null, fqcn,
-            LocationAwareLogger.INFO_INT, msg, null, t
+            null, fqcn, LocationAwareLogger.INFO_INT, msg, null, t
         )
     }
-
 
     override fun info(marker: Marker?, msg: String?) {
-        if (!underlyingLogger.isInfoEnabled)
-            return
+        if (!underlyingLogger.isInfoEnabled) return
         underlyingLogger.log(
-            marker, fqcn,
-            LocationAwareLogger.INFO_INT, msg, null, null
+            marker, fqcn, LocationAwareLogger.INFO_INT, msg, null, null
         )
     }
-
 
     override fun info(marker: Marker?, format: String?, arg: Any?) {
-        if (!underlyingLogger.isInfoEnabled)
-            return
+        if (!underlyingLogger.isInfoEnabled) return
         val formattedMessage = MessageFormatter.format(format, arg).message
         underlyingLogger.log(
-            marker, fqcn,
-            LocationAwareLogger.INFO_INT, formattedMessage, arrayOf(arg),
-            null
+            marker, fqcn, LocationAwareLogger.INFO_INT, formattedMessage, arrayOf(arg), null
         )
     }
-
 
     override fun info(marker: Marker?, format: String?, arg1: Any?, arg2: Any?) {
-        if (!underlyingLogger.isInfoEnabled)
-            return
+        if (!underlyingLogger.isInfoEnabled) return
         val formattedMessage = MessageFormatter.format(format, arg1, arg2).message
         underlyingLogger.log(
-            marker, fqcn,
-            LocationAwareLogger.INFO_INT, formattedMessage, arrayOf(arg1, arg2), null
+            marker, fqcn, LocationAwareLogger.INFO_INT, formattedMessage, arrayOf(arg1, arg2), null
         )
     }
-
 
     override fun info(marker: Marker?, format: String?, argArray: Array<Any?>) {
-        if (!underlyingLogger.isInfoEnabled)
-            return
+        if (!underlyingLogger.isInfoEnabled) return
         val formattedMessage = MessageFormatter.arrayFormat(format, argArray).message
         underlyingLogger.log(
-            marker, fqcn,
-            LocationAwareLogger.INFO_INT, formattedMessage, argArray, null
+            marker, fqcn, LocationAwareLogger.INFO_INT, formattedMessage, argArray, null
         )
     }
 
-
     override fun info(marker: Marker?, msg: String?, t: Throwable?) {
-        if (!underlyingLogger.isInfoEnabled)
-            return
+        if (!underlyingLogger.isInfoEnabled) return
         underlyingLogger.log(
-            marker, fqcn,
-            LocationAwareLogger.INFO_INT, msg, null, t
+            marker, fqcn, LocationAwareLogger.INFO_INT, msg, null, t
         )
     }
 
     override fun warn(msg: String?) {
-        if (!underlyingLogger.isWarnEnabled)
-            return
+        if (!underlyingLogger.isWarnEnabled) return
 
         underlyingLogger.log(
-            null, fqcn,
-            LocationAwareLogger.WARN_INT, msg, null, null
+            null, fqcn, LocationAwareLogger.WARN_INT, msg, null, null
         )
     }
-
 
     override fun warn(format: String?, arg: Any?) {
-        if (!underlyingLogger.isWarnEnabled)
-            return
+        if (!underlyingLogger.isWarnEnabled) return
 
         val formattedMessage = MessageFormatter.format(format, arg).message
         underlyingLogger.log(
-            null, fqcn,
-            LocationAwareLogger.WARN_INT, formattedMessage, arrayOf(arg),
-            null
+            null, fqcn, LocationAwareLogger.WARN_INT, formattedMessage, arrayOf(arg), null
         )
     }
-
 
     override fun warn(format: String?, arg1: Any?, arg2: Any?) {
-        if (!underlyingLogger.isWarnEnabled)
-            return
+        if (!underlyingLogger.isWarnEnabled) return
 
         val formattedMessage = MessageFormatter.format(format, arg1, arg2).message
         underlyingLogger.log(
-            null, fqcn,
-            LocationAwareLogger.WARN_INT, formattedMessage, arrayOf(arg1, arg2), null
+            null, fqcn, LocationAwareLogger.WARN_INT, formattedMessage, arrayOf(arg1, arg2), null
         )
     }
-
 
     override fun warn(format: String?, argArray: Array<Any?>) {
-        if (!underlyingLogger.isWarnEnabled)
-            return
+        if (!underlyingLogger.isWarnEnabled) return
 
         val formattedMessage = MessageFormatter.arrayFormat(format, argArray).message
         underlyingLogger.log(
-            null, fqcn,
-            LocationAwareLogger.WARN_INT, formattedMessage, argArray, null
+            null, fqcn, LocationAwareLogger.WARN_INT, formattedMessage, argArray, null
         )
     }
-
 
     override fun warn(msg: String?, t: Throwable?) {
-        if (!underlyingLogger.isWarnEnabled)
-            return
+        if (!underlyingLogger.isWarnEnabled) return
 
         underlyingLogger.log(
-            null, fqcn,
-            LocationAwareLogger.WARN_INT, msg, null, t
+            null, fqcn, LocationAwareLogger.WARN_INT, msg, null, t
         )
     }
-
 
     override fun warn(marker: Marker?, msg: String?) {
-        if (!underlyingLogger.isWarnEnabled)
-            return
+        if (!underlyingLogger.isWarnEnabled) return
         underlyingLogger.log(
-            marker, fqcn,
-            LocationAwareLogger.WARN_INT, msg, null, null
+            marker, fqcn, LocationAwareLogger.WARN_INT, msg, null, null
         )
     }
-
 
     override fun warn(marker: Marker?, format: String?, arg: Any?) {
-        if (!underlyingLogger.isWarnEnabled)
-            return
+        if (!underlyingLogger.isWarnEnabled) return
         val formattedMessage = MessageFormatter.format(format, arg).message
         underlyingLogger.log(
-            marker, fqcn,
-            LocationAwareLogger.WARN_INT, formattedMessage, arrayOf(arg),
-            null
+            marker, fqcn, LocationAwareLogger.WARN_INT, formattedMessage, arrayOf(arg), null
         )
     }
-
 
     override fun warn(marker: Marker?, format: String?, arg1: Any?, arg2: Any?) {
-        if (!underlyingLogger.isWarnEnabled)
-            return
+        if (!underlyingLogger.isWarnEnabled) return
         val formattedMessage = MessageFormatter.format(format, arg1, arg2).message
         underlyingLogger.log(
-            marker, fqcn,
-            LocationAwareLogger.WARN_INT, formattedMessage, arrayOf(arg1, arg2), null
+            marker, fqcn, LocationAwareLogger.WARN_INT, formattedMessage, arrayOf(arg1, arg2), null
         )
     }
-
 
     override fun warn(marker: Marker?, format: String?, argArray: Array<Any?>) {
-        if (!underlyingLogger.isWarnEnabled)
-            return
+        if (!underlyingLogger.isWarnEnabled) return
         val formattedMessage = MessageFormatter.arrayFormat(format, argArray).message
         underlyingLogger.log(
-            marker, fqcn,
-            LocationAwareLogger.WARN_INT, formattedMessage, argArray, null
+            marker, fqcn, LocationAwareLogger.WARN_INT, formattedMessage, argArray, null
         )
     }
 
-
     override fun warn(marker: Marker?, msg: String?, t: Throwable?) {
-        if (!underlyingLogger.isWarnEnabled)
-            return
+        if (!underlyingLogger.isWarnEnabled) return
         underlyingLogger.log(
-            marker, fqcn,
-            LocationAwareLogger.WARN_INT, msg, null, t
+            marker, fqcn, LocationAwareLogger.WARN_INT, msg, null, t
         )
     }
 
     override fun error(msg: String?) {
-        if (!underlyingLogger.isErrorEnabled)
-            return
+        if (!underlyingLogger.isErrorEnabled) return
 
         underlyingLogger.log(
-            null, fqcn,
-            LocationAwareLogger.ERROR_INT, msg, null, null
+            null, fqcn, LocationAwareLogger.ERROR_INT, msg, null, null
         )
     }
-
 
     override fun error(format: String?, arg: Any?) {
-        if (!underlyingLogger.isErrorEnabled)
-            return
+        if (!underlyingLogger.isErrorEnabled) return
 
         val formattedMessage = MessageFormatter.format(format, arg).message
         underlyingLogger.log(
-            null, fqcn,
-            LocationAwareLogger.ERROR_INT, formattedMessage,
-            arrayOf(arg), null
+            null, fqcn, LocationAwareLogger.ERROR_INT, formattedMessage, arrayOf(arg), null
         )
     }
-
 
     override fun error(format: String?, arg1: Any?, arg2: Any?) {
-        if (!underlyingLogger.isErrorEnabled)
-            return
+        if (!underlyingLogger.isErrorEnabled) return
 
         val formattedMessage = MessageFormatter.format(format, arg1, arg2).message
         underlyingLogger.log(
-            null, fqcn,
-            LocationAwareLogger.ERROR_INT, formattedMessage, arrayOf(arg1, arg2), null
+            null, fqcn, LocationAwareLogger.ERROR_INT, formattedMessage, arrayOf(arg1, arg2), null
         )
     }
-
 
     override fun error(format: String?, argArray: Array<Any?>) {
-        if (!underlyingLogger.isErrorEnabled)
-            return
+        if (!underlyingLogger.isErrorEnabled) return
 
         val formattedMessage = MessageFormatter.arrayFormat(format, argArray).message
         underlyingLogger.log(
-            null, fqcn,
-            LocationAwareLogger.ERROR_INT, formattedMessage, argArray, null
+            null, fqcn, LocationAwareLogger.ERROR_INT, formattedMessage, argArray, null
         )
     }
-
 
     override fun error(msg: String?, t: Throwable?) {
-        if (!underlyingLogger.isErrorEnabled)
-            return
+        if (!underlyingLogger.isErrorEnabled) return
 
         underlyingLogger.log(
-            null, fqcn,
-            LocationAwareLogger.ERROR_INT, msg, null, t
+            null, fqcn, LocationAwareLogger.ERROR_INT, msg, null, t
         )
     }
-
 
     override fun error(marker: Marker?, msg: String?) {
-        if (!underlyingLogger.isErrorEnabled)
-            return
+        if (!underlyingLogger.isErrorEnabled) return
         underlyingLogger.log(
-            marker, fqcn,
-            LocationAwareLogger.ERROR_INT, msg, null, null
+            marker, fqcn, LocationAwareLogger.ERROR_INT, msg, null, null
         )
     }
-
 
     override fun error(marker: Marker?, format: String?, arg: Any?) {
-        if (!underlyingLogger.isErrorEnabled)
-            return
+        if (!underlyingLogger.isErrorEnabled) return
         val formattedMessage = MessageFormatter.format(format, arg).message
         underlyingLogger.log(
-            marker, fqcn,
-            LocationAwareLogger.ERROR_INT, formattedMessage,
-            arrayOf(arg), null
+            marker, fqcn, LocationAwareLogger.ERROR_INT, formattedMessage, arrayOf(arg), null
         )
     }
-
 
     override fun error(marker: Marker?, format: String?, arg1: Any?, arg2: Any?) {
-        if (!underlyingLogger.isErrorEnabled)
-            return
+        if (!underlyingLogger.isErrorEnabled) return
         val formattedMessage = MessageFormatter.format(format, arg1, arg2).message
         underlyingLogger.log(
-            marker, fqcn,
-            LocationAwareLogger.ERROR_INT, formattedMessage, arrayOf(arg1, arg2), null
+            marker, fqcn, LocationAwareLogger.ERROR_INT, formattedMessage, arrayOf(arg1, arg2), null
         )
     }
-
 
     override fun error(marker: Marker?, format: String?, argArray: Array<Any?>) {
-        if (!underlyingLogger.isErrorEnabled)
-            return
+        if (!underlyingLogger.isErrorEnabled) return
         val formattedMessage = MessageFormatter.arrayFormat(format, argArray).message
         underlyingLogger.log(
-            marker, fqcn,
-            LocationAwareLogger.ERROR_INT, formattedMessage, argArray, null
+            marker, fqcn, LocationAwareLogger.ERROR_INT, formattedMessage, argArray, null
         )
     }
 
-
     override fun error(marker: Marker?, msg: String?, t: Throwable?) {
-        if (!underlyingLogger.isErrorEnabled)
-            return
+        if (!underlyingLogger.isErrorEnabled) return
         underlyingLogger.log(
-            marker, fqcn,
-            LocationAwareLogger.ERROR_INT, msg, null, t
+            marker, fqcn, LocationAwareLogger.ERROR_INT, msg, null, t
         )
     }
 
@@ -742,16 +588,11 @@ internal class LocationAwareKLogger(override val underlyingLogger: LocationAware
         }
     }
 
-    override fun <T : Any> exit(retval: T?): T? {
+    override fun <T : Any?> exit(retval: T): T {
         if (underlyingLogger.isTraceEnabled(EXIT)) {
             val tp = MessageFormatter.format(EXITMESSAGE, retval)
             underlyingLogger.log(
-                EXIT,
-                fqcn,
-                LocationAwareLogger.TRACE_INT,
-                tp.message,
-                arrayOf<Any?>(retval),
-                tp.throwable
+                EXIT, fqcn, LocationAwareLogger.TRACE_INT, tp.message, arrayOf<Any?>(retval), tp.throwable
             )
         }
         return retval
@@ -767,8 +608,7 @@ internal class LocationAwareKLogger(override val underlyingLogger: LocationAware
         sb.append(" entry with (")
         for (i in 0 until len) {
             sb.append("{}")
-            if (i != len - 1)
-                sb.append(", ")
+            if (i != len - 1) sb.append(", ")
         }
         sb.append(')')
         return sb.toString()

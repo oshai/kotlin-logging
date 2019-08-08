@@ -1,8 +1,10 @@
 package mu
 
+import org.apache.logging.log4j.Level
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.core.Appender
 import org.apache.logging.log4j.core.appender.WriterAppender
+import org.apache.logging.log4j.core.config.Configurator
 import org.apache.logging.log4j.core.layout.PatternLayout
 import org.junit.After
 import org.junit.Assert
@@ -101,15 +103,21 @@ fun newPatternLayout(pattern: String): PatternLayout = PatternLayout.newBuilder(
 fun addAppender(appender: Appender) {
     val context = LogManager.getContext(false) as org.apache.logging.log4j.core.LoggerContext
     context.configuration.rootLogger.addAppender(appender, null, null)
+    appender.start()
 }
 
 fun removeAppender(appender: Appender) {
     val context = LogManager.getContext(false) as org.apache.logging.log4j.core.LoggerContext
     context.configuration.rootLogger.removeAppender(appender.name)
+    appender.stop()
 }
 
 class LoggingTest {
     private val appenderWithWriter: AppenderWithWriter = AppenderWithWriter()
+
+    init {
+        Configurator.setRootLevel(Level.TRACE)
+    }
 
     @Before
     fun setupAppender() {
@@ -128,6 +136,7 @@ class LoggingTest {
             testThrowable()
             testNullableThrowable()
         }
+        appenderWithWriter.writer.flush()
         val lines = appenderWithWriter.writer.toString().trim().replace("\r", "\n").replace("\n\n", "\n").split("\n")
         Assert.assertEquals("INFO  mu.ClassWithLogging  - test ClassWithLogging", lines[0].trim())
         Assert.assertEquals("TRACE mu.ClassWithLogging  - test ClassWithLogging", lines[1].trim())
@@ -142,6 +151,7 @@ class LoggingTest {
             testMarker()
             testMarkerThrowable()
         }
+        appenderWithWriter.writer.flush()
         val lines = appenderWithWriter.writer.toString().trim().replace("\r", "\n").replace("\n\n", "\n").split("\n")
         Assert.assertEquals("TRACE mu.ClassWithLogging MARKER - test ClassWithLogging", lines[0].trim())
         Assert.assertEquals("TRACE mu.ClassWithLogging MARKER - test ClassWithLogging", lines[1].trim())
@@ -152,51 +162,52 @@ class LoggingTest {
     @Test
     fun testMessages2() {
         ClassInheritLogging().test()
+        appenderWithWriter.writer.flush()
         Assert.assertEquals(
-            "INFO  mu.ClassInheritLogging  - test ClassHasLogging",
-            appenderWithWriter.writer.toString().trim()
+            "INFO  mu.ClassInheritLogging  - test ClassHasLogging", appenderWithWriter.writer.toString().trim()
         )
     }
 
     @Test
     fun testMessages3() {
         ChildClassWithLogging().test()
+        appenderWithWriter.writer.flush()
         Assert.assertEquals(
-            "INFO  mu.ChildClassWithLogging  - test ChildClassWithLogging",
-            appenderWithWriter.writer.toString().trim()
+            "INFO  mu.ChildClassWithLogging  - test ChildClassWithLogging", appenderWithWriter.writer.toString().trim()
         )
     }
 
     @Test
     fun testMessages4() {
         ClassWithNamedLogging().test()
+        appenderWithWriter.writer.flush()
         Assert.assertEquals(
-            "INFO  mu.ClassWithNamedLogging  - test ClassWithNamedLogging",
-            appenderWithWriter.writer.toString().trim()
+            "INFO  mu.ClassWithNamedLogging  - test ClassWithNamedLogging", appenderWithWriter.writer.toString().trim()
         )
     }
 
     @Test
     fun testMessages5() {
         ClassHasLogging().test()
+        appenderWithWriter.writer.flush()
         Assert.assertEquals(
-            "INFO  mu.ClassHasLogging  - test ClassHasLogging",
-            appenderWithWriter.writer.toString().trim()
+            "INFO  mu.ClassHasLogging  - test ClassHasLogging", appenderWithWriter.writer.toString().trim()
         )
     }
 
     @Test
     fun testMessages6() {
         CompanionHasLogging().test()
+        appenderWithWriter.writer.flush()
         Assert.assertEquals(
-            "INFO  mu.CompanionHasLogging  - test CompanionHasLogging",
-            appenderWithWriter.writer.toString().trim()
+            "INFO  mu.CompanionHasLogging  - test CompanionHasLogging", appenderWithWriter.writer.toString().trim()
         )
     }
 
     @Test
     fun shouldNotFailForFailingLambdas() {
         LambdaRaisesError().test()
+        appenderWithWriter.writer.flush()
         Assert.assertEquals(
             "INFO  mu.LambdaRaisesError  - Log message invocation failed: kotlin.KotlinNullPointerException",
             appenderWithWriter.writer.toString().trim()
@@ -225,11 +236,6 @@ data class AppenderWithWriter(
     val pattern: String = "%-5p %c %marker - %m%n",
     val writer: StringWriter = StringWriter(),
     val appender: Appender = WriterAppender.createAppender(
-        newPatternLayout(pattern),
-        null,
-        writer,
-        "writer",
-        false,
-        true
+        newPatternLayout(pattern), null, writer, "writer", false, true
     )
 )
