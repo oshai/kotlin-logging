@@ -1,6 +1,6 @@
-# 1.7.3
+# 1.7.4
 
-* Fixed nullability in exit signature: https://github.com/MicroUtils/kotlin-logging/issues/84
+* Fixed nullability in exit signature: [#84](https://github.com/MicroUtils/kotlin-logging/issues/84) [#86](https://github.com/MicroUtils/kotlin-logging/issues/86) [#87](https://github.com/MicroUtils/kotlin-logging/issues/87)
 
 # 1.7.2
 
