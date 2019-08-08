@@ -21,7 +21,7 @@ class ClassWithLoggingForLocationTesting {
         return logger.exit(2 to 1)
     }
 
-    fun logExitOpt(): Pair<Int, Int>? {
+    fun logExit(): Pair<Int, Int>? {
         logger.entry(1, 2)
         logger.info("log entry body")
         return logger.exit(null)
