@@ -19,7 +19,7 @@ open class KLogging : KLoggable {
 /**
  * A class with logging capabilities and explicit logger name
  */
-open class NamedKLogging(name: String): KLoggable {
+open class NamedKLogging(name: String) : KLoggable {
     override val logger: KLogger = logger(name)
 }
 

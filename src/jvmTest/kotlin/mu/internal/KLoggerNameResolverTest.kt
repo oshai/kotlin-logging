@@ -1,7 +1,7 @@
 package mu.internal
 
 
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
 import org.junit.Test
 
 
@@ -17,25 +17,39 @@ class KLoggerNameResolverTest {
         assertEquals("mu.internal.MyInterface", KLoggerNameResolver.name(MyInterface::class.java))
         assertEquals("java.lang.Object", KLoggerNameResolver.name(Any().javaClass))
         assertEquals("mu.internal.KLoggerNameResolverTest\$testNames$1", KLoggerNameResolver.name(object {}.javaClass))
-        assertEquals("mu.internal.BaseClass\$InnerClass\$Obj", KLoggerNameResolver.name(BaseClass.InnerClass.Obj::class.java))
-        assertEquals("mu.internal.BaseClass\$InnerClass\$Obj", KLoggerNameResolver.name(BaseClass.InnerClass.Obj.javaClass))
-        assertEquals("mu.internal.BaseClass\$InnerClass", KLoggerNameResolver.name(BaseClass.InnerClass.CmpObj::class.java))
-        assertEquals("mu.internal.BaseClass\$InnerClass", KLoggerNameResolver.name(BaseClass.InnerClass.CmpObj::class.java))
+        assertEquals(
+            "mu.internal.BaseClass\$InnerClass\$Obj",
+            KLoggerNameResolver.name(BaseClass.InnerClass.Obj::class.java)
+        )
+        assertEquals(
+            "mu.internal.BaseClass\$InnerClass\$Obj",
+            KLoggerNameResolver.name(BaseClass.InnerClass.Obj.javaClass)
+        )
+        assertEquals(
+            "mu.internal.BaseClass\$InnerClass",
+            KLoggerNameResolver.name(BaseClass.InnerClass.CmpObj::class.java)
+        )
+        assertEquals(
+            "mu.internal.BaseClass\$InnerClass",
+            KLoggerNameResolver.name(BaseClass.InnerClass.CmpObj::class.java)
+        )
         assertEquals("mu.internal.Foo\$Bar", KLoggerNameResolver.name(Foo.Bar::class.java))
         assertEquals("mu.internal.Foo\$Bar2", KLoggerNameResolver.name(Foo.Bar3.javaClass))
     }
 }
 
-open class BaseClass{
+open class BaseClass {
     companion object
     class InnerClass {
         object Obj
         companion object CmpObj
     }
 }
-class ChildClass: BaseClass(){
+
+class ChildClass : BaseClass() {
     companion object
 }
+
 object Singleton
 interface MyInterface
 
@@ -44,6 +58,7 @@ interface MyInterface
 class Foo {
     object Bar
     object Bar2
+
     val z = Bar2
 
     companion object {

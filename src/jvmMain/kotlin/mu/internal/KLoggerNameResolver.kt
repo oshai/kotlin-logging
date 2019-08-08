@@ -26,7 +26,7 @@ internal object KLoggerNameResolver {
      * get class name for java class (that usually represents kotlin class)
      */
     inline internal fun <T : Any> name(forClass: Class<T>): String =
-            unwrapCompanionClass(forClass).name
+        unwrapCompanionClass(forClass).name
 
 
     /**
@@ -41,7 +41,7 @@ internal object KLoggerNameResolver {
                     // the above might be safer but problematic with initialization order
                     return clazz.enclosingClass
                 }
-            } catch(e: Exception) {
+            } catch (e: Exception) {
                 //ok, it is not a companion object
             }
         }

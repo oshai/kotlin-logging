@@ -12,32 +12,38 @@ import org.junit.Test
 import java.io.StringWriter
 
 class ClassWithLogging {
-    companion object: KLogging()
+    companion object : KLogging()
+
     fun test() {
-        logger.info{"test ClassWithLogging"}
+        logger.info { "test ClassWithLogging" }
     }
+
     fun testThrowable() {
         val ex = Throwable()
-        logger.trace(ex){"test ClassWithLogging"}
+        logger.trace(ex) { "test ClassWithLogging" }
     }
+
     fun testNullableThrowable() {
-        val ex:Throwable? = null
-        logger.trace(ex){"test ClassWithLogging"}
+        val ex: Throwable? = null
+        logger.trace(ex) { "test ClassWithLogging" }
     }
+
     fun testMarker() {
         val marker = KMarkerFactory.getMarker("MARKER")
-        logger.trace(marker){"test ClassWithLogging"}
+        logger.trace(marker) { "test ClassWithLogging" }
     }
+
     fun testMarkerThrowable() {
         val marker = KMarkerFactory.getMarker("MARKER")
         val ex = Throwable()
-        logger.trace(marker, ex){"test ClassWithLogging"}
+        logger.trace(marker, ex) { "test ClassWithLogging" }
     }
 }
-open class ClassHasLogging: KLoggable {
+
+open class ClassHasLogging : KLoggable {
     override val logger = logger()
     fun test() {
-        logger.info{"test ClassHasLogging"}
+        logger.info { "test ClassHasLogging" }
     }
 }
 
@@ -46,41 +52,47 @@ open class ClassHasLogging: KLoggable {
  * the logger name will be of the sub-class
  * ie: it is not possible to log with parent class name this way
  */
-class ClassInheritLogging: ClassHasLogging()
+class ClassInheritLogging : ClassHasLogging()
 
 class ClassWithNamedLogging {
-    companion object: Any(), KLoggable by NamedKLogging("mu.ClassWithNamedLogging")
+    companion object : Any(), KLoggable by NamedKLogging("mu.ClassWithNamedLogging")
+
     fun test() {
-        logger.info{"test ClassWithNamedLogging"}
-    }
-}
-class CompanionHasLogging {
-    companion object: Any(), KLoggable {
-        override val logger = logger()
-    }
-    fun test() {
-        logger.info{"test CompanionHasLogging"}
-    }
-}
-class ChildClassWithLogging {
-    companion object: KLogging()
-    fun test() {
-        logger.info{"test ChildClassWithLogging"}
+        logger.info { "test ClassWithNamedLogging" }
     }
 }
 
-data class ClassWithIncorrectToString(val someVariable : String? = null){
+class CompanionHasLogging {
+    companion object : Any(), KLoggable {
+        override val logger = logger()
+    }
+
+    fun test() {
+        logger.info { "test CompanionHasLogging" }
+    }
+}
+
+class ChildClassWithLogging {
+    companion object : KLogging()
+
+    fun test() {
+        logger.info { "test ChildClassWithLogging" }
+    }
+}
+
+data class ClassWithIncorrectToString(val someVariable: String? = null) {
     override fun toString(): String {
         return someVariable!!.toString()
     }
 }
 
 class LambdaRaisesError {
-    companion object: KLogging()
+    companion object : KLogging()
+
     fun test() {
         val problematicClass = ClassWithIncorrectToString()
 
-        logger.info{" $problematicClass"}
+        logger.info { " $problematicClass" }
     }
 }
 
@@ -121,8 +133,9 @@ class LoggingTest {
         Assert.assertEquals("TRACE mu.ClassWithLogging  - test ClassWithLogging", lines[1].trim())
         Assert.assertEquals("java.lang.Throwable: null", lines[2].trim())
         Assert.assertTrue(lines[3].trim().startsWith("at mu.ClassWithLogging.testThrowable("))
-        Assert.assertEquals("TRACE mu.ClassWithLogging  - test ClassWithLogging", lines[lines.size-1].trim())
+        Assert.assertEquals("TRACE mu.ClassWithLogging  - test ClassWithLogging", lines[lines.size - 1].trim())
     }
+
     @Test
     fun testMessages1() {
         ClassWithLogging().apply {
@@ -135,42 +148,67 @@ class LoggingTest {
         Assert.assertEquals("java.lang.Throwable: null", lines[2].trim())
         Assert.assertTrue(lines[3].trim().startsWith("at mu.ClassWithLogging.testMarkerThrowable("))
     }
+
     @Test
     fun testMessages2() {
         ClassInheritLogging().test()
-        Assert.assertEquals("INFO  mu.ClassInheritLogging  - test ClassHasLogging", appenderWithWriter.writer.toString().trim())
-    }
-    @Test
-    fun testMessages3() {
-        ChildClassWithLogging().test()
-        Assert.assertEquals("INFO  mu.ChildClassWithLogging  - test ChildClassWithLogging", appenderWithWriter.writer.toString().trim())
-    }
-    @Test
-    fun testMessages4() {
-        ClassWithNamedLogging().test()
-        Assert.assertEquals("INFO  mu.ClassWithNamedLogging  - test ClassWithNamedLogging", appenderWithWriter.writer.toString().trim())
-    }
-    @Test
-    fun testMessages5() {
-        ClassHasLogging().test()
-        Assert.assertEquals("INFO  mu.ClassHasLogging  - test ClassHasLogging", appenderWithWriter.writer.toString().trim())
-    }
-    @Test
-    fun testMessages6() {
-        CompanionHasLogging().test()
-        Assert.assertEquals("INFO  mu.CompanionHasLogging  - test CompanionHasLogging", appenderWithWriter.writer.toString().trim())
+        Assert.assertEquals(
+            "INFO  mu.ClassInheritLogging  - test ClassHasLogging",
+            appenderWithWriter.writer.toString().trim()
+        )
     }
 
     @Test
-    fun shouldNotFailForFailingLambdas(){
-        LambdaRaisesError().test()
-        Assert.assertEquals("INFO  mu.LambdaRaisesError  - Log message invocation failed: kotlin.KotlinNullPointerException", appenderWithWriter.writer.toString().trim())
+    fun testMessages3() {
+        ChildClassWithLogging().test()
+        Assert.assertEquals(
+            "INFO  mu.ChildClassWithLogging  - test ChildClassWithLogging",
+            appenderWithWriter.writer.toString().trim()
+        )
     }
+
+    @Test
+    fun testMessages4() {
+        ClassWithNamedLogging().test()
+        Assert.assertEquals(
+            "INFO  mu.ClassWithNamedLogging  - test ClassWithNamedLogging",
+            appenderWithWriter.writer.toString().trim()
+        )
+    }
+
+    @Test
+    fun testMessages5() {
+        ClassHasLogging().test()
+        Assert.assertEquals(
+            "INFO  mu.ClassHasLogging  - test ClassHasLogging",
+            appenderWithWriter.writer.toString().trim()
+        )
+    }
+
+    @Test
+    fun testMessages6() {
+        CompanionHasLogging().test()
+        Assert.assertEquals(
+            "INFO  mu.CompanionHasLogging  - test CompanionHasLogging",
+            appenderWithWriter.writer.toString().trim()
+        )
+    }
+
+    @Test
+    fun shouldNotFailForFailingLambdas() {
+        LambdaRaisesError().test()
+        Assert.assertEquals(
+            "INFO  mu.LambdaRaisesError  - Log message invocation failed: kotlin.KotlinNullPointerException",
+            appenderWithWriter.writer.toString().trim()
+        )
+    }
+
     @Test
     fun `check underlyingLogger property`() {
         Assert.assertEquals("mu.ClassHasLogging", ClassHasLogging().logger.underlyingLogger.name)
     }
 }
+
 class LoggingNameTest {
     @Test
     fun testNames() {
@@ -182,8 +220,16 @@ class LoggingNameTest {
         assertEquals("mu.CompanionHasLogging", CompanionHasLogging.logger.name)
     }
 }
+
 data class AppenderWithWriter(
-        val pattern: String = "%-5p %c %marker - %m%n",
-        val writer: StringWriter = StringWriter(),
-        val appender: Appender = WriterAppender.createAppender(newPatternLayout(pattern), null, writer, "writer", false, true)
+    val pattern: String = "%-5p %c %marker - %m%n",
+    val writer: StringWriter = StringWriter(),
+    val appender: Appender = WriterAppender.createAppender(
+        newPatternLayout(pattern),
+        null,
+        writer,
+        "writer",
+        false,
+        true
+    )
 )

@@ -1,7 +1,6 @@
 package mu
 
 
-
 expect object KotlinLogging {
     /**
      * This method allow defining the logger in a file in the following way:
