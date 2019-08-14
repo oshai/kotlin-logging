@@ -105,7 +105,7 @@ actual interface KLogger {
     /**
      * Add a log message with all the supplied parameters along with method name
      */
-    actual fun entry(vararg argArray: Any)
+    actual fun entry(vararg argArray: Any?)
 
     /**
      * Add log message indicating exit of a method
@@ -115,7 +115,7 @@ actual interface KLogger {
     /**
      * Add a log message with the return value of a method
      */
-    actual fun <T> exit(retval: T): T where T : Any?
+    actual fun <T> exit(result: T): T where T : Any?
 
     /**
      * Add a log message indicating an exception will be thrown along with the stack trace.

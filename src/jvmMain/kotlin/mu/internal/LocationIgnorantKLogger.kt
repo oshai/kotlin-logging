@@ -152,7 +152,7 @@ internal class LocationIgnorantKLogger(override val underlyingLogger: Logger) : 
         if (isErrorEnabled) error(marker, msg.toStringSafe(), t)
     }
 
-    override inline fun entry(vararg argArray: Any) {
+    override inline fun entry(vararg argArray: Any?) {
         if (underlyingLogger.isTraceEnabled) {
             underlyingLogger.trace("entry({})", argArray)
         }
@@ -164,11 +164,11 @@ internal class LocationIgnorantKLogger(override val underlyingLogger: Logger) : 
         }
     }
 
-    override inline fun <T : Any?> exit(retval: T): T {
+    override inline fun <T : Any?> exit(result: T): T {
         if (underlyingLogger.isTraceEnabled) {
-            underlyingLogger.trace("exit({}}", retval)
+            underlyingLogger.trace("exit({}}", result)
         }
-        return retval
+        return result
     }
 
     override inline fun <T : Throwable> throwing(throwable: T): T {
