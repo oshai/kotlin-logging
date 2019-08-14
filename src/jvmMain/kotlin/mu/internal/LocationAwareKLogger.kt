@@ -575,7 +575,7 @@ internal class LocationAwareKLogger(override val underlyingLogger: LocationAware
         }
     }
 
-    override fun entry(vararg argArray: Any) {
+    override fun entry(vararg argArray: Any?) {
         if (underlyingLogger.isTraceEnabled(ENTRY)) {
             val tp = MessageFormatter.arrayFormat(buildMessagePattern(argArray.size), argArray)
             underlyingLogger.log(ENTRY, fqcn, LocationAwareLogger.TRACE_INT, tp.message, null, null);
@@ -588,14 +588,14 @@ internal class LocationAwareKLogger(override val underlyingLogger: LocationAware
         }
     }
 
-    override fun <T : Any?> exit(retval: T): T {
+    override fun <T : Any?> exit(result: T): T {
         if (underlyingLogger.isTraceEnabled(EXIT)) {
-            val tp = MessageFormatter.format(EXITMESSAGE, retval)
+            val tp = MessageFormatter.format(EXITMESSAGE, result)
             underlyingLogger.log(
-                EXIT, fqcn, LocationAwareLogger.TRACE_INT, tp.message, arrayOf<Any?>(retval), tp.throwable
+                EXIT, fqcn, LocationAwareLogger.TRACE_INT, tp.message, arrayOf<Any?>(result), tp.throwable
             )
         }
-        return retval
+        return result
     }
 
     override fun <T : Throwable> throwing(throwable: T): T {
