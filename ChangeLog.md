@@ -1,3 +1,7 @@
+# 1.7.5
+
+* Provide for nullable in entry and rename exit argument - [#89](https://github.com/MicroUtils/kotlin-logging/issues/89)
+
 # 1.7.4
 
 * Fixed nullability in exit signature: [#84](https://github.com/MicroUtils/kotlin-logging/issues/84) [#86](https://github.com/MicroUtils/kotlin-logging/issues/86) [#87](https://github.com/MicroUtils/kotlin-logging/issues/87)
