@@ -1,3 +1,7 @@
+# 1.7.6
+
+* wrap slf4j logger with kotlin logger - [#88](https://github.com/MicroUtils/kotlin-logging/issues/88)
+
 # 1.7.5
 
 * Provide for nullable in entry and rename exit argument - [#89](https://github.com/MicroUtils/kotlin-logging/issues/89)
