@@ -1,7 +1,7 @@
 import java.util.*
 
 plugins {
-    kotlin("multiplatform") version "1.3.41"
+    kotlin("multiplatform") version "1.3.50"
     id("com.jfrog.bintray") version "1.8.4"
     `maven-publish`
     `java-library` //todo: ask whether we need javadoc at all as it is always empty
