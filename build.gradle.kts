@@ -1,8 +1,10 @@
-import java.util.*
+import org.jetbrains.dokka.gradle.DokkaTask
+import java.util.Date
 
 plugins {
     kotlin("multiplatform") version "1.3.50"
     id("com.jfrog.bintray") version "1.8.4"
+    id("org.jetbrains.dokka") version "0.10.0"
     `maven-publish`
     `java-library` //todo: ask whether we need javadoc at all as it is always empty
 }
@@ -16,14 +18,22 @@ version = "1.6.27"
 
 repositories {
     mavenCentral()
+    jcenter()
 }
+
+
 
 tasks {
     register<Jar>("javadocJar") {
-        val javadocTask = getByName<Javadoc>("javadoc")
-        from(javadocTask.destinationDir)
-        dependsOn(javadocTask)
+        val dokkaTask = getByName<DokkaTask>("dokka")
+        from(dokkaTask.outputDirectory)
+        dependsOn(dokkaTask)
         archiveClassifier.set("javadoc")
+    }
+    dokka {
+        outputFormat = "javadoc"
+        outputDirectory = "$buildDir/dokka"
+
     }
 }
 

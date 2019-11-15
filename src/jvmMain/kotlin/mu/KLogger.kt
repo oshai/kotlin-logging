@@ -5,7 +5,9 @@ import org.slf4j.Logger
 /**
  * An extension for [Logger] with Lazy message evaluation
  * example:
+ * ```
  * logger.info{"this is $lazy evaluated string"}
+ *```
  */
 actual interface KLogger : Logger {
 
