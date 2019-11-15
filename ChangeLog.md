@@ -1,3 +1,7 @@
+# 1.7.7
+
+* upgrade versions - [#97](https://github.com/MicroUtils/kotlin-logging/issues/97)
+
 # 1.7.6
 
 * wrap slf4j logger with kotlin logger - [#88](https://github.com/MicroUtils/kotlin-logging/issues/88)
