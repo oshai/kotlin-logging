@@ -1,6 +1,7 @@
 # 1.7.8
 
 * use dokka for kotlin javadocs - [#82](https://github.com/MicroUtils/kotlin-logging/issues/82)
+* upgrade gradle wrapper - [#100](https://github.com/MicroUtils/kotlin-logging/issues/100)
 
 # 1.7.7
 
