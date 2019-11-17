@@ -6,7 +6,7 @@ plugins {
     id("com.jfrog.bintray") version "1.8.4"
     id("org.jetbrains.dokka") version "0.10.0"
     `maven-publish`
-    `java-library` //todo: ask whether we need javadoc at all as it is always empty
+    `java-library`
 }
 
 buildscript {
