@@ -1,3 +1,7 @@
+# 1.7.8
+
+* use dokka for kotlin javadocs - [#82](https://github.com/MicroUtils/kotlin-logging/issues/82)
+
 # 1.7.7
 
 * upgrade versions - [#97](https://github.com/MicroUtils/kotlin-logging/issues/97)
