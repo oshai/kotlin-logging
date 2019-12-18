@@ -1,4 +1,5 @@
 import org.jetbrains.dokka.gradle.DokkaTask
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 import java.util.Date
 
 plugins {
@@ -11,6 +12,7 @@ plugins {
 
 buildscript {
     apply("versions.gradle.kts")
+    apply("nativeHelper.gradle.kts")
 }
 
 group = "io.github.microutils"
@@ -36,12 +38,30 @@ tasks {
 }
 
 kotlin {
-    metadata {
-        mavenPublication {
-            // make a name of an artifact backward-compatible, default "-metadata"
-            artifactId = "${rootProject.name}-common"
-        }
+    val hostPresetName: String by rootProject.extra
+    val host = when (hostPresetName) {
+        "macosX64" -> TODO()
+        "linuxX64" -> targetFromPreset(presets[hostPresetName], "linuxX64") as KotlinNativeTarget
+        "mingwX64" -> TODO()
+        else -> error("Unsupported host platform")
+    } as KotlinNativeTarget
+    host.apply {
+        compilations["main"].cinterops.create("zfLog")
     }
+
+//    metadata {
+//        mavenPublication {
+//            // make a name of an artifact backward-compatible, default "-metadata"
+//            artifactId = "${rootProject.name}-common"
+//        }
+//    }
+    val nativeMain by sourceSets.creating {
+        dependencies {
+            api("org.jetbrains.kotlin:kotlin-stdlib-common")
+        }
+
+    }
+
     jvm {
         compilations.named("main") {
             // kotlin compiler compatibility options
@@ -52,7 +72,7 @@ kotlin {
         }
         mavenPublication {
             // make a name of jvm artifact backward-compatible, default "-jvm"
-            artifactId = rootProject.name
+//            artifactId = rootProject.name
         }
     }
     js {
@@ -65,7 +85,18 @@ kotlin {
             }
         }
     }
-    linuxX64 {}
+    val linuxX64 by sourceSets.creating {
+        dependsOn(nativeMain)
+    }
+    targets.withType(KotlinNativeTarget::class.java) {
+        compilations["main"].defaultSourceSet.dependsOn(nativeMain)
+        when (hostPresetName) {
+            "macosX64" -> TODO()
+            "linuxX64" -> compilations["main"].defaultSourceSet.dependsOn(linuxX64)
+            "mingwX64" -> TODO()
+            else -> error("Unsupported host platform")
+        }
+    }
     sourceSets {
         commonMain {
             dependencies {
@@ -103,20 +134,6 @@ kotlin {
         named("jsTest") {
             dependencies {
                 implementation(kotlin("test-js"))
-            }
-        }
-        named("linuxX64Main") {}
-        named("linuxX64Test") {}
-        kotlin {
-            this.linuxX64 {
-                compilations.getByName("main") {
-                    val zfLog by cinterops.creating {
-                        {
-                            defFile = File("$projectDir/src/nativeInterop/cinterop/zLog.def")
-                            includeDirs("$projectDir/src/nativeInterop/zfLog")
-                        }
-                    }
-                }
             }
         }
     }
@@ -178,7 +195,8 @@ bintray {
                 sync = true //[Default: true] Determines whether to sync the version to Maven Central.
                 user = "token" //OSS user token: mandatory
                 password = "pass" //OSS user password: mandatory
-                close = "1" //Optional property. By default the staging repository is closed and artifacts are released to Maven Central. You can optionally turn this behaviour off (by puting 0 as value) and release the version manually.
+                close =
+                    "1" //Optional property. By default the staging repository is closed and artifacts are released to Maven Central. You can optionally turn this behaviour off (by puting 0 as value) and release the version manually.
             }
         }
     }
