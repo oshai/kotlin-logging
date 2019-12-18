@@ -1,0 +1,6 @@
+package = zfLog
+headers = zf_log.h
+staticLibraries = zf_log_linuxX64.a
+compilerOpts = -Isrc/nativeInterop/zfLog
+libraryPaths =  src/nativeInterop/cinterop/
+linkerOpts.linux = -L/usr/lib

@@ -2,7 +2,7 @@ import org.jetbrains.dokka.gradle.DokkaTask
 import java.util.Date
 
 plugins {
-    kotlin("multiplatform") version "1.3.50"
+    kotlin("multiplatform") version "1.3.61"
     id("com.jfrog.bintray") version "1.8.4"
     id("org.jetbrains.dokka") version "0.10.0"
     `maven-publish`
@@ -14,14 +14,12 @@ buildscript {
 }
 
 group = "io.github.microutils"
-version = "1.6.27"
+version = "1.7.9"
 
 repositories {
     mavenCentral()
     jcenter()
 }
-
-
 
 tasks {
     register<Jar>("javadocJar") {
@@ -67,6 +65,7 @@ kotlin {
             }
         }
     }
+    linuxX64 {}
     sourceSets {
         commonMain {
             dependencies {
@@ -104,6 +103,20 @@ kotlin {
         named("jsTest") {
             dependencies {
                 implementation(kotlin("test-js"))
+            }
+        }
+        named("linuxX64Main") {}
+        named("linuxX64Test") {}
+        kotlin {
+            this.linuxX64 {
+                compilations.getByName("main") {
+                    val zfLog by cinterops.creating {
+                        {
+                            defFile = File("$projectDir/src/nativeInterop/cinterop/zLog.def")
+                            includeDirs("$projectDir/src/nativeInterop/zfLog")
+                        }
+                    }
+                }
             }
         }
     }
