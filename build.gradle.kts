@@ -1,6 +1,6 @@
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
-import java.util.Date
+import java.util.*
 
 plugins {
     kotlin("multiplatform") version "1.3.61"
@@ -40,15 +40,9 @@ tasks {
 kotlin {
     val hostPresetName: String by rootProject.extra
     val host = when (hostPresetName) {
-        "macosX64" -> TODO()
         "linuxX64" -> targetFromPreset(presets[hostPresetName], "linuxX64") as KotlinNativeTarget
-        "mingwX64" -> TODO()
         else -> error("Unsupported host platform")
     } as KotlinNativeTarget
-    host.apply {
-        compilations["main"].cinterops.create("zfLog")
-    }
-
 //    metadata {
 //        mavenPublication {
 //            // make a name of an artifact backward-compatible, default "-metadata"
@@ -91,9 +85,7 @@ kotlin {
     targets.withType(KotlinNativeTarget::class.java) {
         compilations["main"].defaultSourceSet.dependsOn(nativeMain)
         when (hostPresetName) {
-            "macosX64" -> TODO()
             "linuxX64" -> compilations["main"].defaultSourceSet.dependsOn(linuxX64)
-            "mingwX64" -> TODO()
             else -> error("Unsupported host platform")
         }
     }

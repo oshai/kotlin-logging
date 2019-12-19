@@ -10,11 +10,17 @@ actual object KotlinLogging {
      * ```
      */
     actual fun logger(func: () -> Unit): KLogger =
-        NativeLogger(func::class.simpleName!!)
+        NativeLogger(func::class.simpleName!!, KotlinLoggingConfiguration())
 
 
     actual fun logger(name: String): KLogger =
-        NativeLogger(name)
+        NativeLogger(name, KotlinLoggingConfiguration())
 
+    fun logger(config: KotlinLoggingConfiguration, func: () -> Unit): KLogger =
+        NativeLogger(func::class.simpleName!!, config)
+
+
+    fun logger(name: String, config: KotlinLoggingConfiguration): KLogger =
+        NativeLogger(name, config)
 
 }

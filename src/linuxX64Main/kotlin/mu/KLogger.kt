@@ -1,7 +1,5 @@
 package mu
 
-import zfLog.*
-
 actual interface KLogger {
     /**
      * Lazy add a log message if isTraceEnabled is true
