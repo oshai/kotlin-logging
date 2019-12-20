@@ -1,37 +1,43 @@
 package mu.internal
 
-import kotlinx.cinterop.*
-import platform.posix.*
+import kotlinx.cinterop.CPointer
+import mu.KotlinLoggingConfiguration
+import platform.posix.FILE
+import platform.posix.fflush
+import platform.posix.fprintf
 
 object ConsoleAppender : IAppender {
     private val STDOUT = platform.posix.fdopen(1, "w")
     private val STDERR = platform.posix.fdopen(2, "w")
 
-    private fun prefix(level: NativeLogLevels): String = memScoped {
-        val t = alloc<time_tVar>()
-        t.value = time(null)
-        val dateTime = asctime(gmtime(t.ptr))
-        val timeString = dateTime?.toKString() ?: ""
-        return "[${level.name}][${timeString.trim()}]"
-    }
+    private fun prefix(config: KotlinLoggingConfiguration, level: NativeLogLevels): String =
+        "[${level.name}]${config.format}"
 
-    private fun printWrapper(level: NativeLogLevels, message: String, descriptor: CPointer<FILE>?) {
-        val fullMessage = prefix(level) + message + "\n"
+
+    private fun printWrapper(
+        config: KotlinLoggingConfiguration,
+        level: NativeLogLevels,
+        message: String,
+        descriptor: CPointer<FILE>?
+    ) {
+        val fullMessage = prefix(config, level) + message + "\n"
         fprintf(descriptor, fullMessage)
-        val fflush = fflush(descriptor)
-
+        fflush(descriptor)
     }
 
-    private fun print(level: NativeLogLevels, message: String) = printWrapper(level, message, STDOUT)
-    private fun printErr(level: NativeLogLevels, message: String) = printWrapper(level, message, STDERR)
+    private fun print(config: KotlinLoggingConfiguration, level: NativeLogLevels, message: String) =
+        printWrapper(config, level, message, STDOUT)
 
-    override fun debug(message: String?) = print(Debug, message ?: "")
+    private fun printErr(config: KotlinLoggingConfiguration, level: NativeLogLevels, message: String) =
+        printWrapper(config, level, message, STDERR)
 
-    override fun info(message: String?) = print(Info, message ?: "")
+    override fun debug(config: KotlinLoggingConfiguration, message: String?) = print(config, Debug, message ?: "")
 
-    override fun warn(message: String?) = print(Warn, message ?: "")
+    override fun info(config: KotlinLoggingConfiguration, message: String?) = print(config, Info, message ?: "")
 
-    override fun error(message: String?) = printErr(Error, message ?: "")
+    override fun warn(config: KotlinLoggingConfiguration, message: String?) = print(config, Warn, message ?: "")
 
-    override fun fatal(message: String?) = printErr(Fatal, message ?: "")
+    override fun error(config: KotlinLoggingConfiguration, message: String?) = printErr(config, Error, message ?: "")
+
+    override fun fatal(config: KotlinLoggingConfiguration, message: String?) = printErr(config, Fatal, message ?: "")
 }

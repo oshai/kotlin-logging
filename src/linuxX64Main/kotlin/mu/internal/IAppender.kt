@@ -1,9 +1,11 @@
 package mu.internal
 
+import mu.KotlinLoggingConfiguration
+
 interface IAppender {
-    fun debug(message: String?)
-    fun info(message: String?)
-    fun warn(message: String?)
-    fun error(message: String?)
-    fun fatal(message: String?)
+    fun debug(config: KotlinLoggingConfiguration, message: String?)
+    fun info(config: KotlinLoggingConfiguration, message: String?)
+    fun warn(config: KotlinLoggingConfiguration, message: String?)
+    fun error(config: KotlinLoggingConfiguration, message: String?)
+    fun fatal(config: KotlinLoggingConfiguration, message: String?)
 }
