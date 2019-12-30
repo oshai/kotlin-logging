@@ -5,10 +5,10 @@ import mu.KotlinLoggingConfiguration
 import platform.posix.FILE
 import platform.posix.fflush
 import platform.posix.fprintf
+import platform.posix.stderr
+import platform.posix.stdout
 
 object ConsoleAppender : IAppender {
-    private val STDOUT = platform.posix.fdopen(1, "w")
-    private val STDERR = platform.posix.fdopen(2, "w")
 
     private fun prefix(config: KotlinLoggingConfiguration, level: NativeLogLevels): String =
         "[${level.name}]${config.format}"
@@ -26,10 +26,10 @@ object ConsoleAppender : IAppender {
     }
 
     private fun print(config: KotlinLoggingConfiguration, level: NativeLogLevels, message: String) =
-        printWrapper(config, level, message, STDOUT)
+        printWrapper(config, level, message, stdout)
 
     private fun printErr(config: KotlinLoggingConfiguration, level: NativeLogLevels, message: String) =
-        printWrapper(config, level, message, STDERR)
+        printWrapper(config, level, message, stderr)
 
     override fun debug(config: KotlinLoggingConfiguration, message: String?) = print(config, Debug, message ?: "")
 

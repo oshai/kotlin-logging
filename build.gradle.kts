@@ -1,5 +1,7 @@
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+import org.jetbrains.kotlin.konan.target.HostManager
+import org.jetbrains.kotlin.konan.target.KonanTarget.LINUX_X64
 import java.util.*
 
 plugins {
@@ -12,7 +14,6 @@ plugins {
 
 buildscript {
     apply("versions.gradle.kts")
-    apply("nativeHelper.gradle.kts")
 }
 
 group = "io.github.microutils"
@@ -38,24 +39,11 @@ tasks {
 }
 
 kotlin {
-    val hostPresetName: String by rootProject.extra
-    val host = when (hostPresetName) {
-        "linuxX64" -> targetFromPreset(presets[hostPresetName], "linuxX64") as KotlinNativeTarget
-        else -> error("Unsupported host platform")
-    } as KotlinNativeTarget
-//    metadata {
-//        mavenPublication {
-//            // make a name of an artifact backward-compatible, default "-metadata"
-//            artifactId = "${rootProject.name}-common"
-//        }
-//    }
     val nativeMain by sourceSets.creating {
         dependencies {
             api("org.jetbrains.kotlin:kotlin-stdlib-common")
         }
-
     }
-
     jvm {
         compilations.named("main") {
             // kotlin compiler compatibility options
@@ -66,7 +54,7 @@ kotlin {
         }
         mavenPublication {
             // make a name of jvm artifact backward-compatible, default "-jvm"
-//            artifactId = rootProject.name
+            //            artifactId = rootProject.name
         }
     }
     js {
@@ -82,13 +70,19 @@ kotlin {
     val linuxX64 by sourceSets.creating {
         dependsOn(nativeMain)
     }
-    targets.withType(KotlinNativeTarget::class.java) {
+    targets.withType<KotlinNativeTarget> {
         compilations["main"].defaultSourceSet.dependsOn(nativeMain)
-        when (hostPresetName) {
-            "linuxX64" -> compilations["main"].defaultSourceSet.dependsOn(linuxX64)
+        when {
+            HostManager.hostIsLinux -> compilations["main"].defaultSourceSet.dependsOn(linuxX64)
             else -> error("Unsupported host platform")
         }
     }
+    when {
+        HostManager.hostIsLinux -> {
+            targetFromPreset(presets["linuxX64"], "linuxX64")
+        }
+        else -> error("Unsupported host platform")
+    } as KotlinNativeTarget
     sourceSets {
         commonMain {
             dependencies {
