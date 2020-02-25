@@ -127,6 +127,7 @@ It is possible to configure IntelliJ live templates. For file level logger confi
 - [DropWizard + Kotlin = Project Kronslott](https://medium.com/@davideriksson_91895/dropwizard-kotlin-project-kronslott-e2aa51b277b8)
 - [Logging in Kotlin – the right approach](https://amarszalek.net/blog/2018/05/13/logging-in-kotlin-right-approach/)
 - https://bednarek.wroclaw.pl/log4j-in-kotlin/
+- https://jaxenter.com/kotlin-logging-168814.html
 
 ## Contributors
 
