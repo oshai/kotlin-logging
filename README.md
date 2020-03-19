@@ -50,7 +50,7 @@ An `Android` example project with kotlin-logging can be found in [kotlin-logging
 
 **Important note:** kotlin-logging depends on slf4j-api (in the JVM artifact). In runtime, it is also required to depend on a logging implementation. More details in [how-to-configure-slf4j](http://saltnlight5.blogspot.co.il/2013/08/how-to-configure-slf4j-with-different.html). And an excellent detailed explanation in [a-guide-to-logging-in-java](https://www.marcobehler.com/guides/a-guide-to-logging-in-java).  
 
-In short, if you just want to log statements to stdout, it's possible to add the following dependency: `org.slf4j:slf4j-simple:1.7.26`.
+In short, if you just want to log statements to stdout, it's possible to add the following dependency: `org.slf4j:slf4j-simple:1.7.29`.
 
 **Multiplatform:** See the [section below](https://github.com/MicroUtils/kotlin-logging/blob/master/README.md#multiplatform).
 
@@ -59,14 +59,14 @@ In short, if you just want to log statements to stdout, it's possible to add the
 <dependency>
   <groupId>io.github.microutils</groupId>
   <artifactId>kotlin-logging</artifactId>
-  <version>1.7.8</version>
+  <version>1.7.9</version>
 </dependency>
 ```
 See the full example in [kotlin-logging-example-maven](https://github.com/MicroUtils/kotlin-logging-example-maven).  
 
 ### Gradle
 ```Groovy
-compile 'io.github.microutils:kotlin-logging:1.7.8'
+compile 'io.github.microutils:kotlin-logging:1.7.9'
 ```
 
 Alternatively, download the JAR from [github](https://github.com/MicroUtils/kotlin-logging/releases/latest) or [bintray](https://dl.bintray.com/microutils/kotlin-logging/io/github/microutils/kotlin-logging/) or [maven-central](http://repo1.maven.org/maven2/io/github/microutils/kotlin-logging/).
