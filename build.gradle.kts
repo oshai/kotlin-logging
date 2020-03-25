@@ -2,11 +2,10 @@ import org.jetbrains.dokka.gradle.DokkaTask
 import java.util.Date
 
 plugins {
-    kotlin("multiplatform") version "1.3.70"
+    kotlin("multiplatform") version "1.4-M1"
     id("com.jfrog.bintray") version "1.8.4"
     id("org.jetbrains.dokka") version "0.10.0"
     `maven-publish`
-    `java-library`
 }
 
 buildscript {
@@ -14,14 +13,13 @@ buildscript {
 }
 
 group = "io.github.microutils"
-version = "1.6.27"
+version = "1.8.0-SNAPSHOT"
 
 repositories {
+    maven { setUrl("https://dl.bintray.com/kotlin/kotlin-eap") }
     mavenCentral()
     jcenter()
 }
-
-
 
 tasks {
     register<Jar>("javadocJar") {
@@ -33,18 +31,27 @@ tasks {
     dokka {
         outputFormat = "javadoc"
         outputDirectory = "$buildDir/dokka"
-
     }
 }
 
 kotlin {
+/*
     metadata {
         mavenPublication {
             // make a name of an artifact backward-compatible, default "-metadata"
-            artifactId = "${rootProject.name}-common"
+            //artifactId = "${rootProject.name}-common"
         }
     }
+*/
     jvm {
+        compilations.named("main") {
+            // kotlin compiler compatibility options
+            kotlinOptions {
+                apiVersion = "1.2"
+                languageVersion = "1.2"
+            }
+        }
+/*
         compilations.named("main") {
             // kotlin compiler compatibility options
             kotlinOptions {
@@ -54,10 +61,13 @@ kotlin {
         }
         mavenPublication {
             // make a name of jvm artifact backward-compatible, default "-jvm"
-            artifactId = rootProject.name
+            //artifactId = rootProject.name
         }
+*/
     }
     js {
+        produceKotlinLibrary()
+/*
         compilations.named("main") {
             kotlinOptions {
                 metaInfo = true
@@ -66,26 +76,27 @@ kotlin {
                 moduleKind = "umd"
             }
         }
+*/
     }
     sourceSets {
-        commonMain {
+        val commonMain by getting {
             dependencies {
-                implementation(kotlin("stdlib-common"))
+                implementation(kotlin("stdlib"))
             }
         }
-        commonTest {
+        val commonTest by getting  {
             dependencies {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
             }
         }
-        named("jvmMain") {
+        val jvmMain by getting {
             dependencies {
                 implementation(kotlin("stdlib"))
                 api("org.slf4j:slf4j-api:${extra["sl4j_version"]}")
             }
         }
-        named("jvmTest") {
+        val jvmTest by getting {
             dependencies {
                 implementation(kotlin("test"))
                 implementation(kotlin("test-junit"))
@@ -96,12 +107,12 @@ kotlin {
                 implementation("org.apache.logging.log4j:log4j-slf4j-impl:${extra["log4j_version"]}")
             }
         }
-        named("jsMain") {
+        val jsMain by getting {
             dependencies {
                 implementation(kotlin("stdlib-js"))
             }
         }
-        named("jsTest") {
+        val jsTest by getting {
             dependencies {
                 implementation(kotlin("test-js"))
             }
