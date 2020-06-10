@@ -1,3 +1,7 @@
+# 1.7.10
+
+* Remove extra space from log message in entry - [#114](https://github.com/MicroUtils/kotlin-logging/issues/114).
+
 # 1.7.9
 
 * update Kotlin to 1.3.70.
