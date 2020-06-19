@@ -2,7 +2,7 @@ import org.jetbrains.dokka.gradle.DokkaTask
 import java.util.Date
 
 plugins {
-    kotlin("multiplatform") version "1.3.70"
+    kotlin("multiplatform") version "1.3.72"
     id("com.jfrog.bintray") version "1.8.4"
     id("org.jetbrains.dokka") version "0.10.0"
     `maven-publish`
@@ -67,6 +67,7 @@ kotlin {
             }
         }
     }
+    linuxX64("linuxX64")
     sourceSets {
         commonMain {
             dependencies {
@@ -143,7 +144,7 @@ bintray {
     user = "oshai"//project.hasProperty("bintrayUser") ? project.property("bintrayUser") : System.getenv("BINTRAY_USER")
     key = "mykey" //https://bintray.com/profile/edit
     // project.hasProperty("bintrayApiKey") ? project.property("bintrayApiKey") : System.getenv("BINTRAY_API_KEY")
-    setPublications("metadata", "jvm", "js")
+    setPublications("metadata", "jvm", "js", "linuxX64")
     publish = true //[Default: false] Whether version should be auto published after an upload
     pkg.apply {
         repo = "kotlin-logging"
