@@ -136,7 +136,8 @@ publishing {
                 url.set("http://github.com/MicroUtils/kotlin-logging/tree/master")
             }
         }
-        artifact(tasks["javadocJar"])
+        // TODO: Fix generation of Java Doc Jars.
+//        artifact(tasks["javadocJar"])
     }
 }
 
