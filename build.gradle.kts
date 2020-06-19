@@ -123,6 +123,38 @@ kotlin {
 }
 
 publishing {
+Add     repositories {
+        maven {
+            name = "releases"
+            // change to point to your repo, e.g. http://my.org/repo
+            url = uri("http://nexus.astraeus.nl/nexus/content/repositories/releases")
+            credentials {
+                val nexusUsername: String by project
+                val nexusPassword: String by project
+
+                username = nexusUsername
+                password = nexusPassword
+            }
+        }
+        maven {
+            name = "snapshots"
+            // change to point to your repo, e.g. http://my.org/repo
+            url = uri("http://nexus.astraeus.nl/nexus/content/repositories/snapshots")
+            credentials {
+                val nexusUsername: String by project
+                val nexusPassword: String by project
+
+                username = nexusUsername
+                password = nexusPassword
+            }
+        }
+    }
+    publications {
+        val kotlinMultiplatform by getting {
+            //artifactId = "kotlin-css-generator"
+        }
+    }
+
     publications.withType<MavenPublication> {
         pom {
             name.set("kotlin-logging")
