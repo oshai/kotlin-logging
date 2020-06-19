@@ -123,7 +123,7 @@ kotlin {
 }
 
 publishing {
-Add     repositories {
+     repositories {
         maven {
             name = "releases"
             // change to point to your repo, e.g. http://my.org/repo
