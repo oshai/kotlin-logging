@@ -2,7 +2,7 @@ import org.jetbrains.dokka.gradle.DokkaTask
 import java.util.Date
 
 plugins {
-    kotlin("multiplatform") version "1.4-M1"
+    kotlin("multiplatform") version "1.4-M2"
     id("com.jfrog.bintray") version "1.8.4"
     id("org.jetbrains.dokka") version "0.10.0"
     `maven-publish`
@@ -13,7 +13,7 @@ buildscript {
 }
 
 group = "io.github.microutils"
-version = "1.8.0-SNAPSHOT"
+version = "1.8.1-SNAPSHOT"
 
 repositories {
     maven { setUrl("https://dl.bintray.com/kotlin/kotlin-eap") }
@@ -65,8 +65,10 @@ kotlin {
         }
 */
     }
-    js {
-        produceKotlinLibrary()
+    js(BOTH) {
+        //produceKotlinLibrary()
+        browser()
+
 /*
         compilations.named("main") {
             kotlinOptions {
