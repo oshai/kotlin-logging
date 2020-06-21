@@ -74,3 +74,4 @@ fabric.properties
 hs_err_pid*
 
 github_packages.properties
+github_packages.properties.old

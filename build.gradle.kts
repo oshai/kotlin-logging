@@ -193,13 +193,16 @@ fun fetchGitHubPackagesSettings(): GitHubPackagesSettings {
     var user = ""
     var token = ""
     val properties = Properties()
-    file("github_packages.properties").bufferedReader().use { br ->
-        with(properties) {
-            load(br)
-            owner = getProperty("gpr.owner")
-            repository = getProperty("gpr.repository")
-            user = getProperty("gpr.user")
-            token = getProperty("gpr.token")
+    val filename = "github_packages.properties"
+    if (file(filename).exists()) {
+        file(filename).bufferedReader().use { br ->
+            with(properties) {
+                load(br)
+                owner = getProperty("gpr.owner")
+                repository = getProperty("gpr.repository")
+                user = getProperty("gpr.user")
+                token = getProperty("gpr.token")
+            }
         }
     }
     return GitHubPackagesSettings(user = user, token = token, owner = owner, repository = repository)
