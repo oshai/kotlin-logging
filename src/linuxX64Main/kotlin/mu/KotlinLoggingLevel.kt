@@ -1,6 +1,6 @@
 package mu
 
-import mu.KotlinLoggingConfiguration.LOG_LEVEL
+import mu.KotlinLoggingConfiguration.logLevel
 
 enum class KotlinLoggingLevel {
     TRACE,
@@ -10,4 +10,4 @@ enum class KotlinLoggingLevel {
     ERROR
 }
 
-fun KotlinLoggingLevel.isLoggingEnabled() = this.ordinal >= LOG_LEVEL.ordinal
+fun KotlinLoggingLevel.isLoggingEnabled() = this.ordinal >= logLevel.value.ordinal

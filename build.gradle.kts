@@ -156,7 +156,7 @@ bintray {
     user = "oshai"//project.hasProperty("bintrayUser") ? project.property("bintrayUser") : System.getenv("BINTRAY_USER")
     key = "mykey" //https://bintray.com/profile/edit
     // project.hasProperty("bintrayApiKey") ? project.property("bintrayApiKey") : System.getenv("BINTRAY_API_KEY")
-    setPublications("metadata", "jvm", "js", "linuxX64")
+    setPublications("metadata", "jvm", "js")
     publish = true //[Default: false] Whether version should be auto published after an upload
     pkg.apply {
         repo = "kotlin-logging"
