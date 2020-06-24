@@ -2,8 +2,24 @@ package mu
 
 import kotlin.native.concurrent.AtomicReference
 
+@Suppress("ObjectPropertyName")
 object KotlinLoggingConfiguration {
-    val logLevel: AtomicReference<KotlinLoggingLevel> = AtomicReference(KotlinLoggingLevel.INFO)
-    val appender: AtomicReference<Appender> = AtomicReference(ConsoleOutputAppender)
-    val formatter: AtomicReference<Formatter> = AtomicReference(DefaultMessageFormatter)
+    private val _logLevel = AtomicReference(KotlinLoggingLevel.INFO)
+    var logLevel: KotlinLoggingLevel
+        get() = _logLevel.value
+        set(value) {
+            _logLevel.value = value
+        }
+    private val _appender = AtomicReference<Appender>(ConsoleOutputAppender)
+    var appender: Appender
+        get() = _appender.value
+        set(value) {
+            _appender.value = value
+        }
+    private val _formatter = AtomicReference<Formatter>(DefaultMessageFormatter)
+    var formatter: Formatter
+        get() = _formatter.value
+        set(value) {
+            _formatter.value = value
+        }
 }

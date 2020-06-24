@@ -10,4 +10,4 @@ enum class KotlinLoggingLevel {
     ERROR
 }
 
-fun KotlinLoggingLevel.isLoggingEnabled() = this.ordinal >= logLevel.value.ordinal
+fun KotlinLoggingLevel.isLoggingEnabled() = this.ordinal >= logLevel.ordinal
