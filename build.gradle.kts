@@ -14,7 +14,7 @@ buildscript {
 }
 
 group = "io.github.microutils"
-version = "1.6.27"
+version = "2.0"
 
 repositories {
     mavenCentral()

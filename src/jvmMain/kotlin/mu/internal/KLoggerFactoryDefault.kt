@@ -2,6 +2,7 @@ package mu.internal
 
 import mu.KLoggable
 import mu.KLogger
+import mu.KLoggerFactory
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.slf4j.spi.LocationAwareLogger
@@ -10,23 +11,23 @@ import org.slf4j.spi.LocationAwareLogger
  * factory methods to obtain a [Logger]
  */
 @Suppress("NOTHING_TO_INLINE")
-internal object KLoggerFactory {
+internal actual object KLoggerFactoryDefault : KLoggerFactory {
 
     /**
      * get logger for the class
      */
-    internal inline fun logger(loggable: KLoggable): KLogger =
+    override fun logger(loggable: KLoggable): KLogger =
         logger(KLoggerNameResolver.name(loggable.javaClass))
 
     /**
      * get logger by explicit name
      */
-    internal inline fun logger(name: String): KLogger = wrapJLogger(jLogger(name))
+    actual override fun logger(name: String): KLogger = wrapJLogger(jLogger(name))
 
     /**
      * get logger for the method, assuming it was declared at the logger file/class
      */
-    internal inline fun logger(noinline func: () -> Unit): KLogger =
+     actual override fun logger(func: () -> Unit): KLogger =
         logger(KLoggerNameResolver.name(func))
 
     /**

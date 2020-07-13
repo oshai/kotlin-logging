@@ -1,6 +1,7 @@
 package mu
 
-import mu.internal.KLoggerFactory
+import mu.internal.KLoggerFactoryDefault
+import mu.internal.KLoggerFactoryDefault.logger
 
 /**
  * A class with logging capabilities
@@ -37,16 +38,18 @@ interface KLoggable {
      */
     val logger: KLogger
 
-    /**
-     * get logger for the class
-     */
-    fun logger(): KLogger = KLoggerFactory.logger(this)
-
-    /**
-     * get logger by explicit name
-     */
-    fun logger(name: String): KLogger = KLoggerFactory.logger(name)
 }
+
+/**
+ * get logger by explicit name
+ */
+fun KLoggable.logger(name: String): KLogger = KotlinLogging.logger(name)
+
+
+/**
+ * get logger for the class
+ */
+fun KLoggable.logger(): KLogger = KotlinLogging.logger(this)
 
 
 

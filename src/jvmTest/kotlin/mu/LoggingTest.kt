@@ -216,7 +216,7 @@ class LoggingTest {
 
     @Test
     fun `check underlyingLogger property`() {
-        Assert.assertEquals("mu.ClassHasLogging", ClassHasLogging().logger.underlyingLogger.name)
+        Assert.assertEquals("mu.ClassHasLogging", ClassHasLogging().logger.name)
     }
 }
 

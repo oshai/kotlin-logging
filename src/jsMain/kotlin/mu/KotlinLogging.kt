@@ -1,6 +1,6 @@
 package mu
 
-import mu.internal.KLoggerJS
+import mu.internal.KLoggerFactoryDefault
 
 
 actual object KotlinLogging {
@@ -10,7 +10,8 @@ actual object KotlinLogging {
      * val logger = KotlinLogging.logger {}
      * ```
      */
-    actual fun logger(func: () -> Unit): KLogger = KLoggerJS(func::class.js.name)
+    actual fun logger(func: () -> Unit): KLogger = kLoggerFactory.logger(func)
 
-    actual fun logger(name: String): KLogger = KLoggerJS(name)
+    actual fun logger(name: String): KLogger = kLoggerFactory.logger(name)
+    actual var kLoggerFactory: KLoggerFactory = KLoggerFactoryDefault
 }

@@ -9,12 +9,12 @@ import org.slf4j.Logger
  * logger.info{"this is $lazy evaluated string"}
  *```
  */
-actual interface KLogger : Logger {
+actual interface KLogger {
 
     /**
-     * The actual logger executing logging
+     * Logger Name
      */
-    val underlyingLogger: Logger
+    actual val name: String
 
     /**
      * Lazy add a log message if isTraceEnabled is true

@@ -11,4 +11,7 @@ expect object KotlinLogging {
     fun logger(func: () -> Unit): KLogger
 
     fun logger(name: String): KLogger
+
+    var kLoggerFactory: KLoggerFactory
 }
+

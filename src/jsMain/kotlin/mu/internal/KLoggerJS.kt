@@ -13,7 +13,7 @@ import mu.Marker
 import mu.isLoggingEnabled
 
 internal class KLoggerJS(
-    private val loggerName: String
+    override val name: String
 ) : KLogger {
 
     override fun trace(msg: () -> Any?) = TRACE.logIfEnabled(msg, APPENDER::trace)
@@ -63,19 +63,19 @@ internal class KLoggerJS(
 
     private fun KotlinLoggingLevel.logIfEnabled(msg: () -> Any?, logFunction: (Any?) -> Unit) {
         if (isLoggingEnabled()) {
-            logFunction(FORMATTER.formatMessage(this, loggerName, msg))
+            logFunction(FORMATTER.formatMessage(this, name, msg))
         }
     }
 
     private fun KotlinLoggingLevel.logIfEnabled(msg: () -> Any?, t: Throwable?, logFunction: (Any?) -> Unit) {
         if (isLoggingEnabled()) {
-            logFunction(FORMATTER.formatMessage(this, loggerName, t, msg))
+            logFunction(FORMATTER.formatMessage(this, name, t, msg))
         }
     }
 
     private fun KotlinLoggingLevel.logIfEnabled(marker: Marker?, msg: () -> Any?, logFunction: (Any?) -> Unit) {
         if (isLoggingEnabled()) {
-            logFunction(FORMATTER.formatMessage(this, loggerName, marker, msg))
+            logFunction(FORMATTER.formatMessage(this, name, marker, msg))
         }
     }
 
@@ -86,7 +86,7 @@ internal class KLoggerJS(
         logFunction: (Any?) -> Unit
     ) {
         if (isLoggingEnabled()) {
-            logFunction(FORMATTER.formatMessage(this, loggerName, marker, t, msg))
+            logFunction(FORMATTER.formatMessage(this, name, marker, t, msg))
         }
     }
 

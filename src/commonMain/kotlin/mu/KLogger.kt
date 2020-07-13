@@ -3,6 +3,11 @@ package mu
 expect interface KLogger {
 
     /**
+     * Logger External Name
+     */
+    val name: String
+
+    /**
      * Lazy add a log message if isTraceEnabled is true
      */
     fun trace(msg: () -> Any?)
