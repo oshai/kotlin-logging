@@ -1,6 +1,5 @@
 import org.jetbrains.dokka.gradle.DokkaTask
-import java.util.Date
-import java.util.Properties
+import java.util.*
 
 plugins {
     kotlin("multiplatform") version "1.3.72"
@@ -112,17 +111,6 @@ kotlin {
 }
 
 publishing {
-    repositories {
-        maven {
-            val settings = fetchGitHubPackagesSettings()
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/${settings.owner}/${settings.repository}")
-            credentials {
-                username = settings.user
-                password = settings.token
-            }
-        }
-    }
     publications.withType<MavenPublication> {
         pom {
             name.set("kotlin-logging")
@@ -182,27 +170,4 @@ bintray {
             }
         }
     }
-}
-
-data class GitHubPackagesSettings(val user: String, val token: String, val owner: String, val repository: String)
-
-fun fetchGitHubPackagesSettings(): GitHubPackagesSettings {
-    var owner = ""
-    var repository = ""
-    var user = ""
-    var token = ""
-    val properties = Properties()
-    val filename = "github_packages.properties"
-    if (file(filename).exists()) {
-        file(filename).bufferedReader().use { br ->
-            with(properties) {
-                load(br)
-                owner = getProperty("gpr.owner")
-                repository = getProperty("gpr.repository")
-                user = getProperty("gpr.user")
-                token = getProperty("gpr.token")
-            }
-        }
-    }
-    return GitHubPackagesSettings(user = user, token = token, owner = owner, repository = repository)
 }
