@@ -1,8 +1,8 @@
 import org.jetbrains.dokka.gradle.DokkaTask
-import java.util.Date
+import java.util.*
 
 plugins {
-    kotlin("multiplatform") version "1.3.70"
+    kotlin("multiplatform") version "1.3.72"
     id("com.jfrog.bintray") version "1.8.4"
     id("org.jetbrains.dokka") version "0.10.0"
     `maven-publish`
@@ -67,6 +67,7 @@ kotlin {
             }
         }
     }
+    linuxX64("linuxX64")
     sourceSets {
         commonMain {
             dependencies {
