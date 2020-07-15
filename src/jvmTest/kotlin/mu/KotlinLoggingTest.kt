@@ -18,7 +18,7 @@ class KotlinLoggingTest {
 
     @Before
     fun resetState() {
-        KotlinLogging.kLoggerFactory = KotlinLogging.defaultLoggerFactory
+        KotlinLogging.kLoggerFactory = defaultLoggerFactory
     }
     @Test
     fun testLoggerName() {
