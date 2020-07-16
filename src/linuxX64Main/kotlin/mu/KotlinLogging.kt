@@ -1,5 +1,6 @@
 package mu
 
+import mu.internal.KLoggerFactoryDefault
 import mu.internal.KLoggerLinux
 
 
@@ -10,7 +11,9 @@ actual object KotlinLogging {
      * val logger = KotlinLogging.logger {}
      * ```
      */
-    actual fun logger(func: () -> Unit): KLogger = KLoggerLinux(func::class.qualifiedName ?: "")
+    actual fun logger(func: () -> Unit): KLogger = kLoggerFactory.logger(func)
 
-    actual fun logger(name: String): KLogger = KLoggerLinux(name)
+    actual fun logger(name: String): KLogger = kLoggerFactory.logger(name)
+
+    actual var kLoggerFactory: KLoggerFactory = KLoggerFactoryDefault
 }
