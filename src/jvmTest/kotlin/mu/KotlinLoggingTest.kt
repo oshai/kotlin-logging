@@ -10,7 +10,7 @@ class ForKotlinLoggingTest {
     val loggerInClass = KotlinLogging.logger { }
 
     companion object {
-        val loggerInCompanion = KotlinLogging.logger { }
+        val loggerInCompanion get() = KotlinLogging.logger { }
     }
 }
 
@@ -20,6 +20,7 @@ class KotlinLoggingTest {
     fun resetState() {
         KotlinLogging.kLoggerFactory = defaultLoggerFactory
     }
+
     @Test
     fun testLoggerName() {
         val logger = KotlinLogging.logger { }
