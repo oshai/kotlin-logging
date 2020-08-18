@@ -68,6 +68,7 @@ kotlin {
         }
     }
     linuxX64("linuxX64")
+    macosX64("macosX64")
     sourceSets {
         commonMain {
             dependencies {
