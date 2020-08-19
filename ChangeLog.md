@@ -1,3 +1,15 @@
+# 1.8.3
+
+* Add Linux X64 Support [#119](https://github.com/MicroUtils/kotlin-logging/pull/119).
+
+# Versions 1.8.0.x are obselete
+
+* Used for testing of [#119](https://github.com/MicroUtils/kotlin-logging/pull/119).
+
+# 1.7.10
+
+* Remove extra space from log message in entry - [#114](https://github.com/MicroUtils/kotlin-logging/issues/114).
+
 # 1.7.9
 
 * update Kotlin to 1.3.70.
