@@ -2,7 +2,7 @@ import org.jetbrains.dokka.gradle.DokkaTask
 import java.util.*
 
 plugins {
-    kotlin("multiplatform") version "1.3.72"
+    kotlin("multiplatform") version "1.4.0"
     id("com.jfrog.bintray") version "1.8.4"
     id("org.jetbrains.dokka") version "0.10.0"
     `maven-publish`
@@ -14,14 +14,12 @@ buildscript {
 }
 
 group = "io.github.microutils"
-version = "1.6.27"
+version = "1.8.4-SNAPSHOT"
 
 repositories {
     mavenCentral()
     jcenter()
 }
-
-
 
 tasks {
     register<Jar>("javadocJar") {
@@ -33,7 +31,6 @@ tasks {
     dokka {
         outputFormat = "javadoc"
         outputDirectory = "$buildDir/dokka"
-
     }
 }
 
@@ -44,7 +41,16 @@ kotlin {
             artifactId = "${rootProject.name}-common"
         }
     }
+
     jvm {
+        compilations.named("main") {
+            // kotlin compiler compatibility options
+            kotlinOptions {
+                apiVersion = "1.2"
+                languageVersion = "1.2"
+            }
+        }
+/*
         compilations.named("main") {
             // kotlin compiler compatibility options
             kotlinOptions {
@@ -54,10 +60,15 @@ kotlin {
         }
         mavenPublication {
             // make a name of jvm artifact backward-compatible, default "-jvm"
-            artifactId = rootProject.name
+            //artifactId = rootProject.name
         }
+*/
     }
-    js {
+    js(BOTH) {
+        //produceKotlinLibrary()
+        browser()
+
+/*
         compilations.named("main") {
             kotlinOptions {
                 metaInfo = true
@@ -66,27 +77,23 @@ kotlin {
                 moduleKind = "umd"
             }
         }
+*/
     }
     linuxX64("linuxX64")
     sourceSets {
-        commonMain {
-            dependencies {
-                implementation(kotlin("stdlib-common"))
-            }
-        }
-        commonTest {
+        val commonMain by getting {}
+        val commonTest by getting  {
             dependencies {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
             }
         }
-        named("jvmMain") {
+        val jvmMain by getting {
             dependencies {
-                implementation(kotlin("stdlib"))
                 api("org.slf4j:slf4j-api:${extra["sl4j_version"]}")
             }
         }
-        named("jvmTest") {
+        val jvmTest by getting {
             dependencies {
                 implementation(kotlin("test"))
                 implementation(kotlin("test-junit"))
@@ -97,12 +104,8 @@ kotlin {
                 implementation("org.apache.logging.log4j:log4j-slf4j-impl:${extra["log4j_version"]}")
             }
         }
-        named("jsMain") {
-            dependencies {
-                implementation(kotlin("stdlib-js"))
-            }
-        }
-        named("jsTest") {
+        val jsMain by getting {}
+        val jsTest by getting {
             dependencies {
                 implementation(kotlin("test-js"))
             }
