@@ -14,7 +14,7 @@ buildscript {
 }
 
 group = "io.github.microutils"
-version = "1.8.4-SNAPSHOT"
+version = "1.9.0"
 
 repositories {
     mavenCentral()
@@ -50,34 +50,14 @@ kotlin {
                 languageVersion = "1.2"
             }
         }
-/*
-        compilations.named("main") {
-            // kotlin compiler compatibility options
-            kotlinOptions {
-                apiVersion = "1.1"
-                languageVersion = "1.1"
-            }
-        }
         mavenPublication {
             // make a name of jvm artifact backward-compatible, default "-jvm"
-            //artifactId = rootProject.name
+            artifactId = rootProject.name
         }
-*/
     }
     js(BOTH) {
-        //produceKotlinLibrary()
         browser()
-
-/*
-        compilations.named("main") {
-            kotlinOptions {
-                metaInfo = true
-                sourceMap = true
-                verbose = true
-                moduleKind = "umd"
-            }
-        }
-*/
+        nodejs()
     }
     linuxX64("linuxX64")
     sourceSets {
@@ -90,7 +70,7 @@ kotlin {
         }
         val jvmMain by getting {
             dependencies {
-                api("org.slf4j:slf4j-api:${extra["sl4j_version"]}")
+                api("org.slf4j:slf4j-api:${extra["slf4j_version"]}")
             }
         }
         val jvmTest by getting {
