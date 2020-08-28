@@ -14,7 +14,7 @@ buildscript {
 }
 
 group = "io.github.microutils"
-version = "1.9.0"
+version = "1.9.5"
 
 repositories {
     mavenCentral()
@@ -32,6 +32,11 @@ tasks {
         outputFormat = "javadoc"
         outputDirectory = "$buildDir/dokka"
     }
+}
+
+java {
+    withSourcesJar()
+    withJavadocJar()
 }
 
 kotlin {
@@ -52,7 +57,9 @@ kotlin {
         }
         mavenPublication {
             // make a name of jvm artifact backward-compatible, default "-jvm"
-            artifactId = rootProject.name
+            afterEvaluate {
+                artifactId = rootProject.name
+            }
         }
     }
     js(BOTH) {
