@@ -4,11 +4,7 @@ import mu.KLogger
 import mu.KotlinLoggingConfiguration.appender
 import mu.KotlinLoggingConfiguration.formatter
 import mu.KotlinLoggingLevel
-import mu.KotlinLoggingLevel.DEBUG
-import mu.KotlinLoggingLevel.ERROR
-import mu.KotlinLoggingLevel.INFO
-import mu.KotlinLoggingLevel.TRACE
-import mu.KotlinLoggingLevel.WARN
+import mu.KotlinLoggingLevel.*
 import mu.Marker
 import mu.isLoggingEnabled
 

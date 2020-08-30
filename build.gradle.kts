@@ -1,4 +1,3 @@
-import org.jetbrains.dokka.gradle.DokkaTask
 import java.util.*
 
 plugins {
@@ -14,7 +13,7 @@ buildscript {
 }
 
 group = "io.github.microutils"
-version = "1.9.0-dev-npm-1"
+version = "1.9.0-dev-npm"
 
 repositories {
     mavenCentral()
@@ -23,8 +22,6 @@ repositories {
 
 tasks {
     dokkaHtml.configure {
-//        outputDirectory.set(buildDir.resolve("javadoc"))
-//        outputDirectory = "$buildDir/dokka"
         dokkaSourceSets {
             register("commonMain") {
                 displayName = "common"
@@ -53,7 +50,15 @@ kotlin {
         browser()
         nodejs()
     }
-    linuxX64("linuxX64")
+    val hostOs = System.getProperty("os.name")
+    val isMingwX64 = hostOs.startsWith("Windows")
+
+    val nativeTarget = when {
+        hostOs == "Mac OS X" -> macosX64("native")
+        hostOs == "Linux" -> linuxX64("native")
+        isMingwX64 -> mingwX64("native")
+        else -> throw GradleException("Host OS is not supported in Kotlin/Native.")
+    }
     sourceSets {
         val commonMain by getting {}
         val commonTest by getting  {
