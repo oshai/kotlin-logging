@@ -4,7 +4,7 @@ import java.util.*
 plugins {
     kotlin("multiplatform") version "1.4.0"
     id("com.jfrog.bintray") version "1.8.4"
-    id("org.jetbrains.dokka") version "0.10.0"
+    id("org.jetbrains.dokka") version "1.4.0-rc"
     `maven-publish`
     `java-library`
 }
@@ -14,7 +14,7 @@ buildscript {
 }
 
 group = "io.github.microutils"
-version = "1.9.0"
+version = "1.9.0-dev-npm-1"
 
 repositories {
     mavenCentral()
@@ -22,42 +22,36 @@ repositories {
 }
 
 tasks {
-    register<Jar>("javadocJar") {
-        val dokkaTask = getByName<DokkaTask>("dokka")
-        from(dokkaTask.outputDirectory)
-        dependsOn(dokkaTask)
-        archiveClassifier.set("javadoc")
+    dokkaHtml.configure {
+//        outputDirectory.set(buildDir.resolve("javadoc"))
+//        outputDirectory = "$buildDir/dokka"
+        dokkaSourceSets {
+            register("commonMain") {
+                displayName = "common"
+                platform = "common"
+            }
+        }
     }
-    dokka {
-        outputFormat = "javadoc"
-        outputDirectory = "$buildDir/dokka"
+    register<Jar>("dokkaJar") {
+        from(dokkaHtml)
+        dependsOn(dokkaHtml)
+        archiveClassifier.set("javadoc")
     }
 }
 
 kotlin {
-    metadata {
-        mavenPublication {
-            // make a name of an artifact backward-compatible, default "-metadata"
-            artifactId = "${rootProject.name}-common"
-        }
-    }
-
     jvm {
         compilations.named("main") {
             // kotlin compiler compatibility options
             kotlinOptions {
-                apiVersion = "1.2"
-                languageVersion = "1.2"
+                apiVersion = "1.4"
+                languageVersion = "1.4"
             }
-        }
-        mavenPublication {
-            // make a name of jvm artifact backward-compatible, default "-jvm"
-            artifactId = rootProject.name
         }
     }
     js(BOTH) {
         browser()
-        //nodejs()
+        nodejs()
     }
     linuxX64("linuxX64")
     sourceSets {
@@ -119,7 +113,7 @@ publishing {
                 url.set("http://github.com/MicroUtils/kotlin-logging/tree/master")
             }
         }
-        artifact(tasks["javadocJar"])
+        artifact(tasks["dokkaJar"])
     }
 }
 
@@ -150,6 +144,29 @@ bintray {
                 user = "token" //OSS user token: mandatory
                 password = "pass" //OSS user password: mandatory
                 close = "1" //Optional property. By default the staging repository is closed and artifacts are released to Maven Central. You can optionally turn this behaviour off (by puting 0 as value) and release the version manually.
+            }
+        }
+    }
+}
+
+/* Publication for github packages */
+
+val githubUser: String? by project
+val githubToken: String? by project
+
+afterEvaluate {
+    project.configure<PublishingExtension> {
+        if (githubUser != null && githubToken != null) {
+            repositories {
+                maven {
+                    name = "github"
+                    url = uri("https://maven.pkg.github.com/altavir/kotlin-logging/")
+                    credentials {
+                        username = githubUser
+                        password = githubToken
+                    }
+
+                }
             }
         }
     }
