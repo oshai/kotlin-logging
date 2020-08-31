@@ -67,6 +67,8 @@ kotlin {
         }
     }
     linuxX64("linuxX64")
+    macosX64("macosX64")
+    mingwX64("mingwX64")
     sourceSets {
         val commonMain by getting {}
         val commonTest by getting  {
@@ -96,6 +98,18 @@ kotlin {
             dependencies {
                 implementation(kotlin("test-js"))
             }
+        }
+        val nativeMain by creating {
+            dependsOn(commonMain)
+        }
+        val linuxX64Main by getting {
+            dependsOn(nativeMain)
+        }
+        val mingwX64Main by getting {
+            dependsOn(nativeMain)
+        }
+        val macosX64Main by getting {
+            dependsOn(nativeMain)
         }
     }
 }
