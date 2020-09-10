@@ -81,7 +81,7 @@ kotlin {
         named("jvmMain") {
             dependencies {
                 implementation(kotlin("stdlib"))
-                api("org.slf4j:slf4j-api:${extra["sl4j_version"]}")
+                api("org.slf4j:slf4j-api:${extra["slf4j_version"]}")
             }
         }
         named("jvmTest") {
