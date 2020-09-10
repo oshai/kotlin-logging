@@ -2,7 +2,7 @@ import org.jetbrains.dokka.gradle.DokkaTask
 import java.util.*
 
 plugins {
-    kotlin("multiplatform") version "1.4.0"
+    kotlin("multiplatform") version "1.3.72"
     id("com.jfrog.bintray") version "1.8.4"
     id("org.jetbrains.dokka") version "0.10.0"
     `maven-publish`
@@ -46,8 +46,8 @@ kotlin {
         compilations.named("main") {
             // kotlin compiler compatibility options
             kotlinOptions {
-                apiVersion = "1.2"
-                languageVersion = "1.2"
+                apiVersion = "1.1"
+                languageVersion = "1.1"
             }
         }
         mavenPublication {
@@ -55,25 +55,36 @@ kotlin {
             artifactId = rootProject.name
         }
     }
-    js(BOTH) {
-        browser()
-        //nodejs()
+    js {
+        compilations.named("main") {
+            kotlinOptions {
+                metaInfo = true
+                sourceMap = true
+                verbose = true
+                moduleKind = "umd"
+            }
+        }
     }
     linuxX64("linuxX64")
     sourceSets {
-        val commonMain by getting {}
-        val commonTest by getting  {
+        commonMain {
+            dependencies {
+                implementation(kotlin("stdlib-common"))
+            }
+        }
+        commonTest {
             dependencies {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
             }
         }
-        val jvmMain by getting {
+        named("jvmMain") {
             dependencies {
+                implementation(kotlin("stdlib"))
                 api("org.slf4j:slf4j-api:${extra["slf4j_version"]}")
             }
         }
-        val jvmTest by getting {
+        named("jvmTest") {
             dependencies {
                 implementation(kotlin("test"))
                 implementation(kotlin("test-junit"))
@@ -84,8 +95,12 @@ kotlin {
                 implementation("org.apache.logging.log4j:log4j-slf4j-impl:${extra["log4j_version"]}")
             }
         }
-        val jsMain by getting {}
-        val jsTest by getting {
+        named("jsMain") {
+            dependencies {
+                implementation(kotlin("stdlib-js"))
+            }
+        }
+        named("jsTest") {
             dependencies {
                 implementation(kotlin("test-js"))
             }
