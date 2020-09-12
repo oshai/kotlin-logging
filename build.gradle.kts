@@ -15,7 +15,7 @@ buildscript {
 }
 
 group = "io.github.microutils"
-version = "1.10.11" + (if (System.getProperty("snapshot")?.toBoolean() == true) "-SNAPSHOT" else "")
+version = "1.11.0" + (if (System.getProperty("snapshot")?.toBoolean() == true) "-SNAPSHOT" else "")
 
 repositories {
     mavenCentral()
