@@ -1,5 +1,5 @@
 plugins {
-    kotlin("multiplatform") version "1.4.0"
+    kotlin("multiplatform") version "1.4.10"
 //    id("com.jfrog.bintray") version "1.8.4"
     id("org.jetbrains.dokka") version "1.4.0"
     `maven-publish`
@@ -11,7 +11,7 @@ apply("versions.gradle.kts")
 
 
 group = "io.github.microutils"
-version = "1.9.0-dev-npm"
+version = "1.9.0-dev-npm-2"
 
 repositories {
     jcenter()
