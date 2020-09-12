@@ -71,6 +71,19 @@ compile 'io.github.microutils:kotlin-logging:1.8.3'
 
 Alternatively, download the JAR from [github](https://github.com/MicroUtils/kotlin-logging/releases/latest) or [bintray](https://dl.bintray.com/microutils/kotlin-logging/io/github/microutils/kotlin-logging/) or [maven-central](http://repo1.maven.org/maven2/io/github/microutils/kotlin-logging/).
 
+### Snapshot builds
+To get the latest non-stable version of kotlin logging use the following gradle configuration:
+```Groovy
+repositories {
+	maven { url 'https://oss.jfrog.org/artifactory/oss-snapshot-local' }
+}
+
+dependencies {
+	compile('io.github.microutils:kotlin-logging:1.10.11-SNAPSHOT')
+}
+```
+* The latest snapshot version can be seen in `build.gradle.kts`.
+
 ## Multiplatform
 
 An experimental common & JS support is available.  
