@@ -7,6 +7,7 @@ plugins {
     id("org.jetbrains.dokka") version "0.10.0"
     `maven-publish`
     `java-library`
+    id("com.jfrog.artifactory") version "4.5.4"
 }
 
 buildscript {
@@ -14,7 +15,7 @@ buildscript {
 }
 
 group = "io.github.microutils"
-version = "1.9.0"
+version = "1.10.10-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -168,4 +169,25 @@ bintray {
             }
         }
     }
+}
+
+artifactory {
+    setContextUrl("http://oss.jfrog.org")
+    publish(delegateClosureOf<org.jfrog.gradle.plugin.artifactory.dsl.PublisherConfig> {
+        repository(delegateClosureOf<groovy.lang.GroovyObject> {
+            setProperty("repoKey", "oss-snapshot-local")
+            setProperty("username", System.getProperty("bintray.user"))
+            setProperty("password", System.getProperty("bintray.key"))
+            setProperty("maven", true)
+        })
+        defaults(delegateClosureOf<groovy.lang.GroovyObject> {
+            invokeMethod("publications", arrayOf("mavenPublication"))
+            setProperty("publishArtifacts", true)
+            setProperty("publishPom", true)
+        })
+    })
+    resolve(delegateClosureOf<org.jfrog.gradle.plugin.artifactory.dsl.ResolverConfig>{
+        setProperty("repoKey", "jcenter")
+    })
+    clientConfig.info.setBuildNumber(System.getProperty("build.number"))
 }
