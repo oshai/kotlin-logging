@@ -180,7 +180,7 @@ artifactory {
             setProperty("maven", true)
         })
         defaults(delegateClosureOf<groovy.lang.GroovyObject> {
-            invokeMethod("publications", arrayOf("mavenPublication"))
+            invokeMethod("publications", publishing.publications.names.toTypedArray())
             setProperty("publishArtifacts", true)
             setProperty("publishPom", true)
         })
