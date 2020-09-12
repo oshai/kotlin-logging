@@ -82,7 +82,7 @@ dependencies {
 	compile('io.github.microutils:kotlin-logging:1.10.11-SNAPSHOT')
 }
 ```
-* The latest snapshot version can be seen in `build.gradle.kts`.
+* The latest snapshot version can be seen in [build.gradle.kts](https://github.com/MicroUtils/kotlin-logging/blob/master/build.gradle.kts).
 
 ## Multiplatform
 
