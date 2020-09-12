@@ -4,10 +4,10 @@ import java.util.*
 plugins {
     kotlin("multiplatform") version "1.3.72"
     id("com.jfrog.bintray") version "1.8.4"
+    id("com.jfrog.artifactory") version "4.17.2"
     id("org.jetbrains.dokka") version "0.10.0"
     `maven-publish`
     `java-library`
-    id("com.jfrog.artifactory") version "4.5.4"
 }
 
 buildscript {
