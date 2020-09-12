@@ -1,3 +1,13 @@
+# 1.11.0
+
+* Fix message formatted twice [issue #132](https://github.com/MicroUtils/kotlin-logging/issues/132) and [PR #134](https://github.com/MicroUtils/kotlin-logging/pull/134).
+* Add automation for snapshot and release builds [#135](https://github.com/MicroUtils/kotlin-logging/issues/135).
+* Tried to upgrade to Kotlin 1.4.0, but reveted [#130](https://github.com/MicroUtils/kotlin-logging/issues/130) (Still WIP).
+
+# Versions 1.9.x and 1.10.x are obselete
+
+* Had deployment issues.
+
 # 1.8.3
 
 * Add Linux X64 Support [#119](https://github.com/MicroUtils/kotlin-logging/pull/119).
