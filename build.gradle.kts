@@ -4,6 +4,7 @@ import java.util.*
 plugins {
     kotlin("multiplatform") version "1.3.72"
     id("com.jfrog.bintray") version "1.8.4"
+    id("com.jfrog.artifactory") version "4.17.2"
     id("org.jetbrains.dokka") version "0.10.0"
     `maven-publish`
     `java-library`
@@ -14,7 +15,7 @@ buildscript {
 }
 
 group = "io.github.microutils"
-version = "1.9.0"
+version = "1.10.11" + (if (System.getProperty("snapshot")?.toBoolean() == true) "-SNAPSHOT" else "")
 
 repositories {
     mavenCentral()
@@ -139,9 +140,8 @@ publishing {
 }
 
 bintray {
-    user = "oshai"//project.hasProperty("bintrayUser") ? project.property("bintrayUser") : System.getenv("BINTRAY_USER")
-    key = "mykey" //https://bintray.com/profile/edit
-    // project.hasProperty("bintrayApiKey") ? project.property("bintrayApiKey") : System.getenv("BINTRAY_API_KEY")
+    user = System.getProperty("bintray.user")
+    key = System.getProperty("bintray.key") //https://bintray.com/profile/edit
     setPublications("metadata", "jvm", "js")
     publish = true //[Default: false] Whether version should be auto published after an upload
     pkg.apply {
@@ -162,10 +162,31 @@ bintray {
             gpg.sign = true //Determines whether to GPG sign the files. The default is false
             mavenCentralSync.apply {
                 sync = true //[Default: true] Determines whether to sync the version to Maven Central.
-                user = "token" //OSS user token: mandatory
-                password = "pass" //OSS user password: mandatory
+                user = System.getProperty("maven.user") //OSS user token: mandatory
+                password = System.getProperty("maven.password") //OSS user password: mandatory
                 close = "1" //Optional property. By default the staging repository is closed and artifacts are released to Maven Central. You can optionally turn this behaviour off (by puting 0 as value) and release the version manually.
             }
         }
     }
+}
+
+artifactory {
+    setContextUrl("http://oss.jfrog.org")
+    publish(delegateClosureOf<org.jfrog.gradle.plugin.artifactory.dsl.PublisherConfig> {
+        repository(delegateClosureOf<groovy.lang.GroovyObject> {
+            setProperty("repoKey", "oss-snapshot-local")
+            setProperty("username", System.getProperty("bintray.user"))
+            setProperty("password", System.getProperty("bintray.key"))
+            setProperty("maven", true)
+        })
+        defaults(delegateClosureOf<groovy.lang.GroovyObject> {
+            invokeMethod("publications", arrayOf("mavenPublication"))
+            setProperty("publishArtifacts", true)
+            setProperty("publishPom", true)
+        })
+    })
+    resolve(delegateClosureOf<org.jfrog.gradle.plugin.artifactory.dsl.ResolverConfig>{
+        setProperty("repoKey", "jcenter")
+    })
+    clientConfig.info.setBuildNumber(System.getProperty("build.number"))
 }
