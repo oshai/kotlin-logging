@@ -8,11 +8,11 @@ dist: trusty
 stages:
 - name: build
 - name: snapshot
-  if: branch = master AND env(RELEASE_BRANCH) = true
+  if: branch = master AND type = push
 - name: pre-snapshot
-  if: branch = pre-snapshot AND env(RELEASE_BRANCH) = true
+  if: branch = pre-snapshot AND type = push
 - name: release
-  if: branch = release AND env(RELEASE_BRANCH) = true
+  if: branch = release AND type = push
 
 jobs:
     include:
