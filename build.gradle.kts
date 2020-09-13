@@ -35,6 +35,21 @@ tasks {
     }
 }
 
+tasks.withType<com.jfrog.bintray.gradle.tasks.BintrayUploadTask> {
+    doFirst {
+        publishing.publications
+            .filterIsInstance<MavenPublication>()
+            .forEach { publication ->
+                val moduleFile = buildDir.resolve("publications/${publication.name}/module.json")
+                if (moduleFile.exists()) {
+                    publication.artifact(object : org.gradle.api.publish.maven.internal.artifact.FileBasedMavenArtifact(moduleFile) {
+                        override fun getDefaultExtension() = "module"
+                    })
+                }
+            }
+    }
+}
+
 kotlin {
     metadata {
         mavenPublication {
@@ -56,7 +71,7 @@ kotlin {
             artifactId = rootProject.name
         }
     }
-    js(BOTH) {
+    js(IR) {
         browser()
         nodejs()
     }
