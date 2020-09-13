@@ -9,6 +9,8 @@ stages:
 - name: build
 - name: snapshot
   if: branch = master
+- name: snapshot-1.4
+  if: branch = 1.4.0
 - name: release
   if: branch = release
 
@@ -17,6 +19,8 @@ jobs:
     - stage: build
       script: ./gradlew build
     - stage: snapshot
+      script: ./gradlew build artifactoryPublish -x test -Dsnapshot=true -Dbintray.user=$BINTRAY_USER -Dbintray.key=$BINTRAY_API_KEY -Dbuild.number=$TRAVIS_BUILD_NUMBER
+    - stage: snapshot-1.4
       script: ./gradlew build artifactoryPublish -x test -Dsnapshot=true -Dbintray.user=$BINTRAY_USER -Dbintray.key=$BINTRAY_API_KEY -Dbuild.number=$TRAVIS_BUILD_NUMBER
     - stage: release
       script: ./gradlew build bintrayUpload -x test -Dbintray.user=$BINTRAY_USER -Dbintray.key=$BINTRAY_API_KEY -Dbuild.number=$TRAVIS_BUILD_NUMBER -Dmaven.password=$MAVEN_PASSWORD -Dmaven.user=$MAVEN_USER
