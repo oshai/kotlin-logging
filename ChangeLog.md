@@ -1,3 +1,7 @@
+# 1.11.1
+
+* Upgrade to Kotlin 1.4.10 [#137](https://github.com/MicroUtils/kotlin-logging/pull/137).
+
 # 1.11.0
 
 * Fix message formatted twice [issue #132](https://github.com/MicroUtils/kotlin-logging/issues/132) and [PR #134](https://github.com/MicroUtils/kotlin-logging/pull/134).
