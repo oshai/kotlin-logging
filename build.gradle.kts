@@ -57,12 +57,12 @@ kotlin {
         }
     }
     js {
-        compilations.named("main") {
-            kotlinOptions {
-                metaInfo = true
-                sourceMap = true
-                verbose = true
-                moduleKind = "umd"
+        nodejs()
+        browser {
+            testTask {
+                useKarma {
+                    useChromeHeadless()
+                }
             }
         }
     }
