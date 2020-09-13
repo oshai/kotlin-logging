@@ -56,15 +56,9 @@ kotlin {
             artifactId = rootProject.name
         }
     }
-    js {
-        compilations.named("main") {
-            kotlinOptions {
-                metaInfo = true
-                sourceMap = true
-                verbose = true
-                moduleKind = "umd"
-            }
-        }
+    js(BOTH) {
+        browser()
+        nodejs()
     }
     linuxX64("linuxX64")
     sourceSets {
@@ -133,7 +127,7 @@ publishing {
 bintray {
     user = System.getProperty("bintray.user")
     key = System.getProperty("bintray.key") //https://bintray.com/profile/edit
-    setPublications("metadata", "jvm", "js")
+    setPublications(*publishing.publications.names.toTypedArray())
     publish = true //[Default: false] Whether version should be auto published after an upload
     pkg.apply {
         repo = "kotlin-logging"
