@@ -1,3 +1,8 @@
+
+# 1.11.3
+
+* Support JS-IR backend [#139](https://github.com/MicroUtils/kotlin-logging/pull/139).
+
 # 1.11.2
 
 * Use linux code for linux/macos/mingw targets [#131](https://github.com/MicroUtils/kotlin-logging/pull/131).
