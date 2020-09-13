@@ -8,11 +8,11 @@ dist: trusty
 stages:
 - name: build
 - name: snapshot
-  if: branch = master
-- name: snapshot-1.4
-  if: branch = 1.4.0
+  if: branch = master AND type = push
+- name: pre-snapshot
+  if: branch = pre-snapshot AND type = push
 - name: release
-  if: branch = release
+  if: branch = release AND type = push
 
 jobs:
     include:
@@ -20,8 +20,7 @@ jobs:
       script: ./gradlew clean build
     - stage: snapshot
       script: ./gradlew clean build artifactoryPublish -x test -Dsnapshot=true -Dbintray.user=$BINTRAY_USER -Dbintray.key=$BINTRAY_API_KEY -Dbuild.number=$TRAVIS_BUILD_NUMBER
-    - stage: snapshot-1.4
+    - stage: pre-snapshot
       script: ./gradlew clean build artifactoryPublish -x test -Dsnapshot=true -Dbintray.user=$BINTRAY_USER -Dbintray.key=$BINTRAY_API_KEY -Dbuild.number=$TRAVIS_BUILD_NUMBER
     - stage: release
       script: ./gradlew clean build bintrayUpload -x test -Dbintray.user=$BINTRAY_USER -Dbintray.key=$BINTRAY_API_KEY -Dbuild.number=$TRAVIS_BUILD_NUMBER -Dmaven.password=$MAVEN_PASSWORD -Dmaven.user=$MAVEN_USER
-
