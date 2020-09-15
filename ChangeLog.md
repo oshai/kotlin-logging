@@ -1,3 +1,6 @@
+# 1.11.4
+
+* Revert back to Kotlin 1.3 and version like 1.11.0 to fix [#144](https://github.com/MicroUtils/kotlin-logging/pull/144).
 
 # 1.11.3
 
