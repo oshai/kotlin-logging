@@ -19,8 +19,8 @@ jobs:
     - stage: build
       script: ./gradlew clean build
     - stage: snapshot
-      script: ./gradlew clean build artifactoryPublish -x test -Dsnapshot=true -Dbintray.user=$BINTRAY_USER -Dbintray.key=$BINTRAY_API_KEY -Dbuild.number=$TRAVIS_BUILD_NUMBER
+      script: ./gradlew clean build artifactoryPublish -Dsnapshot=true -Dbintray.user=$BINTRAY_USER -Dbintray.key=$BINTRAY_API_KEY -Dbuild.number=$TRAVIS_BUILD_NUMBER
     - stage: pre-snapshot
-      script: ./gradlew clean build artifactoryPublish -x test -Dsnapshot=true -Dbintray.user=$BINTRAY_USER -Dbintray.key=$BINTRAY_API_KEY -Dbuild.number=$TRAVIS_BUILD_NUMBER
+      script: ./gradlew clean build artifactoryPublish -Dsnapshot=true -Dbintray.user=$BINTRAY_USER -Dbintray.key=$BINTRAY_API_KEY -Dbuild.number=$TRAVIS_BUILD_NUMBER
     - stage: release
       script: ./gradlew clean build bintrayUpload -x test -Dbintray.user=$BINTRAY_USER -Dbintray.key=$BINTRAY_API_KEY -Dbuild.number=$TRAVIS_BUILD_NUMBER -Dmaven.password=$MAVEN_PASSWORD -Dmaven.user=$MAVEN_USER
