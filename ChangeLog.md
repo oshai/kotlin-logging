@@ -1,9 +1,9 @@
 # 2.0.0 (To Be Released)
 
+* Build refactor and bintray plugin replacement [#145](https://github.com/MicroUtils/kotlin-logging/pull/145).
 * Support JS-IR backend [#139](https://github.com/MicroUtils/kotlin-logging/pull/139).
 * Use linux code for linux/macos/mingw targets [#131](https://github.com/MicroUtils/kotlin-logging/pull/131).
 * Upgrade to Kotlin 1.4.10 [#137](https://github.com/MicroUtils/kotlin-logging/pull/137).
-
 
 # 1.11.5
 
