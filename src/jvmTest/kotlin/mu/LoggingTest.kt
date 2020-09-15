@@ -40,6 +40,10 @@ class ClassWithLogging {
         val ex = Throwable()
         logger.trace(marker, ex) { "test ClassWithLogging" }
     }
+
+    fun testFormatting() {
+        logger.info("Message: {}", "String with {} curly braces")
+    }
 }
 
 open class ClassHasLogging : KLoggable {
@@ -211,6 +215,15 @@ class LoggingTest {
         Assert.assertEquals(
             "INFO  mu.LambdaRaisesError  - Log message invocation failed: java.lang.NullPointerException",
             appenderWithWriter.writer.toString().trim()
+        )
+    }
+
+    @Test
+    fun placeholderFormatting() {
+        ClassWithLogging().testFormatting()
+        appenderWithWriter.writer.flush()
+        Assert.assertEquals(
+            "INFO  mu.ClassWithLogging  - Message: String with {} curly braces", appenderWithWriter.writer.toString().trim()
         )
     }
 

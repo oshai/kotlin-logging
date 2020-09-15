@@ -2,6 +2,10 @@ plugins {
     kotlin("multiplatform") version "1.4.10"
 //    id("com.jfrog.bintray") version "1.8.4"
     id("org.jetbrains.dokka") version "1.4.0"
+    kotlin("multiplatform") version "1.4.10"
+    id("com.jfrog.bintray") version "1.8.4"
+    id("com.jfrog.artifactory") version "4.17.2"
+    id("org.jetbrains.dokka") version "0.10.0"
     `maven-publish`
     id("ru.mipt.npm.publish")
 }
@@ -11,7 +15,7 @@ apply("versions.gradle.kts")
 
 
 group = "io.github.microutils"
-version = "1.9.0-dev-npm-2"
+version = "1.11.5" + (if (System.getProperty("snapshot")?.toBoolean() == true) "-SNAPSHOT" else "")
 
 repositories {
     jcenter()
@@ -31,6 +35,15 @@ kotlin {
     js(BOTH) {
         browser()
         nodejs()
+    js {
+        nodejs()
+        browser {
+            testTask {
+                useKarma {
+                    useChromeHeadless()
+                }
+            }
+        }
     }
     val hostOs = System.getProperty("os.name")
     val isMingwX64 = hostOs.startsWith("Windows")
@@ -44,6 +57,9 @@ kotlin {
         }
         else -> throw GradleException("Host OS is not supported in Kotlin/Native.")
     }
+    linuxX64("linuxX64")
+    macosX64("macosX64")
+    mingwX64("mingwX64")
     sourceSets {
         val commonMain by getting {}
         val commonTest by getting  {
@@ -73,6 +89,18 @@ kotlin {
             dependencies {
                 implementation(kotlin("test-js"))
             }
+        }
+        val nativeMain by creating {
+            dependsOn(commonMain)
+        }
+        val linuxX64Main by getting {
+            dependsOn(nativeMain)
+        }
+        val mingwX64Main by getting {
+            dependsOn(nativeMain)
+        }
+        val macosX64Main by getting {
+            dependsOn(nativeMain)
         }
         val nativeMain by getting
         findByName("linuxX64Main")?.dependsOn(nativeMain)
@@ -149,7 +177,34 @@ publishing {
 //        }
 //    }
 //}
+bintray {
+    user = System.getProperty("bintray.user")
+    key = System.getProperty("bintray.key") //https://bintray.com/profile/edit
+    setPublications(*publishing.publications.names.toTypedArray())
+    publish = true //[Default: false] Whether version should be auto published after an upload
+    pkg.apply {
+        repo = "kotlin-logging"
+        name = "kotlin-logging"
+        userOrg = "microutils"
+        setLicenses("Apache-2.0")
+        vcsUrl = "https://github.com/MicroUtils/kotlin-logging"
+        websiteUrl = "https://github.com/MicroUtils/kotlin-logging"
+        issueTrackerUrl = "https://github.com/MicroUtils/kotlin-logging/issues"
 
+        githubRepo = "MicroUtils/kotlin-logging"
+        githubReleaseNotesFile = "ChangeLog.md"
+        version.apply {
+            name = "${project.version}"
+            desc = "kotlin-logging - Lightweight logging framework for Kotlin"
+            released = "${Date()}"
+            gpg.sign = true //Determines whether to GPG sign the files. The default is false
+            mavenCentralSync.apply {
+                sync = true //[Default: true] Determines whether to sync the version to Maven Central.
+                user = System.getProperty("maven.user") //OSS user token: mandatory
+                password = System.getProperty("maven.password") //OSS user password: mandatory
+                close = "1" //Optional property. By default the staging repository is closed and artifacts are released to Maven Central. You can optionally turn this behaviour off (by puting 0 as value) and release the version manually.
+            }
+        }
 
 /* Kscience publications */
 kscience{
@@ -158,6 +213,31 @@ kscience{
         githubOrg = "altavir"
         githubProject = "kotlin-logging"
     }
+    //workaround bintray bug
+    project.afterEvaluate {
+        setPublications(*project.extensions.findByType<PublishingExtension>()!!.publications.names.toTypedArray())
+    }
+}
+
+artifactory {
+    setContextUrl("http://oss.jfrog.org")
+    publish(delegateClosureOf<org.jfrog.gradle.plugin.artifactory.dsl.PublisherConfig> {
+        repository(delegateClosureOf<groovy.lang.GroovyObject> {
+            setProperty("repoKey", "oss-snapshot-local")
+            setProperty("username", System.getProperty("bintray.user"))
+            setProperty("password", System.getProperty("bintray.key"))
+            setProperty("maven", true)
+        })
+        defaults(delegateClosureOf<groovy.lang.GroovyObject> {
+            invokeMethod("publications", publishing.publications.names.toTypedArray())
+            setProperty("publishArtifacts", true)
+            setProperty("publishPom", true)
+        })
+    })
+    resolve(delegateClosureOf<org.jfrog.gradle.plugin.artifactory.dsl.ResolverConfig>{
+        setProperty("repoKey", "jcenter")
+    })
+    clientConfig.info.setBuildNumber(System.getProperty("build.number"))
 }
 
 //val githubUser: String? by project
