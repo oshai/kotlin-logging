@@ -79,7 +79,7 @@ repositories {
 }
 
 dependencies {
-	compile('io.github.microutils:kotlin-logging:2.0.0-SNAPSHOT')
+	compile('io.github.microutils:kotlin-logging-jvm:2.0.0-SNAPSHOT')
 }
 ```
 * The latest snapshot version can be seen in [build.gradle.kts](https://github.com/MicroUtils/kotlin-logging/blob/master/build.gradle.kts) and in [artifactory](https://oss.jfrog.org/artifactory/webapp/#/artifacts/browse/tree/General/oss-snapshot-local/io/github/microutils/kotlin-logging).
