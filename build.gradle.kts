@@ -8,7 +8,7 @@ plugins {
 apply("versions.gradle.kts")
 
 group = "io.github.microutils"
-version = "1.11.5" + (if (System.getProperty("snapshot")?.toBoolean() == true) "-SNAPSHOT" else "")
+version = "1.11.5-npm" + (if (System.getProperty("snapshot")?.toBoolean() == true) "-SNAPSHOT" else "")
 
 repositories {
     jcenter()
@@ -42,7 +42,7 @@ kotlin {
 
     sourceSets {
         val commonMain by getting {}
-        val commonTest by getting  {
+        val commonTest by getting {
             dependencies {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
@@ -123,21 +123,23 @@ publishing {
     }
 }
 
-val bintrayOrg: String? by project
-val bintrayRepo: String? by project
-val bintrayUser: String? by project
-val bintrayApiKey: String? by project
+publishing {
+    val bintrayOrg: String? by project
+    val bintrayRepo: String? by project
+    val bintrayUser: String? by project
+    val bintrayApiKey: String? by project
 
-if (bintrayRepo != null && bintrayUser != null && bintrayApiKey != null) {
-    repositories {
-        maven {
-            name = "bintray"
-            url = uri(
-                "https://api.bintray.com/maven/$bintrayOrg/$bintrayRepo/${project.name}/;publish=1;override=1"
-            )
-            credentials {
-                username = bintrayUser
-                password = bintrayApiKey
+    if (bintrayRepo != null && bintrayUser != null && bintrayApiKey != null) {
+        repositories {
+            maven {
+                name = "bintray"
+                url = uri(
+                    "https://api.bintray.com/maven/$bintrayOrg/$bintrayRepo/${project.name}/;publish=1;override=1"
+                )
+                credentials {
+                    username = bintrayUser
+                    password = bintrayApiKey
+                }
             }
         }
     }
@@ -190,9 +192,8 @@ artifactory {
             setProperty("publishPom", true)
         })
     })
-    resolve(delegateClosureOf<org.jfrog.gradle.plugin.artifactory.dsl.ResolverConfig>{
+    resolve(delegateClosureOf<org.jfrog.gradle.plugin.artifactory.dsl.ResolverConfig> {
         setProperty("repoKey", "jcenter")
     })
     clientConfig.info.buildNumber = System.getProperty("build.number")
 }
-
