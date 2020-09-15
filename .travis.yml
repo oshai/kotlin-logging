@@ -8,9 +8,7 @@ dist: trusty
 stages:
 - name: build
 - name: snapshot
-  if: branch = master AND type = push
-- name: pre-snapshot
-  if: branch = pre-snapshot AND type = push
+  if: branch IN (master, pre-snapshot, kotlin-1.3-snapshot) AND type = push
 - name: release
   if: branch IN (release, kotlin-1.3) AND type = push
 
@@ -19,8 +17,6 @@ jobs:
     - stage: build
       script: ./gradlew clean build
     - stage: snapshot
-      script: ./gradlew clean build artifactoryPublish -x test -Dsnapshot=true -Dbintray.user=$BINTRAY_USER -Dbintray.key=$BINTRAY_API_KEY -Dbuild.number=$TRAVIS_BUILD_NUMBER
-    - stage: pre-snapshot
       script: ./gradlew clean build artifactoryPublish -x test -Dsnapshot=true -Dbintray.user=$BINTRAY_USER -Dbintray.key=$BINTRAY_API_KEY -Dbuild.number=$TRAVIS_BUILD_NUMBER
     - stage: release
       script: ./gradlew clean build bintrayUpload -x test -Dbintray.user=$BINTRAY_USER -Dbintray.key=$BINTRAY_API_KEY -Dbuild.number=$TRAVIS_BUILD_NUMBER -Dmaven.password=$MAVEN_PASSWORD -Dmaven.user=$MAVEN_USER

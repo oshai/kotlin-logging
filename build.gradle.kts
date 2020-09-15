@@ -144,7 +144,7 @@ publishing {
 bintray {
     user = System.getProperty("bintray.user")
     key = System.getProperty("bintray.key") //https://bintray.com/profile/edit
-    setPublications(*publishing.publications.names.toTypedArray())
+    setPublications("metadata", "jvm", "js")
     publish = true //[Default: false] Whether version should be auto published after an upload
     pkg.apply {
         repo = "kotlin-logging"
@@ -169,10 +169,6 @@ bintray {
                 close = "1" //Optional property. By default the staging repository is closed and artifacts are released to Maven Central. You can optionally turn this behaviour off (by puting 0 as value) and release the version manually.
             }
         }
-    }
-    //workaround bintray bug
-    project.afterEvaluate {
-        setPublications(*project.extensions.findByType<PublishingExtension>()!!.publications.names.toTypedArray())
     }
 }
 
