@@ -14,14 +14,14 @@ import mu.internal.KLoggerFactory
  * }
  * ```
  */
-open class KLogging : KLoggable {
+public open class KLogging : KLoggable {
     override val logger: KLogger = logger()
 }
 
 /**
  * A class with logging capabilities and explicit logger name
  */
-open class NamedKLogging(name: String) : KLoggable {
+public open class NamedKLogging(name: String) : KLoggable {
     override val logger: KLogger = logger(name)
 }
 
@@ -30,22 +30,22 @@ open class NamedKLogging(name: String) : KLoggable {
  * implemented using a logger
  * obtain a logger with logger() method
  */
-interface KLoggable {
+public interface KLoggable {
 
     /**
      * The member that performs the actual logging
      */
-    val logger: KLogger
+    public val logger: KLogger
 
     /**
      * get logger for the class
      */
-    fun logger(): KLogger = KLoggerFactory.logger(this)
+    public fun logger(): KLogger = KLoggerFactory.logger(this)
 
     /**
      * get logger by explicit name
      */
-    fun logger(name: String): KLogger = KLoggerFactory.logger(name)
+    public fun logger(name: String): KLogger = KLoggerFactory.logger(name)
 }
 
 

@@ -1,9 +1,9 @@
 package mu
 
-interface Appender {
-    fun trace(message: Any?)
-    fun debug(message: Any?)
-    fun info(message: Any?)
-    fun warn(message: Any?)
-    fun error(message: Any?)
+public interface Appender {
+    public fun trace(message: Any?)
+    public fun debug(message: Any?)
+    public fun info(message: Any?)
+    public fun warn(message: Any?)
+    public fun error(message: Any?)
 }

@@ -2,8 +2,8 @@ package mu
 
 import org.slf4j.MarkerFactory
 
-actual object KMarkerFactory {
+public actual object KMarkerFactory {
 
-    actual fun getMarker(name: String): Marker = MarkerFactory.getMarker(name)
+    public actual fun getMarker(name: String): Marker = MarkerFactory.getMarker(name)
 
 }
