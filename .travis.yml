@@ -5,10 +5,15 @@ jdk:
 
 dist: trusty
 
+os:
+- linux
+- osx
+- windows
+
 stages:
 - name: build
 - name: snapshot
-  if: branch IN (master, pre-snapshot, 1.x-snapshot) AND type = push
+  if: branch IN (master, pre-snapshot, 1.x-snapshot, windows) AND type = push
 - name: release
   if: branch IN (release, 1.x) AND type = push
 
