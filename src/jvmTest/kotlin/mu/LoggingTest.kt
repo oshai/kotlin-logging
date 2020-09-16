@@ -213,7 +213,7 @@ class LoggingTest {
         LambdaRaisesError().test()
         appenderWithWriter.writer.flush()
         Assert.assertEquals(
-            "INFO  mu.LambdaRaisesError  - Log message invocation failed: kotlin.KotlinNullPointerException",
+            "INFO  mu.LambdaRaisesError  - Log message invocation failed: java.lang.NullPointerException",
             appenderWithWriter.writer.toString().trim()
         )
     }
