@@ -4,18 +4,18 @@ import mu.internal.KLoggerFactory
 import org.slf4j.Logger
 
 
-actual object KotlinLogging {
+public actual object KotlinLogging {
     /**
      * This method allow defining the logger in a file in the following way:
      * ```
      * val logger = KotlinLogging.logger {}
      * ```
      */
-    actual fun logger(func: () -> Unit): KLogger = KLoggerFactory.logger(func)
+    public actual fun logger(func: () -> Unit): KLogger = KLoggerFactory.logger(func)
 
-    actual fun logger(name: String): KLogger = KLoggerFactory.logger(name)
+    public actual fun logger(name: String): KLogger = KLoggerFactory.logger(name)
 
-    fun logger(underlyingLogger: Logger) = KLoggerFactory.wrapJLogger(underlyingLogger)
+    public fun logger(underlyingLogger: Logger): KLogger = KLoggerFactory.wrapJLogger(underlyingLogger)
 }
 
-fun Logger.toKLogger() = KotlinLogging.logger(this)
+public fun Logger.toKLogger(): KLogger = KotlinLogging.logger(this)

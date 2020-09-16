@@ -1,6 +1,6 @@
 package mu
 
-actual interface Marker {
+public actual interface Marker {
 
-    actual fun getName(): String
+    public actual fun getName(): String
 }

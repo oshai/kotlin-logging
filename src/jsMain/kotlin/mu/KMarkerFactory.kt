@@ -2,7 +2,7 @@ package mu
 
 import mu.internal.MarkerJS
 
-actual object KMarkerFactory {
+public actual object KMarkerFactory {
 
-    actual fun getMarker(name: String): Marker = MarkerJS(name)
+    public actual fun getMarker(name: String): Marker = MarkerJS(name)
 }

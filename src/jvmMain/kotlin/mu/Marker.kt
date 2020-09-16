@@ -1,3 +1,3 @@
 package mu
 
-actual typealias Marker = org.slf4j.Marker
+public actual typealias Marker = org.slf4j.Marker

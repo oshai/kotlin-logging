@@ -16,6 +16,7 @@ repositories {
 }
 
 kotlin {
+    explicitApi()
     jvm {
         compilations.all {
             // kotlin compiler compatibility options

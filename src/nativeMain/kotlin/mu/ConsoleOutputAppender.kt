@@ -3,11 +3,11 @@ package mu
 import platform.posix.fprintf
 import platform.posix.stderr
 
-object ConsoleOutputAppender : Appender {
-    override fun trace(message: Any?) = println(message)
-    override fun debug(message: Any?) = println(message)
-    override fun info(message: Any?) = println(message)
-    override fun warn(message: Any?) = println(message)
+public object ConsoleOutputAppender : Appender {
+    public override fun trace(message: Any?): Unit = println(message)
+    public override fun debug(message: Any?): Unit = println(message)
+    public override fun info(message: Any?): Unit = println(message)
+    public override fun warn(message: Any?): Unit = println(message)
 
     override fun error(message: Any?) {
         fprintf(stderr, "$message\n")
