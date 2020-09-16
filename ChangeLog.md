@@ -4,6 +4,7 @@
 * Support JS-IR backend [#139](https://github.com/MicroUtils/kotlin-logging/pull/139).
 * Use linux code for linux/macos/mingw targets [#131](https://github.com/MicroUtils/kotlin-logging/pull/131).
 * Upgrade to Kotlin 1.4.10 [#137](https://github.com/MicroUtils/kotlin-logging/pull/137).
+* Add explicit API in strict mode [#124](https://github.com/MicroUtils/kotlin-logging/issues/124).
 
 # 1.11.6 (To Be Released)
 
