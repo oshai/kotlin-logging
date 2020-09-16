@@ -5,6 +5,10 @@
 * Use linux code for linux/macos/mingw targets [#131](https://github.com/MicroUtils/kotlin-logging/pull/131).
 * Upgrade to Kotlin 1.4.10 [#137](https://github.com/MicroUtils/kotlin-logging/pull/137).
 
+# 1.11.6 (To Be Released)
+
+* Upgrade to Kotlin 1.4.10 [#148](https://github.com/MicroUtils/kotlin-logging/pull/148).
+
 # 1.11.5
 
 * Fix [#144](https://github.com/MicroUtils/kotlin-logging/pull/144) - pom.xml has no dependencies anymore.
