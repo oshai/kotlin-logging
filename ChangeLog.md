@@ -6,7 +6,7 @@
 * Upgrade to Kotlin 1.4.10 [#137](https://github.com/MicroUtils/kotlin-logging/pull/137).
 * Add explicit API in strict mode [#124](https://github.com/MicroUtils/kotlin-logging/issues/124).
 
-# 1.11.6 (To Be Released)
+# 1.12.0 (To Be Released)
 
 * Upgrade to Kotlin 1.4.10 [#148](https://github.com/MicroUtils/kotlin-logging/pull/148).
 
