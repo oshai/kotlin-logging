@@ -2,7 +2,7 @@ import org.jetbrains.dokka.gradle.DokkaTask
 import java.util.*
 
 plugins {
-    kotlin("multiplatform") version "1.3.72"
+    kotlin("multiplatform") version "1.4.10"
     id("com.jfrog.bintray") version "1.8.4"
     id("com.jfrog.artifactory") version "4.17.2"
     id("org.jetbrains.dokka") version "0.10.0"
@@ -47,8 +47,8 @@ kotlin {
         compilations.named("main") {
             // kotlin compiler compatibility options
             kotlinOptions {
-                apiVersion = "1.1"
-                languageVersion = "1.1"
+                apiVersion = "1.2"
+                languageVersion = "1.2"
             }
         }
         mavenPublication {
@@ -70,24 +70,19 @@ kotlin {
     // macosX64("macosX64")
     // mingwX64("mingwX64")
     sourceSets {
-        commonMain {
-            dependencies {
-                implementation(kotlin("stdlib-common"))
-            }
-        }
-        commonTest {
+        val commonMain by getting {}
+        val commonTest by getting  {
             dependencies {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
             }
         }
-        named("jvmMain") {
+        val jvmMain by getting {
             dependencies {
-                implementation(kotlin("stdlib"))
                 api("org.slf4j:slf4j-api:${extra["slf4j_version"]}")
             }
         }
-        named("jvmTest") {
+        val jvmTest by getting {
             dependencies {
                 implementation(kotlin("test"))
                 implementation(kotlin("test-junit"))
@@ -98,12 +93,8 @@ kotlin {
                 implementation("org.apache.logging.log4j:log4j-slf4j-impl:${extra["log4j_version"]}")
             }
         }
-        named("jsMain") {
-            dependencies {
-                implementation(kotlin("stdlib-js"))
-            }
-        }
-        named("jsTest") {
+        val jsMain by getting {}
+        val jsTest by getting {
             dependencies {
                 implementation(kotlin("test-js"))
             }
@@ -144,7 +135,7 @@ publishing {
 bintray {
     user = System.getProperty("bintray.user")
     key = System.getProperty("bintray.key") //https://bintray.com/profile/edit
-    setPublications("metadata", "jvm", "js")
+    setPublications(*publishing.publications.names.toTypedArray())
     publish = true //[Default: false] Whether version should be auto published after an upload
     pkg.apply {
         repo = "kotlin-logging"
@@ -169,6 +160,10 @@ bintray {
                 close = "1" //Optional property. By default the staging repository is closed and artifacts are released to Maven Central. You can optionally turn this behaviour off (by puting 0 as value) and release the version manually.
             }
         }
+    }
+    //workaround bintray bug
+    project.afterEvaluate {
+        setPublications(*project.extensions.findByType<PublishingExtension>()!!.publications.names.toTypedArray())
     }
 }
 
