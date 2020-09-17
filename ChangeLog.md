@@ -6,7 +6,7 @@
 * Upgrade to Kotlin 1.4.10 [#137](https://github.com/MicroUtils/kotlin-logging/pull/137).
 * Add explicit API in strict mode [#124](https://github.com/MicroUtils/kotlin-logging/issues/124).
 
-# 1.12.0 (To Be Released)
+# 1.12.0
 
 * Upgrade to Kotlin 1.4.10 [#148](https://github.com/MicroUtils/kotlin-logging/pull/148).
 
@@ -15,7 +15,7 @@
 * Fix [#144](https://github.com/MicroUtils/kotlin-logging/pull/144) - pom.xml has no dependencies anymore.
 * Fix message formatted twice [issue #132](https://github.com/MicroUtils/kotlin-logging/issues/132) and [PR #134](https://github.com/MicroUtils/kotlin-logging/pull/134).
 * Add automation for snapshot and release builds [#135](https://github.com/MicroUtils/kotlin-logging/issues/135).
-* Tried to upgrade to Kotlin 1.4.0, but reveted [#130](https://github.com/MicroUtils/kotlin-logging/issues/130) (Still WIP).
+* Tried to upgrade to Kotlin 1.4.0, but reveted [#130](https://github.com/MicroUtils/kotlin-logging/issues/130).
 
 # Versions 1.9.x,1.10.x,1.11.0-1.11.4 are obselete
 
