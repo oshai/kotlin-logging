@@ -1,3 +1,7 @@
+# 2.0.3
+
+* Fix Bintray versions display [#152](https://github.com/MicroUtils/kotlin-logging/issues/152).
+
 # 2.0.2
 
 * Build refactor and bintray plugin replacement [#145](https://github.com/MicroUtils/kotlin-logging/pull/145).
