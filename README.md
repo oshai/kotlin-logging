@@ -71,7 +71,8 @@ Alternatively, download the JAR from [github](https://github.com/MicroUtils/kotl
 
 ### Version 2.x
 
-** There are currently two supported branches: 1.x and 2.x **
+**There are currently two supported branches: 1.x and 2.x.**  
+
 The main incompatible change is in the artifact names. In version `1.x` the jvm artifact is called `kotlin-logging` while in version `2.x` it's called `kotlin-logging-jvm` to comply with multiplatform schema.
 
 For example, to use kotlin-logging for jvm in version 2.0.2 add the following gradle dependency:
