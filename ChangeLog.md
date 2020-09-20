@@ -1,4 +1,4 @@
-# 2.0.0 (To Be Released)
+# 2.0.2
 
 * Build refactor and bintray plugin replacement [#145](https://github.com/MicroUtils/kotlin-logging/pull/145).
 * Support JS-IR backend [#139](https://github.com/MicroUtils/kotlin-logging/pull/139).
