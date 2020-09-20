@@ -8,7 +8,7 @@ plugins {
 apply("versions.gradle.kts")
 
 group = "io.github.microutils"
-version = "1.11.5" + (if (System.getProperty("snapshot")?.toBoolean() == true) "-SNAPSHOT" else "")
+version = "2.0.3" + (if (System.getProperty("snapshot")?.toBoolean() == true) "-SNAPSHOT" else "")
 
 repositories {
     jcenter()
@@ -16,6 +16,7 @@ repositories {
 }
 
 kotlin {
+    explicitApi()
     jvm {
         compilations.all {
             // kotlin compiler compatibility options
@@ -124,12 +125,12 @@ publishing {
 }
 
 publishing {
-    val bintrayOrg: String? by project
-    val bintrayRepo: String? by project
-    val bintrayUser: String? by project
-    val bintrayApiKey: String? by project
+    val bintrayOrg = "microutils"
+    val bintrayRepo = "kotlin-logging"
+    val bintrayUser = System.getProperty("bintray.user")
+    val bintrayApiKey = System.getProperty("bintray.key")
 
-    if (bintrayRepo != null && bintrayUser != null && bintrayApiKey != null) {
+    if (bintrayUser != null && bintrayApiKey != null) {
         repositories {
             maven {
                 name = "bintray"

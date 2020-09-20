@@ -2,7 +2,7 @@ package mu
 
 import mu.internal.MarkerLinux
 
-actual object KMarkerFactory {
+public actual object KMarkerFactory {
 
-    actual fun getMarker(name: String): Marker = MarkerLinux(name)
+    public actual fun getMarker(name: String): Marker = MarkerLinux(name)
 }

@@ -1,9 +1,9 @@
 package mu
 
-object ConsoleOutputAppender : Appender {
-    override fun trace(message: Any?) = console.log(message)
-    override fun debug(message: Any?) = console.log(message)
-    override fun info(message: Any?) = console.info(message)
-    override fun warn(message: Any?) = console.warn(message)
-    override fun error(message: Any?) = console.error(message)
+public object ConsoleOutputAppender : Appender {
+    public override fun trace(message: Any?): Unit = console.log(message)
+    public override fun debug(message: Any?): Unit = console.log(message)
+    public override fun info(message: Any?): Unit = console.info(message)
+    public override fun warn(message: Any?): Unit = console.warn(message)
+    public override fun error(message: Any?): Unit = console.error(message)
 }

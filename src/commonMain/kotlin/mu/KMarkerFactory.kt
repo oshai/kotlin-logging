@@ -3,7 +3,7 @@ package mu
 /**
  * A platform independent factory to create markers.
  */
-expect object KMarkerFactory {
+public expect object KMarkerFactory {
 
-    fun getMarker(name: String): Marker
+    public fun getMarker(name: String): Marker
 }

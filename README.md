@@ -52,24 +52,41 @@ An `Android` example project with kotlin-logging can be found in [kotlin-logging
 
 In short, if you just want to log statements to stdout, it's possible to add the following dependency: `org.slf4j:slf4j-simple:1.7.29`.
 
-**Multiplatform:** See the [section below](https://github.com/MicroUtils/kotlin-logging/blob/master/README.md#multiplatform).
-
 ### Maven
 ```xml
 <dependency>
   <groupId>io.github.microutils</groupId>
   <artifactId>kotlin-logging</artifactId>
-  <version>1.11.0</version>
+  <version>1.12.0</version>
 </dependency>
 ```
 See the full example in [kotlin-logging-example-maven](https://github.com/MicroUtils/kotlin-logging-example-maven).  
 
 ### Gradle
 ```Groovy
-compile 'io.github.microutils:kotlin-logging:1.11.0'
+compile 'io.github.microutils:kotlin-logging:1.12.0'
 ```
 
 Alternatively, download the JAR from [github](https://github.com/MicroUtils/kotlin-logging/releases/latest) or [bintray](https://dl.bintray.com/microutils/kotlin-logging/io/github/microutils/kotlin-logging/) or [maven-central](http://repo1.maven.org/maven2/io/github/microutils/kotlin-logging/).
+
+### Version 2.x
+
+**There are currently two supported branches: 1.x and 2.x.**  
+
+The main incompatible change is in the artifact names. In version `1.x` the jvm artifact is called `kotlin-logging` while in version `2.x` it's called `kotlin-logging-jvm` to comply with multiplatform schema. In addition, version 2.x supports only Kotlin >= 1.4.
+
+Therefore for jvm library owners it is still recommended to use 1.x, as for the rest of the use cases 2.x is recommended.
+
+For example, to use kotlin-logging for jvm in version 2.0.2 add the following gradle dependency:
+```Groovy
+compile 'io.github.microutils:kotlin-logging-jvm:2.0.2'
+```
+
+#### Multiplatform
+
+An experimental common & JS & linux-x64 support is available.  
+More information is available on the [wiki](https://github.com/MicroUtils/kotlin-logging/wiki/Multiplatform-support) and issues [#21](https://github.com/MicroUtils/kotlin-logging/issues/21) [#45](https://github.com/MicroUtils/kotlin-logging/issues/45).
+
 
 ### Snapshot builds
 To get the latest non-stable version of kotlin logging use the following gradle configuration:
@@ -79,15 +96,10 @@ repositories {
 }
 
 dependencies {
-	compile('io.github.microutils:kotlin-logging:1.10.11-SNAPSHOT')
+	compile('io.github.microutils:kotlin-logging-jvm:2.0.0-SNAPSHOT')
 }
 ```
 * The latest snapshot version can be seen in [build.gradle.kts](https://github.com/MicroUtils/kotlin-logging/blob/master/build.gradle.kts) and in [artifactory](https://oss.jfrog.org/artifactory/webapp/#/artifacts/browse/tree/General/oss-snapshot-local/io/github/microutils/kotlin-logging).
-
-## Multiplatform
-
-An experimental common & JS support is available.  
-More information is available on the [wiki](https://github.com/MicroUtils/kotlin-logging/wiki/Multiplatform-support) and issue [#21](https://github.com/MicroUtils/kotlin-logging/issues/21).
 
 ## Overview
 
