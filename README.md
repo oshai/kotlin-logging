@@ -35,7 +35,7 @@ logger.error(exception) { "a $fancy message about the $exception" }
 ## Getting started
  
 ```Kotlin
-import mu.KotlinLogging;
+import mu.KotlinLogging
 private val logger = KotlinLogging.logger {} 
 class FooWithLogging {
     val message = "world"
