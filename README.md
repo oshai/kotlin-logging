@@ -65,7 +65,7 @@ See the full example in [kotlin-logging-example-maven](https://github.com/MicroU
 
 ### Gradle
 ```Groovy
-compile 'io.github.microutils:kotlin-logging:1.12.0'
+implementation 'io.github.microutils:kotlin-logging:1.12.0'
 ```
 
 Alternatively, download the JAR from [github](https://github.com/MicroUtils/kotlin-logging/releases/latest) or [bintray](https://dl.bintray.com/microutils/kotlin-logging/io/github/microutils/kotlin-logging/) or [maven-central](http://repo1.maven.org/maven2/io/github/microutils/kotlin-logging/).
@@ -80,7 +80,7 @@ Therefore for jvm library owners it is still recommended to use 1.x, as for the 
 
 For example, to use kotlin-logging for jvm in version 2.0.2 add the following gradle dependency:
 ```Groovy
-compile 'io.github.microutils:kotlin-logging-jvm:2.0.2'
+implementation 'io.github.microutils:kotlin-logging-jvm:2.0.2'
 ```
 
 #### Multiplatform
@@ -97,7 +97,7 @@ repositories {
 }
 
 dependencies {
-	compile('io.github.microutils:kotlin-logging-jvm:2.0.0-SNAPSHOT')
+	implementation('io.github.microutils:kotlin-logging-jvm:2.0.0-SNAPSHOT')
 }
 ```
 * The latest snapshot version can be seen in [build.gradle.kts](https://github.com/MicroUtils/kotlin-logging/blob/master/build.gradle.kts) and in [artifactory](https://oss.jfrog.org/artifactory/webapp/#/artifacts/browse/tree/General/oss-snapshot-local/io/github/microutils/kotlin-logging).
