@@ -1,3 +1,7 @@
+# 2.0.4
+
+* When an error occurs in Log message invocation then log it as an ERROR [#160](https://github.com/MicroUtils/kotlin-logging/issues/160).
+
 # 2.0.3
 
 * Fix Bintray versions display [#152](https://github.com/MicroUtils/kotlin-logging/issues/152).
