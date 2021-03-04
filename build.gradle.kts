@@ -2,7 +2,7 @@ import org.jetbrains.dokka.gradle.DokkaTask
 import java.util.*
 
 plugins {
-    kotlin("multiplatform") version "1.4.10"
+    kotlin("multiplatform") version "1.4.31"
     id("com.jfrog.bintray") version "1.8.4"
     id("com.jfrog.artifactory") version "4.17.2"
     id("org.jetbrains.dokka") version "0.10.0"
@@ -33,6 +33,11 @@ tasks {
         outputFormat = "javadoc"
         outputDirectory = "$buildDir/dokka"
     }
+}
+
+// see issue #163
+tasks.withType<GenerateModuleMetadata> {
+    enabled = false
 }
 
 kotlin {
