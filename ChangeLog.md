@@ -1,6 +1,8 @@
 # Next version
 
-* Upgrade Kotlin to 1.4.21.
+# 2.0.5
+
+* Upgrade Kotlin to 1.4.31.
 
 # 2.0.4
 
