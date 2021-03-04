@@ -20,6 +20,11 @@
 * Upgrade to Kotlin 1.4.10 [#137](https://github.com/MicroUtils/kotlin-logging/pull/137).
 * Add explicit API in strict mode [#124](https://github.com/MicroUtils/kotlin-logging/issues/124).
 
+# 1.12.1
+
+* Upgrade to Kotlin 1.4.31
+* Fix Kotlin-logging version 1.12.0 is missing .module file in Maven artifact [#163](https://github.com/MicroUtils/kotlin-logging/pull/163).
+
 # 1.12.0
 
 * Upgrade to Kotlin 1.4.10 [#148](https://github.com/MicroUtils/kotlin-logging/pull/148).
