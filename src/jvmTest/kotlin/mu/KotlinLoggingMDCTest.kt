@@ -22,6 +22,15 @@ class KotlinLoggingMDCTest {
     }
 
     @Test
+    fun `simple nullable pair withLoggingContext`() {
+        assertNull(MDC.get("a"))
+        withLoggingContext("a" to null) {
+            assertNull(MDC.get("a"))
+        }
+        assertNull(MDC.get("a"))
+    }
+
+    @Test
     fun `multiple pair withLoggingContext`() {
         assertNull(MDC.get("a"))
         assertNull(MDC.get("c"))
@@ -31,6 +40,21 @@ class KotlinLoggingMDCTest {
         }
         assertNull(MDC.get("a"))
         assertNull(MDC.get("c"))
+    }
+
+    @Test
+    fun `multiple nullable pair withLoggingContext`() {
+        assertNull(MDC.get("a"))
+        assertNull(MDC.get("c"))
+        MDC.put("e", "f")
+        withLoggingContext("a" to "b", "c" to null, "e" to null) {
+            assertEquals("b", MDC.get("a"))
+            assertNull(MDC.get("c"))
+            assertEquals("f", MDC.get("e"))
+        }
+        assertNull(MDC.get("a"))
+        assertNull(MDC.get("c"))
+        assertEquals("f", MDC.get("e"))
     }
 
     @Test

@@ -10,8 +10,12 @@ import org.slf4j.MDC
  * }
  * ```
  */
-public inline fun <T> withLoggingContext(pair: Pair<String, String>, body: () -> T): T =
-    MDC.putCloseable(pair.first, pair.second).use { body() }
+public inline fun <T> withLoggingContext(pair: Pair<String, String?>, body: () -> T): T =
+    if (pair.second != null) {
+        MDC.putCloseable(pair.first, pair.second).use { body() }
+    } else {
+        body()
+    }
 
 /**
  * Use a vary number of pairs in MDC context. Example:
@@ -21,12 +25,12 @@ public inline fun <T> withLoggingContext(pair: Pair<String, String>, body: () ->
  * }
  * ```
  */
-public inline fun <T> withLoggingContext(vararg pair: Pair<String, String>, body: () -> T): T {
+public inline fun <T> withLoggingContext(vararg pair: Pair<String, String?>, body: () -> T): T {
     try {
-        pair.forEach { MDC.put(it.first, it.second) }
+        pair.filter { it.second != null }.forEach { MDC.put(it.first, it.second) }
         return body()
     } finally {
-        pair.forEach { MDC.remove(it.first) }
+        pair.filter { it.second != null }.forEach { MDC.remove(it.first) }
     }
 }
 
