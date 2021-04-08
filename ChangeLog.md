@@ -24,6 +24,13 @@
 * Upgrade to Kotlin 1.4.10 [#137](https://github.com/MicroUtils/kotlin-logging/pull/137).
 * Add explicit API in strict mode [#124](https://github.com/MicroUtils/kotlin-logging/issues/124).
 
+# 2.X changes from 1.X
+
+The main incompatible change is in the artifact names. In version `1.x` the jvm artifact is called `kotlin-logging` while in version `2.x` it's called `kotlin-logging-jvm` to comply with the multiplatform schema. In addition, version 2.x supports only Kotlin >= 1.4.
+
+Therefore, for jvm library owners it is still recommended to use 1.x, as for the rest of the use cases 2.x is recommended.
+
+
 # 1.12.5
 
 * Fix Kotlin-logging version 1.12.0 is missing .module file in Maven artifact [#163](https://github.com/MicroUtils/kotlin-logging/pull/163).
