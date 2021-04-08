@@ -1,5 +1,9 @@
 # Next version
 
+# 2.0.7
+
+* Support optional/nullable values for MDC [#172](https://github.com/MicroUtils/kotlin-logging/issues/172).
+
 # 2.0.6
 
 * Same as `2.0.5`.
