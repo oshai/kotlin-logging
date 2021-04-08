@@ -10,9 +10,9 @@ import org.slf4j.MDC
  * }
  * ```
  */
-public inline fun <T> withLoggingContext(pair: Pair<String, String?>, body: () -> T): T =
+public inline fun <T> withLoggingContext(pair: Pair<String, Any?>, body: () -> T): T =
     if (pair.second != null) {
-        MDC.putCloseable(pair.first, pair.second).use { body() }
+        MDC.putCloseable(pair.first, pair.second.toString()).use { body() }
     } else {
         body()
     }
@@ -25,9 +25,9 @@ public inline fun <T> withLoggingContext(pair: Pair<String, String?>, body: () -
  * }
  * ```
  */
-public inline fun <T> withLoggingContext(vararg pair: Pair<String, String?>, body: () -> T): T {
+public inline fun <T> withLoggingContext(vararg pair: Pair<String, Any?>, body: () -> T): T {
     try {
-        pair.filter { it.second != null }.forEach { MDC.put(it.first, it.second) }
+        pair.filter { it.second != null }.forEach { MDC.put(it.first, it.second.toString()) }
         return body()
     } finally {
         pair.filter { it.second != null }.forEach { MDC.remove(it.first) }

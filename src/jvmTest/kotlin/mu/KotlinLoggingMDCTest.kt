@@ -31,6 +31,15 @@ class KotlinLoggingMDCTest {
     }
 
     @Test
+    fun `simple toString pair withLoggingContext`() {
+        assertNull(MDC.get("a"))
+        withLoggingContext("a" to 15) {
+            assertEquals("15", MDC.get("a"))
+        }
+        assertNull(MDC.get("a"))
+    }
+
+    @Test
     fun `multiple pair withLoggingContext`() {
         assertNull(MDC.get("a"))
         assertNull(MDC.get("c"))
@@ -58,6 +67,18 @@ class KotlinLoggingMDCTest {
     }
 
     @Test
+    fun `multiple toString pair withLoggingContext`() {
+        assertNull(MDC.get("a"))
+        assertNull(MDC.get("c"))
+        withLoggingContext("a" to true, "c" to ToStringObject()) {
+            assertEquals("true", MDC.get("a"))
+            assertEquals("string", MDC.get("c"))
+        }
+        assertNull(MDC.get("a"))
+        assertNull(MDC.get("c"))
+    }
+
+    @Test
     fun `map withLoggingContext`() {
         assertNull(MDC.get("a"))
         assertNull(MDC.get("c"))
@@ -67,5 +88,11 @@ class KotlinLoggingMDCTest {
         }
         assertNull(MDC.get("a"))
         assertNull(MDC.get("c"))
+    }
+}
+
+private class ToStringObject {
+    override fun toString(): String {
+        return "string"
     }
 }
