@@ -15,4 +15,4 @@ jobs:
     - stage: build
       script: ./gradlew clean build
     - stage: release
-      script: ./gradlew clean build publishToSonatype closeAndReleaseSonatypeStagingRepository -no-daemon --no-parallel -x test
+      script: ./gradlew publishToSonatype closeAndReleaseSonatypeStagingRepository -no-daemon --no-parallel
