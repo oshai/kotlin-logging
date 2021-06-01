@@ -7,16 +7,12 @@ dist: trusty
 
 stages:
 - name: build
-- name: snapshot
-  if: branch IN (master, pre-snapshot, 1.x-snapshot) AND type = push
 - name: release
-  if: branch IN (release, 1.x) AND type = push
+  if: branch IN (release) AND type = push
 
 jobs:
     include:
     - stage: build
       script: ./gradlew clean build
-    - stage: snapshot
-      script: ./gradlew clean build artifactoryPublish -Dsnapshot=true -Dbintray.user=$BINTRAY_USER -Dbintray.key=$BINTRAY_API_KEY -Dbuild.number=$TRAVIS_BUILD_NUMBER
     - stage: release
-      script: ./gradlew clean build publishAllPublicationsToBintrayRepository -Dbintray.user=$BINTRAY_USER -Dbintray.key=$BINTRAY_API_KEY -Dbuild.number=$TRAVIS_BUILD_NUMBER -Dmaven.password=$MAVEN_PASSWORD -Dmaven.user=$MAVEN_USER
+      script: ./gradlew clean build publishToSonatype closeAndReleaseSonatypeStagingRepository -no-daemon --no-parallel -x test
