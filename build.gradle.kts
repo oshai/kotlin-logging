@@ -1,6 +1,6 @@
 plugins {
     kotlin("multiplatform") version "1.4.31"
-    id("org.jetbrains.dokka") version "1.4.0"
+    id("org.jetbrains.dokka") version "1.4.32"
     `maven-publish`
     id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
     signing
