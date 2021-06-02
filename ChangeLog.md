@@ -1,5 +1,9 @@
 # Next version
 
+# 2.0.8
+
+* Publish to maven central directly [#177](https://github.com/MicroUtils/kotlin-logging/issues/177).
+
 # 2.0.7
 
 * Support optional/nullable values for MDC [#172](https://github.com/MicroUtils/kotlin-logging/issues/172).
