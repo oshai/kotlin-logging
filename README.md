@@ -1,4 +1,4 @@
-# <img height="30" width="30" alt="kotlin-logging" src="https://raw.githubusercontent.com/MicroUtils/kotlin-logging/master/misc/images/kotlin-logging.png"> [kotlin-logging](https://github.com/MicroUtils/kotlin-logging) [![Build Status](https://travis-ci.org/MicroUtils/kotlin-logging.png?branch=master)](https://travis-ci.org/MicroUtils/kotlin-logging) [![Slack channel](https://img.shields.io/badge/Chat-Slack-blue.svg)](https://kotlinlang.slack.com/messages/kotlin-logging/) [ ![Download](https://api.bintray.com/packages/microutils/kotlin-logging/kotlin-logging/images/download.svg) ](https://bintray.com/kotlin-logging/kotlin-logging/kotlin-logging/_latestVersion) [![Maven Central](https://img.shields.io/maven-central/v/io.github.microutils/kotlin-logging.svg)](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22io.github.microutils%22) [![Apache License V.2](https://img.shields.io/badge/license-Apache%20V.2-blue.svg)](https://github.com/MicroUtils/kotlin-logging/blob/master/LICENSE)
+# <img height="30" width="30" alt="kotlin-logging" src="https://raw.githubusercontent.com/MicroUtils/kotlin-logging/master/misc/images/kotlin-logging.png"> [kotlin-logging](https://github.com/MicroUtils/kotlin-logging) [![Build Status](https://travis-ci.com/MicroUtils/kotlin-logging.png?branch=master)](https://travis-ci.com/MicroUtils/kotlin-logging) [![Slack channel](https://img.shields.io/badge/Chat-Slack-blue.svg)](https://kotlinlang.slack.com/messages/kotlin-logging/) [![Maven Central](https://img.shields.io/maven-central/v/io.github.microutils/kotlin-logging.svg)](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22io.github.microutils%22) [![Apache License V.2](https://img.shields.io/badge/license-Apache%20V.2-blue.svg)](https://github.com/MicroUtils/kotlin-logging/blob/master/LICENSE)
 
 Lightweight logging framework for Kotlin, written in [![Pure Kotlin](https://img.shields.io/badge/100%25-kotlin-blue.svg)](https://kotlinlang.org/).  
 A convenient and performant logging library wrapping [slf4j](http://www.slf4j.org/) with Kotlin extensions.
@@ -58,7 +58,7 @@ In short, if you just want to log statements to stdout, it's possible to add the
 <dependency>
   <groupId>io.github.microutils</groupId>
   <artifactId>kotlin-logging-jvm</artifactId>
-  <version>2.0.6</version>
+  <version>2.0.8</version>
 </dependency>
 ```
 or
@@ -73,7 +73,7 @@ See the full example in [kotlin-logging-example-maven](https://github.com/MicroU
 
 ### Gradle
 ```Groovy
-implementation 'io.github.microutils:kotlin-logging-jvm:2.0.6'
+implementation 'io.github.microutils:kotlin-logging-jvm:2.0.8'
 ```
 or
 ```Groovy
@@ -94,20 +94,6 @@ Therefore, for jvm library owners it is still recommended to use 1.x, as for the
 
 An experimental common & JS & linux-x64 support is available.  
 More information is available on the [wiki](https://github.com/MicroUtils/kotlin-logging/wiki/Multiplatform-support) and issues [#21](https://github.com/MicroUtils/kotlin-logging/issues/21) [#45](https://github.com/MicroUtils/kotlin-logging/issues/45).
-
-
-### Snapshot builds
-To get the latest non-stable version of kotlin logging use the following gradle configuration:
-```Groovy
-repositories {
-	maven { url 'https://oss.jfrog.org/artifactory/oss-snapshot-local' }
-}
-
-dependencies {
-	implementation('io.github.microutils:kotlin-logging-jvm:2.0.0-SNAPSHOT')
-}
-```
-* The latest snapshot version can be seen in [build.gradle.kts](https://github.com/MicroUtils/kotlin-logging/blob/master/build.gradle.kts) and in [artifactory](https://oss.jfrog.org/artifactory/webapp/#/artifacts/browse/tree/General/oss-snapshot-local/io/github/microutils/kotlin-logging).
 
 ## Overview
 
@@ -152,7 +138,6 @@ It is possible to configure IntelliJ live templates. For file level logger confi
 
 ## More links
 
-- kotlin-logging is hosted on [bintray](https://bintray.com/microutils/kotlin-logging/kotlin-logging/view) and [maven central](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22io.github.microutils%22).
 - https://medium.com/@OhadShai/logging-in-kotlin-95a4e76388f2
 - [kotlin-logging vs AnkoLogger for Android](https://medium.com/@OhadShai/logging-in-android-ankologger-vs-kotlin-logging-bb693671442a)
 - [How kotlin-logging was published](https://medium.com/@OhadShai/no-forks-one-star-now-what-how-i-published-my-open-source-projects-8a5b5ae35d2c#.e3ygj6uf3)
