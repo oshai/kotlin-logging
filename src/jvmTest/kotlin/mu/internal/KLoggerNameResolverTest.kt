@@ -35,6 +35,7 @@ class KLoggerNameResolverTest {
         )
         assertEquals("mu.internal.Foo\$Bar", KLoggerNameResolver.name(Foo.Bar::class.java))
         assertEquals("mu.internal.Foo\$Bar2", KLoggerNameResolver.name(Foo.Bar3.javaClass))
+        assertEquals("mu.internal.PrivateCompanion", KLoggerNameResolver.name(PrivateCompanion().companionClass))
     }
 }
 
@@ -65,4 +66,9 @@ class Foo {
         @JvmField
         val Bar3 = Foo().z
     }
+}
+
+class PrivateCompanion {
+    val companionClass: Class<*> = Companion::class.java
+    private companion object
 }
