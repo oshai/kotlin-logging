@@ -35,7 +35,7 @@ internal object KLoggerNameResolver {
     inline private fun <T : Any> unwrapCompanionClass(clazz: Class<T>): Class<*> {
         if (clazz.enclosingClass != null) {
             try {
-                val field = clazz.enclosingClass.getField(clazz.simpleName)
+                val field = clazz.enclosingClass.getDeclaredField(clazz.simpleName)
                 if (Modifier.isStatic(field.modifiers) && field.type == clazz) {
                     // && field.get(null) === obj
                     // the above might be safer but problematic with initialization order
