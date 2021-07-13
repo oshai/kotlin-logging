@@ -1,5 +1,9 @@
 # Next version
 
+# 2.0.9
+
+* unwrapCompanionClass fails to unwrap private companions when on kotlin 1.4+ [#182](https://github.com/MicroUtils/kotlin-logging/issues/182).
+
 # 2.0.8
 
 * Publish to maven central directly [#177](https://github.com/MicroUtils/kotlin-logging/issues/177).
