@@ -58,7 +58,7 @@ In short, if you just want to log statements to stdout, it's possible to add the
 <dependency>
   <groupId>io.github.microutils</groupId>
   <artifactId>kotlin-logging-jvm</artifactId>
-  <version>2.0.8</version>
+  <version>2.0.10</version>
 </dependency>
 ```
 or
@@ -73,7 +73,7 @@ See the full example in [kotlin-logging-example-maven](https://github.com/MicroU
 
 ### Gradle
 ```Groovy
-implementation 'io.github.microutils:kotlin-logging-jvm:2.0.8'
+implementation 'io.github.microutils:kotlin-logging-jvm:2.0.10'
 ```
 or
 ```Groovy
