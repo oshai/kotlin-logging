@@ -1,5 +1,6 @@
 package mu
 
+@Suppress("TooManyFunctions")
 public actual interface KLogger {
 
     /**

@@ -51,6 +51,7 @@ class LoggingWithLocationTest {
     @Test
     fun testNullLoggingWithLocationEntryExit() {
         ClassWithLoggingForLocationTesting().logEntry()
+        @Suppress("MaxLineLength")
         Assert.assertEquals(
             "TRACE ClassWithLoggingForLocationTesting.logEntry(19) - entry with (1, 2)" + System.lineSeparator() + "INFO " + "ClassWithLoggingForLocationTesting.logEntry(20) - log entry body" + System.lineSeparator() + "TRACE " + "ClassWithLoggingForLocationTesting.logEntry(21) - exit with ((2, 1))",
             appenderWithWriter.writer.toString().trim()
