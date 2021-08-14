@@ -1,3 +1,5 @@
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+
 plugins {
     kotlin("multiplatform") version "1.5.21"
     id("org.jetbrains.dokka") version "1.5.0"
@@ -101,6 +103,14 @@ tasks {
         from(dokkaHtml)
         dependsOn(dokkaHtml)
         archiveClassifier.set("javadoc")
+    }
+
+    withType<Test> {
+        testLogging {
+            showStandardStreams = true
+            showExceptions = true
+            exceptionFormat = FULL
+        }
     }
 }
 
