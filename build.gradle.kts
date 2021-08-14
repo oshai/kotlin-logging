@@ -1,3 +1,4 @@
+import io.gitlab.arturbosch.detekt.Detekt
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
 
 plugins {
@@ -6,6 +7,7 @@ plugins {
     `maven-publish`
     id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
     signing
+    id("io.gitlab.arturbosch.detekt") version "1.18.0"
 }
 
 apply("versions.gradle.kts")
@@ -112,6 +114,11 @@ tasks {
             exceptionFormat = FULL
         }
     }
+    afterEvaluate {
+        check {
+            dependsOn(withType<Detekt>())
+        }
+    }
 }
 
 publishing {
@@ -149,4 +156,15 @@ signing {
     val signingPassword: String? by project
     useInMemoryPgpKeys(signingKey, signingPassword)
     sign(publishing.publications)
+}
+
+detekt {
+    buildUponDefaultConfig = true
+    config = files(rootDir.resolve("detekt.yml"))
+    parallel = true
+
+    reports {
+        html.enabled = false
+        txt.enabled = false
+    }
 }

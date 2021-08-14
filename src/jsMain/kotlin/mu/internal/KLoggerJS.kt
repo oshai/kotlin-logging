@@ -12,6 +12,7 @@ import mu.KotlinLoggingLevel.WARN
 import mu.Marker
 import mu.isLoggingEnabled
 
+@Suppress("TooManyFunctions")
 internal class KLoggerJS(
     private val loggerName: String
 ) : KLogger {
