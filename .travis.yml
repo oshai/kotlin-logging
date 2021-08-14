@@ -1,17 +1,16 @@
-
 language: java
 jdk:
-- oraclejdk8
+  - oraclejdk8
 
 dist: trusty
 
 stages:
-- name: build
-- name: release
-  if: branch IN (release) AND type = push
+  - name: build
+  - name: release
+    if: branch IN (release) AND type = push
 
 jobs:
-    include:
+  include:
     - stage: build
       script: ./gradlew clean build
     - stage: release

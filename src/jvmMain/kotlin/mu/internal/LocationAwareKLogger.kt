@@ -12,7 +12,7 @@ import org.slf4j.spi.LocationAwareLogger
  * location information with the correct fully qualified class name.
  */
 internal class LocationAwareKLogger(override val underlyingLogger: LocationAwareLogger) : KLogger,
-                                                                                          Logger by underlyingLogger {
+    Logger by underlyingLogger {
 
     private val fqcn: String = LocationAwareKLogger::class.java.name
     private val ENTRY = KMarkerFactory.getMarker("ENTRY")
@@ -587,7 +587,8 @@ internal class LocationAwareKLogger(override val underlyingLogger: LocationAware
         return (1..len).joinToString(
             separator = ", ",
             prefix = "entry with (",
-            postfix = ")") {
+            postfix = ")"
+        ) {
             "{}"
         }
     }
