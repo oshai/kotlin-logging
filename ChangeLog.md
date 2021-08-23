@@ -1,5 +1,9 @@
 # Next version
 
+# 2.0.11
+
+* Fixed losing previous values in MDC [#187](https://github.com/MicroUtils/kotlin-logging/pull/187).
+ 
 # 2.0.10
 
 * upgrade kotlin to 1.5 [#175](https://github.com/MicroUtils/kotlin-logging/pull/175)
