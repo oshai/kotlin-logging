@@ -1,4 +1,5 @@
 import io.gitlab.arturbosch.detekt.Detekt
+import org.gradle.jvm.tasks.Jar
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
 
 plugins {
@@ -24,10 +25,6 @@ nexusPublishing {
         sonatype()
     }
 }
-
-apply(plugin = "io.github.gradle-nexus.publish-plugin")
-apply(plugin = "maven-publish")
-apply(plugin = "signing")
 
 kotlin {
     explicitApi()
@@ -107,6 +104,14 @@ tasks {
         archiveClassifier.set("javadoc")
     }
 
+	withType<Jar> {
+		metaInf.with(
+			copySpec {
+				from("${project.rootDir}/LICENSE")
+			}
+		)
+	}
+
     withType<Test> {
         testLogging {
             showStandardStreams = true
@@ -130,7 +135,7 @@ publishing {
             licenses {
                 license {
                     name.set("The Apache Software License, Version 2.0")
-                    url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                    url.set("https://www.apache.org/licenses/LICENSE-2.0.txt")
                 }
             }
             developers {
@@ -138,13 +143,13 @@ publishing {
                     name.set("Ohad Shai")
                     email.set("ohadshai@gmail.com")
                     organization.set("github")
-                    organizationUrl.set("http://www.github.com")
+                    organizationUrl.set("https://www.github.com")
                 }
             }
             scm {
                 connection.set("scm:git:git://github.com/MicroUtils/kotlin-logging.git")
                 developerConnection.set("scm:git:ssh://github.com:MicroUtils/kotlin-logging.git")
-                url.set("http://github.com/MicroUtils/kotlin-logging/tree/master")
+                url.set("https://github.com/MicroUtils/kotlin-logging/tree/master")
             }
         }
         artifact(tasks["dokkaJar"])
