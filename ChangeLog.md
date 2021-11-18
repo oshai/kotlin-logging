@@ -1,5 +1,9 @@
 # Next version
 
+# 2.0.12
+
+* added the license to all jar files [#191](https://github.com/MicroUtils/kotlin-logging/pull/191.
+
 # 2.0.11
 
 * Fixed losing previous values in MDC [#187](https://github.com/MicroUtils/kotlin-logging/pull/187).
