@@ -1,13 +1,29 @@
-language: java
-jdk:
-  - openjdk11
+# https://github.com/DanySK/Gravis-CI
 
-dist: trusty
-
+# Java is not yet supported on Windows, so the build would block.
+# You do not need any setup from Travis, use a plain bash build
+language: minimal
+# Enable them all, if you need them.
 os:
   - linux
   - osx
   - windows
+env:
+  global:
+    # Convenience variables for shortening commands
+    - GRAVIS_REPO="https://github.com/DanySK/Gravis-CI.git"
+    - GRAVIS="$HOME/gravis"
+  matrix:
+    # List any JDK you want to build your software with.
+    # You can see the list of supported environments by installing Jabba and using ls-remote:
+    # https://github.com/shyiko/jabba#usage
+    - JDK="adopt@1.8.212-04"
+before_install:
+  # Check out the script set
+  - travis_retry git clone --depth 1 $GRAVIS_REPO $GRAVIS
+  # Install the JDK you configured in the $JDK environment variable
+  # Never use travis_retry: hides failures. travis_retry is used internally where possible.
+  - source $GRAVIS/install-jdk
 
 stages:
   - name: build
