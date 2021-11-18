@@ -9,6 +9,8 @@ os:
   - osx
   - windows
 
+osx_image: xcode11.6
+
 stages:
   - name: build
   - name: release
