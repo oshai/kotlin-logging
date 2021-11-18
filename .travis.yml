@@ -17,7 +17,7 @@ env:
     # List any JDK you want to build your software with.
     # You can see the list of supported environments by installing Jabba and using ls-remote:
     # https://github.com/shyiko/jabba#usage
-    - JDK="adopt@1.8.212-04"
+    - JDK="adopt@1.8-0"
 before_install:
   # Check out the script set
   - travis_retry git clone --depth 1 $GRAVIS_REPO $GRAVIS
