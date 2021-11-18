@@ -4,6 +4,11 @@ jdk:
 
 dist: trusty
 
+os:
+  - linux
+  - osx
+  - windows
+
 stages:
   - name: build
   - name: release
