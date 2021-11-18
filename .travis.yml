@@ -7,7 +7,6 @@ dist: trusty
 os:
   - linux
   - osx
-  - windows
 
 osx_image: xcode11.6
 
