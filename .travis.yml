@@ -10,6 +10,9 @@ os:
 
 osx_image: xcode11.6
 
+addons:
+  chrome: stable
+
 stages:
   - name: build
   - name: release
