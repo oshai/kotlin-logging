@@ -24,10 +24,13 @@ jobs:
       os: osx
       osx_image: xcode11.6
     - stage: release-linux
-      script: ./gradlew publishToSonatype closeAndReleaseSonatypeStagingRepository -no-daemon --no-parallel
+      script: ./gradlew publishToSonatype -no-daemon --no-parallel
       os: linux
       dist: trusty
     - stage: release-osx
-      script: ./gradlew publishToSonatype closeAndReleaseSonatypeStagingRepository -no-daemon --no-parallel
+      script: ./gradlew publishToSonatype -no-daemon --no-parallel
       os: osx
       osx_image: xcode11.6
+
+# Requires to manually release a new version on https://s01.oss.sonatype.org/#stagingRepositories
+# add back closeAndReleaseSonatypeStagingRepository to fully automate the release but I suspect it will have a conflict with multiple jobs
