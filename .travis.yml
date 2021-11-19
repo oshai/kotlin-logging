@@ -6,28 +6,25 @@ addons:
   chrome: stable
 
 stages:
-  - name: build-linux
-  - name: build-osx
-  - name: release-linux
-    if: branch IN (release) AND type = push
-  - name: release-osx
+  - name: build
+  - name: release
     if: branch IN (release) AND type = push
 
 jobs:
   include:
-    - stage: build-linux
+    - stage: build
       script: ./gradlew clean build
       os: linux
       dist: trusty
-    - stage: build-osx
+    - # stage name not required, will continue to use above
       script: ./gradlew clean build
       os: osx
       osx_image: xcode11.6
-    - stage: release-linux
+    - stage: release
       script: ./gradlew publishToSonatype -no-daemon --no-parallel
       os: linux
       dist: trusty
-    - stage: release-osx
+    - # stage name not required, will continue to use above
       script: ./gradlew publishToSonatype -no-daemon --no-parallel
       os: osx
       osx_image: xcode11.6
