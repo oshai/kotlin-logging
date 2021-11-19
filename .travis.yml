@@ -2,25 +2,32 @@ language: java
 jdk:
   - openjdk11
 
-dist: trusty
-
-os:
-  - linux
-  - osx
-
-osx_image: xcode11.6
-
 addons:
   chrome: stable
 
 stages:
-  - name: build
-  - name: release
+  - name: build-linux
+  - name: build-osx
+  - name: release-linux
+    if: branch IN (release) AND type = push
+  - name: release-osx
     if: branch IN (release) AND type = push
 
 jobs:
   include:
-    - stage: build
+    - stage: build-linux
       script: ./gradlew clean build
-    - stage: release
+      os: linux
+      dist: trusty
+    - stage: build-osx
+      script: ./gradlew clean build
+      os: osx
+      osx_image: xcode11.6
+    - stage: release-linux
       script: ./gradlew publishToSonatype closeAndReleaseSonatypeStagingRepository -no-daemon --no-parallel
+      os: linux
+      dist: trusty
+    - stage: release-osx
+      script: ./gradlew publishToSonatype closeAndReleaseSonatypeStagingRepository -no-daemon --no-parallel
+      os: osx
+      osx_image: xcode11.6
