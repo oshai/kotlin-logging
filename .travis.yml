@@ -1,8 +1,17 @@
 language: java
 jdk:
-  - oraclejdk8
+  - openjdk11
 
 dist: trusty
+
+os:
+  - linux
+  - osx
+
+osx_image: xcode11.6
+
+addons:
+  chrome: stable
 
 stages:
   - name: build
