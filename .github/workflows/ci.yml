@@ -3,15 +3,63 @@ name: CI
 on: [push]
 
 jobs:
-    build:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v2
-            - name: Set up JDK 8
-              uses: actions/setup-java@v2
-              with:
-                  java-version: '8'
-                  distribution: 'adopt'
-            - name: Validate Gradle wrapper
-              uses: gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b
-            - run: ./gradlew clean build --stacktrace
+  build:
+    name: Build on ${{ matrix.os.runner }}
+    runs-on: ${{ matrix.os.runner }}
+    defaults:
+      run:
+        shell: ${{ matrix.os.shell }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - runner: macos-latest
+            shell: bash
+          - runner: windows-latest
+            shell: msys2 {0}
+          - runner: ubuntu-latest
+            shell: bash
+    steps:
+      - uses: msys2/setup-msys2@v2
+        if: ${{ runner.os == 'Windows' }}
+        with:
+          msystem: MINGW64
+          update: true
+          path-type: inherit
+          install: >-
+            tar
+            make
+            mingw-w64-x86_64-gcc
+            mingw-w64-x86_64-cmake
+            mingw-w64-x86_64-extra-cmake-modules
+            mingw64/mingw-w64-x86_64-cyrus-sasl
+      - uses: actions/checkout@v2
+
+      - name: Restore native cache
+        id: cache-native
+        uses: actions/cache@v2.1.7
+        with:
+          path: |
+            scripts/build
+          key: ${{ runner.os }}-native-${{ hashFiles('./scripts/*') }}
+
+      - uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: 8
+
+      - name: Restore Gradle cache
+        id: cache-gradle
+        uses: actions/cache@v2.1.7
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+            ~/.gradle/yarn
+            ~/.gradle/nodejs
+            ~/.konan
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: ${{ runner.os }}-gradle-
+
+      - name: Gradle Build
+        run: ./gradlew clean build --stacktrace
