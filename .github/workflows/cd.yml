@@ -6,8 +6,20 @@ on:
       - github-release
 
 jobs:
+  create-staging-repository:
+    name: Create staging repository
+    runs-on: ubuntu-latest
+    outputs:
+      repository_id: ${{ steps.create-staging-repository.outputs.repository_id }}
+    steps:
+      - id: create
+        uses: nexus-actions/create-nexus-staging-repo@v1.1
+        with:
+          username: ${{ secrets.SONATYPE_USERNAME }}
+          password: ${{ secrets.SONATYPE_PASSWORD }}
+          staging_profile_id: ${{ secrets.SONATYPE_PROFILE_ID }}
   build-upload:
-    if: success()
+    needs: create-staging-repository
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -25,6 +37,7 @@ jobs:
           IS_MAIN_HOST: ${{matrix.os == 'ubuntu-latest'}}
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
+          SONATYPE_REPOSITORY_ID: ${{ needs.create_staging_repository.outputs.repository_id }}
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
           GPG_PRIVATE_PASSWORD: ${{ secrets.GPG_PRIVATE_PASSWORD }}
           ORG_GRADLE_PROJECT_sonatypePassword: ${{ secrets.SONATYPE_PASSWORD }}
