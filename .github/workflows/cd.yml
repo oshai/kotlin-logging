@@ -12,12 +12,10 @@ jobs:
     outputs:
       repository_id: ${{ steps.create-staging-repository.outputs.repository_id }}
     steps:
-      - id: create
-        uses: nexus-actions/create-nexus-staging-repo@v1.1
-        with:
-          username: ${{ secrets.SONATYPE_USERNAME }}
-          password: ${{ secrets.SONATYPE_PASSWORD }}
-          staging_profile_id: ${{ secrets.SONATYPE_PROFILE_ID }}
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Create staging repo
+        run: ./scripts/create-repository.sh -u ${{ secrets.SONATYPE_USERNAME }} -p ${{ secrets.SONATYPE_PASSWORD }} -id ${{ secrets.SONATYPE_PROFILE_ID }}
   build-upload:
     needs: create-staging-repository
     runs-on: ${{ matrix.os }}
