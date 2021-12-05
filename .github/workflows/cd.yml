@@ -33,7 +33,7 @@ jobs:
         with:
           java-version: 8
       - name: Publish
-        run: ./gradlew publishToSonatype
+        run: ./gradlew publishAllPublicationsToOss -no-daemon --no-parallel --stacktrace -DSONATYPE_USERNAME=$SONATYPE_USERNAME -DSONATYPE_PASSWORD=$SONATYPE_PASSWORD -DREPOSITORY_ID=$REPOSITORY_ID -DGPG_PRIVATE_PASSWORD=$GPG_PRIVATE_PASSWORD -DGPG_PRIVATE_KEY=$GPG_PRIVATE_KEY
         env:
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
