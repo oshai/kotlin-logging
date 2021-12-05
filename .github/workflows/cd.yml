@@ -30,7 +30,7 @@ jobs:
         with:
           java-version: 8
       - name: Publish
-        run: ./gradlew publishAllPublicationsToOss
+        run: ./gradlew publishToSonatype
         env:
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
