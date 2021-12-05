@@ -127,6 +127,8 @@ tasks {
     }
 }
 
+val sonatypeUsername: String? = System.getenv("SONATYPE_USERNAME")
+val sonatypePassword: String? = System.getenv("SONATYPE_PASSWORD")
 publishing {
     publications.withType<MavenPublication> {
         pom {
@@ -154,13 +156,24 @@ publishing {
             }
         }
         artifact(tasks["dokkaJar"])
+        repositories {
+            maven {
+                name = "oss"
+                url = uri("https://oss.sonatype.org/service/local/staging/deployByRepositoryId/kotlin-logging/")
+                credentials {
+                    username = sonatypeUsername
+                    password = sonatypePassword
+                }
+            }
+        }
     }
 }
 
 signing {
-    val signingKey: String? by project
-    val signingPassword: String? by project
-    useInMemoryPgpKeys(signingKey, signingPassword)
+    useInMemoryPgpKeys(
+        System.getenv("GPG_PRIVATE_KEY"),
+        System.getenv("GPG_PRIVATE_PASSWORD")
+    )
     sign(publishing.publications)
 }
 
