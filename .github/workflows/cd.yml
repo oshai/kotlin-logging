@@ -15,7 +15,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Create staging repo
-        run: ./scripts/create-repository.sh -u ${{ secrets.SONATYPE_USERNAME }} -p ${{ secrets.SONATYPE_PASSWORD }} -id ${{ secrets.SONATYPE_PROFILE_ID }}
+        run: ./scripts/create-staging.sh -u ${{ secrets.SONATYPE_USERNAME }} -p ${{ secrets.SONATYPE_PASSWORD }} -id ${{ secrets.SONATYPE_PROFILE_ID }}
   build-upload:
     needs: create-staging-repository
     runs-on: ${{ matrix.os }}
