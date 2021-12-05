@@ -17,6 +17,7 @@ jobs:
           password: ${{ secrets.SONATYPE_PASSWORD }}
           staging_profile_id: ${{ secrets.SONATYPE_PROFILE_ID }}
   build-upload:
+    needs: [create-staging-repository]
     if: success() && github.ref == 'refs/heads/github-release'
     runs-on: ${{ matrix.os }}
     strategy:
