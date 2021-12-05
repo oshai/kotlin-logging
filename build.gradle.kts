@@ -121,14 +121,11 @@ tasks {
     }
 }
 
-val sonatypeUsername: String? = System.getProperty("SONATYPE_USERNAME")
-val sonatypePassword: String? = System.getProperty("SONATYPE_PASSWORD")
-val repositoryId: String? = System.getProperty("REPOSITORY_ID")
 
 nexusPublishing {
     repositories {
         sonatype {
-            nexusUrl.set(uri("https://oss.sonatype.org/service/local/staging/deployByRepositoryId/$repositoryId/"))
+            nexusUrl.set(uri("https://oss.sonatype.org/service/local/staging/deployByRepositoryId/${System.getProperty("REPOSITORY_ID")}/"))
         }
     }
 }
