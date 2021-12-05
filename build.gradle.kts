@@ -129,6 +129,8 @@ tasks {
 
 val sonatypeUsername: String? = System.getenv("SONATYPE_USERNAME")
 val sonatypePassword: String? = System.getenv("SONATYPE_PASSWORD")
+val repositoryId: String? = System.getenv("REPOSITORY_ID")
+
 publishing {
     publications.withType<MavenPublication> {
         pom {
@@ -159,7 +161,7 @@ publishing {
         repositories {
             maven {
                 name = "oss"
-                url = uri("https://oss.sonatype.org/service/local/staging/deployByRepositoryId/kotlin-logging/")
+                url = uri("https://oss.sonatype.org/service/local/staging/deployByRepositoryId/$repositoryId/")
                 credentials {
                     username = sonatypeUsername
                     password = sonatypePassword

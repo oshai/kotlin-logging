@@ -3,7 +3,20 @@ name: CD
 on: [push]
 
 jobs:
-  snapshot:
+  create-staging-repository:
+    if: success() && github.ref == 'refs/heads/github-release'
+    name: Create staging repository
+    runs-on: ubuntu-latest
+    outputs:
+      repository_id: ${{ steps.create.outputs.repository_id }}
+    steps:
+      - id: create
+        uses: nexus-actions/create-nexus-staging-repo@v1.1
+        with:
+          username: ${{ secrets.SONATYPE_USERNAME }}
+          password: ${{ secrets.SONATYPE_PASSWORD }}
+          staging_profile_id: ${{ secrets.SONATYPE_PROFILE_ID }}
+  build-upload:
     if: success() && github.ref == 'refs/heads/github-release'
     runs-on: ${{ matrix.os }}
     strategy:
@@ -23,3 +36,23 @@ jobs:
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
           GPG_PRIVATE_PASSWORD: ${{ secrets.GPG_PRIVATE_PASSWORD }}
+          REPOSITORY_ID: ${{ needs.create_staging_repository.outputs.repository_id }}
+  drop-or-release:
+    needs: [create-staging-repository, build-upload]
+    runs-on: ubuntu-latest
+    if: ${{ always() && needs.create_staging_repository.result == 'success' }}
+    steps:
+      - name: Discard
+        if: ${{ needs.build-upload.result != 'success' }}
+        uses: nexus-actions/drop-nexus-staging-repo@v1
+        with:
+          username: ${{ secrets.SONATYPE_USERNAME }}
+          password: ${{ secrets.SONATYPE_PASSWORD }}
+          staging_repository_id: ${{ needs.create_staging_repository.outputs.repository_id }}
+      - name: Release
+        if: ${{ needs.build-upload.result == 'success' }}
+        uses: nexus-actions/release-nexus-staging-repo@v1
+        with:
+          username: ${{ secrets.SONATYPE_USERNAME }}
+          password: ${{ secrets.SONATYPE_PASSWORD }}
+          staging_repository_id: ${{ needs.create_staging_repository.outputs.repository_id }}
