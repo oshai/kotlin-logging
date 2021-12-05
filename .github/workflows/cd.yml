@@ -10,7 +10,7 @@ jobs:
     name: Create staging repository
     runs-on: ubuntu-latest
     outputs:
-      repository_id: ${{ steps.create.outputs.repository_id }}
+      repository_id: ${{ steps.create-staging-repository.outputs.repository_id }}
     steps:
       - id: create
         uses: nexus-actions/create-nexus-staging-repo@v1.1
