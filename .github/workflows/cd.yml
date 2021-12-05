@@ -32,8 +32,13 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 8
-      - run: echo "needs ${{ needs.create_staging_repository.outputs.repository_id }}"
+      - run: echo "needs $REPOSITORY_ID"
+        env:
+          REPOSITORY_ID: ${{ needs.create_staging_repository.outputs.repository_id }}
       - run: echo "steps ${{ steps.create_staging_repository.outputs.repository_id }}"
+        env:
+          REPOSITORY_ID: ${{ steps.create_staging_repository.outputs.repository_id }}
+
       - name: Publish
         run: ./gradlew publishToSonatype -no-daemon --no-parallel --stacktrace -DSONATYPE_USERNAME=$SONATYPE_USERNAME -DSONATYPE_PASSWORD=$SONATYPE_PASSWORD -DREPOSITORY_ID=$REPOSITORY_ID -DGPG_PRIVATE_PASSWORD=$GPG_PRIVATE_PASSWORD -DGPG_PRIVATE_KEY=$GPG_PRIVATE_KEY
         env:
