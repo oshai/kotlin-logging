@@ -6,7 +6,6 @@ plugins {
     kotlin("multiplatform") version "1.5.21"
     id("org.jetbrains.dokka") version "1.5.0"
     `maven-publish`
-    id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
     signing
     id("io.gitlab.arturbosch.detekt") version "1.18.0"
 }
@@ -14,7 +13,7 @@ plugins {
 apply("versions.gradle.kts")
 
 group = "io.github.microutils"
-version = "2.1.7"
+version = "2.1.10"
 
 repositories {
     mavenCentral()
@@ -122,13 +121,6 @@ tasks {
 }
 
 
-nexusPublishing {
-    repositories {
-        sonatype {
-            nexusUrl.set(uri("https://oss.sonatype.org/service/local/staging/deployByRepositoryId/${System.getProperty("REPOSITORY_ID")}/"))
-        }
-    }
-}
 
 publishing {
     publications.withType<MavenPublication> {
@@ -157,6 +149,15 @@ publishing {
             }
         }
         artifact(tasks["dokkaJar"])
+    }
+    repositories {
+        maven {
+            url = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
+            credentials {
+                username = System.getProperty("SONATYPE_USERNAME")
+                password = System.getProperty("SONATYPE_PASSWORD")
+            }
+        }
     }
 }
 
