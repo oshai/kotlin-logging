@@ -1,10 +1,12 @@
 name: CD
 
-on: [push]
+on:
+  push:
+    branches:
+      - github-release
 
 jobs:
   create-staging-repository:
-    if: success() && github.ref == 'refs/heads/github-release'
     name: Create staging repository
     runs-on: ubuntu-latest
     outputs:
@@ -18,7 +20,7 @@ jobs:
           staging_profile_id: ${{ secrets.SONATYPE_PROFILE_ID }}
   build-upload:
     needs: [create-staging-repository]
-    if: success() && github.ref == 'refs/heads/github-release'
+    if: success()
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
