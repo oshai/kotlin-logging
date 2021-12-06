@@ -6,24 +6,9 @@ on:
       - github-release
 
 jobs:
-  create-staging-repository:
-    name: Create staging repository
-    runs-on: ubuntu-latest
-    outputs:
-      repository_id: ${{ steps.create-staging-repository.outputs.repository_id }}
+  release:
+    runs-on: macos-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Create staging repo
-        run: ./scripts/create-staging.sh -u ${{ secrets.SONATYPE_USERNAME }} -p ${{ secrets.SONATYPE_PASSWORD }} -id ${{ secrets.SONATYPE_PROFILE_ID }}
-  build-upload:
-    needs: create-staging-repository
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macOS-latest]
-    steps:
-      - run: echo repository_id=${{needs.create_staging_repository.outputs.repository_id}} bla
       - name: Checkout
         uses: actions/checkout@v2
       - name: Configure JDK
@@ -31,32 +16,11 @@ jobs:
         with:
           java-version: 8
       - name: Publish
-        run: ./gradlew publishAllPublicationsToMavenRepository -no-daemon --no-parallel --stacktrace -DisMainHost=$IS_MAIN_HOST -DSONATYPE_USERNAME=$SONATYPE_USERNAME -DSONATYPE_PASSWORD=$SONATYPE_PASSWORD -DGPG_PRIVATE_PASSWORD=$GPG_PRIVATE_PASSWORD -DGPG_PRIVATE_KEY=$GPG_PRIVATE_KEY
+        run: ./gradlew publishAllPublicationsToMavenRepository closeAndReleaseMavenRepository -no-daemon --no-parallel --stacktrace -DSONATYPE_USERNAME=$SONATYPE_USERNAME -DSONATYPE_PASSWORD=$SONATYPE_PASSWORD -DGPG_PRIVATE_PASSWORD=$GPG_PRIVATE_PASSWORD -DGPG_PRIVATE_KEY=$GPG_PRIVATE_KEY
         env:
-          IS_MAIN_HOST: ${{matrix.os == 'ubuntu-latest'}}
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
           SONATYPE_REPOSITORY_ID: ${{ needs.create_staging_repository.outputs.repository_id }}
-          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
-          GPG_PRIVATE_PASSWORD: ${{ secrets.GPG_PRIVATE_PASSWORD }}
-          ORG_GRADLE_PROJECT_sonatypePassword: ${{ secrets.SONATYPE_PASSWORD }}
-          ORG_GRADLE_PROJECT_sonatypeUsername: ${{ secrets.SONATYPE_USERNAME }}
-  close-release:
-    needs: build-upload
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Configure JDK
-        uses: actions/setup-java@v1
-        with:
-          java-version: 8
-      - name: Close Release
-        run: ./gradlew closeAndReleaseMavenRepository -no-daemon --no-parallel --stacktrace -DisMainHost=$IS_MAIN_HOST -DSONATYPE_USERNAME=$SONATYPE_USERNAME -DSONATYPE_PASSWORD=$SONATYPE_PASSWORD -DGPG_PRIVATE_PASSWORD=$GPG_PRIVATE_PASSWORD -DGPG_PRIVATE_KEY=$GPG_PRIVATE_KEY
-        env:
-          IS_MAIN_HOST: ${{matrix.os == 'ubuntu-latest'}}
-          SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
-          SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
           GPG_PRIVATE_PASSWORD: ${{ secrets.GPG_PRIVATE_PASSWORD }}
           ORG_GRADLE_PROJECT_sonatypePassword: ${{ secrets.SONATYPE_PASSWORD }}

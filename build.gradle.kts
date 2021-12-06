@@ -13,7 +13,7 @@ plugins {
 apply("versions.gradle.kts")
 
 group = "io.github.microutils"
-version = "2.1.13"
+version = "2.1.14"
 
 repositories {
     mavenCentral()
@@ -87,20 +87,6 @@ kotlin {
         }
         val macosX64Main by getting {
             dependsOn(nativeMain)
-        }
-    }
-
-    // see https://kotlinlang.org/docs/mpp-publish-lib.html#avoid-duplicate-publications
-    val publicationsFromMainHost =
-        listOf(jvm(), js()).map { it.name } + "kotlinMultiplatform"
-    publishing {
-        publications {
-            matching { it.name in publicationsFromMainHost }.all {
-                val targetPublication = this@all
-                tasks.withType<AbstractPublishToMaven>()
-                    .matching { it.publication == targetPublication }
-                    .configureEach { onlyIf { System.getProperty("isMainHost") == "true" } }
-            }
         }
     }
 }
