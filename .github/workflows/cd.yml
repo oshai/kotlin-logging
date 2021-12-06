@@ -23,6 +23,7 @@ jobs:
       matrix:
         os: [ubuntu-latest, macOS-latest]
     steps:
+      - run: echo repository_id=${{needs.create_staging_repository.outputs.repository_id}} bla
       - name: Checkout
         uses: actions/checkout@v2
       - name: Configure JDK
