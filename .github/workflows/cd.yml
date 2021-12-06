@@ -16,7 +16,7 @@ jobs:
         with:
           java-version: 8
       - name: Publish
-        run: ./gradlew publishAllPublicationsToMavenRepository closeAndReleaseMavenRepository -no-daemon --no-parallel --stacktrace -DSONATYPE_USERNAME=$SONATYPE_USERNAME -DSONATYPE_PASSWORD=$SONATYPE_PASSWORD -DGPG_PRIVATE_PASSWORD=$GPG_PRIVATE_PASSWORD -DGPG_PRIVATE_KEY=$GPG_PRIVATE_KEY
+        run: ./gradlew publishToSonatype closeAndReleaseSonatypeStagingRepository -no-daemon --no-parallel --stacktrace -DSONATYPE_USERNAME=$SONATYPE_USERNAME -DSONATYPE_PASSWORD=$SONATYPE_PASSWORD -DGPG_PRIVATE_PASSWORD=$GPG_PRIVATE_PASSWORD -DGPG_PRIVATE_KEY=$GPG_PRIVATE_KEY
         env:
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
