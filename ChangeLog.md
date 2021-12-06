@@ -1,5 +1,11 @@
 # Next version
 
+*
+
+# 2.1.14
+
+* Move to github actions release.
+
 # 2.0.12
 
 * added the license to all jar files [#191](https://github.com/MicroUtils/kotlin-logging/pull/191.
