@@ -14,7 +14,7 @@ plugins {
 apply("versions.gradle.kts")
 
 group = "io.github.microutils"
-version = "2.1.2"
+version = "2.1.14"
 
 repositories {
     mavenCentral()
@@ -25,6 +25,8 @@ nexusPublishing {
         sonatype()
     }
 }
+
+apply(plugin = "io.github.gradle-nexus.publish-plugin")
 
 kotlin {
     explicitApi()
@@ -127,8 +129,8 @@ tasks {
     }
 }
 
-val sonatypeUsername: String? = System.getenv("SONATYPE_USERNAME")
-val sonatypePassword: String? = System.getenv("SONATYPE_PASSWORD")
+
+
 publishing {
     publications.withType<MavenPublication> {
         pom {
@@ -156,23 +158,13 @@ publishing {
             }
         }
         artifact(tasks["dokkaJar"])
-        repositories {
-            maven {
-                name = "oss"
-                url = uri("https://oss.sonatype.org/service/local/staging/deployByRepositoryId/kotlin-logging/")
-                credentials {
-                    username = sonatypeUsername
-                    password = sonatypePassword
-                }
-            }
-        }
     }
 }
 
 signing {
     useInMemoryPgpKeys(
-        System.getenv("GPG_PRIVATE_KEY"),
-        System.getenv("GPG_PRIVATE_PASSWORD")
+        System.getProperty("GPG_PRIVATE_KEY"),
+        System.getProperty("GPG_PRIVATE_PASSWORD")
     )
     sign(publishing.publications)
 }
