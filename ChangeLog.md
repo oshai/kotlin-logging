@@ -2,6 +2,10 @@
 
 *
 
+# 2.1.15
+
+* Add support for mingw (windows) and osx.
+
 # 2.1.14
 
 * Move to github actions release.
