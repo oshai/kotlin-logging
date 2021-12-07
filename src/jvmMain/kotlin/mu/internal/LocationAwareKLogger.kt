@@ -11,6 +11,7 @@ import org.slf4j.spi.LocationAwareLogger
  * A class wrapping a [LocationAwareLogger] instance preserving
  * location information with the correct fully qualified class name.
  */
+@Suppress("VariableNaming", "TooManyFunctions")
 internal class LocationAwareKLogger(override val underlyingLogger: LocationAwareLogger) : KLogger,
     Logger by underlyingLogger {
 
@@ -558,7 +559,7 @@ internal class LocationAwareKLogger(override val underlyingLogger: LocationAware
     override fun entry(vararg argArray: Any?) {
         if (underlyingLogger.isTraceEnabled(ENTRY)) {
             val tp = MessageFormatter.arrayFormat(buildMessagePattern(argArray.size), argArray)
-            underlyingLogger.log(ENTRY, fqcn, LocationAwareLogger.TRACE_INT, tp.message, null, null);
+            underlyingLogger.log(ENTRY, fqcn, LocationAwareLogger.TRACE_INT, tp.message, null, null)
         }
     }
 
