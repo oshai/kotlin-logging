@@ -1,6 +1,7 @@
 package mu.internal
 
-import org.junit.Test
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import kotlin.test.assertEquals
 
 class MessageInvokerJavaTest {
@@ -15,13 +16,15 @@ class MessageInvokerJavaTest {
         assertEquals("Log message invocation failed: java.lang.Exception: hi", { throw Exception("hi") }.toStringSafe())
     }
 
-    @Test(expected = Exception::class)
+    @Test
     fun toStringSafeChecksThrowExceptionWithSystemProperty() {
-        System.setProperty("kotlin-logging.throwOnMessageError", "")
-        try {
-            { throw Exception("hi") }.toStringSafe()
-        } finally {
-          System.clearProperty("kotlin-logging.throwOnMessageError")
+        assertThrows<Exception> {
+            System.setProperty("kotlin-logging.throwOnMessageError", "")
+            try {
+                { throw Exception("hi") }.toStringSafe()
+            } finally {
+                System.clearProperty("kotlin-logging.throwOnMessageError")
+            }
         }
     }
 }
