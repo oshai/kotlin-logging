@@ -71,8 +71,8 @@ kotlin {
         val jvmTest by getting {
             dependencies {
                 implementation(kotlin("test"))
-                implementation(kotlin("test-junit"))
-                implementation("junit:junit:${extra["junit_version"]}")
+                implementation("org.junit.jupiter:junit-jupiter-engine:${extra["junit_version"]}")
+                implementation("org.junit.jupiter:junit-jupiter-params:${extra["junit_version"]}")
                 implementation("org.mockito:mockito-all:${extra["mockito_version"]}")
                 implementation("org.apache.logging.log4j:log4j-api:${extra["log4j_version"]}")
                 implementation("org.apache.logging.log4j:log4j-core:${extra["log4j_version"]}")
@@ -116,6 +116,7 @@ tasks {
 	}
 
     withType<Test> {
+        useJUnitPlatform()
         testLogging {
             showStandardStreams = true
             showExceptions = true
