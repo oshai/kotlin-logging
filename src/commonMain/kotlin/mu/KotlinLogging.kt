@@ -11,4 +11,6 @@ public expect object KotlinLogging {
     public fun logger(func: () -> Unit): KLogger
 
     public fun logger(name: String): KLogger
+
+    public inline fun <reified T> T.logger(): KLogger
 }

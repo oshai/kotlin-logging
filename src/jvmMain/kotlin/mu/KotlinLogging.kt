@@ -15,6 +15,11 @@ public actual object KotlinLogging {
 
     public actual fun logger(name: String): KLogger = KLoggerFactory.logger(name)
 
+    public actual inline fun <reified T> T.logger(): KLogger {
+        val clazz = T::class.java
+        return logger(clazz.canonicalName ?: clazz.toString())
+    }
+
     public fun logger(underlyingLogger: Logger): KLogger = KLoggerFactory.wrapJLogger(underlyingLogger)
 }
 

@@ -13,4 +13,6 @@ public actual object KotlinLogging {
     public actual fun logger(func: () -> Unit): KLogger = KLoggerLinux(func::class.qualifiedName ?: "")
 
     public actual fun logger(name: String): KLogger = KLoggerLinux(name)
+
+    public actual inline fun <reified T> T.logger(): KLogger = logger(T::class.qualifiedName ?: "")
 }
