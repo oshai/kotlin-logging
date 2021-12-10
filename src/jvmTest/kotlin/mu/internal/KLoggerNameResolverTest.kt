@@ -1,42 +1,46 @@
 package mu.internal
 
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.TestInstance
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.MethodSource
+import java.util.stream.Stream
 
-import org.junit.Assert.assertEquals
-import org.junit.Test
-
-
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class KLoggerNameResolverTest {
 
-    @Test
-    fun testNames() {
-        assertEquals("mu.internal.BaseClass", KLoggerNameResolver.name(BaseClass::class.java))
-        assertEquals("mu.internal.ChildClass", KLoggerNameResolver.name(ChildClass::class.java))
-        assertEquals("mu.internal.BaseClass", KLoggerNameResolver.name(BaseClass.Companion::class.java))
-        assertEquals("mu.internal.ChildClass", KLoggerNameResolver.name(ChildClass.Companion::class.java))
-        assertEquals("mu.internal.Singleton", KLoggerNameResolver.name(Singleton::class.java))
-        assertEquals("mu.internal.MyInterface", KLoggerNameResolver.name(MyInterface::class.java))
-        assertEquals("java.lang.Object", KLoggerNameResolver.name(Any().javaClass))
-        assertEquals("mu.internal.KLoggerNameResolverTest\$testNames$1", KLoggerNameResolver.name(object {}.javaClass))
-        assertEquals(
-            "mu.internal.BaseClass\$InnerClass\$Obj",
-            KLoggerNameResolver.name(BaseClass.InnerClass.Obj::class.java)
-        )
-        assertEquals(
-            "mu.internal.BaseClass\$InnerClass\$Obj",
-            KLoggerNameResolver.name(BaseClass.InnerClass.Obj.javaClass)
-        )
-        assertEquals(
-            "mu.internal.BaseClass\$InnerClass",
-            KLoggerNameResolver.name(BaseClass.InnerClass.CmpObj::class.java)
-        )
-        assertEquals(
-            "mu.internal.BaseClass\$InnerClass",
-            KLoggerNameResolver.name(BaseClass.InnerClass.CmpObj::class.java)
-        )
-        assertEquals("mu.internal.Foo\$Bar", KLoggerNameResolver.name(Foo.Bar::class.java))
-        assertEquals("mu.internal.Foo\$Bar2", KLoggerNameResolver.name(Foo.Bar3.javaClass))
-        assertEquals("mu.internal.PrivateCompanion", KLoggerNameResolver.name(PrivateCompanion().companionClass))
+    @ParameterizedTest
+    @MethodSource("testNames")
+    fun testNames(expectedName: String, clazz: Class<*>) {
+        assertEquals(expectedName, KLoggerNameResolver.name(clazz))
     }
+
+    private fun testNames(): Stream<Arguments> = Stream.of(
+        Arguments.of("mu.internal.BaseClass", BaseClass::class.java),
+        Arguments.of("mu.internal.ChildClass", ChildClass::class.java),
+        Arguments.of("mu.internal.BaseClass", BaseClass.Companion::class.java),
+        Arguments.of("mu.internal.ChildClass", ChildClass.Companion::class.java),
+        Arguments.of("mu.internal.Singleton", Singleton::class.java),
+        Arguments.of("mu.internal.MyInterface", MyInterface::class.java),
+        Arguments.of("java.lang.Object", Any().javaClass),
+        Arguments.of("mu.internal.KLoggerNameResolverTest\$testNames$1", object {}.javaClass),
+        Arguments.of(
+            "mu.internal.BaseClass\$InnerClass\$Obj",
+            BaseClass.InnerClass.Obj::class.java,
+        ),
+        Arguments.of(
+            "mu.internal.BaseClass\$InnerClass\$Obj",
+            BaseClass.InnerClass.Obj.javaClass,
+        ),
+        Arguments.of(
+            "mu.internal.BaseClass\$InnerClass",
+            BaseClass.InnerClass.CmpObj::class.java,
+        ),
+        Arguments.of("mu.internal.Foo\$Bar", Foo.Bar::class.java),
+        Arguments.of("mu.internal.Foo\$Bar2", Foo.Bar3.javaClass),
+        Arguments.of("mu.internal.PrivateCompanion", PrivateCompanion().companionClass)
+    )
 }
 
 open class BaseClass {

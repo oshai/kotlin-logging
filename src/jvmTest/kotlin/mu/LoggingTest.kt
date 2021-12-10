@@ -6,11 +6,12 @@ import org.apache.logging.log4j.core.Appender
 import org.apache.logging.log4j.core.appender.WriterAppender
 import org.apache.logging.log4j.core.config.Configurator
 import org.apache.logging.log4j.core.layout.PatternLayout
-import org.junit.After
-import org.junit.Assert
-import org.junit.Assert.assertEquals
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertAll
 import java.io.StringWriter
 
 class ClassWithLogging {
@@ -123,12 +124,12 @@ class LoggingTest {
         Configurator.setRootLevel(Level.TRACE)
     }
 
-    @Before
+    @BeforeEach
     fun setupAppender() {
         addAppender(appenderWithWriter.appender)
     }
 
-    @After
+    @AfterEach
     fun removeAppender() {
         removeAppender(appenderWithWriter.appender)
     }
@@ -141,12 +142,17 @@ class LoggingTest {
             testNullableThrowable()
         }
         appenderWithWriter.writer.flush()
-        val lines = appenderWithWriter.writer.toString().trim().replace("\r", "\n").replace("\n\n", "\n").split("\n")
-        Assert.assertEquals("INFO  mu.ClassWithLogging  - test ClassWithLogging", lines[0].trim())
-        Assert.assertEquals("TRACE mu.ClassWithLogging  - test ClassWithLogging", lines[1].trim())
-        Assert.assertEquals("java.lang.Throwable: null", lines[2].trim())
-        Assert.assertTrue(lines[3].trim().startsWith("at mu.ClassWithLogging.testThrowable("))
-        Assert.assertEquals("TRACE mu.ClassWithLogging  - test ClassWithLogging", lines[lines.size - 1].trim())
+        val lines = appenderWithWriter.writer.toString().trim()
+            .replace("\r", "\n")
+            .replace("\n\n", "\n")
+            .split("\n")
+        assertAll(
+            { assertEquals("INFO  mu.ClassWithLogging  - test ClassWithLogging", lines[0].trim()) },
+            { assertEquals("TRACE mu.ClassWithLogging  - test ClassWithLogging", lines[1].trim()) },
+            { assertEquals("java.lang.Throwable: null", lines[2].trim()) },
+            { assertTrue(lines[3].trim().startsWith("at mu.ClassWithLogging.testThrowable(")) },
+            { assertEquals("TRACE mu.ClassWithLogging  - test ClassWithLogging", lines[lines.size - 1].trim()) },
+        )
     }
 
     @Test
@@ -156,18 +162,23 @@ class LoggingTest {
             testMarkerThrowable()
         }
         appenderWithWriter.writer.flush()
-        val lines = appenderWithWriter.writer.toString().trim().replace("\r", "\n").replace("\n\n", "\n").split("\n")
-        Assert.assertEquals("TRACE mu.ClassWithLogging MARKER - test ClassWithLogging", lines[0].trim())
-        Assert.assertEquals("TRACE mu.ClassWithLogging MARKER - test ClassWithLogging", lines[1].trim())
-        Assert.assertEquals("java.lang.Throwable: null", lines[2].trim())
-        Assert.assertTrue(lines[3].trim().startsWith("at mu.ClassWithLogging.testMarkerThrowable("))
+        val lines = appenderWithWriter.writer.toString().trim()
+            .replace("\r", "\n")
+            .replace("\n\n", "\n")
+            .split("\n")
+        assertAll(
+            { assertEquals("TRACE mu.ClassWithLogging MARKER - test ClassWithLogging", lines[0].trim()) },
+            { assertEquals("TRACE mu.ClassWithLogging MARKER - test ClassWithLogging", lines[1].trim()) },
+            { assertEquals("java.lang.Throwable: null", lines[2].trim()) },
+            { assertTrue(lines[3].trim().startsWith("at mu.ClassWithLogging.testMarkerThrowable(")) },
+        )
     }
 
     @Test
     fun testMessages2() {
         ClassInheritLogging().test()
         appenderWithWriter.writer.flush()
-        Assert.assertEquals(
+        assertEquals(
             "INFO  mu.ClassInheritLogging  - test ClassHasLogging", appenderWithWriter.writer.toString().trim()
         )
     }
@@ -176,7 +187,7 @@ class LoggingTest {
     fun testMessages3() {
         ChildClassWithLogging().test()
         appenderWithWriter.writer.flush()
-        Assert.assertEquals(
+        assertEquals(
             "INFO  mu.ChildClassWithLogging  - test ChildClassWithLogging", appenderWithWriter.writer.toString().trim()
         )
     }
@@ -185,7 +196,7 @@ class LoggingTest {
     fun testMessages4() {
         ClassWithNamedLogging().test()
         appenderWithWriter.writer.flush()
-        Assert.assertEquals(
+        assertEquals(
             "INFO  mu.ClassWithNamedLogging  - test ClassWithNamedLogging", appenderWithWriter.writer.toString().trim()
         )
     }
@@ -194,7 +205,7 @@ class LoggingTest {
     fun testMessages5() {
         ClassHasLogging().test()
         appenderWithWriter.writer.flush()
-        Assert.assertEquals(
+        assertEquals(
             "INFO  mu.ClassHasLogging  - test ClassHasLogging", appenderWithWriter.writer.toString().trim()
         )
     }
@@ -203,7 +214,7 @@ class LoggingTest {
     fun testMessages6() {
         CompanionHasLogging().test()
         appenderWithWriter.writer.flush()
-        Assert.assertEquals(
+        assertEquals(
             "INFO  mu.CompanionHasLogging  - test CompanionHasLogging", appenderWithWriter.writer.toString().trim()
         )
     }
@@ -212,7 +223,7 @@ class LoggingTest {
     fun shouldNotFailForFailingLambdas() {
         LambdaRaisesError().test()
         appenderWithWriter.writer.flush()
-        Assert.assertEquals(
+        assertEquals(
             "INFO  mu.LambdaRaisesError  - Log message invocation failed: java.lang.NullPointerException",
             appenderWithWriter.writer.toString().trim()
         )
@@ -222,26 +233,28 @@ class LoggingTest {
     fun placeholderFormatting() {
         ClassWithLogging().testFormatting()
         appenderWithWriter.writer.flush()
-        Assert.assertEquals(
+        assertEquals(
             "INFO  mu.ClassWithLogging  - Message: String with {} curly braces", appenderWithWriter.writer.toString().trim()
         )
     }
 
     @Test
     fun `check underlyingLogger property`() {
-        Assert.assertEquals("mu.ClassHasLogging", ClassHasLogging().logger.underlyingLogger.name)
+        assertEquals("mu.ClassHasLogging", ClassHasLogging().logger.underlyingLogger.name)
     }
 }
 
 class LoggingNameTest {
     @Test
     fun testNames() {
-        assertEquals("mu.ClassWithLogging", ClassWithLogging.logger.name)
-        assertEquals("mu.ClassInheritLogging", ClassInheritLogging().logger.name)
-        assertEquals("mu.ChildClassWithLogging", ChildClassWithLogging.logger.name)
-        assertEquals("mu.ClassWithNamedLogging", ClassWithNamedLogging.logger.name)
-        assertEquals("mu.ClassHasLogging", ClassHasLogging().logger.name)
-        assertEquals("mu.CompanionHasLogging", CompanionHasLogging.logger.name)
+        assertAll(
+            { assertEquals("mu.ClassWithLogging", ClassWithLogging.logger.name) },
+            { assertEquals("mu.ClassInheritLogging", ClassInheritLogging().logger.name) },
+            { assertEquals("mu.ChildClassWithLogging", ChildClassWithLogging.logger.name) },
+            { assertEquals("mu.ClassWithNamedLogging", ClassWithNamedLogging.logger.name) },
+            { assertEquals("mu.ClassHasLogging", ClassHasLogging().logger.name) },
+            { assertEquals("mu.CompanionHasLogging", CompanionHasLogging.logger.name) },
+        )
     }
 }
 
