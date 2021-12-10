@@ -34,11 +34,17 @@ internal object KLoggerNameResolver {
      */
     private inline fun <T : Any> unwrapCompanionClass(clazz: Class<T>): Class<*> {
         return clazz.enclosingClass?.let { enclosingClass ->
-            enclosingClass.declaredFields.find { field ->
-                field.name == clazz.simpleName &&
-                    Modifier.isStatic(field.modifiers) &&
-                    field.type == clazz
-            }?.run { enclosingClass }
+            try {
+                enclosingClass.declaredFields.find { field ->
+                    field.name == clazz.simpleName &&
+                        Modifier.isStatic(field.modifiers) &&
+                        field.type == clazz
+                }?.run { enclosingClass }
+            } catch (se: SecurityException) {
+                // The security manager isn't properly set up, so it won't be possible
+                // to search for the target declared field.
+                null
+            }
         } ?: clazz
     }
 }

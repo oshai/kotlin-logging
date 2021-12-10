@@ -6,9 +6,13 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.assertAll
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.ValueSource
 import org.slf4j.MDC
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class KotlinLoggingMDCTest {
     init {
         Configurator.setRootLevel(Level.TRACE)
@@ -160,8 +164,9 @@ class KotlinLoggingMDCTest {
         assertEquals("f", MDC.get("e"))
     }
 
-    @Test
-    fun `map withLoggingContext`() {
+    @ParameterizedTest
+    @ValueSource(booleans = [true, false])
+    fun `map withLoggingContext`(restorePrevious: Boolean) {
         assertAll(
             { assertNull(MDC.get("a")) },
             { assertNull(MDC.get("c")) },
@@ -173,7 +178,7 @@ class KotlinLoggingMDCTest {
         MDC.put("e", "g")
         MDC.put("k", "l")
 
-        withLoggingContext(mapOf("a" to "b", "c" to "d", "e" to null, "f" to "h")) {
+        withLoggingContext(mapOf("a" to "b", "c" to "d", "e" to null, "f" to "h"), restorePrevious) {
             assertAll(
                 { assertEquals("b", MDC.get("a")) },
                 { assertEquals("d", MDC.get("c")) },
@@ -204,52 +209,15 @@ class KotlinLoggingMDCTest {
         assertAll(
             { assertNull(MDC.get("a")) },
             { assertNull(MDC.get("c")) },
-            { assertEquals("g", MDC.get("e")) },
+            {
+                if (restorePrevious) {
+                    assertEquals("g", MDC.get("e"))
+                } else {
+                    assertNull(MDC.get("e"))
+                }
+            },
             { assertNull(MDC.get("f")) },
             { assertEquals("l", MDC.get("k")) },
         )
-    }
-
-    @Test
-    fun `map withLoggingContext (restorePrevious=false)`() {
-        assertNull(MDC.get("a"))
-        assertNull(MDC.get("c"))
-        assertNull(MDC.get("e"))
-        assertNull(MDC.get("f"))
-        assertNull(MDC.get("k"))
-
-        MDC.put("e", "g")
-        MDC.put("k", "l")
-
-        withLoggingContext(
-            mapOf("a" to "b", "c" to "d", "e" to null, "f" to "h"),
-            restorePrevious = false,
-        ) {
-            assertEquals("b", MDC.get("a"))
-            assertEquals("d", MDC.get("c"))
-            assertEquals("g", MDC.get("e"))
-            assertEquals("h", MDC.get("f"))
-            assertEquals("l", MDC.get("k"))
-
-            withLoggingContext(mapOf("a" to "b", "e" to "i", "f" to "j")) {
-                assertEquals("b", MDC.get("a"))
-                assertEquals("d", MDC.get("c"))
-                assertEquals("i", MDC.get("e"))
-                assertEquals("j", MDC.get("f"))
-                assertEquals("l", MDC.get("k"))
-            }
-
-            assertEquals("b", MDC.get("a"))
-            assertEquals("d", MDC.get("c"))
-            assertEquals("g", MDC.get("e"))
-            assertEquals("h", MDC.get("f"))
-            assertEquals("l", MDC.get("k"))
-        }
-
-        assertNull(MDC.get("a"))
-        assertNull(MDC.get("c"))
-        assertNull(MDC.get("e"))
-        assertNull(MDC.get("f"))
-        assertEquals("l", MDC.get("k"))
     }
 }
