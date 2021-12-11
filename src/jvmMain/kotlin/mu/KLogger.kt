@@ -9,6 +9,7 @@ import org.slf4j.Logger
  * logger.info{"this is $lazy evaluated string"}
  *```
  */
+@Suppress("TooManyFunctions")
 public actual interface KLogger : Logger {
 
     /**

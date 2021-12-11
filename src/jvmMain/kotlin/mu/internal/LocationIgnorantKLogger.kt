@@ -12,6 +12,7 @@ import org.slf4j.Marker
  * the rest of the methods are delegated to [Logger]
  * Hence no implemented methods
  */
+@Suppress("TooManyFunctions")
 internal class LocationIgnorantKLogger(override val underlyingLogger: Logger) : KLogger, Logger by underlyingLogger {
 
     /**

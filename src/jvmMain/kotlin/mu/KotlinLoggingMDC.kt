@@ -47,29 +47,20 @@ public inline fun <T> withLoggingContext(
     body: () -> T
 ): T {
     val pairForMDC = pair.filter { it.second != null }
-    val previousMDC = if (restorePrevious) {
-        pairForMDC.map { (k, _) ->
-            k to MDC.get(k)
+    val cleanupCallbacks = pairForMDC.map { (mdcKey, _) ->
+        val mdcValue = MDC.get(mdcKey)
+        if (restorePrevious && mdcValue != null) {
+            { MDC.put(mdcKey, mdcValue) }
+        } else {
+            { MDC.remove(mdcKey) }
         }
-    } else {
-        null
     }
 
     try {
         pairForMDC.forEach { MDC.put(it.first, it.second) }
         return body()
     } finally {
-        if (restorePrevious) {
-            previousMDC?.forEach {
-                if (it.second != null) {
-                    MDC.put(it.first, it.second)
-                } else {
-                    MDC.remove(it.first)
-                }
-            }
-        } else {
-            pairForMDC.forEach { MDC.remove(it.first) }
-        }
+        cleanupCallbacks.forEach { it.invoke() }
     }
 }
 
@@ -91,7 +82,14 @@ public inline fun <T> withLoggingContext(
     restorePrevious: Boolean = true,
     body: () -> T
 ): T {
-    val previousMDC = map.mapValues { MDC.get(it.key) }
+    val cleanupCallbacks = map.map {
+        val mdcValue = MDC.get(it.key)
+        if (restorePrevious && mdcValue != null) {
+            { MDC.put(it.key, mdcValue) }
+        } else {
+            { MDC.remove(it.key) }
+        }
+    }
 
     try {
         map.forEach {
@@ -101,16 +99,6 @@ public inline fun <T> withLoggingContext(
         }
         return body()
     } finally {
-        if (restorePrevious) {
-            previousMDC.forEach {
-                if (it.value != null) {
-                    MDC.put(it.key, it.value)
-                } else {
-                    MDC.remove(it.key)
-                }
-            }
-        } else {
-            previousMDC.forEach { MDC.remove(it.key) }
-        }
+        cleanupCallbacks.forEach { it.invoke() }
     }
 }
