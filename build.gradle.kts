@@ -54,6 +54,7 @@ kotlin {
     linuxX64("linuxX64")
     macosX64("macosX64")
     mingwX64("mingwX64")
+    iosX64("iosX64")
 
     sourceSets {
         val commonMain by getting {}
@@ -95,6 +96,9 @@ kotlin {
             dependsOn(nativeMain)
         }
         val macosX64Main by getting {
+            dependsOn(nativeMain)
+        }
+        val iosX64 by getting {
             dependsOn(nativeMain)
         }
     }
