@@ -1,6 +1,15 @@
 # Next version
 
-*
+# 2.1.20
+
+* Same as `2.1.17`.
+
+# 2.1.17
+
+* Upgrade log4j to 2.16.0 [#211](https://github.com/MicroUtils/kotlin-logging/pull/211) [#207](https://github.com/MicroUtils/kotlin-logging/pull/207).
+* Upgrade dokka to 1.6 [#209](https://github.com/MicroUtils/kotlin-logging/pull/209).
+* Fix detekt warnings [#203](https://github.com/MicroUtils/kotlin-logging/pull/203).
+* Upgrade to junit 5 [#204](https://github.com/MicroUtils/kotlin-logging/pull/204).
 
 # 2.1.15
 
