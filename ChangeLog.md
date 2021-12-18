@@ -1,4 +1,4 @@
-# Next version
+# See latest versions changelog on github [releases page](https://github.com/MicroUtils/kotlin-logging/releases)
 
 # 2.1.20
 
