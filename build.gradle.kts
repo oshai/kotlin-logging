@@ -72,6 +72,7 @@ kotlin {
                 implementation(libs.junit.jupiter.engine)
                 implementation(libs.junit.jupiter.params)
                 implementation(libs.mockito)
+                implementation(libs.log4j.core)
                 implementation(libs.log4j.slf4j)
             }
         }
@@ -119,6 +120,11 @@ tasks {
             exceptionFormat = FULL
         }
     }
+
+    withType<Detekt> {
+        reports.xml.required.set(true)
+    }
+
     afterEvaluate {
         check {
             dependsOn(withType<Detekt>())
@@ -170,9 +176,4 @@ detekt {
     buildUponDefaultConfig = true
     config = files(rootDir.resolve("detekt.yml"))
     parallel = true
-
-    reports {
-        html.enabled = false
-        txt.enabled = false
-    }
 }
