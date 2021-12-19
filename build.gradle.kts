@@ -3,12 +3,12 @@ import org.gradle.jvm.tasks.Jar
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
 
 plugins {
-    kotlin("multiplatform") version "1.6.0"
+    kotlin("multiplatform") version "1.6.10"
     id("org.jetbrains.dokka") version "1.6.0"
     `maven-publish`
     id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
     signing
-    id("io.gitlab.arturbosch.detekt") version "1.18.0"
+    id("io.gitlab.arturbosch.detekt") version "1.19.0"
 }
 
 apply("versions.gradle.kts")
@@ -34,8 +34,8 @@ kotlin {
         compilations.all {
             // kotlin compiler compatibility options
             kotlinOptions {
-                apiVersion = "1.4"
-                languageVersion = "1.4"
+                apiVersion = "1.5"
+                languageVersion = "1.5"
                 jvmTarget = "1.8"
             }
         }
@@ -65,7 +65,7 @@ kotlin {
         }
         val jvmMain by getting {
             dependencies {
-                api("org.slf4j:slf4j-api:${extra["slf4j_version"]}")
+                api(libs.slf4j.api)
             }
         }
         val jvmTest by getting {
