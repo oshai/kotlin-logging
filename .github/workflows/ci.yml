@@ -62,4 +62,6 @@ jobs:
           restore-keys: ${{ runner.os }}-gradle-
 
       - name: Gradle Build
-        run: ./gradlew clean build --stacktrace
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: clean build --stacktrace

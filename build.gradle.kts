@@ -11,8 +11,6 @@ plugins {
     id("io.gitlab.arturbosch.detekt") version "1.19.0"
 }
 
-apply("versions.gradle.kts")
-
 group = "io.github.microutils"
 version = "2.1.22"
 
@@ -71,12 +69,10 @@ kotlin {
         val jvmTest by getting {
             dependencies {
                 implementation(kotlin("test"))
-                implementation("org.junit.jupiter:junit-jupiter-engine:${extra["junit_version"]}")
-                implementation("org.junit.jupiter:junit-jupiter-params:${extra["junit_version"]}")
-                implementation("org.mockito:mockito-all:${extra["mockito_version"]}")
-                implementation("org.apache.logging.log4j:log4j-api:${extra["log4j_version"]}")
-                implementation("org.apache.logging.log4j:log4j-core:${extra["log4j_version"]}")
-                implementation("org.apache.logging.log4j:log4j-slf4j-impl:${extra["log4j_version"]}")
+                implementation(libs.junit.jupiter.engine)
+                implementation(libs.junit.jupiter.params)
+                implementation(libs.mockito)
+                implementation(libs.log4j.slf4j)
             }
         }
         val jsMain by getting {}
@@ -107,13 +103,13 @@ tasks {
         archiveClassifier.set("javadoc")
     }
 
-	withType<Jar> {
-		metaInf.with(
-			copySpec {
-				from("${project.rootDir}/LICENSE")
-			}
-		)
-	}
+    withType<Jar> {
+        metaInf.with(
+            copySpec {
+                from("${project.rootDir}/LICENSE")
+            }
+        )
+    }
 
     withType<Test> {
         useJUnitPlatform()
