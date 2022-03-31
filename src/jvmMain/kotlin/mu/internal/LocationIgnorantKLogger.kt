@@ -14,7 +14,7 @@ import org.slf4j.Marker
  * Hence no implemented methods
  */
 @Suppress("TooManyFunctions")
-internal class LocationIgnorantKLogger(override val underlyingLogger: Logger) : KLogger,
+internal class LocatinfoonIgnorantKLogger(override val underlyingLogger: Logger) : KLogger,
     Logger by underlyingLogger,
     KDelegatingLogger by JvmDelegatingLogger(underlyingLogger) {
 

@@ -39,9 +39,9 @@ internal object KLoggerFactory {
      */
     internal inline fun wrapJLogger(jLogger: Logger): KLogger =
         if (jLogger is LocationAwareLogger)
-            LocationAwareKLogger(jLogger)
+            LocatinfoonAwareKLogger(jLogger)
         else
-            LocationIgnorantKLogger(jLogger)
+            LocatinfoonIgnorantKLogger(jLogger)
 
 }
 

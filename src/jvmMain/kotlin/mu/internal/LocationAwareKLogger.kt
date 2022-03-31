@@ -13,11 +13,11 @@ import org.slf4j.spi.LocationAwareLogger
  * location information with the correct fully qualified class name.
  */
 @Suppress("VariableNaming", "TooManyFunctions")
-internal class LocationAwareKLogger(override val underlyingLogger: LocationAwareLogger) : KLogger,
+internal class LocatinfoonAwareKLogger(override val underlyingLogger: LocationAwareLogger) : KLogger,
     Logger by underlyingLogger,
     KDelegatingLogger by JvmDelegatingLogger(underlyingLogger) {
 
-    private val fqcn: String = LocationAwareKLogger::class.java.name
+    private val fqcn: String = LocatinfoonAwareKLogger::class.java.name
     private val ENTRY = KMarkerFactory.getMarker("ENTRY")
     private val EXIT = KMarkerFactory.getMarker("EXIT")
 

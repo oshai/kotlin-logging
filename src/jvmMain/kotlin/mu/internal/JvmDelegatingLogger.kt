@@ -15,12 +15,15 @@ internal class JvmDelegatingLogger(private val underlyingLogger: Logger) : KDele
     override val trace: LoggingCallback?
         get() = when (underlyingLogger.isTraceEnabled) {
             true -> {
-                traceLoggingCallback?.let {
-                    val newCallback = JvmLoggingCallback(underlyingLogger::trace)
+                when (traceLoggingCallback) {
+                    null -> {
+                        val newCallback = JvmLoggingCallback(underlyingLogger::trace)
 
-                    traceLoggingCallback = newCallback
+                        traceLoggingCallback = newCallback
 
-                    newCallback
+                        newCallback
+                    }
+                    else -> traceLoggingCallback
                 }
             }
             false -> null
@@ -29,12 +32,15 @@ internal class JvmDelegatingLogger(private val underlyingLogger: Logger) : KDele
     override val debug: LoggingCallback?
         get() = when (underlyingLogger.isDebugEnabled) {
             true -> {
-                debugLoggingCallback?.let {
-                    val newCallback = JvmLoggingCallback(underlyingLogger::debug)
+                when (debugLoggingCallback) {
+                    null -> {
+                        val newCallback = JvmLoggingCallback(underlyingLogger::debug)
 
-                    debugLoggingCallback = newCallback
+                        debugLoggingCallback = newCallback
 
-                    newCallback
+                        newCallback
+                    }
+                    else -> debugLoggingCallback
                 }
             }
             false -> null
@@ -43,12 +49,15 @@ internal class JvmDelegatingLogger(private val underlyingLogger: Logger) : KDele
     override val info: LoggingCallback?
         get() = when (underlyingLogger.isInfoEnabled) {
             true -> {
-                intoLoggingCallback?.let {
-                    val newCallback = JvmLoggingCallback(underlyingLogger::info)
+                when (intoLoggingCallback) {
+                    null -> {
+                        val newCallback = JvmLoggingCallback(underlyingLogger::info)
 
-                    intoLoggingCallback = newCallback
+                        intoLoggingCallback = newCallback
 
-                    newCallback
+                        newCallback
+                    }
+                    else -> intoLoggingCallback
                 }
             }
             false -> null
@@ -57,12 +66,15 @@ internal class JvmDelegatingLogger(private val underlyingLogger: Logger) : KDele
     override val warn: LoggingCallback?
         get() = when (underlyingLogger.isWarnEnabled) {
             true -> {
-                warnLoggingCallback?.let {
-                    val newCallback = JvmLoggingCallback(underlyingLogger::warn)
+                when (warnLoggingCallback) {
+                    null -> {
+                        val newCallback = JvmLoggingCallback(underlyingLogger::warn)
 
-                    warnLoggingCallback = newCallback
+                        warnLoggingCallback = newCallback
 
-                    newCallback
+                        newCallback
+                    }
+                    else -> warnLoggingCallback
                 }
             }
             false -> null
@@ -71,12 +83,15 @@ internal class JvmDelegatingLogger(private val underlyingLogger: Logger) : KDele
     override val error: LoggingCallback?
         get() = when (underlyingLogger.isErrorEnabled) {
             true -> {
-                errorLoggingCallback?.let {
-                    val newCallback = JvmLoggingCallback(underlyingLogger::error)
+                when (errorLoggingCallback) {
+                    null -> {
+                        val newCallback = JvmLoggingCallback(underlyingLogger::error)
 
-                    errorLoggingCallback = newCallback
+                        errorLoggingCallback = newCallback
 
-                    newCallback
+                        newCallback
+                    }
+                    else -> errorLoggingCallback
                 }
             }
             false -> null

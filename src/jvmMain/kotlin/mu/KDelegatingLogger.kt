@@ -1,7 +1,5 @@
 package mu
 
-import mu.LoggingCallback
-
 public interface KDelegatingLogger {
 
     /**

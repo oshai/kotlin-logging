@@ -45,6 +45,10 @@ class ClassWithLogging {
     fun testFormatting() {
         logger.info("Message: {}", "String with {} curly braces")
     }
+
+    fun testDelegatingLogger() {
+        logger.info?.let { it("Message from logging callback") }
+    }
 }
 
 open class ClassHasLogging : KLoggable {
@@ -232,6 +236,15 @@ class LoggingTest {
     @Test
     fun placeholderFormatting() {
         ClassWithLogging().testFormatting()
+        appenderWithWriter.writer.flush()
+        assertEquals(
+            "INFO  mu.ClassWithLogging  - Message: String with {} curly braces", appenderWithWriter.writer.toString().trim()
+        )
+    }
+
+    @Test
+    fun delegatingLogger() {
+        ClassWithLogging().testDelegatingLogger()
         appenderWithWriter.writer.flush()
         assertEquals(
             "INFO  mu.ClassWithLogging  - Message: String with {} curly braces", appenderWithWriter.writer.toString().trim()
