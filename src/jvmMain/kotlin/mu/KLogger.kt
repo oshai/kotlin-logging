@@ -10,7 +10,7 @@ import org.slf4j.Logger
  *```
  */
 @Suppress("TooManyFunctions")
-public actual interface KLogger : Logger {
+public actual interface KLogger : Logger, KDelegatingLogger {
 
     /**
      * The actual logger executing logging

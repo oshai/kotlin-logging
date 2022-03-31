@@ -2,6 +2,7 @@
 
 package mu.internal
 
+import mu.KDelegatingLogger
 import mu.KLogger
 import org.slf4j.Logger
 import org.slf4j.Marker
@@ -13,7 +14,9 @@ import org.slf4j.Marker
  * Hence no implemented methods
  */
 @Suppress("TooManyFunctions")
-internal class LocationIgnorantKLogger(override val underlyingLogger: Logger) : KLogger, Logger by underlyingLogger {
+internal class LocationIgnorantKLogger(override val underlyingLogger: Logger) : KLogger,
+    Logger by underlyingLogger,
+    KDelegatingLogger by JvmDelegatingLogger(underlyingLogger) {
 
     /**
      * Lazy add a log message if isTraceEnabled is true

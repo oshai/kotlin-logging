@@ -1,5 +1,6 @@
 package mu.internal
 
+import mu.KDelegatingLogger
 import mu.KLogger
 import mu.KMarkerFactory
 import org.slf4j.Logger
@@ -13,7 +14,8 @@ import org.slf4j.spi.LocationAwareLogger
  */
 @Suppress("VariableNaming", "TooManyFunctions")
 internal class LocationAwareKLogger(override val underlyingLogger: LocationAwareLogger) : KLogger,
-    Logger by underlyingLogger {
+    Logger by underlyingLogger,
+    KDelegatingLogger by JvmDelegatingLogger(underlyingLogger) {
 
     private val fqcn: String = LocationAwareKLogger::class.java.name
     private val ENTRY = KMarkerFactory.getMarker("ENTRY")
