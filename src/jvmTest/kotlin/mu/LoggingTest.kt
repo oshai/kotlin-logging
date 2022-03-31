@@ -247,7 +247,7 @@ class LoggingTest {
         ClassWithLogging().testDelegatingLogger()
         appenderWithWriter.writer.flush()
         assertEquals(
-            "INFO  mu.ClassWithLogging  - Message: String with {} curly braces", appenderWithWriter.writer.toString().trim()
+            "INFO  mu.ClassWithLogging  - Message from logging callback", appenderWithWriter.writer.toString().trim()
         )
     }
 
