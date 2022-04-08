@@ -1,8 +1,8 @@
 package mu
 
-import mu.internal.MarkerLinux
+import mu.internal.MarkerNative
 
 public actual object KMarkerFactory {
 
-    public actual fun getMarker(name: String): Marker = MarkerLinux(name)
+    public actual fun getMarker(name: String): Marker = MarkerNative(name)
 }
