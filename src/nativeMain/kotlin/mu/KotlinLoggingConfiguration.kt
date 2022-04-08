@@ -2,6 +2,8 @@ package mu
 
 import kotlin.native.concurrent.AtomicReference
 
+public expect val DefaultAppender: Appender
+
 @Suppress("ObjectPropertyName")
 public object KotlinLoggingConfiguration {
     private val _logLevel = AtomicReference(KotlinLoggingLevel.INFO)
@@ -10,7 +12,7 @@ public object KotlinLoggingConfiguration {
         set(value) {
             _logLevel.value = value
         }
-    private val _appender = AtomicReference<Appender>(ConsoleOutputAppender)
+    private val _appender = AtomicReference<Appender>(DefaultAppender)
     public var appender: Appender
         get() = _appender.value
         set(value) {
