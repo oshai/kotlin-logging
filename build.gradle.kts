@@ -51,9 +51,24 @@ kotlin {
         nodejs()
     }
 
-    linuxX64("linuxX64")
-    macosX64("macosX64")
-    mingwX64("mingwX64")
+    val linuxTargets = listOf(
+        linuxArm64(),
+        linuxX64(),
+        mingwX64()
+    )
+    val darwinTargets = listOf(
+        macosArm64(),
+        macosX64(),
+        iosArm64(),
+        iosSimulatorArm64(),
+        iosX64(),
+        watchosArm64(),
+        watchosSimulatorArm64(),
+        watchosX64(),
+        tvosArm64(),
+        tvosSimulatorArm64(),
+        tvosX64()
+    )
 
     sourceSets {
         val commonMain by getting {}
@@ -88,14 +103,21 @@ kotlin {
         val nativeMain by creating {
             dependsOn(commonMain)
         }
-        val linuxX64Main by getting {
+        val linuxMain by creating {
             dependsOn(nativeMain)
         }
-        val mingwX64Main by getting {
+        val darwinMain by creating {
             dependsOn(nativeMain)
         }
-        val macosX64Main by getting {
-            dependsOn(nativeMain)
+        linuxTargets.forEach {
+            getByName("${it.targetName}Main") {
+                dependsOn(linuxMain)
+            }
+        }
+        darwinTargets.forEach {
+            getByName("${it.targetName}Main") {
+                dependsOn(darwinMain)
+            }
         }
     }
 }

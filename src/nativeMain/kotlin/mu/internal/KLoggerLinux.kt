@@ -59,19 +59,19 @@ internal class KLoggerLinux(
 
     private fun KotlinLoggingLevel.logIfEnabled(msg: () -> Any?, logFunction: (String, String) -> Unit) {
         if (isLoggingEnabled()) {
-            logFunction(loggerName, formatter.formatMessage(this, loggerName, msg))
+            logFunction(loggerName, formatter.formatMessage(appender.includePrefix, this, loggerName, msg))
         }
     }
 
     private fun KotlinLoggingLevel.logIfEnabled(msg: () -> Any?, t: Throwable?, logFunction: (String, String) -> Unit) {
         if (isLoggingEnabled()) {
-            logFunction(loggerName, formatter.formatMessage(this, loggerName, t, msg))
+            logFunction(loggerName, formatter.formatMessage(appender.includePrefix, this, loggerName, t, msg))
         }
     }
 
     private fun KotlinLoggingLevel.logIfEnabled(marker: Marker?, msg: () -> Any?, logFunction: (String, String) -> Unit) {
         if (isLoggingEnabled()) {
-            logFunction(loggerName, formatter.formatMessage(this, loggerName, marker, msg))
+            logFunction(loggerName, formatter.formatMessage(appender.includePrefix, this, loggerName, marker, msg))
         }
     }
 
@@ -82,7 +82,7 @@ internal class KLoggerLinux(
         logFunction: (String, String) -> Unit
     ) {
         if (isLoggingEnabled()) {
-            logFunction(loggerName, formatter.formatMessage(this, loggerName, marker, t, msg))
+            logFunction(loggerName, formatter.formatMessage(appender.includePrefix, this, loggerName, marker, t, msg))
         }
     }
 
