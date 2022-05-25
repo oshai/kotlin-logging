@@ -5,7 +5,7 @@ import mu.internal.KLoggerJS
 
 public actual object KotlinLogging {
     /**
-     * This method allow defining the logger in a file in the following way:
+     * This method allows defining the logger in a file in the following way:
      * ```
      * val logger = KotlinLogging.logger {}
      * ```
