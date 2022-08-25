@@ -10,7 +10,7 @@ following email address:
 
 ## Verifying contents
 
-All SLF4J project artifacts published on Maven central are signed. For
+All `kotlin-logging` project artifacts published on Maven central are signed. For
 each artifact, there is an associated signature file with the .asc
 suffix.
 
