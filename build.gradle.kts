@@ -11,6 +11,7 @@ plugins {
     id("io.gitlab.arturbosch.detekt") version "1.18.0"
 }
 
+
 apply("versions.gradle.kts")
 
 group = "io.github.microutils"
@@ -127,6 +128,11 @@ tasks {
         from(dokkaHtml)
         dependsOn(dokkaHtml)
         archiveClassifier.set("javadoc")
+    }
+
+    // see https://docs.gradle.org/current/userguide/gradle_wrapper.html#customizing_wrapper
+    wrapper {
+        distributionType = Wrapper.DistributionType.ALL
     }
 
 	withType<Jar> {
