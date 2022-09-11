@@ -84,7 +84,7 @@ After seeing many questions like [Idiomatic way of logging in Kotlin](http://sta
 
 ## Who is using it
 
-- https://www.jetbrains.com/youtrack/ (https://www.jetbrains.com/help/youtrack/standalone/Third-Party-Software-Used-by-YouTrack.html)
+- [https://www.jetbrains.com/youtrack/](https://www.jetbrains.com/help/youtrack/standalone/Third-Party-Software-Used-by-YouTrack.html)
 - https://github.com/DiUS/pact-jvm
 - https://github.com/AsynkronIT/protoactor-kotlin
 - https://github.com/square/misk
