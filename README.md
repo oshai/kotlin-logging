@@ -58,14 +58,14 @@ In short, if you just want to log statements to stdout, it's possible to add the
 <dependency>
   <groupId>io.github.microutils</groupId>
   <artifactId>kotlin-logging-jvm</artifactId>
-  <version>2.1.20</version>
+  <version>3.0.0</version>
 </dependency>
 ```
 See the full example in [kotlin-logging-example-maven](https://github.com/MicroUtils/kotlin-logging-example-maven).  
 
 ### Gradle
 ```Groovy
-implementation 'io.github.microutils:kotlin-logging-jvm:2.1.20'
+implementation 'io.github.microutils:kotlin-logging-jvm:3.0.0'
 ```
 
 Alternatively, download the JAR from [github](https://github.com/MicroUtils/kotlin-logging/releases/latest) or [bintray](https://dl.bintray.com/microutils/kotlin-logging/io/github/microutils/kotlin-logging/) or [maven-central](http://repo1.maven.org/maven2/io/github/microutils/kotlin-logging/).
