@@ -8,7 +8,7 @@ plugins {
     `maven-publish`
     id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
     signing
-    id("io.gitlab.arturbosch.detekt") version "1.18.0"
+    id("io.gitlab.arturbosch.detekt") version "1.21.0"
 }
 
 
@@ -25,6 +25,10 @@ nexusPublishing {
     repositories {
         sonatype()
     }
+}
+
+dependencies {
+    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.21.0")
 }
 
 apply(plugin = "io.github.gradle-nexus.publish-plugin")
@@ -153,7 +157,12 @@ tasks {
     }
     afterEvaluate {
         check {
-            dependsOn(withType<Detekt>())
+            dependsOn(withType<Detekt>().configureEach {
+                reports {
+                    html.required.set(true)
+                    txt.required.set(true)
+                }
+            })
         }
     }
 }
@@ -202,9 +211,4 @@ detekt {
     buildUponDefaultConfig = true
     config = files(rootDir.resolve("detekt.yml"))
     parallel = true
-
-    reports {
-        html.enabled = false
-        txt.enabled = false
-    }
 }
