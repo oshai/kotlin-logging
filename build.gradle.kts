@@ -89,7 +89,7 @@ kotlin {
                 implementation(kotlin("test"))
                 implementation("org.junit.jupiter:junit-jupiter-engine:${extra["junit_version"]}")
                 implementation("org.junit.jupiter:junit-jupiter-params:${extra["junit_version"]}")
-                implementation("org.mockito:mockito-all:${extra["mockito_version"]}")
+                implementation("org.mockito:mockito-core:${extra["mockito_version"]}")
                 implementation("org.apache.logging.log4j:log4j-api:${extra["log4j_version"]}")
                 implementation("org.apache.logging.log4j:log4j-core:${extra["log4j_version"]}")
                 implementation("org.apache.logging.log4j:log4j-slf4j2-impl:${extra["log4j_version"]}")
