@@ -3,7 +3,7 @@ import org.gradle.jvm.tasks.Jar
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
 
 plugins {
-    kotlin("multiplatform") version "1.6.0"
+    kotlin("multiplatform") version "1.7.20"
     id("org.jetbrains.dokka") version "1.6.0"
     `maven-publish`
     id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
