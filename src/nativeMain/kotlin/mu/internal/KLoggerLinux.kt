@@ -57,21 +57,21 @@ internal class KLoggerLinux(
     override fun error(marker: Marker?, t: Throwable?, msg: () -> Any?) =
         ERROR.logIfEnabled(marker, msg, t, appender::error)
 
-    private fun KotlinLoggingLevel.logIfEnabled(msg: () -> Any?, logFunction: (Any?) -> Unit) {
+    private fun KotlinLoggingLevel.logIfEnabled(msg: () -> Any?, logFunction: (String, String) -> Unit) {
         if (isLoggingEnabled()) {
-            logFunction(formatter.formatMessage(this, loggerName, msg))
+            logFunction(loggerName, formatter.formatMessage(appender.includePrefix, this, loggerName, msg))
         }
     }
 
-    private fun KotlinLoggingLevel.logIfEnabled(msg: () -> Any?, t: Throwable?, logFunction: (Any?) -> Unit) {
+    private fun KotlinLoggingLevel.logIfEnabled(msg: () -> Any?, t: Throwable?, logFunction: (String, String) -> Unit) {
         if (isLoggingEnabled()) {
-            logFunction(formatter.formatMessage(this, loggerName, t, msg))
+            logFunction(loggerName, formatter.formatMessage(appender.includePrefix, this, loggerName, t, msg))
         }
     }
 
-    private fun KotlinLoggingLevel.logIfEnabled(marker: Marker?, msg: () -> Any?, logFunction: (Any?) -> Unit) {
+    private fun KotlinLoggingLevel.logIfEnabled(marker: Marker?, msg: () -> Any?, logFunction: (String, String) -> Unit) {
         if (isLoggingEnabled()) {
-            logFunction(formatter.formatMessage(this, loggerName, marker, msg))
+            logFunction(loggerName, formatter.formatMessage(appender.includePrefix, this, loggerName, marker, msg))
         }
     }
 
@@ -79,10 +79,10 @@ internal class KLoggerLinux(
         marker: Marker?,
         msg: () -> Any?,
         t: Throwable?,
-        logFunction: (Any?) -> Unit
+        logFunction: (String, String) -> Unit
     ) {
         if (isLoggingEnabled()) {
-            logFunction(formatter.formatMessage(this, loggerName, marker, t, msg))
+            logFunction(loggerName, formatter.formatMessage(appender.includePrefix, this, loggerName, marker, t, msg))
         }
     }
 

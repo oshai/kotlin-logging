@@ -3,16 +3,16 @@ import org.gradle.jvm.tasks.Jar
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
 
 plugins {
-    kotlin("multiplatform") version "1.6.10"
+    kotlin("multiplatform") version "1.7.20"
     id("org.jetbrains.dokka") version "1.6.0"
     `maven-publish`
     id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
     signing
-    id("io.gitlab.arturbosch.detekt") version "1.19.0"
+    id("io.gitlab.arturbosch.detekt") version "1.21.0"
 }
 
 group = "io.github.microutils"
-version = "2.1.22"
+version = "3.0.1"
 
 repositories {
     mavenCentral()
@@ -49,9 +49,24 @@ kotlin {
         nodejs()
     }
 
-    linuxX64("linuxX64")
-    macosX64("macosX64")
-    mingwX64("mingwX64")
+    val linuxTargets = listOf(
+        linuxArm64(),
+        linuxX64(),
+        mingwX64()
+    )
+    val darwinTargets = listOf(
+        macosArm64(),
+        macosX64(),
+        iosArm64(),
+        iosSimulatorArm64(),
+        iosX64(),
+        watchosArm64(),
+        watchosSimulatorArm64(),
+        watchosX64(),
+        tvosArm64(),
+        tvosSimulatorArm64(),
+        tvosX64()
+    )
 
     sourceSets {
         val commonMain by getting {}
@@ -69,11 +84,12 @@ kotlin {
         val jvmTest by getting {
             dependencies {
                 implementation(kotlin("test"))
-                implementation(libs.junit.jupiter.engine)
-                implementation(libs.junit.jupiter.params)
-                implementation(libs.mockito)
-                implementation(libs.log4j.core)
-                implementation(libs.log4j.slf4j)
+                implementation("org.junit.jupiter:junit-jupiter-engine:${extra["junit_version"]}")
+                implementation("org.junit.jupiter:junit-jupiter-params:${extra["junit_version"]}")
+                implementation("org.mockito:mockito-core:${extra["mockito_version"]}")
+                implementation("org.apache.logging.log4j:log4j-api:${extra["log4j_version"]}")
+                implementation("org.apache.logging.log4j:log4j-core:${extra["log4j_version"]}")
+                implementation("org.apache.logging.log4j:log4j-slf4j2-impl:${extra["log4j_version"]}")
             }
         }
         val jsMain by getting {}
@@ -85,14 +101,21 @@ kotlin {
         val nativeMain by creating {
             dependsOn(commonMain)
         }
-        val linuxX64Main by getting {
+        val linuxMain by creating {
             dependsOn(nativeMain)
         }
-        val mingwX64Main by getting {
+        val darwinMain by creating {
             dependsOn(nativeMain)
         }
-        val macosX64Main by getting {
-            dependsOn(nativeMain)
+        linuxTargets.forEach {
+            getByName("${it.targetName}Main") {
+                dependsOn(linuxMain)
+            }
+        }
+        darwinTargets.forEach {
+            getByName("${it.targetName}Main") {
+                dependsOn(darwinMain)
+            }
         }
     }
 }
@@ -104,13 +127,18 @@ tasks {
         archiveClassifier.set("javadoc")
     }
 
-    withType<Jar> {
-        metaInf.with(
-            copySpec {
-                from("${project.rootDir}/LICENSE")
-            }
-        )
+    // see https://docs.gradle.org/current/userguide/gradle_wrapper.html#customizing_wrapper
+    wrapper {
+        distributionType = Wrapper.DistributionType.ALL
     }
+
+	withType<Jar> {
+		metaInf.with(
+			copySpec {
+				from("${project.rootDir}/LICENSE")
+			}
+		)
+	}
 
     withType<Test> {
         useJUnitPlatform()

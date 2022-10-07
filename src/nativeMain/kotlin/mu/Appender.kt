@@ -1,9 +1,11 @@
 package mu
 
 public interface Appender {
-    public fun trace(message: Any?)
-    public fun debug(message: Any?)
-    public fun info(message: Any?)
-    public fun warn(message: Any?)
-    public fun error(message: Any?)
+    public val includePrefix: Boolean
+
+    public fun trace(loggerName: String, message: String)
+    public fun debug(loggerName: String, message: String)
+    public fun info(loggerName: String, message: String)
+    public fun warn(loggerName: String, message: String)
+    public fun error(loggerName: String, message: String)
 }
