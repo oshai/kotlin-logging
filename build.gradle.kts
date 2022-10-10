@@ -4,7 +4,7 @@ import org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
 
 plugins {
     kotlin("multiplatform") version "1.7.20"
-    id("org.jetbrains.dokka") version "1.6.0"
+    id("org.jetbrains.dokka") version "1.7.10"
     `maven-publish`
     id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
     signing
@@ -32,8 +32,8 @@ kotlin {
         compilations.all {
             // kotlin compiler compatibility options
             kotlinOptions {
-                apiVersion = "1.5"
-                languageVersion = "1.5"
+                apiVersion = "1.7"
+                languageVersion = "1.7"
                 jvmTarget = "1.8"
             }
         }
@@ -84,12 +84,11 @@ kotlin {
         val jvmTest by getting {
             dependencies {
                 implementation(kotlin("test"))
-                implementation("org.junit.jupiter:junit-jupiter-engine:${extra["junit_version"]}")
-                implementation("org.junit.jupiter:junit-jupiter-params:${extra["junit_version"]}")
-                implementation("org.mockito:mockito-core:${extra["mockito_version"]}")
-                implementation("org.apache.logging.log4j:log4j-api:${extra["log4j_version"]}")
-                implementation("org.apache.logging.log4j:log4j-core:${extra["log4j_version"]}")
-                implementation("org.apache.logging.log4j:log4j-slf4j2-impl:${extra["log4j_version"]}")
+                implementation(libs.junit.jupiter.engine)
+                implementation(libs.junit.jupiter.params)
+                implementation(libs.mockito.core)
+                implementation(libs.log4j.core)
+                implementation(libs.log4j.slf4j)
             }
         }
         val jsMain by getting {}
