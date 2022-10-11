@@ -9,6 +9,7 @@ plugins {
     id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
     signing
     id("io.gitlab.arturbosch.detekt") version "1.18.0"
+    id("com.ncorti.ktfmt.gradle") version "0.11.0"
 }
 
 
@@ -37,7 +38,7 @@ kotlin {
             kotlinOptions {
                 apiVersion = "1.4"
                 languageVersion = "1.4"
-                jvmTarget = "1.8"
+                jvmTarget = "11"
             }
         }
     }
