@@ -8,7 +8,7 @@ plugins {
     `maven-publish`
     id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
     signing
-    id("io.gitlab.arturbosch.detekt") version "1.18.0"
+    id("io.gitlab.arturbosch.detekt") version "1.21.0"
 }
 
 
