@@ -4,5 +4,5 @@ import mu.Marker
 
 internal class MarkerNative(private val name: String) : Marker {
 
-    override fun getName(): String = this.name
+  override fun getName(): String = this.name
 }

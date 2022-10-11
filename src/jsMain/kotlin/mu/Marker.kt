@@ -2,5 +2,5 @@ package mu
 
 public actual interface Marker {
 
-    public actual fun getName(): String
+  public actual fun getName(): String
 }

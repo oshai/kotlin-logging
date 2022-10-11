@@ -21,16 +21,16 @@ public inline fun <T> withLoggingContext(
     body: () -> T
 ): T =
     if (pair.second == null) {
-        body()
+      body()
     } else if (!restorePrevious) {
-        MDC.putCloseable(pair.first, pair.second).use { body() }
+      MDC.putCloseable(pair.first, pair.second).use { body() }
     } else {
-        val previousValue = MDC.get(pair.first)
-        try {
-            MDC.putCloseable(pair.first, pair.second).use { body() }
-        } finally {
-            if (previousValue != null) MDC.put(pair.first, previousValue)
-        }
+      val previousValue = MDC.get(pair.first)
+      try {
+        MDC.putCloseable(pair.first, pair.second).use { body() }
+      } finally {
+        if (previousValue != null) MDC.put(pair.first, previousValue)
+      }
     }
 
 /**
@@ -46,22 +46,23 @@ public inline fun <T> withLoggingContext(
     restorePrevious: Boolean = true,
     body: () -> T
 ): T {
-    val pairForMDC = pair.filter { it.second != null }
-    val cleanupCallbacks = pairForMDC.map { (mdcKey, _) ->
+  val pairForMDC = pair.filter { it.second != null }
+  val cleanupCallbacks =
+      pairForMDC.map { (mdcKey, _) ->
         val mdcValue = MDC.get(mdcKey)
         if (restorePrevious && mdcValue != null) {
-            { MDC.put(mdcKey, mdcValue) }
+          { MDC.put(mdcKey, mdcValue) }
         } else {
-            { MDC.remove(mdcKey) }
+          { MDC.remove(mdcKey) }
         }
-    }
+      }
 
-    try {
-        pairForMDC.forEach { MDC.put(it.first, it.second) }
-        return body()
-    } finally {
-        cleanupCallbacks.forEach { it.invoke() }
-    }
+  try {
+    pairForMDC.forEach { MDC.put(it.first, it.second) }
+    return body()
+  } finally {
+    cleanupCallbacks.forEach { it.invoke() }
+  }
 }
 
 /**
@@ -82,23 +83,24 @@ public inline fun <T> withLoggingContext(
     restorePrevious: Boolean = true,
     body: () -> T
 ): T {
-    val cleanupCallbacks = map.map {
+  val cleanupCallbacks =
+      map.map {
         val mdcValue = MDC.get(it.key)
         if (restorePrevious && mdcValue != null) {
-            { MDC.put(it.key, mdcValue) }
+          { MDC.put(it.key, mdcValue) }
         } else {
-            { MDC.remove(it.key) }
+          { MDC.remove(it.key) }
         }
-    }
+      }
 
-    try {
-        map.forEach {
-            if (it.value != null) {
-                MDC.put(it.key, it.value)
-            }
-        }
-        return body()
-    } finally {
-        cleanupCallbacks.forEach { it.invoke() }
+  try {
+    map.forEach {
+      if (it.value != null) {
+        MDC.put(it.key, it.value)
+      }
     }
+    return body()
+  } finally {
+    cleanupCallbacks.forEach { it.invoke() }
+  }
 }
