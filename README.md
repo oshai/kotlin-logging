@@ -127,13 +127,13 @@ It is possible to configure IntelliJ live templates. For file level logger confi
 - https://bednarek.wroclaw.pl/log4j-in-kotlin/
 - https://jaxenter.com/kotlin-logging-168814.html
 
-## Contributors
-
-Any contribution is appreciated. See the contributors list in: https://github.com/MicroUtils/kotlin-logging/graphs/contributors
-
 ## Contributing
 
-Pull requests are welcome!  
+Any contribution is appreciated.  
+See the contributors list in: https://github.com/MicroUtils/kotlin-logging/graphs/contributors
+
+Pull requests are welcome! See instructions in https://github.com/MicroUtils/kotlin-logging/blob/master/CONTRIBUTING.md.  
+
 [Show your ❤ with a ★](https://github.com/MicroUtils/kotlin-logging/stargazers)
 
 
