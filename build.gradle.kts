@@ -209,3 +209,9 @@ detekt {
         txt.enabled = false
     }
 }
+
+val jvmJar by tasks.getting(Jar::class) {
+    manifest {
+        attributes("Automatic-Module-Name" to "io.github.microutils.kotlinlogging")
+    }
+}
