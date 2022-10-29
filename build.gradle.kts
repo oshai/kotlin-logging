@@ -105,6 +105,12 @@ kotlin {
         val nativeMain by creating {
             dependsOn(commonMain)
         }
+        val nativeTest by creating {
+            dependsOn(nativeMain)
+            dependencies {
+                implementation(kotlin("test"))
+            }
+        }
         val linuxMain by creating {
             dependsOn(nativeMain)
         }
