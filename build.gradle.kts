@@ -16,7 +16,7 @@ plugins {
 apply("versions.gradle.kts")
 
 group = "io.github.microutils"
-version = "3.0.4"
+version = "3.0.5"
 
 repositories {
     mavenCentral()
