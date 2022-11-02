@@ -62,4 +62,4 @@ jobs:
           restore-keys: ${{ runner.os }}-gradle-
 
       - name: Gradle Build
-        run: ./gradlew clean build --stacktrace
+        run: ./gradlew clean build ktfmtCheck --stacktrace
