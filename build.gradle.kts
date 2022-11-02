@@ -38,7 +38,7 @@ kotlin {
             kotlinOptions {
                 apiVersion = "1.4"
                 languageVersion = "1.4"
-                jvmTarget = "8"
+                jvmTarget = "1.8"
             }
         }
     }
