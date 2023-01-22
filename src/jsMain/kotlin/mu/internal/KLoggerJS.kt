@@ -9,7 +9,6 @@ import mu.Level.ERROR
 import mu.Level.INFO
 import mu.Level.TRACE
 import mu.Level.WARN
-import mu.Marker
 import mu.isLoggingEnabled
 
 @Suppress("TooManyFunctions")
