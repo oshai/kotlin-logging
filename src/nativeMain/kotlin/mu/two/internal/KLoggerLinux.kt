@@ -1,14 +1,14 @@
-package mu.two.internal
+package mu.internal
 
-import mu.two.KLogger
-import mu.two.KotlinLoggingConfiguration.appender
-import mu.two.KotlinLoggingConfiguration.formatter
-import mu.two.Level
-import mu.two.Level.*
-import mu.two.Marker
-import mu.two.isLoggingEnabled
+import mu.KLogger
+import mu.KotlinLoggingConfiguration.appender
+import mu.KotlinLoggingConfiguration.formatter
+import mu.Level
+import mu.Level.*
+import mu.Marker
+import mu.isLoggingEnabled
 
-internal class KLoggerLinux(override val name: String) : mu.two.KLogger {
+internal class KLoggerLinux(private val loggerName: String) : KLogger {
 
   override fun trace(msg: () -> Any?) = TRACE.logIfEnabled(msg, appender::trace)
 
@@ -30,70 +30,79 @@ internal class KLoggerLinux(override val name: String) : mu.two.KLogger {
 
   override fun error(t: Throwable?, msg: () -> Any?) = ERROR.logIfEnabled(msg, t, appender::error)
 
-  override fun trace(marker: mu.two.Marker?, msg: () -> Any?) =
+  override fun trace(marker: Marker?, msg: () -> Any?) =
       TRACE.logIfEnabled(marker, msg, appender::trace)
 
-  override fun debug(marker: mu.two.Marker?, msg: () -> Any?) =
+  override fun debug(marker: Marker?, msg: () -> Any?) =
       DEBUG.logIfEnabled(marker, msg, appender::debug)
 
-  override fun info(marker: mu.two.Marker?, msg: () -> Any?) =
+  override fun info(marker: Marker?, msg: () -> Any?) =
       INFO.logIfEnabled(marker, msg, appender::info)
 
-  override fun warn(marker: mu.two.Marker?, msg: () -> Any?) =
+  override fun warn(marker: Marker?, msg: () -> Any?) =
       WARN.logIfEnabled(marker, msg, appender::warn)
 
-  override fun error(marker: mu.two.Marker?, msg: () -> Any?) =
+  override fun error(marker: Marker?, msg: () -> Any?) =
       ERROR.logIfEnabled(marker, msg, appender::error)
 
-  override fun trace(marker: mu.two.Marker?, t: Throwable?, msg: () -> Any?) =
+  override fun trace(marker: Marker?, t: Throwable?, msg: () -> Any?) =
       TRACE.logIfEnabled(marker, msg, t, appender::trace)
 
-  override fun debug(marker: mu.two.Marker?, t: Throwable?, msg: () -> Any?) =
+  override fun debug(marker: Marker?, t: Throwable?, msg: () -> Any?) =
       DEBUG.logIfEnabled(marker, msg, t, appender::debug)
 
-  override fun info(marker: mu.two.Marker?, t: Throwable?, msg: () -> Any?) =
+  override fun info(marker: Marker?, t: Throwable?, msg: () -> Any?) =
       INFO.logIfEnabled(marker, msg, t, appender::info)
 
-  override fun warn(marker: mu.two.Marker?, t: Throwable?, msg: () -> Any?) =
+  override fun warn(marker: Marker?, t: Throwable?, msg: () -> Any?) =
       WARN.logIfEnabled(marker, msg, t, appender::warn)
 
-  override fun error(marker: mu.two.Marker?, t: Throwable?, msg: () -> Any?) =
+  override fun error(marker: Marker?, t: Throwable?, msg: () -> Any?) =
       ERROR.logIfEnabled(marker, msg, t, appender::error)
 
-  private fun mu.two.Level.logIfEnabled(msg: () -> Any?, logFunction: (String, String) -> Unit) {
+  private fun Level.logIfEnabled(
+      msg: () -> Any?,
+      logFunction: (String, String) -> Unit
+  ) {
     if (isLoggingEnabled()) {
-      logFunction(name, formatter.formatMessage(appender.includePrefix, this, name, msg))
+      logFunction(
+          loggerName, formatter.formatMessage(appender.includePrefix, this, loggerName, msg))
     }
   }
 
-  private fun mu.two.Level.logIfEnabled(
+  private fun Level.logIfEnabled(
       msg: () -> Any?,
       t: Throwable?,
       logFunction: (String, String) -> Unit
   ) {
     if (isLoggingEnabled()) {
-      logFunction(name, formatter.formatMessage(appender.includePrefix, this, name, t, msg))
+      logFunction(
+          loggerName, formatter.formatMessage(appender.includePrefix, this, loggerName, t, msg))
     }
   }
 
-  private fun mu.two.Level.logIfEnabled(
-      marker: mu.two.Marker?,
+  private fun Level.logIfEnabled(
+      marker: Marker?,
       msg: () -> Any?,
       logFunction: (String, String) -> Unit
   ) {
     if (isLoggingEnabled()) {
-      logFunction(name, formatter.formatMessage(appender.includePrefix, this, name, marker, msg))
+      logFunction(
+          loggerName,
+          formatter.formatMessage(appender.includePrefix, this, loggerName, marker, msg))
     }
   }
 
-  private fun mu.two.Level.logIfEnabled(
-      marker: mu.two.Marker?,
+  private fun Level.logIfEnabled(
+      marker: Marker?,
       msg: () -> Any?,
       t: Throwable?,
       logFunction: (String, String) -> Unit
   ) {
     if (isLoggingEnabled()) {
-      logFunction(name, formatter.formatMessage(appender.includePrefix, this, name, marker, t, msg))
+      logFunction(
+          loggerName,
+          formatter.formatMessage(appender.includePrefix, this, loggerName, marker, t, msg))
     }
   }
 
