@@ -3,8 +3,8 @@ package mu.internal
 import mu.KLogger
 import mu.KotlinLoggingConfiguration.appender
 import mu.KotlinLoggingConfiguration.formatter
-import mu.KotlinLoggingLevel
-import mu.KotlinLoggingLevel.*
+import mu.Level
+import mu.Level.*
 import mu.Marker
 import mu.isLoggingEnabled
 
@@ -60,7 +60,7 @@ internal class KLoggerLinux(private val loggerName: String) : KLogger {
   override fun error(marker: Marker?, t: Throwable?, msg: () -> Any?) =
       ERROR.logIfEnabled(marker, msg, t, appender::error)
 
-  private fun KotlinLoggingLevel.logIfEnabled(
+  private fun Level.logIfEnabled(
       msg: () -> Any?,
       logFunction: (String, String) -> Unit
   ) {
@@ -70,7 +70,7 @@ internal class KLoggerLinux(private val loggerName: String) : KLogger {
     }
   }
 
-  private fun KotlinLoggingLevel.logIfEnabled(
+  private fun Level.logIfEnabled(
       msg: () -> Any?,
       t: Throwable?,
       logFunction: (String, String) -> Unit
@@ -81,7 +81,7 @@ internal class KLoggerLinux(private val loggerName: String) : KLogger {
     }
   }
 
-  private fun KotlinLoggingLevel.logIfEnabled(
+  private fun Level.logIfEnabled(
       marker: Marker?,
       msg: () -> Any?,
       logFunction: (String, String) -> Unit
@@ -93,7 +93,7 @@ internal class KLoggerLinux(private val loggerName: String) : KLogger {
     }
   }
 
-  private fun KotlinLoggingLevel.logIfEnabled(
+  private fun Level.logIfEnabled(
       marker: Marker?,
       msg: () -> Any?,
       t: Throwable?,

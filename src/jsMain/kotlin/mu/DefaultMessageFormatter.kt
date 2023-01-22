@@ -4,27 +4,27 @@ import mu.internal.toStringSafe
 
 public object DefaultMessageFormatter : Formatter {
   public override fun formatMessage(
-      level: KotlinLoggingLevel,
+      level: Level,
       loggerName: String,
       msg: () -> Any?
   ): String = "${level.name}: [$loggerName] ${msg.toStringSafe()}"
 
   public override fun formatMessage(
-      level: KotlinLoggingLevel,
+      level: Level,
       loggerName: String,
       t: Throwable?,
       msg: () -> Any?
   ): String = "${level.name}: [$loggerName] ${msg.toStringSafe()}${t.throwableToString()}"
 
   public override fun formatMessage(
-      level: KotlinLoggingLevel,
+      level: Level,
       loggerName: String,
       marker: Marker?,
       msg: () -> Any?
   ): String = "${level.name}: [$loggerName] ${marker?.getName()} ${msg.toStringSafe()}"
 
   public override fun formatMessage(
-      level: KotlinLoggingLevel,
+      level: Level,
       loggerName: String,
       marker: Marker?,
       t: Throwable?,

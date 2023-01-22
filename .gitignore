@@ -75,3 +75,4 @@ hs_err_pid*
 
 github_packages.properties
 github_packages.properties.old
+/kotlin-js-store/yarn.lock

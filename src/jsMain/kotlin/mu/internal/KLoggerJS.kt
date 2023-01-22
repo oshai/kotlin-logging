@@ -3,12 +3,12 @@ package mu.internal
 import mu.KLogger
 import mu.KotlinLoggingConfiguration.APPENDER
 import mu.KotlinLoggingConfiguration.FORMATTER
-import mu.KotlinLoggingLevel
-import mu.KotlinLoggingLevel.DEBUG
-import mu.KotlinLoggingLevel.ERROR
-import mu.KotlinLoggingLevel.INFO
-import mu.KotlinLoggingLevel.TRACE
-import mu.KotlinLoggingLevel.WARN
+import mu.Level
+import mu.Level.DEBUG
+import mu.Level.ERROR
+import mu.Level.INFO
+import mu.Level.TRACE
+import mu.Level.WARN
 import mu.Marker
 import mu.isLoggingEnabled
 
@@ -65,13 +65,13 @@ internal class KLoggerJS(private val loggerName: String) : KLogger {
   override fun error(marker: Marker?, t: Throwable?, msg: () -> Any?) =
       ERROR.logIfEnabled(marker, msg, t, APPENDER::error)
 
-  private fun KotlinLoggingLevel.logIfEnabled(msg: () -> Any?, logFunction: (Any?) -> Unit) {
+  private fun Level.logIfEnabled(msg: () -> Any?, logFunction: (Any?) -> Unit) {
     if (isLoggingEnabled()) {
       logFunction(FORMATTER.formatMessage(this, loggerName, msg))
     }
   }
 
-  private fun KotlinLoggingLevel.logIfEnabled(
+  private fun Level.logIfEnabled(
       msg: () -> Any?,
       t: Throwable?,
       logFunction: (Any?) -> Unit
@@ -81,7 +81,7 @@ internal class KLoggerJS(private val loggerName: String) : KLogger {
     }
   }
 
-  private fun KotlinLoggingLevel.logIfEnabled(
+  private fun Level.logIfEnabled(
       marker: Marker?,
       msg: () -> Any?,
       logFunction: (Any?) -> Unit
@@ -91,7 +91,7 @@ internal class KLoggerJS(private val loggerName: String) : KLogger {
     }
   }
 
-  private fun KotlinLoggingLevel.logIfEnabled(
+  private fun Level.logIfEnabled(
       marker: Marker?,
       msg: () -> Any?,
       t: Throwable?,

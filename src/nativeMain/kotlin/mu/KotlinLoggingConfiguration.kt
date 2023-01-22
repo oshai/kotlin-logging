@@ -6,8 +6,8 @@ public expect val DefaultAppender: Appender
 
 @Suppress("ObjectPropertyName")
 public object KotlinLoggingConfiguration {
-  private val _logLevel = AtomicReference(KotlinLoggingLevel.INFO)
-  public var logLevel: KotlinLoggingLevel
+  private val _logLevel = AtomicReference(Level.INFO)
+  public var logLevel: Level
     get() = _logLevel.value
     set(value) {
       _logLevel.value = value

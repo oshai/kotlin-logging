@@ -5,14 +5,14 @@ import mu.internal.toStringSafe
 public object DefaultMessageFormatter : Formatter {
   public override fun formatMessage(
       includePrefix: Boolean,
-      level: KotlinLoggingLevel,
+      level: Level,
       loggerName: String,
       msg: () -> Any?
   ): String = "${prefix(includePrefix, level, loggerName)}${msg.toStringSafe()}"
 
   public override fun formatMessage(
       includePrefix: Boolean,
-      level: KotlinLoggingLevel,
+      level: Level,
       loggerName: String,
       t: Throwable?,
       msg: () -> Any?
@@ -21,7 +21,7 @@ public object DefaultMessageFormatter : Formatter {
 
   public override fun formatMessage(
       includePrefix: Boolean,
-      level: KotlinLoggingLevel,
+      level: Level,
       loggerName: String,
       marker: Marker?,
       msg: () -> Any?
@@ -30,7 +30,7 @@ public object DefaultMessageFormatter : Formatter {
 
   public override fun formatMessage(
       includePrefix: Boolean,
-      level: KotlinLoggingLevel,
+      level: Level,
       loggerName: String,
       marker: Marker?,
       t: Throwable?,
@@ -40,7 +40,7 @@ public object DefaultMessageFormatter : Formatter {
 
   private fun prefix(
       includePrefix: Boolean,
-      level: KotlinLoggingLevel,
+      level: Level,
       loggerName: String
   ): String {
     return if (includePrefix) {
