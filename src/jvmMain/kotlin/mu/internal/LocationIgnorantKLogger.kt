@@ -3,8 +3,10 @@
 package mu.internal
 
 import mu.KLogger
+import mu.Marker
+import mu.slf4j.Slf4jLoggerWrapper
+import mu.slf4j.toSlf4j
 import org.slf4j.Logger
-import org.slf4j.Marker
 
 /**
  * A class wrapping a [Logger] instance that is not location aware all methods of [KLogger] has
@@ -13,7 +15,7 @@ import org.slf4j.Marker
  */
 @Suppress("TooManyFunctions")
 internal class LocationIgnorantKLogger(override val underlyingLogger: Logger) :
-    KLogger, Logger by underlyingLogger {
+    Slf4jLoggerWrapper(underlyingLogger), KLogger {
 
   /** Lazy add a log message if isTraceEnabled is true */
   override fun trace(msg: () -> Any?) {
@@ -95,27 +97,227 @@ internal class LocationIgnorantKLogger(override val underlyingLogger: Logger) :
     if (isTraceEnabled) trace(marker, msg.toStringSafe(), t)
   }
 
-  /** Lazy add a log message with a marker and throwable payload if isDebugEnabled is true */
+    override fun trace(msg: String?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun trace(format: String?, arg: Any?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun trace(format: String?, arg1: Any?, arg2: Any?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun trace(format: String?, vararg arguments: Any?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun trace(msg: String?, t: Throwable?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun trace(marker: Marker?, msg: String?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun trace(marker: Marker?, format: String?, arg: Any?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun trace(marker: Marker?, format: String?, arg1: Any?, arg2: Any?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun trace(marker: Marker?, format: String?, vararg argArray: Any?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun trace(marker: Marker?, msg: String?, t: Throwable?) {
+        TODO("Not yet implemented")
+    }
+
+    /** Lazy add a log message with a marker and throwable payload if isDebugEnabled is true */
   override fun debug(marker: Marker?, t: Throwable?, msg: () -> Any?) {
     if (isDebugEnabled) debug(marker, msg.toStringSafe(), t)
   }
 
-  /** Lazy add a log message with a marker and throwable payload if isInfoEnabled is true */
+    override fun debug(msg: String?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun debug(format: String?, arg: Any?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun debug(format: String?, arg1: Any?, arg2: Any?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun debug(format: String?, vararg arguments: Any?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun debug(msg: String?, t: Throwable?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun debug(marker: Marker?, msg: String?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun debug(marker: Marker?, format: String?, arg: Any?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun debug(marker: Marker?, format: String?, arg1: Any?, arg2: Any?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun debug(marker: Marker?, format: String?, vararg arguments: Any?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun debug(marker: Marker?, msg: String?, t: Throwable?) {
+        TODO("Not yet implemented")
+    }
+
+    /** Lazy add a log message with a marker and throwable payload if isInfoEnabled is true */
   override fun info(marker: Marker?, t: Throwable?, msg: () -> Any?) {
     if (isInfoEnabled) info(marker, msg.toStringSafe(), t)
   }
 
-  /** Lazy add a log message with a marker and throwable payload if isWarnEnabled is true */
+    override fun info(msg: String?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun info(format: String?, arg: Any?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun info(format: String?, arg1: Any?, arg2: Any?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun info(format: String?, vararg arguments: Any?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun info(msg: String?, t: Throwable?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun info(marker: Marker?, msg: String?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun info(marker: Marker?, format: String?, arg: Any?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun info(marker: Marker?, format: String?, arg1: Any?, arg2: Any?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun info(marker: Marker?, format: String?, vararg arguments: Any?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun info(marker: Marker?, msg: String?, t: Throwable?) {
+        TODO("Not yet implemented")
+    }
+
+    /** Lazy add a log message with a marker and throwable payload if isWarnEnabled is true */
   override fun warn(marker: Marker?, t: Throwable?, msg: () -> Any?) {
     if (isWarnEnabled) warn(marker, msg.toStringSafe(), t)
   }
 
-  /** Lazy add a log message with a marker and throwable payload if isErrorEnabled is true */
+    override fun warn(msg: String?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun warn(format: String?, arg: Any?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun warn(format: String?, vararg arguments: Any?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun warn(format: String?, arg1: Any?, arg2: Any?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun warn(msg: String?, t: Throwable?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun warn(marker: Marker?, msg: String?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun warn(marker: Marker?, format: String?, arg: Any?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun warn(marker: Marker?, format: String?, arg1: Any?, arg2: Any?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun warn(marker: Marker?, format: String?, vararg arguments: Any?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun warn(marker: Marker?, msg: String?, t: Throwable?) {
+        TODO("Not yet implemented")
+    }
+
+    /** Lazy add a log message with a marker and throwable payload if isErrorEnabled is true */
   override fun error(marker: Marker?, t: Throwable?, msg: () -> Any?) {
     if (isErrorEnabled) error(marker, msg.toStringSafe(), t)
   }
 
-  override inline fun entry(vararg argArray: Any?) {
+    override fun error(msg: String?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun error(format: String?, arg: Any?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun error(format: String?, arg1: Any?, arg2: Any?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun error(format: String?, vararg arguments: Any?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun error(msg: String?, t: Throwable?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun error(marker: Marker?, msg: String?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun error(marker: Marker?, format: String?, arg: Any?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun error(marker: Marker?, format: String?, arg1: Any?, arg2: Any?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun error(marker: Marker?, format: String?, vararg arguments: Any?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun error(marker: Marker?, msg: String?, t: Throwable?) {
+        TODO("Not yet implemented")
+    }
+
+    override inline fun entry(vararg argArray: Any?) {
     if (underlyingLogger.isTraceEnabled) {
       underlyingLogger.trace("entry({})", argArray)
     }
@@ -146,4 +348,5 @@ internal class LocationIgnorantKLogger(override val underlyingLogger: Logger) :
       underlyingLogger.error("catching($throwable)", throwable)
     }
   }
+
 }
