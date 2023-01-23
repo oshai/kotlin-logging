@@ -8,7 +8,7 @@ import mu.Level.*
 import mu.Marker
 import mu.isLoggingEnabled
 
-internal class KLoggerLinux(private val loggerName: String) : KLogger {
+internal class KLoggerLinux(override val name: String) : KLogger {
 
   override fun trace(msg: () -> Any?) = TRACE.logIfEnabled(msg, appender::trace)
 
@@ -60,13 +60,9 @@ internal class KLoggerLinux(private val loggerName: String) : KLogger {
   override fun error(marker: Marker?, t: Throwable?, msg: () -> Any?) =
       ERROR.logIfEnabled(marker, msg, t, appender::error)
 
-  private fun Level.logIfEnabled(
-      msg: () -> Any?,
-      logFunction: (String, String) -> Unit
-  ) {
+  private fun Level.logIfEnabled(msg: () -> Any?, logFunction: (String, String) -> Unit) {
     if (isLoggingEnabled()) {
-      logFunction(
-          loggerName, formatter.formatMessage(appender.includePrefix, this, loggerName, msg))
+      logFunction(name, formatter.formatMessage(appender.includePrefix, this, name, msg))
     }
   }
 
@@ -76,8 +72,7 @@ internal class KLoggerLinux(private val loggerName: String) : KLogger {
       logFunction: (String, String) -> Unit
   ) {
     if (isLoggingEnabled()) {
-      logFunction(
-          loggerName, formatter.formatMessage(appender.includePrefix, this, loggerName, t, msg))
+      logFunction(name, formatter.formatMessage(appender.includePrefix, this, name, t, msg))
     }
   }
 
@@ -87,9 +82,7 @@ internal class KLoggerLinux(private val loggerName: String) : KLogger {
       logFunction: (String, String) -> Unit
   ) {
     if (isLoggingEnabled()) {
-      logFunction(
-          loggerName,
-          formatter.formatMessage(appender.includePrefix, this, loggerName, marker, msg))
+      logFunction(name, formatter.formatMessage(appender.includePrefix, this, name, marker, msg))
     }
   }
 
@@ -100,9 +93,7 @@ internal class KLoggerLinux(private val loggerName: String) : KLogger {
       logFunction: (String, String) -> Unit
   ) {
     if (isLoggingEnabled()) {
-      logFunction(
-          loggerName,
-          formatter.formatMessage(appender.includePrefix, this, loggerName, marker, t, msg))
+      logFunction(name, formatter.formatMessage(appender.includePrefix, this, name, marker, t, msg))
     }
   }
 

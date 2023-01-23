@@ -2,6 +2,12 @@ package mu
 
 public expect interface KLogger {
 
+  /**
+   * Return the name of this `Logger` instance.
+   * @return name of this logger instance
+   */
+  public val name: String
+
   /** Lazy add a log message if isTraceEnabled is true */
   public fun trace(msg: () -> Any?)
 

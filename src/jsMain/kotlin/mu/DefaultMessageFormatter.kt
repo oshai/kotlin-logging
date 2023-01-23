@@ -3,11 +3,8 @@ package mu
 import mu.internal.toStringSafe
 
 public object DefaultMessageFormatter : Formatter {
-  public override fun formatMessage(
-      level: Level,
-      loggerName: String,
-      msg: () -> Any?
-  ): String = "${level.name}: [$loggerName] ${msg.toStringSafe()}"
+  public override fun formatMessage(level: Level, loggerName: String, msg: () -> Any?): String =
+      "${level.name}: [$loggerName] ${msg.toStringSafe()}"
 
   public override fun formatMessage(
       level: Level,
