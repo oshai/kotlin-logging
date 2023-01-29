@@ -1,7 +1,6 @@
 package mu.two
 
 import mu.two.internal.KLoggerFactory
-import org.slf4j.Logger
 
 public actual object KotlinLogging {
   /**
@@ -14,8 +13,4 @@ public actual object KotlinLogging {
 
   public actual fun logger(name: String): KLogger = KLoggerFactory.logger(name)
 
-  public fun logger(underlyingLogger: Logger): KLogger =
-      KLoggerFactory.wrapJLogger(underlyingLogger)
 }
-
-public fun Logger.toKLogger(): KLogger = KotlinLogging.logger(this)
