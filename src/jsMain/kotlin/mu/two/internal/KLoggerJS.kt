@@ -9,11 +9,10 @@ import mu.two.Level.ERROR
 import mu.two.Level.INFO
 import mu.two.Level.TRACE
 import mu.two.Level.WARN
-import mu.two.Marker
 import mu.two.isLoggingEnabled
 
 @Suppress("TooManyFunctions")
-internal class KLoggerJS(override val name: String) : mu.two.KLogger {
+internal class KLoggerJS(override val name: String) : KLogger {
 
   override fun trace(msg: () -> Any?) = TRACE.logIfEnabled(msg, APPENDER::trace)
 
@@ -71,13 +70,21 @@ internal class KLoggerJS(override val name: String) : mu.two.KLogger {
     }
   }
 
-  private fun mu.two.Level.logIfEnabled(msg: () -> Any?, t: Throwable?, logFunction: (Any?) -> Unit) {
+  private fun mu.two.Level.logIfEnabled(
+      msg: () -> Any?,
+      t: Throwable?,
+      logFunction: (Any?) -> Unit
+  ) {
     if (isLoggingEnabled()) {
       logFunction(FORMATTER.formatMessage(this, name, t, msg))
     }
   }
 
-  private fun mu.two.Level.logIfEnabled(marker: mu.two.Marker?, msg: () -> Any?, logFunction: (Any?) -> Unit) {
+  private fun mu.two.Level.logIfEnabled(
+      marker: mu.two.Marker?,
+      msg: () -> Any?,
+      logFunction: (Any?) -> Unit
+  ) {
     if (isLoggingEnabled()) {
       logFunction(FORMATTER.formatMessage(this, name, marker, msg))
     }

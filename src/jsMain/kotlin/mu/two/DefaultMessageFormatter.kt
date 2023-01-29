@@ -3,27 +3,27 @@ package mu.two
 import mu.two.internal.toStringSafe
 
 public object DefaultMessageFormatter : Formatter {
-  public override fun formatMessage(level: mu.two.Level, loggerName: String, msg: () -> Any?): String =
+  public override fun formatMessage(level: Level, loggerName: String, msg: () -> Any?): String =
       "${level.name}: [$loggerName] ${msg.toStringSafe()}"
 
   public override fun formatMessage(
-      level: mu.two.Level,
+      level: Level,
       loggerName: String,
       t: Throwable?,
       msg: () -> Any?
   ): String = "${level.name}: [$loggerName] ${msg.toStringSafe()}${t.throwableToString()}"
 
   public override fun formatMessage(
-      level: mu.two.Level,
+      level: Level,
       loggerName: String,
-      marker: mu.two.Marker?,
+      marker: Marker?,
       msg: () -> Any?
   ): String = "${level.name}: [$loggerName] ${marker?.getName()} ${msg.toStringSafe()}"
 
   public override fun formatMessage(
-      level: mu.two.Level,
+      level: Level,
       loggerName: String,
-      marker: mu.two.Marker?,
+      marker: Marker?,
       t: Throwable?,
       msg: () -> Any?
   ): String =
