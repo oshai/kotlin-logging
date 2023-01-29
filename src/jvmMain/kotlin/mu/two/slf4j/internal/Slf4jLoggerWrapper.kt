@@ -1,10 +1,11 @@
-package mu.two.slf4j
+package mu.two.slf4j.internal
 
 import mu.two.KLogger
 import mu.two.Marker
+import mu.two.slf4j.toSlf4j
 import org.slf4j.Logger
 
-internal abstract class Slf4jLoggerWrapper(override val underlyingLogger: Logger) : mu.two.KLogger {
+internal abstract class Slf4jLoggerWrapper(override val underlyingLogger: Logger) : KLogger {
 
   override val name: String
     get() = underlyingLogger.name
@@ -12,35 +13,35 @@ internal abstract class Slf4jLoggerWrapper(override val underlyingLogger: Logger
   override val isTraceEnabled: Boolean
     get() = underlyingLogger.isTraceEnabled
 
-  override fun isTraceEnabled(marker: mu.two.Marker?): Boolean {
+  override fun isTraceEnabled(marker: Marker?): Boolean {
     return underlyingLogger.isTraceEnabled(marker?.toSlf4j())
   }
 
   override val isDebugEnabled: Boolean
     get() = underlyingLogger.isDebugEnabled
 
-  override fun isDebugEnabled(marker: mu.two.Marker?): Boolean {
+  override fun isDebugEnabled(marker: Marker?): Boolean {
     return underlyingLogger.isDebugEnabled(marker?.toSlf4j())
   }
 
   override val isInfoEnabled: Boolean
     get() = underlyingLogger.isInfoEnabled
 
-  override fun isInfoEnabled(marker: mu.two.Marker?): Boolean {
+  override fun isInfoEnabled(marker: Marker?): Boolean {
     return underlyingLogger.isInfoEnabled(marker?.toSlf4j())
   }
 
   override val isWarnEnabled: Boolean
     get() = underlyingLogger.isWarnEnabled
 
-  override fun isWarnEnabled(marker: mu.two.Marker?): Boolean {
+  override fun isWarnEnabled(marker: Marker?): Boolean {
     return underlyingLogger.isWarnEnabled(marker?.toSlf4j())
   }
 
   override val isErrorEnabled: Boolean
     get() = underlyingLogger.isErrorEnabled
 
-  override fun isErrorEnabled(marker: mu.two.Marker?): Boolean {
+  override fun isErrorEnabled(marker: Marker?): Boolean {
     return underlyingLogger.isErrorEnabled(marker?.toSlf4j())
   }
 }

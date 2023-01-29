@@ -1,9 +1,6 @@
-package mu.two.internal
+package mu.two.slf4j.internal
 
-import mu.two.KLogger
-import mu.two.KMarkerFactory
-import mu.two.Marker
-import mu.two.slf4j.Slf4jLoggerWrapper
+import mu.two.internal.toStringSafe
 import mu.two.slf4j.toSlf4j
 import org.slf4j.helpers.MessageFormatter
 import org.slf4j.spi.LocationAwareLogger

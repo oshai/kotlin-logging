@@ -1,10 +1,9 @@
 @file:Suppress("NOTHING_TO_INLINE", "OVERRIDE_BY_INLINE")
 
-package mu.two.internal
+package mu.two.slf4j.internal
 
 import mu.two.KLogger
-import mu.two.Marker
-import mu.two.slf4j.Slf4jLoggerWrapper
+import mu.two.internal.toStringSafe
 import mu.two.slf4j.toSlf4j
 import org.slf4j.Logger
 
