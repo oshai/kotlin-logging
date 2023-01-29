@@ -13,5 +13,4 @@ public fun Marker.toSlf4j(): org.slf4j.Marker = MarkerFactory.getMarker(this.get
 public fun KotlinLogging.logger(underlyingLogger: Logger): KLogger =
     KLoggerFactory.wrapJLogger(underlyingLogger)
 
-
 public fun Logger.toKLogger(): KLogger = KotlinLogging.logger(this)

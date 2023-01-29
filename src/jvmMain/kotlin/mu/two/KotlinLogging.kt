@@ -12,5 +12,4 @@ public actual object KotlinLogging {
   public actual fun logger(func: () -> Unit): KLogger = KLoggerFactory.logger(func)
 
   public actual fun logger(name: String): KLogger = KLoggerFactory.logger(name)
-
 }
