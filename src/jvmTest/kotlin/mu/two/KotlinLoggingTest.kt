@@ -1,5 +1,7 @@
 package mu.two
 
+import mu.two.slf4j.logger
+import mu.two.slf4j.toKLogger
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
