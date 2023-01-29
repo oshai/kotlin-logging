@@ -1,6 +1,6 @@
 package mu.two
 
-import mu.internal.KLoggerFactory
+import mu.two.internal.KLoggerFactory
 import org.slf4j.Logger
 
 public actual object KotlinLogging {

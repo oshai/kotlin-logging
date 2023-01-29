@@ -1,6 +1,6 @@
 package mu.two
 
-import mu.internal.KLoggerFactory
+import mu.two.internal.KLoggerFactory
 
 /**
  * A class with logging capabilities usage example:

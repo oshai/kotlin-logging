@@ -4,8 +4,8 @@ package mu.two.internal
 
 import mu.two.KLogger
 import mu.two.Marker
-import mu.slf4j.Slf4jLoggerWrapper
-import mu.slf4j.toSlf4j
+import mu.two.slf4j.Slf4jLoggerWrapper
+import mu.two.slf4j.toSlf4j
 import org.slf4j.Logger
 
 /**

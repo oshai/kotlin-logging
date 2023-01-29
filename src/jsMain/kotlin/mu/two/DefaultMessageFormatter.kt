@@ -1,6 +1,6 @@
 package mu.two
 
-import mu.internal.toStringSafe
+import mu.two.internal.toStringSafe
 
 public object DefaultMessageFormatter : Formatter {
   public override fun formatMessage(level: mu.two.Level, loggerName: String, msg: () -> Any?): String =

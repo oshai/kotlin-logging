@@ -1,6 +1,6 @@
 package mu.two.internal
 
-import mu.KLoggable
+import mu.two.KLoggable
 import mu.two.KLogger
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory

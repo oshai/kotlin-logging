@@ -1,8 +1,8 @@
 package mu.two.internal
 
 import mu.two.KLogger
-import mu.KotlinLoggingConfiguration.APPENDER
-import mu.KotlinLoggingConfiguration.FORMATTER
+import mu.two.KotlinLoggingConfiguration.APPENDER
+import mu.two.KotlinLoggingConfiguration.FORMATTER
 import mu.two.Level
 import mu.two.Level.DEBUG
 import mu.two.Level.ERROR
@@ -10,7 +10,7 @@ import mu.two.Level.INFO
 import mu.two.Level.TRACE
 import mu.two.Level.WARN
 import mu.two.Marker
-import mu.isLoggingEnabled
+import mu.two.isLoggingEnabled
 
 @Suppress("TooManyFunctions")
 internal class KLoggerJS(override val name: String) : mu.two.KLogger {

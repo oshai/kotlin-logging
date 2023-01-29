@@ -1,12 +1,12 @@
 package mu.two.internal
 
 import mu.two.KLogger
-import mu.KotlinLoggingConfiguration.appender
-import mu.KotlinLoggingConfiguration.formatter
+import mu.two.KotlinLoggingConfiguration.appender
+import mu.two.KotlinLoggingConfiguration.formatter
 import mu.two.Level
 import mu.two.Level.*
 import mu.two.Marker
-import mu.isLoggingEnabled
+import mu.two.isLoggingEnabled
 
 internal class KLoggerLinux(override val name: String) : mu.two.KLogger {
 

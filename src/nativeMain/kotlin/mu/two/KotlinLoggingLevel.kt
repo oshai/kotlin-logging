@@ -1,5 +1,5 @@
 package mu.two
 
-import mu.KotlinLoggingConfiguration.logLevel
+import mu.two.KotlinLoggingConfiguration.logLevel
 
 public fun mu.two.Level.isLoggingEnabled(): Boolean = this.ordinal >= logLevel.ordinal

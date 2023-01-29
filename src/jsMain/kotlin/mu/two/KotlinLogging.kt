@@ -1,6 +1,6 @@
 package mu.two
 
-import mu.internal.KLoggerJS
+import mu.two.internal.KLoggerJS
 
 public actual object KotlinLogging {
   /**
