@@ -18,29 +18,29 @@ class KLoggerNameResolverTest {
 
   private fun testNames(): Stream<Arguments> =
       Stream.of(
-          Arguments.of(" mu.two.internal.BaseClass", BaseClass::class.java),
-          Arguments.of(" mu.two.internal.ChildClass", ChildClass::class.java),
-          Arguments.of(" mu.two.internal.BaseClass", BaseClass.Companion::class.java),
-          Arguments.of(" mu.two.internal.ChildClass", ChildClass.Companion::class.java),
-          Arguments.of(" mu.two.internal.Singleton", Singleton::class.java),
-          Arguments.of(" mu.two.internal.MyInterface", MyInterface::class.java),
+          Arguments.of("mu.two.internal.BaseClass", BaseClass::class.java),
+          Arguments.of("mu.two.internal.ChildClass", ChildClass::class.java),
+          Arguments.of("mu.two.internal.BaseClass", BaseClass.Companion::class.java),
+          Arguments.of("mu.two.internal.ChildClass", ChildClass.Companion::class.java),
+          Arguments.of("mu.two.internal.Singleton", Singleton::class.java),
+          Arguments.of("mu.two.internal.MyInterface", MyInterface::class.java),
           Arguments.of("java.lang.Object", Any().javaClass),
-          Arguments.of(" mu.two.internal.KLoggerNameResolverTest\$testNames$1", object {}.javaClass),
+          Arguments.of("mu.two.internal.KLoggerNameResolverTest\$testNames$1", object {}.javaClass),
           Arguments.of(
-              " mu.two.internal.BaseClass\$InnerClass\$Obj",
+              "mu.two.internal.BaseClass\$InnerClass\$Obj",
               BaseClass.InnerClass.Obj::class.java,
           ),
           Arguments.of(
-              " mu.two.internal.BaseClass\$InnerClass\$Obj",
+              "mu.two.internal.BaseClass\$InnerClass\$Obj",
               BaseClass.InnerClass.Obj.javaClass,
           ),
           Arguments.of(
-              " mu.two.internal.BaseClass\$InnerClass",
+              "mu.two.internal.BaseClass\$InnerClass",
               BaseClass.InnerClass.CmpObj::class.java,
           ),
-          Arguments.of(" mu.two.internal.Foo\$Bar", Foo.Bar::class.java),
-          Arguments.of(" mu.two.internal.Foo\$Bar2", Foo.Bar3.javaClass),
-          Arguments.of(" mu.two.internal.PrivateCompanion", PrivateCompanion().companionClass))
+          Arguments.of("mu.two.internal.Foo\$Bar", Foo.Bar::class.java),
+          Arguments.of("mu.two.internal.Foo\$Bar2", Foo.Bar3.javaClass),
+          Arguments.of("mu.two.internal.PrivateCompanion", PrivateCompanion().companionClass))
 }
 
 open class BaseClass {

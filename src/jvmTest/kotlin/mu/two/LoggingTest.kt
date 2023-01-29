@@ -32,12 +32,12 @@ class ClassWithLogging {
   }
 
   fun testMarker() {
-    val marker = mu.two.KMarkerFactory.getMarker("MARKER")
+    val marker = KMarkerFactory.getMarker("MARKER")
     logger.trace(marker) { "test ClassWithLogging" }
   }
 
   fun testMarkerThrowable() {
-    val marker = mu.two.KMarkerFactory.getMarker("MARKER")
+    val marker = KMarkerFactory.getMarker("MARKER")
     val ex = Throwable()
     logger.trace(marker, ex) { "test ClassWithLogging" }
   }
@@ -62,7 +62,7 @@ open class ClassHasLogging : KLoggable {
 class ClassInheritLogging : ClassHasLogging()
 
 class ClassWithNamedLogging {
-  companion object : Any(), KLoggable by NamedKLogging("mu.ClassWithNamedLogging")
+  companion object : Any(), KLoggable by NamedKLogging("mu.two.ClassWithNamedLogging")
 
   fun test() {
     logger.info { "test ClassWithNamedLogging" }
@@ -151,13 +151,14 @@ class LoggingTest {
             .replace("\n\n", "\n")
             .split("\n")
     assertAll(
-        { assertEquals("INFO  mu.ClassWithLogging  - test ClassWithLogging", lines[0].trim()) },
-        { assertEquals("TRACE mu.ClassWithLogging  - test ClassWithLogging", lines[1].trim()) },
+        { assertEquals("INFO  mu.two.ClassWithLogging  - test ClassWithLogging", lines[0].trim()) },
+        { assertEquals("TRACE mu.two.ClassWithLogging  - test ClassWithLogging", lines[1].trim()) },
         { assertEquals("java.lang.Throwable: null", lines[2].trim()) },
-        { assertTrue(lines[3].trim().startsWith("at mu.ClassWithLogging.testThrowable(")) },
+        { assertTrue(lines[3].trim().startsWith("at mu.two.ClassWithLogging.testThrowable(")) },
         {
           assertEquals(
-              "TRACE mu.ClassWithLogging  - test ClassWithLogging", lines[lines.size - 1].trim())
+              "TRACE mu.two.ClassWithLogging  - test ClassWithLogging",
+              lines[lines.size - 1].trim())
         },
     )
   }
@@ -178,13 +179,17 @@ class LoggingTest {
             .split("\n")
     assertAll(
         {
-          assertEquals("TRACE mu.ClassWithLogging MARKER - test ClassWithLogging", lines[0].trim())
+          assertEquals(
+              "TRACE mu.two.ClassWithLogging MARKER - test ClassWithLogging", lines[0].trim())
         },
         {
-          assertEquals("TRACE mu.ClassWithLogging MARKER - test ClassWithLogging", lines[1].trim())
+          assertEquals(
+              "TRACE mu.two.ClassWithLogging MARKER - test ClassWithLogging", lines[1].trim())
         },
         { assertEquals("java.lang.Throwable: null", lines[2].trim()) },
-        { assertTrue(lines[3].trim().startsWith("at mu.ClassWithLogging.testMarkerThrowable(")) },
+        {
+          assertTrue(lines[3].trim().startsWith("at mu.two.ClassWithLogging.testMarkerThrowable("))
+        },
     )
   }
 
@@ -193,7 +198,7 @@ class LoggingTest {
     ClassInheritLogging().test()
     appenderWithWriter.writer.flush()
     assertEquals(
-        "INFO  mu.ClassInheritLogging  - test ClassHasLogging",
+        "INFO  mu.two.ClassInheritLogging  - test ClassHasLogging",
         appenderWithWriter.writer.toString().trim())
   }
 
@@ -202,7 +207,7 @@ class LoggingTest {
     ChildClassWithLogging().test()
     appenderWithWriter.writer.flush()
     assertEquals(
-        "INFO  mu.ChildClassWithLogging  - test ChildClassWithLogging",
+        "INFO  mu.two.ChildClassWithLogging  - test ChildClassWithLogging",
         appenderWithWriter.writer.toString().trim())
   }
 
@@ -211,7 +216,7 @@ class LoggingTest {
     ClassWithNamedLogging().test()
     appenderWithWriter.writer.flush()
     assertEquals(
-        "INFO  mu.ClassWithNamedLogging  - test ClassWithNamedLogging",
+        "INFO  mu.two.ClassWithNamedLogging  - test ClassWithNamedLogging",
         appenderWithWriter.writer.toString().trim())
   }
 
@@ -220,7 +225,7 @@ class LoggingTest {
     ClassHasLogging().test()
     appenderWithWriter.writer.flush()
     assertEquals(
-        "INFO  mu.ClassHasLogging  - test ClassHasLogging",
+        "INFO  mu.two.ClassHasLogging  - test ClassHasLogging",
         appenderWithWriter.writer.toString().trim())
   }
 
@@ -229,7 +234,7 @@ class LoggingTest {
     CompanionHasLogging().test()
     appenderWithWriter.writer.flush()
     assertEquals(
-        "INFO  mu.CompanionHasLogging  - test CompanionHasLogging",
+        "INFO  mu.two.CompanionHasLogging  - test CompanionHasLogging",
         appenderWithWriter.writer.toString().trim())
   }
 
@@ -238,7 +243,7 @@ class LoggingTest {
     LambdaRaisesError().test()
     appenderWithWriter.writer.flush()
     assertEquals(
-        "INFO  mu.LambdaRaisesError  - Log message invocation failed: java.lang.NullPointerException",
+        "INFO  mu.two.LambdaRaisesError  - Log message invocation failed: java.lang.NullPointerException",
         appenderWithWriter.writer.toString().trim())
   }
 
@@ -247,14 +252,15 @@ class LoggingTest {
     ClassWithLogging().testFormatting()
     appenderWithWriter.writer.flush()
     assertEquals(
-        "INFO  mu.ClassWithLogging  - Message: String with {} curly braces",
+        "INFO  mu.two.ClassWithLogging  - Message: String with {} curly braces",
         appenderWithWriter.writer.toString().trim())
   }
 
   @Test
   fun `check underlyingLogger property`() {
     assertEquals(
-        "mu.ClassHasLogging", (ClassHasLogging().logger.underlyingLogger as org.slf4j.Logger).name)
+        "mu.two.ClassHasLogging",
+        (ClassHasLogging().logger.underlyingLogger as org.slf4j.Logger).name)
   }
 }
 
@@ -262,12 +268,12 @@ class LoggingNameTest {
   @Test
   fun testNames() {
     assertAll(
-        { assertEquals("mu.ClassWithLogging", ClassWithLogging.logger.name) },
-        { assertEquals("mu.ClassInheritLogging", ClassInheritLogging().logger.name) },
-        { assertEquals("mu.ChildClassWithLogging", ChildClassWithLogging.logger.name) },
-        { assertEquals("mu.ClassWithNamedLogging", ClassWithNamedLogging.logger.name) },
-        { assertEquals("mu.ClassHasLogging", ClassHasLogging().logger.name) },
-        { assertEquals("mu.CompanionHasLogging", CompanionHasLogging.logger.name) },
+        { assertEquals("mu.two.ClassWithLogging", ClassWithLogging.logger.name) },
+        { assertEquals("mu.two.ClassInheritLogging", ClassInheritLogging().logger.name) },
+        { assertEquals("mu.two.ChildClassWithLogging", ChildClassWithLogging.logger.name) },
+        { assertEquals("mu.two.ClassWithNamedLogging", ClassWithNamedLogging.logger.name) },
+        { assertEquals("mu.two.ClassHasLogging", ClassHasLogging().logger.name) },
+        { assertEquals("mu.two.CompanionHasLogging", CompanionHasLogging.logger.name) },
     )
   }
 }
