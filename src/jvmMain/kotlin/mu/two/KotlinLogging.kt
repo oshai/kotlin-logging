@@ -10,12 +10,12 @@ public actual object KotlinLogging {
    * val logger = KotlinLogging.logger {}
    * ```
    */
-  public actual fun logger(func: () -> Unit): mu.two.KLogger = KLoggerFactory.logger(func)
+  public actual fun logger(func: () -> Unit): KLogger = KLoggerFactory.logger(func)
 
-  public actual fun logger(name: String): mu.two.KLogger = KLoggerFactory.logger(name)
+  public actual fun logger(name: String): KLogger = KLoggerFactory.logger(name)
 
-  public fun logger(underlyingLogger: Logger): mu.two.KLogger =
+  public fun logger(underlyingLogger: Logger): KLogger =
       KLoggerFactory.wrapJLogger(underlyingLogger)
 }
 
-public fun Logger.toKLogger(): mu.two.KLogger = mu.two.KotlinLogging.logger(this)
+public fun Logger.toKLogger(): KLogger = KotlinLogging.logger(this)

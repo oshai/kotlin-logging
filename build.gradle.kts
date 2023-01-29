@@ -82,7 +82,7 @@ kotlin {
         }
         val jvmMain by getting {
             dependencies {
-                api("org.slf4j:slf4j-api:${extra["slf4j_version"]}")
+                compileOnly("org.slf4j:slf4j-api:${extra["slf4j_version"]}")
             }
         }
         val jvmTest by getting {
@@ -94,6 +94,8 @@ kotlin {
                 implementation("org.apache.logging.log4j:log4j-api:${extra["log4j_version"]}")
                 implementation("org.apache.logging.log4j:log4j-core:${extra["log4j_version"]}")
                 implementation("org.apache.logging.log4j:log4j-slf4j2-impl:${extra["log4j_version"]}")
+                implementation("org.slf4j:slf4j-api:${extra["slf4j_version"]}")
+
             }
         }
         val jsMain by getting {}
