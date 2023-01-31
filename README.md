@@ -1,5 +1,9 @@
 # <img height="30" width="30" alt="kotlin-logging" src="https://raw.githubusercontent.com/MicroUtils/kotlin-logging/master/misc/images/kotlin-logging.png"> [kotlin-logging](https://github.com/MicroUtils/kotlin-logging) [![CI](https://github.com/MicroUtils/kotlin-logging/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/MicroUtils/kotlin-logging/actions/workflows/ci.yml) [![Slack channel](https://img.shields.io/badge/Chat-Slack-blue.svg)](https://kotlinlang.slack.com/messages/kotlin-logging/) [![Maven Central](https://img.shields.io/maven-central/v/io.github.microutils/kotlin-logging.svg)](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22io.github.microutils%22) [![Apache License V.2](https://img.shields.io/badge/license-Apache%20V.2-blue.svg)](https://github.com/MicroUtils/kotlin-logging/blob/master/LICENSE)
 
+Curious to try version 4? See https://github.com/MicroUtils/kotlin-logging/issues/264 for details.
+
+## 
+
 Lightweight logging framework for Kotlin, written in [![Pure Kotlin](https://img.shields.io/badge/100%25-kotlin-blue.svg)](https://kotlinlang.org/).  
 A convenient and performant logging facade.  
 For jvm `kotlin-logging` is wrapping [slf4j](http://www.slf4j.org/) with Kotlin extensions.  
