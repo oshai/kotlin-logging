@@ -18,7 +18,7 @@ internal object KLoggerFactory {
     if (System.getProperty("kotlin-logging-to-jul") != null) {
       return JulLoggerFactory.wrapJLogger(JulLoggerFactory.jLogger(name))
     }
-    // default to sl4fj
+    // default to slf4j
     return Slf4jLoggerFactory.wrapJLogger(Slf4jLoggerFactory.jLogger(name))
   }
 
