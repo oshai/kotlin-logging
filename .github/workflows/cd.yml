@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - github-release
+      - github-release-4.x
 
 jobs:
   release:
