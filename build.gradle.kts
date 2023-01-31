@@ -173,7 +173,7 @@ tasks {
 publishing {
     publications.withType<MavenPublication> {
         pom {
-            name.set("kotlin-logging")
+            name.set("kotlin-logging-mew")
             description.set("kotlin-logging $version - Lightweight logging framework for Kotlin")
             url.set("https://github.com/oshai/kotlin-logging")
             licenses {
