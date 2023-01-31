@@ -22,6 +22,7 @@ class JulLoggerWrapperTest {
     @BeforeAll
     @JvmStatic
     fun init() {
+        // our jul test just forward the logs jul -> slf4j -> log4j
       SLF4JBridgeHandler.removeHandlersForRootLogger()
       SLF4JBridgeHandler.install()
       Logger.getLogger("").level = Level.FINEST
