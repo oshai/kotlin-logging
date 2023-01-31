@@ -46,6 +46,11 @@ class JulLoggerWrapperTest {
     appenderWithWriter.writer.flush()
     assertEquals(
         "INFO  mu.two.jul.internal.JulLoggerWrapperTest  - simple jul message",
-        appenderWithWriter.writer.toString().split("\n")[1])
+        appenderWithWriter.writer
+            .toString()
+            .trim()
+            .replace("\r", "\n")
+            .replace("\n\n", "\n")
+            .split("\n")[1])
   }
 }
