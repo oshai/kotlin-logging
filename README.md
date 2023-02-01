@@ -74,7 +74,7 @@ See the full example in [kotlin-logging-example-maven](https://github.com/oshai/
 implementation 'io.github.microutils:kotlin-logging-jvm:3.0.4'
 ```
 
-Alternatively, download the JAR from [github](https://github.com/oshai/kotlin-logging/releases/latest)  or [maven-central](http://repo1.maven.org/maven2/io/github/microutils/kotlin-logging/).
+Alternatively, download the JAR from [github](https://github.com/oshai/kotlin-logging/releases/latest)  or [maven-central](https://repo1.maven.org/maven2/io/github/microutils/kotlin-logging/).
 
 ### Multiplatform
 
