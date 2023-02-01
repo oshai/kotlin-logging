@@ -1,13 +1,13 @@
-# <img height="30" width="30" alt="kotlin-logging" src="https://raw.githubusercontent.com/MicroUtils/kotlin-logging/master/misc/images/kotlin-logging.png"> [kotlin-logging](https://github.com/MicroUtils/kotlin-logging) [![CI](https://github.com/MicroUtils/kotlin-logging/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/MicroUtils/kotlin-logging/actions/workflows/ci.yml) [![Slack channel](https://img.shields.io/badge/Chat-Slack-blue.svg)](https://kotlinlang.slack.com/messages/kotlin-logging/) [![Maven Central](https://img.shields.io/maven-central/v/io.github.microutils/kotlin-logging.svg)](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22io.github.microutils%22) [![Apache License V.2](https://img.shields.io/badge/license-Apache%20V.2-blue.svg)](https://github.com/MicroUtils/kotlin-logging/blob/master/LICENSE)
+# <img height="30" width="30" alt="kotlin-logging" src="https://raw.githubusercontent.com/oshai/kotlin-logging/master/misc/images/kotlin-logging.png"> [kotlin-logging](https://github.com/oshai/kotlin-logging) [![CI](https://github.com/oshai/kotlin-logging/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/oshai/kotlin-logging/actions/workflows/ci.yml) [![Slack channel](https://img.shields.io/badge/Chat-Slack-blue.svg)](https://kotlinlang.slack.com/messages/kotlin-logging/) [![Maven Central](https://img.shields.io/maven-central/v/io.github.oshai/kotlin-logging.svg)](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22io.github.microutils%22) [![Apache License V.2](https://img.shields.io/badge/license-Apache%20V.2-blue.svg)](https://github.com/oshai/kotlin-logging/blob/master/LICENSE)
 
-Curious to try version 4? See https://github.com/MicroUtils/kotlin-logging/issues/264 for details.
+Curious to try version 4? See https://github.com/oshai/kotlin-logging/issues/264 for details.
 
 ## 
 
 Lightweight logging framework for Kotlin, written in [![Pure Kotlin](https://img.shields.io/badge/100%25-kotlin-blue.svg)](https://kotlinlang.org/).  
 A convenient and performant logging facade.  
 For jvm `kotlin-logging` is wrapping [slf4j](http://www.slf4j.org/) with Kotlin extensions.  
-For other platforms `kotlin-logging` has various implementations. More details in the [wiki](https://github.com/MicroUtils/kotlin-logging/wiki/Multiplatform-support)
+For other platforms `kotlin-logging` has various implementations. More details in the [wiki](https://github.com/oshai/kotlin-logging/wiki/Multiplatform-support)
 
 #### Call log methods, without checking whether the respective log level is enabled
 ```Kotlin
@@ -51,7 +51,7 @@ class FooWithLogging {
 }
 ```
 
-An `Android` example project with kotlin-logging can be found in [kotlin-logging-example-android](https://github.com/MicroUtils/kotlin-logging-example-android).
+An `Android` example project with kotlin-logging can be found in [kotlin-logging-example-android](https://github.com/oshai/kotlin-logging-example-android).
 
 ## Download
 
@@ -67,19 +67,19 @@ In short, if you just want to log statements to stdout, it's possible to add the
   <version>3.0.4</version>
 </dependency>
 ```
-See the full example in [kotlin-logging-example-maven](https://github.com/MicroUtils/kotlin-logging-example-maven).  
+See the full example in [kotlin-logging-example-maven](https://github.com/oshai/kotlin-logging-example-maven).  
 
 ### Gradle
 ```Groovy
 implementation 'io.github.microutils:kotlin-logging-jvm:3.0.4'
 ```
 
-Alternatively, download the JAR from [github](https://github.com/MicroUtils/kotlin-logging/releases/latest) or [bintray](https://dl.bintray.com/microutils/kotlin-logging/io/github/microutils/kotlin-logging/) or [maven-central](http://repo1.maven.org/maven2/io/github/microutils/kotlin-logging/).
+Alternatively, download the JAR from [github](https://github.com/oshai/kotlin-logging/releases/latest)  or [maven-central](http://repo1.maven.org/maven2/io/github/microutils/kotlin-logging/).
 
 ### Multiplatform
 
 An experimental common & JS & linux-x64 support is available.  
-More information is available on the [wiki](https://github.com/MicroUtils/kotlin-logging/wiki/Multiplatform-support) and issues [#21](https://github.com/MicroUtils/kotlin-logging/issues/21) [#45](https://github.com/MicroUtils/kotlin-logging/issues/45).
+More information is available on the [wiki](https://github.com/oshai/kotlin-logging/wiki/Multiplatform-support) and issues [#21](https://github.com/oshai/kotlin-logging/issues/21) [#45](https://github.com/oshai/kotlin-logging/issues/45).
 
 ## Overview
 
@@ -109,7 +109,7 @@ And many more... (add your name above)
 
 ## Usage
 
-- See [wiki](https://github.com/MicroUtils/kotlin-logging/wiki) for more examples.
+- See [wiki](https://github.com/oshai/kotlin-logging/wiki) for more examples.
 
 It is possible to configure IntelliJ live templates. For file level logger configure the following:
 - Text template: `private val logger = mu.KotlinLogging.logger {}`.
@@ -117,7 +117,7 @@ It is possible to configure IntelliJ live templates. For file level logger confi
 
 ## Support
 
-- Open an issue here: https://github.com/MicroUtils/kotlin-logging/issues
+- Open an issue here: https://github.com/oshai/kotlin-logging/issues
 - Ask a question in StackOverflow with [kotlin-logging tag](http://stackoverflow.com/tags/kotlin-logging/info).
 - Chat on Slack channel: https://kotlinlang.slack.com/messages/kotlin-logging
 - Chat on Telegram channel: https://t.me/klogging
@@ -136,10 +136,10 @@ It is possible to configure IntelliJ live templates. For file level logger confi
 ## Contributing
 
 Any contribution is appreciated.  
-See the contributors list in: https://github.com/MicroUtils/kotlin-logging/graphs/contributors
+See the contributors list in: https://github.com/oshai/kotlin-logging/graphs/contributors
 
-Pull requests are welcome! See instructions in https://github.com/MicroUtils/kotlin-logging/blob/master/CONTRIBUTING.md.  
+Pull requests are welcome! See instructions in https://github.com/oshai/kotlin-logging/blob/master/CONTRIBUTING.md.  
 
-[Show your ❤ with a ★](https://github.com/MicroUtils/kotlin-logging/stargazers)
+[Show your ❤ with a ★](https://github.com/oshai/kotlin-logging/stargazers)
 
 
