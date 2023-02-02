@@ -16,7 +16,7 @@ plugins {
 apply("versions.gradle.kts")
 
 group = "io.github.oshai"
-version = "4.0.0-beta-6"
+version = "4.0.0-beta-7"
 
 repositories {
     mavenCentral()
