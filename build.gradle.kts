@@ -25,7 +25,8 @@ repositories {
 nexusPublishing {
     repositories {
         sonatype {  //only for users registered in Sonatype after 24 Feb 2021
-            nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"))
+            stagingProfileId.set("106ff12489ce3e")
+            nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/staging/deployByRepositoryId/iogithuboshai-1000/"))
             snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
             username.set(System.getenv("SONATYPE_USERNAME")) // defaults to project.properties["myNexusUsername"]
             password.set(System.getenv("SONATYPE_PASSWORD")) // defaults to project.properties["myNexusPassword"]
