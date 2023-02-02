@@ -15,7 +15,7 @@ plugins {
 
 apply("versions.gradle.kts")
 
-group = "io.github.microutils"
+group = "io.github.oshai"
 version = "4.0.0-beta-3"
 
 repositories {
@@ -221,6 +221,6 @@ detekt {
 
 val jvmJar by tasks.getting(Jar::class) {
     manifest {
-        attributes("Automatic-Module-Name" to "io.github.microutils.kotlinlogging")
+        attributes("Automatic-Module-Name" to "io.github.oshai.kotlinlogging")
     }
 }
