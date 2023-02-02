@@ -27,8 +27,8 @@ nexusPublishing {
         sonatype {  //only for users registered in Sonatype after 24 Feb 2021
             nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
             snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
-            username.set(System.getProperty("SONATYPE_USERNAME")) // defaults to project.properties["myNexusUsername"]
-            password.set(System.getProperty("SONATYPE_PASSWORD")) // defaults to project.properties["myNexusPassword"]
+            username.set(System.getenv("SONATYPE_USERNAME")) // defaults to project.properties["myNexusUsername"]
+            password.set(System.getenv("SONATYPE_PASSWORD")) // defaults to project.properties["myNexusPassword"]
         }
     }
 }
