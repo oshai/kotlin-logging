@@ -1,12 +1,12 @@
 package io.github.oshai.jul.internal
 
-import java.util.logging.Level
-import java.util.logging.Logger
 import io.github.oshai.AppenderWithWriter
 import io.github.oshai.KLogger
 import io.github.oshai.KotlinLogging
 import io.github.oshai.addAppender
 import io.github.oshai.removeAppender
+import java.util.logging.Level
+import java.util.logging.Logger
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeAll

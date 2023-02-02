@@ -1,7 +1,7 @@
 package io.github.oshai.jul.internal
 
-import java.util.logging.Logger
 import io.github.oshai.KLogger
+import java.util.logging.Logger
 
 internal object JulLoggerFactory {
 

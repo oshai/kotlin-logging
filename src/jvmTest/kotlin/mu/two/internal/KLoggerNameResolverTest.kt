@@ -25,7 +25,8 @@ class KLoggerNameResolverTest {
           Arguments.of("io.github.oshai.internal.Singleton", Singleton::class.java),
           Arguments.of("io.github.oshai.internal.MyInterface", MyInterface::class.java),
           Arguments.of("java.lang.Object", Any().javaClass),
-          Arguments.of("io.github.oshai.internal.KLoggerNameResolverTest\$testNames$1", object {}.javaClass),
+          Arguments.of(
+              "io.github.oshai.internal.KLoggerNameResolverTest\$testNames$1", object {}.javaClass),
           Arguments.of(
               "io.github.oshai.internal.BaseClass\$InnerClass\$Obj",
               BaseClass.InnerClass.Obj::class.java,
@@ -40,7 +41,8 @@ class KLoggerNameResolverTest {
           ),
           Arguments.of("io.github.oshai.internal.Foo\$Bar", Foo.Bar::class.java),
           Arguments.of("io.github.oshai.internal.Foo\$Bar2", Foo.Bar3.javaClass),
-          Arguments.of("io.github.oshai.internal.PrivateCompanion", PrivateCompanion().companionClass))
+          Arguments.of(
+              "io.github.oshai.internal.PrivateCompanion", PrivateCompanion().companionClass))
 }
 
 open class BaseClass {

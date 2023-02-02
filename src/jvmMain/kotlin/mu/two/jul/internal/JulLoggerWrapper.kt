@@ -1,10 +1,10 @@
 package io.github.oshai.jul.internal
 
-import java.util.logging.Level
-import java.util.logging.Logger
 import io.github.oshai.KLogger
 import io.github.oshai.Marker
 import io.github.oshai.internal.toStringSafe
+import java.util.logging.Level
+import java.util.logging.Logger
 
 @Suppress("OVERRIDE_BY_INLINE", "NOTHING_TO_INLINE")
 internal class JulLoggerWrapper(override val underlyingLogger: Logger) : KLogger {

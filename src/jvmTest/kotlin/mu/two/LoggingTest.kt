@@ -151,10 +151,19 @@ class LoggingTest {
             .replace("\n\n", "\n")
             .split("\n")
     assertAll(
-        { assertEquals("INFO  io.github.oshai.ClassWithLogging  - test ClassWithLogging", lines[0].trim()) },
-        { assertEquals("TRACE io.github.oshai.ClassWithLogging  - test ClassWithLogging", lines[1].trim()) },
+        {
+          assertEquals(
+              "INFO  io.github.oshai.ClassWithLogging  - test ClassWithLogging", lines[0].trim())
+        },
+        {
+          assertEquals(
+              "TRACE io.github.oshai.ClassWithLogging  - test ClassWithLogging", lines[1].trim())
+        },
         { assertEquals("java.lang.Throwable: null", lines[2].trim()) },
-        { assertTrue(lines[3].trim().startsWith("at io.github.oshai.ClassWithLogging.testThrowable(")) },
+        {
+          assertTrue(
+              lines[3].trim().startsWith("at io.github.oshai.ClassWithLogging.testThrowable("))
+        },
         {
           assertEquals(
               "TRACE io.github.oshai.ClassWithLogging  - test ClassWithLogging",
@@ -180,15 +189,20 @@ class LoggingTest {
     assertAll(
         {
           assertEquals(
-              "TRACE io.github.oshai.ClassWithLogging MARKER - test ClassWithLogging", lines[0].trim())
+              "TRACE io.github.oshai.ClassWithLogging MARKER - test ClassWithLogging",
+              lines[0].trim())
         },
         {
           assertEquals(
-              "TRACE io.github.oshai.ClassWithLogging MARKER - test ClassWithLogging", lines[1].trim())
+              "TRACE io.github.oshai.ClassWithLogging MARKER - test ClassWithLogging",
+              lines[1].trim())
         },
         { assertEquals("java.lang.Throwable: null", lines[2].trim()) },
         {
-          assertTrue(lines[3].trim().startsWith("at io.github.oshai.ClassWithLogging.testMarkerThrowable("))
+          assertTrue(
+              lines[3]
+                  .trim()
+                  .startsWith("at io.github.oshai.ClassWithLogging.testMarkerThrowable("))
         },
     )
   }
@@ -270,8 +284,12 @@ class LoggingNameTest {
     assertAll(
         { assertEquals("io.github.oshai.ClassWithLogging", ClassWithLogging.logger.name) },
         { assertEquals("io.github.oshai.ClassInheritLogging", ClassInheritLogging().logger.name) },
-        { assertEquals("io.github.oshai.ChildClassWithLogging", ChildClassWithLogging.logger.name) },
-        { assertEquals("io.github.oshai.ClassWithNamedLogging", ClassWithNamedLogging.logger.name) },
+        {
+          assertEquals("io.github.oshai.ChildClassWithLogging", ChildClassWithLogging.logger.name)
+        },
+        {
+          assertEquals("io.github.oshai.ClassWithNamedLogging", ClassWithNamedLogging.logger.name)
+        },
         { assertEquals("io.github.oshai.ClassHasLogging", ClassHasLogging().logger.name) },
         { assertEquals("io.github.oshai.CompanionHasLogging", CompanionHasLogging.logger.name) },
     )

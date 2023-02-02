@@ -38,11 +38,7 @@ public object DefaultMessageFormatter : Formatter {
   ): String =
       "${prefix(includePrefix, level, loggerName)}${marker?.getName()} ${msg.toStringSafe()}${t.throwableToString()}"
 
-  private fun prefix(
-      includePrefix: Boolean,
-      level: Level,
-      loggerName: String
-  ): String {
+  private fun prefix(includePrefix: Boolean, level: Level, loggerName: String): String {
     return if (includePrefix) {
       "${level.name}: [$loggerName] "
     } else {

@@ -71,21 +71,13 @@ internal class KLoggerJS(private val loggerName: String) : KLogger {
     }
   }
 
-  private fun Level.logIfEnabled(
-      msg: () -> Any?,
-      t: Throwable?,
-      logFunction: (Any?) -> Unit
-  ) {
+  private fun Level.logIfEnabled(msg: () -> Any?, t: Throwable?, logFunction: (Any?) -> Unit) {
     if (isLoggingEnabled()) {
       logFunction(FORMATTER.formatMessage(this, loggerName, t, msg))
     }
   }
 
-  private fun Level.logIfEnabled(
-      marker: Marker?,
-      msg: () -> Any?,
-      logFunction: (Any?) -> Unit
-  ) {
+  private fun Level.logIfEnabled(marker: Marker?, msg: () -> Any?, logFunction: (Any?) -> Unit) {
     if (isLoggingEnabled()) {
       logFunction(FORMATTER.formatMessage(this, loggerName, marker, msg))
     }
