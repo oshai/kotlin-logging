@@ -19,8 +19,8 @@ jobs:
       - name: Publish
         run: ./gradlew publishToSonatype closeSonatypeStagingRepository -no-daemon --no-parallel --stacktrace -DSONATYPE_USERNAME=$SONATYPE_USERNAME -DSONATYPE_PASSWORD=$SONATYPE_PASSWORD -DGPG_PRIVATE_PASSWORD=$GPG_PRIVATE_PASSWORD -DGPG_PRIVATE_KEY=$GPG_PRIVATE_KEY
         env:
-          SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
-          SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
+          SONATYPE_USERNAME_2: ${{ secrets.SONATYPE_USERNAME_2 }}
+          SONATYPE_PASSWORD_2: ${{ secrets.SONATYPE_PASSWORD_2 }}
           SONATYPE_REPOSITORY_ID: ${{ needs.create_staging_repository.outputs.repository_id }}
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
           GPG_PRIVATE_PASSWORD: ${{ secrets.GPG_PRIVATE_PASSWORD }}
