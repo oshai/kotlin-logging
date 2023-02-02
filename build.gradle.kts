@@ -175,7 +175,7 @@ publishing {
         pom {
             name.set("kotlin-logging-mew")
             description.set("kotlin-logging $version - Lightweight logging framework for Kotlin")
-            url.set("https://github.com/MicroUtils/kotlin-logging")
+            url.set("https://github.com/oshai/kotlin-logging")
             licenses {
                 license {
                     name.set("The Apache Software License, Version 2.0")
@@ -191,9 +191,9 @@ publishing {
                 }
             }
             scm {
-                connection.set("scm:git:git://github.com/MicroUtils/kotlin-logging.git")
+                connection.set("scm:git:git://github.com/oshai/kotlin-logging.git")
                 developerConnection.set("scm:git:ssh://github.com:MicroUtils/kotlin-logging.git")
-                url.set("https://github.com/MicroUtils/kotlin-logging/tree/master")
+                url.set("https://github.com/oshai/kotlin-logging/tree/master")
             }
         }
         artifact(tasks["dokkaJar"])
