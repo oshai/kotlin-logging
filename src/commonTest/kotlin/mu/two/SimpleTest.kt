@@ -1,9 +1,9 @@
-package mu.two
+package io.github.oshai
 
 import kotlin.test.Test
 
 class SimpleTest {
-  private val logger = mu.two.KotlinLogging.logger {}
+  private val logger = io.github.oshai.KotlinLogging.logger {}
 
   @Test
   fun simpleTest() {

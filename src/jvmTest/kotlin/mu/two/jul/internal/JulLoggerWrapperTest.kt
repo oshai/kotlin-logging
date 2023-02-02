@@ -1,12 +1,12 @@
-package mu.two.jul.internal
+package io.github.oshai.jul.internal
 
 import java.util.logging.Level
 import java.util.logging.Logger
-import mu.two.AppenderWithWriter
-import mu.two.KLogger
-import mu.two.KotlinLogging
-import mu.two.addAppender
-import mu.two.removeAppender
+import io.github.oshai.AppenderWithWriter
+import io.github.oshai.KLogger
+import io.github.oshai.KotlinLogging
+import io.github.oshai.addAppender
+import io.github.oshai.removeAppender
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeAll
@@ -45,7 +45,7 @@ class JulLoggerWrapperTest {
     logger.info("simple jul message")
     appenderWithWriter.writer.flush()
     assertEquals(
-        "INFO  mu.two.jul.internal.JulLoggerWrapperTest  - simple jul message",
+        "INFO  io.github.oshai.jul.internal.JulLoggerWrapperTest  - simple jul message",
         appenderWithWriter.writer
             .toString()
             .trim()

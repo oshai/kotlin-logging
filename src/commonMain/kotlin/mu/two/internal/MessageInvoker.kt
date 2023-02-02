@@ -1,4 +1,4 @@
-package mu.two.internal
+package io.github.oshai.internal
 
 @Suppress("NOTHING_TO_INLINE")
 internal inline fun (() -> Any?).toStringSafe(): String {

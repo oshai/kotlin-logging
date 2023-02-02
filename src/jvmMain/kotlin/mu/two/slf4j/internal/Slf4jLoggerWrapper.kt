@@ -1,8 +1,8 @@
-package mu.two.slf4j.internal
+package io.github.oshai.slf4j.internal
 
-import mu.two.KLogger
-import mu.two.Marker
-import mu.two.slf4j.toSlf4j
+import io.github.oshai.KLogger
+import io.github.oshai.Marker
+import io.github.oshai.slf4j.toSlf4j
 import org.slf4j.Logger
 
 internal abstract class Slf4jLoggerWrapper(override val underlyingLogger: Logger) : KLogger {

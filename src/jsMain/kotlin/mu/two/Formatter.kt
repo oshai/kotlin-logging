@@ -1,4 +1,4 @@
-package mu.two
+package io.github.oshai
 
 public interface Formatter {
   public fun formatMessage(level: Level, loggerName: String, msg: () -> Any?): Any?

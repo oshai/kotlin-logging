@@ -1,4 +1,4 @@
-package mu.two
+package io.github.oshai
 
 import org.slf4j.MDC
 

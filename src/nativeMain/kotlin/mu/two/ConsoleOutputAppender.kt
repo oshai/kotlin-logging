@@ -1,4 +1,4 @@
-package mu.two
+package io.github.oshai
 
 import platform.posix.fprintf
 import platform.posix.stderr

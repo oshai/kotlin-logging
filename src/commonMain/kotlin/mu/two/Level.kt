@@ -1,11 +1,11 @@
-package mu.two
+package io.github.oshai
 
 public enum class Level(private val levelInt: Int, private val levelStr: String) {
-  TRACE(mu.two.Levels.TRACE_INT, "TRACE"),
-  DEBUG(mu.two.Levels.DEBUG_INT, "DEBUG"),
-  INFO(mu.two.Levels.INFO_INT, "INFO"),
-  WARN(mu.two.Levels.WARN_INT, "WARN"),
-  ERROR(mu.two.Levels.ERROR_INT, "ERROR"),
+  TRACE(io.github.oshai.Levels.TRACE_INT, "TRACE"),
+  DEBUG(io.github.oshai.Levels.DEBUG_INT, "DEBUG"),
+  INFO(io.github.oshai.Levels.INFO_INT, "INFO"),
+  WARN(io.github.oshai.Levels.WARN_INT, "WARN"),
+  ERROR(io.github.oshai.Levels.ERROR_INT, "ERROR"),
   ;
 
   public fun toInt(): Int {
@@ -26,13 +26,13 @@ public object Levels {
   public const val WARN_INT: Int = 30
   public const val ERROR_INT: Int = 40
 
-  public fun intToLevel(levelInt: Int): mu.two.Level {
+  public fun intToLevel(levelInt: Int): io.github.oshai.Level {
     return when (levelInt) {
-      mu.two.Levels.TRACE_INT -> mu.two.Level.TRACE
-      mu.two.Levels.DEBUG_INT -> mu.two.Level.DEBUG
-      mu.two.Levels.INFO_INT -> mu.two.Level.INFO
-      mu.two.Levels.WARN_INT -> mu.two.Level.WARN
-      mu.two.Levels.ERROR_INT -> mu.two.Level.ERROR
+      io.github.oshai.Levels.TRACE_INT -> io.github.oshai.Level.TRACE
+      io.github.oshai.Levels.DEBUG_INT -> io.github.oshai.Level.DEBUG
+      io.github.oshai.Levels.INFO_INT -> io.github.oshai.Level.INFO
+      io.github.oshai.Levels.WARN_INT -> io.github.oshai.Level.WARN
+      io.github.oshai.Levels.ERROR_INT -> io.github.oshai.Level.ERROR
       else -> throw IllegalArgumentException("Level integer [$levelInt] not recognized.")
     }
   }

@@ -1,6 +1,6 @@
-package mu.two
+package io.github.oshai
 
-import mu.two.internal.KLoggerJS
+import io.github.oshai.internal.KLoggerJS
 
 public actual object KotlinLogging {
   /**
@@ -9,7 +9,7 @@ public actual object KotlinLogging {
    * val logger = KotlinLogging.logger {}
    * ```
    */
-  public actual fun logger(func: () -> Unit): mu.two.KLogger = KLoggerJS(func::class.js.name)
+  public actual fun logger(func: () -> Unit): io.github.oshai.KLogger = KLoggerJS(func::class.js.name)
 
-  public actual fun logger(name: String): mu.two.KLogger = KLoggerJS(name)
+  public actual fun logger(name: String): io.github.oshai.KLogger = KLoggerJS(name)
 }

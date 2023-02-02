@@ -1,4 +1,4 @@
-package mu.two
+package io.github.oshai
 
 import kotlin.native.concurrent.AtomicReference
 import platform.darwin.os_log_create

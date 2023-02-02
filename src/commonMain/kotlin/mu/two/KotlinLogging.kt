@@ -1,4 +1,4 @@
-package mu.two
+package io.github.oshai
 
 public expect object KotlinLogging {
   /**
@@ -7,7 +7,7 @@ public expect object KotlinLogging {
    * val logger = KotlinLogging.logger {}
    * ```
    */
-  public fun logger(func: () -> Unit): mu.two.KLogger
+  public fun logger(func: () -> Unit): io.github.oshai.KLogger
 
-  public fun logger(name: String): mu.two.KLogger
+  public fun logger(name: String): io.github.oshai.KLogger
 }

@@ -1,4 +1,4 @@
-package mu.two
+package io.github.oshai
 
 public object ConsoleOutputAppender : Appender {
   public override fun trace(message: Any?): Unit = console.log(message)

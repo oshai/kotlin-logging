@@ -1,4 +1,4 @@
-package mu.two
+package io.github.oshai
 
 public interface Appender {
   public fun trace(message: Any?)

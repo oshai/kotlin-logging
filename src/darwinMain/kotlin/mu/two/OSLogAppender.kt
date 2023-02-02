@@ -1,4 +1,4 @@
-package mu.two
+package io.github.oshai
 
 import kotlinx.cinterop.ptr
 import platform.darwin.OS_LOG_DEFAULT

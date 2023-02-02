@@ -1,4 +1,4 @@
-package mu.two.internal
+package io.github.oshai.internal
 
 import java.lang.reflect.Modifier
 

@@ -1,6 +1,6 @@
-package mu.two.slf4j.internal
+package io.github.oshai.slf4j.internal
 
-import mu.two.KLogger
+import io.github.oshai.KLogger
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.slf4j.spi.LocationAwareLogger

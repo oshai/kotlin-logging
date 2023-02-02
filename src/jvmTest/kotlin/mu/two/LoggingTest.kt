@@ -1,4 +1,4 @@
-package mu.two
+package io.github.oshai
 
 import java.io.StringWriter
 import org.apache.logging.log4j.Level
@@ -62,7 +62,7 @@ open class ClassHasLogging : KLoggable {
 class ClassInheritLogging : ClassHasLogging()
 
 class ClassWithNamedLogging {
-  companion object : Any(), KLoggable by NamedKLogging("mu.two.ClassWithNamedLogging")
+  companion object : Any(), KLoggable by NamedKLogging("io.github.oshai.ClassWithNamedLogging")
 
   fun test() {
     logger.info { "test ClassWithNamedLogging" }
@@ -151,13 +151,13 @@ class LoggingTest {
             .replace("\n\n", "\n")
             .split("\n")
     assertAll(
-        { assertEquals("INFO  mu.two.ClassWithLogging  - test ClassWithLogging", lines[0].trim()) },
-        { assertEquals("TRACE mu.two.ClassWithLogging  - test ClassWithLogging", lines[1].trim()) },
+        { assertEquals("INFO  io.github.oshai.ClassWithLogging  - test ClassWithLogging", lines[0].trim()) },
+        { assertEquals("TRACE io.github.oshai.ClassWithLogging  - test ClassWithLogging", lines[1].trim()) },
         { assertEquals("java.lang.Throwable: null", lines[2].trim()) },
-        { assertTrue(lines[3].trim().startsWith("at mu.two.ClassWithLogging.testThrowable(")) },
+        { assertTrue(lines[3].trim().startsWith("at io.github.oshai.ClassWithLogging.testThrowable(")) },
         {
           assertEquals(
-              "TRACE mu.two.ClassWithLogging  - test ClassWithLogging",
+              "TRACE io.github.oshai.ClassWithLogging  - test ClassWithLogging",
               lines[lines.size - 1].trim())
         },
     )
@@ -180,15 +180,15 @@ class LoggingTest {
     assertAll(
         {
           assertEquals(
-              "TRACE mu.two.ClassWithLogging MARKER - test ClassWithLogging", lines[0].trim())
+              "TRACE io.github.oshai.ClassWithLogging MARKER - test ClassWithLogging", lines[0].trim())
         },
         {
           assertEquals(
-              "TRACE mu.two.ClassWithLogging MARKER - test ClassWithLogging", lines[1].trim())
+              "TRACE io.github.oshai.ClassWithLogging MARKER - test ClassWithLogging", lines[1].trim())
         },
         { assertEquals("java.lang.Throwable: null", lines[2].trim()) },
         {
-          assertTrue(lines[3].trim().startsWith("at mu.two.ClassWithLogging.testMarkerThrowable("))
+          assertTrue(lines[3].trim().startsWith("at io.github.oshai.ClassWithLogging.testMarkerThrowable("))
         },
     )
   }
@@ -198,7 +198,7 @@ class LoggingTest {
     ClassInheritLogging().test()
     appenderWithWriter.writer.flush()
     assertEquals(
-        "INFO  mu.two.ClassInheritLogging  - test ClassHasLogging",
+        "INFO  io.github.oshai.ClassInheritLogging  - test ClassHasLogging",
         appenderWithWriter.writer.toString().trim())
   }
 
@@ -207,7 +207,7 @@ class LoggingTest {
     ChildClassWithLogging().test()
     appenderWithWriter.writer.flush()
     assertEquals(
-        "INFO  mu.two.ChildClassWithLogging  - test ChildClassWithLogging",
+        "INFO  io.github.oshai.ChildClassWithLogging  - test ChildClassWithLogging",
         appenderWithWriter.writer.toString().trim())
   }
 
@@ -216,7 +216,7 @@ class LoggingTest {
     ClassWithNamedLogging().test()
     appenderWithWriter.writer.flush()
     assertEquals(
-        "INFO  mu.two.ClassWithNamedLogging  - test ClassWithNamedLogging",
+        "INFO  io.github.oshai.ClassWithNamedLogging  - test ClassWithNamedLogging",
         appenderWithWriter.writer.toString().trim())
   }
 
@@ -225,7 +225,7 @@ class LoggingTest {
     ClassHasLogging().test()
     appenderWithWriter.writer.flush()
     assertEquals(
-        "INFO  mu.two.ClassHasLogging  - test ClassHasLogging",
+        "INFO  io.github.oshai.ClassHasLogging  - test ClassHasLogging",
         appenderWithWriter.writer.toString().trim())
   }
 
@@ -234,7 +234,7 @@ class LoggingTest {
     CompanionHasLogging().test()
     appenderWithWriter.writer.flush()
     assertEquals(
-        "INFO  mu.two.CompanionHasLogging  - test CompanionHasLogging",
+        "INFO  io.github.oshai.CompanionHasLogging  - test CompanionHasLogging",
         appenderWithWriter.writer.toString().trim())
   }
 
@@ -243,7 +243,7 @@ class LoggingTest {
     LambdaRaisesError().test()
     appenderWithWriter.writer.flush()
     assertEquals(
-        "INFO  mu.two.LambdaRaisesError  - Log message invocation failed: java.lang.NullPointerException",
+        "INFO  io.github.oshai.LambdaRaisesError  - Log message invocation failed: java.lang.NullPointerException",
         appenderWithWriter.writer.toString().trim())
   }
 
@@ -252,14 +252,14 @@ class LoggingTest {
     ClassWithLogging().testFormatting()
     appenderWithWriter.writer.flush()
     assertEquals(
-        "INFO  mu.two.ClassWithLogging  - Message: String with {} curly braces",
+        "INFO  io.github.oshai.ClassWithLogging  - Message: String with {} curly braces",
         appenderWithWriter.writer.toString().trim())
   }
 
   @Test
   fun `check underlyingLogger property`() {
     assertEquals(
-        "mu.two.ClassHasLogging",
+        "io.github.oshai.ClassHasLogging",
         (ClassHasLogging().logger.underlyingLogger as org.slf4j.Logger).name)
   }
 }
@@ -268,12 +268,12 @@ class LoggingNameTest {
   @Test
   fun testNames() {
     assertAll(
-        { assertEquals("mu.two.ClassWithLogging", ClassWithLogging.logger.name) },
-        { assertEquals("mu.two.ClassInheritLogging", ClassInheritLogging().logger.name) },
-        { assertEquals("mu.two.ChildClassWithLogging", ChildClassWithLogging.logger.name) },
-        { assertEquals("mu.two.ClassWithNamedLogging", ClassWithNamedLogging.logger.name) },
-        { assertEquals("mu.two.ClassHasLogging", ClassHasLogging().logger.name) },
-        { assertEquals("mu.two.CompanionHasLogging", CompanionHasLogging.logger.name) },
+        { assertEquals("io.github.oshai.ClassWithLogging", ClassWithLogging.logger.name) },
+        { assertEquals("io.github.oshai.ClassInheritLogging", ClassInheritLogging().logger.name) },
+        { assertEquals("io.github.oshai.ChildClassWithLogging", ChildClassWithLogging.logger.name) },
+        { assertEquals("io.github.oshai.ClassWithNamedLogging", ClassWithNamedLogging.logger.name) },
+        { assertEquals("io.github.oshai.ClassHasLogging", ClassHasLogging().logger.name) },
+        { assertEquals("io.github.oshai.CompanionHasLogging", CompanionHasLogging.logger.name) },
     )
   }
 }

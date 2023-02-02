@@ -1,9 +1,9 @@
-package mu.two.slf4j
+package io.github.oshai.slf4j
 
-import mu.two.KLogger
-import mu.two.KotlinLogging
-import mu.two.Marker
-import mu.two.slf4j.internal.Slf4jLoggerFactory
+import io.github.oshai.KLogger
+import io.github.oshai.KotlinLogging
+import io.github.oshai.Marker
+import io.github.oshai.slf4j.internal.Slf4jLoggerFactory
 import org.slf4j.Logger
 import org.slf4j.MarkerFactory
 

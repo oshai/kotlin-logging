@@ -1,4 +1,4 @@
-package mu.two
+package io.github.oshai
 
 class ClassWithLoggingForLocationTesting {
   companion object : KLogging()

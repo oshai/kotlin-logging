@@ -1,6 +1,6 @@
-package mu.two
+package io.github.oshai
 
-import mu.two.internal.KLoggerFactory
+import io.github.oshai.internal.KLoggerFactory
 
 public actual object KotlinLogging {
   /**

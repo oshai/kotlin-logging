@@ -1,4 +1,4 @@
-package mu.two.internal
+package io.github.oshai.internal
 
 import kotlin.test.Test
 import kotlin.test.assertEquals

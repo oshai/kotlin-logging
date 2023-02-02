@@ -1,5 +1,5 @@
-package mu.two
+package io.github.oshai
 
-import mu.two.KotlinLoggingConfiguration.logLevel
+import io.github.oshai.KotlinLoggingConfiguration.logLevel
 
-public fun mu.two.Level.isLoggingEnabled(): Boolean = this.ordinal >= logLevel.ordinal
+public fun io.github.oshai.Level.isLoggingEnabled(): Boolean = this.ordinal >= logLevel.ordinal

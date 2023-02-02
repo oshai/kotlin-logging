@@ -1,9 +1,9 @@
-package mu.two.internal
+package io.github.oshai.internal
 
-import mu.two.KLoggable
-import mu.two.KLogger
-import mu.two.jul.internal.JulLoggerFactory
-import mu.two.slf4j.internal.Slf4jLoggerFactory
+import io.github.oshai.KLoggable
+import io.github.oshai.KLogger
+import io.github.oshai.jul.internal.JulLoggerFactory
+import io.github.oshai.slf4j.internal.Slf4jLoggerFactory
 
 /** factory methods to obtain a [Logger] */
 @Suppress("NOTHING_TO_INLINE")
