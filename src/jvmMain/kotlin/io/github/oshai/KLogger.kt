@@ -1,7 +1,7 @@
 package io.github.oshai
 
 /**
- * An Logger interface with Lazy message evaluation example:
+ * A Logger interface with Lazy message evaluation example:
  * ```
  * logger.info{"this is $lazy evaluated string"}
  * ```
@@ -49,34 +49,34 @@ public actual interface KLogger {
   public actual fun error(t: Throwable?, msg: () -> Any?)
 
   /** Lazy add a log message if isTraceEnabled is true */
-  public actual fun trace(marker: io.github.oshai.Marker?, msg: () -> Any?)
+  public actual fun trace(marker: Marker?, msg: () -> Any?)
 
   /** Lazy add a log message if isDebugEnabled is true */
-  public actual fun debug(marker: io.github.oshai.Marker?, msg: () -> Any?)
+  public actual fun debug(marker: Marker?, msg: () -> Any?)
 
   /** Lazy add a log message if isInfoEnabled is true */
-  public actual fun info(marker: io.github.oshai.Marker?, msg: () -> Any?)
+  public actual fun info(marker: Marker?, msg: () -> Any?)
 
   /** Lazy add a log message if isWarnEnabled is true */
-  public actual fun warn(marker: io.github.oshai.Marker?, msg: () -> Any?)
+  public actual fun warn(marker: Marker?, msg: () -> Any?)
 
   /** Lazy add a log message if isErrorEnabled is true */
-  public actual fun error(marker: io.github.oshai.Marker?, msg: () -> Any?)
+  public actual fun error(marker: Marker?, msg: () -> Any?)
 
   /** Lazy add a log message with throwable payload if isTraceEnabled is true */
-  public actual fun trace(marker: io.github.oshai.Marker?, t: Throwable?, msg: () -> Any?)
+  public actual fun trace(marker: Marker?, t: Throwable?, msg: () -> Any?)
 
   /** Lazy add a log message with throwable payload if isDebugEnabled is true */
-  public actual fun debug(marker: io.github.oshai.Marker?, t: Throwable?, msg: () -> Any?)
+  public actual fun debug(marker: Marker?, t: Throwable?, msg: () -> Any?)
 
   /** Lazy add a log message with throwable payload if isInfoEnabled is true */
-  public actual fun info(marker: io.github.oshai.Marker?, t: Throwable?, msg: () -> Any?)
+  public actual fun info(marker: Marker?, t: Throwable?, msg: () -> Any?)
 
   /** Lazy add a log message with throwable payload if isWarnEnabled is true */
-  public actual fun warn(marker: io.github.oshai.Marker?, t: Throwable?, msg: () -> Any?)
+  public actual fun warn(marker: Marker?, t: Throwable?, msg: () -> Any?)
 
   /** Lazy add a log message with throwable payload if isErrorEnabled is true */
-  public actual fun error(marker: io.github.oshai.Marker?, t: Throwable?, msg: () -> Any?)
+  public actual fun error(marker: Marker?, t: Throwable?, msg: () -> Any?)
 
   /** Add a log message with all the supplied parameters along with method name */
   public actual fun entry(vararg argArray: Any?)
@@ -94,35 +94,16 @@ public actual interface KLogger {
   public actual fun <T> catching(throwable: T) where T : Throwable
 
   /**
-   * Returns whether this Logger is enabled for a given [Level].
-   *
-   * @param level
-   * @return true if enabled, false otherwise.
-   */
-  public fun isEnabledForLevel(level: io.github.oshai.Level): Boolean {
-    return when (level.toInt()) {
-      io.github.oshai.Levels.TRACE_INT -> isTraceEnabled
-      io.github.oshai.Levels.DEBUG_INT -> isDebugEnabled
-      io.github.oshai.Levels.INFO_INT -> isInfoEnabled
-      io.github.oshai.Levels.WARN_INT -> isWarnEnabled
-      io.github.oshai.Levels.ERROR_INT -> isErrorEnabled
-      else -> throw IllegalArgumentException("Level [$level] not recognized.")
-    }
-  }
-
-  /**
    * Is the logger instance enabled for the TRACE level?
    *
    * @return True if this Logger is enabled for the TRACE level, false otherwise.
-   * @since 1.4
    */
-  public val isTraceEnabled: Boolean
+  public actual val isTraceEnabled: Boolean
 
   /**
    * Log a message at the TRACE level.
    *
    * @param msg the message string to be logged
-   * @since 1.4
    */
   public fun trace(msg: String?)
 
@@ -133,7 +114,6 @@ public actual interface KLogger {
    *
    * @param format the format string
    * @param arg the argument
-   * @since 1.4
    */
   public fun trace(format: String?, arg: Any?)
 
@@ -145,7 +125,6 @@ public actual interface KLogger {
    * @param format the format string
    * @param arg1 the first argument
    * @param arg2 the second argument
-   * @since 1.4
    */
   public fun trace(format: String?, arg1: Any?, arg2: Any?)
 
@@ -160,7 +139,6 @@ public actual interface KLogger {
    *
    * @param format the format string
    * @param arguments a list of 3 or more arguments
-   * @since 1.4
    */
   public fun trace(format: String?, vararg arguments: Any?)
 
@@ -169,7 +147,6 @@ public actual interface KLogger {
    *
    * @param msg the message accompanying the exception
    * @param t the exception (throwable) to log
-   * @since 1.4
    */
   public fun trace(msg: String?, t: Throwable?)
 
@@ -179,18 +156,17 @@ public actual interface KLogger {
    * @param marker The marker data to take into consideration
    * @return True if this Logger is enabled for the TRACE level, false otherwise.
    *
-   * @since 1.4
+   * @since 14
    */
-  public fun isTraceEnabled(marker: io.github.oshai.Marker?): Boolean
+  public fun isTraceEnabled(marker: Marker?): Boolean
 
   /**
    * Log a message with the specific Marker at the TRACE level.
    *
    * @param marker the marker data specific to this log statement
    * @param msg the message string to be logged
-   * @since 1.4
    */
-  public fun trace(marker: io.github.oshai.Marker?, msg: String?)
+  public fun trace(marker: Marker?, msg: String?)
 
   /**
    * This method is similar to [.trace] method except that the marker data is also taken into
@@ -199,9 +175,8 @@ public actual interface KLogger {
    * @param marker the marker data specific to this log statement
    * @param format the format string
    * @param arg the argument
-   * @since 1.4
    */
-  public fun trace(marker: io.github.oshai.Marker?, format: String?, arg: Any?)
+  public fun trace(marker: Marker?, format: String?, arg: Any?)
 
   /**
    * This method is similar to [.trace] method except that the marker data is also taken into
@@ -211,9 +186,8 @@ public actual interface KLogger {
    * @param format the format string
    * @param arg1 the first argument
    * @param arg2 the second argument
-   * @since 1.4
    */
-  public fun trace(marker: io.github.oshai.Marker?, format: String?, arg1: Any?, arg2: Any?)
+  public fun trace(marker: Marker?, format: String?, arg1: Any?, arg2: Any?)
 
   /**
    * This method is similar to [.trace] method except that the marker data is also taken into
@@ -222,9 +196,8 @@ public actual interface KLogger {
    * @param marker the marker data specific to this log statement
    * @param format the format string
    * @param argArray an array of arguments
-   * @since 1.4
    */
-  public fun trace(marker: io.github.oshai.Marker?, format: String?, vararg argArray: Any?)
+  public fun trace(marker: Marker?, format: String?, vararg argArray: Any?)
 
   /**
    * This method is similar to [.trace] method except that the marker data is also taken into
@@ -233,16 +206,15 @@ public actual interface KLogger {
    * @param marker the marker data specific to this log statement
    * @param msg the message accompanying the exception
    * @param t the exception (throwable) to log
-   * @since 1.4
    */
-  public fun trace(marker: io.github.oshai.Marker?, msg: String?, t: Throwable?)
+  public fun trace(marker: Marker?, msg: String?, t: Throwable?)
 
   /**
    * Is the logger instance enabled for the DEBUG level?
    *
    * @return True if this Logger is enabled for the DEBUG level, false otherwise.
    */
-  public val isDebugEnabled: Boolean
+  public actual val isDebugEnabled: Boolean
 
   /**
    * Log a message at the DEBUG level.
@@ -300,7 +272,7 @@ public actual interface KLogger {
    * @param marker The marker data to take into consideration
    * @return True if this Logger is enabled for the DEBUG level, false otherwise.
    */
-  public fun isDebugEnabled(marker: io.github.oshai.Marker?): Boolean
+  public fun isDebugEnabled(marker: Marker?): Boolean
 
   /**
    * Log a message with the specific Marker at the DEBUG level.
@@ -308,7 +280,7 @@ public actual interface KLogger {
    * @param marker the marker data specific to this log statement
    * @param msg the message string to be logged
    */
-  public fun debug(marker: io.github.oshai.Marker?, msg: String?)
+  public fun debug(marker: Marker?, msg: String?)
 
   /**
    * This method is similar to [.debug] method except that the marker data is also taken into
@@ -318,7 +290,7 @@ public actual interface KLogger {
    * @param format the format string
    * @param arg the argument
    */
-  public fun debug(marker: io.github.oshai.Marker?, format: String?, arg: Any?)
+  public fun debug(marker: Marker?, format: String?, arg: Any?)
 
   /**
    * This method is similar to [.debug] method except that the marker data is also taken into
@@ -329,7 +301,7 @@ public actual interface KLogger {
    * @param arg1 the first argument
    * @param arg2 the second argument
    */
-  public fun debug(marker: io.github.oshai.Marker?, format: String?, arg1: Any?, arg2: Any?)
+  public fun debug(marker: Marker?, format: String?, arg1: Any?, arg2: Any?)
 
   /**
    * This method is similar to [.debug] method except that the marker data is also taken into
@@ -339,7 +311,7 @@ public actual interface KLogger {
    * @param format the format string
    * @param arguments a list of 3 or more arguments
    */
-  public fun debug(marker: io.github.oshai.Marker?, format: String?, vararg arguments: Any?)
+  public fun debug(marker: Marker?, format: String?, vararg arguments: Any?)
 
   /**
    * This method is similar to [.debug] method except that the marker data is also taken into
@@ -349,14 +321,14 @@ public actual interface KLogger {
    * @param msg the message accompanying the exception
    * @param t the exception (throwable) to log
    */
-  public fun debug(marker: io.github.oshai.Marker?, msg: String?, t: Throwable?)
+  public fun debug(marker: Marker?, msg: String?, t: Throwable?)
 
   /**
    * Is the logger instance enabled for the INFO level?
    *
    * @return True if this Logger is enabled for the INFO level, false otherwise.
    */
-  public val isInfoEnabled: Boolean
+  public actual val isInfoEnabled: Boolean
 
   /**
    * Log a message at the INFO level.
@@ -414,7 +386,7 @@ public actual interface KLogger {
    * @param marker The marker data to take into consideration
    * @return true if this Logger is enabled for the INFO level, false otherwise.
    */
-  public fun isInfoEnabled(marker: io.github.oshai.Marker?): Boolean
+  public fun isInfoEnabled(marker: Marker?): Boolean
 
   /**
    * Log a message with the specific Marker at the INFO level.
@@ -422,7 +394,7 @@ public actual interface KLogger {
    * @param marker The marker specific to this log statement
    * @param msg the message string to be logged
    */
-  public fun info(marker: io.github.oshai.Marker?, msg: String?)
+  public fun info(marker: Marker?, msg: String?)
 
   /**
    * This method is similar to [.info] method except that the marker data is also taken into
@@ -432,7 +404,7 @@ public actual interface KLogger {
    * @param format the format string
    * @param arg the argument
    */
-  public fun info(marker: io.github.oshai.Marker?, format: String?, arg: Any?)
+  public fun info(marker: Marker?, format: String?, arg: Any?)
 
   /**
    * This method is similar to [.info] method except that the marker data is also taken into
@@ -443,7 +415,7 @@ public actual interface KLogger {
    * @param arg1 the first argument
    * @param arg2 the second argument
    */
-  public fun info(marker: io.github.oshai.Marker?, format: String?, arg1: Any?, arg2: Any?)
+  public fun info(marker: Marker?, format: String?, arg1: Any?, arg2: Any?)
 
   /**
    * This method is similar to [.info] method except that the marker data is also taken into
@@ -453,7 +425,7 @@ public actual interface KLogger {
    * @param format the format string
    * @param arguments a list of 3 or more arguments
    */
-  public fun info(marker: io.github.oshai.Marker?, format: String?, vararg arguments: Any?)
+  public fun info(marker: Marker?, format: String?, vararg arguments: Any?)
 
   /**
    * This method is similar to [.info] method except that the marker data is also taken into
@@ -463,14 +435,14 @@ public actual interface KLogger {
    * @param msg the message accompanying the exception
    * @param t the exception (throwable) to log
    */
-  public fun info(marker: io.github.oshai.Marker?, msg: String?, t: Throwable?)
+  public fun info(marker: Marker?, msg: String?, t: Throwable?)
 
   /**
    * Is the logger instance enabled for the WARN level?
    *
    * @return True if this Logger is enabled for the WARN level, false otherwise.
    */
-  public val isWarnEnabled: Boolean
+  public actual val isWarnEnabled: Boolean
 
   /**
    * Log a message at the WARN level.
@@ -528,7 +500,7 @@ public actual interface KLogger {
    * @param marker The marker data to take into consideration
    * @return True if this Logger is enabled for the WARN level, false otherwise.
    */
-  public fun isWarnEnabled(marker: io.github.oshai.Marker?): Boolean
+  public fun isWarnEnabled(marker: Marker?): Boolean
 
   /**
    * Log a message with the specific Marker at the WARN level.
@@ -536,7 +508,7 @@ public actual interface KLogger {
    * @param marker The marker specific to this log statement
    * @param msg the message string to be logged
    */
-  public fun warn(marker: io.github.oshai.Marker?, msg: String?)
+  public fun warn(marker: Marker?, msg: String?)
 
   /**
    * This method is similar to [.warn] method except that the marker data is also taken into
@@ -546,7 +518,7 @@ public actual interface KLogger {
    * @param format the format string
    * @param arg the argument
    */
-  public fun warn(marker: io.github.oshai.Marker?, format: String?, arg: Any?)
+  public fun warn(marker: Marker?, format: String?, arg: Any?)
 
   /**
    * This method is similar to [.warn] method except that the marker data is also taken into
@@ -557,7 +529,7 @@ public actual interface KLogger {
    * @param arg1 the first argument
    * @param arg2 the second argument
    */
-  public fun warn(marker: io.github.oshai.Marker?, format: String?, arg1: Any?, arg2: Any?)
+  public fun warn(marker: Marker?, format: String?, arg1: Any?, arg2: Any?)
 
   /**
    * This method is similar to [.warn] method except that the marker data is also taken into
@@ -567,7 +539,7 @@ public actual interface KLogger {
    * @param format the format string
    * @param arguments a list of 3 or more arguments
    */
-  public fun warn(marker: io.github.oshai.Marker?, format: String?, vararg arguments: Any?)
+  public fun warn(marker: Marker?, format: String?, vararg arguments: Any?)
 
   /**
    * This method is similar to [.warn] method except that the marker data is also taken into
@@ -577,14 +549,14 @@ public actual interface KLogger {
    * @param msg the message accompanying the exception
    * @param t the exception (throwable) to log
    */
-  public fun warn(marker: io.github.oshai.Marker?, msg: String?, t: Throwable?)
+  public fun warn(marker: Marker?, msg: String?, t: Throwable?)
 
   /**
    * Is the logger instance enabled for the ERROR level?
    *
    * @return True if this Logger is enabled for the ERROR level, false otherwise.
    */
-  public val isErrorEnabled: Boolean
+  public actual val isErrorEnabled: Boolean
 
   /**
    * Log a message at the ERROR level.
@@ -643,7 +615,7 @@ public actual interface KLogger {
    * @param marker The marker data to take into consideration
    * @return True if this Logger is enabled for the ERROR level, false otherwise.
    */
-  public fun isErrorEnabled(marker: io.github.oshai.Marker?): Boolean
+  public fun isErrorEnabled(marker: Marker?): Boolean
 
   /**
    * Log a message with the specific Marker at the ERROR level.
@@ -651,7 +623,7 @@ public actual interface KLogger {
    * @param marker The marker specific to this log statement
    * @param msg the message string to be logged
    */
-  public fun error(marker: io.github.oshai.Marker?, msg: String?)
+  public fun error(marker: Marker?, msg: String?)
 
   /**
    * This method is similar to [.error] method except that the marker data is also taken into
@@ -661,7 +633,7 @@ public actual interface KLogger {
    * @param format the format string
    * @param arg the argument
    */
-  public fun error(marker: io.github.oshai.Marker?, format: String?, arg: Any?)
+  public fun error(marker: Marker?, format: String?, arg: Any?)
 
   /**
    * This method is similar to [.error] method except that the marker data is also taken into
@@ -672,7 +644,7 @@ public actual interface KLogger {
    * @param arg1 the first argument
    * @param arg2 the second argument
    */
-  public fun error(marker: io.github.oshai.Marker?, format: String?, arg1: Any?, arg2: Any?)
+  public fun error(marker: Marker?, format: String?, arg1: Any?, arg2: Any?)
 
   /**
    * This method is similar to [.error] method except that the marker data is also taken into
@@ -682,7 +654,7 @@ public actual interface KLogger {
    * @param format the format string
    * @param arguments a list of 3 or more arguments
    */
-  public fun error(marker: io.github.oshai.Marker?, format: String?, vararg arguments: Any?)
+  public fun error(marker: Marker?, format: String?, vararg arguments: Any?)
 
   /**
    * This method is similar to [.error] method except that the marker data is also taken into
@@ -692,5 +664,5 @@ public actual interface KLogger {
    * @param msg the message accompanying the exception
    * @param t the exception (throwable) to log
    */
-  public fun error(marker: io.github.oshai.Marker?, msg: String?, t: Throwable?)
+  public fun error(marker: Marker?, msg: String?, t: Throwable?)
 }
