@@ -3,7 +3,7 @@ import org.gradle.jvm.tasks.Jar
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
 
 plugins {
-    kotlin("multiplatform") version "1.8.0"
+    kotlin("multiplatform") version "1.8.10"
     id("org.jetbrains.dokka") version "1.7.10"
     `maven-publish`
     id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
@@ -57,7 +57,7 @@ kotlin {
         }
         nodejs()
     }
-
+    android()
     val linuxTargets = listOf(
         linuxArm64(),
         linuxX64(),
@@ -104,6 +104,7 @@ kotlin {
                 implementation("org.slf4j:jul-to-slf4j:${extra["slf4j_version"]}")
             }
         }
+        val androidMain by getting {}
         val jsMain by getting {}
         val jsTest by getting {
             dependencies {
