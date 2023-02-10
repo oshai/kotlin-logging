@@ -5,14 +5,14 @@ import io.github.oshai.internal.toStringSafe
 public object DefaultMessageFormatter : Formatter {
   public override fun formatMessage(
       includePrefix: Boolean,
-      level: io.github.oshai.Level,
+      level: Level,
       loggerName: String,
       msg: () -> Any?
   ): String = "${prefix(includePrefix, level, loggerName)}${msg.toStringSafe()}"
 
   public override fun formatMessage(
       includePrefix: Boolean,
-      level: io.github.oshai.Level,
+      level: Level,
       loggerName: String,
       t: Throwable?,
       msg: () -> Any?
@@ -21,28 +21,24 @@ public object DefaultMessageFormatter : Formatter {
 
   public override fun formatMessage(
       includePrefix: Boolean,
-      level: io.github.oshai.Level,
+      level: Level,
       loggerName: String,
-      marker: io.github.oshai.Marker?,
+      marker: Marker?,
       msg: () -> Any?
   ): String =
       "${prefix(includePrefix, level, loggerName)}${marker?.getName()} ${msg.toStringSafe()}"
 
   public override fun formatMessage(
       includePrefix: Boolean,
-      level: io.github.oshai.Level,
+      level: Level,
       loggerName: String,
-      marker: io.github.oshai.Marker?,
+      marker: Marker?,
       t: Throwable?,
       msg: () -> Any?
   ): String =
       "${prefix(includePrefix, level, loggerName)}${marker?.getName()} ${msg.toStringSafe()}${t.throwableToString()}"
 
-  private fun prefix(
-      includePrefix: Boolean,
-      level: io.github.oshai.Level,
-      loggerName: String
-  ): String {
+  private fun prefix(includePrefix: Boolean, level: Level, loggerName: String): String {
     return if (includePrefix) {
       "${level.name}: [$loggerName] "
     } else {

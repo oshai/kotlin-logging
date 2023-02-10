@@ -122,4 +122,10 @@ internal class KLoggerJS(override val name: String) : KLogger {
   override fun <T : Throwable> catching(throwable: T) {
     ERROR.logIfEnabled({ "catching($throwable" }, throwable, APPENDER::error)
   }
+
+  override val isTraceEnabled: Boolean = TRACE.isLoggingEnabled()
+  override val isDebugEnabled: Boolean = DEBUG.isLoggingEnabled()
+  override val isInfoEnabled: Boolean = INFO.isLoggingEnabled()
+  override val isWarnEnabled: Boolean = WARN.isLoggingEnabled()
+  override val isErrorEnabled: Boolean = ERROR.isLoggingEnabled()
 }

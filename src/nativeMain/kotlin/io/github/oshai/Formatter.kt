@@ -3,29 +3,29 @@ package io.github.oshai
 public interface Formatter {
   public fun formatMessage(
       includePrefix: Boolean,
-      level: io.github.oshai.Level,
+      level: Level,
       loggerName: String,
       msg: () -> Any?
   ): String
   public fun formatMessage(
       includePrefix: Boolean,
-      level: io.github.oshai.Level,
+      level: Level,
       loggerName: String,
       t: Throwable?,
       msg: () -> Any?
   ): String
   public fun formatMessage(
       includePrefix: Boolean,
-      level: io.github.oshai.Level,
+      level: Level,
       loggerName: String,
-      marker: io.github.oshai.Marker?,
+      marker: Marker?,
       msg: () -> Any?
   ): String
   public fun formatMessage(
       includePrefix: Boolean,
-      level: io.github.oshai.Level,
+      level: Level,
       loggerName: String,
-      marker: io.github.oshai.Marker?,
+      marker: Marker?,
       t: Throwable?,
       msg: () -> Any?
   ): String

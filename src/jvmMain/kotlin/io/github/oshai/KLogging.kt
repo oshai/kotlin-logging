@@ -14,12 +14,12 @@ import io.github.oshai.internal.KLoggerFactory
  * ```
  */
 public open class KLogging : KLoggable {
-  override val logger: io.github.oshai.KLogger = logger()
+  override val logger: KLogger = logger()
 }
 
 /** A class with logging capabilities and explicit logger name */
 public open class NamedKLogging(name: String) : KLoggable {
-  override val logger: io.github.oshai.KLogger = logger(name)
+  override val logger: KLogger = logger(name)
 }
 
 /**
@@ -29,11 +29,11 @@ public open class NamedKLogging(name: String) : KLoggable {
 public interface KLoggable {
 
   /** The member that performs the actual logging */
-  public val logger: io.github.oshai.KLogger
+  public val logger: KLogger
 
   /** get logger for the class */
-  public fun logger(): io.github.oshai.KLogger = KLoggerFactory.logger(this)
+  public fun logger(): KLogger = KLoggerFactory.logger(this)
 
   /** get logger by explicit name */
-  public fun logger(name: String): io.github.oshai.KLogger = KLoggerFactory.logger(name)
+  public fun logger(name: String): KLogger = KLoggerFactory.logger(name)
 }

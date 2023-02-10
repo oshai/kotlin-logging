@@ -3,12 +3,10 @@ package io.github.oshai.internal
 import io.github.oshai.KLogger
 import io.github.oshai.KotlinLoggingConfiguration.appender
 import io.github.oshai.KotlinLoggingConfiguration.formatter
-import io.github.oshai.Level
 import io.github.oshai.Level.*
-import io.github.oshai.Marker
 import io.github.oshai.isLoggingEnabled
 
-internal class KLoggerLinux(override val name: String) : io.github.oshai.KLogger {
+internal class KLoggerLinux(override val name: String) : KLogger {
 
   override fun trace(msg: () -> Any?) = TRACE.logIfEnabled(msg, appender::trace)
 
@@ -121,4 +119,10 @@ internal class KLoggerLinux(override val name: String) : io.github.oshai.KLogger
   override fun <T : Throwable> catching(throwable: T) {
     ERROR.logIfEnabled({ "catching($throwable" }, throwable, appender::error)
   }
+
+  override val isTraceEnabled: Boolean = TRACE.isLoggingEnabled()
+  override val isDebugEnabled: Boolean = DEBUG.isLoggingEnabled()
+  override val isInfoEnabled: Boolean = INFO.isLoggingEnabled()
+  override val isWarnEnabled: Boolean = WARN.isLoggingEnabled()
+  override val isErrorEnabled: Boolean = ERROR.isLoggingEnabled()
 }
