@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - github-release
+      - github-release-4.x
 
 jobs:
   release:
@@ -14,14 +15,14 @@ jobs:
       - name: Configure JDK
         uses: actions/setup-java@v1
         with:
-          java-version: 8
+          java-version: 11
       - name: Publish
-        run: ./gradlew publishToSonatype closeAndReleaseSonatypeStagingRepository -no-daemon --no-parallel --stacktrace -DSONATYPE_USERNAME=$SONATYPE_USERNAME -DSONATYPE_PASSWORD=$SONATYPE_PASSWORD -DGPG_PRIVATE_PASSWORD=$GPG_PRIVATE_PASSWORD -DGPG_PRIVATE_KEY=$GPG_PRIVATE_KEY
+        run: ./gradlew publishToSonatype closeAndReleaseSonatypeStagingRepository -no-daemon --no-parallel --stacktrace -DSONATYPE_USERNAME_2=$SONATYPE_USERNAME_2 -DSONATYPE_PASSWORD_2=$SONATYPE_PASSWORD_2 -DGPG_PRIVATE_PASSWORD=$GPG_PRIVATE_PASSWORD -DGPG_PRIVATE_KEY=$GPG_PRIVATE_KEY
         env:
-          SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
-          SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
+          SONATYPE_USERNAME_2: ${{ secrets.SONATYPE_USERNAME_2 }}
+          SONATYPE_PASSWORD_2: ${{ secrets.SONATYPE_PASSWORD_2 }}
           SONATYPE_REPOSITORY_ID: ${{ needs.create_staging_repository.outputs.repository_id }}
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
           GPG_PRIVATE_PASSWORD: ${{ secrets.GPG_PRIVATE_PASSWORD }}
-          ORG_GRADLE_PROJECT_sonatypePassword: ${{ secrets.SONATYPE_PASSWORD }}
-          ORG_GRADLE_PROJECT_sonatypeUsername: ${{ secrets.SONATYPE_USERNAME }}
+          ORG_GRADLE_PROJECT_sonatypePassword: ${{ secrets.SONATYPE_PASSWORD_2 }}
+          ORG_GRADLE_PROJECT_sonatypeUsername: ${{ secrets.SONATYPE_USERNAME_2 }}

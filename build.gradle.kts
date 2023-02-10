@@ -3,19 +3,20 @@ import org.gradle.jvm.tasks.Jar
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
 
 plugins {
-    kotlin("multiplatform") version "1.6.0"
-    id("org.jetbrains.dokka") version "1.6.0"
+    kotlin("multiplatform") version "1.8.0"
+    id("org.jetbrains.dokka") version "1.7.10"
     `maven-publish`
     id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
     signing
     id("io.gitlab.arturbosch.detekt") version "1.21.0"
+    id("com.ncorti.ktfmt.gradle") version "0.11.0"
 }
 
 
 apply("versions.gradle.kts")
 
-group = "io.github.microutils"
-version = "3.0.1"
+group = "io.github.oshai"
+version = "4.0.0-beta-12"
 
 repositories {
     mavenCentral()
@@ -23,7 +24,12 @@ repositories {
 
 nexusPublishing {
     repositories {
-        sonatype()
+        sonatype {  //only for users registered in Sonatype after 24 Feb 2021
+            nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
+            snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
+            username.set(System.getenv("SONATYPE_USERNAME_2")) // defaults to project.properties["myNexusUsername"]
+            password.set(System.getenv("SONATYPE_PASSWORD_2")) // defaults to project.properties["myNexusPassword"]
+        }
     }
 }
 
@@ -85,7 +91,7 @@ kotlin {
         }
         val jvmMain by getting {
             dependencies {
-                api("org.slf4j:slf4j-api:${extra["slf4j_version"]}")
+                compileOnly("org.slf4j:slf4j-api:${extra["slf4j_version"]}")
             }
         }
         val jvmTest by getting {
@@ -97,6 +103,9 @@ kotlin {
                 implementation("org.apache.logging.log4j:log4j-api:${extra["log4j_version"]}")
                 implementation("org.apache.logging.log4j:log4j-core:${extra["log4j_version"]}")
                 implementation("org.apache.logging.log4j:log4j-slf4j2-impl:${extra["log4j_version"]}")
+                implementation("org.slf4j:slf4j-api:${extra["slf4j_version"]}")
+                // our jul test just forward the logs jul -> slf4j -> log4j
+                implementation("org.slf4j:jul-to-slf4j:${extra["slf4j_version"]}")
             }
         }
         val jsMain by getting {}
@@ -107,6 +116,12 @@ kotlin {
         }
         val nativeMain by creating {
             dependsOn(commonMain)
+        }
+        val nativeTest by creating {
+            dependsOn(nativeMain)
+            dependencies {
+                implementation(kotlin("test"))
+            }
         }
         val linuxMain by creating {
             dependsOn(nativeMain)
@@ -174,7 +189,7 @@ publishing {
         pom {
             name.set("kotlin-logging")
             description.set("kotlin-logging $version - Lightweight logging framework for Kotlin")
-            url.set("https://github.com/MicroUtils/kotlin-logging")
+            url.set("https://github.com/oshai/kotlin-logging")
             licenses {
                 license {
                     name.set("The Apache Software License, Version 2.0")
@@ -190,9 +205,9 @@ publishing {
                 }
             }
             scm {
-                connection.set("scm:git:git://github.com/MicroUtils/kotlin-logging.git")
-                developerConnection.set("scm:git:ssh://github.com:MicroUtils/kotlin-logging.git")
-                url.set("https://github.com/MicroUtils/kotlin-logging/tree/master")
+                connection.set("scm:git:git://github.com/oshai/kotlin-logging.git")
+                developerConnection.set("scm:git:ssh://github.com:oshai/kotlin-logging.git")
+                url.set("https://github.com/oshai/kotlin-logging/tree/master")
             }
         }
         artifact(tasks["dokkaJar"])
@@ -211,4 +226,10 @@ detekt {
     buildUponDefaultConfig = true
     config = files(rootDir.resolve("detekt.yml"))
     parallel = true
+}
+
+val jvmJar by tasks.getting(Jar::class) {
+    manifest {
+        attributes("Automatic-Module-Name" to "io.github.oshai.kotlinlogging")
+    }
 }
