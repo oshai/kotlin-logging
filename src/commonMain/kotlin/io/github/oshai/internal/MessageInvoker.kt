@@ -12,3 +12,7 @@ internal inline fun (() -> Any?).toStringSafe(): String {
 public expect object ErrorMessageProducer {
   public fun getErrorLog(e: Exception): String
 }
+
+public object DefaultErrorMessageProducer {
+  public fun getErrorLog(e: Exception): String = "Log message invocation failed: $e"
+}
