@@ -3,8 +3,6 @@
 Lightweight Multiplatform logging framework for Kotlin, written in 
 [![Pure Kotlin](https://img.shields.io/badge/100%25-kotlin-blue.svg)](https://kotlinlang.org/).  
 A convenient and performant logging facade.  
-For jvm `kotlin-logging` is wrapping [slf4j](http://www.slf4j.org/) with Kotlin extensions.  
-For other platforms `kotlin-logging` has various implementations. More details in the [wiki](https://github.com/oshai/kotlin-logging/wiki/Multiplatform-support)
 
 #### Call log methods, without checking whether the respective log level is enabled
 ```Kotlin
