@@ -15,8 +15,8 @@ plugins {
 
 apply("versions.gradle.kts")
 
-group = "io.github.microutils"
-version = "3.0.6"
+group = "io.github.oshai"
+version = "4.0.0-beta-10"
 
 repositories {
     mavenCentral()
@@ -24,7 +24,12 @@ repositories {
 
 nexusPublishing {
     repositories {
-        sonatype()
+        sonatype {  //only for users registered in Sonatype after 24 Feb 2021
+            nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
+            snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
+            username.set(System.getenv("SONATYPE_USERNAME_2")) // defaults to project.properties["myNexusUsername"]
+            password.set(System.getenv("SONATYPE_PASSWORD_2")) // defaults to project.properties["myNexusPassword"]
+        }
     }
 }
 
@@ -82,7 +87,7 @@ kotlin {
         }
         val jvmMain by getting {
             dependencies {
-                api("org.slf4j:slf4j-api:${extra["slf4j_version"]}")
+                compileOnly("org.slf4j:slf4j-api:${extra["slf4j_version"]}")
             }
         }
         val jvmTest by getting {
@@ -94,6 +99,9 @@ kotlin {
                 implementation("org.apache.logging.log4j:log4j-api:${extra["log4j_version"]}")
                 implementation("org.apache.logging.log4j:log4j-core:${extra["log4j_version"]}")
                 implementation("org.apache.logging.log4j:log4j-slf4j2-impl:${extra["log4j_version"]}")
+                implementation("org.slf4j:slf4j-api:${extra["slf4j_version"]}")
+                // our jul test just forward the logs jul -> slf4j -> log4j
+                implementation("org.slf4j:jul-to-slf4j:${extra["slf4j_version"]}")
             }
         }
         val jsMain by getting {}
@@ -218,6 +226,6 @@ detekt {
 
 val jvmJar by tasks.getting(Jar::class) {
     manifest {
-        attributes("Automatic-Module-Name" to "io.github.microutils.kotlinlogging")
+        attributes("Automatic-Module-Name" to "io.github.oshai.kotlinlogging")
     }
 }
