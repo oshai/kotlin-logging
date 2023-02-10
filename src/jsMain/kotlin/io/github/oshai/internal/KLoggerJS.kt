@@ -64,23 +64,19 @@ internal class KLoggerJS(override val name: String) : KLogger {
   override fun error(marker: io.github.oshai.Marker?, t: Throwable?, msg: () -> Any?) =
       ERROR.logIfEnabled(marker, msg, t, APPENDER::error)
 
-  private fun io.github.oshai.Level.logIfEnabled(msg: () -> Any?, logFunction: (Any?) -> Unit) {
+  private fun Level.logIfEnabled(msg: () -> Any?, logFunction: (Any?) -> Unit) {
     if (isLoggingEnabled()) {
       logFunction(FORMATTER.formatMessage(this, name, msg))
     }
   }
 
-  private fun io.github.oshai.Level.logIfEnabled(
-      msg: () -> Any?,
-      t: Throwable?,
-      logFunction: (Any?) -> Unit
-  ) {
+  private fun Level.logIfEnabled(msg: () -> Any?, t: Throwable?, logFunction: (Any?) -> Unit) {
     if (isLoggingEnabled()) {
       logFunction(FORMATTER.formatMessage(this, name, t, msg))
     }
   }
 
-  private fun io.github.oshai.Level.logIfEnabled(
+  private fun Level.logIfEnabled(
       marker: io.github.oshai.Marker?,
       msg: () -> Any?,
       logFunction: (Any?) -> Unit
@@ -90,7 +86,7 @@ internal class KLoggerJS(override val name: String) : KLogger {
     }
   }
 
-  private fun io.github.oshai.Level.logIfEnabled(
+  private fun Level.logIfEnabled(
       marker: io.github.oshai.Marker?,
       msg: () -> Any?,
       t: Throwable?,
@@ -122,4 +118,39 @@ internal class KLoggerJS(override val name: String) : KLogger {
   override fun <T : Throwable> catching(throwable: T) {
     ERROR.logIfEnabled({ "catching($throwable" }, throwable, APPENDER::error)
   }
+
+  /**
+   * Is the logger instance enabled for the TRACE level?
+   *
+   * @return True if this Logger is enabled for the TRACE level, false otherwise.
+   */
+  override val isTraceEnabled: Boolean = TRACE.isLoggingEnabled()
+
+  /**
+   * Is the logger instance enabled for the DEBUG level?
+   *
+   * @return True if this Logger is enabled for the DEBUG level, false otherwise.
+   */
+  override val isDebugEnabled: Boolean = DEBUG.isLoggingEnabled()
+
+  /**
+   * Is the logger instance enabled for the INFO level?
+   *
+   * @return True if this Logger is enabled for the INFO level, false otherwise.
+   */
+  override val isInfoEnabled: Boolean = INFO.isLoggingEnabled()
+
+  /**
+   * Is the logger instance enabled for the WARN level?
+   *
+   * @return True if this Logger is enabled for the WARN level, false otherwise.
+   */
+  override val isWarnEnabled: Boolean = WARN.isLoggingEnabled()
+
+  /**
+   * Is the logger instance enabled for the ERROR level?
+   *
+   * @return True if this Logger is enabled for the ERROR level, false otherwise.
+   */
+  override val isErrorEnabled: Boolean = ERROR.isLoggingEnabled()
 }

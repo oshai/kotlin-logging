@@ -3,12 +3,10 @@ package io.github.oshai.internal
 import io.github.oshai.KLogger
 import io.github.oshai.KotlinLoggingConfiguration.appender
 import io.github.oshai.KotlinLoggingConfiguration.formatter
-import io.github.oshai.Level
 import io.github.oshai.Level.*
-import io.github.oshai.Marker
 import io.github.oshai.isLoggingEnabled
 
-internal class KLoggerLinux(override val name: String) : io.github.oshai.KLogger {
+internal class KLoggerLinux(override val name: String) : KLogger {
 
   override fun trace(msg: () -> Any?) = TRACE.logIfEnabled(msg, appender::trace)
 
@@ -121,4 +119,39 @@ internal class KLoggerLinux(override val name: String) : io.github.oshai.KLogger
   override fun <T : Throwable> catching(throwable: T) {
     ERROR.logIfEnabled({ "catching($throwable" }, throwable, appender::error)
   }
+
+  /**
+   * Is the logger instance enabled for the TRACE level?
+   *
+   * @return True if this Logger is enabled for the TRACE level, false otherwise.
+   */
+  override val isTraceEnabled: Boolean = TRACE.isLoggingEnabled()
+
+  /**
+   * Is the logger instance enabled for the DEBUG level?
+   *
+   * @return True if this Logger is enabled for the DEBUG level, false otherwise.
+   */
+  override val isDebugEnabled: Boolean = DEBUG.isLoggingEnabled()
+
+  /**
+   * Is the logger instance enabled for the INFO level?
+   *
+   * @return True if this Logger is enabled for the INFO level, false otherwise.
+   */
+  override val isInfoEnabled: Boolean = INFO.isLoggingEnabled()
+
+  /**
+   * Is the logger instance enabled for the WARN level?
+   *
+   * @return True if this Logger is enabled for the WARN level, false otherwise.
+   */
+  override val isWarnEnabled: Boolean = WARN.isLoggingEnabled()
+
+  /**
+   * Is the logger instance enabled for the ERROR level?
+   *
+   * @return True if this Logger is enabled for the ERROR level, false otherwise.
+   */
+  override val isErrorEnabled: Boolean = ERROR.isLoggingEnabled()
 }

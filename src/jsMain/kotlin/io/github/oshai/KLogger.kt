@@ -83,4 +83,39 @@ public actual interface KLogger {
 
   /** Add a log message indicating an exception is caught along with the stack trace. */
   public actual fun <T> catching(throwable: T) where T : Throwable
+
+  /**
+   * Is the logger instance enabled for the TRACE level?
+   *
+   * @return True if this Logger is enabled for the TRACE level, false otherwise.
+   */
+  public actual val isTraceEnabled: Boolean
+
+  /**
+   * Is the logger instance enabled for the DEBUG level?
+   *
+   * @return True if this Logger is enabled for the DEBUG level, false otherwise.
+   */
+  public actual val isDebugEnabled: Boolean
+
+  /**
+   * Is the logger instance enabled for the INFO level?
+   *
+   * @return True if this Logger is enabled for the INFO level, false otherwise.
+   */
+  public actual val isInfoEnabled: Boolean
+
+  /**
+   * Is the logger instance enabled for the WARN level?
+   *
+   * @return True if this Logger is enabled for the WARN level, false otherwise.
+   */
+  public actual val isWarnEnabled: Boolean
+
+  /**
+   * Is the logger instance enabled for the ERROR level?
+   *
+   * @return True if this Logger is enabled for the ERROR level, false otherwise.
+   */
+  public actual val isErrorEnabled: Boolean
 }
