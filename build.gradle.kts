@@ -10,6 +10,7 @@ plugins {
     signing
     id("io.gitlab.arturbosch.detekt") version "1.18.0"
     id("com.ncorti.ktfmt.gradle") version "0.11.0"
+    id("com.android.library") version "7.1.2"
 }
 
 
@@ -19,6 +20,8 @@ group = "io.github.oshai"
 version = "4.0.0-beta-12"
 
 repositories {
+    gradlePluginPortal()
+    google()
     mavenCentral()
 }
 
@@ -228,5 +231,14 @@ detekt {
 val jvmJar by tasks.getting(Jar::class) {
     manifest {
         attributes("Automatic-Module-Name" to "io.github.oshai.kotlinlogging")
+    }
+}
+
+android {
+    compileSdk = 31
+    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
+    defaultConfig {
+        minSdk = 21
+        targetSdk = 31
     }
 }
