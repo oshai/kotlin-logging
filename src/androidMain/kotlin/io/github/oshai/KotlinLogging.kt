@@ -1,6 +1,8 @@
 package io.github.oshai
 
-import io.github.oshai.internal.KLoggerJS
+
+import io.github.oshai.internal.KLoggerAndroid
+import io.github.oshai.internal.KLoggerNameResolver
 
 public actual object KotlinLogging {
   /**
@@ -10,7 +12,7 @@ public actual object KotlinLogging {
    * ```
    */
   public actual fun logger(func: () -> Unit): KLogger =
-      KLoggerJS(func::class.js.name)
+      logger(KLoggerNameResolver.name(func))
 
-  public actual fun logger(name: String): KLogger = KLoggerJS(name)
+  public actual fun logger(name: String): KLogger = KLoggerAndroid(name)
 }
