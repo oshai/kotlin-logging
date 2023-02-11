@@ -98,7 +98,7 @@ Or
 implementation 'io.github.microutils:kotlin-logging-jvm:3.0.5'
 ```
 
-Alternatively, download the JAR from [github](https://github.com/oshai/kotlin-logging/releases/latest)  or [maven-central](https://repo1.maven.org/maven2/io/github/microutils/kotlin-logging/).
+Alternatively, download the JAR from [github](https://github.com/oshai/kotlin-logging/releases/latest)  or [maven-central](https://repo1.maven.org/maven2/io/github/oshai/).
 
 ### Multiplatform
 
