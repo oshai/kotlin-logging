@@ -9,9 +9,9 @@ Before submitting a PR, it is usually better to discuss your intentions either b
 
 To check formatting:
 
-`./gradlew ktfmtCheck`
+`./gradlew spotlessCheck`
 
 To fix formatting:
 
-`./gradlew ktfmtFormat`
+`./gradlew spotlessApply`
 

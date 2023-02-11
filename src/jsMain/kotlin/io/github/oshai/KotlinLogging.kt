@@ -9,8 +9,7 @@ public actual object KotlinLogging {
    * val logger = KotlinLogging.logger {}
    * ```
    */
-  public actual fun logger(func: () -> Unit): io.github.oshai.KLogger =
-      KLoggerJS(func::class.js.name)
+  public actual fun logger(func: () -> Unit): KLogger = KLoggerJS(func::class.js.name)
 
-  public actual fun logger(name: String): io.github.oshai.KLogger = KLoggerJS(name)
+  public actual fun logger(name: String): KLogger = KLoggerJS(name)
 }

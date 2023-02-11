@@ -35,34 +35,34 @@ internal class KLoggerJS(override val name: String) : KLogger {
   override fun error(t: Throwable?, msg: () -> Any?) = ERROR.logIfEnabled(msg, t, APPENDER::error)
 
   override fun trace(marker: io.github.oshai.Marker?, msg: () -> Any?) =
-      TRACE.logIfEnabled(marker, msg, APPENDER::trace)
+    TRACE.logIfEnabled(marker, msg, APPENDER::trace)
 
   override fun debug(marker: io.github.oshai.Marker?, msg: () -> Any?) =
-      DEBUG.logIfEnabled(marker, msg, APPENDER::debug)
+    DEBUG.logIfEnabled(marker, msg, APPENDER::debug)
 
   override fun info(marker: io.github.oshai.Marker?, msg: () -> Any?) =
-      INFO.logIfEnabled(marker, msg, APPENDER::info)
+    INFO.logIfEnabled(marker, msg, APPENDER::info)
 
   override fun warn(marker: io.github.oshai.Marker?, msg: () -> Any?) =
-      WARN.logIfEnabled(marker, msg, APPENDER::warn)
+    WARN.logIfEnabled(marker, msg, APPENDER::warn)
 
   override fun error(marker: io.github.oshai.Marker?, msg: () -> Any?) =
-      ERROR.logIfEnabled(marker, msg, APPENDER::error)
+    ERROR.logIfEnabled(marker, msg, APPENDER::error)
 
   override fun trace(marker: io.github.oshai.Marker?, t: Throwable?, msg: () -> Any?) =
-      TRACE.logIfEnabled(marker, msg, t, APPENDER::trace)
+    TRACE.logIfEnabled(marker, msg, t, APPENDER::trace)
 
   override fun debug(marker: io.github.oshai.Marker?, t: Throwable?, msg: () -> Any?) =
-      DEBUG.logIfEnabled(marker, msg, t, APPENDER::debug)
+    DEBUG.logIfEnabled(marker, msg, t, APPENDER::debug)
 
   override fun info(marker: io.github.oshai.Marker?, t: Throwable?, msg: () -> Any?) =
-      INFO.logIfEnabled(marker, msg, t, APPENDER::info)
+    INFO.logIfEnabled(marker, msg, t, APPENDER::info)
 
   override fun warn(marker: io.github.oshai.Marker?, t: Throwable?, msg: () -> Any?) =
-      WARN.logIfEnabled(marker, msg, t, APPENDER::warn)
+    WARN.logIfEnabled(marker, msg, t, APPENDER::warn)
 
   override fun error(marker: io.github.oshai.Marker?, t: Throwable?, msg: () -> Any?) =
-      ERROR.logIfEnabled(marker, msg, t, APPENDER::error)
+    ERROR.logIfEnabled(marker, msg, t, APPENDER::error)
 
   private fun Level.logIfEnabled(msg: () -> Any?, logFunction: (Any?) -> Unit) {
     if (isLoggingEnabled()) {
@@ -77,9 +77,9 @@ internal class KLoggerJS(override val name: String) : KLogger {
   }
 
   private fun Level.logIfEnabled(
-      marker: io.github.oshai.Marker?,
-      msg: () -> Any?,
-      logFunction: (Any?) -> Unit
+    marker: io.github.oshai.Marker?,
+    msg: () -> Any?,
+    logFunction: (Any?) -> Unit
   ) {
     if (isLoggingEnabled()) {
       logFunction(FORMATTER.formatMessage(this, name, marker, msg))
@@ -87,10 +87,10 @@ internal class KLoggerJS(override val name: String) : KLogger {
   }
 
   private fun Level.logIfEnabled(
-      marker: io.github.oshai.Marker?,
-      msg: () -> Any?,
-      t: Throwable?,
-      logFunction: (Any?) -> Unit
+    marker: io.github.oshai.Marker?,
+    msg: () -> Any?,
+    t: Throwable?,
+    logFunction: (Any?) -> Unit
   ) {
     if (isLoggingEnabled()) {
       logFunction(FORMATTER.formatMessage(this, name, marker, t, msg))

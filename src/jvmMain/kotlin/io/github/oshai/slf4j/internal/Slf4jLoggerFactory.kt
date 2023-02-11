@@ -12,6 +12,6 @@ internal object Slf4jLoggerFactory {
 
   /** wrap java logger based on location awareness */
   fun wrapJLogger(jLogger: Logger): KLogger =
-      if (jLogger is LocationAwareLogger) LocationAwareKLogger(jLogger)
-      else LocationIgnorantKLogger(jLogger)
+    if (jLogger is LocationAwareLogger) LocationAwareKLogger(jLogger)
+    else LocationIgnorantKLogger(jLogger)
 }

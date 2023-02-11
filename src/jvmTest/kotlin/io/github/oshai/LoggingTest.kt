@@ -104,7 +104,7 @@ class LambdaRaisesError {
 }
 
 fun newPatternLayout(pattern: String): PatternLayout =
-    PatternLayout.newBuilder().withPattern(pattern).build()
+  PatternLayout.newBuilder().withPattern(pattern).build()
 
 fun addAppender(appender: Appender) {
   val context = LogManager.getContext(false) as org.apache.logging.log4j.core.LoggerContext
@@ -144,31 +144,36 @@ class LoggingTest {
     }
     appenderWithWriter.writer.flush()
     val lines =
-        appenderWithWriter.writer
-            .toString()
-            .trim()
-            .replace("\r", "\n")
-            .replace("\n\n", "\n")
-            .split("\n")
+      appenderWithWriter
+        .writer
+        .toString()
+        .trim()
+        .replace("\r", "\n")
+        .replace("\n\n", "\n")
+        .split("\n")
     assertAll(
-        {
-          assertEquals(
-              "INFO  io.github.oshai.ClassWithLogging  - test ClassWithLogging", lines[0].trim())
-        },
-        {
-          assertEquals(
-              "TRACE io.github.oshai.ClassWithLogging  - test ClassWithLogging", lines[1].trim())
-        },
-        { assertEquals("java.lang.Throwable: null", lines[2].trim()) },
-        {
-          assertTrue(
-              lines[3].trim().startsWith("at io.github.oshai.ClassWithLogging.testThrowable("))
-        },
-        {
-          assertEquals(
-              "TRACE io.github.oshai.ClassWithLogging  - test ClassWithLogging",
-              lines[lines.size - 1].trim())
-        },
+      {
+        assertEquals(
+          "INFO  io.github.oshai.ClassWithLogging  - test ClassWithLogging",
+          lines[0].trim()
+        )
+      },
+      {
+        assertEquals(
+          "TRACE io.github.oshai.ClassWithLogging  - test ClassWithLogging",
+          lines[1].trim()
+        )
+      },
+      { assertEquals("java.lang.Throwable: null", lines[2].trim()) },
+      {
+        assertTrue(lines[3].trim().startsWith("at io.github.oshai.ClassWithLogging.testThrowable("))
+      },
+      {
+        assertEquals(
+          "TRACE io.github.oshai.ClassWithLogging  - test ClassWithLogging",
+          lines[lines.size - 1].trim()
+        )
+      },
     )
   }
 
@@ -180,30 +185,32 @@ class LoggingTest {
     }
     appenderWithWriter.writer.flush()
     val lines =
-        appenderWithWriter.writer
-            .toString()
-            .trim()
-            .replace("\r", "\n")
-            .replace("\n\n", "\n")
-            .split("\n")
+      appenderWithWriter
+        .writer
+        .toString()
+        .trim()
+        .replace("\r", "\n")
+        .replace("\n\n", "\n")
+        .split("\n")
     assertAll(
-        {
-          assertEquals(
-              "TRACE io.github.oshai.ClassWithLogging MARKER - test ClassWithLogging",
-              lines[0].trim())
-        },
-        {
-          assertEquals(
-              "TRACE io.github.oshai.ClassWithLogging MARKER - test ClassWithLogging",
-              lines[1].trim())
-        },
-        { assertEquals("java.lang.Throwable: null", lines[2].trim()) },
-        {
-          assertTrue(
-              lines[3]
-                  .trim()
-                  .startsWith("at io.github.oshai.ClassWithLogging.testMarkerThrowable("))
-        },
+      {
+        assertEquals(
+          "TRACE io.github.oshai.ClassWithLogging MARKER - test ClassWithLogging",
+          lines[0].trim()
+        )
+      },
+      {
+        assertEquals(
+          "TRACE io.github.oshai.ClassWithLogging MARKER - test ClassWithLogging",
+          lines[1].trim()
+        )
+      },
+      { assertEquals("java.lang.Throwable: null", lines[2].trim()) },
+      {
+        assertTrue(
+          lines[3].trim().startsWith("at io.github.oshai.ClassWithLogging.testMarkerThrowable(")
+        )
+      },
     )
   }
 
@@ -212,8 +219,9 @@ class LoggingTest {
     ClassInheritLogging().test()
     appenderWithWriter.writer.flush()
     assertEquals(
-        "INFO  io.github.oshai.ClassInheritLogging  - test ClassHasLogging",
-        appenderWithWriter.writer.toString().trim())
+      "INFO  io.github.oshai.ClassInheritLogging  - test ClassHasLogging",
+      appenderWithWriter.writer.toString().trim()
+    )
   }
 
   @Test
@@ -221,8 +229,9 @@ class LoggingTest {
     ChildClassWithLogging().test()
     appenderWithWriter.writer.flush()
     assertEquals(
-        "INFO  io.github.oshai.ChildClassWithLogging  - test ChildClassWithLogging",
-        appenderWithWriter.writer.toString().trim())
+      "INFO  io.github.oshai.ChildClassWithLogging  - test ChildClassWithLogging",
+      appenderWithWriter.writer.toString().trim()
+    )
   }
 
   @Test
@@ -230,8 +239,9 @@ class LoggingTest {
     ClassWithNamedLogging().test()
     appenderWithWriter.writer.flush()
     assertEquals(
-        "INFO  io.github.oshai.ClassWithNamedLogging  - test ClassWithNamedLogging",
-        appenderWithWriter.writer.toString().trim())
+      "INFO  io.github.oshai.ClassWithNamedLogging  - test ClassWithNamedLogging",
+      appenderWithWriter.writer.toString().trim()
+    )
   }
 
   @Test
@@ -239,8 +249,9 @@ class LoggingTest {
     ClassHasLogging().test()
     appenderWithWriter.writer.flush()
     assertEquals(
-        "INFO  io.github.oshai.ClassHasLogging  - test ClassHasLogging",
-        appenderWithWriter.writer.toString().trim())
+      "INFO  io.github.oshai.ClassHasLogging  - test ClassHasLogging",
+      appenderWithWriter.writer.toString().trim()
+    )
   }
 
   @Test
@@ -248,8 +259,9 @@ class LoggingTest {
     CompanionHasLogging().test()
     appenderWithWriter.writer.flush()
     assertEquals(
-        "INFO  io.github.oshai.CompanionHasLogging  - test CompanionHasLogging",
-        appenderWithWriter.writer.toString().trim())
+      "INFO  io.github.oshai.CompanionHasLogging  - test CompanionHasLogging",
+      appenderWithWriter.writer.toString().trim()
+    )
   }
 
   @Test
@@ -257,8 +269,9 @@ class LoggingTest {
     LambdaRaisesError().test()
     appenderWithWriter.writer.flush()
     assertEquals(
-        "INFO  io.github.oshai.LambdaRaisesError  - Log message invocation failed: java.lang.NullPointerException",
-        appenderWithWriter.writer.toString().trim())
+      "INFO  io.github.oshai.LambdaRaisesError  - Log message invocation failed: java.lang.NullPointerException",
+      appenderWithWriter.writer.toString().trim()
+    )
   }
 
   @Test
@@ -266,15 +279,17 @@ class LoggingTest {
     ClassWithLogging().testFormatting()
     appenderWithWriter.writer.flush()
     assertEquals(
-        "INFO  io.github.oshai.ClassWithLogging  - Message: String with {} curly braces",
-        appenderWithWriter.writer.toString().trim())
+      "INFO  io.github.oshai.ClassWithLogging  - Message: String with {} curly braces",
+      appenderWithWriter.writer.toString().trim()
+    )
   }
 
   @Test
   fun `check underlyingLogger property`() {
     assertEquals(
-        "io.github.oshai.ClassHasLogging",
-        (ClassHasLogging().logger.underlyingLogger as org.slf4j.Logger).name)
+      "io.github.oshai.ClassHasLogging",
+      (ClassHasLogging().logger.underlyingLogger as org.slf4j.Logger).name
+    )
   }
 }
 
@@ -282,24 +297,19 @@ class LoggingNameTest {
   @Test
   fun testNames() {
     assertAll(
-        { assertEquals("io.github.oshai.ClassWithLogging", ClassWithLogging.logger.name) },
-        { assertEquals("io.github.oshai.ClassInheritLogging", ClassInheritLogging().logger.name) },
-        {
-          assertEquals("io.github.oshai.ChildClassWithLogging", ChildClassWithLogging.logger.name)
-        },
-        {
-          assertEquals("io.github.oshai.ClassWithNamedLogging", ClassWithNamedLogging.logger.name)
-        },
-        { assertEquals("io.github.oshai.ClassHasLogging", ClassHasLogging().logger.name) },
-        { assertEquals("io.github.oshai.CompanionHasLogging", CompanionHasLogging.logger.name) },
+      { assertEquals("io.github.oshai.ClassWithLogging", ClassWithLogging.logger.name) },
+      { assertEquals("io.github.oshai.ClassInheritLogging", ClassInheritLogging().logger.name) },
+      { assertEquals("io.github.oshai.ChildClassWithLogging", ChildClassWithLogging.logger.name) },
+      { assertEquals("io.github.oshai.ClassWithNamedLogging", ClassWithNamedLogging.logger.name) },
+      { assertEquals("io.github.oshai.ClassHasLogging", ClassHasLogging().logger.name) },
+      { assertEquals("io.github.oshai.CompanionHasLogging", CompanionHasLogging.logger.name) },
     )
   }
 }
 
 data class AppenderWithWriter(
-    val pattern: String = "%-5p %c %marker - %m%n",
-    val writer: StringWriter = StringWriter(),
-    val appender: Appender =
-        WriterAppender.createAppender(
-            newPatternLayout(pattern), null, writer, "writer", false, true)
+  val pattern: String = "%-5p %c %marker - %m%n",
+  val writer: StringWriter = StringWriter(),
+  val appender: Appender =
+    WriterAppender.createAppender(newPatternLayout(pattern), null, writer, "writer", false, true)
 )

@@ -10,7 +10,7 @@ public actual object KotlinLogging {
    * ```
    */
   public actual fun logger(func: () -> Unit): io.github.oshai.KLogger =
-      KLoggerLinux(func::class.qualifiedName ?: "")
+    KLoggerLinux(func::class.qualifiedName ?: "")
 
   public actual fun logger(name: String): io.github.oshai.KLogger = KLoggerLinux(name)
 }

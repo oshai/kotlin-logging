@@ -14,8 +14,9 @@ class MessageInvokerJavaTest {
   @Test
   fun toStringSafeChecksThrowException() {
     assertEquals(
-        "Log message invocation failed: java.lang.Exception: hi",
-        { throw Exception("hi") }.toStringSafe())
+      "Log message invocation failed: java.lang.Exception: hi",
+      { throw Exception("hi") }.toStringSafe()
+    )
   }
 
   @Test

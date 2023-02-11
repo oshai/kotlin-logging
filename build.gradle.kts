@@ -3,13 +3,14 @@ import org.gradle.jvm.tasks.Jar
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
 
 plugins {
-    kotlin("multiplatform") version "1.8.0"
+    kotlin("multiplatform") version "1.8.10"
     id("org.jetbrains.dokka") version "1.7.10"
     `maven-publish`
     id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
     signing
     id("io.gitlab.arturbosch.detekt") version "1.18.0"
-    id("com.ncorti.ktfmt.gradle") version "0.11.0"
+    id("com.android.library") version "7.1.2"
+    id("com.diffplug.spotless") version "5.12.4"
 }
 
 
@@ -19,6 +20,8 @@ group = "io.github.oshai"
 version = "4.0.0-beta-13"
 
 repositories {
+    gradlePluginPortal()
+    google()
     mavenCentral()
 }
 
@@ -57,7 +60,7 @@ kotlin {
         }
         nodejs()
     }
-
+    android()
     val linuxTargets = listOf(
         linuxArm64(),
         linuxX64(),
@@ -102,6 +105,15 @@ kotlin {
                 implementation("org.slf4j:slf4j-api:${extra["slf4j_version"]}")
                 // our jul test just forward the logs jul -> slf4j -> log4j
                 implementation("org.slf4j:jul-to-slf4j:${extra["slf4j_version"]}")
+            }
+        }
+        val androidMain by getting {}
+        val androidTest by getting {
+            dependencies {
+                implementation(kotlin("test"))
+                implementation("org.junit.jupiter:junit-jupiter-engine:${extra["junit_version"]}")
+                implementation("org.junit.jupiter:junit-jupiter-params:${extra["junit_version"]}")
+                implementation("org.mockito:mockito-core:${extra["mockito_version"]}")
             }
         }
         val jsMain by getting {}
@@ -227,5 +239,23 @@ detekt {
 val jvmJar by tasks.getting(Jar::class) {
     manifest {
         attributes("Automatic-Module-Name" to "io.github.oshai.kotlinlogging")
+    }
+}
+
+android {
+    compileSdk = 31
+    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
+    defaultConfig {
+        minSdk = 21
+        targetSdk = 31
+    }
+    testOptions {
+        unitTests.isReturnDefaultValues = true
+    }
+}
+spotless {
+    kotlin {
+        target("src/**/*.kt")
+        ktfmt("0.24").googleStyle()
     }
 }

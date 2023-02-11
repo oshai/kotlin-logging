@@ -4,39 +4,39 @@ import io.github.oshai.internal.toStringSafe
 
 public object DefaultMessageFormatter : Formatter {
   public override fun formatMessage(
-      includePrefix: Boolean,
-      level: Level,
-      loggerName: String,
-      msg: () -> Any?
+    includePrefix: Boolean,
+    level: Level,
+    loggerName: String,
+    msg: () -> Any?
   ): String = "${prefix(includePrefix, level, loggerName)}${msg.toStringSafe()}"
 
   public override fun formatMessage(
-      includePrefix: Boolean,
-      level: Level,
-      loggerName: String,
-      t: Throwable?,
-      msg: () -> Any?
+    includePrefix: Boolean,
+    level: Level,
+    loggerName: String,
+    t: Throwable?,
+    msg: () -> Any?
   ): String =
-      "${prefix(includePrefix, level, loggerName)}${msg.toStringSafe()}${t.throwableToString()}"
+    "${prefix(includePrefix, level, loggerName)}${msg.toStringSafe()}${t.throwableToString()}"
 
   public override fun formatMessage(
-      includePrefix: Boolean,
-      level: Level,
-      loggerName: String,
-      marker: Marker?,
-      msg: () -> Any?
+    includePrefix: Boolean,
+    level: Level,
+    loggerName: String,
+    marker: Marker?,
+    msg: () -> Any?
   ): String =
-      "${prefix(includePrefix, level, loggerName)}${marker?.getName()} ${msg.toStringSafe()}"
+    "${prefix(includePrefix, level, loggerName)}${marker?.getName()} ${msg.toStringSafe()}"
 
   public override fun formatMessage(
-      includePrefix: Boolean,
-      level: Level,
-      loggerName: String,
-      marker: Marker?,
-      t: Throwable?,
-      msg: () -> Any?
+    includePrefix: Boolean,
+    level: Level,
+    loggerName: String,
+    marker: Marker?,
+    t: Throwable?,
+    msg: () -> Any?
   ): String =
-      "${prefix(includePrefix, level, loggerName)}${marker?.getName()} ${msg.toStringSafe()}${t.throwableToString()}"
+    "${prefix(includePrefix, level, loggerName)}${marker?.getName()} ${msg.toStringSafe()}${t.throwableToString()}"
 
   private fun prefix(includePrefix: Boolean, level: Level, loggerName: String): String {
     return if (includePrefix) {

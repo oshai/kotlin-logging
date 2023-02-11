@@ -67,40 +67,40 @@ class KotlinLoggingMDCTest {
     MDC.put("f", "g")
 
     assertAll(
-        { assertNull(MDC.get("a")) },
-        { assertNull(MDC.get("c")) },
-        { assertNull(MDC.get("e")) },
-        { assertEquals("g", MDC.get("f")) },
+      { assertNull(MDC.get("a")) },
+      { assertNull(MDC.get("c")) },
+      { assertNull(MDC.get("e")) },
+      { assertEquals("g", MDC.get("f")) },
     )
 
     withLoggingContext("a" to "h", "c" to "i") {
       assertAll(
-          { assertEquals("h", MDC.get("a")) },
-          { assertEquals("i", MDC.get("c")) },
-          { assertNull(MDC.get("e")) },
-          { assertEquals("g", MDC.get("f")) },
+        { assertEquals("h", MDC.get("a")) },
+        { assertEquals("i", MDC.get("c")) },
+        { assertNull(MDC.get("e")) },
+        { assertEquals("g", MDC.get("f")) },
       )
 
       withLoggingContext("a" to "b", "c" to "d", "e" to null, "f" to null) {
         assertAll(
-            { assertEquals("b", MDC.get("a")) },
-            { assertEquals("d", MDC.get("c")) },
-            { assertNull(MDC.get("e")) },
-            { assertEquals("g", MDC.get("f")) },
+          { assertEquals("b", MDC.get("a")) },
+          { assertEquals("d", MDC.get("c")) },
+          { assertNull(MDC.get("e")) },
+          { assertEquals("g", MDC.get("f")) },
         )
       }
       assertAll(
-          { assertEquals("h", MDC.get("a")) },
-          { assertEquals("i", MDC.get("c")) },
-          { assertNull(MDC.get("e")) },
-          { assertEquals("g", MDC.get("f")) },
+        { assertEquals("h", MDC.get("a")) },
+        { assertEquals("i", MDC.get("c")) },
+        { assertNull(MDC.get("e")) },
+        { assertEquals("g", MDC.get("f")) },
       )
     }
     assertAll(
-        { assertNull(MDC.get("a")) },
-        { assertNull(MDC.get("c")) },
-        { assertNull(MDC.get("e")) },
-        { assertEquals("g", MDC.get("f")) },
+      { assertNull(MDC.get("a")) },
+      { assertNull(MDC.get("c")) },
+      { assertNull(MDC.get("e")) },
+      { assertEquals("g", MDC.get("f")) },
     )
   }
 
@@ -109,25 +109,25 @@ class KotlinLoggingMDCTest {
     MDC.put("f", "g")
 
     assertAll(
-        { assertNull(MDC.get("a")) },
-        { assertNull(MDC.get("c")) },
-        { assertNull(MDC.get("e")) },
-        { assertEquals("g", MDC.get("f")) },
+      { assertNull(MDC.get("a")) },
+      { assertNull(MDC.get("c")) },
+      { assertNull(MDC.get("e")) },
+      { assertEquals("g", MDC.get("f")) },
     )
 
     withLoggingContext("a" to "b", "c" to "d", "e" to null, "f" to null, restorePrevious = false) {
       assertAll(
-          { assertEquals("b", MDC.get("a")) },
-          { assertEquals("d", MDC.get("c")) },
-          { assertNull(MDC.get("e")) },
-          { assertEquals("g", MDC.get("f")) },
+        { assertEquals("b", MDC.get("a")) },
+        { assertEquals("d", MDC.get("c")) },
+        { assertNull(MDC.get("e")) },
+        { assertEquals("g", MDC.get("f")) },
       )
     }
     assertAll(
-        { assertNull(MDC.get("a")) },
-        { assertNull(MDC.get("c")) },
-        { assertNull(MDC.get("e")) },
-        { assertEquals("g", MDC.get("f")) },
+      { assertNull(MDC.get("a")) },
+      { assertNull(MDC.get("c")) },
+      { assertNull(MDC.get("e")) },
+      { assertEquals("g", MDC.get("f")) },
     )
   }
 
@@ -151,11 +151,11 @@ class KotlinLoggingMDCTest {
   @ValueSource(booleans = [true, false])
   fun `map withLoggingContext`(restorePrevious: Boolean) {
     assertAll(
-        { assertNull(MDC.get("a")) },
-        { assertNull(MDC.get("c")) },
-        { assertNull(MDC.get("e")) },
-        { assertNull(MDC.get("f")) },
-        { assertNull(MDC.get("k")) },
+      { assertNull(MDC.get("a")) },
+      { assertNull(MDC.get("c")) },
+      { assertNull(MDC.get("e")) },
+      { assertNull(MDC.get("f")) },
+      { assertNull(MDC.get("k")) },
     )
 
     MDC.put("e", "g")
@@ -163,44 +163,44 @@ class KotlinLoggingMDCTest {
 
     withLoggingContext(mapOf("a" to "b", "c" to "d", "e" to null, "f" to "h"), restorePrevious) {
       assertAll(
-          { assertEquals("b", MDC.get("a")) },
-          { assertEquals("d", MDC.get("c")) },
-          { assertEquals("g", MDC.get("e")) },
-          { assertEquals("h", MDC.get("f")) },
-          { assertEquals("l", MDC.get("k")) },
+        { assertEquals("b", MDC.get("a")) },
+        { assertEquals("d", MDC.get("c")) },
+        { assertEquals("g", MDC.get("e")) },
+        { assertEquals("h", MDC.get("f")) },
+        { assertEquals("l", MDC.get("k")) },
       )
 
       withLoggingContext(mapOf("a" to "b", "e" to "i", "f" to "j")) {
         assertAll(
-            { assertEquals("b", MDC.get("a")) },
-            { assertEquals("d", MDC.get("c")) },
-            { assertEquals("i", MDC.get("e")) },
-            { assertEquals("j", MDC.get("f")) },
-            { assertEquals("l", MDC.get("k")) },
+          { assertEquals("b", MDC.get("a")) },
+          { assertEquals("d", MDC.get("c")) },
+          { assertEquals("i", MDC.get("e")) },
+          { assertEquals("j", MDC.get("f")) },
+          { assertEquals("l", MDC.get("k")) },
         )
       }
 
       assertAll(
-          { assertEquals("b", MDC.get("a")) },
-          { assertEquals("d", MDC.get("c")) },
-          { assertEquals("g", MDC.get("e")) },
-          { assertEquals("h", MDC.get("f")) },
-          { assertEquals("l", MDC.get("k")) },
+        { assertEquals("b", MDC.get("a")) },
+        { assertEquals("d", MDC.get("c")) },
+        { assertEquals("g", MDC.get("e")) },
+        { assertEquals("h", MDC.get("f")) },
+        { assertEquals("l", MDC.get("k")) },
       )
     }
 
     assertAll(
-        { assertNull(MDC.get("a")) },
-        { assertNull(MDC.get("c")) },
-        {
-          if (restorePrevious) {
-            assertEquals("g", MDC.get("e"))
-          } else {
-            assertNull(MDC.get("e"))
-          }
-        },
-        { assertNull(MDC.get("f")) },
-        { assertEquals("l", MDC.get("k")) },
+      { assertNull(MDC.get("a")) },
+      { assertNull(MDC.get("c")) },
+      {
+        if (restorePrevious) {
+          assertEquals("g", MDC.get("e"))
+        } else {
+          assertNull(MDC.get("e"))
+        }
+      },
+      { assertNull(MDC.get("f")) },
+      { assertEquals("l", MDC.get("k")) },
     )
   }
 }

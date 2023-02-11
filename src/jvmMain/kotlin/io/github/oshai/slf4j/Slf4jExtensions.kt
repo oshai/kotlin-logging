@@ -11,6 +11,6 @@ public fun Marker.toSlf4j(): org.slf4j.Marker = MarkerFactory.getMarker(this.get
 
 @Suppress("UnusedReceiverParameter")
 public fun KotlinLogging.logger(underlyingLogger: Logger): KLogger =
-    Slf4jLoggerFactory.wrapJLogger(underlyingLogger)
+  Slf4jLoggerFactory.wrapJLogger(underlyingLogger)
 
 public fun Logger.toKLogger(): KLogger = KotlinLogging.logger(this)

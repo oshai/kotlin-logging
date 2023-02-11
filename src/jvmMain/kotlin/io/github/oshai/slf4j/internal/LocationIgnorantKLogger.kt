@@ -14,7 +14,7 @@ import org.slf4j.Logger
  */
 @Suppress("TooManyFunctions")
 internal class LocationIgnorantKLogger(override val underlyingLogger: Logger) :
-    Slf4jLoggerWrapper(underlyingLogger), io.github.oshai.KLogger {
+  Slf4jLoggerWrapper(underlyingLogger), io.github.oshai.KLogger {
 
   /** Lazy add a log message if isTraceEnabled is true */
   override fun trace(msg: () -> Any?) {
