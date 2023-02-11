@@ -249,6 +249,9 @@ android {
         minSdk = 21
         targetSdk = 31
     }
+    testOptions {
+        unitTests.isReturnDefaultValues = true
+    }
 }
 spotless {
     kotlin {
