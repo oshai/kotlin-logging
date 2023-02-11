@@ -9,7 +9,7 @@ plugins {
     id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
     signing
     id("io.gitlab.arturbosch.detekt") version "1.18.0"
-    id("com.android.library") version "7.1.2"
+    id("com.android.library") version "7.3.1"
     id("com.diffplug.spotless") version "5.12.4"
 }
 
