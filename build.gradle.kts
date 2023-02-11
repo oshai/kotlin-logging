@@ -60,7 +60,9 @@ kotlin {
         }
         nodejs()
     }
-    android()
+    android {
+        publishLibraryVariants("release", "debug")
+    }
     val linuxTargets = listOf(
         linuxArm64(),
         linuxX64(),
@@ -251,13 +253,6 @@ android {
     }
     testOptions {
         unitTests.isReturnDefaultValues = true
-    }
-    publishing {
-        multipleVariants {
-            allVariants()
-            withJavadocJar()
-            withSourcesJar()
-        }
     }
 }
 spotless {
