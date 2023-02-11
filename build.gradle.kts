@@ -108,6 +108,12 @@ kotlin {
             }
         }
         val androidMain by getting {}
+        val androidTest by getting {
+            dependencies {
+                implementation(kotlin("test-junit"))
+                implementation("junit:junit:4.13.2")
+            }
+        }
         val jsMain by getting {}
         val jsTest by getting {
             dependencies {
