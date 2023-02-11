@@ -110,8 +110,10 @@ kotlin {
         val androidMain by getting {}
         val androidTest by getting {
             dependencies {
-                implementation(kotlin("test-junit"))
-                implementation("junit:junit:4.13.2")
+                implementation(kotlin("test"))
+                implementation("org.junit.jupiter:junit-jupiter-engine:${extra["junit_version"]}")
+                implementation("org.junit.jupiter:junit-jupiter-params:${extra["junit_version"]}")
+                implementation("org.mockito:mockito-core:${extra["mockito_version"]}")
             }
         }
         val jsMain by getting {}
