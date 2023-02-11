@@ -13,5 +13,5 @@ public expect object ErrorMessageProducer {
 }
 
 public object DefaultErrorMessageProducer {
-    public fun getErrorLog(e: Exception): String = "Log message invocation failed: $e"
+  public fun getErrorLog(e: Exception): String = "Log message invocation failed: $e"
 }

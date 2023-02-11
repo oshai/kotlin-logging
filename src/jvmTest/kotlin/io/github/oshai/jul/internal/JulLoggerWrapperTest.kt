@@ -45,12 +45,14 @@ class JulLoggerWrapperTest {
     logger.info("simple jul message")
     appenderWithWriter.writer.flush()
     assertEquals(
-        "INFO  io.github.oshai.jul.internal.JulLoggerWrapperTest  - simple jul message",
-        appenderWithWriter.writer
-            .toString()
-            .trim()
-            .replace("\r", "\n")
-            .replace("\n\n", "\n")
-            .split("\n")[1])
+      "INFO  io.github.oshai.jul.internal.JulLoggerWrapperTest  - simple jul message",
+      appenderWithWriter
+        .writer
+        .toString()
+        .trim()
+        .replace("\r", "\n")
+        .replace("\n\n", "\n")
+        .split("\n")[1]
+    )
   }
 }

@@ -9,8 +9,8 @@ plugins {
     id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
     signing
     id("io.gitlab.arturbosch.detekt") version "1.18.0"
-    id("com.ncorti.ktfmt.gradle") version "0.11.0"
     id("com.android.library") version "7.1.2"
+    id("com.diffplug.spotless") version "5.12.4"
 }
 
 
@@ -240,5 +240,11 @@ android {
     defaultConfig {
         minSdk = 21
         targetSdk = 31
+    }
+}
+spotless {
+    kotlin {
+        target("src/**/*.kt")
+        ktfmt("0.24").googleStyle()
     }
 }

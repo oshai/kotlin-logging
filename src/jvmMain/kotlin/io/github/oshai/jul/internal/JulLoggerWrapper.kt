@@ -380,13 +380,13 @@ internal class JulLoggerWrapper(override val underlyingLogger: Logger) : KLogger
 
   private fun io.github.oshai.Level.toJULLevel(): Level {
     val julLevel: Level =
-        when (this) {
-          io.github.oshai.Level.TRACE -> Level.FINEST
-          io.github.oshai.Level.DEBUG -> Level.FINE
-          io.github.oshai.Level.INFO -> Level.INFO
-          io.github.oshai.Level.WARN -> Level.WARNING
-          io.github.oshai.Level.ERROR -> Level.SEVERE
-        }
+      when (this) {
+        io.github.oshai.Level.TRACE -> Level.FINEST
+        io.github.oshai.Level.DEBUG -> Level.FINE
+        io.github.oshai.Level.INFO -> Level.INFO
+        io.github.oshai.Level.WARN -> Level.WARNING
+        io.github.oshai.Level.ERROR -> Level.SEVERE
+      }
     return julLevel
   }
 }

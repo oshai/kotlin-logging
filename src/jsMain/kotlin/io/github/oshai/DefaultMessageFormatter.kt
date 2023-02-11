@@ -4,30 +4,30 @@ import io.github.oshai.internal.toStringSafe
 
 public object DefaultMessageFormatter : Formatter {
   public override fun formatMessage(level: Level, loggerName: String, msg: () -> Any?): String =
-      "${level.name}: [$loggerName] ${msg.toStringSafe()}"
+    "${level.name}: [$loggerName] ${msg.toStringSafe()}"
 
   public override fun formatMessage(
-      level: Level,
-      loggerName: String,
-      t: Throwable?,
-      msg: () -> Any?
+    level: Level,
+    loggerName: String,
+    t: Throwable?,
+    msg: () -> Any?
   ): String = "${level.name}: [$loggerName] ${msg.toStringSafe()}${t.throwableToString()}"
 
   public override fun formatMessage(
-      level: Level,
-      loggerName: String,
-      marker: Marker?,
-      msg: () -> Any?
+    level: Level,
+    loggerName: String,
+    marker: Marker?,
+    msg: () -> Any?
   ): String = "${level.name}: [$loggerName] ${marker?.getName()} ${msg.toStringSafe()}"
 
   public override fun formatMessage(
-      level: Level,
-      loggerName: String,
-      marker: Marker?,
-      t: Throwable?,
-      msg: () -> Any?
+    level: Level,
+    loggerName: String,
+    marker: Marker?,
+    t: Throwable?,
+    msg: () -> Any?
   ): String =
-      "${level.name}: [$loggerName] ${marker?.getName()} ${msg.toStringSafe()}${t.throwableToString()}"
+    "${level.name}: [$loggerName] ${marker?.getName()} ${msg.toStringSafe()}${t.throwableToString()}"
 
   private fun Throwable?.throwableToString(): String {
     if (this == null) {
