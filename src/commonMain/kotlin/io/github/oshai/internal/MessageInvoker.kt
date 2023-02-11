@@ -1,6 +1,5 @@
 package io.github.oshai.internal
 
-@Suppress("NOTHING_TO_INLINE")
 internal inline fun (() -> Any?).toStringSafe(): String {
   return try {
     invoke().toString()
@@ -11,4 +10,8 @@ internal inline fun (() -> Any?).toStringSafe(): String {
 
 public expect object ErrorMessageProducer {
   public fun getErrorLog(e: Exception): String
+}
+
+public object DefaultErrorMessageProducer {
+  public fun getErrorLog(e: Exception): String = "Log message invocation failed: $e"
 }
