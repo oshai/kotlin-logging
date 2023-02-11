@@ -252,6 +252,13 @@ android {
     testOptions {
         unitTests.isReturnDefaultValues = true
     }
+    publishing {
+        multipleVariants {
+            allVariants()
+            withJavadocJar()
+            withSourcesJar()
+        }
+    }
 }
 spotless {
     kotlin {
