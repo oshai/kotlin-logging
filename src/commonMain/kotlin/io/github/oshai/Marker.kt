@@ -6,6 +6,6 @@ public interface Marker {
   public fun getName(): String
 }
 
-internal data class SimpleMarker(private val name: String) : io.github.oshai.Marker {
+internal data class SimpleMarker(private val name: String) : Marker {
   override fun getName(): String = this.name
 }

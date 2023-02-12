@@ -4,10 +4,10 @@ import java.lang.reflect.Modifier
 
 /** Resolves name of java classes */
 @Suppress("NOTHING_TO_INLINE")
-internal object KLoggerNameResolver {
+internal actual object KLoggerNameResolver {
 
   /** get class name for function by the package of the function */
-  internal inline fun name(noinline func: () -> Unit): String {
+  internal actual inline fun name(noinline func: () -> Unit): String {
     val name = func.javaClass.name
     val slicedName =
       when {

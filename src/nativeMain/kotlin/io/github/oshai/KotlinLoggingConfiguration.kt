@@ -4,15 +4,14 @@ import kotlin.native.concurrent.AtomicReference
 
 public expect val DefaultAppender: Appender
 
-@Suppress("ObjectPropertyName")
 public object KotlinLoggingConfiguration {
-  private val _logLevel = AtomicReference(io.github.oshai.Level.INFO)
-  public var logLevel: io.github.oshai.Level
+  private val _logLevel = AtomicReference(Level.INFO)
+  public var logLevel: Level
     get() = _logLevel.value
     set(value) {
       _logLevel.value = value
     }
-  private val _appender = AtomicReference<Appender>(DefaultAppender)
+  private val _appender = AtomicReference(DefaultAppender)
   public var appender: Appender
     get() = _appender.value
     set(value) {

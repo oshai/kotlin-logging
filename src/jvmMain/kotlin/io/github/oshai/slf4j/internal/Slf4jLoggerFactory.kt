@@ -8,10 +8,10 @@ import org.slf4j.spi.LocationAwareLogger
 internal object Slf4jLoggerFactory {
 
   /** get a java logger by name */
-  fun jLogger(name: String): Logger = LoggerFactory.getLogger(name)
+  internal fun jLogger(name: String): Logger = LoggerFactory.getLogger(name)
 
   /** wrap java logger based on location awareness */
-  fun wrapJLogger(jLogger: Logger): KLogger =
+  internal fun wrapJLogger(jLogger: Logger): KLogger =
     if (jLogger is LocationAwareLogger) LocationAwareKLogger(jLogger)
     else LocationIgnorantKLogger(jLogger)
 }

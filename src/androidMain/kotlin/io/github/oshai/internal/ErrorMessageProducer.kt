@@ -1,3 +1,3 @@
 package io.github.oshai.internal
 
-public actual typealias ErrorMessageProducer = DefaultErrorMessageProducer
+internal actual typealias ErrorMessageProducer = DefaultErrorMessageProducer

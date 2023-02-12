@@ -40,34 +40,34 @@ public actual interface KLogger {
   public actual fun error(t: Throwable?, msg: () -> Any?)
 
   /** Lazy add a log message if isTraceEnabled is true */
-  public actual fun trace(marker: io.github.oshai.Marker?, msg: () -> Any?)
+  public actual fun trace(marker: Marker?, msg: () -> Any?)
 
   /** Lazy add a log message if isDebugEnabled is true */
-  public actual fun debug(marker: io.github.oshai.Marker?, msg: () -> Any?)
+  public actual fun debug(marker: Marker?, msg: () -> Any?)
 
   /** Lazy add a log message if isInfoEnabled is true */
-  public actual fun info(marker: io.github.oshai.Marker?, msg: () -> Any?)
+  public actual fun info(marker: Marker?, msg: () -> Any?)
 
   /** Lazy add a log message if isWarnEnabled is true */
-  public actual fun warn(marker: io.github.oshai.Marker?, msg: () -> Any?)
+  public actual fun warn(marker: Marker?, msg: () -> Any?)
 
   /** Lazy add a log message if isErrorEnabled is true */
-  public actual fun error(marker: io.github.oshai.Marker?, msg: () -> Any?)
+  public actual fun error(marker: Marker?, msg: () -> Any?)
 
   /** Lazy add a log message with throwable payload if isTraceEnabled is true */
-  public actual fun trace(marker: io.github.oshai.Marker?, t: Throwable?, msg: () -> Any?)
+  public actual fun trace(marker: Marker?, t: Throwable?, msg: () -> Any?)
 
   /** Lazy add a log message with throwable payload if isDebugEnabled is true */
-  public actual fun debug(marker: io.github.oshai.Marker?, t: Throwable?, msg: () -> Any?)
+  public actual fun debug(marker: Marker?, t: Throwable?, msg: () -> Any?)
 
   /** Lazy add a log message with throwable payload if isInfoEnabled is true */
-  public actual fun info(marker: io.github.oshai.Marker?, t: Throwable?, msg: () -> Any?)
+  public actual fun info(marker: Marker?, t: Throwable?, msg: () -> Any?)
 
   /** Lazy add a log message with throwable payload if isWarnEnabled is true */
-  public actual fun warn(marker: io.github.oshai.Marker?, t: Throwable?, msg: () -> Any?)
+  public actual fun warn(marker: Marker?, t: Throwable?, msg: () -> Any?)
 
   /** Lazy add a log message with throwable payload if isErrorEnabled is true */
-  public actual fun error(marker: io.github.oshai.Marker?, t: Throwable?, msg: () -> Any?)
+  public actual fun error(marker: Marker?, t: Throwable?, msg: () -> Any?)
 
   /** Add a log message with all the supplied parameters along with method name */
   public actual fun entry(vararg argArray: Any?)

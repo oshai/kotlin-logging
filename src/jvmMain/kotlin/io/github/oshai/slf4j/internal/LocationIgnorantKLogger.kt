@@ -14,7 +14,7 @@ import org.slf4j.Logger
  */
 @Suppress("TooManyFunctions")
 internal class LocationIgnorantKLogger(override val underlyingLogger: Logger) :
-  Slf4jLoggerWrapper(underlyingLogger), io.github.oshai.KLogger {
+  Slf4jLoggerWrapper(underlyingLogger), KLogger {
 
   /** Lazy add a log message if isTraceEnabled is true */
   override fun trace(msg: () -> Any?) {
@@ -177,8 +177,8 @@ internal class LocationIgnorantKLogger(override val underlyingLogger: Logger) :
     underlyingLogger.debug(marker?.toSlf4j(), format, arg1, arg2)
   }
 
-  override fun debug(marker: io.github.oshai.Marker?, format: String?, vararg argArray: Any?) {
-    underlyingLogger.debug(marker?.toSlf4j(), format, argArray)
+  override fun debug(marker: io.github.oshai.Marker?, format: String?, vararg arguments: Any?) {
+    underlyingLogger.debug(marker?.toSlf4j(), format, arguments)
   }
 
   override fun debug(marker: io.github.oshai.Marker?, msg: String?, t: Throwable?) {
@@ -224,8 +224,8 @@ internal class LocationIgnorantKLogger(override val underlyingLogger: Logger) :
     underlyingLogger.info(marker?.toSlf4j(), format, arg1, arg2)
   }
 
-  override fun info(marker: io.github.oshai.Marker?, format: String?, vararg argArray: Any?) {
-    underlyingLogger.info(marker?.toSlf4j(), format, argArray)
+  override fun info(marker: io.github.oshai.Marker?, format: String?, vararg arguments: Any?) {
+    underlyingLogger.info(marker?.toSlf4j(), format, arguments)
   }
 
   override fun info(marker: io.github.oshai.Marker?, msg: String?, t: Throwable?) {
@@ -271,8 +271,8 @@ internal class LocationIgnorantKLogger(override val underlyingLogger: Logger) :
     underlyingLogger.warn(marker?.toSlf4j(), format, arg1, arg2)
   }
 
-  override fun warn(marker: io.github.oshai.Marker?, format: String?, vararg argArray: Any?) {
-    underlyingLogger.warn(marker?.toSlf4j(), format, argArray)
+  override fun warn(marker: io.github.oshai.Marker?, format: String?, vararg arguments: Any?) {
+    underlyingLogger.warn(marker?.toSlf4j(), format, arguments)
   }
 
   override fun warn(marker: io.github.oshai.Marker?, msg: String?, t: Throwable?) {
@@ -318,8 +318,8 @@ internal class LocationIgnorantKLogger(override val underlyingLogger: Logger) :
     underlyingLogger.error(marker?.toSlf4j(), format, arg1, arg2)
   }
 
-  override fun error(marker: io.github.oshai.Marker?, format: String?, vararg argArray: Any?) {
-    underlyingLogger.error(marker?.toSlf4j(), format, argArray)
+  override fun error(marker: io.github.oshai.Marker?, format: String?, vararg arguments: Any?) {
+    underlyingLogger.error(marker?.toSlf4j(), format, arguments)
   }
 
   override fun error(marker: io.github.oshai.Marker?, msg: String?, t: Throwable?) {
