@@ -9,6 +9,9 @@ package io.github.oshai
 @Suppress("TooManyFunctions")
 public actual interface KLogger : ActualKLogger {
 
+  /** The actual logger executing logging */
+  public val underlyingLogger: Any
+
   /**
    * Log a message at the TRACE level.
    *
