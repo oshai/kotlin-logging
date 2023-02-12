@@ -172,8 +172,8 @@ internal class JulLoggerWrapper(override val underlyingLogger: Logger) : KLogger
     underlyingLogger.log(io.github.oshai.Level.DEBUG.toJULLevel(), format, arrayOf(arg1, arg2))
   }
 
-  override fun debug(marker: Marker?, format: String?, vararg argArray: Any?) {
-    underlyingLogger.log(io.github.oshai.Level.DEBUG.toJULLevel(), format, argArray)
+  override fun debug(marker: Marker?, format: String?, vararg arguments: Any?) {
+    underlyingLogger.log(io.github.oshai.Level.DEBUG.toJULLevel(), format, arguments)
   }
 
   override fun debug(marker: Marker?, msg: String?, t: Throwable?) {
@@ -219,8 +219,8 @@ internal class JulLoggerWrapper(override val underlyingLogger: Logger) : KLogger
     underlyingLogger.log(io.github.oshai.Level.INFO.toJULLevel(), format, arrayOf(arg1, arg2))
   }
 
-  override fun info(marker: Marker?, format: String?, vararg argArray: Any?) {
-    underlyingLogger.log(io.github.oshai.Level.INFO.toJULLevel(), format, argArray)
+  override fun info(marker: Marker?, format: String?, vararg arguments: Any?) {
+    underlyingLogger.log(io.github.oshai.Level.INFO.toJULLevel(), format, arguments)
   }
 
   override fun info(marker: Marker?, msg: String?, t: Throwable?) {
@@ -266,8 +266,8 @@ internal class JulLoggerWrapper(override val underlyingLogger: Logger) : KLogger
     underlyingLogger.log(io.github.oshai.Level.WARN.toJULLevel(), format, arrayOf(arg1, arg2))
   }
 
-  override fun warn(marker: Marker?, format: String?, vararg argArray: Any?) {
-    underlyingLogger.log(io.github.oshai.Level.WARN.toJULLevel(), format, argArray)
+  override fun warn(marker: Marker?, format: String?, vararg arguments: Any?) {
+    underlyingLogger.log(io.github.oshai.Level.WARN.toJULLevel(), format, arguments)
   }
 
   override fun warn(marker: Marker?, msg: String?, t: Throwable?) {
@@ -313,8 +313,8 @@ internal class JulLoggerWrapper(override val underlyingLogger: Logger) : KLogger
     underlyingLogger.log(io.github.oshai.Level.ERROR.toJULLevel(), format, arrayOf(arg1, arg2))
   }
 
-  override fun error(marker: Marker?, format: String?, vararg argArray: Any?) {
-    underlyingLogger.log(io.github.oshai.Level.ERROR.toJULLevel(), format, argArray)
+  override fun error(marker: Marker?, format: String?, vararg arguments: Any?) {
+    underlyingLogger.log(io.github.oshai.Level.ERROR.toJULLevel(), format, arguments)
   }
 
   override fun error(marker: Marker?, msg: String?, t: Throwable?) {

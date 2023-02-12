@@ -90,7 +90,12 @@ kotlin {
                 implementation(kotlin("test-annotations-common"))
             }
         }
+        // common to jvm and android
+        val javaMain by creating {
+            dependsOn(commonMain)
+        }
         val jvmMain by getting {
+            dependsOn(javaMain)
             dependencies {
                 compileOnly("org.slf4j:slf4j-api:${extra["slf4j_version"]}")
             }
@@ -109,7 +114,9 @@ kotlin {
                 implementation("org.slf4j:jul-to-slf4j:${extra["slf4j_version"]}")
             }
         }
-        val androidMain by getting {}
+        val androidMain by getting {
+            dependsOn(javaMain)
+        }
         val androidTest by getting {
             dependencies {
                 implementation(kotlin("test"))

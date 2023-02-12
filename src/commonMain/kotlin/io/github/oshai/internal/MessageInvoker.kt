@@ -8,10 +8,10 @@ internal inline fun (() -> Any?).toStringSafe(): String {
   }
 }
 
-public expect object ErrorMessageProducer {
-  public fun getErrorLog(e: Exception): String
+internal expect object ErrorMessageProducer {
+  fun getErrorLog(e: Exception): String
 }
 
-public object DefaultErrorMessageProducer {
-  public fun getErrorLog(e: Exception): String = "Log message invocation failed: $e"
+internal object DefaultErrorMessageProducer {
+  fun getErrorLog(e: Exception): String = "Log message invocation failed: $e"
 }
