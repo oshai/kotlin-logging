@@ -238,7 +238,7 @@ internal class LocationIgnorantKLogger(override val underlyingLogger: Logger) :
   }
 
   override fun warn(msg: String?) {
-    if (isTraceEnabled) {
+    if (isWarnEnabled) {
       underlyingLogger.warn(msg)
     }
   }
