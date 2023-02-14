@@ -285,7 +285,7 @@ internal class LocationIgnorantKLogger(override val underlyingLogger: Logger) :
   }
 
   override fun error(msg: String?) {
-    if (isTraceEnabled) {
+    if (isErrorEnabled) {
       underlyingLogger.error(msg)
     }
   }
