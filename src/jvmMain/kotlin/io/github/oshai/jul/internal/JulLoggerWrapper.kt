@@ -233,7 +233,7 @@ internal class JulLoggerWrapper(override val underlyingLogger: Logger) : KLogger
   }
 
   override fun warn(msg: String?) {
-    if (isTraceEnabled) {
+    if (isWarnEnabled) {
       underlyingLogger.log(io.github.oshai.Level.WARN.toJULLevel(), msg)
     }
   }
@@ -280,7 +280,7 @@ internal class JulLoggerWrapper(override val underlyingLogger: Logger) : KLogger
   }
 
   override fun error(msg: String?) {
-    if (isTraceEnabled) {
+    if (isErrorEnabled) {
       underlyingLogger.log(io.github.oshai.Level.ERROR.toJULLevel(), msg)
     }
   }
