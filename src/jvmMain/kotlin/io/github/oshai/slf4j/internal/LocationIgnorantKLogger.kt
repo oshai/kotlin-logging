@@ -3,6 +3,7 @@
 package io.github.oshai.slf4j.internal
 
 import io.github.oshai.KLogger
+import io.github.oshai.Marker
 import io.github.oshai.internal.toStringSafe
 import io.github.oshai.slf4j.toSlf4j
 import org.slf4j.Logger
@@ -67,32 +68,32 @@ internal class LocationIgnorantKLogger(override val underlyingLogger: Logger) :
   }
 
   /** Lazy add a log message with a marker if isTraceEnabled is true */
-  override fun trace(marker: io.github.oshai.Marker?, msg: () -> Any?) {
+  override fun trace(marker: Marker?, msg: () -> Any?) {
     if (isTraceEnabled) trace(marker, msg.toStringSafe())
   }
 
   /** Lazy add a log message with a marker if isDebugEnabled is true */
-  override fun debug(marker: io.github.oshai.Marker?, msg: () -> Any?) {
+  override fun debug(marker: Marker?, msg: () -> Any?) {
     if (isDebugEnabled) debug(marker, msg.toStringSafe())
   }
 
   /** Lazy add a log message with a marker if isInfoEnabled is true */
-  override fun info(marker: io.github.oshai.Marker?, msg: () -> Any?) {
+  override fun info(marker: Marker?, msg: () -> Any?) {
     if (isInfoEnabled) info(marker, msg.toStringSafe())
   }
 
   /** Lazy add a log message with a marker if isWarnEnabled is true */
-  override fun warn(marker: io.github.oshai.Marker?, msg: () -> Any?) {
+  override fun warn(marker: Marker?, msg: () -> Any?) {
     if (isWarnEnabled) warn(marker, msg.toStringSafe())
   }
 
   /** Lazy add a log message with a marker if isErrorEnabled is true */
-  override fun error(marker: io.github.oshai.Marker?, msg: () -> Any?) {
+  override fun error(marker: Marker?, msg: () -> Any?) {
     if (isErrorEnabled) error(marker, msg.toStringSafe())
   }
 
   /** Lazy add a log message with a marker and throwable payload if isTraceEnabled is true */
-  override fun trace(marker: io.github.oshai.Marker?, t: Throwable?, msg: () -> Any?) {
+  override fun trace(marker: Marker?, t: Throwable?, msg: () -> Any?) {
     if (isTraceEnabled) trace(marker, msg.toStringSafe(), t)
   }
 
@@ -118,33 +119,33 @@ internal class LocationIgnorantKLogger(override val underlyingLogger: Logger) :
     underlyingLogger.trace(msg, t)
   }
 
-  override fun trace(marker: io.github.oshai.Marker?, msg: String?) {
+  override fun trace(marker: Marker?, msg: String?) {
     underlyingLogger.trace(marker?.toSlf4j(), msg)
   }
 
-  override fun trace(marker: io.github.oshai.Marker?, format: String?, arg: Any?) {
+  override fun trace(marker: Marker?, format: String?, arg: Any?) {
     underlyingLogger.trace(marker?.toSlf4j(), format, arg)
   }
 
-  override fun trace(marker: io.github.oshai.Marker?, format: String?, arg1: Any?, arg2: Any?) {
+  override fun trace(marker: Marker?, format: String?, arg1: Any?, arg2: Any?) {
     underlyingLogger.trace(marker?.toSlf4j(), format, arg1, arg2)
   }
 
-  override fun trace(marker: io.github.oshai.Marker?, format: String?, vararg argArray: Any?) {
+  override fun trace(marker: Marker?, format: String?, vararg argArray: Any?) {
     underlyingLogger.trace(marker?.toSlf4j(), format, argArray)
   }
 
-  override fun trace(marker: io.github.oshai.Marker?, msg: String?, t: Throwable?) {
+  override fun trace(marker: Marker?, msg: String?, t: Throwable?) {
     underlyingLogger.trace(marker?.toSlf4j(), msg, t)
   }
 
   /** Lazy add a log message with a marker and throwable payload if isDebugEnabled is true */
-  override fun debug(marker: io.github.oshai.Marker?, t: Throwable?, msg: () -> Any?) {
+  override fun debug(marker: Marker?, t: Throwable?, msg: () -> Any?) {
     if (isDebugEnabled) debug(marker, msg.toStringSafe(), t)
   }
 
   override fun debug(msg: String?) {
-    if (isTraceEnabled) {
+    if (isDebugEnabled) {
       underlyingLogger.debug(msg)
     }
   }
@@ -165,33 +166,33 @@ internal class LocationIgnorantKLogger(override val underlyingLogger: Logger) :
     underlyingLogger.debug(msg, t)
   }
 
-  override fun debug(marker: io.github.oshai.Marker?, msg: String?) {
+  override fun debug(marker: Marker?, msg: String?) {
     underlyingLogger.debug(marker?.toSlf4j(), msg)
   }
 
-  override fun debug(marker: io.github.oshai.Marker?, format: String?, arg: Any?) {
+  override fun debug(marker: Marker?, format: String?, arg: Any?) {
     underlyingLogger.debug(marker?.toSlf4j(), format, arg)
   }
 
-  override fun debug(marker: io.github.oshai.Marker?, format: String?, arg1: Any?, arg2: Any?) {
+  override fun debug(marker: Marker?, format: String?, arg1: Any?, arg2: Any?) {
     underlyingLogger.debug(marker?.toSlf4j(), format, arg1, arg2)
   }
 
-  override fun debug(marker: io.github.oshai.Marker?, format: String?, vararg arguments: Any?) {
+  override fun debug(marker: Marker?, format: String?, vararg arguments: Any?) {
     underlyingLogger.debug(marker?.toSlf4j(), format, arguments)
   }
 
-  override fun debug(marker: io.github.oshai.Marker?, msg: String?, t: Throwable?) {
+  override fun debug(marker: Marker?, msg: String?, t: Throwable?) {
     underlyingLogger.debug(marker?.toSlf4j(), msg, t)
   }
 
   /** Lazy add a log message with a marker and throwable payload if isInfoEnabled is true */
-  override fun info(marker: io.github.oshai.Marker?, t: Throwable?, msg: () -> Any?) {
+  override fun info(marker: Marker?, t: Throwable?, msg: () -> Any?) {
     if (isInfoEnabled) info(marker, msg.toStringSafe(), t)
   }
 
   override fun info(msg: String?) {
-    if (isTraceEnabled) {
+    if (isInfoEnabled) {
       underlyingLogger.info(msg)
     }
   }
@@ -212,28 +213,28 @@ internal class LocationIgnorantKLogger(override val underlyingLogger: Logger) :
     underlyingLogger.info(msg, t)
   }
 
-  override fun info(marker: io.github.oshai.Marker?, msg: String?) {
+  override fun info(marker: Marker?, msg: String?) {
     underlyingLogger.info(marker?.toSlf4j(), msg)
   }
 
-  override fun info(marker: io.github.oshai.Marker?, format: String?, arg: Any?) {
+  override fun info(marker: Marker?, format: String?, arg: Any?) {
     underlyingLogger.info(marker?.toSlf4j(), format, arg)
   }
 
-  override fun info(marker: io.github.oshai.Marker?, format: String?, arg1: Any?, arg2: Any?) {
+  override fun info(marker: Marker?, format: String?, arg1: Any?, arg2: Any?) {
     underlyingLogger.info(marker?.toSlf4j(), format, arg1, arg2)
   }
 
-  override fun info(marker: io.github.oshai.Marker?, format: String?, vararg arguments: Any?) {
+  override fun info(marker: Marker?, format: String?, vararg arguments: Any?) {
     underlyingLogger.info(marker?.toSlf4j(), format, arguments)
   }
 
-  override fun info(marker: io.github.oshai.Marker?, msg: String?, t: Throwable?) {
+  override fun info(marker: Marker?, msg: String?, t: Throwable?) {
     underlyingLogger.info(marker?.toSlf4j(), msg, t)
   }
 
   /** Lazy add a log message with a marker and throwable payload if isWarnEnabled is true */
-  override fun warn(marker: io.github.oshai.Marker?, t: Throwable?, msg: () -> Any?) {
+  override fun warn(marker: Marker?, t: Throwable?, msg: () -> Any?) {
     if (isWarnEnabled) warn(marker, msg.toStringSafe(), t)
   }
 
@@ -259,28 +260,28 @@ internal class LocationIgnorantKLogger(override val underlyingLogger: Logger) :
     underlyingLogger.warn(msg, t)
   }
 
-  override fun warn(marker: io.github.oshai.Marker?, msg: String?) {
+  override fun warn(marker: Marker?, msg: String?) {
     underlyingLogger.warn(marker?.toSlf4j(), msg)
   }
 
-  override fun warn(marker: io.github.oshai.Marker?, format: String?, arg: Any?) {
+  override fun warn(marker: Marker?, format: String?, arg: Any?) {
     underlyingLogger.warn(marker?.toSlf4j(), format, arg)
   }
 
-  override fun warn(marker: io.github.oshai.Marker?, format: String?, arg1: Any?, arg2: Any?) {
+  override fun warn(marker: Marker?, format: String?, arg1: Any?, arg2: Any?) {
     underlyingLogger.warn(marker?.toSlf4j(), format, arg1, arg2)
   }
 
-  override fun warn(marker: io.github.oshai.Marker?, format: String?, vararg arguments: Any?) {
+  override fun warn(marker: Marker?, format: String?, vararg arguments: Any?) {
     underlyingLogger.warn(marker?.toSlf4j(), format, arguments)
   }
 
-  override fun warn(marker: io.github.oshai.Marker?, msg: String?, t: Throwable?) {
+  override fun warn(marker: Marker?, msg: String?, t: Throwable?) {
     underlyingLogger.warn(marker?.toSlf4j(), msg, t)
   }
 
   /** Lazy add a log message with a marker and throwable payload if isErrorEnabled is true */
-  override fun error(marker: io.github.oshai.Marker?, t: Throwable?, msg: () -> Any?) {
+  override fun error(marker: Marker?, t: Throwable?, msg: () -> Any?) {
     if (isErrorEnabled) error(marker, msg.toStringSafe(), t)
   }
 
@@ -306,23 +307,23 @@ internal class LocationIgnorantKLogger(override val underlyingLogger: Logger) :
     underlyingLogger.error(msg, t)
   }
 
-  override fun error(marker: io.github.oshai.Marker?, msg: String?) {
+  override fun error(marker: Marker?, msg: String?) {
     underlyingLogger.error(marker?.toSlf4j(), msg)
   }
 
-  override fun error(marker: io.github.oshai.Marker?, format: String?, arg: Any?) {
+  override fun error(marker: Marker?, format: String?, arg: Any?) {
     underlyingLogger.error(marker?.toSlf4j(), format, arg)
   }
 
-  override fun error(marker: io.github.oshai.Marker?, format: String?, arg1: Any?, arg2: Any?) {
+  override fun error(marker: Marker?, format: String?, arg1: Any?, arg2: Any?) {
     underlyingLogger.error(marker?.toSlf4j(), format, arg1, arg2)
   }
 
-  override fun error(marker: io.github.oshai.Marker?, format: String?, vararg arguments: Any?) {
+  override fun error(marker: Marker?, format: String?, vararg arguments: Any?) {
     underlyingLogger.error(marker?.toSlf4j(), format, arguments)
   }
 
-  override fun error(marker: io.github.oshai.Marker?, msg: String?, t: Throwable?) {
+  override fun error(marker: Marker?, msg: String?, t: Throwable?) {
     underlyingLogger.error(marker?.toSlf4j(), msg, t)
   }
 

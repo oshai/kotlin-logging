@@ -1,6 +1,7 @@
 package io.github.oshai.jul.internal
 
 import io.github.oshai.KLogger
+import io.github.oshai.Level.*
 import io.github.oshai.Marker
 import io.github.oshai.internal.toStringSafe
 import java.util.logging.Level
@@ -93,44 +94,44 @@ internal class JulLoggerWrapper(override val underlyingLogger: Logger) : KLogger
 
   override fun trace(msg: String?) {
     if (isTraceEnabled) {
-      underlyingLogger.log(io.github.oshai.Level.TRACE.toJULLevel(), msg)
+      underlyingLogger.log(TRACE.toJULLevel(), msg)
     }
   }
 
   override fun trace(format: String?, arg: Any?) {
-    underlyingLogger.log(io.github.oshai.Level.TRACE.toJULLevel(), format, arg)
+    underlyingLogger.log(TRACE.toJULLevel(), format, arg)
   }
 
   override fun trace(format: String?, arg1: Any?, arg2: Any?) {
-    underlyingLogger.log(io.github.oshai.Level.TRACE.toJULLevel(), format, arrayOf(arg1, arg2))
+    underlyingLogger.log(TRACE.toJULLevel(), format, arrayOf(arg1, arg2))
   }
 
   override fun trace(format: String?, vararg arguments: Any?) {
-    underlyingLogger.log(io.github.oshai.Level.TRACE.toJULLevel(), format, arguments)
+    underlyingLogger.log(TRACE.toJULLevel(), format, arguments)
   }
 
   override fun trace(msg: String?, t: Throwable?) {
-    underlyingLogger.log(io.github.oshai.Level.TRACE.toJULLevel(), msg, t)
+    underlyingLogger.log(TRACE.toJULLevel(), msg, t)
   }
 
   override fun trace(marker: Marker?, msg: String?) {
-    underlyingLogger.log(io.github.oshai.Level.TRACE.toJULLevel(), msg)
+    underlyingLogger.log(TRACE.toJULLevel(), msg)
   }
 
   override fun trace(marker: Marker?, format: String?, arg: Any?) {
-    underlyingLogger.log(io.github.oshai.Level.TRACE.toJULLevel(), format, arg)
+    underlyingLogger.log(TRACE.toJULLevel(), format, arg)
   }
 
   override fun trace(marker: Marker?, format: String?, arg1: Any?, arg2: Any?) {
-    underlyingLogger.log(io.github.oshai.Level.TRACE.toJULLevel(), format, arrayOf(arg1, arg2))
+    underlyingLogger.log(TRACE.toJULLevel(), format, arrayOf(arg1, arg2))
   }
 
   override fun trace(marker: Marker?, format: String?, vararg argArray: Any?) {
-    underlyingLogger.log(io.github.oshai.Level.TRACE.toJULLevel(), format, argArray)
+    underlyingLogger.log(TRACE.toJULLevel(), format, argArray)
   }
 
   override fun trace(marker: Marker?, msg: String?, t: Throwable?) {
-    underlyingLogger.log(io.github.oshai.Level.TRACE.toJULLevel(), msg, t)
+    underlyingLogger.log(TRACE.toJULLevel(), msg, t)
   }
 
   /** Lazy add a log message with a marker and throwable payload if isDebugEnabled is true */
@@ -139,45 +140,45 @@ internal class JulLoggerWrapper(override val underlyingLogger: Logger) : KLogger
   }
 
   override fun debug(msg: String?) {
-    if (isTraceEnabled) {
-      underlyingLogger.log(io.github.oshai.Level.DEBUG.toJULLevel(), msg)
+    if (isDebugEnabled) {
+      underlyingLogger.log(DEBUG.toJULLevel(), msg)
     }
   }
 
   override fun debug(format: String?, arg: Any?) {
-    underlyingLogger.log(io.github.oshai.Level.DEBUG.toJULLevel(), format, arg)
+    underlyingLogger.log(DEBUG.toJULLevel(), format, arg)
   }
 
   override fun debug(format: String?, arg1: Any?, arg2: Any?) {
-    underlyingLogger.log(io.github.oshai.Level.DEBUG.toJULLevel(), format, arrayOf(arg1, arg2))
+    underlyingLogger.log(DEBUG.toJULLevel(), format, arrayOf(arg1, arg2))
   }
 
   override fun debug(format: String?, vararg arguments: Any?) {
-    underlyingLogger.log(io.github.oshai.Level.DEBUG.toJULLevel(), format, arguments)
+    underlyingLogger.log(DEBUG.toJULLevel(), format, arguments)
   }
 
   override fun debug(msg: String?, t: Throwable?) {
-    underlyingLogger.log(io.github.oshai.Level.DEBUG.toJULLevel(), msg, t)
+    underlyingLogger.log(DEBUG.toJULLevel(), msg, t)
   }
 
   override fun debug(marker: Marker?, msg: String?) {
-    underlyingLogger.log(io.github.oshai.Level.DEBUG.toJULLevel(), msg)
+    underlyingLogger.log(DEBUG.toJULLevel(), msg)
   }
 
   override fun debug(marker: Marker?, format: String?, arg: Any?) {
-    underlyingLogger.log(io.github.oshai.Level.DEBUG.toJULLevel(), format, arg)
+    underlyingLogger.log(DEBUG.toJULLevel(), format, arg)
   }
 
   override fun debug(marker: Marker?, format: String?, arg1: Any?, arg2: Any?) {
-    underlyingLogger.log(io.github.oshai.Level.DEBUG.toJULLevel(), format, arrayOf(arg1, arg2))
+    underlyingLogger.log(DEBUG.toJULLevel(), format, arrayOf(arg1, arg2))
   }
 
   override fun debug(marker: Marker?, format: String?, vararg arguments: Any?) {
-    underlyingLogger.log(io.github.oshai.Level.DEBUG.toJULLevel(), format, arguments)
+    underlyingLogger.log(DEBUG.toJULLevel(), format, arguments)
   }
 
   override fun debug(marker: Marker?, msg: String?, t: Throwable?) {
-    underlyingLogger.log(io.github.oshai.Level.DEBUG.toJULLevel(), msg, t)
+    underlyingLogger.log(DEBUG.toJULLevel(), msg, t)
   }
 
   /** Lazy add a log message with a marker and throwable payload if isInfoEnabled is true */
@@ -186,45 +187,45 @@ internal class JulLoggerWrapper(override val underlyingLogger: Logger) : KLogger
   }
 
   override fun info(msg: String?) {
-    if (isTraceEnabled) {
+    if (isInfoEnabled) {
       underlyingLogger.info(msg)
     }
   }
 
   override fun info(format: String?, arg: Any?) {
-    underlyingLogger.log(io.github.oshai.Level.INFO.toJULLevel(), format, arg)
+    underlyingLogger.log(INFO.toJULLevel(), format, arg)
   }
 
   override fun info(format: String?, arg1: Any?, arg2: Any?) {
-    underlyingLogger.log(io.github.oshai.Level.INFO.toJULLevel(), format, arrayOf(arg1, arg2))
+    underlyingLogger.log(INFO.toJULLevel(), format, arrayOf(arg1, arg2))
   }
 
   override fun info(format: String?, vararg arguments: Any?) {
-    underlyingLogger.log(io.github.oshai.Level.INFO.toJULLevel(), format, arguments)
+    underlyingLogger.log(INFO.toJULLevel(), format, arguments)
   }
 
   override fun info(msg: String?, t: Throwable?) {
-    underlyingLogger.log(io.github.oshai.Level.INFO.toJULLevel(), msg, t)
+    underlyingLogger.log(INFO.toJULLevel(), msg, t)
   }
 
   override fun info(marker: Marker?, msg: String?) {
-    underlyingLogger.log(io.github.oshai.Level.INFO.toJULLevel(), msg)
+    underlyingLogger.log(INFO.toJULLevel(), msg)
   }
 
   override fun info(marker: Marker?, format: String?, arg: Any?) {
-    underlyingLogger.log(io.github.oshai.Level.INFO.toJULLevel(), format, arg)
+    underlyingLogger.log(INFO.toJULLevel(), format, arg)
   }
 
   override fun info(marker: Marker?, format: String?, arg1: Any?, arg2: Any?) {
-    underlyingLogger.log(io.github.oshai.Level.INFO.toJULLevel(), format, arrayOf(arg1, arg2))
+    underlyingLogger.log(INFO.toJULLevel(), format, arrayOf(arg1, arg2))
   }
 
   override fun info(marker: Marker?, format: String?, vararg arguments: Any?) {
-    underlyingLogger.log(io.github.oshai.Level.INFO.toJULLevel(), format, arguments)
+    underlyingLogger.log(INFO.toJULLevel(), format, arguments)
   }
 
   override fun info(marker: Marker?, msg: String?, t: Throwable?) {
-    underlyingLogger.log(io.github.oshai.Level.INFO.toJULLevel(), msg, t)
+    underlyingLogger.log(INFO.toJULLevel(), msg, t)
   }
 
   /** Lazy add a log message with a marker and throwable payload if isWarnEnabled is true */
@@ -234,44 +235,44 @@ internal class JulLoggerWrapper(override val underlyingLogger: Logger) : KLogger
 
   override fun warn(msg: String?) {
     if (isWarnEnabled) {
-      underlyingLogger.log(io.github.oshai.Level.WARN.toJULLevel(), msg)
+      underlyingLogger.log(WARN.toJULLevel(), msg)
     }
   }
 
   override fun warn(format: String?, arg: Any?) {
-    underlyingLogger.log(io.github.oshai.Level.WARN.toJULLevel(), format, arg)
+    underlyingLogger.log(WARN.toJULLevel(), format, arg)
   }
 
   override fun warn(format: String?, arg1: Any?, arg2: Any?) {
-    underlyingLogger.log(io.github.oshai.Level.WARN.toJULLevel(), format, arrayOf(arg1, arg2))
+    underlyingLogger.log(WARN.toJULLevel(), format, arrayOf(arg1, arg2))
   }
 
   override fun warn(format: String?, vararg arguments: Any?) {
-    underlyingLogger.log(io.github.oshai.Level.WARN.toJULLevel(), format, arguments)
+    underlyingLogger.log(WARN.toJULLevel(), format, arguments)
   }
 
   override fun warn(msg: String?, t: Throwable?) {
-    underlyingLogger.log(io.github.oshai.Level.WARN.toJULLevel(), msg, t)
+    underlyingLogger.log(WARN.toJULLevel(), msg, t)
   }
 
   override fun warn(marker: Marker?, msg: String?) {
-    underlyingLogger.log(io.github.oshai.Level.WARN.toJULLevel(), msg)
+    underlyingLogger.log(WARN.toJULLevel(), msg)
   }
 
   override fun warn(marker: Marker?, format: String?, arg: Any?) {
-    underlyingLogger.log(io.github.oshai.Level.WARN.toJULLevel(), format, arg)
+    underlyingLogger.log(WARN.toJULLevel(), format, arg)
   }
 
   override fun warn(marker: Marker?, format: String?, arg1: Any?, arg2: Any?) {
-    underlyingLogger.log(io.github.oshai.Level.WARN.toJULLevel(), format, arrayOf(arg1, arg2))
+    underlyingLogger.log(WARN.toJULLevel(), format, arrayOf(arg1, arg2))
   }
 
   override fun warn(marker: Marker?, format: String?, vararg arguments: Any?) {
-    underlyingLogger.log(io.github.oshai.Level.WARN.toJULLevel(), format, arguments)
+    underlyingLogger.log(WARN.toJULLevel(), format, arguments)
   }
 
   override fun warn(marker: Marker?, msg: String?, t: Throwable?) {
-    underlyingLogger.log(io.github.oshai.Level.WARN.toJULLevel(), msg, t)
+    underlyingLogger.log(WARN.toJULLevel(), msg, t)
   }
 
   /** Lazy add a log message with a marker and throwable payload if isErrorEnabled is true */
@@ -281,44 +282,44 @@ internal class JulLoggerWrapper(override val underlyingLogger: Logger) : KLogger
 
   override fun error(msg: String?) {
     if (isErrorEnabled) {
-      underlyingLogger.log(io.github.oshai.Level.ERROR.toJULLevel(), msg)
+      underlyingLogger.log(ERROR.toJULLevel(), msg)
     }
   }
 
   override fun error(format: String?, arg: Any?) {
-    underlyingLogger.log(io.github.oshai.Level.ERROR.toJULLevel(), format, arg)
+    underlyingLogger.log(ERROR.toJULLevel(), format, arg)
   }
 
   override fun error(format: String?, arg1: Any?, arg2: Any?) {
-    underlyingLogger.log(io.github.oshai.Level.ERROR.toJULLevel(), format, arrayOf(arg1, arg2))
+    underlyingLogger.log(ERROR.toJULLevel(), format, arrayOf(arg1, arg2))
   }
 
   override fun error(format: String?, vararg arguments: Any?) {
-    underlyingLogger.log(io.github.oshai.Level.ERROR.toJULLevel(), format, arguments)
+    underlyingLogger.log(ERROR.toJULLevel(), format, arguments)
   }
 
   override fun error(msg: String?, t: Throwable?) {
-    underlyingLogger.log(io.github.oshai.Level.ERROR.toJULLevel(), msg, t)
+    underlyingLogger.log(ERROR.toJULLevel(), msg, t)
   }
 
   override fun error(marker: Marker?, msg: String?) {
-    underlyingLogger.log(io.github.oshai.Level.ERROR.toJULLevel(), msg)
+    underlyingLogger.log(ERROR.toJULLevel(), msg)
   }
 
   override fun error(marker: Marker?, format: String?, arg: Any?) {
-    underlyingLogger.log(io.github.oshai.Level.ERROR.toJULLevel(), format, arg)
+    underlyingLogger.log(ERROR.toJULLevel(), format, arg)
   }
 
   override fun error(marker: Marker?, format: String?, arg1: Any?, arg2: Any?) {
-    underlyingLogger.log(io.github.oshai.Level.ERROR.toJULLevel(), format, arrayOf(arg1, arg2))
+    underlyingLogger.log(ERROR.toJULLevel(), format, arrayOf(arg1, arg2))
   }
 
   override fun error(marker: Marker?, format: String?, vararg arguments: Any?) {
-    underlyingLogger.log(io.github.oshai.Level.ERROR.toJULLevel(), format, arguments)
+    underlyingLogger.log(ERROR.toJULLevel(), format, arguments)
   }
 
   override fun error(marker: Marker?, msg: String?, t: Throwable?) {
-    underlyingLogger.log(io.github.oshai.Level.ERROR.toJULLevel(), msg, t)
+    underlyingLogger.log(ERROR.toJULLevel(), msg, t)
   }
 
   override inline fun entry(vararg argArray: Any?) {
@@ -344,48 +345,48 @@ internal class JulLoggerWrapper(override val underlyingLogger: Logger) : KLogger
   }
 
   override val isTraceEnabled: Boolean
-    get() = underlyingLogger.isLoggable(io.github.oshai.Level.TRACE.toJULLevel())
+    get() = underlyingLogger.isLoggable(TRACE.toJULLevel())
 
   override fun isTraceEnabled(marker: Marker?): Boolean {
-    return underlyingLogger.isLoggable(io.github.oshai.Level.TRACE.toJULLevel())
+    return underlyingLogger.isLoggable(TRACE.toJULLevel())
   }
 
   override val isDebugEnabled: Boolean
-    get() = underlyingLogger.isLoggable(io.github.oshai.Level.DEBUG.toJULLevel())
+    get() = underlyingLogger.isLoggable(DEBUG.toJULLevel())
 
   override fun isDebugEnabled(marker: Marker?): Boolean {
-    return underlyingLogger.isLoggable(io.github.oshai.Level.DEBUG.toJULLevel())
+    return underlyingLogger.isLoggable(DEBUG.toJULLevel())
   }
 
   override val isInfoEnabled: Boolean
-    get() = underlyingLogger.isLoggable(io.github.oshai.Level.INFO.toJULLevel())
+    get() = underlyingLogger.isLoggable(INFO.toJULLevel())
 
   override fun isInfoEnabled(marker: Marker?): Boolean {
-    return underlyingLogger.isLoggable(io.github.oshai.Level.INFO.toJULLevel())
+    return underlyingLogger.isLoggable(INFO.toJULLevel())
   }
 
   override val isWarnEnabled: Boolean
-    get() = underlyingLogger.isLoggable(io.github.oshai.Level.WARN.toJULLevel())
+    get() = underlyingLogger.isLoggable(WARN.toJULLevel())
 
   override fun isWarnEnabled(marker: Marker?): Boolean {
-    return underlyingLogger.isLoggable(io.github.oshai.Level.WARN.toJULLevel())
+    return underlyingLogger.isLoggable(WARN.toJULLevel())
   }
 
   override val isErrorEnabled: Boolean
-    get() = underlyingLogger.isLoggable(io.github.oshai.Level.ERROR.toJULLevel())
+    get() = underlyingLogger.isLoggable(ERROR.toJULLevel())
 
   override fun isErrorEnabled(marker: Marker?): Boolean {
-    return underlyingLogger.isLoggable(io.github.oshai.Level.ERROR.toJULLevel())
+    return underlyingLogger.isLoggable(ERROR.toJULLevel())
   }
 
   private fun io.github.oshai.Level.toJULLevel(): Level {
     val julLevel: Level =
       when (this) {
-        io.github.oshai.Level.TRACE -> Level.FINEST
-        io.github.oshai.Level.DEBUG -> Level.FINE
-        io.github.oshai.Level.INFO -> Level.INFO
-        io.github.oshai.Level.WARN -> Level.WARNING
-        io.github.oshai.Level.ERROR -> Level.SEVERE
+        TRACE -> Level.FINEST
+        DEBUG -> Level.FINE
+        INFO -> Level.INFO
+        WARN -> Level.WARNING
+        ERROR -> Level.SEVERE
       }
     return julLevel
   }
