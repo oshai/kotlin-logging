@@ -98,6 +98,7 @@ kotlin {
             dependsOn(javaMain)
             dependencies {
                 compileOnly("org.slf4j:slf4j-api:${extra["slf4j_version"]}")
+                compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:1.6.4")
             }
         }
         val jvmTest by getting {
