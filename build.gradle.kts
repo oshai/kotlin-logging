@@ -98,6 +98,7 @@ kotlin {
             dependsOn(javaMain)
             dependencies {
                 compileOnly("org.slf4j:slf4j-api:${extra["slf4j_version"]}")
+                compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:${extra["coroutines_version"]}")
             }
         }
         val jvmTest by getting {
@@ -112,6 +113,9 @@ kotlin {
                 implementation("org.slf4j:slf4j-api:${extra["slf4j_version"]}")
                 // our jul test just forward the logs jul -> slf4j -> log4j
                 implementation("org.slf4j:jul-to-slf4j:${extra["slf4j_version"]}")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:${extra["coroutines_version"]}")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${extra["coroutines_version"]}")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:${extra["coroutines_version"]}")
             }
         }
         val androidMain by getting {
