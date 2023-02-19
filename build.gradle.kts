@@ -85,7 +85,6 @@ kotlin {
     sourceSets {
         val commonMain by getting {}
         val commonTest by getting {
-            dependsOn(commonMain)
             dependencies {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
@@ -103,7 +102,6 @@ kotlin {
             }
         }
         val jvmTest by getting {
-            dependsOn(jvmMain)
             dependencies {
                 implementation(kotlin("test"))
                 implementation("org.junit.jupiter:junit-jupiter-engine:${extra["junit_version"]}")
@@ -124,7 +122,6 @@ kotlin {
             dependsOn(javaMain)
         }
         val androidTest by getting {
-            dependsOn(androidMain)
             dependencies {
                 implementation(kotlin("test"))
                 implementation("org.junit.jupiter:junit-jupiter-engine:${extra["junit_version"]}")
@@ -136,7 +133,6 @@ kotlin {
             dependsOn(commonMain)
         }
         val jsTest by getting {
-            dependsOn(jsMain)
             dependencies {
                 implementation(kotlin("test-js"))
             }
@@ -145,7 +141,6 @@ kotlin {
             dependsOn(commonMain)
         }
         val nativeTest by creating {
-            dependsOn(nativeMain)
             dependencies {
                 implementation(kotlin("test"))
             }
