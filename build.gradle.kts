@@ -129,7 +129,9 @@ kotlin {
                 implementation("org.mockito:mockito-core:${extra["mockito_version"]}")
             }
         }
-        val jsMain by getting {}
+        val jsMain by getting {
+            dependsOn(commonMain)
+        }
         val jsTest by getting {
             dependencies {
                 implementation(kotlin("test-js"))
@@ -139,7 +141,6 @@ kotlin {
             dependsOn(commonMain)
         }
         val nativeTest by creating {
-            dependsOn(nativeMain)
             dependencies {
                 implementation(kotlin("test"))
             }
