@@ -5,7 +5,8 @@ internal actual object KLoggerNameResolver {
 
   internal actual inline fun name(noinline func: () -> Unit): String {
     var found = false
-    for (line in Exception().stackTraceToString().split("\n")) {
+    val exception = Exception()
+    for (line in exception.stackTraceToString().split("\n")) {
       if (found) {
         return line.substringBefore(".kt").substringAfterLast(".").substringAfterLast("/")
       }

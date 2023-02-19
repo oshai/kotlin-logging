@@ -3,9 +3,10 @@ package io.github.oshai
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-private val logger = KotlinLogging.logger {}
+private val logger = KotlinLogging.logger("SimpleJsTest")
 
 class SimpleJsTest {
+
   @Test
   fun simpleJsTest() {
     val appender = createAppender()
