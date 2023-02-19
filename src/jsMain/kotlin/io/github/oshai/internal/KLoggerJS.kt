@@ -9,114 +9,127 @@ import io.github.oshai.Level.ERROR
 import io.github.oshai.Level.INFO
 import io.github.oshai.Level.TRACE
 import io.github.oshai.Level.WARN
+import io.github.oshai.Marker
 import io.github.oshai.isLoggingEnabled
 
 @Suppress("TooManyFunctions")
 internal class KLoggerJS(override val name: String) : KLogger {
 
-  override fun trace(msg: () -> Any?) = TRACE.logIfEnabled(msg, APPENDER::trace)
+  override fun trace(msg: () -> Any?) = TRACE.logIfEnabled(name, msg, APPENDER::trace)
 
-  override fun debug(msg: () -> Any?) = DEBUG.logIfEnabled(msg, APPENDER::debug)
+  override fun debug(msg: () -> Any?) = DEBUG.logIfEnabled(name, msg, APPENDER::debug)
 
-  override fun info(msg: () -> Any?) = INFO.logIfEnabled(msg, APPENDER::info)
+  override fun info(msg: () -> Any?) = INFO.logIfEnabled(name, msg, APPENDER::info)
 
-  override fun warn(msg: () -> Any?) = WARN.logIfEnabled(msg, APPENDER::warn)
+  override fun warn(msg: () -> Any?) = WARN.logIfEnabled(name, msg, APPENDER::warn)
 
-  override fun error(msg: () -> Any?) = ERROR.logIfEnabled(msg, APPENDER::error)
+  override fun error(msg: () -> Any?) = ERROR.logIfEnabled(name, msg, APPENDER::error)
 
-  override fun trace(t: Throwable?, msg: () -> Any?) = TRACE.logIfEnabled(msg, t, APPENDER::trace)
+  override fun trace(t: Throwable?, msg: () -> Any?) =
+    TRACE.logIfEnabled(name, msg, t, APPENDER::trace)
 
-  override fun debug(t: Throwable?, msg: () -> Any?) = DEBUG.logIfEnabled(msg, t, APPENDER::debug)
+  override fun debug(t: Throwable?, msg: () -> Any?) =
+    DEBUG.logIfEnabled(name, msg, t, APPENDER::debug)
 
-  override fun info(t: Throwable?, msg: () -> Any?) = INFO.logIfEnabled(msg, t, APPENDER::info)
+  override fun info(t: Throwable?, msg: () -> Any?) =
+    INFO.logIfEnabled(name, msg, t, APPENDER::info)
 
-  override fun warn(t: Throwable?, msg: () -> Any?) = WARN.logIfEnabled(msg, t, APPENDER::warn)
+  override fun warn(t: Throwable?, msg: () -> Any?) =
+    WARN.logIfEnabled(name, msg, t, APPENDER::warn)
 
-  override fun error(t: Throwable?, msg: () -> Any?) = ERROR.logIfEnabled(msg, t, APPENDER::error)
+  override fun error(t: Throwable?, msg: () -> Any?) =
+    ERROR.logIfEnabled(name, msg, t, APPENDER::error)
 
-  override fun trace(marker: io.github.oshai.Marker?, msg: () -> Any?) =
-    TRACE.logIfEnabled(marker, msg, APPENDER::trace)
+  override fun trace(marker: Marker?, msg: () -> Any?) =
+    TRACE.logIfEnabled(name, marker, msg, APPENDER::trace)
 
-  override fun debug(marker: io.github.oshai.Marker?, msg: () -> Any?) =
-    DEBUG.logIfEnabled(marker, msg, APPENDER::debug)
+  override fun debug(marker: Marker?, msg: () -> Any?) =
+    DEBUG.logIfEnabled(name, marker, msg, APPENDER::debug)
 
-  override fun info(marker: io.github.oshai.Marker?, msg: () -> Any?) =
-    INFO.logIfEnabled(marker, msg, APPENDER::info)
+  override fun info(marker: Marker?, msg: () -> Any?) =
+    INFO.logIfEnabled(name, marker, msg, APPENDER::info)
 
-  override fun warn(marker: io.github.oshai.Marker?, msg: () -> Any?) =
-    WARN.logIfEnabled(marker, msg, APPENDER::warn)
+  override fun warn(marker: Marker?, msg: () -> Any?) =
+    WARN.logIfEnabled(name, marker, msg, APPENDER::warn)
 
-  override fun error(marker: io.github.oshai.Marker?, msg: () -> Any?) =
-    ERROR.logIfEnabled(marker, msg, APPENDER::error)
+  override fun error(marker: Marker?, msg: () -> Any?) =
+    ERROR.logIfEnabled(name, marker, msg, APPENDER::error)
 
-  override fun trace(marker: io.github.oshai.Marker?, t: Throwable?, msg: () -> Any?) =
-    TRACE.logIfEnabled(marker, msg, t, APPENDER::trace)
+  override fun trace(marker: Marker?, t: Throwable?, msg: () -> Any?) =
+    TRACE.logIfEnabled(name, marker, msg, t, APPENDER::trace)
 
-  override fun debug(marker: io.github.oshai.Marker?, t: Throwable?, msg: () -> Any?) =
-    DEBUG.logIfEnabled(marker, msg, t, APPENDER::debug)
+  override fun debug(marker: Marker?, t: Throwable?, msg: () -> Any?) =
+    DEBUG.logIfEnabled(name, marker, msg, t, APPENDER::debug)
 
-  override fun info(marker: io.github.oshai.Marker?, t: Throwable?, msg: () -> Any?) =
-    INFO.logIfEnabled(marker, msg, t, APPENDER::info)
+  override fun info(marker: Marker?, t: Throwable?, msg: () -> Any?) =
+    INFO.logIfEnabled(name, marker, msg, t, APPENDER::info)
 
-  override fun warn(marker: io.github.oshai.Marker?, t: Throwable?, msg: () -> Any?) =
-    WARN.logIfEnabled(marker, msg, t, APPENDER::warn)
+  override fun warn(marker: Marker?, t: Throwable?, msg: () -> Any?) =
+    WARN.logIfEnabled(name, marker, msg, t, APPENDER::warn)
 
-  override fun error(marker: io.github.oshai.Marker?, t: Throwable?, msg: () -> Any?) =
-    ERROR.logIfEnabled(marker, msg, t, APPENDER::error)
+  override fun error(marker: Marker?, t: Throwable?, msg: () -> Any?) =
+    ERROR.logIfEnabled(name, marker, msg, t, APPENDER::error)
 
-  private fun Level.logIfEnabled(msg: () -> Any?, logFunction: (Any?) -> Unit) {
+  private fun Level.logIfEnabled(loggerName: String, msg: () -> Any?, logFunction: (Any?) -> Unit) {
     if (isLoggingEnabled()) {
-      logFunction(FORMATTER.formatMessage(this, name, msg))
-    }
-  }
-
-  private fun Level.logIfEnabled(msg: () -> Any?, t: Throwable?, logFunction: (Any?) -> Unit) {
-    if (isLoggingEnabled()) {
-      logFunction(FORMATTER.formatMessage(this, name, t, msg))
-    }
-  }
-
-  private fun Level.logIfEnabled(
-    marker: io.github.oshai.Marker?,
-    msg: () -> Any?,
-    logFunction: (Any?) -> Unit
-  ) {
-    if (isLoggingEnabled()) {
-      logFunction(FORMATTER.formatMessage(this, name, marker, msg))
+      logFunction(FORMATTER.formatMessage(this, loggerName, msg))
     }
   }
 
   private fun Level.logIfEnabled(
-    marker: io.github.oshai.Marker?,
+    loggerName: String,
     msg: () -> Any?,
     t: Throwable?,
     logFunction: (Any?) -> Unit
   ) {
     if (isLoggingEnabled()) {
-      logFunction(FORMATTER.formatMessage(this, name, marker, t, msg))
+      logFunction(FORMATTER.formatMessage(this, loggerName, t, msg))
+    }
+  }
+
+  private fun Level.logIfEnabled(
+    loggerName: String,
+    marker: Marker?,
+    msg: () -> Any?,
+    logFunction: (Any?) -> Unit
+  ) {
+    if (isLoggingEnabled()) {
+      logFunction(FORMATTER.formatMessage(this, loggerName, marker, msg))
+    }
+  }
+
+  private fun Level.logIfEnabled(
+    loggerName: String,
+    marker: Marker?,
+    msg: () -> Any?,
+    t: Throwable?,
+    logFunction: (Any?) -> Unit
+  ) {
+    if (isLoggingEnabled()) {
+      logFunction(FORMATTER.formatMessage(this, loggerName, marker, t, msg))
     }
   }
 
   override fun entry(vararg argArray: Any?) {
-    TRACE.logIfEnabled({ "entry($argArray)" }, APPENDER::trace)
+    TRACE.logIfEnabled(name, { "entry($argArray)" }, APPENDER::trace)
   }
 
   override fun exit() {
-    TRACE.logIfEnabled({ "exit()" }, APPENDER::trace)
+    TRACE.logIfEnabled(name, { "exit()" }, APPENDER::trace)
   }
 
   override fun <T : Any?> exit(result: T): T {
-    TRACE.logIfEnabled({ "exit($result)" }, APPENDER::trace)
+    TRACE.logIfEnabled(name, { "exit($result)" }, APPENDER::trace)
     return result
   }
 
   override fun <T : Throwable> throwing(throwable: T): T {
-    ERROR.logIfEnabled({ "throwing($throwable" }, throwable, APPENDER::error)
+    ERROR.logIfEnabled(name, { "throwing($throwable" }, throwable, APPENDER::error)
     return throwable
   }
 
   override fun <T : Throwable> catching(throwable: T) {
-    ERROR.logIfEnabled({ "catching($throwable" }, throwable, APPENDER::error)
+    ERROR.logIfEnabled(name, { "catching($throwable" }, throwable, APPENDER::error)
   }
 
   /**
