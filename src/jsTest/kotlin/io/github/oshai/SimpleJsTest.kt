@@ -14,6 +14,7 @@ class SimpleJsTest {
     logger.info { "info msg" }
     assertEquals("INFO: [SimpleJsTest] info msg", appender.lastMessage)
     assertEquals("info", appender.lastLevel)
+    KotlinLoggingConfiguration.APPENDER = ConsoleOutputAppender
   }
 
   private fun createAppender(): SimpleAppender = SimpleAppender()
