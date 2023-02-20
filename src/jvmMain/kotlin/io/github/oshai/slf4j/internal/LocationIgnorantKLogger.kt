@@ -103,16 +103,16 @@ internal class LocationIgnorantKLogger(override val underlyingLogger: Logger) :
     }
   }
 
-  override fun trace(format: String?, arg: Any?) {
-    underlyingLogger.trace(format, arg)
+  override fun trace(msg: String?, arg: Any?) {
+    underlyingLogger.trace(msg, arg)
   }
 
-  override fun trace(format: String?, arg1: Any?, arg2: Any?) {
-    underlyingLogger.trace(format, arg1, arg2)
+  override fun trace(msg: String?, arg1: Any?, arg2: Any?) {
+    underlyingLogger.trace(msg, arg1, arg2)
   }
 
-  override fun trace(format: String?, vararg arguments: Any?) {
-    underlyingLogger.trace(format, arguments)
+  override fun trace(msg: String?, vararg arguments: Any?) {
+    underlyingLogger.trace(msg, arguments)
   }
 
   override fun trace(msg: String?, t: Throwable?) {
@@ -123,16 +123,16 @@ internal class LocationIgnorantKLogger(override val underlyingLogger: Logger) :
     underlyingLogger.trace(marker?.toSlf4j(), msg)
   }
 
-  override fun trace(marker: Marker?, format: String?, arg: Any?) {
-    underlyingLogger.trace(marker?.toSlf4j(), format, arg)
+  override fun trace(marker: Marker?, msg: String?, arg: Any?) {
+    underlyingLogger.trace(marker?.toSlf4j(), msg, arg)
   }
 
-  override fun trace(marker: Marker?, format: String?, arg1: Any?, arg2: Any?) {
-    underlyingLogger.trace(marker?.toSlf4j(), format, arg1, arg2)
+  override fun trace(marker: Marker?, msg: String?, arg1: Any?, arg2: Any?) {
+    underlyingLogger.trace(marker?.toSlf4j(), msg, arg1, arg2)
   }
 
-  override fun trace(marker: Marker?, format: String?, vararg argArray: Any?) {
-    underlyingLogger.trace(marker?.toSlf4j(), format, argArray)
+  override fun trace(marker: Marker?, msg: String?, vararg argArray: Any?) {
+    underlyingLogger.trace(marker?.toSlf4j(), msg, argArray)
   }
 
   override fun trace(marker: Marker?, msg: String?, t: Throwable?) {
@@ -150,16 +150,16 @@ internal class LocationIgnorantKLogger(override val underlyingLogger: Logger) :
     }
   }
 
-  override fun debug(format: String?, arg: Any?) {
-    underlyingLogger.debug(format, arg)
+  override fun debug(msg: String?, arg: Any?) {
+    underlyingLogger.debug(msg, arg)
   }
 
-  override fun debug(format: String?, arg1: Any?, arg2: Any?) {
-    underlyingLogger.debug(format, arg1, arg2)
+  override fun debug(msg: String?, arg1: Any?, arg2: Any?) {
+    underlyingLogger.debug(msg, arg1, arg2)
   }
 
-  override fun debug(format: String?, vararg arguments: Any?) {
-    underlyingLogger.debug(format, arguments)
+  override fun debug(msg: String?, vararg arguments: Any?) {
+    underlyingLogger.debug(msg, arguments)
   }
 
   override fun debug(msg: String?, t: Throwable?) {
@@ -170,16 +170,16 @@ internal class LocationIgnorantKLogger(override val underlyingLogger: Logger) :
     underlyingLogger.debug(marker?.toSlf4j(), msg)
   }
 
-  override fun debug(marker: Marker?, format: String?, arg: Any?) {
-    underlyingLogger.debug(marker?.toSlf4j(), format, arg)
+  override fun debug(marker: Marker?, msg: String?, arg: Any?) {
+    underlyingLogger.debug(marker?.toSlf4j(), msg, arg)
   }
 
-  override fun debug(marker: Marker?, format: String?, arg1: Any?, arg2: Any?) {
-    underlyingLogger.debug(marker?.toSlf4j(), format, arg1, arg2)
+  override fun debug(marker: Marker?, msg: String?, arg1: Any?, arg2: Any?) {
+    underlyingLogger.debug(marker?.toSlf4j(), msg, arg1, arg2)
   }
 
-  override fun debug(marker: Marker?, format: String?, vararg arguments: Any?) {
-    underlyingLogger.debug(marker?.toSlf4j(), format, arguments)
+  override fun debug(marker: Marker?, msg: String?, vararg arguments: Any?) {
+    underlyingLogger.debug(marker?.toSlf4j(), msg, arguments)
   }
 
   override fun debug(marker: Marker?, msg: String?, t: Throwable?) {
@@ -197,16 +197,16 @@ internal class LocationIgnorantKLogger(override val underlyingLogger: Logger) :
     }
   }
 
-  override fun info(format: String?, arg: Any?) {
-    underlyingLogger.info(format, arg)
+  override fun info(msg: String?, arg: Any?) {
+    underlyingLogger.info(msg, arg)
   }
 
-  override fun info(format: String?, arg1: Any?, arg2: Any?) {
-    underlyingLogger.info(format, arg1, arg2)
+  override fun info(msg: String?, arg1: Any?, arg2: Any?) {
+    underlyingLogger.info(msg, arg1, arg2)
   }
 
-  override fun info(format: String?, vararg arguments: Any?) {
-    underlyingLogger.info(format, arguments)
+  override fun info(msg: String?, vararg arguments: Any?) {
+    underlyingLogger.info(msg, arguments)
   }
 
   override fun info(msg: String?, t: Throwable?) {
@@ -217,16 +217,16 @@ internal class LocationIgnorantKLogger(override val underlyingLogger: Logger) :
     underlyingLogger.info(marker?.toSlf4j(), msg)
   }
 
-  override fun info(marker: Marker?, format: String?, arg: Any?) {
-    underlyingLogger.info(marker?.toSlf4j(), format, arg)
+  override fun info(marker: Marker?, msg: String?, arg: Any?) {
+    underlyingLogger.info(marker?.toSlf4j(), msg, arg)
   }
 
-  override fun info(marker: Marker?, format: String?, arg1: Any?, arg2: Any?) {
-    underlyingLogger.info(marker?.toSlf4j(), format, arg1, arg2)
+  override fun info(marker: Marker?, msg: String?, arg1: Any?, arg2: Any?) {
+    underlyingLogger.info(marker?.toSlf4j(), msg, arg1, arg2)
   }
 
-  override fun info(marker: Marker?, format: String?, vararg arguments: Any?) {
-    underlyingLogger.info(marker?.toSlf4j(), format, arguments)
+  override fun info(marker: Marker?, msg: String?, vararg arguments: Any?) {
+    underlyingLogger.info(marker?.toSlf4j(), msg, arguments)
   }
 
   override fun info(marker: Marker?, msg: String?, t: Throwable?) {
@@ -244,16 +244,16 @@ internal class LocationIgnorantKLogger(override val underlyingLogger: Logger) :
     }
   }
 
-  override fun warn(format: String?, arg: Any?) {
-    underlyingLogger.warn(format, arg)
+  override fun warn(msg: String?, arg: Any?) {
+    underlyingLogger.warn(msg, arg)
   }
 
-  override fun warn(format: String?, arg1: Any?, arg2: Any?) {
-    underlyingLogger.warn(format, arg1, arg2)
+  override fun warn(msg: String?, arg1: Any?, arg2: Any?) {
+    underlyingLogger.warn(msg, arg1, arg2)
   }
 
-  override fun warn(format: String?, vararg arguments: Any?) {
-    underlyingLogger.warn(format, arguments)
+  override fun warn(msg: String?, vararg arguments: Any?) {
+    underlyingLogger.warn(msg, arguments)
   }
 
   override fun warn(msg: String?, t: Throwable?) {
@@ -264,16 +264,16 @@ internal class LocationIgnorantKLogger(override val underlyingLogger: Logger) :
     underlyingLogger.warn(marker?.toSlf4j(), msg)
   }
 
-  override fun warn(marker: Marker?, format: String?, arg: Any?) {
-    underlyingLogger.warn(marker?.toSlf4j(), format, arg)
+  override fun warn(marker: Marker?, msg: String?, arg: Any?) {
+    underlyingLogger.warn(marker?.toSlf4j(), msg, arg)
   }
 
-  override fun warn(marker: Marker?, format: String?, arg1: Any?, arg2: Any?) {
-    underlyingLogger.warn(marker?.toSlf4j(), format, arg1, arg2)
+  override fun warn(marker: Marker?, msg: String?, arg1: Any?, arg2: Any?) {
+    underlyingLogger.warn(marker?.toSlf4j(), msg, arg1, arg2)
   }
 
-  override fun warn(marker: Marker?, format: String?, vararg arguments: Any?) {
-    underlyingLogger.warn(marker?.toSlf4j(), format, arguments)
+  override fun warn(marker: Marker?, msg: String?, vararg arguments: Any?) {
+    underlyingLogger.warn(marker?.toSlf4j(), msg, arguments)
   }
 
   override fun warn(marker: Marker?, msg: String?, t: Throwable?) {
@@ -291,16 +291,16 @@ internal class LocationIgnorantKLogger(override val underlyingLogger: Logger) :
     }
   }
 
-  override fun error(format: String?, arg: Any?) {
-    underlyingLogger.error(format, arg)
+  override fun error(msg: String?, arg: Any?) {
+    underlyingLogger.error(msg, arg)
   }
 
-  override fun error(format: String?, arg1: Any?, arg2: Any?) {
-    underlyingLogger.error(format, arg1, arg2)
+  override fun error(msg: String?, arg1: Any?, arg2: Any?) {
+    underlyingLogger.error(msg, arg1, arg2)
   }
 
-  override fun error(format: String?, vararg arguments: Any?) {
-    underlyingLogger.error(format, arguments)
+  override fun error(msg: String?, vararg arguments: Any?) {
+    underlyingLogger.error(msg, arguments)
   }
 
   override fun error(msg: String?, t: Throwable?) {
@@ -311,16 +311,16 @@ internal class LocationIgnorantKLogger(override val underlyingLogger: Logger) :
     underlyingLogger.error(marker?.toSlf4j(), msg)
   }
 
-  override fun error(marker: Marker?, format: String?, arg: Any?) {
-    underlyingLogger.error(marker?.toSlf4j(), format, arg)
+  override fun error(marker: Marker?, msg: String?, arg: Any?) {
+    underlyingLogger.error(marker?.toSlf4j(), msg, arg)
   }
 
-  override fun error(marker: Marker?, format: String?, arg1: Any?, arg2: Any?) {
-    underlyingLogger.error(marker?.toSlf4j(), format, arg1, arg2)
+  override fun error(marker: Marker?, msg: String?, arg1: Any?, arg2: Any?) {
+    underlyingLogger.error(marker?.toSlf4j(), msg, arg1, arg2)
   }
 
-  override fun error(marker: Marker?, format: String?, vararg arguments: Any?) {
-    underlyingLogger.error(marker?.toSlf4j(), format, arguments)
+  override fun error(marker: Marker?, msg: String?, vararg arguments: Any?) {
+    underlyingLogger.error(marker?.toSlf4j(), msg, arguments)
   }
 
   override fun error(marker: Marker?, msg: String?, t: Throwable?) {

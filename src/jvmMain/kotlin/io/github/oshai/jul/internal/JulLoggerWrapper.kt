@@ -98,16 +98,16 @@ internal class JulLoggerWrapper(override val underlyingLogger: Logger) : KLogger
     }
   }
 
-  override fun trace(format: String?, arg: Any?) {
-    underlyingLogger.log(TRACE.toJULLevel(), format, arg)
+  override fun trace(msg: String?, arg: Any?) {
+    underlyingLogger.log(TRACE.toJULLevel(), msg, arg)
   }
 
-  override fun trace(format: String?, arg1: Any?, arg2: Any?) {
-    underlyingLogger.log(TRACE.toJULLevel(), format, arrayOf(arg1, arg2))
+  override fun trace(msg: String?, arg1: Any?, arg2: Any?) {
+    underlyingLogger.log(TRACE.toJULLevel(), msg, arrayOf(arg1, arg2))
   }
 
-  override fun trace(format: String?, vararg arguments: Any?) {
-    underlyingLogger.log(TRACE.toJULLevel(), format, arguments)
+  override fun trace(msg: String?, vararg arguments: Any?) {
+    underlyingLogger.log(TRACE.toJULLevel(), msg, arguments)
   }
 
   override fun trace(msg: String?, t: Throwable?) {
@@ -118,16 +118,16 @@ internal class JulLoggerWrapper(override val underlyingLogger: Logger) : KLogger
     underlyingLogger.log(TRACE.toJULLevel(), msg)
   }
 
-  override fun trace(marker: Marker?, format: String?, arg: Any?) {
-    underlyingLogger.log(TRACE.toJULLevel(), format, arg)
+  override fun trace(marker: Marker?, msg: String?, arg: Any?) {
+    underlyingLogger.log(TRACE.toJULLevel(), msg, arg)
   }
 
-  override fun trace(marker: Marker?, format: String?, arg1: Any?, arg2: Any?) {
-    underlyingLogger.log(TRACE.toJULLevel(), format, arrayOf(arg1, arg2))
+  override fun trace(marker: Marker?, msg: String?, arg1: Any?, arg2: Any?) {
+    underlyingLogger.log(TRACE.toJULLevel(), msg, arrayOf(arg1, arg2))
   }
 
-  override fun trace(marker: Marker?, format: String?, vararg argArray: Any?) {
-    underlyingLogger.log(TRACE.toJULLevel(), format, argArray)
+  override fun trace(marker: Marker?, msg: String?, vararg argArray: Any?) {
+    underlyingLogger.log(TRACE.toJULLevel(), msg, argArray)
   }
 
   override fun trace(marker: Marker?, msg: String?, t: Throwable?) {
@@ -145,16 +145,16 @@ internal class JulLoggerWrapper(override val underlyingLogger: Logger) : KLogger
     }
   }
 
-  override fun debug(format: String?, arg: Any?) {
-    underlyingLogger.log(DEBUG.toJULLevel(), format, arg)
+  override fun debug(msg: String?, arg: Any?) {
+    underlyingLogger.log(DEBUG.toJULLevel(), msg, arg)
   }
 
-  override fun debug(format: String?, arg1: Any?, arg2: Any?) {
-    underlyingLogger.log(DEBUG.toJULLevel(), format, arrayOf(arg1, arg2))
+  override fun debug(msg: String?, arg1: Any?, arg2: Any?) {
+    underlyingLogger.log(DEBUG.toJULLevel(), msg, arrayOf(arg1, arg2))
   }
 
-  override fun debug(format: String?, vararg arguments: Any?) {
-    underlyingLogger.log(DEBUG.toJULLevel(), format, arguments)
+  override fun debug(msg: String?, vararg arguments: Any?) {
+    underlyingLogger.log(DEBUG.toJULLevel(), msg, arguments)
   }
 
   override fun debug(msg: String?, t: Throwable?) {
@@ -165,16 +165,16 @@ internal class JulLoggerWrapper(override val underlyingLogger: Logger) : KLogger
     underlyingLogger.log(DEBUG.toJULLevel(), msg)
   }
 
-  override fun debug(marker: Marker?, format: String?, arg: Any?) {
-    underlyingLogger.log(DEBUG.toJULLevel(), format, arg)
+  override fun debug(marker: Marker?, msg: String?, arg: Any?) {
+    underlyingLogger.log(DEBUG.toJULLevel(), msg, arg)
   }
 
-  override fun debug(marker: Marker?, format: String?, arg1: Any?, arg2: Any?) {
-    underlyingLogger.log(DEBUG.toJULLevel(), format, arrayOf(arg1, arg2))
+  override fun debug(marker: Marker?, msg: String?, arg1: Any?, arg2: Any?) {
+    underlyingLogger.log(DEBUG.toJULLevel(), msg, arrayOf(arg1, arg2))
   }
 
-  override fun debug(marker: Marker?, format: String?, vararg arguments: Any?) {
-    underlyingLogger.log(DEBUG.toJULLevel(), format, arguments)
+  override fun debug(marker: Marker?, msg: String?, vararg arguments: Any?) {
+    underlyingLogger.log(DEBUG.toJULLevel(), msg, arguments)
   }
 
   override fun debug(marker: Marker?, msg: String?, t: Throwable?) {
@@ -192,16 +192,16 @@ internal class JulLoggerWrapper(override val underlyingLogger: Logger) : KLogger
     }
   }
 
-  override fun info(format: String?, arg: Any?) {
-    underlyingLogger.log(INFO.toJULLevel(), format, arg)
+  override fun info(msg: String?, arg: Any?) {
+    underlyingLogger.log(INFO.toJULLevel(), msg, arg)
   }
 
-  override fun info(format: String?, arg1: Any?, arg2: Any?) {
-    underlyingLogger.log(INFO.toJULLevel(), format, arrayOf(arg1, arg2))
+  override fun info(msg: String?, arg1: Any?, arg2: Any?) {
+    underlyingLogger.log(INFO.toJULLevel(), msg, arrayOf(arg1, arg2))
   }
 
-  override fun info(format: String?, vararg arguments: Any?) {
-    underlyingLogger.log(INFO.toJULLevel(), format, arguments)
+  override fun info(msg: String?, vararg arguments: Any?) {
+    underlyingLogger.log(INFO.toJULLevel(), msg, arguments)
   }
 
   override fun info(msg: String?, t: Throwable?) {
@@ -212,16 +212,16 @@ internal class JulLoggerWrapper(override val underlyingLogger: Logger) : KLogger
     underlyingLogger.log(INFO.toJULLevel(), msg)
   }
 
-  override fun info(marker: Marker?, format: String?, arg: Any?) {
-    underlyingLogger.log(INFO.toJULLevel(), format, arg)
+  override fun info(marker: Marker?, msg: String?, arg: Any?) {
+    underlyingLogger.log(INFO.toJULLevel(), msg, arg)
   }
 
-  override fun info(marker: Marker?, format: String?, arg1: Any?, arg2: Any?) {
-    underlyingLogger.log(INFO.toJULLevel(), format, arrayOf(arg1, arg2))
+  override fun info(marker: Marker?, msg: String?, arg1: Any?, arg2: Any?) {
+    underlyingLogger.log(INFO.toJULLevel(), msg, arrayOf(arg1, arg2))
   }
 
-  override fun info(marker: Marker?, format: String?, vararg arguments: Any?) {
-    underlyingLogger.log(INFO.toJULLevel(), format, arguments)
+  override fun info(marker: Marker?, msg: String?, vararg arguments: Any?) {
+    underlyingLogger.log(INFO.toJULLevel(), msg, arguments)
   }
 
   override fun info(marker: Marker?, msg: String?, t: Throwable?) {
@@ -239,16 +239,16 @@ internal class JulLoggerWrapper(override val underlyingLogger: Logger) : KLogger
     }
   }
 
-  override fun warn(format: String?, arg: Any?) {
-    underlyingLogger.log(WARN.toJULLevel(), format, arg)
+  override fun warn(msg: String?, arg: Any?) {
+    underlyingLogger.log(WARN.toJULLevel(), msg, arg)
   }
 
-  override fun warn(format: String?, arg1: Any?, arg2: Any?) {
-    underlyingLogger.log(WARN.toJULLevel(), format, arrayOf(arg1, arg2))
+  override fun warn(msg: String?, arg1: Any?, arg2: Any?) {
+    underlyingLogger.log(WARN.toJULLevel(), msg, arrayOf(arg1, arg2))
   }
 
-  override fun warn(format: String?, vararg arguments: Any?) {
-    underlyingLogger.log(WARN.toJULLevel(), format, arguments)
+  override fun warn(msg: String?, vararg arguments: Any?) {
+    underlyingLogger.log(WARN.toJULLevel(), msg, arguments)
   }
 
   override fun warn(msg: String?, t: Throwable?) {
@@ -259,16 +259,16 @@ internal class JulLoggerWrapper(override val underlyingLogger: Logger) : KLogger
     underlyingLogger.log(WARN.toJULLevel(), msg)
   }
 
-  override fun warn(marker: Marker?, format: String?, arg: Any?) {
-    underlyingLogger.log(WARN.toJULLevel(), format, arg)
+  override fun warn(marker: Marker?, msg: String?, arg: Any?) {
+    underlyingLogger.log(WARN.toJULLevel(), msg, arg)
   }
 
-  override fun warn(marker: Marker?, format: String?, arg1: Any?, arg2: Any?) {
-    underlyingLogger.log(WARN.toJULLevel(), format, arrayOf(arg1, arg2))
+  override fun warn(marker: Marker?, msg: String?, arg1: Any?, arg2: Any?) {
+    underlyingLogger.log(WARN.toJULLevel(), msg, arrayOf(arg1, arg2))
   }
 
-  override fun warn(marker: Marker?, format: String?, vararg arguments: Any?) {
-    underlyingLogger.log(WARN.toJULLevel(), format, arguments)
+  override fun warn(marker: Marker?, msg: String?, vararg arguments: Any?) {
+    underlyingLogger.log(WARN.toJULLevel(), msg, arguments)
   }
 
   override fun warn(marker: Marker?, msg: String?, t: Throwable?) {
@@ -286,16 +286,16 @@ internal class JulLoggerWrapper(override val underlyingLogger: Logger) : KLogger
     }
   }
 
-  override fun error(format: String?, arg: Any?) {
-    underlyingLogger.log(ERROR.toJULLevel(), format, arg)
+  override fun error(msg: String?, arg: Any?) {
+    underlyingLogger.log(ERROR.toJULLevel(), msg, arg)
   }
 
-  override fun error(format: String?, arg1: Any?, arg2: Any?) {
-    underlyingLogger.log(ERROR.toJULLevel(), format, arrayOf(arg1, arg2))
+  override fun error(msg: String?, arg1: Any?, arg2: Any?) {
+    underlyingLogger.log(ERROR.toJULLevel(), msg, arrayOf(arg1, arg2))
   }
 
-  override fun error(format: String?, vararg arguments: Any?) {
-    underlyingLogger.log(ERROR.toJULLevel(), format, arguments)
+  override fun error(msg: String?, vararg arguments: Any?) {
+    underlyingLogger.log(ERROR.toJULLevel(), msg, arguments)
   }
 
   override fun error(msg: String?, t: Throwable?) {
@@ -306,16 +306,16 @@ internal class JulLoggerWrapper(override val underlyingLogger: Logger) : KLogger
     underlyingLogger.log(ERROR.toJULLevel(), msg)
   }
 
-  override fun error(marker: Marker?, format: String?, arg: Any?) {
-    underlyingLogger.log(ERROR.toJULLevel(), format, arg)
+  override fun error(marker: Marker?, msg: String?, arg: Any?) {
+    underlyingLogger.log(ERROR.toJULLevel(), msg, arg)
   }
 
-  override fun error(marker: Marker?, format: String?, arg1: Any?, arg2: Any?) {
-    underlyingLogger.log(ERROR.toJULLevel(), format, arrayOf(arg1, arg2))
+  override fun error(marker: Marker?, msg: String?, arg1: Any?, arg2: Any?) {
+    underlyingLogger.log(ERROR.toJULLevel(), msg, arrayOf(arg1, arg2))
   }
 
-  override fun error(marker: Marker?, format: String?, vararg arguments: Any?) {
-    underlyingLogger.log(ERROR.toJULLevel(), format, arguments)
+  override fun error(marker: Marker?, msg: String?, vararg arguments: Any?) {
+    underlyingLogger.log(ERROR.toJULLevel(), msg, arguments)
   }
 
   override fun error(marker: Marker?, msg: String?, t: Throwable?) {
