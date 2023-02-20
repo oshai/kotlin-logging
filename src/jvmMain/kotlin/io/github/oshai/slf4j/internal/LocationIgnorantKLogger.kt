@@ -131,8 +131,8 @@ internal class LocationIgnorantKLogger(override val underlyingLogger: Logger) :
     underlyingLogger.trace(marker?.toSlf4j(), msg, arg1, arg2)
   }
 
-  override fun trace(marker: Marker?, msg: String?, vararg argArray: Any?) {
-    underlyingLogger.trace(marker?.toSlf4j(), msg, argArray)
+  override fun trace(marker: Marker?, msg: String?, vararg arguments: Any?) {
+    underlyingLogger.trace(marker?.toSlf4j(), msg, arguments)
   }
 
   override fun trace(marker: Marker?, msg: String?, t: Throwable?) {
@@ -327,9 +327,9 @@ internal class LocationIgnorantKLogger(override val underlyingLogger: Logger) :
     underlyingLogger.error(marker?.toSlf4j(), msg, t)
   }
 
-  override inline fun entry(vararg argArray: Any?) {
+  override inline fun entry(vararg arguments: Any?) {
     if (underlyingLogger.isTraceEnabled) {
-      underlyingLogger.trace("entry({})", argArray)
+      underlyingLogger.trace("entry({})", arguments)
     }
   }
 

@@ -266,6 +266,7 @@ android {
     testOptions {
         unitTests.isReturnDefaultValues = true
     }
+    namespace = "io.github.oshai"
 }
 spotless {
     kotlin {

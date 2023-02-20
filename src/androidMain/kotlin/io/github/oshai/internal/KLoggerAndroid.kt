@@ -78,7 +78,7 @@ internal class KLoggerAndroid(override val name: String) : KLogger {
 
   override fun error(marker: Marker?, t: Throwable?, msg: () -> Any?) = error(t, msg)
 
-  override fun entry(vararg argArray: Any?) = trace { "entry($argArray)" }
+  override fun entry(vararg arguments: Any?) = trace { "entry($arguments)" }
 
   override fun exit() = trace { "exit()" }
 

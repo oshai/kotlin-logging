@@ -107,9 +107,9 @@ public actual interface KLogger : ActualKLogger {
    *
    * @param marker the marker data specific to this log statement
    * @param msg the msg string
-   * @param argArray an array of arguments
+   * @param arguments an array of arguments
    */
-  public fun trace(marker: Marker?, msg: String?, vararg argArray: Any?)
+  public fun trace(marker: Marker?, msg: String?, vararg arguments: Any?)
 
   /**
    * This method is similar to [.trace] method except that the marker data is also taken into

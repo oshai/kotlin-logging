@@ -75,7 +75,7 @@ public expect interface KLogger {
   public fun error(marker: Marker?, t: Throwable?, msg: () -> Any?)
 
   /** Add a log message with all the supplied parameters along with method name */
-  public fun entry(vararg argArray: Any?)
+  public fun entry(vararg arguments: Any?)
 
   /** Add log message indicating exit of a method */
   public fun exit()
@@ -212,7 +212,7 @@ public interface ActualKLogger {
   public fun error(marker: Marker?, t: Throwable?, msg: () -> Any?)
 
   /** Add a log message with all the supplied parameters along with method name */
-  public fun entry(vararg argArray: Any?)
+  public fun entry(vararg arguments: Any?)
 
   /** Add log message indicating exit of a method */
   public fun exit()

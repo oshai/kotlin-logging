@@ -126,8 +126,8 @@ internal class JulLoggerWrapper(override val underlyingLogger: Logger) : KLogger
     underlyingLogger.log(TRACE.toJULLevel(), msg, arrayOf(arg1, arg2))
   }
 
-  override fun trace(marker: Marker?, msg: String?, vararg argArray: Any?) {
-    underlyingLogger.log(TRACE.toJULLevel(), msg, argArray)
+  override fun trace(marker: Marker?, msg: String?, vararg arguments: Any?) {
+    underlyingLogger.log(TRACE.toJULLevel(), msg, arguments)
   }
 
   override fun trace(marker: Marker?, msg: String?, t: Throwable?) {
@@ -322,8 +322,8 @@ internal class JulLoggerWrapper(override val underlyingLogger: Logger) : KLogger
     underlyingLogger.log(ERROR.toJULLevel(), msg, t)
   }
 
-  override inline fun entry(vararg argArray: Any?) {
-    trace("entry({})", argArray)
+  override inline fun entry(vararg arguments: Any?) {
+    trace("entry({})", arguments)
   }
 
   override inline fun exit() {
