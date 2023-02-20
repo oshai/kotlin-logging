@@ -50,7 +50,7 @@ kotlin {
             }
         }
     }
-    js(BOTH) {
+    js(IR) {
         browser {
             testTask {
                 useKarma {
@@ -121,7 +121,7 @@ kotlin {
         val androidMain by getting {
             dependsOn(javaMain)
         }
-        val androidTest by getting {
+        val androidUnitTest by getting {
             dependencies {
                 implementation(kotlin("test"))
                 implementation("org.junit.jupiter:junit-jupiter-engine:${extra["junit_version"]}")
@@ -266,6 +266,7 @@ android {
     testOptions {
         unitTests.isReturnDefaultValues = true
     }
+    namespace = "io.github.oshai"
 }
 spotless {
     kotlin {

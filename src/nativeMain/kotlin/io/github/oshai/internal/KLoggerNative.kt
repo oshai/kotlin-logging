@@ -121,8 +121,8 @@ internal class KLoggerNative(override val name: String) : KLogger {
     }
   }
 
-  override fun entry(vararg argArray: Any?) {
-    TRACE.logIfEnabled(name, { "entry($argArray)" }, appender::trace)
+  override fun entry(vararg arguments: Any?) {
+    TRACE.logIfEnabled(name, { "entry($arguments)" }, appender::trace)
   }
 
   override fun exit() {

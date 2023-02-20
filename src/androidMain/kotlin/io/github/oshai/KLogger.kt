@@ -70,7 +70,7 @@ public actual interface KLogger {
   public actual fun error(marker: Marker?, t: Throwable?, msg: () -> Any?)
 
   /** Add a log message with all the supplied parameters along with method name */
-  public actual fun entry(vararg argArray: Any?)
+  public actual fun entry(vararg arguments: Any?)
 
   /** Add log message indicating exit of a method */
   public actual fun exit()
