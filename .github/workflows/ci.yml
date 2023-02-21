@@ -3,6 +3,12 @@ name: CI
 on: [push, pull_request]
 
 jobs:
+  validation:
+    name: "Validate Gradle Wrapper"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: gradle/wrapper-validation-action@v1
   build:
     name: Build on ${{ matrix.os.runner }}
     runs-on: ${{ matrix.os.runner }}
