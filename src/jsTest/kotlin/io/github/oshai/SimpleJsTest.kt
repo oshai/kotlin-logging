@@ -18,6 +18,11 @@ class SimpleJsTest {
     KotlinLoggingConfiguration.APPENDER = ConsoleOutputAppender
   }
 
+  @Test
+  fun loggerNameTest() {
+    assertEquals("MyClass", MyClass().logger2.name)
+  }
+
   private fun createAppender(): SimpleAppender = SimpleAppender()
 
   class SimpleAppender : Appender {
@@ -49,4 +54,8 @@ class SimpleJsTest {
       lastLevel = "error"
     }
   }
+}
+
+class MyClass {
+  val logger2 by KotlinLogging.logger()
 }
