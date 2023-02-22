@@ -76,7 +76,7 @@ In short, if you just want to log statements to stdout, it's possible to add the
 <dependency>
   <groupId>io.github.oshai</groupId>
   <artifactId>kotlin-logging-jvm</artifactId>
-  <version>4.0.0-beta-11</version>
+  <version>4.0.0-beta-22</version>
 </dependency>
 ```
 Or
@@ -91,7 +91,7 @@ See the full example in [kotlin-logging-example-maven](https://github.com/oshai/
 
 ### Gradle
 ```Groovy
-implementation 'io.github.oshai:kotlin-logging-jvm:4.0.0-beta-11'
+implementation 'io.github.oshai:kotlin-logging-jvm:4.0.0-beta-22'
 ```
 Or
 ```Groovy
