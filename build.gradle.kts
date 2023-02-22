@@ -50,7 +50,7 @@ kotlin {
             }
         }
     }
-    js(IR) {
+    js(BOTH) {
         browser {
             testTask {
                 useKarma {
