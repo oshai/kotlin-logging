@@ -51,7 +51,7 @@ jobs:
 
       - uses: actions/setup-java@v3
         with:
-          distribution: 'adopt'
+          distribution: 'temurin'
           java-version: 11
 
       - name: Restore Gradle cache
