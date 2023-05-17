@@ -20,5 +20,5 @@ public object KotlinLogging {
    * In most cases the name represents the package notation of the file that the logger is defined
    * in.
    */
-  public fun logger(name: String): KLogger = KLoggerFactory.logger(name)
+  public fun logger(name: String, decorator: KLoggerDecorator = DoNothingDecorator): KLogger = KLoggerFactory.logger(name, decorator)
 }
