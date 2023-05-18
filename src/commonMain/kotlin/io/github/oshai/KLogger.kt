@@ -138,6 +138,7 @@ public fun KLogger.isEnabledForLevel(level: Level): Boolean {
     Levels.INFO_INT -> isInfoEnabled
     Levels.WARN_INT -> isWarnEnabled
     Levels.ERROR_INT -> isErrorEnabled
+    Levels.OFF_INT -> false
     else -> throw IllegalArgumentException("Level [$level] not recognized.")
   }
 }
