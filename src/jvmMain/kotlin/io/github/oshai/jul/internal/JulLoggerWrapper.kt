@@ -387,6 +387,7 @@ internal class JulLoggerWrapper(override val underlyingLogger: Logger) : KLogger
         INFO -> Level.INFO
         WARN -> Level.WARNING
         ERROR -> Level.SEVERE
+        OFF -> Level.OFF
       }
     return julLevel
   }

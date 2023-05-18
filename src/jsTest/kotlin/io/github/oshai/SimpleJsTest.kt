@@ -1,21 +1,41 @@
 package io.github.oshai
 
+import kotlin.test.AfterTest
+import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 private val logger = KotlinLogging.logger("SimpleJsTest")
 
 class SimpleJsTest {
+  private lateinit var appender: SimpleAppender
+
+  @BeforeTest
+  fun setup() {
+    appender = createAppender()
+    KotlinLoggingConfiguration.APPENDER = appender
+  }
+
+  @AfterTest
+  fun cleanup() {
+    KotlinLoggingConfiguration.APPENDER = ConsoleOutputAppender
+    KotlinLoggingConfiguration.LOG_LEVEL = Level.INFO
+  }
 
   @Test
   fun simpleJsTest() {
-    val appender = createAppender()
-    KotlinLoggingConfiguration.APPENDER = appender
     assertEquals("SimpleJsTest", logger.name)
     logger.info { "info msg" }
     assertEquals("INFO: [SimpleJsTest] info msg", appender.lastMessage)
     assertEquals("info", appender.lastLevel)
-    KotlinLoggingConfiguration.APPENDER = ConsoleOutputAppender
+  }
+
+  @Test
+  fun offLevelJsTest() {
+    KotlinLoggingConfiguration.LOG_LEVEL = Level.OFF
+    logger.error { "error msg" }
+    assertEquals("NA", appender.lastMessage)
+    assertEquals("NA", appender.lastLevel)
   }
 
   @Test
