@@ -130,4 +130,11 @@ internal class KLoggerAndroid(override val name: String) : KLogger {
    * @return True if this Logger is enabled for the ERROR level, false otherwise.
    */
   override val isErrorEnabled: Boolean = Log.isLoggable(name, Log.ERROR)
+
+  /**
+   * Is the logger instance OFF?
+   *
+   * @return True if this Logger is set to the OFF level, false otherwise.
+   */
+  override val isLoggingOff: Boolean = !Log.isLoggable(name, Log.ASSERT)
 }

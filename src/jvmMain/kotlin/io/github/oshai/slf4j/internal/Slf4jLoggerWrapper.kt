@@ -44,4 +44,11 @@ internal abstract class Slf4jLoggerWrapper(override val underlyingLogger: Logger
   override fun isErrorEnabled(marker: Marker?): Boolean {
     return underlyingLogger.isErrorEnabled(marker?.toSlf4j())
   }
+
+  override val isLoggingOff: Boolean
+    get() = !underlyingLogger.isErrorEnabled
+
+  override fun isLoggingOff(marker: Marker?): Boolean {
+    return !underlyingLogger.isErrorEnabled(marker?.toSlf4j())
+  }
 }

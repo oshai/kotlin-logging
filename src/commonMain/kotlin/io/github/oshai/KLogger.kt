@@ -123,6 +123,13 @@ public expect interface KLogger {
    * @return True if this Logger is enabled for the ERROR level, false otherwise.
    */
   public val isErrorEnabled: Boolean
+
+  /**
+   * Is the logger instance OFF?
+   *
+   * @return True if this Logger is set to the OFF level, false otherwise.
+   */
+  public val isLoggingOff: Boolean
 }
 
 /**
@@ -138,7 +145,7 @@ public fun KLogger.isEnabledForLevel(level: Level): Boolean {
     Levels.INFO_INT -> isInfoEnabled
     Levels.WARN_INT -> isWarnEnabled
     Levels.ERROR_INT -> isErrorEnabled
-    Levels.OFF_INT -> false
+    Levels.OFF_INT -> isLoggingOff
     else -> throw IllegalArgumentException("Level [$level] not recognized.")
   }
 }
@@ -261,4 +268,11 @@ public interface ActualKLogger {
    * @return True if this Logger is enabled for the ERROR level, false otherwise.
    */
   public val isErrorEnabled: Boolean
+
+  /**
+   * Is the logger instance OFF?
+   *
+   * @return True if this Logger is set to the OFF level, false otherwise.
+   */
+  public val isLoggingOff: Boolean
 }
