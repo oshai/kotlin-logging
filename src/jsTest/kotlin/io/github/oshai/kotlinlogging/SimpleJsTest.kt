@@ -1,9 +1,6 @@
 package io.github.oshai.kotlinlogging
 
-import kotlin.test.AfterTest
-import kotlin.test.BeforeTest
-import kotlin.test.Test
-import kotlin.test.assertEquals
+import kotlin.test.*
 
 private val logger = KotlinLogging.logger("SimpleJsTest")
 
@@ -33,6 +30,7 @@ class SimpleJsTest {
   @Test
   fun offLevelJsTest() {
     KotlinLoggingConfiguration.LOG_LEVEL = Level.OFF
+    assertTrue(logger.isLoggingOff)
     logger.error { "error msg" }
     assertEquals("NA", appender.lastMessage)
     assertEquals("NA", appender.lastLevel)

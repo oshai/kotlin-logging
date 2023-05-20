@@ -549,4 +549,12 @@ public actual interface KLogger : ActualKLogger {
    * @param t the exception (throwable) to log
    */
   public fun error(marker: Marker?, msg: String?, t: Throwable?)
+
+  /**
+   * Similar to [.isLoggingOff] method except that the marker data is also taken into consideration.
+   *
+   * @param marker The marker data to take into consideration
+   * @return True if this Logger is set to the OFF level, false otherwise.
+   */
+  public fun isLoggingOff(marker: Marker?): Boolean
 }

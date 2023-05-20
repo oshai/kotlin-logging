@@ -379,6 +379,13 @@ internal class JulLoggerWrapper(override val underlyingLogger: Logger) : KLogger
     return underlyingLogger.isLoggable(ERROR.toJULLevel())
   }
 
+  override val isLoggingOff: Boolean
+    get() = underlyingLogger.isLoggable(OFF.toJULLevel())
+
+  override fun isLoggingOff(marker: Marker?): Boolean {
+    return underlyingLogger.isLoggable(OFF.toJULLevel())
+  }
+
   private fun io.github.oshai.kotlinlogging.Level.toJULLevel(): Level {
     val julLevel: Level =
       when (this) {

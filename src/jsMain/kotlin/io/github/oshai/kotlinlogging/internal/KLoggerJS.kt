@@ -7,6 +7,7 @@ import io.github.oshai.kotlinlogging.Level
 import io.github.oshai.kotlinlogging.Level.DEBUG
 import io.github.oshai.kotlinlogging.Level.ERROR
 import io.github.oshai.kotlinlogging.Level.INFO
+import io.github.oshai.Level.OFF
 import io.github.oshai.kotlinlogging.Level.TRACE
 import io.github.oshai.kotlinlogging.Level.WARN
 import io.github.oshai.kotlinlogging.Marker
@@ -166,4 +167,11 @@ internal class KLoggerJS(override val name: String) : KLogger {
    * @return True if this Logger is enabled for the ERROR level, false otherwise.
    */
   override val isErrorEnabled: Boolean = ERROR.isLoggingEnabled()
+
+  /**
+   * Is the logger instance OFF?
+   *
+   * @return True if this Logger is set to the OFF level, false otherwise.
+   */
+  override val isLoggingOff: Boolean = OFF.isLoggingEnabled()
 }

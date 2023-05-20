@@ -118,4 +118,11 @@ public actual interface KLogger {
    * @return True if this Logger is enabled for the ERROR level, false otherwise.
    */
   public actual val isErrorEnabled: Boolean
+
+  /**
+   * Is the logger instance OFF?
+   *
+   * @return True if this Logger is set to the OFF level, false otherwise.
+   */
+  public actual val isLoggingOff: Boolean
 }
