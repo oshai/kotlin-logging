@@ -58,7 +58,7 @@ In that sense it's a completely new dependency.
 
 Main changes are:
 - Maven group id changed from `io.github.microutils` -> `io.github.oshai`.
-- Root package change from `mu` -> `io.github.oshai`.
+- Root package change from `mu` -> `io.github.oshai.kotlinlogging`.
 - Slf4j dependency is not provided anymore (users have to provide it). It means that 4.x can work with both slf4j 1 or 2.
 - There are changes to multiplatform class hierarchy that might break compatibility.
 
