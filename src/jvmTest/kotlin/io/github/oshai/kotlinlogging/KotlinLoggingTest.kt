@@ -40,7 +40,12 @@ class KotlinLoggingTest {
         )
       },
       { assertEquals("io.github.oshai.kotlinlogging.slf4jLogger", loggerFromSlf4j.name) },
-      { assertEquals("io.github.oshai.kotlinlogging.slf4jLoggerExtension", loggerFromSlf4jExtension.name) },
+      {
+        assertEquals(
+          "io.github.oshai.kotlinlogging.slf4jLoggerExtension",
+          loggerFromSlf4jExtension.name
+        )
+      },
     )
   }
 }

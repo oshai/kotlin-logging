@@ -18,8 +18,10 @@ internal class LocationAwareKLogger(override val underlyingLogger: LocationAware
   private val ENTRY = io.github.oshai.kotlinlogging.KMarkerFactory.getMarker("ENTRY").toSlf4j()
   private val EXIT = io.github.oshai.kotlinlogging.KMarkerFactory.getMarker("EXIT").toSlf4j()
 
-  private val THROWING = io.github.oshai.kotlinlogging.KMarkerFactory.getMarker("THROWING").toSlf4j()
-  private val CATCHING = io.github.oshai.kotlinlogging.KMarkerFactory.getMarker("CATCHING").toSlf4j()
+  private val THROWING =
+    io.github.oshai.kotlinlogging.KMarkerFactory.getMarker("THROWING").toSlf4j()
+  private val CATCHING =
+    io.github.oshai.kotlinlogging.KMarkerFactory.getMarker("CATCHING").toSlf4j()
   private val EXITONLY = "exit"
   private val EXITMESSAGE = "exit with ({})"
 

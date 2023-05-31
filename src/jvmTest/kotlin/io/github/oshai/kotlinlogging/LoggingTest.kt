@@ -62,7 +62,8 @@ open class ClassHasLogging : KLoggable {
 class ClassInheritLogging : ClassHasLogging()
 
 class ClassWithNamedLogging {
-  companion object : Any(), KLoggable by NamedKLogging("io.github.oshai.kotlinlogging.ClassWithNamedLogging")
+  companion object :
+    Any(), KLoggable by NamedKLogging("io.github.oshai.kotlinlogging.ClassWithNamedLogging")
 
   fun test() {
     logger.info { "test ClassWithNamedLogging" }
@@ -166,7 +167,11 @@ class LoggingTest {
       },
       { assertEquals("java.lang.Throwable: null", lines[2].trim()) },
       {
-        assertTrue(lines[3].trim().startsWith("at io.github.oshai.kotlinlogging.ClassWithLogging.testThrowable("))
+        assertTrue(
+          lines[3]
+            .trim()
+            .startsWith("at io.github.oshai.kotlinlogging.ClassWithLogging.testThrowable(")
+        )
       },
       {
         assertEquals(
@@ -208,7 +213,9 @@ class LoggingTest {
       { assertEquals("java.lang.Throwable: null", lines[2].trim()) },
       {
         assertTrue(
-          lines[3].trim().startsWith("at io.github.oshai.kotlinlogging.ClassWithLogging.testMarkerThrowable(")
+          lines[3]
+            .trim()
+            .startsWith("at io.github.oshai.kotlinlogging.ClassWithLogging.testMarkerThrowable(")
         )
       },
     )
@@ -297,12 +304,36 @@ class LoggingNameTest {
   @Test
   fun testNames() {
     assertAll(
-      { assertEquals("io.github.oshai.kotlinlogging.ClassWithLogging", ClassWithLogging.logger.name) },
-      { assertEquals("io.github.oshai.kotlinlogging.ClassInheritLogging", ClassInheritLogging().logger.name) },
-      { assertEquals("io.github.oshai.kotlinlogging.ChildClassWithLogging", ChildClassWithLogging.logger.name) },
-      { assertEquals("io.github.oshai.kotlinlogging.ClassWithNamedLogging", ClassWithNamedLogging.logger.name) },
-      { assertEquals("io.github.oshai.kotlinlogging.ClassHasLogging", ClassHasLogging().logger.name) },
-      { assertEquals("io.github.oshai.kotlinlogging.CompanionHasLogging", CompanionHasLogging.logger.name) },
+      {
+        assertEquals("io.github.oshai.kotlinlogging.ClassWithLogging", ClassWithLogging.logger.name)
+      },
+      {
+        assertEquals(
+          "io.github.oshai.kotlinlogging.ClassInheritLogging",
+          ClassInheritLogging().logger.name
+        )
+      },
+      {
+        assertEquals(
+          "io.github.oshai.kotlinlogging.ChildClassWithLogging",
+          ChildClassWithLogging.logger.name
+        )
+      },
+      {
+        assertEquals(
+          "io.github.oshai.kotlinlogging.ClassWithNamedLogging",
+          ClassWithNamedLogging.logger.name
+        )
+      },
+      {
+        assertEquals("io.github.oshai.kotlinlogging.ClassHasLogging", ClassHasLogging().logger.name)
+      },
+      {
+        assertEquals(
+          "io.github.oshai.kotlinlogging.CompanionHasLogging",
+          CompanionHasLogging.logger.name
+        )
+      },
     )
   }
 }

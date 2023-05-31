@@ -20,8 +20,14 @@ class KLoggerNameResolverTest {
     Stream.of(
       Arguments.of("io.github.oshai.kotlinlogging.internal.BaseClass", BaseClass::class.java),
       Arguments.of("io.github.oshai.kotlinlogging.internal.ChildClass", ChildClass::class.java),
-      Arguments.of("io.github.oshai.kotlinlogging.internal.BaseClass", BaseClass.Companion::class.java),
-      Arguments.of("io.github.oshai.kotlinlogging.internal.ChildClass", ChildClass.Companion::class.java),
+      Arguments.of(
+        "io.github.oshai.kotlinlogging.internal.BaseClass",
+        BaseClass.Companion::class.java
+      ),
+      Arguments.of(
+        "io.github.oshai.kotlinlogging.internal.ChildClass",
+        ChildClass.Companion::class.java
+      ),
       Arguments.of("io.github.oshai.kotlinlogging.internal.Singleton", Singleton::class.java),
       Arguments.of("io.github.oshai.kotlinlogging.internal.MyInterface", MyInterface::class.java),
       Arguments.of("java.lang.Object", Any().javaClass),
@@ -43,7 +49,10 @@ class KLoggerNameResolverTest {
       ),
       Arguments.of("io.github.oshai.kotlinlogging.internal.Foo\$Bar", Foo.Bar::class.java),
       Arguments.of("io.github.oshai.kotlinlogging.internal.Foo\$Bar2", Foo.Bar3.javaClass),
-      Arguments.of("io.github.oshai.kotlinlogging.internal.PrivateCompanion", PrivateCompanion().companionClass)
+      Arguments.of(
+        "io.github.oshai.kotlinlogging.internal.PrivateCompanion",
+        PrivateCompanion().companionClass
+      )
     )
 }
 
