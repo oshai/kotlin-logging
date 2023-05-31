@@ -36,7 +36,7 @@ logger.error(exception) { "a $fancy message about the $exception" }
 ## Getting started
  
 ```Kotlin
-import io.github.oshai.KotlinLogging
+import io.github.oshai.kotlinlogging.KotlinLogging
 private val logger = KotlinLogging.logger {} 
 class FooWithLogging {
     val message = "world"
@@ -76,7 +76,7 @@ In short, if you just want to log statements to stdout, it's possible to add the
 <dependency>
   <groupId>io.github.oshai</groupId>
   <artifactId>kotlin-logging-jvm</artifactId>
-  <version>4.0.0-beta-22</version>
+  <version>4.0.0-beta-29</version>
 </dependency>
 ```
 Or
@@ -91,7 +91,7 @@ See the full example in [kotlin-logging-example-maven](https://github.com/oshai/
 
 ### Gradle
 ```Groovy
-implementation 'io.github.oshai:kotlin-logging-jvm:4.0.0-beta-22'
+implementation 'io.github.oshai:kotlin-logging-jvm:4.0.0-beta-29'
 ```
 Or
 ```Groovy
