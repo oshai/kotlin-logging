@@ -3,21 +3,21 @@ import org.gradle.jvm.tasks.Jar
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
 
 plugins {
-    kotlin("multiplatform") version "1.8.22"
-    id("org.jetbrains.dokka") version "1.8.20"
+    kotlin("multiplatform") version "1.8.20"
+    id("org.jetbrains.dokka") version "1.8.10"
     `maven-publish`
     id("io.github.gradle-nexus.publish-plugin") version "1.3.0"
     signing
     id("io.gitlab.arturbosch.detekt") version "1.18.0"
     id("com.android.library") version "7.4.2"
-    id("com.diffplug.spotless") version "6.19.0"
+    id("com.diffplug.spotless") version "6.17.0"
 }
 
 
 apply("versions.gradle.kts")
 
 group = "io.github.oshai"
-version = "4.0.0"
+version = "4.0.0-beta-30"
 
 repositories {
     gradlePluginPortal()
