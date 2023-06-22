@@ -50,7 +50,6 @@ An `Android` example project with kotlin-logging can be found in [kotlin-logging
 
 ## Version 4.x vs. previous versions
 
-Version 4 is still in beta but you're encourage to try it!  
 Version 4 is not backward compatible with previous versions. Group id (in maven) and packages names changed.
 It is possible to use both version 4 and previous versions side-by-side so some of the code from the old version
 and some new. It is also possible to have libs using old version and use the new version (and vice-versa).  
