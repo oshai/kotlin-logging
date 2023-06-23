@@ -135,7 +135,7 @@ And many more... (add your name above)
 - See [wiki](https://github.com/oshai/kotlin-logging/wiki) for more examples.
 
 It is possible to configure IntelliJ live templates. For file level logger configure the following:
-- Text template: `private val logger = mu.KotlinLogging.logger {}`.
+- Text template: `private val logger = io.github.oshai.kotlinlogging.KotlinLogging.logger {}`.
 - Applicable in `Kotlin: top-level`.
 
 ## Support
