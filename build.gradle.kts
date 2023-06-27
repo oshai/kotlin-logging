@@ -8,7 +8,7 @@ plugins {
     `maven-publish`
     id("io.github.gradle-nexus.publish-plugin") version "1.3.0"
     signing
-    id("io.gitlab.arturbosch.detekt") version "1.18.0"
+    id("io.gitlab.arturbosch.detekt") version "1.23.0"
     id("com.android.library") version "7.4.2"
     id("com.diffplug.spotless") version "6.19.0"
 }
