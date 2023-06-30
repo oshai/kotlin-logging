@@ -14,14 +14,9 @@ internal class JulLoggerWrapper(override val underlyingLogger: Logger) :
   override val name: String
     get() = underlyingLogger.name
 
-  override fun log(level: io.github.oshai.kotlinlogging.Level, message: () -> Any?) {
-    if (isLoggingEnabledFor(level, null)) {
-      underlyingLogger.log(level.toJULLevel(), message.toStringSafe())
-    }
-  }
-
-  override fun logAt(
+  override fun at(
     level: io.github.oshai.kotlinlogging.Level,
+    marker: Marker?, // marker is not supported in JUL
     block: KLoggingEventBuilder.() -> Unit
   ) {
     if (isLoggingEnabledFor(level, null)) {

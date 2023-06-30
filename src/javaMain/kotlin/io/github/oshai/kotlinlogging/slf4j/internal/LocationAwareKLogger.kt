@@ -30,21 +30,27 @@ internal class LocationAwareKLogger(override val underlyingLogger: LocationAware
     override val name: String
         get() = underlyingLogger.name
 
-    override fun log(level: Level, message: () -> Any?) {
-        if (isLoggingEnabledFor(level, null)) {
-            underlyingLogger.log(null, fqcn, level.toSlf4j(), message.toStringSafe(), null, null)
-        }
-    }
 
-    // TODO: it seems that marker needs to be pre-calculated and passed to the underlying logger
-    // so maybe a better approach will be to have marker in the signature of the function
-    override fun logAt(level: Level, block: KLoggingEventBuilder.() -> Unit) {
-        underlyingLogger.log(null, fqcn, level.toSlf4j(), message.toStringSafe(), null, null)
+    override fun at(level: Level, marker: Marker?, block: KLoggingEventBuilder.() -> Unit) {
+        if (isLoggingEnabledFor(level, marker)) {
+            KLoggingEventBuilder().apply(block).run {
+                underlyingLogger.log(
+                    marker?.toSlf4j(),
+                    fqcn,
+                    level.toSlf4j(),
+                    message,
+                    null,
+                    cause
+                )
+            }
+        }
     }
 
     override fun isLoggingEnabledFor(level: Level, marker: Marker?): Boolean {
         TODO("Not yet implemented")
     }
+
+    // TODO look at exit/entry/catching/throwing/etc'
 
 //  override fun trace(msg: String?) {
 //    if (!underlyingLogger.isTraceEnabled) return
