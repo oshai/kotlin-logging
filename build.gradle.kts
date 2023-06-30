@@ -100,6 +100,10 @@ kotlin {
         }
         val jvmMain by getting {
             dependsOn(javaMain)
+            dependencies {
+                compileOnly("org.slf4j:slf4j-api:${extra["slf4j_version"]}")
+                compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:${extra["coroutines_version"]}")
+            }
         }
         val jvmTest by getting {
             dependencies {
@@ -120,6 +124,10 @@ kotlin {
         }
         val androidMain by getting {
             dependsOn(javaMain)
+            dependencies {
+                compileOnly("org.slf4j:slf4j-api:${extra["slf4j_version"]}")
+                compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:${extra["coroutines_version"]}")
+            }
         }
         val androidUnitTest by getting {
             dependencies {
