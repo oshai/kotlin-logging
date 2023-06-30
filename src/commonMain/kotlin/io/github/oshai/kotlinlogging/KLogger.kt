@@ -6,7 +6,7 @@ package io.github.oshai.kotlinlogging
  * logger.info{"this is $lazy evaluated string"}
  * ```
  */
-public expect interface KLogger {
+public interface KLogger {
 
   /**
    * Return the name of this `Logger` instance.
@@ -15,264 +15,128 @@ public expect interface KLogger {
   public val name: String
 
   /** Lazy add a log message if isTraceEnabled is true */
-  public fun trace(msg: () -> Any?)
+  public fun trace(message: () -> Any?): Unit = log(Level.TRACE, message)
 
   /** Lazy add a log message if isDebugEnabled is true */
-  public fun debug(msg: () -> Any?)
+  public fun debug(message: () -> Any?): Unit = log(Level.DEBUG, message)
 
   /** Lazy add a log message if isInfoEnabled is true */
-  public fun info(msg: () -> Any?)
+  public fun info(message: () -> Any?): Unit = log(Level.INFO, message)
 
   /** Lazy add a log message if isWarnEnabled is true */
-  public fun warn(msg: () -> Any?)
+  public fun warn(message: () -> Any?): Unit = log(Level.WARN, message)
 
   /** Lazy add a log message if isErrorEnabled is true */
-  public fun error(msg: () -> Any?)
+  public fun error(message: () -> Any?): Unit = log(Level.ERROR, message)
+
+  /** Lazy add a log message if isErrorEnabled is true */
+  public fun log(level: Level, message: () -> Any?)
 
   /** Lazy add a log message with throwable payload if isTraceEnabled is true */
-  public fun trace(t: Throwable?, msg: () -> Any?)
+  public fun atTrace(block: KLoggingEventBuilder.() -> Unit): Unit = logAt(Level.TRACE, block)
 
   /** Lazy add a log message with throwable payload if isDebugEnabled is true */
-  public fun debug(t: Throwable?, msg: () -> Any?)
+  public fun atDebug(block: KLoggingEventBuilder.() -> Unit): Unit = logAt(Level.DEBUG, block)
 
   /** Lazy add a log message with throwable payload if isInfoEnabled is true */
-  public fun info(t: Throwable?, msg: () -> Any?)
+  public fun atInfo(block: KLoggingEventBuilder.() -> Unit): Unit = logAt(Level.INFO, block)
 
   /** Lazy add a log message with throwable payload if isWarnEnabled is true */
-  public fun warn(t: Throwable?, msg: () -> Any?)
+  public fun atWarn(block: KLoggingEventBuilder.() -> Unit): Unit = logAt(Level.WARN, block)
 
   /** Lazy add a log message with throwable payload if isErrorEnabled is true */
-  public fun error(t: Throwable?, msg: () -> Any?)
+  public fun atError(block: KLoggingEventBuilder.() -> Unit): Unit = logAt(Level.ERROR, block)
 
-  /** Lazy add a log message with a marker if isTraceEnabled is true */
-  public fun trace(marker: Marker?, msg: () -> Any?)
-
-  /** Lazy add a log message with a marker if isDebugEnabled is true */
-  public fun debug(marker: Marker?, msg: () -> Any?)
-
-  /** Lazy add a log message with a marker if isInfoEnabled is true */
-  public fun info(marker: Marker?, msg: () -> Any?)
-
-  /** Lazy add a log message with a marker if isWarnEnabled is true */
-  public fun warn(marker: Marker?, msg: () -> Any?)
-
-  /** Lazy add a log message with a marker if isErrorEnabled is true */
-  public fun error(marker: Marker?, msg: () -> Any?)
-
-  /** Lazy add a log message with a marker and throwable payload if isTraceEnabled is true */
-  public fun trace(marker: Marker?, t: Throwable?, msg: () -> Any?)
-
-  /** Lazy add a log message with a marker and throwable payload if isDebugEnabled is true */
-  public fun debug(marker: Marker?, t: Throwable?, msg: () -> Any?)
-
-  /** Lazy add a log message with a marker and throwable payload if isInfoEnabled is true */
-  public fun info(marker: Marker?, t: Throwable?, msg: () -> Any?)
-
-  /** Lazy add a log message with a marker and throwable payload if isWarnEnabled is true */
-  public fun warn(marker: Marker?, t: Throwable?, msg: () -> Any?)
-
-  /** Lazy add a log message with a marker and throwable payload if isErrorEnabled is true */
-  public fun error(marker: Marker?, t: Throwable?, msg: () -> Any?)
+  /** Lazy add a log message if isErrorEnabled is true */
+  public fun logAt(level: Level, block: KLoggingEventBuilder.() -> Unit)
 
   /** Add a log message with all the supplied parameters along with method name */
-  public fun entry(vararg arguments: Any?)
+  public fun entry(vararg arguments: Any?): Unit = trace { "entry(${arguments.joinToString() })" }
 
   /** Add log message indicating exit of a method */
-  public fun exit()
+  public fun exit(): Unit = trace { "exit" }
 
   /** Add a log message with the return value of a method */
-  public fun <T> exit(result: T): T where T : Any?
-
-  /** Add a log message indicating an exception will be thrown along with the stack trace. */
-  public fun <T> throwing(throwable: T): T where T : Throwable
-
-  /** Add a log message indicating an exception is caught along with the stack trace. */
-  public fun <T> catching(throwable: T) where T : Throwable
-
-  /**
-   * Is the logger instance enabled for the TRACE level?
-   *
-   * @return True if this Logger is enabled for the TRACE level, false otherwise.
-   */
-  public val isTraceEnabled: Boolean
-
-  /**
-   * Is the logger instance enabled for the DEBUG level?
-   *
-   * @return True if this Logger is enabled for the DEBUG level, false otherwise.
-   */
-  public val isDebugEnabled: Boolean
-
-  /**
-   * Is the logger instance enabled for the INFO level?
-   *
-   * @return True if this Logger is enabled for the INFO level, false otherwise.
-   */
-  public val isInfoEnabled: Boolean
-
-  /**
-   * Is the logger instance enabled for the WARN level?
-   *
-   * @return True if this Logger is enabled for the WARN level, false otherwise.
-   */
-  public val isWarnEnabled: Boolean
-
-  /**
-   * Is the logger instance enabled for the ERROR level?
-   *
-   * @return True if this Logger is enabled for the ERROR level, false otherwise.
-   */
-  public val isErrorEnabled: Boolean
-
-  /**
-   * Is the logger instance OFF?
-   *
-   * @return True if this Logger is set to the OFF level, false otherwise.
-   */
-  public val isLoggingOff: Boolean
-}
-
-/**
- * Returns whether this Logger is enabled for a given [Level].
- *
- * @param level
- * @return true if enabled, false otherwise.
- */
-public fun KLogger.isEnabledForLevel(level: Level): Boolean {
-  return when (level.toInt()) {
-    Levels.TRACE_INT -> isTraceEnabled
-    Levels.DEBUG_INT -> isDebugEnabled
-    Levels.INFO_INT -> isInfoEnabled
-    Levels.WARN_INT -> isWarnEnabled
-    Levels.ERROR_INT -> isErrorEnabled
-    Levels.OFF_INT -> isLoggingOff
-    else -> throw IllegalArgumentException("Level [$level] not recognized.")
+  public fun <T> exit(result: T): T where T : Any? {
+    trace { "exit($result)" }
+    return result
   }
-}
-
-@Suppress("TooManyFunctions")
-public interface ActualKLogger {
-
-  /**
-   * Return the name of this `Logger` instance.
-   * @return name of this logger instance
-   */
-  public val name: String
-
-  /** Lazy add a log message if isTraceEnabled is true */
-  public fun trace(msg: () -> Any?)
-
-  /** Lazy add a log message if isDebugEnabled is true */
-  public fun debug(msg: () -> Any?)
-
-  /** Lazy add a log message if isInfoEnabled is true */
-  public fun info(msg: () -> Any?)
-
-  /** Lazy add a log message if isWarnEnabled is true */
-  public fun warn(msg: () -> Any?)
-
-  /** Lazy add a log message if isErrorEnabled is true */
-  public fun error(msg: () -> Any?)
-
-  /** Lazy add a log message with throwable payload if isTraceEnabled is true */
-  public fun trace(t: Throwable?, msg: () -> Any?)
-
-  /** Lazy add a log message with throwable payload if isDebugEnabled is true */
-  public fun debug(t: Throwable?, msg: () -> Any?)
-
-  /** Lazy add a log message with throwable payload if isInfoEnabled is true */
-  public fun info(t: Throwable?, msg: () -> Any?)
-
-  /** Lazy add a log message with throwable payload if isWarnEnabled is true */
-  public fun warn(t: Throwable?, msg: () -> Any?)
-
-  /** Lazy add a log message with throwable payload if isErrorEnabled is true */
-  public fun error(t: Throwable?, msg: () -> Any?)
-
-  /** Lazy add a log message if isTraceEnabled is true */
-  public fun trace(marker: Marker?, msg: () -> Any?)
-
-  /** Lazy add a log message if isDebugEnabled is true */
-  public fun debug(marker: Marker?, msg: () -> Any?)
-
-  /** Lazy add a log message if isInfoEnabled is true */
-  public fun info(marker: Marker?, msg: () -> Any?)
-
-  /** Lazy add a log message if isWarnEnabled is true */
-  public fun warn(marker: Marker?, msg: () -> Any?)
-
-  /** Lazy add a log message if isErrorEnabled is true */
-  public fun error(marker: Marker?, msg: () -> Any?)
-
-  /** Lazy add a log message with throwable payload if isTraceEnabled is true */
-  public fun trace(marker: Marker?, t: Throwable?, msg: () -> Any?)
-
-  /** Lazy add a log message with throwable payload if isDebugEnabled is true */
-  public fun debug(marker: Marker?, t: Throwable?, msg: () -> Any?)
-
-  /** Lazy add a log message with throwable payload if isInfoEnabled is true */
-  public fun info(marker: Marker?, t: Throwable?, msg: () -> Any?)
-
-  /** Lazy add a log message with throwable payload if isWarnEnabled is true */
-  public fun warn(marker: Marker?, t: Throwable?, msg: () -> Any?)
-
-  /** Lazy add a log message with throwable payload if isErrorEnabled is true */
-  public fun error(marker: Marker?, t: Throwable?, msg: () -> Any?)
-
-  /** Add a log message with all the supplied parameters along with method name */
-  public fun entry(vararg arguments: Any?)
-
-  /** Add log message indicating exit of a method */
-  public fun exit()
-
-  /** Add a log message with the return value of a method */
-  public fun <T> exit(result: T): T where T : Any?
 
   /** Add a log message indicating an exception will be thrown along with the stack trace. */
-  public fun <T> throwing(throwable: T): T where T : Throwable
+  public fun <T> throwing(throwable: T): T where T : Throwable {
+    atError {
+      cause = throwable
+      message = "throwing($throwable)"
+    }
+    return throwable
+  }
 
   /** Add a log message indicating an exception is caught along with the stack trace. */
-  public fun <T> catching(throwable: T) where T : Throwable
+  public fun <T> catching(throwable: T) where T : Throwable {
+    atError {
+      cause = throwable
+      message = "catching($throwable)"
+    }
+  }
 
   /**
-   * Is the logger instance enabled for the TRACE level?
+   * Similar to [.isTraceEnabled] method except that the marker data is also taken into account.
    *
+   * @param marker The marker data to take into consideration
    * @return True if this Logger is enabled for the TRACE level, false otherwise.
    */
-  public val isTraceEnabled: Boolean
+  public fun isTraceEnabled(marker: Marker? = null): Boolean =
+    isLoggingEnabledFor(Level.TRACE, marker)
 
   /**
-   * Is the logger instance enabled for the DEBUG level?
+   * Similar to [.isDebugEnabled] method except that the marker data is also taken into account.
    *
+   * @param marker The marker data to take into consideration
    * @return True if this Logger is enabled for the DEBUG level, false otherwise.
    */
-  public val isDebugEnabled: Boolean
+  public fun isDebugEnabled(marker: Marker? = null): Boolean =
+    isLoggingEnabledFor(Level.DEBUG, marker)
 
   /**
-   * Is the logger instance enabled for the INFO level?
+   * Similar to [.isInfoEnabled] method except that the marker data is also taken into
+   * consideration.
    *
-   * @return True if this Logger is enabled for the INFO level, false otherwise.
+   * @param marker The marker data to take into consideration
+   * @return true if this Logger is enabled for the INFO level, false otherwise.
    */
-  public val isInfoEnabled: Boolean
+  public fun isInfoEnabled(marker: Marker? = null): Boolean = isLoggingEnabledFor(Level.INFO, marker)
 
   /**
-   * Is the logger instance enabled for the WARN level?
+   * Similar to [.isWarnEnabled] method except that the marker data is also taken into
+   * consideration.
    *
+   * @param marker The marker data to take into consideration
    * @return True if this Logger is enabled for the WARN level, false otherwise.
    */
-  public val isWarnEnabled: Boolean
+  public fun isWarnEnabled(marker: Marker? = null): Boolean = isLoggingEnabledFor(Level.WARN, marker)
 
   /**
-   * Is the logger instance enabled for the ERROR level?
+   * Similar to [.isErrorEnabled] method except that the marker data is also taken into
+   * consideration.
    *
+   * @param marker The marker data to take into consideration
    * @return True if this Logger is enabled for the ERROR level, false otherwise.
    */
-  public val isErrorEnabled: Boolean
+  public fun isErrorEnabled(marker: Marker? = null): Boolean =
+    isLoggingEnabledFor(Level.ERROR, marker)
 
   /**
-   * Is the logger instance OFF?
+   * Similar to [.isLoggingOff] method except that the marker data is also taken into consideration.
    *
+   * @param marker The marker data to take into consideration
    * @return True if this Logger is set to the OFF level, false otherwise.
    */
-  public val isLoggingOff: Boolean
+  public fun isLoggingOff(marker: Marker? = null): Boolean = !isLoggingEnabledFor(Level.ERROR, marker)
+
+  public fun isLoggingEnabledFor(level: Level, marker: Marker? = null): Boolean
+}
+
+public interface DelegatingKLogger<T> {
+  /** The actual logger executing logging */
+  public val underlyingLogger: T
 }
