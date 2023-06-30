@@ -30,7 +30,7 @@ public interface KLogger {
   public fun error(message: () -> Any?): Unit = log(Level.ERROR, message)
 
   /** Lazy add a log message if isErrorEnabled is true */
-  public fun log(level: Level, message: () -> Any?)
+  public fun log(level: Level, message: () -> Any?) = at(level){}
 
   /** Lazy add a log message with throwable payload if isTraceEnabled is true */
   public fun atTrace(block: KLoggingEventBuilder.() -> Unit): Unit = logAt(Level.TRACE, block)
@@ -48,7 +48,7 @@ public interface KLogger {
   public fun atError(block: KLoggingEventBuilder.() -> Unit): Unit = logAt(Level.ERROR, block)
 
   /** Lazy add a log message if isErrorEnabled is true */
-  public fun logAt(level: Level, block: KLoggingEventBuilder.() -> Unit)
+  public fun at(level: Level, block: KLoggingEventBuilder.() -> Unit)
 
   /** Add a log message with all the supplied parameters along with method name */
   public fun entry(vararg arguments: Any?): Unit = trace { "entry(${arguments.joinToString() })" }
