@@ -1,5 +1,7 @@
 package io.github.oshai.kotlinlogging
 
+import io.github.oshai.kotlinlogging.internal.toStringSafe
+
 /**
  * A Logger interface with Lazy message evaluation example:
  * ```
@@ -15,40 +17,38 @@ public interface KLogger {
   public val name: String
 
   /** Lazy add a log message if isTraceEnabled is true */
-  public fun trace(message: () -> Any?): Unit = log(Level.TRACE, message)
+  public fun trace(message: () -> Any?): Unit = at(Level.TRACE) { this.message = message.toStringSafe() }
 
   /** Lazy add a log message if isDebugEnabled is true */
-  public fun debug(message: () -> Any?): Unit = log(Level.DEBUG, message)
+  public fun debug(message: () -> Any?): Unit = at(Level.DEBUG) { this.message = message.toStringSafe() }
 
   /** Lazy add a log message if isInfoEnabled is true */
-  public fun info(message: () -> Any?): Unit = log(Level.INFO, message)
+  public fun info(message: () -> Any?): Unit = at(Level.INFO) { this.message = message.toStringSafe() }
 
   /** Lazy add a log message if isWarnEnabled is true */
-  public fun warn(message: () -> Any?): Unit = log(Level.WARN, message)
+  public fun warn(message: () -> Any?): Unit = at(Level.WARN) { this.message = message.toStringSafe() }
 
   /** Lazy add a log message if isErrorEnabled is true */
-  public fun error(message: () -> Any?): Unit = log(Level.ERROR, message)
+  public fun error(message: () -> Any?): Unit = at(Level.ERROR) { this.message = message.toStringSafe() }
 
-  /** Lazy add a log message if isErrorEnabled is true */
-  public fun log(level: Level, message: () -> Any?) = at(level){}
 
   /** Lazy add a log message with throwable payload if isTraceEnabled is true */
-  public fun atTrace(block: KLoggingEventBuilder.() -> Unit): Unit = logAt(Level.TRACE, block)
+  public fun atTrace(marker: Marker? = null,block: KLoggingEventBuilder.() -> Unit): Unit = at(Level.TRACE, marker, block)
 
   /** Lazy add a log message with throwable payload if isDebugEnabled is true */
-  public fun atDebug(block: KLoggingEventBuilder.() -> Unit): Unit = logAt(Level.DEBUG, block)
+  public fun atDebug(marker: Marker? = null,block: KLoggingEventBuilder.() -> Unit): Unit = at(Level.DEBUG, marker, block)
 
   /** Lazy add a log message with throwable payload if isInfoEnabled is true */
-  public fun atInfo(block: KLoggingEventBuilder.() -> Unit): Unit = logAt(Level.INFO, block)
+  public fun atInfo(marker: Marker? = null,block: KLoggingEventBuilder.() -> Unit): Unit = at(Level.INFO, marker, block)
 
   /** Lazy add a log message with throwable payload if isWarnEnabled is true */
-  public fun atWarn(block: KLoggingEventBuilder.() -> Unit): Unit = logAt(Level.WARN, block)
+  public fun atWarn(marker: Marker? = null,block: KLoggingEventBuilder.() -> Unit): Unit = at(Level.WARN, marker, block)
 
   /** Lazy add a log message with throwable payload if isErrorEnabled is true */
-  public fun atError(block: KLoggingEventBuilder.() -> Unit): Unit = logAt(Level.ERROR, block)
+  public fun atError(marker: Marker? = null,block: KLoggingEventBuilder.() -> Unit): Unit = at(Level.ERROR, marker, block)
 
   /** Lazy add a log message if isErrorEnabled is true */
-  public fun at(level: Level, block: KLoggingEventBuilder.() -> Unit)
+  public fun at(level: Level,marker: Marker? = null, block: KLoggingEventBuilder.() -> Unit)
 
   /** Add a log message with all the supplied parameters along with method name */
   public fun entry(vararg arguments: Any?): Unit = trace { "entry(${arguments.joinToString() })" }
