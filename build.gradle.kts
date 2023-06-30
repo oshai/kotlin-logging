@@ -93,13 +93,13 @@ kotlin {
         // common to jvm and android
         val javaMain by creating {
             dependsOn(commonMain)
-        }
-        val jvmMain by getting {
-            dependsOn(javaMain)
             dependencies {
                 compileOnly("org.slf4j:slf4j-api:${extra["slf4j_version"]}")
                 compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:${extra["coroutines_version"]}")
             }
+        }
+        val jvmMain by getting {
+            dependsOn(javaMain)
         }
         val jvmTest by getting {
             dependencies {
