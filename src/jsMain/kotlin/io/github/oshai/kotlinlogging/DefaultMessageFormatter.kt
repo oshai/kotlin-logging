@@ -3,31 +3,15 @@ package io.github.oshai.kotlinlogging
 import io.github.oshai.kotlinlogging.internal.toStringSafe
 
 public object DefaultMessageFormatter : Formatter {
-  public override fun formatMessage(level: Level, loggerName: String, msg: () -> Any?): String =
-    "${level.name}: [$loggerName] ${msg.toStringSafe()}"
-
-  public override fun formatMessage(
-    level: Level,
-    loggerName: String,
-    t: Throwable?,
-    msg: () -> Any?
-  ): String = "${level.name}: [$loggerName] ${msg.toStringSafe()}${t.throwableToString()}"
 
   public override fun formatMessage(
     level: Level,
     loggerName: String,
     marker: Marker?,
-    msg: () -> Any?
-  ): String = "${level.name}: [$loggerName] ${marker?.getName()} ${msg.toStringSafe()}"
-
-  public override fun formatMessage(
-    level: Level,
-    loggerName: String,
-    marker: Marker?,
-    t: Throwable?,
-    msg: () -> Any?
+    throwable: Throwable?,
+    message: () -> Any?
   ): String =
-    "${level.name}: [$loggerName] ${marker?.getName()} ${msg.toStringSafe()}${t.throwableToString()}"
+    "${level.name}: [$loggerName] ${marker?.getName()} ${message.toStringSafe()}${throwable.throwableToString()}"
 
   private fun Throwable?.throwableToString(): String {
     if (this == null) {
