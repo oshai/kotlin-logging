@@ -5,6 +5,7 @@ import io.github.oshai.kotlinlogging.KLogger
 import io.github.oshai.kotlinlogging.KLoggingEventBuilder
 import io.github.oshai.kotlinlogging.Level
 import io.github.oshai.kotlinlogging.Marker
+import io.github.oshai.kotlinlogging.internal.toStringSafe
 import io.github.oshai.kotlinlogging.slf4j.isLoggingEnabledFor
 import io.github.oshai.kotlinlogging.slf4j.toSlf4j
 import org.slf4j.event.EventConstants
@@ -85,4 +86,114 @@ internal class LocationAwareKLogger(override val underlyingLogger: LocationAware
   private fun buildMessagePattern(len: Int): String {
     return (1..len).joinToString(separator = ", ", prefix = "entry with (", postfix = ")") { "{}" }
   }
+
+  /** Lazy add a log message if isTraceEnabled is true */
+  override fun trace(message: () -> Any?): Unit =
+    at(Level.TRACE) { this.message = message.toStringSafe() }
+
+  /** Lazy add a log message if isDebugEnabled is true */
+  override fun debug(message: () -> Any?): Unit =
+    at(Level.DEBUG) { this.message = message.toStringSafe() }
+
+  /** Lazy add a log message if isInfoEnabled is true */
+  override fun info(message: () -> Any?): Unit =
+    at(Level.INFO) { this.message = message.toStringSafe() }
+
+  /** Lazy add a log message if isWarnEnabled is true */
+  override fun warn(message: () -> Any?): Unit =
+    at(Level.WARN) { this.message = message.toStringSafe() }
+
+  /** Lazy add a log message if isErrorEnabled is true */
+  override fun error(message: () -> Any?): Unit =
+    at(Level.ERROR) { this.message = message.toStringSafe() }
+
+  /** Lazy add a log message if isTraceEnabled is true */
+  override fun trace(throwable: Throwable?, message: () -> Any?): Unit =
+    at(Level.TRACE) {
+      this.message = message.toStringSafe()
+      this.cause = throwable
+    }
+
+  /** Lazy add a log message if isDebugEnabled is true */
+  override fun debug(throwable: Throwable?, message: () -> Any?): Unit =
+    at(Level.DEBUG) {
+      this.message = message.toStringSafe()
+      this.cause = throwable
+    }
+
+  /** Lazy add a log message if isInfoEnabled is true */
+  override fun info(throwable: Throwable?, message: () -> Any?): Unit =
+    at(Level.INFO) {
+      this.message = message.toStringSafe()
+      this.cause = throwable
+    }
+
+  /** Lazy add a log message if isWarnEnabled is true */
+  override fun warn(throwable: Throwable?, message: () -> Any?): Unit =
+    at(Level.WARN) {
+      this.message = message.toStringSafe()
+      this.cause = throwable
+    }
+
+  /** Lazy add a log message if isErrorEnabled is true */
+  override fun error(throwable: Throwable?, message: () -> Any?): Unit =
+    at(Level.ERROR) {
+      this.message = message.toStringSafe()
+      this.cause = throwable
+    }
+
+  /** Lazy add a log message if isTraceEnabled is true */
+  override fun trace(throwable: Throwable?, marker: Marker?, message: () -> Any?): Unit =
+    at(Level.TRACE, marker) {
+      this.message = message.toStringSafe()
+      this.cause = throwable
+    }
+
+  /** Lazy add a log message if isDebugEnabled is true */
+  override fun debug(throwable: Throwable?, marker: Marker?, message: () -> Any?): Unit =
+    at(Level.DEBUG, marker) {
+      this.message = message.toStringSafe()
+      this.cause = throwable
+    }
+
+  /** Lazy add a log message if isInfoEnabled is true */
+  override fun info(throwable: Throwable?, marker: Marker?, message: () -> Any?): Unit =
+    at(Level.INFO, marker) {
+      this.message = message.toStringSafe()
+      this.cause = throwable
+    }
+
+  /** Lazy add a log message if isWarnEnabled is true */
+  override fun warn(throwable: Throwable?, marker: Marker?, message: () -> Any?): Unit =
+    at(Level.WARN, marker) {
+      this.message = message.toStringSafe()
+      this.cause = throwable
+    }
+
+  /** Lazy add a log message if isErrorEnabled is true */
+  override fun error(throwable: Throwable?, marker: Marker?, message: () -> Any?): Unit =
+    at(Level.ERROR, marker) {
+      this.message = message.toStringSafe()
+      this.cause = throwable
+    }
+
+  /** Lazy add a log message with throwable payload if isTraceEnabled is true */
+  override fun atTrace(marker: Marker?, block: KLoggingEventBuilder.() -> Unit): Unit =
+    at(Level.TRACE, marker, block)
+
+  /** Lazy add a log message with throwable payload if isDebugEnabled is true */
+  override fun atDebug(marker: Marker?, block: KLoggingEventBuilder.() -> Unit): Unit =
+    at(Level.DEBUG, marker, block)
+
+  /** Lazy add a log message with throwable payload if isInfoEnabled is true */
+  override fun atInfo(marker: Marker?, block: KLoggingEventBuilder.() -> Unit): Unit =
+    at(Level.INFO, marker, block)
+
+  /** Lazy add a log message with throwable payload if isWarnEnabled is true */
+  override fun atWarn(marker: Marker?, block: KLoggingEventBuilder.() -> Unit): Unit =
+    at(Level.WARN, marker, block)
+
+  /** Lazy add a log message with throwable payload if isErrorEnabled is true */
+  override fun atError(marker: Marker?, block: KLoggingEventBuilder.() -> Unit): Unit =
+    at(Level.ERROR, marker, block)
 }

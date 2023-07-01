@@ -126,7 +126,7 @@ public interface KLogger {
   public fun atError(marker: Marker? = null, block: KLoggingEventBuilder.() -> Unit): Unit =
     at(Level.ERROR, marker, block)
 
-  /** Lazy add a log message if isErrorEnabled is true */
+  /** Lazy add a log message if level enabled */
   public fun at(level: Level, marker: Marker? = null, block: KLoggingEventBuilder.() -> Unit)
 
   /** Add a log message with all the supplied parameters along with method name */
