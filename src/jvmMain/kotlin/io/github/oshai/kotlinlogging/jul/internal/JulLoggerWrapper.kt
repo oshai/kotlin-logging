@@ -5,7 +5,6 @@ import io.github.oshai.kotlinlogging.KLogger
 import io.github.oshai.kotlinlogging.KLoggingEventBuilder
 import io.github.oshai.kotlinlogging.Level.*
 import io.github.oshai.kotlinlogging.Marker
-import io.github.oshai.kotlinlogging.internal.toStringSafe
 import java.util.logging.Level
 import java.util.logging.Logger
 

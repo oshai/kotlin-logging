@@ -9,6 +9,7 @@ import org.slf4j.Logger
 import org.slf4j.MarkerFactory
 
 public fun Marker.toSlf4j(): org.slf4j.Marker = MarkerFactory.getMarker(this.getName())
+
 public fun Level.toSlf4j(): Int = TODO()
 
 @Suppress("UnusedReceiverParameter")
