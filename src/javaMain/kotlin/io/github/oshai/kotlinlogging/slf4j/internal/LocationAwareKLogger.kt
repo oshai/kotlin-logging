@@ -38,10 +38,18 @@ internal class LocationAwareKLogger(override val underlyingLogger: LocationAware
   }
 
   override fun isLoggingEnabledFor(level: Level, marker: Marker?): Boolean {
-    TODO("Not yet implemented")
+    return when (level) {
+      Level.TRACE -> underlyingLogger.isTraceEnabled(marker?.toSlf4j())
+      Level.DEBUG -> underlyingLogger.isDebugEnabled(marker?.toSlf4j())
+      Level.INFO -> underlyingLogger.isInfoEnabled(marker?.toSlf4j())
+      Level.WARN -> underlyingLogger.isWarnEnabled(marker?.toSlf4j())
+      Level.ERROR -> underlyingLogger.isErrorEnabled(marker?.toSlf4j())
+      Level.OFF -> false
+    }
   }
 
   // TODO look at exit/entry/catching/throwing/etc'
+    // maybe move impl up to KLogger
 
   //  override fun trace(msg: String?) {
   //    if (!underlyingLogger.isTraceEnabled) return
