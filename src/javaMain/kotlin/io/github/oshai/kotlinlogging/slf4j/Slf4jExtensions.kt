@@ -10,7 +10,7 @@ import org.slf4j.MarkerFactory
 
 public fun Marker.toSlf4j(): org.slf4j.Marker = MarkerFactory.getMarker(this.getName())
 
-public fun Level.toSlf4j(): Int = TODO()
+public fun Level.toSlf4j(): org.slf4j.event.Level = TODO()
 
 @Suppress("UnusedReceiverParameter")
 public fun KotlinLogging.logger(underlyingLogger: Logger): KLogger =
