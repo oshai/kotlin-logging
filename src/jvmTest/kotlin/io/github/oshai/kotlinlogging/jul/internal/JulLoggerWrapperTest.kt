@@ -50,9 +50,9 @@ class JulLoggerWrapperTest {
     assertTrue(logger is JulLoggerWrapper)
     assertTrue(warnLogger is JulLoggerWrapper)
     assertTrue(errorLogger is JulLoggerWrapper)
-    logger.info("simple jul info message")
-    warnLogger.warn("simple jul warn message")
-    errorLogger.error("simple jul error message")
+    logger.info { "simple jul info message" }
+    warnLogger.warn { "simple jul warn message" }
+    errorLogger.error { "simple jul error message" }
     appenderWithWriter.writer.flush()
     val lines =
       appenderWithWriter

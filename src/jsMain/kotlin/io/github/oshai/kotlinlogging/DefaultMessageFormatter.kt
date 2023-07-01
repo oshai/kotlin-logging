@@ -10,8 +10,20 @@ public object DefaultMessageFormatter : Formatter {
     marker: Marker?,
     throwable: Throwable?,
     message: () -> Any?
-  ): String =
-    "${level.name}: [$loggerName] ${marker?.getName()} ${message.toStringSafe()}${throwable.throwableToString()}"
+  ): String {
+    return buildString {
+      append(level.name)
+      append(": [")
+      append(loggerName)
+      append("] ")
+      marker?.getName()?.let {
+        append(it)
+        append(" ")
+      }
+      append(message.toStringSafe())
+      append(throwable.throwableToString())
+    }
+  }
 
   private fun Throwable?.throwableToString(): String {
     if (this == null) {

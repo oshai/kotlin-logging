@@ -33,17 +33,17 @@ class ClassWithLogging {
 
   fun testMarker() {
     val marker = KMarkerFactory.getMarker("MARKER")
-    logger.trace(marker) { "test ClassWithLogging" }
+    logger.trace(null, marker) { "test ClassWithLogging" }
   }
 
   fun testMarkerThrowable() {
     val marker = KMarkerFactory.getMarker("MARKER")
     val ex = Throwable()
-    logger.trace(marker, ex) { "test ClassWithLogging" }
+    logger.trace(ex, marker) { "test ClassWithLogging" }
   }
 
   fun testFormatting() {
-    logger.info("Message: {}", "String with {} curly braces")
+    logger.info { "Message: String with {} curly braces" }
   }
 }
 
@@ -295,7 +295,7 @@ class LoggingTest {
   fun `check underlyingLogger property`() {
     assertEquals(
       "io.github.oshai.kotlinlogging.ClassHasLogging",
-      (ClassHasLogging().logger.underlyingLogger as org.slf4j.Logger).name
+      ((ClassHasLogging().logger as DelegatingKLogger<*>).underlyingLogger as org.slf4j.Logger).name
     )
   }
 }
