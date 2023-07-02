@@ -29,7 +29,7 @@ internal class JulLoggerWrapper(override val underlyingLogger: Logger) :
     level: io.github.oshai.kotlinlogging.Level,
     marker: Marker?
   ): Boolean {
-    return underlyingLogger.isLoggable(TRACE.toJULLevel())
+    return underlyingLogger.isLoggable(level.toJULLevel())
   }
 
   private fun io.github.oshai.kotlinlogging.Level.toJULLevel(): Level {
