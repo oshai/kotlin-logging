@@ -33,6 +33,19 @@ val logger = LoggerFactory.getLogger("package.ClassName")
 logger.error(exception) { "a $fancy message about the $exception" }
 ```
 
+#### Fluent logging in a Kotlin-style
+```kotlin
+logger.atWarn {
+   message = "foo $bar"
+   cause = exception
+   payload = buildMap(capacity = 3) {
+        put("foo", 1)
+        put("bar", "x")
+        put("obj", Pair(2, 3))
+    }
+}
+```
+
 ## Getting started
  
 ```Kotlin
