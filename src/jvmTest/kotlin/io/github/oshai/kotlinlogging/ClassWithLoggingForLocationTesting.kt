@@ -1,7 +1,7 @@
 package io.github.oshai.kotlinlogging
 
+private val logger = KotlinLogging.logger {}
 class ClassWithLoggingForLocationTesting {
-  companion object : KLogging()
 
   fun log() {
     logger.info { "test" }
