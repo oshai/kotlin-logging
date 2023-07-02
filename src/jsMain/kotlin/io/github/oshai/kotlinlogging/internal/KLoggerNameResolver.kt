@@ -1,9 +1,8 @@
 package io.github.oshai.kotlinlogging.internal
 
-@Suppress("NOTHING_TO_INLINE")
 internal actual object KLoggerNameResolver {
 
-  internal actual inline fun name(noinline func: () -> Unit): String {
+  internal actual fun name(func: () -> Unit): String {
     var found = false
     val exception = Exception()
     for (line in exception.stackTraceToString().split("\n")) {

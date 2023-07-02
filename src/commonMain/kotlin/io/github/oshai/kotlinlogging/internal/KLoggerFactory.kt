@@ -4,5 +4,5 @@ import io.github.oshai.kotlinlogging.KLogger
 
 internal expect object KLoggerFactory {
 
-  internal inline fun logger(name: String): KLogger
+  internal fun logger(name: String): KLogger
 }
