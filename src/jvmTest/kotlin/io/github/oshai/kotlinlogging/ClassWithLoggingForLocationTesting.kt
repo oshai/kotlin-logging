@@ -1,6 +1,7 @@
 package io.github.oshai.kotlinlogging
 
 private val logger = KotlinLogging.logger {}
+
 class ClassWithLoggingForLocationTesting {
 
   fun log() {
