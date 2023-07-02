@@ -17,7 +17,7 @@ import org.slf4j.spi.LocationAwareLogger
  * correct fully qualified class name.
  */
 internal class LocationAwareKLogger(override val underlyingLogger: LocationAwareLogger) :
-  KLogger, DelegatingKLogger<LocationAwareLogger> {
+  KLogger, DelegatingKLogger<LocationAwareLogger>, Slf4jLogger() {
 
   private val fqcn: String = LocationAwareKLogger::class.java.name
   private val ENTRY = io.github.oshai.kotlinlogging.KMarkerFactory.getMarker("ENTRY").toSlf4j()

@@ -1,5 +1,3 @@
-@file:Suppress("NOTHING_TO_INLINE", "OVERRIDE_BY_INLINE")
-
 package io.github.oshai.kotlinlogging.slf4j.internal
 
 import io.github.oshai.kotlinlogging.DelegatingKLogger
@@ -17,7 +15,7 @@ import org.slf4j.Logger
  * methods
  */
 internal class LocationIgnorantKLogger(override val underlyingLogger: Logger) :
-  KLogger, DelegatingKLogger<Logger> {
+  KLogger, DelegatingKLogger<Logger>, Slf4jLogger() {
   override val name: String
     get() = underlyingLogger.name
 
