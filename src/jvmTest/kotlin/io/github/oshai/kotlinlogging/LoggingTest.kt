@@ -33,7 +33,7 @@ class ClassWithLogging {
 
   fun testMarker() {
     val marker = KMarkerFactory.getMarker("MARKER")
-    logger.trace(null, marker) { "test ClassWithLogging" }
+    logger.trace(null as Throwable?, marker) { "test ClassWithLogging" }
   }
 
   fun testMarkerThrowable() {
