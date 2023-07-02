@@ -3,30 +3,6 @@ package io.github.oshai.kotlinlogging
 import io.github.oshai.kotlinlogging.internal.toStringSafe
 
 public object DefaultMessageFormatter : Formatter {
-  public override fun formatMessage(
-    includePrefix: Boolean,
-    level: Level,
-    loggerName: String,
-    msg: () -> Any?
-  ): String = "${prefix(includePrefix, level, loggerName)}${msg.toStringSafe()}"
-
-  public override fun formatMessage(
-    includePrefix: Boolean,
-    level: Level,
-    loggerName: String,
-    t: Throwable?,
-    msg: () -> Any?
-  ): String =
-    "${prefix(includePrefix, level, loggerName)}${msg.toStringSafe()}${t.throwableToString()}"
-
-  public override fun formatMessage(
-    includePrefix: Boolean,
-    level: Level,
-    loggerName: String,
-    marker: Marker?,
-    msg: () -> Any?
-  ): String =
-    "${prefix(includePrefix, level, loggerName)}${marker?.getName()} ${msg.toStringSafe()}"
 
   public override fun formatMessage(
     includePrefix: Boolean,

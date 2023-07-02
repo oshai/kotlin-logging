@@ -3,11 +3,10 @@ package io.github.oshai.kotlinlogging.internal
 import java.lang.reflect.Modifier
 
 /** Resolves name of java classes */
-@Suppress("NOTHING_TO_INLINE")
 internal actual object KLoggerNameResolver {
 
   /** get class name for function by the package of the function */
-  internal actual inline fun name(noinline func: () -> Unit): String {
+  internal actual fun name(func: () -> Unit): String {
     val name = func.javaClass.name
     val slicedName =
       when {
@@ -19,11 +18,10 @@ internal actual object KLoggerNameResolver {
   }
 
   /** get class name for java class (that usually represents kotlin class) */
-  internal inline fun <T : Any> name(forClass: Class<T>): String =
-    unwrapCompanionClass(forClass).name
+  internal fun <T : Any> name(forClass: Class<T>): String = unwrapCompanionClass(forClass).name
 
   /** unwrap companion class to enclosing class given a Java Class */
-  private inline fun <T : Any> unwrapCompanionClass(clazz: Class<T>): Class<*> {
+  private fun <T : Any> unwrapCompanionClass(clazz: Class<T>): Class<*> {
     return clazz.enclosingClass?.let { enclosingClass ->
       try {
         enclosingClass.declaredFields

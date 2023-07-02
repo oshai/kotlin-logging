@@ -5,6 +5,7 @@ on:
     branches:
       - github-release
       - github-release-4.x
+      - github-release-5.x
 
 jobs:
   release:

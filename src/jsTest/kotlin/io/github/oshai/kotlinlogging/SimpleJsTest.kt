@@ -30,7 +30,7 @@ class SimpleJsTest {
   @Test
   fun offLevelJsTest() {
     KotlinLoggingConfiguration.LOG_LEVEL = Level.OFF
-    assertTrue(logger.isLoggingOff)
+    assertTrue(logger.isLoggingOff())
     logger.error { "error msg" }
     assertEquals("NA", appender.lastMessage)
     assertEquals("NA", appender.lastLevel)

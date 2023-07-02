@@ -1,6 +1,6 @@
 package io.github.oshai.kotlinlogging.internal
 
-internal inline fun (() -> Any?).toStringSafe(): String {
+internal fun (() -> Any?).toStringSafe(): String {
   return try {
     invoke().toString()
   } catch (e: Exception) {
