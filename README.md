@@ -48,9 +48,9 @@ class FooWithLogging {
 
 An `Android` example project with kotlin-logging can be found in [kotlin-logging-example-android](https://github.com/oshai/kotlin-logging-example-android).
 
-## Version 4.x vs. previous versions
+## Version >= 4 vs. previous versions
 
-Version 4 is not backward compatible with previous versions. Group id (in maven) and packages names changed.
+Version >= 4 is not backward compatible with previous versions. Group id (in maven) and packages names changed.
 It is possible to use both version 4 and previous versions side-by-side so some of the code from the old version
 and some new. It is also possible to have libs using old version and use the new version (and vice-versa).  
 In that sense it's a completely new dependency.
@@ -58,7 +58,7 @@ In that sense it's a completely new dependency.
 Main changes are:
 - Maven group id changed from `io.github.microutils` -> `io.github.oshai`.
 - Root package change from `mu` -> `io.github.oshai.kotlinlogging`.
-- Slf4j dependency is not provided anymore (users have to provide it). It means that 4.x can work with both slf4j 1 or 2.
+- Slf4j dependency is not provided anymore (users have to provide it). It means that >= 4.x can work with both slf4j 1 or 2.
 - There are changes to multiplatform class hierarchy that might break compatibility.
 
 More details in issue [#264](https://github.com/oshai/kotlin-logging/issues/264).
@@ -75,7 +75,7 @@ In short, if you just want to log statements to stdout, it's possible to add the
 <dependency>
   <groupId>io.github.oshai</groupId>
   <artifactId>kotlin-logging-jvm</artifactId>
-  <version>4.0.0</version>
+  <version>5.0.0-beta-01</version>
 </dependency>
 ```
 Or
@@ -90,7 +90,7 @@ See the full example in [kotlin-logging-example-maven](https://github.com/oshai/
 
 ### Gradle
 ```Groovy
-implementation 'io.github.oshai:kotlin-logging-jvm:4.0.0'
+implementation 'io.github.oshai:kotlin-logging-jvm:5.0.0-beta-01'
 ```
 Or
 ```Groovy
