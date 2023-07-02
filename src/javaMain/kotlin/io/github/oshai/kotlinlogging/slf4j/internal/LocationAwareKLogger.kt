@@ -50,6 +50,57 @@ internal class LocationAwareKLogger(override val underlyingLogger: LocationAware
     }
   }
 
+  /**
+   * Similar to [.isTraceEnabled] method except that the marker data is also taken into account.
+   *
+   * @param marker The marker data to take into consideration
+   * @return True if this Logger is enabled for the TRACE level, false otherwise.
+   */
+  override fun isTraceEnabled(marker: Marker?): Boolean = isLoggingEnabledFor(Level.TRACE, marker)
+
+  /**
+   * Similar to [.isDebugEnabled] method except that the marker data is also taken into account.
+   *
+   * @param marker The marker data to take into consideration
+   * @return True if this Logger is enabled for the DEBUG level, false otherwise.
+   */
+  override fun isDebugEnabled(marker: Marker?): Boolean = isLoggingEnabledFor(Level.DEBUG, marker)
+
+  /**
+   * Similar to [.isInfoEnabled] method except that the marker data is also taken into
+   * consideration.
+   *
+   * @param marker The marker data to take into consideration
+   * @return true if this Logger is enabled for the INFO level, false otherwise.
+   */
+  override fun isInfoEnabled(marker: Marker?): Boolean = isLoggingEnabledFor(Level.INFO, marker)
+
+  /**
+   * Similar to [.isWarnEnabled] method except that the marker data is also taken into
+   * consideration.
+   *
+   * @param marker The marker data to take into consideration
+   * @return True if this Logger is enabled for the WARN level, false otherwise.
+   */
+  override fun isWarnEnabled(marker: Marker?): Boolean = isLoggingEnabledFor(Level.WARN, marker)
+
+  /**
+   * Similar to [.isErrorEnabled] method except that the marker data is also taken into
+   * consideration.
+   *
+   * @param marker The marker data to take into consideration
+   * @return True if this Logger is enabled for the ERROR level, false otherwise.
+   */
+  override fun isErrorEnabled(marker: Marker?): Boolean = isLoggingEnabledFor(Level.ERROR, marker)
+
+  /**
+   * Similar to [.isLoggingOff] method except that the marker data is also taken into consideration.
+   *
+   * @param marker The marker data to take into consideration
+   * @return True if this Logger is set to the OFF level, false otherwise.
+   */
+  override fun isLoggingOff(marker: Marker?) = !isLoggingEnabledFor(Level.ERROR, marker)
+
   override fun entry(vararg arguments: Any?) {
     if (underlyingLogger.isTraceEnabled(ENTRY)) {
       val tp = MessageFormatter.arrayFormat(buildMessagePattern(arguments.size), arguments)
@@ -89,23 +140,23 @@ internal class LocationAwareKLogger(override val underlyingLogger: LocationAware
 
   /** Lazy add a log message if isTraceEnabled is true */
   override fun trace(message: () -> Any?): Unit =
-    at(Level.TRACE) { this.message = message.toStringSafe() }
+    at(Level.TRACE, null) { this.message = message.toStringSafe() }
 
   /** Lazy add a log message if isDebugEnabled is true */
   override fun debug(message: () -> Any?): Unit =
-    at(Level.DEBUG) { this.message = message.toStringSafe() }
+    at(Level.DEBUG, null) { this.message = message.toStringSafe() }
 
   /** Lazy add a log message if isInfoEnabled is true */
   override fun info(message: () -> Any?): Unit =
-    at(Level.INFO) { this.message = message.toStringSafe() }
+    at(Level.INFO, null) { this.message = message.toStringSafe() }
 
   /** Lazy add a log message if isWarnEnabled is true */
   override fun warn(message: () -> Any?): Unit =
-    at(Level.WARN) { this.message = message.toStringSafe() }
+    at(Level.WARN, null) { this.message = message.toStringSafe() }
 
   /** Lazy add a log message if isErrorEnabled is true */
   override fun error(message: () -> Any?): Unit =
-    at(Level.ERROR) { this.message = message.toStringSafe() }
+    at(Level.ERROR, null) { this.message = message.toStringSafe() }
 
   /** Lazy add a log message if isTraceEnabled is true */
   override fun trace(throwable: Throwable?, message: () -> Any?): Unit =
@@ -116,28 +167,28 @@ internal class LocationAwareKLogger(override val underlyingLogger: LocationAware
 
   /** Lazy add a log message if isDebugEnabled is true */
   override fun debug(throwable: Throwable?, message: () -> Any?): Unit =
-    at(Level.DEBUG) {
+    at(Level.DEBUG, null) {
       this.message = message.toStringSafe()
       this.cause = throwable
     }
 
   /** Lazy add a log message if isInfoEnabled is true */
   override fun info(throwable: Throwable?, message: () -> Any?): Unit =
-    at(Level.INFO) {
+    at(Level.INFO, null) {
       this.message = message.toStringSafe()
       this.cause = throwable
     }
 
   /** Lazy add a log message if isWarnEnabled is true */
   override fun warn(throwable: Throwable?, message: () -> Any?): Unit =
-    at(Level.WARN) {
+    at(Level.WARN, null) {
       this.message = message.toStringSafe()
       this.cause = throwable
     }
 
   /** Lazy add a log message if isErrorEnabled is true */
   override fun error(throwable: Throwable?, message: () -> Any?): Unit =
-    at(Level.ERROR) {
+    at(Level.ERROR, null) {
       this.message = message.toStringSafe()
       this.cause = throwable
     }
