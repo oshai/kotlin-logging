@@ -24,6 +24,7 @@ internal class LocationIgnorantKLogger(override val underlyingLogger: Logger) :
       KLoggingEventBuilder().apply(block).run {
         val builder = underlyingLogger.atLevel(level.toSlf4j())
         marker?.toSlf4j()?.let { builder.addMarker(it) }
+        payload?.forEach { (key, value) -> builder.addKeyValue(key, value) }
         builder.setCause(cause)
         builder.log(message)
       }
