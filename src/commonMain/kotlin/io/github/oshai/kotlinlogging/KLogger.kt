@@ -1,3 +1,5 @@
+@file:Suppress("MoveLambdaOutsideParentheses")
+
 package io.github.oshai.kotlinlogging
 
 import io.github.oshai.kotlinlogging.internal.toStringSafe
@@ -8,7 +10,6 @@ import io.github.oshai.kotlinlogging.internal.toStringSafe
  * logger.info{"this is $lazy evaluated string"}
  * ```
  */
-@Suppress("DeprecatedCallableAddReplaceWith")
 public interface KLogger {
 
   /**
@@ -281,7 +282,8 @@ public interface KLogger {
    *
    * @param msg the message string to be logged
    */
-  @Deprecated("Use trace {} instead") public fun trace(msg: String?): Unit = trace { msg }
+  @Deprecated("Use trace {} instead", replaceWith = ReplaceWith("trace { \"\$msg\"}"))
+  public fun trace(msg: String?): Unit = trace { msg }
 
   /**
    * Log a message at the TRACE level according to the specified msg and argument.
@@ -291,7 +293,8 @@ public interface KLogger {
    * @param msg the msg string
    * @param arg the argument
    */
-  @Deprecated("Use trace {} instead") public fun trace(msg: String?, arg: Any?): Unit = TODO()
+  @Deprecated("Use trace {} instead", replaceWith = ReplaceWith("trace { \"\$msg \$arg\"}"))
+  public fun trace(msg: String?, arg: Any?): Unit = TODO()
 
   /**
    * Log a message at the TRACE level according to the specified msg and arguments.
@@ -302,7 +305,7 @@ public interface KLogger {
    * @param arg1 the first argument
    * @param arg2 the second argument
    */
-  @Deprecated("Use trace {} instead")
+  @Deprecated("Use trace {} instead", replaceWith = ReplaceWith("trace { \"\$msg \$arg1 \$arg2\"}"))
   public fun trace(msg: String?, arg1: Any?, arg2: Any?): Unit = TODO()
 
   /**
@@ -317,7 +320,7 @@ public interface KLogger {
    * @param msg the msg string
    * @param arguments a list of 3 or more arguments
    */
-  @Deprecated("Use trace {} instead")
+  @Deprecated("Use trace {} instead", replaceWith = ReplaceWith("trace { \"\$msg \$arguments\"}"))
   public fun trace(msg: String?, vararg arguments: Any?): Unit = TODO()
 
   /**
@@ -326,7 +329,7 @@ public interface KLogger {
    * @param msg the message accompanying the exception
    * @param t the exception (throwable) to log
    */
-  @Deprecated("Use trace {} instead")
+  @Deprecated("Use trace {} instead", replaceWith = ReplaceWith("trace(t) { \"\$msg\"}"))
   public fun trace(msg: String?, t: Throwable?): Unit = trace(t as Throwable, null, { msg })
 
   /**
@@ -335,7 +338,7 @@ public interface KLogger {
    * @param marker the marker data specific to this log statement
    * @param msg the message string to be logged
    */
-  @Deprecated("Use trace {} instead")
+  @Deprecated("Use trace {} instead", replaceWith = ReplaceWith("trace(marker) { \"\$msg\"}"))
   public fun trace(marker: Marker?, msg: String?): Unit = trace(null as Throwable?, marker, { msg })
 
   /**
@@ -346,7 +349,7 @@ public interface KLogger {
    * @param msg the msg string
    * @param arg the argument
    */
-  @Deprecated("Use trace {} instead")
+  @Deprecated("Use trace {} instead", replaceWith = ReplaceWith("trace(marker) { \"\$msg \$arg\"}"))
   public fun trace(marker: Marker?, msg: String?, arg: Any?): Unit = TODO()
 
   /**
@@ -358,7 +361,10 @@ public interface KLogger {
    * @param arg1 the first argument
    * @param arg2 the second argument
    */
-  @Deprecated("Use trace {} instead")
+  @Deprecated(
+    "Use trace {} instead",
+    replaceWith = ReplaceWith("trace(marker) { \"\$msg \$arg1 \$arg2\"}")
+  )
   public fun trace(marker: Marker?, msg: String?, arg1: Any?, arg2: Any?): Unit = TODO()
 
   /**
@@ -369,7 +375,10 @@ public interface KLogger {
    * @param msg the msg string
    * @param arguments an array of arguments
    */
-  @Deprecated("Use trace {} instead")
+  @Deprecated(
+    "Use trace {} instead",
+    replaceWith = ReplaceWith("trace(marker) { \"\$msg \$arguments\"}")
+  )
   public fun trace(marker: Marker?, msg: String?, vararg arguments: Any?): Unit = TODO()
 
   /**
@@ -380,7 +389,7 @@ public interface KLogger {
    * @param msg the message accompanying the exception
    * @param t the exception (throwable) to log
    */
-  @Deprecated("Use trace {} instead")
+  @Deprecated("Use trace {} instead", replaceWith = ReplaceWith("trace(t, marker) { \"\$msg\"}"))
   public fun trace(marker: Marker?, msg: String?, t: Throwable?): Unit =
     trace(t as Throwable, marker, { msg })
 
@@ -389,7 +398,8 @@ public interface KLogger {
    *
    * @param msg the message string to be logged
    */
-  @Deprecated("Use debug {} instead") public fun debug(msg: String?): Unit = debug { msg }
+  @Deprecated("Use debug {} instead", replaceWith = ReplaceWith("debug { \"\$msg\"}"))
+  public fun debug(msg: String?): Unit = debug { msg }
 
   /**
    * Log a message at the DEBUG level according to the specified msg and argument.
@@ -399,7 +409,8 @@ public interface KLogger {
    * @param msg the msg string
    * @param arg the argument
    */
-  @Deprecated("Use debug {} instead") public fun debug(msg: String?, arg: Any?): Unit = TODO()
+  @Deprecated("Use debug {} instead", replaceWith = ReplaceWith("debug { \"\$msg \$arg\"}"))
+  public fun debug(msg: String?, arg: Any?): Unit = TODO()
 
   /**
    * Log a message at the DEBUG level according to the specified msg and arguments.
@@ -410,7 +421,7 @@ public interface KLogger {
    * @param arg1 the first argument
    * @param arg2 the second argument
    */
-  @Deprecated("Use debug {} instead")
+  @Deprecated("Use debug {} instead", replaceWith = ReplaceWith("debug { \"\$msg \$arg1 \$arg2\"}"))
   public fun debug(msg: String?, arg1: Any?, arg2: Any?): Unit = TODO()
 
   /**
@@ -434,7 +445,7 @@ public interface KLogger {
    * @param msg the message accompanying the exception
    * @param t the exception (throwable) to log
    */
-  @Deprecated("Use debug {} instead")
+  @Deprecated("Use debug {} instead", replaceWith = ReplaceWith("debug(t) { \"\$msg\"}"))
   public fun debug(msg: String?, t: Throwable?): Unit = debug(t as Throwable, null, { msg })
 
   /**
@@ -443,7 +454,7 @@ public interface KLogger {
    * @param marker the marker data specific to this log statement
    * @param msg the message string to be logged
    */
-  @Deprecated("Use debug {} instead")
+  @Deprecated("Use debug {} instead", replaceWith = ReplaceWith("debug(marker) { \"\$msg\"}"))
   public fun debug(marker: Marker?, msg: String?): Unit = debug(null as Throwable?, marker, { msg })
 
   /**
@@ -454,7 +465,7 @@ public interface KLogger {
    * @param msg the msg string
    * @param arg the argument
    */
-  @Deprecated("Use debug {} instead")
+  @Deprecated("Use debug {} instead", replaceWith = ReplaceWith("debug(marker) { \"\$msg \$arg\"}"))
   public fun debug(marker: Marker?, msg: String?, arg: Any?): Unit = TODO()
 
   /**
@@ -466,7 +477,10 @@ public interface KLogger {
    * @param arg1 the first argument
    * @param arg2 the second argument
    */
-  @Deprecated("Use debug {} instead")
+  @Deprecated(
+    "Use debug {} instead",
+    replaceWith = ReplaceWith("debug(marker) { \"\$msg \$arg1 \$arg2\"}")
+  )
   public fun debug(marker: Marker?, msg: String?, arg1: Any?, arg2: Any?): Unit = TODO()
 
   /**
@@ -477,7 +491,10 @@ public interface KLogger {
    * @param msg the msg string
    * @param arguments a list of 3 or more arguments
    */
-  @Deprecated("Use debug {} instead")
+  @Deprecated(
+    "Use debug {} instead",
+    replaceWith = ReplaceWith("debug(marker) { \"\$msg \$arguments\"}")
+  )
   public fun debug(marker: Marker?, msg: String?, vararg arguments: Any?): Unit = TODO()
 
   /**
@@ -488,7 +505,7 @@ public interface KLogger {
    * @param msg the message accompanying the exception
    * @param t the exception (throwable) to log
    */
-  @Deprecated("Use debug {} instead")
+  @Deprecated("Use debug {} instead", replaceWith = ReplaceWith("debug(t, marker) { \"\$msg\"}"))
   public fun debug(marker: Marker?, msg: String?, t: Throwable?): Unit =
     debug(t as Throwable, marker, { msg })
 
@@ -507,7 +524,8 @@ public interface KLogger {
    * @param msg the msg string
    * @param arg the argument
    */
-  @Deprecated("Use info {} instead") public fun info(msg: String?, arg: Any?): Unit = TODO()
+  @Deprecated("Use info {} instead", replaceWith = ReplaceWith("info { \"\$msg \$arg\"}"))
+  public fun info(msg: String?, arg: Any?): Unit = TODO()
 
   /**
    * Log a message at the INFO level according to the specified msg and arguments.
@@ -518,7 +536,7 @@ public interface KLogger {
    * @param arg1 the first argument
    * @param arg2 the second argument
    */
-  @Deprecated("Use info {} instead")
+  @Deprecated("Use info {} instead", replaceWith = ReplaceWith("info { \"\$msg \$arg1 \$arg2\"}"))
   public fun info(msg: String?, arg1: Any?, arg2: Any?): Unit = TODO()
 
   /**
@@ -532,7 +550,7 @@ public interface KLogger {
    * @param msg the msg string
    * @param arguments a list of 3 or more arguments
    */
-  @Deprecated("Use info {} instead")
+  @Deprecated("Use info {} instead", replaceWith = ReplaceWith("info { \"\$msg \$arguments\"}"))
   public fun info(msg: String?, vararg arguments: Any?): Unit = TODO()
 
   /**
@@ -541,7 +559,7 @@ public interface KLogger {
    * @param msg the message accompanying the exception
    * @param t the exception (throwable) to log
    */
-  @Deprecated("Use info {} instead")
+  @Deprecated("Use info {} instead", replaceWith = ReplaceWith("info(t) { \"\$msg\"}"))
   public fun info(msg: String?, t: Throwable?): Unit = info(t as Throwable, null, { msg })
 
   /**
@@ -550,7 +568,7 @@ public interface KLogger {
    * @param marker The marker specific to this log statement
    * @param msg the message string to be logged
    */
-  @Deprecated("Use info {} instead")
+  @Deprecated("Use info {} instead", replaceWith = ReplaceWith("info(marker) { \"\$msg\"}"))
   public fun info(marker: Marker?, msg: String?): Unit = info(null as Throwable?, marker, { msg })
 
   /**
@@ -561,7 +579,7 @@ public interface KLogger {
    * @param msg the msg string
    * @param arg the argument
    */
-  @Deprecated("Use info {} instead")
+  @Deprecated("Use info {} instead", replaceWith = ReplaceWith("info(marker) { \"\$msg \$arg\"}"))
   public fun info(marker: Marker?, msg: String?, arg: Any?): Unit = TODO()
 
   /**
@@ -573,7 +591,10 @@ public interface KLogger {
    * @param arg1 the first argument
    * @param arg2 the second argument
    */
-  @Deprecated("Use info {} instead")
+  @Deprecated(
+    "Use info {} instead",
+    replaceWith = ReplaceWith("info(marker) { \"\$msg \$arg1 \$arg2\"}")
+  )
   public fun info(marker: Marker?, msg: String?, arg1: Any?, arg2: Any?): Unit = TODO()
 
   /**
@@ -584,7 +605,10 @@ public interface KLogger {
    * @param msg the msg string
    * @param arguments a list of 3 or more arguments
    */
-  @Deprecated("Use info {} instead")
+  @Deprecated(
+    "Use info {} instead",
+    replaceWith = ReplaceWith("info(marker) { \"\$msg \$arguments\"}")
+  )
   public fun info(marker: Marker?, msg: String?, vararg arguments: Any?): Unit = TODO()
 
   /**
@@ -595,7 +619,7 @@ public interface KLogger {
    * @param msg the message accompanying the exception
    * @param t the exception (throwable) to log
    */
-  @Deprecated("Use info {} instead")
+  @Deprecated("Use info {} instead", replaceWith = ReplaceWith("info(t, marker) { \"\$msg\"}"))
   public fun info(marker: Marker?, msg: String?, t: Throwable?): Unit =
     info(t as Throwable, marker, { msg })
 
@@ -614,7 +638,8 @@ public interface KLogger {
    * @param msg the msg string
    * @param arg the argument
    */
-  @Deprecated("Use warn {} instead") public fun warn(msg: String?, arg: Any?): Unit = TODO()
+  @Deprecated("Use warn {} instead", replaceWith = ReplaceWith("warn { \"\$msg \$arg\"}"))
+  public fun warn(msg: String?, arg: Any?): Unit = TODO()
 
   /**
    * Log a message at the WARN level according to the specified msg and arguments.
@@ -627,7 +652,7 @@ public interface KLogger {
    * @param msg the msg string
    * @param arguments a list of 3 or more arguments
    */
-  @Deprecated("Use warn {} instead")
+  @Deprecated("Use warn {} instead", replaceWith = ReplaceWith("warn { \"\$msg \$arguments\"}"))
   public fun warn(msg: String?, vararg arguments: Any?): Unit = TODO()
 
   /**
@@ -639,7 +664,7 @@ public interface KLogger {
    * @param arg1 the first argument
    * @param arg2 the second argument
    */
-  @Deprecated("Use warn {} instead")
+  @Deprecated("Use warn {} instead", replaceWith = ReplaceWith("warn { \"\$msg \$arg1 \$arg2\"}"))
   public fun warn(msg: String?, arg1: Any?, arg2: Any?): Unit = TODO()
 
   /**
@@ -648,7 +673,7 @@ public interface KLogger {
    * @param msg the message accompanying the exception
    * @param t the exception (throwable) to log
    */
-  @Deprecated("Use warn {} instead")
+  @Deprecated("Use warn {} instead", replaceWith = ReplaceWith("warn(t) { \"\$msg\"}"))
   public fun warn(msg: String?, t: Throwable?): Unit = warn(t as Throwable, null, { msg })
 
   /**
@@ -657,7 +682,7 @@ public interface KLogger {
    * @param marker The marker specific to this log statement
    * @param msg the message string to be logged
    */
-  @Deprecated("Use warn {} instead")
+  @Deprecated("Use warn {} instead", replaceWith = ReplaceWith("warn(marker) { \"\$msg\"}"))
   public fun warn(marker: Marker?, msg: String?): Unit = warn(null as Throwable?, marker, { msg })
 
   /**
@@ -668,7 +693,7 @@ public interface KLogger {
    * @param msg the msg string
    * @param arg the argument
    */
-  @Deprecated("Use warn {} instead")
+  @Deprecated("Use warn {} instead", replaceWith = ReplaceWith("warn(marker) { \"\$msg \$arg\"}"))
   public fun warn(marker: Marker?, msg: String?, arg: Any?): Unit = TODO()
 
   /**
@@ -680,6 +705,10 @@ public interface KLogger {
    * @param arg1 the first argument
    * @param arg2 the second argument
    */
+  @Deprecated(
+    "Use warn {} instead",
+    replaceWith = ReplaceWith("warn(marker) { \"\$msg \$arg1 \$arg2\"}")
+  )
   public fun warn(marker: Marker?, msg: String?, arg1: Any?, arg2: Any?): Unit = TODO()
 
   /**
@@ -690,7 +719,10 @@ public interface KLogger {
    * @param msg the msg string
    * @param arguments a list of 3 or more arguments
    */
-  @Deprecated("Use warn {} instead")
+  @Deprecated(
+    "Use warn {} instead",
+    replaceWith = ReplaceWith("warn(marker) { \"\$msg \$arguments\"}")
+  )
   public fun warn(marker: Marker?, msg: String?, vararg arguments: Any?): Unit = TODO()
 
   /**
@@ -701,7 +733,7 @@ public interface KLogger {
    * @param msg the message accompanying the exception
    * @param t the exception (throwable) to log
    */
-  @Deprecated("Use warn {} instead")
+  @Deprecated("Use warn {} instead", replaceWith = ReplaceWith("warn(t, marker) { \"\$msg\"}"))
   public fun warn(marker: Marker?, msg: String?, t: Throwable?): Unit =
     warn(t as Throwable, marker, { msg })
 
@@ -710,7 +742,8 @@ public interface KLogger {
    *
    * @param msg the message string to be logged
    */
-  @Deprecated("Use error {} instead") public fun error(msg: String?): Unit = error { msg }
+  @Deprecated("Use error {} instead", replaceWith = ReplaceWith("error { \"\$msg\"}"))
+  public fun error(msg: String?): Unit = error { msg }
 
   /**
    * Log a message at the ERROR level according to the specified msg and argument.
@@ -720,7 +753,8 @@ public interface KLogger {
    * @param msg the msg string
    * @param arg the argument
    */
-  @Deprecated("Use error {} instead") public fun error(msg: String?, arg: Any?): Unit = TODO()
+  @Deprecated("Use error {} instead", replaceWith = ReplaceWith("error { \"\$msg \$arg\"}"))
+  public fun error(msg: String?, arg: Any?): Unit = TODO()
 
   /**
    * Log a message at the ERROR level according to the specified msg and arguments.
@@ -731,7 +765,7 @@ public interface KLogger {
    * @param arg1 the first argument
    * @param arg2 the second argument
    */
-  @Deprecated("Use error {} instead")
+  @Deprecated("Use error {} instead", replaceWith = ReplaceWith("error { \"\$msg \$arg1 \$arg2\"}"))
   public fun error(msg: String?, arg1: Any?, arg2: Any?): Unit = TODO()
 
   /**
@@ -746,7 +780,7 @@ public interface KLogger {
    * @param msg the msg string
    * @param arguments a list of 3 or more arguments
    */
-  @Deprecated("Use error {} instead")
+  @Deprecated("Use error {} instead", replaceWith = ReplaceWith("error { \"\$msg \$arguments\"}"))
   public fun error(msg: String?, vararg arguments: Any?): Unit = TODO()
 
   /**
@@ -755,7 +789,7 @@ public interface KLogger {
    * @param msg the message accompanying the exception
    * @param t the exception (throwable) to log
    */
-  @Deprecated("Use error(t){} instead")
+  @Deprecated("Use error(t){} instead", replaceWith = ReplaceWith("error(t) { \"\$msg\"}"))
   public fun error(msg: String?, t: Throwable?): Unit = error(t, null) { msg }
 
   /**
@@ -764,7 +798,10 @@ public interface KLogger {
    * @param marker The marker specific to this log statement
    * @param msg the message string to be logged
    */
-  @Deprecated("Use error(marker){} instead")
+  @Deprecated(
+    "Use error(marker){} instead",
+    replaceWith = ReplaceWith("error(marker) { \"\$msg\"}")
+  )
   public fun error(marker: Marker?, msg: String?): Unit = error(null as Throwable?, marker) { msg }
 
   /**
@@ -775,6 +812,10 @@ public interface KLogger {
    * @param msg the msg string
    * @param arg the argument
    */
+  @Deprecated(
+    "Use error(marker){} instead",
+    replaceWith = ReplaceWith("error(marker) { \"\$msg \$arg \"}")
+  )
   public fun error(marker: Marker?, msg: String?, arg: Any?): Unit = TODO()
 
   /**
@@ -786,7 +827,10 @@ public interface KLogger {
    * @param arg1 the first argument
    * @param arg2 the second argument
    */
-  @Deprecated("Use error(marker){} instead")
+  @Deprecated(
+    "Use error(marker){} instead",
+    replaceWith = ReplaceWith("error(marker) { \"\$msg \$arg1 \$arg2\"}")
+  )
   public fun error(marker: Marker?, msg: String?, arg1: Any?, arg2: Any?): Unit = TODO()
 
   /**
@@ -797,7 +841,10 @@ public interface KLogger {
    * @param msg the msg string
    * @param arguments a list of 3 or more arguments
    */
-  @Deprecated("Use error(marker){} instead")
+  @Deprecated(
+    "Use error(marker){} instead",
+    replaceWith = ReplaceWith("error(marker) { \"\$msg \$arguments\"}")
+  )
   public fun error(marker: Marker?, msg: String?, vararg arguments: Any?): Unit = TODO()
 
   @Deprecated("Use error instead", ReplaceWith("error(t, marker, msg)"))
