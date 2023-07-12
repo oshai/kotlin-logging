@@ -9,6 +9,7 @@ import io.github.oshai.kotlinlogging.internal.toStringSafe
 import io.github.oshai.kotlinlogging.slf4j.toSlf4j
 import org.slf4j.event.EventConstants
 import org.slf4j.helpers.MessageFormatter
+import org.slf4j.spi.CallerBoundaryAware
 import org.slf4j.spi.LocationAwareLogger
 
 /**
@@ -16,9 +17,12 @@ import org.slf4j.spi.LocationAwareLogger
  * correct fully qualified class name.
  */
 internal class LocationAwareKLogger(override val underlyingLogger: LocationAwareLogger) :
-  KLogger, DelegatingKLogger<LocationAwareLogger>, Slf4jLogger<LocationAwareLogger>() {
-  override val fqcn: String?
-    get() = LocationAwareKLogger::class.java.name
+  KLogger, DelegatingKLogger<LocationAwareLogger>, Slf4jLogger() {
+
+  override val name: String
+    get() = underlyingLogger.name
+
+  private val fqcn: String? = LocationAwareKLogger::class.java.name
 
   private val ENTRY = io.github.oshai.kotlinlogging.KMarkerFactory.getMarker("ENTRY").toSlf4j()
   private val EXIT = io.github.oshai.kotlinlogging.KMarkerFactory.getMarker("EXIT").toSlf4j()
@@ -30,7 +34,37 @@ internal class LocationAwareKLogger(override val underlyingLogger: LocationAware
   private val EXITONLY = "exit"
   private val EXITMESSAGE = "exit with ({})"
 
-  override fun logWithoutPayload(
+  override fun isLoggingEnabledFor(level: Level, marker: Marker?): Boolean {
+    return isLoggingEnabledFor(underlyingLogger, level, marker)
+  }
+  override fun at(level: Level, marker: Marker?, block: KLoggingEventBuilder.() -> Unit) {
+    if (isLoggingEnabledFor(level, marker)) {
+      KLoggingEventBuilder().apply(block).run {
+        if (payload != null) {
+          logWithPayload(this, level, marker)
+        } else {
+          logWithoutPayload(this, level, marker)
+        }
+      }
+    }
+  }
+
+  private fun logWithPayload(
+    kLoggingEventBuilder: KLoggingEventBuilder,
+    level: Level,
+    marker: Marker?
+  ) {
+    val builder = underlyingLogger.atLevel(level.toSlf4j())
+    marker?.toSlf4j()?.let { builder.addMarker(it) }
+    kLoggingEventBuilder.payload?.forEach { (key, value) -> builder.addKeyValue(key, value) }
+    builder.setCause(kLoggingEventBuilder.cause)
+    if (builder is CallerBoundaryAware) {
+      builder.setCallerBoundary(fqcn)
+    }
+    builder.log(kLoggingEventBuilder.message)
+  }
+
+  private fun logWithoutPayload(
     kLoggingEventBuilder: KLoggingEventBuilder,
     level: Level,
     marker: Marker?

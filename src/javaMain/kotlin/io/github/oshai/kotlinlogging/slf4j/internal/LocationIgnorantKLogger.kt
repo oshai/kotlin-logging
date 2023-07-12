@@ -14,12 +14,40 @@ import org.slf4j.Logger
  * methods
  */
 internal class LocationIgnorantKLogger(override val underlyingLogger: Logger) :
-  KLogger, DelegatingKLogger<Logger>, Slf4jLogger<Logger>() {
+  KLogger, DelegatingKLogger<Logger>, Slf4jLogger() {
 
-  override val fqcn: String?
-    get() = null
+  override val name: String
+    get() = underlyingLogger.name
 
-  override fun logWithoutPayload(
+  override fun isLoggingEnabledFor(level: Level, marker: Marker?): Boolean {
+    return isLoggingEnabledFor(underlyingLogger, level, marker)
+  }
+
+  override fun at(level: Level, marker: Marker?, block: KLoggingEventBuilder.() -> Unit) {
+    if (isLoggingEnabledFor(level, marker)) {
+      KLoggingEventBuilder().apply(block).run {
+        if (payload != null) {
+          logWithPayload(this, level, marker)
+        } else {
+          logWithoutPayload(this, level, marker)
+        }
+      }
+    }
+  }
+
+  private fun logWithPayload(
+    kLoggingEventBuilder: KLoggingEventBuilder,
+    level: Level,
+    marker: Marker?
+  ) {
+    val builder = underlyingLogger.atLevel(level.toSlf4j())
+    marker?.toSlf4j()?.let { builder.addMarker(it) }
+    kLoggingEventBuilder.payload?.forEach { (key, value) -> builder.addKeyValue(key, value) }
+    builder.setCause(kLoggingEventBuilder.cause)
+    builder.log(kLoggingEventBuilder.message)
+  }
+
+  private fun logWithoutPayload(
     kLoggingEventBuilder: KLoggingEventBuilder,
     level: Level,
     marker: Marker?
