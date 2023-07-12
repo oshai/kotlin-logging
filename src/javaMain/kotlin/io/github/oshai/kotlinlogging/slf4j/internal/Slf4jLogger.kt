@@ -8,6 +8,10 @@ import org.slf4j.Logger
 
 public abstract class Slf4jLogger : KLogger {
 
+  // we don't move more methods to here because if it will appear on stacktrace
+  // it will break fqcn for class name in location aware loggers
+  // (tests are also failing when doing this)
+
   protected fun isLoggingEnabledFor(
     underlyingLogger: Logger,
     level: Level,
