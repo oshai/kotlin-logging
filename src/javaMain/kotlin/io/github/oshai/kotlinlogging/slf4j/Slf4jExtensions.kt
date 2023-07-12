@@ -20,17 +20,6 @@ public fun Level.toSlf4j(): org.slf4j.event.Level =
     Level.OFF -> throw IllegalArgumentException("OFF level is not supported")
   }
 
-public fun Logger.isLoggingEnabledFor(level: Level, marker: Marker?): Boolean {
-  return when (level) {
-    Level.TRACE -> this.isTraceEnabled(marker?.toSlf4j())
-    Level.DEBUG -> this.isDebugEnabled(marker?.toSlf4j())
-    Level.INFO -> this.isInfoEnabled(marker?.toSlf4j())
-    Level.WARN -> this.isWarnEnabled(marker?.toSlf4j())
-    Level.ERROR -> this.isErrorEnabled(marker?.toSlf4j())
-    Level.OFF -> false
-  }
-}
-
 @Suppress("UnusedReceiverParameter")
 public fun KotlinLogging.logger(underlyingLogger: Logger): KLogger =
   Slf4jLoggerFactory.wrapJLogger(underlyingLogger)
