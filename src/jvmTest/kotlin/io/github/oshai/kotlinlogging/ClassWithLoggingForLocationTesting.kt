@@ -27,4 +27,11 @@ class ClassWithLoggingForLocationTesting {
     logger.info { "log entry body" }
     return logger.exit(null)
   }
+
+  fun logFluentWithPayload() {
+    logger.atInfo {
+      message = "test"
+      payload = mapOf("key" to "value")
+    }
+  }
 }
