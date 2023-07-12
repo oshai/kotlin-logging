@@ -22,7 +22,7 @@ internal class LocationAwareKLogger(override val underlyingLogger: LocationAware
   override val name: String
     get() = underlyingLogger.name
 
-  private val fqcn: String? = LocationAwareKLogger::class.java.name
+  private val fqcn: String = LocationAwareKLogger::class.java.name
 
   private val ENTRY = io.github.oshai.kotlinlogging.KMarkerFactory.getMarker("ENTRY").toSlf4j()
   private val EXIT = io.github.oshai.kotlinlogging.KMarkerFactory.getMarker("EXIT").toSlf4j()
