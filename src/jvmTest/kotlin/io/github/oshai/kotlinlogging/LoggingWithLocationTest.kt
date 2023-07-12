@@ -43,6 +43,15 @@ class LoggingWithLocationTest {
   }
 
   @Test
+  fun testFluentLoggingWithLocation() {
+    ClassWithLoggingForLocationTesting().logFluentWithPayload()
+    assertEquals(
+      "INFO ClassWithLoggingForLocationTesting.logFluentWithPayload(32) - test",
+      appenderWithWriter.writer.toString().trim()
+    )
+  }
+
+  @Test
   fun testNullLoggingWithLocation() {
     ClassWithLoggingForLocationTesting().logNull()
     assertEquals(
