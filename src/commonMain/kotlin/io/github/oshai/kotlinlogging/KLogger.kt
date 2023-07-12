@@ -8,6 +8,7 @@ import io.github.oshai.kotlinlogging.internal.toStringSafe
  * logger.info{"this is $lazy evaluated string"}
  * ```
  */
+@Suppress("DeprecatedCallableAddReplaceWith")
 public interface KLogger {
 
   /**
