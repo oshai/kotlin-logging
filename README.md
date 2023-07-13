@@ -76,7 +76,7 @@ Main changes are:
 - There are changes to multiplatform class hierarchy that might break compatibility.
 
 More details in issue [#264](https://github.com/oshai/kotlin-logging/issues/264), 
-and in the [change log](https://github.com/oshai/kotlin-logging/ChangeLog.md)
+and in the [change log](https://github.com/oshai/kotlin-logging/blob/master/ChangeLog.md)
 
 ## Download
 

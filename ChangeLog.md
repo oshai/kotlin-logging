@@ -64,7 +64,7 @@ Main Changes:
 # Version 2
 
 Released on: Sep 20, 2020.  
-Full change log in the [previous changelog](https://github.com/oshai/kotlin-logging/ChangeLog-old.md).
+Full change log in the [previous changelog](https://github.com/oshai/kotlin-logging/blob/master/ChangeLog-old.md).
 
 The main incompatible change is in the artifact names. In version `1.x` the jvm artifact is called `kotlin-logging` while in version `2.x` it's called `kotlin-logging-jvm` to comply with the multiplatform schema. In addition, version 2.x supports only Kotlin >= 1.4.
 
@@ -74,12 +74,12 @@ Therefore, for jvm library owners it is still recommended to use 1.x, as for the
 
 First GA release.  
 Released on: Jul 13, 2016.  
-Full change log in the [previous changelog](https://github.com/oshai/kotlin-logging/ChangeLog-old.md).
+Full change log in the [previous changelog](https://github.com/oshai/kotlin-logging/blob/master/ChangeLog-old.md).
 
 
 # Version 0.1
 
 Initial Release.  
 Released on: Jul 5, 2016.  
-Full change log in the [previous changelog](https://github.com/oshai/kotlin-logging/ChangeLog-old.md).
+Full change log in the [previous changelog](https://github.com/oshai/kotlin-logging/blob/master/ChangeLog-old.md).
 
