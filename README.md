@@ -50,7 +50,9 @@ logger.atWarn {
  
 ```Kotlin
 import io.github.oshai.kotlinlogging.KotlinLogging
+
 private val logger = KotlinLogging.logger {} 
+
 class FooWithLogging {
     val message = "world"
     fun bar() {
@@ -61,10 +63,10 @@ class FooWithLogging {
 
 An `Android` example project with kotlin-logging can be found in [kotlin-logging-example-android](https://github.com/oshai/kotlin-logging-example-android).
 
-## Version >= 4 vs. previous versions
+## Version 5 vs. previous versions
 
-Version >= 4 is not backward compatible with previous versions. Group id (in maven) and packages names changed.
-It is possible to use both version 4 and previous versions side-by-side so some of the code from the old version
+Version 5 is not backward compatible with previous versions (v.3, v.2, v.1). Group id (in maven) and packages names changed.
+It is possible to use both version 5 and previous versions side-by-side so some of the code from the old version
 and some new. It is also possible to have libs using old version and use the new version (and vice-versa).  
 In that sense it's a completely new dependency.
 
@@ -74,7 +76,8 @@ Main changes are:
 - Slf4j dependency is not provided anymore (users have to provide it). It means that >= 4.x can work with both slf4j 1 or 2.
 - There are changes to multiplatform class hierarchy that might break compatibility.
 
-More details in issue [#264](https://github.com/oshai/kotlin-logging/issues/264).
+More details in issue [#264](https://github.com/oshai/kotlin-logging/issues/264), 
+and in the [change log](https://github.com/oshai/kotlin-logging/ChangeLog.md)
 
 ## Download
 
