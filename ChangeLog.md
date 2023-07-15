@@ -68,8 +68,6 @@ Full change log in the [previous changelog](https://github.com/oshai/kotlin-logg
 
 The main incompatible change is in the artifact names. In version `1.x` the jvm artifact is called `kotlin-logging` while in version `2.x` it's called `kotlin-logging-jvm` to comply with the multiplatform schema. In addition, version 2.x supports only Kotlin >= 1.4.
 
-Therefore, for jvm library owners it is still recommended to use 1.x, as for the rest of the use cases 2.x is recommended.
-
 # Version 1
 
 First GA release.  
