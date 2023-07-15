@@ -50,7 +50,7 @@ Main changes are (compared to v.3):
 
 # Version 4
 
-Not to be used.
+Not to be used. Immediately after releasing the changes it was decided some more breaking changes are required so skipping this version.
 
 # Version 3
 
