@@ -17,7 +17,7 @@ plugins {
 apply("versions.gradle.kts")
 
 group = "io.github.oshai"
-version = "5.0.0"
+version = "5.0.1"
 
 repositories {
     gradlePluginPortal()
