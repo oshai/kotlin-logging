@@ -11,7 +11,7 @@ and [maven central](https://repo1.maven.org/maven2/io/github/oshai/kotlin-loggin
 
 # Overview 
 
-The latest kotlin-logging version is 5 (now in beta).  
+The latest kotlin-logging version is 5.  
 It is the recommended version for new users and upgrades, as previous versions will require manual upgrade.
 
 Version 4.x is **not recommended** to use (we jumped directly from v.3 to v.5).  
@@ -33,7 +33,7 @@ Below is a list of all versions, some history and note-worthy changes.
 
 # Version 5
 
-Released on: TBD (currently in beta).  
+Released on: July 19, 2023.  
 Full change log: 
 [v.5](https://github.com/oshai/kotlin-logging/releases/tag/5.0.0)
 and [v.4](https://github.com/oshai/kotlin-logging/releases/tag/4.0.0).
