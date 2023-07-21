@@ -81,7 +81,7 @@ and in the [change log](https://github.com/oshai/kotlin-logging/blob/master/Chan
 ## Download
 
 **Important note:** kotlin-logging depends on slf4j-api (in the JVM artifact). In runtime, it is also required to depend on a logging implementation. More details in [how-to-configure-slf4j](http://saltnlight5.blogspot.co.il/2013/08/how-to-configure-slf4j-with-different.html). And an excellent detailed explanation in [a-guide-to-logging-in-java](https://www.marcobehler.com/guides/a-guide-to-logging-in-java).  
-In version 4 users should also provide slf4j-api dependency.
+In version 5 users should also provide slf4j-api dependency.
 
 In short, if you just want to log statements to stdout, it's possible to add the following dependency: `org.slf4j:slf4j-simple:2.0.3`.
 
@@ -90,27 +90,17 @@ In short, if you just want to log statements to stdout, it's possible to add the
 <dependency>
   <groupId>io.github.oshai</groupId>
   <artifactId>kotlin-logging-jvm</artifactId>
-  <version>5.0.0-beta-04</version>
+  <version>5.0.0</version>
 </dependency>
 ```
-Or
-```xml
-<dependency>
-  <groupId>io.github.microutils</groupId>
-  <artifactId>kotlin-logging-jvm</artifactId>
-  <version>3.0.5</version>
-</dependency>
-```
+
 See the full example in [kotlin-logging-example-maven](https://github.com/oshai/kotlin-logging-example-maven).  
 
 ### Gradle
 ```Groovy
-implementation 'io.github.oshai:kotlin-logging-jvm:5.0.0-beta-04'
+implementation 'io.github.oshai:kotlin-logging-jvm:5.0.0'
 ```
-Or
-```Groovy
-implementation 'io.github.microutils:kotlin-logging-jvm:3.0.5'
-```
+
 
 Alternatively, download the JAR from [github](https://github.com/oshai/kotlin-logging/releases/latest)  or [maven-central](https://repo1.maven.org/maven2/io/github/oshai/).
 
