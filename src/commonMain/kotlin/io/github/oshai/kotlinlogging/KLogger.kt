@@ -398,7 +398,7 @@ public interface KLogger {
    *
    * @param msg the message string to be logged
    */
-  @Deprecated("Use debug {} instead", replaceWith = ReplaceWith("debug { \"\$msg\"}"))
+  @Deprecated("Use debug {} instead", replaceWith = ReplaceWith("debug { msg }"))
   public fun debug(msg: String?): Unit = debug { msg }
 
   /**
@@ -514,7 +514,8 @@ public interface KLogger {
    *
    * @param msg the message string to be logged
    */
-  @Deprecated("Use info {} instead") public fun info(msg: String?): Unit = info { msg }
+  @Deprecated("Use info {} instead", ReplaceWith("info { msg }"))
+  public fun info(msg: String?): Unit = info { msg }
 
   /**
    * Log a message at the INFO level according to the specified msg and argument.
@@ -628,7 +629,8 @@ public interface KLogger {
    *
    * @param msg the message string to be logged
    */
-  @Deprecated("Use warn {} instead") public fun warn(msg: String?): Unit = warn { msg }
+  @Deprecated("Use warn {} instead", ReplaceWith("warn { msg }"))
+  public fun warn(msg: String?): Unit = warn { msg }
 
   /**
    * Log a message at the WARN level according to the specified msg and argument.
@@ -742,7 +744,7 @@ public interface KLogger {
    *
    * @param msg the message string to be logged
    */
-  @Deprecated("Use error {} instead", replaceWith = ReplaceWith("error { \"\$msg\"}"))
+  @Deprecated("Use error {} instead", replaceWith = ReplaceWith("error { msg }"))
   public fun error(msg: String?): Unit = error { msg }
 
   /**
