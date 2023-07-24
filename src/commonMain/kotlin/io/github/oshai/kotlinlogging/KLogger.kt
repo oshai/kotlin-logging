@@ -253,27 +253,27 @@ public interface KLogger {
   @Deprecated("use error instead", ReplaceWith("error(t, marker, msg)"))
   public fun error(marker: Marker?, t: Throwable?, msg: () -> Any?): Unit = error(t, marker, msg)
 
-  @Deprecated("Use isTraceEnabled instead", ReplaceWith("isTraceEnabled"))
+  @Deprecated("Use isTraceEnabled() instead", ReplaceWith("isTraceEnabled()"))
   public val isTraceEnabled: Boolean
     get() = isTraceEnabled()
 
-  @Deprecated("Use isDebugEnabled instead", ReplaceWith("isDebugEnabled"))
+  @Deprecated("Use isDebugEnabled() instead", ReplaceWith("isDebugEnabled()"))
   public val isDebugEnabled: Boolean
     get() = isDebugEnabled()
 
-  @Deprecated("Use isInfoEnabled instead", ReplaceWith("isInfoEnabled"))
+  @Deprecated("Use isInfoEnabled() instead", ReplaceWith("isInfoEnabled()"))
   public val isInfoEnabled: Boolean
     get() = isInfoEnabled()
 
-  @Deprecated("Use isWarnEnabled instead", ReplaceWith("isWarnEnabled"))
+  @Deprecated("Use isWarnEnabled() instead", ReplaceWith("isWarnEnabled()"))
   public val isWarnEnabled: Boolean
     get() = isWarnEnabled()
 
-  @Deprecated("Use isErrorEnabled instead", ReplaceWith("isErrorEnabled"))
+  @Deprecated("Use isErrorEnabled() instead", ReplaceWith("isErrorEnabled()"))
   public val isErrorEnabled: Boolean
     get() = isErrorEnabled()
 
-  @Deprecated("Use isLoggingOff instead", ReplaceWith("isLoggingOff"))
+  @Deprecated("Use isLoggingOff() instead", ReplaceWith("isLoggingOff()"))
   public val isLoggingOff: Boolean
     get() = isLoggingOff()
 
@@ -398,7 +398,7 @@ public interface KLogger {
    *
    * @param msg the message string to be logged
    */
-  @Deprecated("Use debug {} instead", replaceWith = ReplaceWith("debug { \"\$msg\"}"))
+  @Deprecated("Use debug {} instead", replaceWith = ReplaceWith("debug { msg }"))
   public fun debug(msg: String?): Unit = debug { msg }
 
   /**
@@ -514,7 +514,8 @@ public interface KLogger {
    *
    * @param msg the message string to be logged
    */
-  @Deprecated("Use info {} instead") public fun info(msg: String?): Unit = info { msg }
+  @Deprecated("Use info {} instead", ReplaceWith("info { msg }"))
+  public fun info(msg: String?): Unit = info { msg }
 
   /**
    * Log a message at the INFO level according to the specified msg and argument.
@@ -628,7 +629,8 @@ public interface KLogger {
    *
    * @param msg the message string to be logged
    */
-  @Deprecated("Use warn {} instead") public fun warn(msg: String?): Unit = warn { msg }
+  @Deprecated("Use warn {} instead", ReplaceWith("warn { msg }"))
+  public fun warn(msg: String?): Unit = warn { msg }
 
   /**
    * Log a message at the WARN level according to the specified msg and argument.
@@ -742,7 +744,7 @@ public interface KLogger {
    *
    * @param msg the message string to be logged
    */
-  @Deprecated("Use error {} instead", replaceWith = ReplaceWith("error { \"\$msg\"}"))
+  @Deprecated("Use error {} instead", replaceWith = ReplaceWith("error { msg }"))
   public fun error(msg: String?): Unit = error { msg }
 
   /**
