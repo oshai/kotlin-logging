@@ -853,7 +853,3 @@ public interface KLogger {
   public fun error(marker: Marker?, msg: String?, t: Throwable?): Unit = error(t, marker) { msg }
 }
 
-public interface DelegatingKLogger<T> {
-  /** The actual logger executing logging */
-  public val underlyingLogger: T
-}
