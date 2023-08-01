@@ -852,4 +852,3 @@ public interface KLogger {
   @Deprecated("Use error instead", ReplaceWith("error(t, marker, msg)"))
   public fun error(marker: Marker?, msg: String?, t: Throwable?): Unit = error(t, marker) { msg }
 }
-
