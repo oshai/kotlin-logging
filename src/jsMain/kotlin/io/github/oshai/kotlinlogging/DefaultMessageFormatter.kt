@@ -9,6 +9,7 @@ public object DefaultMessageFormatter : Formatter {
     loggerName: String,
     marker: Marker?,
     throwable: Throwable?,
+    payload: Map<String, Any>?,
     message: () -> Any?
   ): String {
     return buildString {

@@ -20,11 +20,11 @@ internal class KLoggerJS(override val name: String) : KLogger {
     if (isLoggingEnabledFor(level, marker)) {
       KLoggingEventBuilder().apply(block).run {
         when (level) {
-          TRACE -> APPENDER.trace(FORMATTER.formatMessage(level, name, marker, cause) { message })
-          DEBUG -> APPENDER.debug(FORMATTER.formatMessage(level, name, marker, cause) { message })
-          INFO -> APPENDER.info(FORMATTER.formatMessage(level, name, marker, cause) { message })
-          WARN -> APPENDER.warn(FORMATTER.formatMessage(level, name, marker, cause) { message })
-          ERROR -> APPENDER.error(FORMATTER.formatMessage(level, name, marker, cause) { message })
+          TRACE -> APPENDER.trace(FORMATTER.formatMessage(level, name, marker, cause, payload) { message })
+          DEBUG -> APPENDER.debug(FORMATTER.formatMessage(level, name, marker, cause, payload) { message })
+          INFO -> APPENDER.info(FORMATTER.formatMessage(level, name, marker, cause, payload) { message })
+          WARN -> APPENDER.warn(FORMATTER.formatMessage(level, name, marker, cause, payload) { message })
+          ERROR -> APPENDER.error(FORMATTER.formatMessage(level, name, marker, cause, payload) { message })
           OFF -> Unit
         }
       }

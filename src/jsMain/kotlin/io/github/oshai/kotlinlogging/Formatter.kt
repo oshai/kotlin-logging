@@ -6,6 +6,7 @@ public interface Formatter {
     loggerName: String,
     marker: Marker?,
     throwable: Throwable?,
-    message: () -> Any?
+    payload: Map<String, Any>?,
+    message: () -> Any?,
   ): Any?
 }
