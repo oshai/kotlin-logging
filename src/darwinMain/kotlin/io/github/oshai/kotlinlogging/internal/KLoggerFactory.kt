@@ -11,6 +11,7 @@ import platform.darwin.os_log_create
 internal actual object KLoggerFactory {
 
   private val constantLogger: AtomicReference<KLogger?> = AtomicReference(null)
+  private val constantOsDefaultLogger: KLogger = DarwinKLogger("", OS_LOG_DEFAULT)
 
   /** get logger by explicit name */
   internal actual fun logger(name: String): KLogger {
@@ -26,7 +27,7 @@ internal actual object KLoggerFactory {
       subsystemConfigured != null || categoryConfigured != null -> {
         DarwinKLogger(name, os_log_create(subsystemConfigured ?: name, categoryConfigured ?: name))
       }
-      name.isBlank() -> DarwinKLogger(name, OS_LOG_DEFAULT)
+      name.isBlank() -> constantOsDefaultLogger
       name.contains(".") -> {
         DarwinKLogger(
           name,
