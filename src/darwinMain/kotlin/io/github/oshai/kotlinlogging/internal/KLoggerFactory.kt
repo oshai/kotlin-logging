@@ -3,6 +3,7 @@ package io.github.oshai.kotlinlogging.internal
 import io.github.oshai.kotlinlogging.DarwinKLogger
 import io.github.oshai.kotlinlogging.KLogger
 import io.github.oshai.kotlinlogging.KotlinLoggingConfiguration
+import platform.darwin.OS_LOG_DEFAULT
 import platform.darwin.os_log_create
 
 /** factory methods to obtain a [KLogger] */
@@ -16,6 +17,7 @@ internal actual object KLoggerFactory {
       subsystemConfigured != null || categoryConfigured != null -> {
         DarwinKLogger(name, os_log_create(subsystemConfigured ?: name, categoryConfigured ?: name))
       }
+      name.isBlank() -> DarwinKLogger(name, OS_LOG_DEFAULT)
       name.contains(".") -> {
         DarwinKLogger(
           name,
@@ -23,7 +25,7 @@ internal actual object KLoggerFactory {
         )
       }
       else -> {
-        DarwinKLogger(name, os_log_create(name, "default"))
+        DarwinKLogger(name, os_log_create(name, ""))
       }
     }
   }
