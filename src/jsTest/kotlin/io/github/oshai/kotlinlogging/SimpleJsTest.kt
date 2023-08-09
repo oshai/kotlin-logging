@@ -48,7 +48,7 @@ class SimpleJsTest {
     var lastLevel: String = "NA"
 
     override fun log(loggingEvent: KLoggingEvent) {
-      lastMessage = loggingEvent.message!!
+      lastMessage = DefaultMessageFormatter(includePrefix = true).formatMessage(loggingEvent)
       lastLevel = loggingEvent.level.name.toLowerCase()
     }
   }
