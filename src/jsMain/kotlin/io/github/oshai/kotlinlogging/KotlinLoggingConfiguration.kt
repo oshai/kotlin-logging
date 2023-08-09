@@ -1,7 +1,7 @@
 package io.github.oshai.kotlinlogging
 
-public object KotlinLoggingConfiguration {
-  public var LOG_LEVEL: Level = Level.INFO
-  public var APPENDER: Appender = ConsoleOutputAppender
-  public var FORMATTER: Formatter = DefaultMessageFormatter
+public actual object KotlinLoggingConfiguration {
+  public actual var logLevel: Level = Level.INFO
+  public actual var formatter: Formatter = DefaultMessageFormatter(includePrefix = true)
+  public actual var appender: Appender = ConsoleOutputAppender()
 }

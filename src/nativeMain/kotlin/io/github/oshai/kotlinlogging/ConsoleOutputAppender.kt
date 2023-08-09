@@ -3,14 +3,12 @@ package io.github.oshai.kotlinlogging
 import platform.posix.fprintf
 import platform.posix.stderr
 
-public object ConsoleOutputAppender : Appender {
-  override val includePrefix: Boolean = true
-  public override fun trace(loggerName: String, message: String): Unit = println(message)
-  public override fun debug(loggerName: String, message: String): Unit = println(message)
-  public override fun info(loggerName: String, message: String): Unit = println(message)
-  public override fun warn(loggerName: String, message: String): Unit = println(message)
-
-  override fun error(loggerName: String, message: String) {
-    fprintf(stderr, "$message\n")
+public object ConsoleOutputAppender : FormattingAppender() {
+  override fun logFormattedMessage(loggingEvent: KLoggingEvent, formattedMessage: Any?) {
+    if (loggingEvent.level == Level.ERROR) {
+      fprintf(stderr, "$formattedMessage\n")
+    } else {
+      println(formattedMessage)
+    }
   }
 }
