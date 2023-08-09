@@ -166,7 +166,7 @@ kotlin {
             dependsOn(nativeMain)
         }
         val darwinMain by creating {
-            dependsOn(nativeMain)
+            dependsOn(commonMain)
         }
         linuxTargets.forEach {
             getByName("${it.targetName}Main") {
