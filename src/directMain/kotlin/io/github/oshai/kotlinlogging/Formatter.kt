@@ -2,7 +2,7 @@ package io.github.oshai.kotlinlogging
 
 public interface Formatter {
 
-  public fun formatMessage(loggingEvent: KLoggingEvent): Any?
+  public fun formatMessage(loggingEvent: KLoggingEvent): String
 }
 
 public class DefaultMessageFormatter(private val includePrefix: Boolean = true) : Formatter {
