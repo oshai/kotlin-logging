@@ -146,8 +146,11 @@ kotlin {
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:${extra["coroutines_version"]}")
             }
         }
-        val jsMain by getting {
+        val directMain by creating {
             dependsOn(commonMain)
+        }
+        val jsMain by getting {
+            dependsOn(directMain)
         }
         val jsTest by getting {
             dependencies {
@@ -155,7 +158,7 @@ kotlin {
             }
         }
         val nativeMain by creating {
-            dependsOn(commonMain)
+            dependsOn(directMain)
         }
         val nativeTest by creating {
             dependencies {
