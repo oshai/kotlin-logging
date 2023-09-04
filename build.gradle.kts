@@ -10,7 +10,7 @@ plugins {
     signing
     id("io.gitlab.arturbosch.detekt") version "1.18.0"
     id("com.android.library") version "7.4.2"
-    id("com.diffplug.spotless") version "6.20.0"
+    id("com.diffplug.spotless") version "6.21.0"
 }
 
 
