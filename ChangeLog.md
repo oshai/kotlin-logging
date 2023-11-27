@@ -1,265 +1,83 @@
-# See latest versions changelog on github [releases page](https://github.com/MicroUtils/kotlin-logging/releases)
 
-# 2.1.20
+# `kotlin-logging` versions
 
-* Same as `2.1.17`.
+This page is the TL;DR version of the changes in major versions.
 
-# 2.1.17
+For the full changelog see github [releases page](https://github.com/oshai/kotlin-logging/releases).  
+The previous changelog is available [here](https://github.com/oshai/kotlin-logging/ChangeLog-old.md).
 
-* Upgrade log4j to 2.16.0 [#211](https://github.com/MicroUtils/kotlin-logging/pull/211) [#207](https://github.com/MicroUtils/kotlin-logging/pull/207).
-* Upgrade dokka to 1.6 [#209](https://github.com/MicroUtils/kotlin-logging/pull/209).
-* Fix detekt warnings [#203](https://github.com/MicroUtils/kotlin-logging/pull/203).
-* Upgrade to junit 5 [#204](https://github.com/MicroUtils/kotlin-logging/pull/204).
+List of versions are available also in [mvnrepository](https://mvnrepository.com/artifact/io.github.oshai/kotlin-logging)
+and [maven central](https://repo1.maven.org/maven2/io/github/oshai/kotlin-logging/).
 
-# 2.1.15
+# Overview 
 
-* Add support for mingw (windows) and osx.
+The latest kotlin-logging version is 5.  
+It is the recommended version for new users and upgrades, as previous versions will require manual upgrade.
 
-# 2.1.14
+Version 4.x is **not recommended** to use (we jumped directly from v.3 to v.5).  
+During the change from v.3 to v.5 the lib was "rebranded" from `MicroUtils` to `oshai`.  
+The github organization changed from [MicroUtils](https://github.com/MicroUtils/kotlin-logging) to [oshai](https://github.com/oshai/kotlin-logging) user 
+(github automatically redirects from the old to the new url).  
+The package name changed from `mu` to `io.github.oshai.kotlinlogging`.
 
-* Move to github actions release.
+The rationale for the change is that after v.3 (v.4, v.5) a big breaking change was introduced around multiplatform class hierarchy
+and changing artifact id and package name allow to avoid compatibility issues for users of the pre v.5 versions (v.1, v.2, v.3).  
+In addition, what initially seems as a good idea of having an organization for the lib (micro utils), turns out as less visible as to who maintains it, and the package name was less conventional.
 
-# 2.0.12
+Version 5 is not backward compatible with previous versions (v.3, v.2, v.1). Group id (in maven) and packages names changed.
+It is possible to use both version 5 and previous versions side-by-side so some of the code from the old version
+and some new. It is also possible to have libs using old version and use the new version (and vice-versa).  
+In that sense it's a completely new dependency.
 
-* added the license to all jar files [#191](https://github.com/MicroUtils/kotlin-logging/pull/191.
+Below is a list of all versions, some history and note-worthy changes.
 
-# 2.0.11
+# Version 5
 
-* Fixed losing previous values in MDC [#187](https://github.com/MicroUtils/kotlin-logging/pull/187).
- 
-# 2.0.10
+Released on: July 19, 2023.  
+Full change log: 
+[v.5](https://github.com/oshai/kotlin-logging/releases/tag/5.0.0)
+and [v.4](https://github.com/oshai/kotlin-logging/releases/tag/4.0.0).
 
-* upgrade kotlin to 1.5 [#175](https://github.com/MicroUtils/kotlin-logging/pull/175)
-* unwrapCompanionClass fails to unwrap private companions when on kotlin 1.4+ [#182](https://github.com/MicroUtils/kotlin-logging/issues/182).
 
-# 2.0.8
+Main changes are (compared to v.3):
 
-* Publish to maven central directly [#177](https://github.com/MicroUtils/kotlin-logging/issues/177).
+- Add fluent api and structured logging support (payload).
+- Maven group id changed from `io.github.microutils` -> `io.github.oshai`.
+- Root package change from `mu` -> `io.github.oshai.kotlinlogging`.
+- Slf4j dependency is not provided anymore (users have to provide it). It means that >= 5.x can work with both slf4j 1 or 2.
+- There are changes to multiplatform class hierarchy that break compatibility (the api structure around expected / actual was significantly changed).'
 
-# 2.0.7
 
-* Support optional/nullable values for MDC [#172](https://github.com/MicroUtils/kotlin-logging/issues/172).
+# Version 4
 
-# 2.0.6
+Not to be used. Immediately after releasing the changes it was decided some more breaking changes are required so skipping this version.
 
-* Same as `2.0.5`.
+# Version 3
 
-# 2.0.5
+Released on: Sep 18, 2022.  
+Full change log:
+[v.3](https://github.com/oshai/kotlin-logging/releases/tag/3.0.0)
 
-* Upgrade Kotlin to 1.4.31.
+Main Changes:
+- Upgrade slf4j 1.x->2.x by @yeikel in https://github.com/oshai/kotlin-logging/pull/234
 
-# 2.0.4
+# Version 2
 
-* When an error occurs in Log message invocation then log it as an ERROR [#160](https://github.com/MicroUtils/kotlin-logging/issues/160).
-
-# 2.0.3
-
-* Fix Bintray versions display [#152](https://github.com/MicroUtils/kotlin-logging/issues/152).
-
-# 2.0.2
-
-* Build refactor and bintray plugin replacement [#145](https://github.com/MicroUtils/kotlin-logging/pull/145).
-* Support JS-IR backend [#139](https://github.com/MicroUtils/kotlin-logging/pull/139).
-* Use linux code for linux/macos/mingw targets [#131](https://github.com/MicroUtils/kotlin-logging/pull/131).
-* Upgrade to Kotlin 1.4.10 [#137](https://github.com/MicroUtils/kotlin-logging/pull/137).
-* Add explicit API in strict mode [#124](https://github.com/MicroUtils/kotlin-logging/issues/124).
-
-# 2.X changes from 1.X
+Released on: Sep 20, 2020.  
+Full change log in the [previous changelog](https://github.com/oshai/kotlin-logging/blob/master/ChangeLog-old.md).
 
 The main incompatible change is in the artifact names. In version `1.x` the jvm artifact is called `kotlin-logging` while in version `2.x` it's called `kotlin-logging-jvm` to comply with the multiplatform schema. In addition, version 2.x supports only Kotlin >= 1.4.
 
-Therefore, for jvm library owners it is still recommended to use 1.x, as for the rest of the use cases 2.x is recommended.
+# Version 1
 
+First GA release.  
+Released on: Jul 13, 2016.  
+Full change log in the [previous changelog](https://github.com/oshai/kotlin-logging/blob/master/ChangeLog-old.md).
 
-# 1.12.5
 
-* Fix Kotlin-logging version 1.12.0 is missing .module file in Maven artifact [#163](https://github.com/MicroUtils/kotlin-logging/pull/163).
+# Version 0.1
 
-# Versions 1.12.1 -  1.12.4 are obselete
+Initial Release.  
+Released on: Jul 5, 2016.  
+Full change log in the [previous changelog](https://github.com/oshai/kotlin-logging/blob/master/ChangeLog-old.md).
 
-* Break versions due to kotlin upgrade, see [#170](https://github.com/MicroUtils/kotlin-logging/issues/170).
-
-# 1.12.0
-
-* Upgrade to Kotlin 1.4.10 [#148](https://github.com/MicroUtils/kotlin-logging/pull/148).
-
-# 1.11.5
-
-* Fix [#144](https://github.com/MicroUtils/kotlin-logging/pull/144) - pom.xml has no dependencies anymore.
-* Fix message formatted twice [issue #132](https://github.com/MicroUtils/kotlin-logging/issues/132) and [PR #134](https://github.com/MicroUtils/kotlin-logging/pull/134).
-* Add automation for snapshot and release builds [#135](https://github.com/MicroUtils/kotlin-logging/issues/135).
-* Tried to upgrade to Kotlin 1.4.0, but reveted [#130](https://github.com/MicroUtils/kotlin-logging/issues/130).
-
-# Versions 1.9.x,1.10.x,1.11.0-1.11.4 are obselete
-
-* Had deployment issues.
-
-# 1.8.3
-
-* Add Linux X64 Support [#119](https://github.com/MicroUtils/kotlin-logging/pull/119).
-
-# Versions 1.8.0.x are obselete
-
-* Used for testing of [#119](https://github.com/MicroUtils/kotlin-logging/pull/119).
-
-# 1.7.10
-
-* Remove extra space from log message in entry - [#114](https://github.com/MicroUtils/kotlin-logging/issues/114).
-
-# 1.7.9
-
-* update Kotlin to 1.3.70.
-
-# 1.7.8
-
-* use dokka for kotlin javadocs - [#82](https://github.com/MicroUtils/kotlin-logging/issues/82)
-* upgrade gradle wrapper - [#100](https://github.com/MicroUtils/kotlin-logging/issues/100)
-
-# 1.7.7
-
-* upgrade versions - [#97](https://github.com/MicroUtils/kotlin-logging/issues/97)
-
-# 1.7.6
-
-* wrap slf4j logger with kotlin logger - [#88](https://github.com/MicroUtils/kotlin-logging/issues/88)
-
-# 1.7.5
-
-* Provide for nullable in entry and rename exit argument - [#89](https://github.com/MicroUtils/kotlin-logging/issues/89)
-
-# 1.7.4
-
-* Fixed nullability in exit signature: [#84](https://github.com/MicroUtils/kotlin-logging/issues/84) [#86](https://github.com/MicroUtils/kotlin-logging/issues/86) [#87](https://github.com/MicroUtils/kotlin-logging/issues/87)
-
-# 1.7.2
-
-* Fixed missing slf4j dependency - https://github.com/MicroUtils/kotlin-logging/issues/83
-
-# 1.7.1
-
-* Convert project to new MPP format: https://github.com/MicroUtils/kotlin-logging/issues/64
-
-# 1.6.26
-
-* Add support for slf4j-ext: https://github.com/MicroUtils/kotlin-logging/pull/73
-
-# 1.6.25
-
-* Javascript - Extracting Message Formatter interface (more changes):https://github.com/MicroUtils/kotlin-logging/pull/66
-
-# 1.6.24
-
-* Javascript - Extracting Message Formatter interface: https://github.com/MicroUtils/kotlin-logging/pull/63
-
-# 1.6.23
-
-* Update kotlin to 1.3.20.
-
-# 1.6.22
-
-* Fix log levels in JS: https://github.com/MicroUtils/kotlin-logging/pull/57
-* Update kotlin to 1.3.10.
-
-# 1.6.20
-
-* Compile with Kotlin 1.3.0: https://github.com/MicroUtils/kotlin-logging/pull/55 thanks @walokra.
-
-# 1.6.0 + 1.6.10
-* Add Markers support for multiplatform [#48](https://github.com/MicroUtils/kotlin-logging/pull/48)
-* Improvement to version upload automation [#46](https://github.com/MicroUtils/kotlin-logging/issues/46)
-
-# 1.5.9
-* Back to Kotlin 1.2.60, created 3 artifacts on maven central.
-
-# 1.5.8
-* Refactor - move toStringSafe() to common lib.
-* This version (+1.5.7 which has no changes) are mostly deployed for multiplatform checks.
-
-# 1.5.6
-* Add Partial support for multiplatform [#21](https://github.com/MicroUtils/kotlin-logging/issues/21)
-  * common and js implementation.
-* kotlin version is now 1.2.30, when tried to upgrade an additional (unneeded) dependency in pom.xml on common module was created.
-
-# 1.5.4
-* Accept nullable Throwables [#38](https://github.com/MicroUtils/kotlin-logging/issues/38) [#39](https://github.com/MicroUtils/kotlin-logging/issues/39)
-
-# 1.5.3
-* Add Partial support for multiplatform [#21](https://github.com/MicroUtils/kotlin-logging/issues/21)
-  * Split directories.
-  * Currently only jvm artifact is deployed.
-
-# 1.4.9
-* Add MDC Support [#31](https://github.com/MicroUtils/kotlin-logging/issues/31)
-* Upgrade to Kotlin 1.2.10.
-
-# 1.4.8
-* 1.4.7 was broken see issue [#30](https://github.com/MicroUtils/kotlin-logging/issues/30)
-
-# 1.4.7
-* Upgrade to Kotlin 1.2.0.
-
-# 1.4.6
-* Fixed issue [#20](https://github.com/MicroUtils/kotlin-logging/issues/20) - add `KLogger.underlyingLogger` that provides the Logger actual implementation. Can help in operations such as setting log level.
-
-# 1.4.5
-* Fixed issue [#22](https://github.com/MicroUtils/kotlin-logging/pull/22) - Suppress exceptions from toString methods.
-
-# 1.4.4
-* Upgrade to Kotlin 1.1.
-
-# 1.4.3
-* Fixed issue [#17](https://github.com/MicroUtils/kotlin-logging/issues/17) - bad location in some logging methods.
-
-# 1.4.2
-* Supported `null` values in parameters that allows it in slf4j.
-* Update to kotlin 1.0.6.
-
-# 1.4.1
-* Added KotlinLogging object allow getting a logger in the following way:
-```kotlin
-private val logger = KotlinLogging.logger {}
-```
-see issue [#12](https://github.com/MicroUtils/kotlin-logging/issues/12) and PR [#13](https://github.com/MicroUtils/kotlin-logging/issues/13)
-
-# 1.4
-
-* Changed KLogger to be an interface
-* Fix issue [#11](https://github.com/MicroUtils/kotlin-logging/issues/11) - Location Awerness of logger
-
-# 1.3.3
-
-* Remove dependency on kotlin reflection to make it even more lightweight.
-* Update to kotlin 1.0.4.
-
-
-# 1.3.2
-
-* Published artifacts to maven-central.
-* Added lazy evaluated message methods for throwables: https://github.com/MicroUtils/kotlin-logging/pull/7.
-
-# 1.3
-
-* Changed artifactId and jar name from kotlin.logging to kotlin-logging and changed groupId to io.github.microutils
-* Moved the bintray path
-
-# 1.2.1
-
-* Added tests for class name in logger in KLoggerNameResolverTest
-* Added KLoggerNameResolver and KLoggerFactory
-* Added documentation
-
-# 1.2
-
-* Added KLogger method inline - better for Android methods count
-
-# 1.1.1
-
-* Added documentation and sources jars to release
-* Removed KLogger method inline - should not affect performance and line numbers will be better
-
-# 1.1
-
-* Changed names of classes:
-  * WithLogging -> KLogging
-  * HasLogging -> KLoggable
-  * WithNamedLogging -> NamedKLogging

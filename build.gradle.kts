@@ -10,14 +10,14 @@ plugins {
     signing
     id("io.gitlab.arturbosch.detekt") version "1.18.0"
     id("com.android.library") version "7.4.2"
-    id("com.diffplug.spotless") version "6.19.0"
+    id("com.diffplug.spotless") version "6.22.0"
 }
 
 
 apply("versions.gradle.kts")
 
 group = "io.github.oshai"
-version = "5.0.0-beta-04"
+version = "5.1.1"
 
 repositories {
     gradlePluginPortal()
@@ -146,8 +146,11 @@ kotlin {
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:${extra["coroutines_version"]}")
             }
         }
-        val jsMain by getting {
+        val directMain by creating {
             dependsOn(commonMain)
+        }
+        val jsMain by getting {
+            dependsOn(directMain)
         }
         val jsTest by getting {
             dependencies {
@@ -155,7 +158,7 @@ kotlin {
             }
         }
         val nativeMain by creating {
-            dependsOn(commonMain)
+            dependsOn(directMain)
         }
         val nativeTest by creating {
             dependencies {
@@ -166,7 +169,7 @@ kotlin {
             dependsOn(nativeMain)
         }
         val darwinMain by creating {
-            dependsOn(nativeMain)
+            dependsOn(commonMain)
         }
         linuxTargets.forEach {
             getByName("${it.targetName}Main") {

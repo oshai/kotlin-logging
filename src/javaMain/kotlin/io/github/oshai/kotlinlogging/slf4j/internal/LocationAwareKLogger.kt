@@ -17,7 +17,7 @@ import org.slf4j.spi.LocationAwareLogger
  * correct fully qualified class name.
  */
 internal class LocationAwareKLogger(override val underlyingLogger: LocationAwareLogger) :
-  KLogger, DelegatingKLogger<LocationAwareLogger>, Slf4jLogger() {
+  KLogger, DelegatingKLogger<LocationAwareLogger>, Slf4jLogger<LocationAwareLogger>() {
 
   override val name: String
     get() = underlyingLogger.name

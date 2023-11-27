@@ -15,7 +15,7 @@ class SimpleJsTest {
 
   @AfterTest
   fun cleanup() {
-    KotlinLoggingConfiguration.APPENDER = ConsoleOutputAppender
+    KotlinLoggingConfiguration.APPENDER = ConsoleOutputAppender()
     KotlinLoggingConfiguration.LOG_LEVEL = Level.INFO
   }
 
@@ -47,29 +47,9 @@ class SimpleJsTest {
     var lastMessage: String = "NA"
     var lastLevel: String = "NA"
 
-    override fun trace(message: Any?) {
-      lastMessage = message.toString()
-      lastLevel = "trace"
-    }
-
-    override fun debug(message: Any?) {
-      lastMessage = message.toString()
-      lastLevel = "debug"
-    }
-
-    override fun info(message: Any?) {
-      lastMessage = message.toString()
-      lastLevel = "info"
-    }
-
-    override fun warn(message: Any?) {
-      lastMessage = message.toString()
-      lastLevel = "warn"
-    }
-
-    override fun error(message: Any?) {
-      lastMessage = message.toString()
-      lastLevel = "error"
+    override fun log(loggingEvent: KLoggingEvent) {
+      lastMessage = DefaultMessageFormatter(includePrefix = true).formatMessage(loggingEvent)
+      lastLevel = loggingEvent.level.name.toLowerCase()
     }
   }
 }

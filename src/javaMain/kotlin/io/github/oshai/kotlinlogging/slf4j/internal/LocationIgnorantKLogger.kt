@@ -14,7 +14,7 @@ import org.slf4j.Logger
  * methods
  */
 internal class LocationIgnorantKLogger(override val underlyingLogger: Logger) :
-  KLogger, DelegatingKLogger<Logger>, Slf4jLogger() {
+  KLogger, DelegatingKLogger<Logger>, Slf4jLogger<Logger>() {
 
   override val name: String
     get() = underlyingLogger.name

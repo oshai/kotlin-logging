@@ -50,7 +50,9 @@ logger.atWarn {
  
 ```Kotlin
 import io.github.oshai.kotlinlogging.KotlinLogging
+
 private val logger = KotlinLogging.logger {} 
+
 class FooWithLogging {
     val message = "world"
     fun bar() {
@@ -59,27 +61,27 @@ class FooWithLogging {
 }
 ```
 
-An `Android` example project with kotlin-logging can be found in [kotlin-logging-example-android](https://github.com/oshai/kotlin-logging-example-android).
 
-## Version >= 4 vs. previous versions
+## Version 5 vs. previous versions
 
-Version >= 4 is not backward compatible with previous versions. Group id (in maven) and packages names changed.
-It is possible to use both version 4 and previous versions side-by-side so some of the code from the old version
+Version 5 is not backward compatible with previous versions (v.3, v.2, v.1). Group id (in maven) and packages names changed.
+It is possible to use both version 5 and previous versions side-by-side so some of the code from the old version
 and some new. It is also possible to have libs using old version and use the new version (and vice-versa).  
 In that sense it's a completely new dependency.
 
 Main changes are:
 - Maven group id changed from `io.github.microutils` -> `io.github.oshai`.
 - Root package change from `mu` -> `io.github.oshai.kotlinlogging`.
-- Slf4j dependency is not provided anymore (users have to provide it). It means that >= 4.x can work with both slf4j 1 or 2.
+- Slf4j dependency is not provided anymore (users have to provide it). It means that >= 5.x can work with both slf4j 1 or 2.
 - There are changes to multiplatform class hierarchy that might break compatibility.
 
-More details in issue [#264](https://github.com/oshai/kotlin-logging/issues/264).
+More details in issue [#264](https://github.com/oshai/kotlin-logging/issues/264), 
+and in the [change log](https://github.com/oshai/kotlin-logging/blob/master/ChangeLog.md)
 
 ## Download
 
 **Important note:** kotlin-logging depends on slf4j-api (in the JVM artifact). In runtime, it is also required to depend on a logging implementation. More details in [how-to-configure-slf4j](http://saltnlight5.blogspot.co.il/2013/08/how-to-configure-slf4j-with-different.html). And an excellent detailed explanation in [a-guide-to-logging-in-java](https://www.marcobehler.com/guides/a-guide-to-logging-in-java).  
-In version 4 users should also provide slf4j-api dependency.
+In version 5 users should also provide slf4j-api dependency.
 
 In short, if you just want to log statements to stdout, it's possible to add the following dependency: `org.slf4j:slf4j-simple:2.0.3`.
 
@@ -88,33 +90,23 @@ In short, if you just want to log statements to stdout, it's possible to add the
 <dependency>
   <groupId>io.github.oshai</groupId>
   <artifactId>kotlin-logging-jvm</artifactId>
-  <version>5.0.0-beta-01</version>
+  <version>5.1.0</version>
 </dependency>
 ```
-Or
-```xml
-<dependency>
-  <groupId>io.github.microutils</groupId>
-  <artifactId>kotlin-logging-jvm</artifactId>
-  <version>3.0.5</version>
-</dependency>
-```
+
 See the full example in [kotlin-logging-example-maven](https://github.com/oshai/kotlin-logging-example-maven).  
 
 ### Gradle
 ```Groovy
-implementation 'io.github.oshai:kotlin-logging-jvm:5.0.0-beta-01'
+implementation 'io.github.oshai:kotlin-logging-jvm:5.1.0'
 ```
-Or
-```Groovy
-implementation 'io.github.microutils:kotlin-logging-jvm:3.0.5'
-```
+
 
 Alternatively, download the JAR from [github](https://github.com/oshai/kotlin-logging/releases/latest)  or [maven-central](https://repo1.maven.org/maven2/io/github/oshai/).
 
 ### Multiplatform
 
-An experimental common & JS & linux-x64 support is available.  
+An experimental multiplatform support is available.  
 More information is available on the [wiki](https://github.com/oshai/kotlin-logging/wiki/Multiplatform-support) and issues [#21](https://github.com/oshai/kotlin-logging/issues/21) [#45](https://github.com/oshai/kotlin-logging/issues/45).
 
 ## Overview
@@ -138,10 +130,10 @@ And many more... (add your name above)
 ## FAQ
 
 - Why not use plain slf4j? kotlin-logging has better native Kotlin support. It adds more functionality and enables less boilerplate code.
-- Is all slf4j implementation supported (Markers, params, etc')? Yes, kotlin-logging inherits Logger and all methods are supported.
+- Is all slf4j implementation supported (Markers, params, etc')? Yes.
 - Is location logging possible? Yes, location awareness was added in kotlin-logging 1.4.
 - When I do `logger.debug`, my IntelliJ IDEA run console doesn't show any output. Do you know how I could set the console logger to debug or trace levels? Is this an IDE setting, or can it be set in the call to KLogging()? Setting log level is done per implementation. kotlin-logging and slf4j are just facades for the underlying logging lib (log4j, logback etc') more details [here](http://stackoverflow.com/questions/43146977/how-to-configure-kotlin-logging-logger).
-- Can I access the actual logger? Yes, via `KLogger.underlyingLogger` property.
+- Can I access the actual logger? In platforms available yes, via `DelegatingKLogger.underlyingLogger` property.
 
 ## Usage
 

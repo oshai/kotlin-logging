@@ -1,9 +1,14 @@
 package io.github.oshai.kotlinlogging
 
-public object ConsoleOutputAppender : Appender {
-  public override fun trace(message: Any?): Unit = console.log(message)
-  public override fun debug(message: Any?): Unit = console.log(message)
-  public override fun info(message: Any?): Unit = console.info(message)
-  public override fun warn(message: Any?): Unit = console.warn(message)
-  public override fun error(message: Any?): Unit = console.error(message)
+public class ConsoleOutputAppender : FormattingAppender() {
+  override fun logFormattedMessage(loggingEvent: KLoggingEvent, formattedMessage: Any?) {
+    when (loggingEvent.level) {
+      Level.TRACE -> console.log(formattedMessage)
+      Level.DEBUG -> console.log(formattedMessage)
+      Level.INFO -> console.info(formattedMessage)
+      Level.WARN -> console.warn(formattedMessage)
+      Level.ERROR -> console.error(formattedMessage)
+      Level.OFF -> Unit
+    }
+  }
 }
