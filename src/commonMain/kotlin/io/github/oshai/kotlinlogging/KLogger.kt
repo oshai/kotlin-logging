@@ -109,24 +109,39 @@ public interface KLogger {
     }
 
   /** Lazy add a log message with throwable payload if isTraceEnabled is true */
-  public fun atTrace(marker: Marker? = null, block: KLoggingEventBuilder.() -> Unit): Unit =
+  public fun atTrace(marker: Marker?, block: KLoggingEventBuilder.() -> Unit): Unit =
     at(Level.TRACE, marker, block)
 
+  /** Lazy add a log message with throwable payload if isTraceEnabled is true */
+  public fun atTrace(block: KLoggingEventBuilder.() -> Unit): Unit = at(Level.TRACE, null, block)
+
   /** Lazy add a log message with throwable payload if isDebugEnabled is true */
-  public fun atDebug(marker: Marker? = null, block: KLoggingEventBuilder.() -> Unit): Unit =
+  public fun atDebug(marker: Marker?, block: KLoggingEventBuilder.() -> Unit): Unit =
     at(Level.DEBUG, marker, block)
 
+  /** Lazy add a log message with throwable payload if isDebugEnabled is true */
+  public fun atDebug(block: KLoggingEventBuilder.() -> Unit): Unit = at(Level.DEBUG, null, block)
+
   /** Lazy add a log message with throwable payload if isInfoEnabled is true */
-  public fun atInfo(marker: Marker? = null, block: KLoggingEventBuilder.() -> Unit): Unit =
+  public fun atInfo(marker: Marker?, block: KLoggingEventBuilder.() -> Unit): Unit =
     at(Level.INFO, marker, block)
 
+  /** Lazy add a log message with throwable payload if isInfoEnabled is true */
+  public fun atInfo(block: KLoggingEventBuilder.() -> Unit): Unit = at(Level.INFO, null, block)
+
   /** Lazy add a log message with throwable payload if isWarnEnabled is true */
-  public fun atWarn(marker: Marker? = null, block: KLoggingEventBuilder.() -> Unit): Unit =
+  public fun atWarn(marker: Marker?, block: KLoggingEventBuilder.() -> Unit): Unit =
     at(Level.WARN, marker, block)
 
+  /** Lazy add a log message with throwable payload if isWarnEnabled is true */
+  public fun atWarn(block: KLoggingEventBuilder.() -> Unit): Unit = at(Level.WARN, null, block)
+
   /** Lazy add a log message with throwable payload if isErrorEnabled is true */
-  public fun atError(marker: Marker? = null, block: KLoggingEventBuilder.() -> Unit): Unit =
+  public fun atError(marker: Marker?, block: KLoggingEventBuilder.() -> Unit): Unit =
     at(Level.ERROR, marker, block)
+
+  /** Lazy add a log message with throwable payload if isErrorEnabled is true */
+  public fun atError(block: KLoggingEventBuilder.() -> Unit): Unit = at(Level.ERROR, null, block)
 
   /** Lazy add a log message if level enabled */
   public fun at(level: Level, marker: Marker? = null, block: KLoggingEventBuilder.() -> Unit)
