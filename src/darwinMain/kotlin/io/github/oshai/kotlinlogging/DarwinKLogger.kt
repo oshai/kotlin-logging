@@ -17,7 +17,18 @@ public class DarwinKLogger(override val name: String, override val underlyingLog
   override fun at(level: Level, marker: Marker?, block: KLoggingEventBuilder.() -> Unit) {
     if (isLoggingEnabledFor(level, marker)) {
       KLoggingEventBuilder().apply(block).run {
-        _os_log_internal(__dso_handle.ptr, underlyingLogger, level.toDarwinLevel(), message)
+        val formattedMessage = buildString {
+          marker?.getName()?.let {
+            append(it)
+            append(" ")
+          }
+          append(message)
+          cause?.stackTraceToString()?.let {
+            append('\n')
+            append(it)
+          }
+        }
+        _os_log_internal(__dso_handle.ptr, underlyingLogger, level.toDarwinLevel(), formattedMessage)
       }
     }
   }
