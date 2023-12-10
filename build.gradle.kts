@@ -49,7 +49,7 @@ kotlin {
             }
         }
     }
-    js(BOTH) {
+    js {
         browser {
             testTask {
                 useKarma {
