@@ -1,6 +1,6 @@
 package io.github.oshai.kotlinlogging
 
-import kotlin.native.concurrent.AtomicReference
+import kotlin.concurrent.AtomicReference
 
 public expect val DefaultAppender: Appender
 
