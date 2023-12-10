@@ -1,4 +1,4 @@
-@OptIn(ExperimentalForeignApi::class)
+@file:OptIn(ExperimentalForeignApi::class)
 
 package io.github.oshai.kotlinlogging
 
