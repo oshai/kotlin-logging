@@ -1,8 +1,6 @@
 import io.gitlab.arturbosch.detekt.Detekt
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
 import org.gradle.jvm.tasks.Jar
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
-import org.jetbrains.kotlin.gradle.dsl.KotlinVersion.KOTLIN_1_4
 
 plugins {
     kotlin("multiplatform") version "1.9.21"
@@ -43,18 +41,10 @@ apply(plugin = "io.github.gradle-nexus.publish-plugin")
 kotlin {
     explicitApi()
 
-    @OptIn(ExperimentalKotlinGradlePluginApi::class)
-    compilerOptions {
-        apiVersion.set(KOTLIN_1_4)
-        languageVersion.set(KOTLIN_1_4)
-    }
-
     jvm {
         compilations.all {
             // kotlin compiler compatibility options
             kotlinOptions {
-                apiVersion = "1.4"
-                languageVersion = "1.4"
                 jvmTarget = "1.8"
             }
         }
@@ -68,14 +58,6 @@ kotlin {
             }
         }
         nodejs()
-
-        compilations.all {
-            // kotlin compiler compatibility options
-            kotlinOptions {
-                apiVersion = "1.9"
-                languageVersion = "1.9"
-            }
-        }
     }
     android {
         publishLibraryVariants("release", "debug")
