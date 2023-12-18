@@ -271,15 +271,27 @@ internal class LocationAwareKLogger(override val underlyingLogger: LocationAware
   override fun atDebug(marker: Marker?, block: KLoggingEventBuilder.() -> Unit): Unit =
     at(Level.DEBUG, marker, block)
 
+  /** Lazy add a log message with throwable payload if isDebugEnabled is true */
+  override fun atDebug(block: KLoggingEventBuilder.() -> Unit): Unit = at(Level.DEBUG, null, block)
+
   /** Lazy add a log message with throwable payload if isInfoEnabled is true */
   override fun atInfo(marker: Marker?, block: KLoggingEventBuilder.() -> Unit): Unit =
     at(Level.INFO, marker, block)
+
+  /** Lazy add a log message with throwable payload if isInfoEnabled is true */
+  override fun atInfo(block: KLoggingEventBuilder.() -> Unit): Unit = at(Level.INFO, null, block)
 
   /** Lazy add a log message with throwable payload if isWarnEnabled is true */
   override fun atWarn(marker: Marker?, block: KLoggingEventBuilder.() -> Unit): Unit =
     at(Level.WARN, marker, block)
 
+  /** Lazy add a log message with throwable payload if isWarnEnabled is true */
+  override fun atWarn(block: KLoggingEventBuilder.() -> Unit): Unit = at(Level.WARN, null, block)
+
   /** Lazy add a log message with throwable payload if isErrorEnabled is true */
   override fun atError(marker: Marker?, block: KLoggingEventBuilder.() -> Unit): Unit =
     at(Level.ERROR, marker, block)
+
+  /** Lazy add a log message with throwable payload if isErrorEnabled is true */
+  override fun atError(block: KLoggingEventBuilder.() -> Unit): Unit = at(Level.ERROR, null, block)
 }

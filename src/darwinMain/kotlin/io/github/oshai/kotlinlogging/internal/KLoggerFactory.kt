@@ -3,7 +3,7 @@ package io.github.oshai.kotlinlogging.internal
 import io.github.oshai.kotlinlogging.DarwinKLogger
 import io.github.oshai.kotlinlogging.KLogger
 import io.github.oshai.kotlinlogging.KotlinLoggingConfiguration
-import kotlin.native.concurrent.AtomicReference
+import kotlin.concurrent.AtomicReference
 import platform.darwin.OS_LOG_DEFAULT
 import platform.darwin.os_log_create
 
