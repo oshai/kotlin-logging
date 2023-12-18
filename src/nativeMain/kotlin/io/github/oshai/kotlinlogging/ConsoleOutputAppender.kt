@@ -1,5 +1,8 @@
+@file:OptIn(ExperimentalForeignApi::class)
+
 package io.github.oshai.kotlinlogging
 
+import kotlinx.cinterop.ExperimentalForeignApi
 import platform.posix.fprintf
 import platform.posix.stderr
 

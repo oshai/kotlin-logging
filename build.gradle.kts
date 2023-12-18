@@ -1,9 +1,11 @@
 import io.gitlab.arturbosch.detekt.Detekt
-import org.gradle.jvm.tasks.Jar
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+import org.gradle.jvm.tasks.Jar
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 
 plugins {
-    kotlin("multiplatform") version "1.8.22"
+    kotlin("multiplatform") version "1.9.21"
     id("org.jetbrains.dokka") version "1.8.20"
     `maven-publish`
     id("io.github.gradle-nexus.publish-plugin") version "1.3.0"
@@ -40,17 +42,25 @@ apply(plugin = "io.github.gradle-nexus.publish-plugin")
 
 kotlin {
     explicitApi()
+
+    @OptIn(ExperimentalKotlinGradlePluginApi::class)
+    compilerOptions {
+        // kotlin compiler compatibility options
+        apiVersion.set(KotlinVersion.KOTLIN_1_9)
+        languageVersion.set(KotlinVersion.KOTLIN_1_9)
+
+        freeCompilerArgs.add("-Xexpect-actual-classes")
+    }
+
     jvm {
         compilations.all {
             // kotlin compiler compatibility options
             kotlinOptions {
-                apiVersion = "1.4"
-                languageVersion = "1.4"
                 jvmTarget = "1.8"
             }
         }
     }
-    js(BOTH) {
+    js {
         browser {
             testTask {
                 useKarma {
