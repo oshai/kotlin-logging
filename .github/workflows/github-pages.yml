@@ -73,6 +73,8 @@ jobs:
           destination: ${{ env.JEKYLL_OUTPUT_DIR }}
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
+        with:
+          path: ${{ env.JEKYLL_OUTPUT_DIR }}
 
   # Deployment job
   deploy:
