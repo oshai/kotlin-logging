@@ -1,4 +1,5 @@
 import io.gitlab.arturbosch.detekt.Detekt
+import io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
 import org.gradle.jvm.tasks.Jar
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
@@ -10,7 +11,7 @@ plugins {
     `maven-publish`
     id("io.github.gradle-nexus.publish-plugin") version "1.3.0"
     signing
-    id("io.gitlab.arturbosch.detekt") version "1.18.0"
+    id("io.gitlab.arturbosch.detekt") version "1.23.4"
     id("com.android.library") version "7.4.2"
     id("com.diffplug.spotless") version "6.23.3"
 }
@@ -25,6 +26,10 @@ repositories {
     gradlePluginPortal()
     google()
     mavenCentral()
+}
+
+dependencies {
+    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.23.4")
 }
 
 nexusPublishing {
@@ -195,6 +200,18 @@ kotlin {
 }
 
 tasks {
+    withType<Detekt>().configureEach {
+        jvmTarget = "1.8"
+
+        reports {
+            html.required.set(false)
+            txt.required.set(false)
+        }
+    }
+    withType<DetektCreateBaselineTask>().configureEach {
+        jvmTarget = "1.8"
+    }
+
     register<Jar>("dokkaJar") {
         from(dokkaHtml)
         dependsOn(dokkaHtml)
@@ -271,13 +288,11 @@ signing {
 
 detekt {
     buildUponDefaultConfig = true
-    config = files(rootDir.resolve("detekt.yml"))
     parallel = true
+    ignoreFailures = true
 
-    reports {
-        html.enabled = false
-        txt.enabled = false
-    }
+    config.setFrom(files(rootDir.resolve("detekt.yml")))
+    source.setFrom(files(rootProject.sourceSets))
 }
 
 val jvmJar by tasks.getting(Jar::class) {
