@@ -4,6 +4,8 @@ build:
   maxIssues: 13
 
 formatting:
+  Indentation:
+    indentSize: 2
   MaximumLineLength:
     maxLineLength: 150
 
