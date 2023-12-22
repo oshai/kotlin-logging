@@ -23,6 +23,7 @@ concurrency:
   cancel-in-progress: false
 
 env:
+  JEKYLL_OUTPUT_DIR: ./dist
   DOKKA_ARTIFACT_NAME: dokka-html 
 
 jobs:
@@ -53,18 +54,23 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      # Workaround for https://github.com/actions/jekyll-build-pages/issues/101
+      - name: Create output directory
+        run: mkdir ${{ env.JEKYLL_OUTPUT_DIR }}
+      # We need to run this before the Jekyll site is built, otherwise we get
+      # a permission denied error - see https://github.com/actions/jekyll-build-pages/issues/101
+      - name: Download Dokka artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ env.DOKKA_ARTIFACT_NAME }}
+          path: ${{ env.JEKYLL_OUTPUT_DIR }}/api
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
           source: ./
-          destination: ./_site
-      - name: Download Dokka artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: ${{ env.DOKKA_ARTIFACT_NAME }}
-          path: ./_site/api
+          destination: ${{ env.JEKYLL_OUTPUT_DIR }}
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
 
