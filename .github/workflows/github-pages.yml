@@ -1,0 +1,79 @@
+# Sample workflow for building and deploying a Jekyll site to GitHub Pages
+name: Deploy to GitHub Pages
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ["master"]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+env:
+  DOKKA_ARTIFACT_NAME: dokka-html 
+
+jobs:
+  api-docs:
+    name: Generate Dokka HTML docs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Configure JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: 11
+      - name: Generate Dokka HTML docs
+        run: ./gradlew :dokkaHtml
+      - name: Upload Dokka output
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.DOKKA_ARTIFACT_NAME }}
+          path: build/dokka/html
+          if-no-files-found: error
+  # Build job
+  build:
+    runs-on: ubuntu-latest
+    needs: api-docs
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      - name: Build with Jekyll
+        uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./
+          destination: ./_site
+      - name: Download Dokka artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ env.DOKKA_ARTIFACT_NAME }}
+          path: ./_site/api
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+
+  # Deployment job
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v3
