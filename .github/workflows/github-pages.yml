@@ -47,6 +47,7 @@ jobs:
           if-no-files-found: error
   # Build job
   build:
+    name: Build Jekyll docs
     runs-on: ubuntu-latest
     needs: api-docs
     steps:
@@ -69,6 +70,7 @@ jobs:
 
   # Deployment job
   deploy:
+    name: Deploy to GitHub Pages
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
