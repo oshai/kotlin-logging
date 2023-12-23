@@ -1,12 +1,8 @@
-@file:Suppress("TooManyFunctions")
+@file:Suppress("PrivatePropertyName", "TooManyFunctions", "VariableNaming")
 
 package io.github.oshai.kotlinlogging.slf4j.internal
 
-import io.github.oshai.kotlinlogging.DelegatingKLogger
-import io.github.oshai.kotlinlogging.KLogger
-import io.github.oshai.kotlinlogging.KLoggingEventBuilder
-import io.github.oshai.kotlinlogging.Level
-import io.github.oshai.kotlinlogging.Marker
+import io.github.oshai.kotlinlogging.*
 import io.github.oshai.kotlinlogging.internal.toStringSafe
 import io.github.oshai.kotlinlogging.slf4j.toSlf4j
 import org.slf4j.event.EventConstants
@@ -26,15 +22,13 @@ internal class LocationAwareKLogger(override val underlyingLogger: LocationAware
 
   private val fqcn: String = LocationAwareKLogger::class.java.name
 
-  private val ENTRY = io.github.oshai.kotlinlogging.KMarkerFactory.getMarker("ENTRY").toSlf4j()
-  private val EXIT = io.github.oshai.kotlinlogging.KMarkerFactory.getMarker("EXIT").toSlf4j()
+  private val ENTRY = KMarkerFactory.getMarker("ENTRY").toSlf4j()
+  private val EXIT = KMarkerFactory.getMarker("EXIT").toSlf4j()
 
-  private val THROWING =
-    io.github.oshai.kotlinlogging.KMarkerFactory.getMarker("THROWING").toSlf4j()
-  private val CATCHING =
-    io.github.oshai.kotlinlogging.KMarkerFactory.getMarker("CATCHING").toSlf4j()
-  private val EXITONLY = "exit"
-  private val EXITMESSAGE = "exit with ({})"
+  private val THROWING = KMarkerFactory.getMarker("THROWING").toSlf4j()
+  private val CATCHING = KMarkerFactory.getMarker("CATCHING").toSlf4j()
+  private val EXIT_ONLY = "exit"
+  private val EXIT_MESSAGE = "exit with ({})"
 
   override fun isLoggingEnabledFor(level: Level, marker: Marker?): Boolean {
     return isLoggingEnabledFor(underlyingLogger, level, marker)
@@ -147,13 +141,13 @@ internal class LocationAwareKLogger(override val underlyingLogger: LocationAware
 
   override fun exit() {
     if (underlyingLogger.isTraceEnabled(EXIT)) {
-      underlyingLogger.log(EXIT, fqcn, EventConstants.TRACE_INT, EXITONLY, null, null)
+      underlyingLogger.log(EXIT, fqcn, EventConstants.TRACE_INT, EXIT_ONLY, null, null)
     }
   }
 
   override fun <T : Any?> exit(result: T): T {
     if (underlyingLogger.isTraceEnabled(EXIT)) {
-      val tp = MessageFormatter.format(EXITMESSAGE, result)
+      val tp = MessageFormatter.format(EXIT_MESSAGE, result)
       underlyingLogger.log(
         EXIT,
         fqcn,

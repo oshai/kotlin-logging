@@ -245,7 +245,6 @@ tasks {
 detekt {
     buildUponDefaultConfig = true
     parallel = true
-    ignoreFailures = true
 
     config.setFrom(files(rootDir.resolve("detekt.yml")))
 }

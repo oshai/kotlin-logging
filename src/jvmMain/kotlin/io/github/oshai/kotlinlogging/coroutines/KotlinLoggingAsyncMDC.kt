@@ -1,8 +1,8 @@
 package io.github.oshai.kotlinlogging.coroutines
 
-import io.github.oshai.kotlinlogging.*
-import kotlinx.coroutines.*
-import kotlinx.coroutines.slf4j.*
+import io.github.oshai.kotlinlogging.withLoggingContext
+import kotlinx.coroutines.slf4j.MDCContext
+import kotlinx.coroutines.withContext
 
 /**
  * Use a pair in an asynchronous MDC context. Example:

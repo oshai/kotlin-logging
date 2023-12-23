@@ -16,6 +16,7 @@ class KLoggerNameResolverTest {
     assertEquals(expectedName, KLoggerNameResolver.name(clazz))
   }
 
+  @Suppress("UnusedPrivateMember")
   private fun testNames(): Stream<Arguments> =
     Stream.of(
       Arguments.of("io.github.oshai.kotlinlogging.internal.BaseClass", BaseClass::class.java),

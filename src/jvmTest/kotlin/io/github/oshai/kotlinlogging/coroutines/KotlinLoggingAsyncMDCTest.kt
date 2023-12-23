@@ -1,12 +1,14 @@
 package io.github.oshai.kotlinlogging.coroutines
 
-import kotlin.test.*
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertNull
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
-import org.apache.logging.log4j.*
-import org.apache.logging.log4j.core.config.*
+import org.apache.logging.log4j.Level
+import org.apache.logging.log4j.core.config.Configurator
 import org.junit.jupiter.api.BeforeEach
-import org.slf4j.*
+import org.slf4j.MDC
 
 @ExperimentalCoroutinesApi
 class KotlinLoggingAsyncMDCTest {

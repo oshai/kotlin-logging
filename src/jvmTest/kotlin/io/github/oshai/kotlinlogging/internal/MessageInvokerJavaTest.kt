@@ -1,3 +1,5 @@
+@file:Suppress("TooGenericExceptionThrown")
+
 package io.github.oshai.kotlinlogging.internal
 
 import kotlin.test.assertEquals
