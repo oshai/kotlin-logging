@@ -1,3 +1,5 @@
+@file:Suppress("TooManyFunctions")
+
 package io.github.oshai.kotlinlogging.slf4j.internal
 
 import io.github.oshai.kotlinlogging.DelegatingKLogger

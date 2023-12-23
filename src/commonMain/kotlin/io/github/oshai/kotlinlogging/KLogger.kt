@@ -1,4 +1,4 @@
-@file:Suppress("MoveLambdaOutsideParentheses")
+@file:Suppress("MoveLambdaOutsideParentheses", "TooManyFunctions")
 
 package io.github.oshai.kotlinlogging
 
