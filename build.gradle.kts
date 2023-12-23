@@ -248,7 +248,6 @@ detekt {
     ignoreFailures = true
 
     config.setFrom(files(rootDir.resolve("detekt.yml")))
-    source.setFrom(files(rootProject.sourceSets))
 }
 
 tasks {
