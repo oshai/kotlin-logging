@@ -5,7 +5,7 @@ import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 
 plugins {
-    kotlin("multiplatform") version "1.9.21"
+    kotlin("multiplatform") version "1.9.22"
     id("org.jetbrains.dokka") version "1.9.10"
     `maven-publish`
     id("io.github.gradle-nexus.publish-plugin") version "1.3.0"
