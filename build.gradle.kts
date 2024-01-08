@@ -1,4 +1,5 @@
 import io.gitlab.arturbosch.detekt.Detekt
+import io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
 import org.gradle.jvm.tasks.Jar
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
@@ -6,15 +7,17 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 
 plugins {
     kotlin("multiplatform") version "1.9.22"
-    id("org.jetbrains.dokka") version "1.9.10"
-    `maven-publish`
-    id("io.github.gradle-nexus.publish-plugin") version "1.3.0"
-    signing
-    id("io.gitlab.arturbosch.detekt") version "1.18.0"
     id("com.android.library") version "7.4.2"
-    id("com.diffplug.spotless") version "6.23.3"
-}
 
+    id("org.jetbrains.dokka") version "1.9.10"
+
+    id("io.gitlab.arturbosch.detekt") version "1.23.4"
+    id("com.diffplug.spotless") version "6.23.3"
+
+    id("io.github.gradle-nexus.publish-plugin") version "1.3.0"
+    `maven-publish`
+    signing
+}
 
 apply("versions.gradle.kts")
 
@@ -27,18 +30,6 @@ repositories {
     mavenCentral()
 }
 
-nexusPublishing {
-    repositories {
-        sonatype {  //only for users registered in Sonatype after 24 Feb 2021
-            nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
-            snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
-            username.set(System.getenv("SONATYPE_USERNAME_2")) // defaults to project.properties["myNexusUsername"]
-            password.set(System.getenv("SONATYPE_PASSWORD_2")) // defaults to project.properties["myNexusPassword"]
-        }
-    }
-}
-
-apply(plugin = "io.github.gradle-nexus.publish-plugin")
 
 kotlin {
     explicitApi()
@@ -194,26 +185,50 @@ kotlin {
     }
 }
 
+android {
+    compileSdk = 31
+    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
+    defaultConfig {
+        minSdk = 21
+        targetSdk = 31
+    }
+    testOptions {
+        unitTests.isReturnDefaultValues = true
+    }
+    namespace = "io.github.oshai"
+}
+
+tasks {
+    withType<Jar> {
+        metaInf.with(
+            copySpec {
+                from("${project.rootDir}/LICENSE")
+            }
+        )
+    }
+
+    val jvmJar by getting(Jar::class) {
+        manifest {
+            attributes("Automatic-Module-Name" to "io.github.oshai.kotlinlogging")
+        }
+    }
+}
+
+
+// Docs
+
 tasks {
     register<Jar>("dokkaJar") {
         from(dokkaHtml)
         dependsOn(dokkaHtml)
         archiveClassifier.set("javadoc")
     }
+}
 
-    // see https://docs.gradle.org/current/userguide/gradle_wrapper.html#customizing_wrapper
-    wrapper {
-        distributionType = Wrapper.DistributionType.ALL
-    }
 
-	withType<Jar> {
-		metaInf.with(
-			copySpec {
-				from("${project.rootDir}/LICENSE")
-			}
-		)
-	}
+// Tests
 
+tasks {
     withType<Test> {
         useJUnitPlatform()
         testLogging {
@@ -222,6 +237,30 @@ tasks {
             exceptionFormat = FULL
         }
     }
+}
+
+
+// Static code analysis tools
+
+detekt {
+    buildUponDefaultConfig = true
+    parallel = true
+
+    config.setFrom(files(rootDir.resolve("detekt.yml")))
+}
+
+tasks {
+    withType<Detekt>().configureEach {
+        jvmTarget = "1.8"
+
+        reports {
+            html.required.set(false)
+            txt.required.set(false)
+        }
+    }
+    withType<DetektCreateBaselineTask>().configureEach {
+        jvmTarget = "1.8"
+    }
     afterEvaluate {
         check {
             dependsOn(withType<Detekt>())
@@ -229,7 +268,32 @@ tasks {
     }
 }
 
+dependencies {
+    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.23.4")
+}
 
+spotless {
+    kotlin {
+        target("src/**/*.kt")
+        ktfmt("0.24").googleStyle()
+    }
+}
+
+
+// Publishing
+
+nexusPublishing {
+    repositories {
+        sonatype {  // only for users registered in Sonatype after 24 Feb 2021
+            nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
+            snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
+            username.set(System.getenv("SONATYPE_USERNAME_2")) // defaults to project.properties["myNexusUsername"]
+            password.set(System.getenv("SONATYPE_PASSWORD_2")) // defaults to project.properties["myNexusPassword"]
+        }
+    }
+}
+
+apply(plugin = "io.github.gradle-nexus.publish-plugin")
 
 publishing {
     publications.withType<MavenPublication> {
@@ -269,38 +333,12 @@ signing {
     sign(publishing.publications)
 }
 
-detekt {
-    buildUponDefaultConfig = true
-    config = files(rootDir.resolve("detekt.yml"))
-    parallel = true
 
-    reports {
-        html.enabled = false
-        txt.enabled = false
-    }
-}
+// Gradle wrapper
 
-val jvmJar by tasks.getting(Jar::class) {
-    manifest {
-        attributes("Automatic-Module-Name" to "io.github.oshai.kotlinlogging")
-    }
-}
-
-android {
-    compileSdk = 31
-    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
-    defaultConfig {
-        minSdk = 21
-        targetSdk = 31
-    }
-    testOptions {
-        unitTests.isReturnDefaultValues = true
-    }
-    namespace = "io.github.oshai"
-}
-spotless {
-    kotlin {
-        target("src/**/*.kt")
-        ktfmt("0.24").googleStyle()
+tasks {
+    // see https://docs.gradle.org/current/userguide/gradle_wrapper.html#customizing_wrapper
+    wrapper {
+        distributionType = Wrapper.DistributionType.ALL
     }
 }
