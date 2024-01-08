@@ -1,5 +1,3 @@
-import io.gitlab.arturbosch.detekt.Detekt
-import io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
 import org.gradle.jvm.tasks.Jar
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
@@ -11,7 +9,6 @@ plugins {
 
     id("org.jetbrains.dokka") version "1.9.10"
 
-    id("io.gitlab.arturbosch.detekt") version "1.23.4"
     id("com.diffplug.spotless") version "6.23.3"
 
     id("io.github.gradle-nexus.publish-plugin") version "1.3.0"
@@ -241,36 +238,6 @@ tasks {
 
 
 // Static code analysis tools
-
-detekt {
-    buildUponDefaultConfig = true
-    parallel = true
-
-    config.setFrom(files(rootDir.resolve("detekt.yml")))
-}
-
-tasks {
-    withType<Detekt>().configureEach {
-        jvmTarget = "1.8"
-
-        reports {
-            html.required.set(false)
-            txt.required.set(false)
-        }
-    }
-    withType<DetektCreateBaselineTask>().configureEach {
-        jvmTarget = "1.8"
-    }
-    afterEvaluate {
-        check {
-            dependsOn(withType<Detekt>())
-        }
-    }
-}
-
-dependencies {
-    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.23.4")
-}
 
 spotless {
     kotlin {
