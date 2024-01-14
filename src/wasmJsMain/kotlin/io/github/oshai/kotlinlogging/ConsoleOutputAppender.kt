@@ -13,18 +13,10 @@ public class ConsoleOutputAppender : FormattingAppender() {
   }
 }
 
-private fun consoleLog(
-  @Suppress("UNUSED_PARAMETER") msg: String,
-): Unit = js("console.log(msg)")
+private fun consoleLog(message: String): Unit = js("console.log(message)")
 
-private fun consoleInfo(
-  @Suppress("UNUSED_PARAMETER") msg: String,
-): Unit = js("console.info(msg)")
+private fun consoleInfo(message: String): Unit = js("console.info(message)")
 
-private fun consoleWarn(
-  @Suppress("UNUSED_PARAMETER") msg: String,
-): Unit = js("console.warn(msg)")
+private fun consoleWarn(message: String): Unit = js("console.warn(message)")
 
-private fun consoleError(
-  @Suppress("UNUSED_PARAMETER") msg: String,
-): Unit = js("console.error(msg)")
+private fun consoleError(message: String): Unit = js("console.error(message)")
