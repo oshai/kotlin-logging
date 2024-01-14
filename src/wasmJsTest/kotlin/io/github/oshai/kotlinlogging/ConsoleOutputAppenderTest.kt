@@ -40,10 +40,7 @@ class ConsoleOutputAppenderTest {
   fun logTraceTest() {
     testAppender.log(createTestEvent(Level.TRACE))
 
-    assertEquals(
-      expected = "testing... TRACE",
-      actual = getTestLog()
-    )
+    assertEquals(expected = "testing... TRACE", actual = getTestLog())
     assertEquals("", getTestInfo())
     assertEquals("", getTestWarn())
     assertEquals("", getTestError())
@@ -53,10 +50,7 @@ class ConsoleOutputAppenderTest {
   fun logDebugTest() {
     testAppender.log(createTestEvent(Level.DEBUG))
 
-    assertEquals(
-      expected = "testing... DEBUG",
-      actual = getTestLog()
-    )
+    assertEquals(expected = "testing... DEBUG", actual = getTestLog())
     assertEquals("", getTestInfo())
     assertEquals("", getTestWarn())
     assertEquals("", getTestError())
@@ -67,10 +61,7 @@ class ConsoleOutputAppenderTest {
     testAppender.log(createTestEvent(Level.INFO))
 
     assertEquals("", getTestLog())
-    assertEquals(
-      expected = "testing... INFO",
-      actual = getTestInfo()
-    )
+    assertEquals(expected = "testing... INFO", actual = getTestInfo())
     assertEquals("", getTestWarn())
     assertEquals("", getTestError())
   }
@@ -81,10 +72,7 @@ class ConsoleOutputAppenderTest {
 
     assertEquals("", getTestLog())
     assertEquals("", getTestInfo())
-    assertEquals(
-      expected = "testing... WARN",
-      actual = getTestWarn()
-    )
+    assertEquals(expected = "testing... WARN", actual = getTestWarn())
     assertEquals("", getTestError())
   }
 
@@ -95,10 +83,7 @@ class ConsoleOutputAppenderTest {
     assertEquals("", getTestLog())
     assertEquals("", getTestInfo())
     assertEquals("", getTestWarn())
-    assertEquals(
-      expected = "testing... ERROR",
-      actual = getTestError()
-    )
+    assertEquals(expected = "testing... ERROR", actual = getTestError())
   }
 
   @Test
@@ -112,25 +97,29 @@ class ConsoleOutputAppenderTest {
   }
 
   class TestFormatter : Formatter {
-    override fun formatMessage(loggingEvent: KLoggingEvent): String = "testing... ${loggingEvent.level}"
+    override fun formatMessage(loggingEvent: KLoggingEvent): String =
+      "testing... ${loggingEvent.level}"
   }
 
-  private fun createTestEvent(level: Level) = KLoggingEvent(
-    level = level,
-    marker = null,
-    loggerName = "test logger",
-    message = "test message",
-    cause = null,
-    payload = null,
-  )
+  private fun createTestEvent(level: Level) =
+    KLoggingEvent(
+      level = level,
+      marker = null,
+      loggerName = "test logger",
+      message = "test message",
+      cause = null,
+      payload = null,
+    )
 }
-
 
 // Access intercepted console.* test messages
 
 private fun getTestLog(): String = js("""window.__testLog.toString()""")
+
 private fun getTestInfo(): String = js("""window.__testInfo.toString()""")
+
 private fun getTestWarn(): String = js("""window.__testWarn.toString()""")
+
 private fun getTestError(): String = js("""window.__testError.toString()""")
 
 private fun setupConsole() {
