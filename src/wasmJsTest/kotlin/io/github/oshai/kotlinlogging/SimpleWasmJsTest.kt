@@ -4,7 +4,7 @@ import kotlin.test.*
 
 private val logger = KotlinLogging.logger("SimpleWasmJsTest")
 
-class SimpleJsTest {
+class SimpleWasmJsTest {
   private lateinit var appender: SimpleAppender
 
   @BeforeTest
@@ -20,7 +20,7 @@ class SimpleJsTest {
   }
 
   @Test
-  fun simpleJsTest() {
+  fun simpleWasmJsTest() {
     assertEquals("SimpleWasmJsTest", logger.name)
     logger.info { "info msg" }
     assertEquals("INFO: [SimpleWasmJsTest] info msg", appender.lastMessage)
@@ -28,7 +28,7 @@ class SimpleJsTest {
   }
 
   @Test
-  fun offLevelJsTest() {
+  fun offLevelWasmJsTest() {
     KotlinLoggingConfiguration.logLevel = Level.OFF
     assertTrue(logger.isLoggingOff())
     logger.error { "error msg" }
