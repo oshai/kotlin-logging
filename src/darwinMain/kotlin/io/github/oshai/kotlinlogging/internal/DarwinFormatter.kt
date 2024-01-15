@@ -6,7 +6,7 @@ import io.github.oshai.kotlinlogging.Marker
 internal object DarwinFormatter {
 
   internal fun getFormattedMessage(builder: KLoggingEventBuilder, marker: Marker?): String {
-    buildString {
+    return buildString {
       marker?.getName()?.let {
         append(it)
         append(" ")
