@@ -7,7 +7,7 @@ class DarwinFormatterTest {
   @Test
   fun simpleTest() {
     KLoggingEventBuilder().apply { message = "msg" }.run {
-      assertEquals("msg", DarwinFormatter.getFormattedMessage(this, null))
+      assertEquals("msg1", DarwinFormatter.getFormattedMessage(this, null))
     }
   }
 }
