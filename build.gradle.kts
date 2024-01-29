@@ -10,7 +10,7 @@ plugins {
 
     id("org.jetbrains.dokka") version "1.9.20"
 
-    id("com.diffplug.spotless") version "6.24.0"
+    id("com.diffplug.spotless") version "6.25.0"
 
     id("io.github.gradle-nexus.publish-plugin") version "1.3.0"
     `maven-publish`
