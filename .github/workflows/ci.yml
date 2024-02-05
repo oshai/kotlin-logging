@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: gradle/wrapper-validation-action@v1
+      - uses: gradle/wrapper-validation-action@v2
   build:
     name: Build on ${{ matrix.os.runner }}
     runs-on: ${{ matrix.os.runner }}
