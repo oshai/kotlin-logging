@@ -6,7 +6,7 @@ public data class KLoggingEvent(
   public val loggerName: String,
   public val message: String? = null,
   public val cause: Throwable? = null,
-  public val payload: Map<String, Any>? = null,
+  public val payload: Map<String, Any?>? = null,
 ) {
   public constructor(
     level: Level,
