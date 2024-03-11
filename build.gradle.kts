@@ -6,7 +6,7 @@ import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 
 plugins {
     kotlin("multiplatform") version "1.9.23"
-    id("com.android.library") version "7.4.2"
+    id("com.android.library") version "8.3.0"
 
     id("org.jetbrains.dokka") version "1.9.20"
 
