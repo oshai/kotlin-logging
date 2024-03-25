@@ -43,7 +43,7 @@ jobs:
 
       - name: Restore native cache
         id: cache-native
-        uses: actions/cache@v4.0.1
+        uses: actions/cache@v4.0.2
         with:
           path: |
             scripts/build
@@ -56,7 +56,7 @@ jobs:
 
       - name: Restore Gradle cache
         id: cache-gradle
-        uses: actions/cache@v4.0.1
+        uses: actions/cache@v4.0.2
         with:
           path: |
             ~/.gradle/caches
