@@ -1,12 +1,16 @@
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
 import org.gradle.jvm.tasks.Jar
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("multiplatform") version "1.9.23"
-    id("com.android.library") version "7.4.2"
+    // This version is dependent on the maximum tested version
+    // of this plugin within the Kotlin multiplatform library
+    id("com.android.library") version "8.2.2"
 
     id("org.jetbrains.dokka") version "1.9.20"
 
@@ -28,6 +32,9 @@ repositories {
     mavenCentral()
 }
 
+tasks.withType<KotlinCompile> {
+    kotlinOptions.jvmTarget = JvmTarget.JVM_1_8.target
+}
 
 kotlin {
     explicitApi()
@@ -69,7 +76,7 @@ kotlin {
             }
         }
     }
-    android {
+    androidTarget {
         publishLibraryVariants("release", "debug")
     }
     val linuxTargets = listOf(
@@ -206,8 +213,8 @@ android {
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
         minSdk = 21
-        targetSdk = 31
     }
+    @Suppress("UnstableApiUsage")
     testOptions {
         unitTests.isReturnDefaultValues = true
     }
