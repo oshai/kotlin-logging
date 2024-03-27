@@ -1,5 +1,5 @@
 extra["slf4j_version"] = "2.0.9"
-extra["coroutines_version"] = "1.6.4"
+extra["coroutines_version"] = "1.8.0"
 extra["log4j_version"] = "2.22.0"
 extra["mockito_version"] = "4.11.0"
 extra["junit_version"] = "5.9.2"

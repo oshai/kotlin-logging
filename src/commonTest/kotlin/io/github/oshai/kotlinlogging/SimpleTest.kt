@@ -2,6 +2,7 @@ package io.github.oshai.kotlinlogging
 
 import kotlin.test.Test
 
+@Suppress("DEPRECATION")
 class SimpleTest {
   private val logger = KotlinLogging.logger {}
 

@@ -4,6 +4,7 @@ import kotlin.test.*
 
 private val logger = KotlinLogging.logger("SimpleJsTest")
 
+@Suppress("DEPRECATION")
 class SimpleJsTest {
   private lateinit var appender: SimpleAppender
 
