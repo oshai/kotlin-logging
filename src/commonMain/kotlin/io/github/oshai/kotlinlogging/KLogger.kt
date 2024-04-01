@@ -14,6 +14,7 @@ public interface KLogger {
 
   /**
    * Return the name of this `Logger` instance.
+   *
    * @return name of this logger instance
    */
   public val name: String
@@ -378,7 +379,7 @@ public interface KLogger {
    */
   @Deprecated(
     "Use trace {} instead",
-    replaceWith = ReplaceWith("trace(marker) { \"\$msg \$arg1 \$arg2\"}")
+    replaceWith = ReplaceWith("trace(marker) { \"\$msg \$arg1 \$arg2\"}"),
   )
   public fun trace(marker: Marker?, msg: String?, arg1: Any?, arg2: Any?): Unit = TODO()
 
@@ -392,7 +393,7 @@ public interface KLogger {
    */
   @Deprecated(
     "Use trace {} instead",
-    replaceWith = ReplaceWith("trace(marker) { \"\$msg \$arguments\"}")
+    replaceWith = ReplaceWith("trace(marker) { \"\$msg \$arguments\"}"),
   )
   public fun trace(marker: Marker?, msg: String?, vararg arguments: Any?): Unit = TODO()
 
@@ -494,7 +495,7 @@ public interface KLogger {
    */
   @Deprecated(
     "Use debug {} instead",
-    replaceWith = ReplaceWith("debug(marker) { \"\$msg \$arg1 \$arg2\"}")
+    replaceWith = ReplaceWith("debug(marker) { \"\$msg \$arg1 \$arg2\"}"),
   )
   public fun debug(marker: Marker?, msg: String?, arg1: Any?, arg2: Any?): Unit = TODO()
 
@@ -508,7 +509,7 @@ public interface KLogger {
    */
   @Deprecated(
     "Use debug {} instead",
-    replaceWith = ReplaceWith("debug(marker) { \"\$msg \$arguments\"}")
+    replaceWith = ReplaceWith("debug(marker) { \"\$msg \$arguments\"}"),
   )
   public fun debug(marker: Marker?, msg: String?, vararg arguments: Any?): Unit = TODO()
 
@@ -609,7 +610,7 @@ public interface KLogger {
    */
   @Deprecated(
     "Use info {} instead",
-    replaceWith = ReplaceWith("info(marker) { \"\$msg \$arg1 \$arg2\"}")
+    replaceWith = ReplaceWith("info(marker) { \"\$msg \$arg1 \$arg2\"}"),
   )
   public fun info(marker: Marker?, msg: String?, arg1: Any?, arg2: Any?): Unit = TODO()
 
@@ -623,7 +624,7 @@ public interface KLogger {
    */
   @Deprecated(
     "Use info {} instead",
-    replaceWith = ReplaceWith("info(marker) { \"\$msg \$arguments\"}")
+    replaceWith = ReplaceWith("info(marker) { \"\$msg \$arguments\"}"),
   )
   public fun info(marker: Marker?, msg: String?, vararg arguments: Any?): Unit = TODO()
 
@@ -724,7 +725,7 @@ public interface KLogger {
    */
   @Deprecated(
     "Use warn {} instead",
-    replaceWith = ReplaceWith("warn(marker) { \"\$msg \$arg1 \$arg2\"}")
+    replaceWith = ReplaceWith("warn(marker) { \"\$msg \$arg1 \$arg2\"}"),
   )
   public fun warn(marker: Marker?, msg: String?, arg1: Any?, arg2: Any?): Unit = TODO()
 
@@ -738,7 +739,7 @@ public interface KLogger {
    */
   @Deprecated(
     "Use warn {} instead",
-    replaceWith = ReplaceWith("warn(marker) { \"\$msg \$arguments\"}")
+    replaceWith = ReplaceWith("warn(marker) { \"\$msg \$arguments\"}"),
   )
   public fun warn(marker: Marker?, msg: String?, vararg arguments: Any?): Unit = TODO()
 
@@ -817,7 +818,7 @@ public interface KLogger {
    */
   @Deprecated(
     "Use error(marker){} instead",
-    replaceWith = ReplaceWith("error(marker) { \"\$msg\"}")
+    replaceWith = ReplaceWith("error(marker) { \"\$msg\"}"),
   )
   public fun error(marker: Marker?, msg: String?): Unit = error(null as Throwable?, marker) { msg }
 
@@ -831,7 +832,7 @@ public interface KLogger {
    */
   @Deprecated(
     "Use error(marker){} instead",
-    replaceWith = ReplaceWith("error(marker) { \"\$msg \$arg \"}")
+    replaceWith = ReplaceWith("error(marker) { \"\$msg \$arg \"}"),
   )
   public fun error(marker: Marker?, msg: String?, arg: Any?): Unit = TODO()
 
@@ -846,7 +847,7 @@ public interface KLogger {
    */
   @Deprecated(
     "Use error(marker){} instead",
-    replaceWith = ReplaceWith("error(marker) { \"\$msg \$arg1 \$arg2\"}")
+    replaceWith = ReplaceWith("error(marker) { \"\$msg \$arg1 \$arg2\"}"),
   )
   public fun error(marker: Marker?, msg: String?, arg1: Any?, arg2: Any?): Unit = TODO()
 
@@ -860,7 +861,7 @@ public interface KLogger {
    */
   @Deprecated(
     "Use error(marker){} instead",
-    replaceWith = ReplaceWith("error(marker) { \"\$msg \$arguments\"}")
+    replaceWith = ReplaceWith("error(marker) { \"\$msg \$arguments\"}"),
   )
   public fun error(marker: Marker?, msg: String?, vararg arguments: Any?): Unit = TODO()
 

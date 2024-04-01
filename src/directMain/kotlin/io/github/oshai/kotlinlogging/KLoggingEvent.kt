@@ -12,13 +12,13 @@ public data class KLoggingEvent(
     level: Level,
     marker: Marker?,
     loggerName: String,
-    eventBuilder: KLoggingEventBuilder
+    eventBuilder: KLoggingEventBuilder,
   ) : this(
     level,
     marker,
     loggerName,
     eventBuilder.message,
     eventBuilder.cause,
-    eventBuilder.payload
+    eventBuilder.payload,
   )
 }

@@ -35,7 +35,7 @@ public class DarwinKLogger(override val name: String, override val underlyingLog
           __dso_handle.ptr,
           underlyingLogger,
           level.toDarwinLevel(),
-          formattedMessage
+          formattedMessage,
         )
       }
     }

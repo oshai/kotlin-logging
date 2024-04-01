@@ -30,20 +30,20 @@ class KotlinLoggingTest {
       {
         assertEquals(
           "io.github.oshai.kotlinlogging.ForKotlinLoggingTest",
-          ForKotlinLoggingTest().loggerInClass.name
+          ForKotlinLoggingTest().loggerInClass.name,
         )
       },
       {
         assertEquals(
           "io.github.oshai.kotlinlogging.ForKotlinLoggingTest",
-          ForKotlinLoggingTest.loggerInCompanion.name
+          ForKotlinLoggingTest.loggerInCompanion.name,
         )
       },
       { assertEquals("io.github.oshai.kotlinlogging.slf4jLogger", loggerFromSlf4j.name) },
       {
         assertEquals(
           "io.github.oshai.kotlinlogging.slf4jLoggerExtension",
-          loggerFromSlf4jExtension.name
+          loggerFromSlf4jExtension.name,
         )
       },
     )

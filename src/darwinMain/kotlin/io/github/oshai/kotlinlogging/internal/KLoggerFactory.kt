@@ -31,7 +31,7 @@ internal actual object KLoggerFactory {
       name.contains(".") -> {
         DarwinKLogger(
           name,
-          os_log_create(name.substringBeforeLast("."), name.substringAfterLast("."))
+          os_log_create(name.substringBeforeLast("."), name.substringAfterLast(".")),
         )
       }
       else -> {

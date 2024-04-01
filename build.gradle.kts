@@ -261,7 +261,7 @@ tasks {
 spotless {
     kotlin {
         target("src/**/*.kt")
-        ktfmt("0.24").googleStyle()
+        ktfmt("0.47").googleStyle()
     }
 }
 
