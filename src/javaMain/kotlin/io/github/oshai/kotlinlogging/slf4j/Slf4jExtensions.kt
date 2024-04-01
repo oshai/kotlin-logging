@@ -5,10 +5,17 @@ import io.github.oshai.kotlinlogging.KotlinLogging
 import io.github.oshai.kotlinlogging.Level
 import io.github.oshai.kotlinlogging.Marker
 import io.github.oshai.kotlinlogging.slf4j.internal.Slf4jLoggerFactory
+import io.github.oshai.kotlinlogging.slf4j.internal.Slf4jMarker
 import org.slf4j.Logger
 import org.slf4j.MarkerFactory
 
-public fun Marker.toSlf4j(): org.slf4j.Marker = MarkerFactory.getMarker(this.getName())
+public fun Marker.toSlf4j(): org.slf4j.Marker =
+  when (this) {
+    is Slf4jMarker -> marker
+    else -> MarkerFactory.getMarker(getName())
+  }
+
+public fun org.slf4j.Marker.toKotlinLogging(): Marker = Slf4jMarker(this)
 
 public fun Level.toSlf4j(): org.slf4j.event.Level =
   when (this) {
