@@ -20,7 +20,7 @@ import kotlinx.coroutines.slf4j.*
 public suspend inline fun <T> withLoggingContextAsync(
   pair: Pair<String, String?>,
   restorePrevious: Boolean = true,
-  crossinline body: suspend () -> T
+  crossinline body: suspend () -> T,
 ): T =
   withLoggingContext(pair, restorePrevious = restorePrevious) {
     withContext(MDCContext()) { body() }
@@ -37,7 +37,7 @@ public suspend inline fun <T> withLoggingContextAsync(
 public suspend inline fun <T> withLoggingContextAsync(
   vararg pair: Pair<String, String?>,
   restorePrevious: Boolean = true,
-  crossinline body: suspend () -> T
+  crossinline body: suspend () -> T,
 ): T =
   withLoggingContext(*pair, restorePrevious = restorePrevious) {
     withContext(MDCContext()) { body() }
@@ -59,7 +59,7 @@ public suspend inline fun <T> withLoggingContextAsync(
 public suspend inline fun <T> withLoggingContextAsync(
   map: Map<String, String?>,
   restorePrevious: Boolean = true,
-  crossinline body: suspend () -> T
+  crossinline body: suspend () -> T,
 ): T =
   withLoggingContext(map, restorePrevious = restorePrevious) {
     withContext(MDCContext()) { body() }

@@ -106,7 +106,7 @@ class KotlinLoggingAsyncMDCTest {
       "c" to "d",
       "e" to null,
       "f" to null,
-      restorePrevious = false
+      restorePrevious = false,
     ) {
       assertEquals("b", MDC.get("a"))
       assertEquals("d", MDC.get("c"))

@@ -36,7 +36,6 @@ internal actual object KLoggerNameResolver {
         // to search for the target declared field.
         null
       }
-    }
-      ?: clazz
+    } ?: clazz
   }
 }

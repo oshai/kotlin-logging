@@ -11,6 +11,7 @@ public actual object KotlinLoggingConfiguration {
     set(value) {
       appender = value
     }
+
   @Deprecated("Use logLevel instead", ReplaceWith("logLevel"))
   public var LOG_LEVEL: Level
     get() = logLevel

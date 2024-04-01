@@ -16,7 +16,7 @@ public abstract class Slf4jLogger<T : Logger> : KLogger, DelegatingKLogger<T> {
   protected fun isLoggingEnabledFor(
     underlyingLogger: Logger,
     level: Level,
-    marker: Marker?
+    marker: Marker?,
   ): Boolean {
     return when (level) {
       Level.TRACE -> underlyingLogger.isTraceEnabled(marker?.toSlf4j())
@@ -137,21 +137,21 @@ public abstract class Slf4jLogger<T : Logger> : KLogger, DelegatingKLogger<T> {
 
   @Deprecated(
     "Use error(marker){} instead",
-    replaceWith = ReplaceWith("error(marker){ \"\$msg \$arg\"}")
+    replaceWith = ReplaceWith("error(marker){ \"\$msg \$arg\"}"),
   )
   public override fun error(marker: Marker?, msg: String?, arg: Any?): Unit =
     underlyingLogger.error(marker?.toSlf4j(), msg, arg)
 
   @Deprecated(
     "Use error(marker){} instead",
-    replaceWith = ReplaceWith("error(marker){ \"\$msg \$arg1 \$arg2\"}")
+    replaceWith = ReplaceWith("error(marker){ \"\$msg \$arg1 \$arg2\"}"),
   )
   public override fun error(marker: Marker?, msg: String?, arg1: Any?, arg2: Any?): Unit =
     underlyingLogger.error(marker?.toSlf4j(), msg, arg1, arg2)
 
   @Deprecated(
     "Use error(marker){} instead",
-    replaceWith = ReplaceWith("error(marker){ \"\$msg \$arguments\"}")
+    replaceWith = ReplaceWith("error(marker){ \"\$msg \$arguments\"}"),
   )
   public override fun error(marker: Marker?, msg: String?, vararg arguments: Any?): Unit =
     underlyingLogger.error(marker?.toSlf4j(), msg, *arguments)
