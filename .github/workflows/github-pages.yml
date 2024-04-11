@@ -36,7 +36,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: 11
+          java-version: 17
       - name: Generate Dokka HTML docs
         run: ./gradlew :dokkaHtml
       - name: Upload Dokka output
