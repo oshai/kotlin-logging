@@ -37,6 +37,7 @@ internal class LocationAwareKLogger(override val underlyingLogger: LocationAware
   override fun isLoggingEnabledFor(level: Level, marker: Marker?): Boolean {
     return isLoggingEnabledFor(underlyingLogger, level, marker)
   }
+
   override fun at(level: Level, marker: Marker?, block: KLoggingEventBuilder.() -> Unit) {
     if (isLoggingEnabledFor(level, marker)) {
       KLoggingEventBuilder().apply(block).run {
@@ -52,7 +53,7 @@ internal class LocationAwareKLogger(override val underlyingLogger: LocationAware
   private fun logWithPayload(
     kLoggingEventBuilder: KLoggingEventBuilder,
     level: Level,
-    marker: Marker?
+    marker: Marker?,
   ) {
     val builder = underlyingLogger.atLevel(level.toSlf4j())
     marker?.toSlf4j()?.let { builder.addMarker(it) }
@@ -67,7 +68,7 @@ internal class LocationAwareKLogger(override val underlyingLogger: LocationAware
   private fun logWithoutPayload(
     kLoggingEventBuilder: KLoggingEventBuilder,
     level: Level,
-    marker: Marker?
+    marker: Marker?,
   ) {
     underlyingLogger.log(
       marker?.toSlf4j(),
@@ -75,7 +76,7 @@ internal class LocationAwareKLogger(override val underlyingLogger: LocationAware
       level.toSlf4j().toInt(),
       kLoggingEventBuilder.message,
       null,
-      kLoggingEventBuilder.cause
+      kLoggingEventBuilder.cause,
     )
   }
 
@@ -158,7 +159,7 @@ internal class LocationAwareKLogger(override val underlyingLogger: LocationAware
         EventConstants.TRACE_INT,
         tp.message,
         arrayOf<Any?>(result),
-        tp.throwable
+        tp.throwable,
       )
     }
     return result

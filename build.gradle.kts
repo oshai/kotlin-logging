@@ -24,7 +24,7 @@ plugins {
 apply("versions.gradle.kts")
 
 group = "io.github.oshai"
-version = "6.0.4"
+version = "6.0.5"
 
 repositories {
     gradlePluginPortal()
@@ -268,7 +268,7 @@ tasks {
 spotless {
     kotlin {
         target("src/**/*.kt")
-        ktfmt("0.24").googleStyle()
+        ktfmt("0.47").googleStyle()
     }
 }
 

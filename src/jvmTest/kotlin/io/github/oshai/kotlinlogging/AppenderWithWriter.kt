@@ -25,5 +25,5 @@ data class AppenderWithWriter(
   val pattern: String = "%-5p %c %marker - %m%n",
   val writer: StringWriter = StringWriter(),
   val appender: Appender =
-    WriterAppender.createAppender(newPatternLayout(pattern), null, writer, "writer", false, true)
+    WriterAppender.createAppender(newPatternLayout(pattern), null, writer, "writer", false, true),
 )

@@ -18,7 +18,7 @@ import org.slf4j.MDC
 public inline fun <T> withLoggingContext(
   pair: Pair<String, String?>,
   restorePrevious: Boolean = true,
-  body: () -> T
+  body: () -> T,
 ): T =
   if (pair.second == null) {
     body()
@@ -44,7 +44,7 @@ public inline fun <T> withLoggingContext(
 public inline fun <T> withLoggingContext(
   vararg pair: Pair<String, String?>,
   restorePrevious: Boolean = true,
-  body: () -> T
+  body: () -> T,
 ): T {
   val pairForMDC = pair.filter { it.second != null }
   val cleanupCallbacks =
@@ -81,7 +81,7 @@ public inline fun <T> withLoggingContext(
 public inline fun <T> withLoggingContext(
   map: Map<String, String?>,
   restorePrevious: Boolean = true,
-  body: () -> T
+  body: () -> T,
 ): T {
   val cleanupCallbacks =
     map.map {

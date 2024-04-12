@@ -17,6 +17,7 @@ public object KotlinLogging {
    * ```
    * private val logger = KotlinLogging.logger("io.github.oshai.kotlinlogging.MyLogger")
    * ```
+   *
    * In most cases the name represents the package notation of the file that the logger is defined
    * in.
    */

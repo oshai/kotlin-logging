@@ -5,6 +5,7 @@ import kotlin.reflect.KProperty
 
 /**
  * The JS way to define a logger without explicit name
+ *
  * ```
  * class MyClass {
  *     private val logger by KotlinLogging.logger()
@@ -21,8 +22,7 @@ private class LoggerDelegate : ReadOnlyProperty<Any?, KLogger> {
       logger =
         thisRef.asDynamic()?.constructor?.name.unsafeCast<String?>()?.let {
           KotlinLogging.logger(it)
-        }
-          ?: KotlinLogging.logger("root-logger")
+        } ?: KotlinLogging.logger("root-logger")
     }
     return logger
   }

@@ -11,12 +11,14 @@ public actual object KotlinLoggingConfiguration {
     set(value) {
       _logLevel.value = value
     }
+
   private val _appender = AtomicReference(DefaultAppender)
   public actual var appender: Appender
     get() = _appender.value
     set(value) {
       _appender.value = value
     }
+
   private val _formatter = AtomicReference<Formatter>(DefaultMessageFormatter(includePrefix = true))
   public actual var formatter: Formatter
     get() = _formatter.value

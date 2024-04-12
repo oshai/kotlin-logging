@@ -29,7 +29,7 @@ class LoggingWithLocationTest {
     ClassWithLoggingForLocationTesting().log()
     assertEquals(
       "INFO ClassWithLoggingForLocationTesting.log(8) - test",
-      appenderWithWriter.writer.toString().trim()
+      appenderWithWriter.writer.toString().trim(),
     )
   }
 
@@ -38,7 +38,7 @@ class LoggingWithLocationTest {
     ClassWithLoggingForLocationTesting().logLazy()
     assertEquals(
       "INFO ClassWithLoggingForLocationTesting.logLazy(12) - test",
-      appenderWithWriter.writer.toString().trim()
+      appenderWithWriter.writer.toString().trim(),
     )
   }
 
@@ -47,7 +47,7 @@ class LoggingWithLocationTest {
     ClassWithLoggingForLocationTesting().logFluentWithPayload()
     assertEquals(
       "INFO ClassWithLoggingForLocationTesting.logFluentWithPayload(32) - test",
-      appenderWithWriter.writer.toString().trim()
+      appenderWithWriter.writer.toString().trim(),
     )
   }
 
@@ -56,7 +56,7 @@ class LoggingWithLocationTest {
     ClassWithLoggingForLocationTesting().logNull()
     assertEquals(
       "INFO ClassWithLoggingForLocationTesting.logNull(16) - null",
-      appenderWithWriter.writer.toString().trim()
+      appenderWithWriter.writer.toString().trim(),
     )
   }
 
@@ -72,7 +72,7 @@ class LoggingWithLocationTest {
         System.lineSeparator() +
         "TRACE " +
         "ClassWithLoggingForLocationTesting.logEntry(22) - exit with ((2, 1))",
-      appenderWithWriter.writer.toString().trim()
+      appenderWithWriter.writer.toString().trim(),
     )
   }
 
@@ -85,7 +85,7 @@ class LoggingWithLocationTest {
         "INFO ClassWithLoggingForLocationTesting.logExitOpt(27) - log entry body" +
         System.lineSeparator() +
         "TRACE ClassWithLoggingForLocationTesting.logExitOpt(28) - exit with (null)",
-      appenderWithWriter.writer.toString().trim()
+      appenderWithWriter.writer.toString().trim(),
     )
   }
 }

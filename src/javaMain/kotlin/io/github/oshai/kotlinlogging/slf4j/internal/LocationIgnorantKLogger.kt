@@ -38,7 +38,7 @@ internal class LocationIgnorantKLogger(override val underlyingLogger: Logger) :
   private fun logWithPayload(
     kLoggingEventBuilder: KLoggingEventBuilder,
     level: Level,
-    marker: Marker?
+    marker: Marker?,
   ) {
     val builder = underlyingLogger.atLevel(level.toSlf4j())
     marker?.toSlf4j()?.let { builder.addMarker(it) }
@@ -50,7 +50,7 @@ internal class LocationIgnorantKLogger(override val underlyingLogger: Logger) :
   private fun logWithoutPayload(
     kLoggingEventBuilder: KLoggingEventBuilder,
     level: Level,
-    marker: Marker?
+    marker: Marker?,
   ) {
     val slf4jMarker = marker?.toSlf4j()
     val message = kLoggingEventBuilder.message

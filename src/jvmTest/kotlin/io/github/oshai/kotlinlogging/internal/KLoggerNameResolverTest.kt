@@ -22,18 +22,18 @@ class KLoggerNameResolverTest {
       Arguments.of("io.github.oshai.kotlinlogging.internal.ChildClass", ChildClass::class.java),
       Arguments.of(
         "io.github.oshai.kotlinlogging.internal.BaseClass",
-        BaseClass.Companion::class.java
+        BaseClass.Companion::class.java,
       ),
       Arguments.of(
         "io.github.oshai.kotlinlogging.internal.ChildClass",
-        ChildClass.Companion::class.java
+        ChildClass.Companion::class.java,
       ),
       Arguments.of("io.github.oshai.kotlinlogging.internal.Singleton", Singleton::class.java),
       Arguments.of("io.github.oshai.kotlinlogging.internal.MyInterface", MyInterface::class.java),
       Arguments.of("java.lang.Object", Any().javaClass),
       Arguments.of(
         "io.github.oshai.kotlinlogging.internal.KLoggerNameResolverTest\$testNames$1",
-        object {}.javaClass
+        object {}.javaClass,
       ),
       Arguments.of(
         "io.github.oshai.kotlinlogging.internal.BaseClass\$InnerClass\$Obj",
@@ -51,15 +51,17 @@ class KLoggerNameResolverTest {
       Arguments.of("io.github.oshai.kotlinlogging.internal.Foo\$Bar2", Foo.Bar3.javaClass),
       Arguments.of(
         "io.github.oshai.kotlinlogging.internal.PrivateCompanion",
-        PrivateCompanion().companionClass
-      )
+        PrivateCompanion().companionClass,
+      ),
     )
 }
 
 open class BaseClass {
   companion object
+
   class InnerClass {
     object Obj
+
     companion object CmpObj
   }
 }
@@ -75,6 +77,7 @@ interface MyInterface
 @Suppress("unused")
 class Foo {
   object Bar
+
   object Bar2
 
   val z = Bar2
@@ -86,5 +89,6 @@ class Foo {
 
 class PrivateCompanion {
   val companionClass: Class<*> = Companion::class.java
+
   private companion object
 }

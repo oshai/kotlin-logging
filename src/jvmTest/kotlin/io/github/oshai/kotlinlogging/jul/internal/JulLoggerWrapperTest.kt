@@ -55,8 +55,7 @@ class JulLoggerWrapperTest {
     errorLogger.error { "simple jul error message" }
     appenderWithWriter.writer.flush()
     val lines =
-      appenderWithWriter
-        .writer
+      appenderWithWriter.writer
         .toString()
         .trim()
         .replace("\r", "\n")
@@ -64,7 +63,7 @@ class JulLoggerWrapperTest {
         .split("\n")
     assertEquals(
       "INFO  io.github.oshai.kotlinlogging.jul.internal.JulLoggerWrapperTest  - simple jul info message",
-      lines[1]
+      lines[1],
     )
     assertEquals("WARN  warnLogger  - simple jul warn message", lines[2])
     assertEquals("ERROR errorLogger  - simple jul error message", lines[3])
