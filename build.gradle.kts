@@ -72,16 +72,14 @@ kotlin {
     android {
         publishLibraryVariants("release", "debug")
     }
-    val androidTargets = listOf(
+    val linuxTargets = listOf(
+        linuxArm64(),
+        linuxX64(),
+        mingwX64(),
         androidNativeX64(),
         androidNativeX86(),
         androidNativeArm64(),
         androidNativeArm32(),
-    )
-    val linuxTargets = listOf(
-        linuxArm64(),
-        linuxX64(),
-        mingwX64()
     )
     val darwinTargets = listOf(
         macosArm64(),
@@ -193,11 +191,6 @@ kotlin {
         }
         val darwinMain by creating {
             dependsOn(commonMain)
-        }
-        androidTargets.forEach {
-            getByName("${it.targetName}Main") {
-                dependsOn(nativeMain)
-            }
         }
         linuxTargets.forEach {
             getByName("${it.targetName}Main") {
