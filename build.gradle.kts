@@ -82,11 +82,7 @@ kotlin {
     val linuxTargets = listOf(
         linuxArm64(),
         linuxX64(),
-        mingwX64(),
-        androidNativeX64(),
-        androidNativeX86(),
-        androidNativeArm64(),
-        androidNativeArm32(),
+        mingwX64()
     )
     val darwinTargets = listOf(
         macosArm64(),
