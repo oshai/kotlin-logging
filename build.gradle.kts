@@ -82,7 +82,11 @@ kotlin {
     val linuxTargets = listOf(
         linuxArm64(),
         linuxX64(),
-        mingwX64()
+        mingwX64(),
+        androidNativeX64(),
+        androidNativeX86(),
+        androidNativeArm64(),
+        androidNativeArm32(),
     )
     val darwinTargets = listOf(
         macosArm64(),
@@ -335,3 +339,11 @@ tasks {
         distributionType = Wrapper.DistributionType.ALL
     }
 }
+
+//region Fix Gradle warning about signing tasks using publishing task outputs without explicit dependencies
+// https://github.com/gradle/gradle/issues/26091
+tasks.withType<AbstractPublishToMaven>().configureEach {
+    val signingTasks = tasks.withType<Sign>()
+    mustRunAfter(signingTasks)
+}
+//endregion
