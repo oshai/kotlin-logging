@@ -29,16 +29,13 @@ public class DefaultMessageFormatter(private val includePrefix: Boolean = true) 
     }
   }
 
-  private fun Throwable?.throwableToString(): String {
-    if (this == null) {
-      return ""
+  private fun Throwable?.throwableToString() = createThrowableMsg("", this)
+
+  private tailrec fun createThrowableMsg(msg: String, throwable: Throwable?): String {
+    return if (throwable == null || throwable.cause == throwable) {
+      msg
+    } else {
+      createThrowableMsg("$msg, Caused by: '${throwable.message}'", throwable.cause)
     }
-    var msg = ""
-    var current = this
-    while (current != null && current.cause != current) {
-      msg += ", Caused by: '${current.message}'"
-      current = current.cause
-    }
-    return msg
   }
 }

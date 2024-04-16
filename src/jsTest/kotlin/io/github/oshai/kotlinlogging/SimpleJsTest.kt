@@ -29,6 +29,16 @@ class SimpleJsTest {
   }
 
   @Test
+  fun logThrowableTest() {
+    val errorLog = "Something Bad Happened"
+    val outerMessage = "Outer Message"
+    val innerMessage = "Inner Message"
+    val throwable = Throwable(message = outerMessage, cause = Throwable(message = innerMessage))
+    logger.error(throwable) { errorLog }
+    assertEquals("ERROR: [SimpleJsTest] $errorLog, Caused by: '$outerMessage', Caused by: '$innerMessage'", appender.lastMessage)
+  }
+
+  @Test
   fun offLevelJsTest() {
     KotlinLoggingConfiguration.LOG_LEVEL = Level.OFF
     assertTrue(logger.isLoggingOff())
