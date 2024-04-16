@@ -35,7 +35,10 @@ class SimpleJsTest {
     val innerMessage = "Inner Message"
     val throwable = Throwable(message = outerMessage, cause = Throwable(message = innerMessage))
     logger.error(throwable) { errorLog }
-    assertEquals("ERROR: [SimpleJsTest] $errorLog, Caused by: '$outerMessage', Caused by: '$innerMessage'", appender.lastMessage)
+    assertEquals(
+      "ERROR: [SimpleJsTest] $errorLog, Caused by: '$outerMessage', Caused by: '$innerMessage'",
+      appender.lastMessage,
+    )
   }
 
   @Test
