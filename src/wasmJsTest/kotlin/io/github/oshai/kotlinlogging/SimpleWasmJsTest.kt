@@ -2,10 +2,12 @@ package io.github.oshai.kotlinlogging
 
 import kotlin.test.*
 
-private val logger = KotlinLogging.logger("SimpleWasmJsTest")
+private val namedLogger = KotlinLogging.logger("SimpleWasmJsTest")
+private val anonymousFilePropLogger = KotlinLogging.logger { }
 
 class SimpleWasmJsTest {
   private lateinit var appender: SimpleAppender
+  private val anonymousClassPropLogger = KotlinLogging.logger { }
 
   @BeforeTest
   fun setup() {
@@ -21,17 +23,31 @@ class SimpleWasmJsTest {
 
   @Test
   fun simpleWasmJsTest() {
-    assertEquals("SimpleWasmJsTest", logger.name)
-    logger.info { "info msg" }
+    assertEquals("SimpleWasmJsTest", namedLogger.name)
+    namedLogger.info { "info msg" }
     assertEquals("INFO: [SimpleWasmJsTest] info msg", appender.lastMessage)
     assertEquals("info", appender.lastLevel)
   }
 
   @Test
+  fun anonymousFilePropWasmJsTest() {
+    assertEquals("SimpleWasmJsTest", anonymousFilePropLogger.name)
+    anonymousFilePropLogger.info { "info msg" }
+    assertEquals("INFO: [SimpleWasmJsTest] info msg", appender.lastMessage)
+  }
+
+  @Test
+  fun anonymousClassPropWasmJsTest() {
+    assertEquals("SimpleWasmJsTest", anonymousClassPropLogger.name)
+    anonymousFilePropLogger.info { "info msg" }
+    assertEquals("INFO: [SimpleWasmJsTest] info msg", appender.lastMessage)
+  }
+
+  @Test
   fun offLevelWasmJsTest() {
     KotlinLoggingConfiguration.logLevel = Level.OFF
-    assertTrue(logger.isLoggingOff())
-    logger.error { "error msg" }
+    assertTrue(namedLogger.isLoggingOff())
+    namedLogger.error { "error msg" }
     assertEquals("NA", appender.lastMessage)
     assertEquals("NA", appender.lastLevel)
   }
