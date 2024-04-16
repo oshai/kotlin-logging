@@ -18,10 +18,8 @@ internal actual object KLoggerNameResolver {
   }
 
   private fun getInvokingClass(line: String): String {
-    return topLevelPropertyRegex.find(line)?.let {
-      it.groupValues[1].split(".").last()
-    } ?: classPropertyRegex.find(line)?.let {
-      it.groupValues[1].split(".").last()
-    } ?: NO_CLASS
+    return topLevelPropertyRegex.find(line)?.let { it.groupValues[1].split(".").last() }
+      ?: classPropertyRegex.find(line)?.let { it.groupValues[1].split(".").last() }
+      ?: NO_CLASS
   }
 }
