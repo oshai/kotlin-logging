@@ -3,11 +3,11 @@ package io.github.oshai.kotlinlogging
 import kotlin.test.*
 
 private val namedLogger = KotlinLogging.logger("SimpleWasmJsTest")
-private val anonymousFilePropLogger = KotlinLogging.logger { }
+private val anonymousFilePropLogger = KotlinLogging.logger {}
 
 class SimpleWasmJsTest {
   private lateinit var appender: SimpleAppender
-  private val anonymousClassPropLogger = KotlinLogging.logger { }
+  private val anonymousClassPropLogger = KotlinLogging.logger {}
 
   @BeforeTest
   fun setup() {
