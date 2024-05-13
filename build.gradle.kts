@@ -7,7 +7,7 @@ import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("multiplatform") version "1.9.23"
+    kotlin("multiplatform") version "1.9.24"
     // This version is dependent on the maximum tested version
     // of this plugin within the Kotlin multiplatform library
     id("com.android.library") version "8.3.2"
