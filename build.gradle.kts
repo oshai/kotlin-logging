@@ -49,6 +49,8 @@ kotlin {
         apiVersion.set(KotlinVersion.KOTLIN_2_0)
         languageVersion.set(KotlinVersion.KOTLIN_2_0)
 
+        // Required to silence compiler warnings about the beta status of
+        // expected and actual classes. See https://kotlinlang.org/docs/multiplatform-expect-actual.html#expected-and-actual-classes
         freeCompilerArgs.add("-Xexpect-actual-classes")
     }
 
