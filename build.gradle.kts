@@ -4,10 +4,9 @@ import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("multiplatform") version "1.9.23"
+    kotlin("multiplatform") version "2.0.0"
     // This version is dependent on the maximum tested version
     // of this plugin within the Kotlin multiplatform library
     id("com.android.library") version "8.3.2"
@@ -27,13 +26,11 @@ group = "io.github.oshai"
 version = "6.0.10"
 
 repositories {
+    // FIXME: This repository needs to be declared first, otherwise Gradle can't find the
+    //        Kotlin-JS dependency. This might be an issue of support for Kotlin 2 in Gradle.
+    mavenCentral()
     gradlePluginPortal()
     google()
-    mavenCentral()
-}
-
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = JvmTarget.JVM_1_8.target
 }
 
 kotlin {
@@ -42,18 +39,16 @@ kotlin {
     @OptIn(ExperimentalKotlinGradlePluginApi::class)
     compilerOptions {
         // kotlin compiler compatibility options
-        apiVersion.set(KotlinVersion.KOTLIN_1_9)
-        languageVersion.set(KotlinVersion.KOTLIN_1_9)
+        apiVersion.set(KotlinVersion.KOTLIN_2_0)
+        languageVersion.set(KotlinVersion.KOTLIN_2_0)
 
         freeCompilerArgs.add("-Xexpect-actual-classes")
     }
 
     jvm {
-        compilations.all {
-            // kotlin compiler compatibility options
-            kotlinOptions {
-                jvmTarget = "1.8"
-            }
+        @OptIn(ExperimentalKotlinGradlePluginApi::class)
+        compilerOptions {
+            jvmTarget = JvmTarget.JVM_1_8
         }
     }
     js {
