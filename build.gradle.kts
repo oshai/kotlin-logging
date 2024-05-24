@@ -29,6 +29,7 @@ version = "6.0.10"
 repositories {
     // FIXME: This repository needs to be declared first, otherwise Gradle can't find the
     //        Kotlin-JS dependency. This might be an issue of support for Kotlin 2 in Gradle.
+    //        See https://youtrack.jetbrains.com/issue/KT-68471.
     mavenCentral()
     gradlePluginPortal()
     google()
