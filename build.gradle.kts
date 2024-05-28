@@ -27,7 +27,6 @@ group = "io.github.oshai"
 version = "6.0.10"
 
 repositories {
-    gradlePluginPortal()
     google()
     mavenCentral()
 }
