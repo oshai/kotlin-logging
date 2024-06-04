@@ -7,7 +7,7 @@ import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("multiplatform") version "1.9.23"
+    kotlin("multiplatform") version "2.0.0"
     // This version is dependent on the maximum tested version
     // of this plugin within the Kotlin multiplatform library
     id("com.android.library") version "8.3.2"
@@ -27,13 +27,14 @@ group = "io.github.oshai"
 version = "6.0.10"
 
 repositories {
-    gradlePluginPortal()
     google()
     mavenCentral()
 }
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = JvmTarget.JVM_1_8.target
+    compilerOptions {
+        jvmTarget = JvmTarget.JVM_1_8
+    }
 }
 
 kotlin {
@@ -42,19 +43,15 @@ kotlin {
     @OptIn(ExperimentalKotlinGradlePluginApi::class)
     compilerOptions {
         // kotlin compiler compatibility options
-        apiVersion.set(KotlinVersion.KOTLIN_1_9)
-        languageVersion.set(KotlinVersion.KOTLIN_1_9)
+        apiVersion.set(KotlinVersion.KOTLIN_2_0)
+        languageVersion.set(KotlinVersion.KOTLIN_2_0)
 
+        // Required to silence compiler warnings about the beta status of
+        // expected and actual classes. See https://kotlinlang.org/docs/multiplatform-expect-actual.html#expected-and-actual-classes
         freeCompilerArgs.add("-Xexpect-actual-classes")
     }
 
     jvm {
-        compilations.all {
-            // kotlin compiler compatibility options
-            kotlinOptions {
-                jvmTarget = "1.8"
-            }
-        }
     }
     js {
         browser {
