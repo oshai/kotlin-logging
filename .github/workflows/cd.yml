@@ -7,6 +7,7 @@ on:
       - github-release-4.x
       - github-release-5.x
       - github-release-6.x
+      - github-release-7.x
 
 jobs:
   release:
