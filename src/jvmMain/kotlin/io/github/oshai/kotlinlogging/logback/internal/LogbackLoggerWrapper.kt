@@ -14,7 +14,7 @@ import org.slf4j.event.KeyValuePair
 
 internal class LogbackLoggerWrapper(
   override val underlyingLogger: Logger,
-  private val logbackServiceProvider: LogbackServiceProvider
+  private val logbackServiceProvider: LogbackServiceProvider,
 ) : KLogger, DelegatingKLogger<Logger> {
 
   override val name: String
@@ -25,15 +25,16 @@ internal class LogbackLoggerWrapper(
   override fun at(level: Level, marker: Marker?, block: KLoggingEventBuilder.() -> Unit) {
     if (isLoggingEnabledFor(level, marker)) {
       KLoggingEventBuilder().apply(block).run {
-        val logbackEvent = LogbackLogEvent(
-          fqcn = fqcn,
-          logger = underlyingLogger,
-          level = level.toLogbackLevel(),
-          message = messageTemplate ?: message,
-          finalFormattedMessage = message,
-          throwable = cause,
-          argArray = emptyArray()
-        )
+        val logbackEvent =
+          LogbackLogEvent(
+            fqcn = fqcn,
+            logger = underlyingLogger,
+            level = level.toLogbackLevel(),
+            message = messageTemplate ?: message,
+            finalFormattedMessage = message,
+            throwable = cause,
+            argArray = emptyArray(),
+          )
         marker?.toLogback(logbackServiceProvider)?.let { logbackEvent.addMarker(it) }
         payload?.forEach { (key, value) -> logbackEvent.addKeyValuePair(KeyValuePair(key, value)) }
         underlyingLogger.callAppenders(logbackEvent)
@@ -41,7 +42,6 @@ internal class LogbackLoggerWrapper(
     }
   }
 
-  override fun isLoggingEnabledFor(level: Level, marker: Marker?)
-    = underlyingLogger.isEnabledFor(marker?.toLogback(logbackServiceProvider), level.toLogbackLevel())
-
+  override fun isLoggingEnabledFor(level: Level, marker: Marker?) =
+    underlyingLogger.isEnabledFor(marker?.toLogback(logbackServiceProvider), level.toLogbackLevel())
 }

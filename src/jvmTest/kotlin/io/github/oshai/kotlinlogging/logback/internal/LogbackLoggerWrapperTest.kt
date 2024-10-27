@@ -7,11 +7,11 @@ import ch.qos.logback.classic.spi.ILoggingEvent
 import ch.qos.logback.core.OutputStreamAppender
 import io.github.oshai.kotlinlogging.KLogger
 import io.github.oshai.kotlinlogging.KotlinLogging
+import java.io.ByteArrayOutputStream
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
-import java.io.ByteArrayOutputStream
 
 class LogbackLoggerWrapperTest {
 
@@ -72,7 +72,9 @@ class LogbackLoggerWrapperTest {
     warnLogger.warn { "simple logback warn message" }
     errorLogger.error { "simple logback error message" }
     val lines =
-      logOutputStream.toByteArray().toString(Charsets.UTF_8)
+      logOutputStream
+        .toByteArray()
+        .toString(Charsets.UTF_8)
         .trim()
         .replace("\r", "\n")
         .replace("\n\n", "\n")

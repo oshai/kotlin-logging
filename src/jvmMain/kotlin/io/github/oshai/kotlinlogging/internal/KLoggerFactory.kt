@@ -12,8 +12,7 @@ internal actual object KLoggerFactory {
   internal actual fun logger(name: String): KLogger {
     if (System.getProperty("kotlin-logging-to-jul") != null) {
       return JulLoggerFactory.wrapJLogger(JulLoggerFactory.jLogger(name))
-    }
-    else if (System.getProperty("kotlin-logging-to-logback") != null) {
+    } else if (System.getProperty("kotlin-logging-to-logback") != null) {
       return LogbackLoggerFactory.wrapJLogger(LogbackLoggerFactory.jLogger(name))
     }
     // default to slf4j

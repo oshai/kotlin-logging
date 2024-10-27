@@ -11,11 +11,10 @@ public class LogbackLogEvent(
   message: String?,
   private val finalFormattedMessage: String?,
   throwable: Throwable?,
-  argArray: Array<Any>
+  argArray: Array<Any>,
 ) : LoggingEvent(fqcn, logger, level, message, throwable, argArray) {
 
   override fun getFormattedMessage(): String? {
     return finalFormattedMessage
   }
-
 }
