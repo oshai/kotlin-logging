@@ -30,7 +30,7 @@ internal class LogbackLoggerWrapper(
             fqcn = fqcn,
             logger = underlyingLogger,
             level = level.toLogbackLevel(),
-            message = messageTemplate ?: message,
+            message = internalCompilerData?.messageTemplate ?: message,
             finalFormattedMessage = message,
             throwable = cause,
             argArray = emptyArray(),
