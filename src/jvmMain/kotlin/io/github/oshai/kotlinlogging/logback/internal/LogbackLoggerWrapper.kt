@@ -29,11 +29,8 @@ internal class LogbackLoggerWrapper(
           LogbackLogEvent(
             fqcn = fqcn,
             logger = underlyingLogger,
-            level = level.toLogbackLevel(),
-            message = internalCompilerData?.messageTemplate ?: message,
-            finalFormattedMessage = message,
-            throwable = cause,
-            argArray = emptyArray(),
+            level = level,
+            kLoggingEvent = this,
           )
         marker?.toLogback(logbackServiceProvider)?.let { logbackEvent.addMarker(it) }
         payload?.forEach { (key, value) -> logbackEvent.addKeyValuePair(KeyValuePair(key, value)) }
