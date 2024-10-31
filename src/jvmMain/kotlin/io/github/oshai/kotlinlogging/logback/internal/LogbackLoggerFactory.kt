@@ -15,13 +15,12 @@ internal object LogbackLoggerFactory {
     return logbackServiceProvider
   }
 
-  /** get a java logger by name. Logback relies on SLF4J logger factory */
-  internal fun jLogger(name: String): Logger =
+  /** Get a Logback logger by name. Logback relies on SLF4J logger factory */
+  internal fun logbackLogger(name: String): Logger =
     logbackServiceProvider.loggerFactory.getLogger(name) as Logger
 
-  /** wrap java logger based on location awareness */
-  internal fun wrapJLogger(jLogger: Logger): KLogger =
-    LogbackLoggerWrapper(jLogger, logbackServiceProvider)
+  internal fun wrapLogbackLogger(logbackLogger: Logger): KLogger =
+    LogbackLoggerWrapper(logbackLogger, logbackServiceProvider)
 
   fun getLoggerContext() = logbackServiceProvider.loggerFactory as LoggerContext
 }
