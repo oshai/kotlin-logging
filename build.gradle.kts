@@ -119,6 +119,7 @@ kotlin {
             dependsOn(javaMain)
             dependencies {
                 compileOnly("org.slf4j:slf4j-api:${extra["slf4j_version"]}")
+                compileOnly("ch.qos.logback:logback-classic:${extra["logback_version"]}")
                 compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:${extra["coroutines_version"]}")
             }
         }
@@ -132,6 +133,7 @@ kotlin {
                 implementation("org.apache.logging.log4j:log4j-core:${extra["log4j_version"]}")
                 implementation("org.apache.logging.log4j:log4j-slf4j2-impl:${extra["log4j_version"]}")
                 implementation("org.slf4j:slf4j-api:${extra["slf4j_version"]}")
+                implementation("ch.qos.logback:logback-classic:${extra["logback_version"]}")
                 // our jul test just forward the logs jul -> slf4j -> log4j
                 implementation("org.slf4j:jul-to-slf4j:${extra["slf4j_version"]}")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:${extra["coroutines_version"]}")
