@@ -18,7 +18,7 @@ public class LogbackLogEvent(
     level.toLogbackLevel(),
     kLoggingEvent.internalCompilerData?.messageTemplate ?: kLoggingEvent.message,
     kLoggingEvent.cause,
-    emptyArray(),
+    kLoggingEvent.arguments ?: emptyArray(),
   ) {
 
   override fun getFormattedMessage(): String? {

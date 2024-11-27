@@ -58,6 +58,7 @@ internal class LocationAwareKLogger(override val underlyingLogger: LocationAware
     val builder = underlyingLogger.atLevel(level.toSlf4j())
     marker?.toSlf4j()?.let { builder.addMarker(it) }
     kLoggingEventBuilder.payload?.forEach { (key, value) -> builder.addKeyValue(key, value) }
+    kLoggingEventBuilder.arguments?.forEach { arg -> builder.addArgument(arg) }
     builder.setCause(kLoggingEventBuilder.cause)
     if (builder is CallerBoundaryAware) {
       builder.setCallerBoundary(fqcn)
@@ -75,7 +76,7 @@ internal class LocationAwareKLogger(override val underlyingLogger: LocationAware
       fqcn,
       level.toSlf4j().toInt(),
       kLoggingEventBuilder.message,
-      null,
+      kLoggingEventBuilder.arguments,
       kLoggingEventBuilder.cause,
     )
   }

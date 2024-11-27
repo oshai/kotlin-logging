@@ -4,6 +4,7 @@ public class KLoggingEventBuilder {
   public var message: String? = null
   public var cause: Throwable? = null
   public var payload: Map<String, Any?>? = null
+  public var arguments: Array<Any>? = null
 
   /**
    * Internal data that is used by compiler plugin to provide additional information about the log
