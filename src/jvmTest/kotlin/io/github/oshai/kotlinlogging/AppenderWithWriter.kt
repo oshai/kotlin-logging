@@ -4,6 +4,8 @@ import java.io.StringWriter
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.core.Appender
 import org.apache.logging.log4j.core.appender.WriterAppender
+import org.apache.logging.log4j.core.config.json.JsonConfiguration
+import org.apache.logging.log4j.core.layout.JsonLayout
 import org.apache.logging.log4j.core.layout.PatternLayout
 
 fun newPatternLayout(pattern: String): PatternLayout =
