@@ -4,9 +4,7 @@ public class KLoggingEventBuilder {
   public var message: String? = null
   public var cause: Throwable? = null
   public var payload: Map<String, Any?>? = null
-  /**
-   * Arguments passed as is to underlying impl. API stability is not guaranteed.
-   */
+  /** Arguments passed as is to underlying impl. API stability is not guaranteed. */
   public var arguments: Array<Any?>? = null
 
   /**
