@@ -61,6 +61,44 @@ class FooWithLogging {
 }
 ```
 
+## Download
+
+**Important note:** kotlin-logging depends on slf4j-api (in the JVM artifact). In runtime, it is also required to depend on a logging implementation. More details in [how-to-configure-slf4j](http://saltnlight5.blogspot.co.il/2013/08/how-to-configure-slf4j-with-different.html). And an excellent detailed explanation in [a-guide-to-logging-in-java](https://www.marcobehler.com/guides/a-guide-to-logging-in-java).  
+In version 5 users should also provide slf4j-api dependency.
+
+In short, if you just want to log statements to stdout, it's possible to add the following dependency: `org.slf4j:slf4j-simple:2.0.3`.
+
+### Maven
+```xml
+<dependency>
+  <groupId>io.github.oshai</groupId>
+  <artifactId>kotlin-logging-jvm</artifactId>
+  <version>7.0.3</version>
+</dependency>
+```
+
+See the full example in [kotlin-logging-example-maven](https://github.com/oshai/kotlin-logging-example-maven).  
+
+### Gradle
+```Groovy
+implementation 'io.github.oshai:kotlin-logging-jvm:7.0.3'
+```
+
+
+Alternatively, download the JAR from [github](https://github.com/oshai/kotlin-logging/releases/latest)  or [maven-central](https://repo1.maven.org/maven2/io/github/oshai/).
+
+### Multiplatform
+
+An experimental multiplatform support is available.  
+More information is available on the [wiki](https://github.com/oshai/kotlin-logging/wiki/Multiplatform-support) and issues [#21](https://github.com/oshai/kotlin-logging/issues/21) [#45](https://github.com/oshai/kotlin-logging/issues/45).
+
+## Overview
+
+After seeing many questions like [Idiomatic way of logging in Kotlin](http://stackoverflow.com/questions/34416869/idiomatic-way-of-logging-in-kotlin) and [Best practices for loggers](https://discuss.kotlinlang.org/t/best-practices-for-loggers/226/15), it seems like there should be a standard for logging and obtaining a logger in Kotlin. kotlin-logging provides a wrapper for slf4j-api to be used by Kotlin classes with the following advantages:
+  - No need to write the logger and class name or logger name boilerplate code.
+  - A straight forward way to log messages with lazy-evaluated string using lambda expression `{}`.
+  - All previous slf4j implementation can still be used.
+
 
 ## Version 5 vs. previous versions
 
@@ -78,43 +116,7 @@ Main changes are:
 More details in issue [#264](https://github.com/oshai/kotlin-logging/issues/264), 
 and in the [change log](https://github.com/oshai/kotlin-logging/blob/master/ChangeLog.md)
 
-## Download
 
-**Important note:** kotlin-logging depends on slf4j-api (in the JVM artifact). In runtime, it is also required to depend on a logging implementation. More details in [how-to-configure-slf4j](http://saltnlight5.blogspot.co.il/2013/08/how-to-configure-slf4j-with-different.html). And an excellent detailed explanation in [a-guide-to-logging-in-java](https://www.marcobehler.com/guides/a-guide-to-logging-in-java).  
-In version 5 users should also provide slf4j-api dependency.
-
-In short, if you just want to log statements to stdout, it's possible to add the following dependency: `org.slf4j:slf4j-simple:2.0.3`.
-
-### Maven
-```xml
-<dependency>
-  <groupId>io.github.oshai</groupId>
-  <artifactId>kotlin-logging-jvm</artifactId>
-  <version>7.0.0</version>
-</dependency>
-```
-
-See the full example in [kotlin-logging-example-maven](https://github.com/oshai/kotlin-logging-example-maven).  
-
-### Gradle
-```Groovy
-implementation 'io.github.oshai:kotlin-logging-jvm:7.0.0'
-```
-
-
-Alternatively, download the JAR from [github](https://github.com/oshai/kotlin-logging/releases/latest)  or [maven-central](https://repo1.maven.org/maven2/io/github/oshai/).
-
-### Multiplatform
-
-An experimental multiplatform support is available.  
-More information is available on the [wiki](https://github.com/oshai/kotlin-logging/wiki/Multiplatform-support) and issues [#21](https://github.com/oshai/kotlin-logging/issues/21) [#45](https://github.com/oshai/kotlin-logging/issues/45).
-
-## Overview
-
-After seeing many questions like [Idiomatic way of logging in Kotlin](http://stackoverflow.com/questions/34416869/idiomatic-way-of-logging-in-kotlin) and [Best practices for loggers](https://discuss.kotlinlang.org/t/best-practices-for-loggers/226/15), it seems like there should be a standard for logging and obtaining a logger in Kotlin. kotlin-logging provides a wrapper for slf4j-api to be used by Kotlin classes with the following advantages:
-  - No need to write the logger and class name or logger name boilerplate code.
-  - A straight forward way to log messages with lazy-evaluated string using lambda expression `{}`.
-  - All previous slf4j implementation can still be used.
 
 ## Who is using it
 
