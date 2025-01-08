@@ -16,35 +16,58 @@ suffix.
 
 ### 2.1.14 +
 
-To verify the signature use [this public key](https://keys.openpgp.org/vks/v1/by-fingerprint/47EB6836245D2D40E89DFB4136D4E9618F3ADAB5). 
-Here is its fingerprint:
-```
-pub   rsa3072 2021-11-27 [SCEA]
-      47EB6836245D2D40E89DFB4136D4E9618F3ADAB5
-sub   rsa3072 2021-11-27 [E]
+To ensure the integrity and authenticity of [Software Name], follow these steps to verify its digital signature:
+
+**1. Download and Import the Public Key:**
+
+You can download and import my public key directly from the `keys.openpgp.org` keyserver using the following command:
+
+```bash
+gpg --keyserver hkps://keys.openpgp.org --recv-keys 47EB6836245D2D40E89DFB4136D4E9618F3ADAB5
 ```
 
-A copy of this key is stored on the
-[keys.openpgp.org](https://keys.openpgp.org) keyserver. To add it to
-your public key ring use the following command:
+Alternatively, you can use the Ubuntu keyserver:
 
+```bash
+gpg --keyserver hkps://keyserver.ubuntu.com --recv-keys 47EB6836245D2D40E89DFB4136D4E9618F3ADAB5
 ```
-> FINGER_PRINT=47EB6836245D2D40E89DFB4136D4E9618F3ADAB5
-> gpg  --keyserver hkps://keys.openpgp.org --recv-keys $FINGER_PRINT
+**2. Verify the Key Fingerprint (Important!):**
+
+After importing the key, verify that its fingerprint matches the one below. This ensures you have the correct key and not a malicious imposter:
+
+Fingerprint: `47EB6836245D2D40E89DFB4136D4E9618F3ADAB5`
+
+Verify the fingerprint by running the following command and comparing the output:
+
+```bash
+gpg --fingerprint 47EB6836245D2D40E89DFB4136D4E9618F3ADAB5
 ```
 
-Alternatively the key can be found on ubuntu: https://keyserver.ubuntu.com/pks/lookup?search=47eb6836245d2d40e89dfb4136d4e9618f3adab5&fingerprint=on&op=index
+**Do not proceed if the fingerprints do not match!**
 
-Then after installing the key download asc file and actual file.
-To verify it, run:
+**3. Download the Files:**
+
+Download both the file you want to verify (e.g., `kotlin-logging-jvm-7.0.3.jar`) and its corresponding signature file (e.g., `kotlin-logging-jvm-7.0.3.jar.asc`) from [maven central](https://repo.maven.apache.org/maven2/io/github/oshai).
+
+**4. Verify the Signature:**
+
+Navigate to the directory where you downloaded the files and run the following command, replacing the file names with the actual names of the downloaded files:
+
+```bash
+gpg --verify kotlin-logging-jvm-7.0.3.jar.asc kotlin-logging-jvm-7.0.3.jar
 ```
-$ gpg --verify /tmp/kotlin-logging-jvm-7.0.3.jar.asc
-gpg: assuming signed data in '/tmp/kotlin-logging-jvm-7.0.3.jar'
-gpg: Signature made IST 23:03:28 2024 נוב 30 ש'
-gpg:                using RSA key 36D4E9618F3ADAB5
+
+You should see output similar to this if the verification is successful:
+
+```bash
+gpg: Signature made ...
+gpg: using RSA key 36D4E9618F3ADAB5
 gpg: Good signature from "Ohad Shai <ohadshai@gmail.com>" [ultimate]
 ```
 
+**If you see "Good signature"**, it means the file has not been tampered with and is genuinely from the person who signed it.
+
+**If you see "BAD signature", do not trust the file**. It may have been corrupted or tampered with. Delete it and try downloading it again from a trusted source. If the problem persists, contact the mail above.
 
 ### 2.0.8-2.0.11
 
