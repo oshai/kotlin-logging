@@ -60,14 +60,19 @@ gpg --verify kotlin-logging-jvm-7.0.3.jar.asc kotlin-logging-jvm-7.0.3.jar
 You should see output similar to this if the verification is successful:
 
 ```bash
-gpg: Signature made ...
-gpg: using RSA key 36D4E9618F3ADAB5
-gpg: Good signature from "Ohad Shai <ohadshai@gmail.com>" [ultimate]
+$ gpg --verify kotlin-logging-jvm-7.0.3.jar.asc kotlin-logging-jvm-7.0.3.jar
+gpg: Signature made IST 23:03:28 2024 נוב 30 ש'
+gpg:                using RSA key 36D4E9618F3ADAB5
+gpg: Good signature from "Ohad Shai <ohadshai@gmail.com>" [unknown]
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: 47EB 6836 245D 2D40 E89D  FB41 36D4 E961 8F3A DAB5
 ```
 
 **If you see "Good signature"**, it means the file has not been tampered with and is genuinely from the person who signed it.
 
 **If you see "BAD signature", do not trust the file**. It may have been corrupted or tampered with. Delete it and try downloading it again from a trusted source. If the problem persists, contact the mail above.
+
 
 ### 2.0.8-2.0.11
 
