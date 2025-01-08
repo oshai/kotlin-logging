@@ -33,6 +33,19 @@ your public key ring use the following command:
 > gpg  --keyserver hkps://keys.openpgp.org --recv-keys $FINGER_PRINT
 ```
 
+Alternatively the key can be found on ubuntu: https://keyserver.ubuntu.com/pks/lookup?search=47eb6836245d2d40e89dfb4136d4e9618f3adab5&fingerprint=on&op=index
+
+Then after installing the key download asc file and actual file.
+To verify it, run:
+```
+$ gpg --verify /tmp/kotlin-logging-jvm-7.0.3.jar.asc
+gpg: assuming signed data in '/tmp/kotlin-logging-jvm-7.0.3.jar'
+gpg: Signature made IST 23:03:28 2024 נוב 30 ש'
+gpg:                using RSA key 36D4E9618F3ADAB5
+gpg: Good signature from "Ohad Shai <ohadshai@gmail.com>" [ultimate]
+```
+
+
 ### 2.0.8-2.0.11
 
 To verify the signature use [this public key](https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x637b8fb6cd0b57ca1e833e897f083a4ab2af5107).
