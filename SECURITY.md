@@ -61,7 +61,6 @@ You should see output similar to this if the verification is successful:
 
 ```bash
 $ gpg --verify kotlin-logging-jvm-7.0.3.jar.asc kotlin-logging-jvm-7.0.3.jar
-gpg: Signature made IST 23:03:28 2024 נוב 30 ש'
 gpg:                using RSA key 36D4E9618F3ADAB5
 gpg: Good signature from "Ohad Shai <ohadshai@gmail.com>" [unknown]
 gpg: WARNING: This key is not certified with a trusted signature!
