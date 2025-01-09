@@ -68,7 +68,7 @@ gpg:          There is no indication that the signature belongs to the owner.
 Primary key fingerprint: 47EB 6836 245D 2D40 E89D  FB41 36D4 E961 8F3A DAB5
 ```
 
-**If you see "Good signature"**, it means the file has not been tampered with and is genuinely from the person who signed it.
+**If you see "Good signature"**, it means the file has not been tampered and match the signature.
 
 **If you see "BAD signature", do not trust the file**. It may have been corrupted or tampered with. Delete it and try downloading it again from a trusted source. If the problem persists, contact the mail above.
 
