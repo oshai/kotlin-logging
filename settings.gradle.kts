@@ -1,4 +1,7 @@
 pluginManagement {
+    plugins {
+      id("com.diffplug.spotless") version "7.0.1" apply false
+    }
     repositories {
         google()
         gradlePluginPortal()
@@ -7,3 +10,5 @@ pluginManagement {
 }
 
 rootProject.name = "kotlin-logging"
+include(":kotlin-ir-plugin-gradle")
+include(":kotlin-ir-plugin")
