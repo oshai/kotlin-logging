@@ -25,11 +25,9 @@ class PlaceholderReplacer(
     if (msgExp is IrConst<*>) {
       val value = msgExp.value
       if (value is String && value.contains(placeholder)) {
-        val pair =
+        val (newExpression, argIndexAfterReplace) =
           replacePlaceholdersInStringConstant(value, valueArguments, newArgIndex, placeholder)
-        val newExpression = pair.first
-        newArgIndex = pair.second
-        return ReplaceResult(newExpression!!, newArgIndex)
+        return ReplaceResult(newExpression!!, argIndexAfterReplace)
       }
     } else if (msgExp is IrCall) {
       val dispatchResult =
