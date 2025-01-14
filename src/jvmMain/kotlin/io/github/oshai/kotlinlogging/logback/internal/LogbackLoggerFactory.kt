@@ -5,7 +5,7 @@ import ch.qos.logback.classic.LoggerContext
 import ch.qos.logback.classic.spi.LogbackServiceProvider
 import io.github.oshai.kotlinlogging.KLogger
 
-internal object LogbackLoggerFactory {
+public object LogbackLoggerFactory {
 
   private val logbackServiceProvider = createLogbackServiceProvider()
 
@@ -22,5 +22,6 @@ internal object LogbackLoggerFactory {
   internal fun wrapLogbackLogger(logbackLogger: Logger): KLogger =
     LogbackLoggerWrapper(logbackLogger, logbackServiceProvider)
 
-  fun getLoggerContext() = logbackServiceProvider.loggerFactory as LoggerContext
+  public fun getLoggerContext(): LoggerContext =
+    logbackServiceProvider.loggerFactory as LoggerContext
 }

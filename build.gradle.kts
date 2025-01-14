@@ -6,6 +6,11 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+buildscript {
+  extra["kotlin_plugin_id"] = "io.github.oshai.kotlinlogging.kotlin-ir-plugin"
+  extra["kotlin_plugin_package_name"] = "io.github.oshai.kotlinlogging.irplugin"
+}
+
 plugins {
     kotlin("multiplatform") version "2.0.21"
     // This version is dependent on the maximum tested version
@@ -14,9 +19,11 @@ plugins {
 
     id("org.jetbrains.dokka") version "2.0.0"
 
-    id("com.diffplug.spotless") version "7.0.1"
+    id("com.diffplug.spotless")
 
     id("io.github.gradle-nexus.publish-plugin") version "2.0.0"
+    id("com.gradle.plugin-publish") version "1.2.1" apply false
+    id("com.github.gmazzo.buildconfig") version "5.3.5" apply false
     `maven-publish`
     signing
 }
