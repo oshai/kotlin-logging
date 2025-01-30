@@ -17,6 +17,8 @@
 package io.github.oshai.kotlinlogging.irplugin
 
 import java.io.File
+import org.jetbrains.kotlin.cli.common.messages.CompilerMessageLocationWithRange
+import org.jetbrains.kotlin.cli.common.messages.CompilerMessageSourceLocation
 import org.jetbrains.kotlin.ir.IrElement
 import org.jetbrains.kotlin.ir.SourceRangeInfo
 import org.jetbrains.kotlin.ir.declarations.IrFile
@@ -75,4 +77,17 @@ data class SourceFile(private val irFile: IrFile) {
       "." +
       irFile.name.capitalizeAsciiOnly().substringBefore(".kt") +
       "Kt"
+
+  fun getCompilerMessageLocation(element: IrElement): CompilerMessageSourceLocation {
+    val info = getSourceRangeInfo(element)
+    val lineContent = getText(info)
+    return CompilerMessageLocationWithRange.create(
+      irFile.path,
+      info.startLineNumber,
+      info.startColumnNumber,
+      info.endLineNumber,
+      info.endColumnNumber,
+      lineContent,
+    )!!
+  }
 }

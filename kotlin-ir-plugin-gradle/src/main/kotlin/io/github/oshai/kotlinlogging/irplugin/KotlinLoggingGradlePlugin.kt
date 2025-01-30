@@ -46,26 +46,26 @@ class KotlinLoggingGradlePlugin : KotlinCompilerPluginSupportPlugin {
     val extension = project.extensions.getByType(KotlinLoggingGradleExtension::class.java)
     return project.provider {
       listOf(
-        SubpluginOption(key = "disableAll", value = extension.disableAll.get()),
+        SubpluginOption(key = "disableAll", value = extension.disableAll.get().toString()),
         SubpluginOption(
           key = "disableTransformingDeprecatedApi",
-          value = extension.disableTransformingDeprecatedApi.get(),
+          value = extension.disableTransformingDeprecatedApi.get().toString(),
         ),
         SubpluginOption(
           key = "disableTransformingNotImplementedApi",
-          value = extension.disableTransformingNotImplementedApi.get(),
+          value = extension.disableTransformingNotImplementedApi.get().toString(),
         ),
         SubpluginOption(
           key = "disableTransformingEntryExitApi",
-          value = extension.disableTransformingEntryExitApi.get(),
+          value = extension.disableTransformingEntryExitApi.get().toString(),
         ),
         SubpluginOption(
           key = "disableTransformingThrowingCatchingApi",
-          value = extension.disableTransformingThrowingCatchingApi.get(),
+          value = extension.disableTransformingThrowingCatchingApi.get().toString(),
         ),
         SubpluginOption(
           key = "disableCollectingCallSiteInformation",
-          value = extension.disableCollectingCallSiteInformation.get(),
+          value = extension.disableCollectingCallSiteInformation.get().toString(),
         ),
       )
     }

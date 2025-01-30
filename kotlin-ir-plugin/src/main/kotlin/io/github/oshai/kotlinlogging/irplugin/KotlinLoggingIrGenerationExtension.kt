@@ -9,13 +9,10 @@ import org.jetbrains.kotlin.backend.common.IrElementTransformerVoidWithContext
 import org.jetbrains.kotlin.backend.common.extensions.IrGenerationExtension
 import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
 import org.jetbrains.kotlin.backend.common.lower.DeclarationIrBuilder
-import org.jetbrains.kotlin.backend.common.pop
-import org.jetbrains.kotlin.backend.common.push
 import org.jetbrains.kotlin.backend.jvm.codegen.isAnnotatedWithDeprecated
 import org.jetbrains.kotlin.cli.common.messages.CompilerMessageSeverity
 import org.jetbrains.kotlin.cli.common.messages.MessageCollector
 import org.jetbrains.kotlin.ir.IrElement
-import org.jetbrains.kotlin.ir.IrStatement
 import org.jetbrains.kotlin.ir.UNDEFINED_OFFSET
 import org.jetbrains.kotlin.ir.backend.js.utils.valueArguments
 import org.jetbrains.kotlin.ir.builders.declarations.UNDEFINED_PARAMETER_INDEX
@@ -23,14 +20,13 @@ import org.jetbrains.kotlin.ir.builders.irCall
 import org.jetbrains.kotlin.ir.builders.irInt
 import org.jetbrains.kotlin.ir.builders.irString
 import org.jetbrains.kotlin.ir.declarations.IrClass
-import org.jetbrains.kotlin.ir.declarations.IrDeclarationBase
 import org.jetbrains.kotlin.ir.declarations.IrDeclarationOrigin
-import org.jetbrains.kotlin.ir.declarations.IrDeclarationParent
 import org.jetbrains.kotlin.ir.declarations.IrEnumEntry
 import org.jetbrains.kotlin.ir.declarations.IrFile
 import org.jetbrains.kotlin.ir.declarations.IrFunction
 import org.jetbrains.kotlin.ir.declarations.IrModuleFragment
 import org.jetbrains.kotlin.ir.declarations.IrValueParameter
+import org.jetbrains.kotlin.ir.expressions.IrBlockBody
 import org.jetbrains.kotlin.ir.expressions.IrCall
 import org.jetbrains.kotlin.ir.expressions.IrConstructorCall
 import org.jetbrains.kotlin.ir.expressions.IrExpression
@@ -69,9 +65,11 @@ class KotlinLoggingIrGenerationExtension(
 ) : IrGenerationExtension {
   override fun generate(moduleFragment: IrModuleFragment, pluginContext: IrPluginContext) {
     messageCollector.report(CompilerMessageSeverity.INFO, "Plugin config: $config")
-    for (file in moduleFragment.files) {
-      AccessorCallTransformer(config, SourceFile(file), pluginContext, messageCollector)
-        .runOnFileInOrder(file)
+    if (!config.disableAll) {
+      for (file in moduleFragment.files) {
+        AccessorCallTransformer(config, SourceFile(file), pluginContext, messageCollector)
+          .runOnFileInOrder(file)
+      }
     }
   }
 
@@ -178,28 +176,8 @@ class KotlinLoggingIrGenerationExtension(
       irFile.transformChildrenVoid()
     }
 
-    private var parentDeclarations = ArrayDeque<IrDeclarationBase>()
-    private var parentDeclaration: IrDeclarationParent? = null
-    private var parentClass: IrClass? = null
-
-    override fun visitDeclaration(declaration: IrDeclarationBase): IrStatement {
-      if (config.disableAll) return super.visitDeclaration(declaration)
-      parentDeclarations.push(declaration)
-      if (declaration is IrDeclarationParent) parentDeclaration = declaration
-      if (declaration is IrClass) parentClass = declaration
-      try {
-        return super.visitDeclaration(declaration)
-      } finally {
-        parentDeclarations.pop()
-        val lastDeclaration = parentDeclarations.lastOrNull()
-        if (lastDeclaration is IrDeclarationParent) parentDeclaration = lastDeclaration
-        if (lastDeclaration is IrClass) parentClass = lastDeclaration
-      }
-    }
-
     @OptIn(UnsafeDuringIrConstructionAPI::class)
     override fun visitCall(expression: IrCall): IrExpression {
-      if (config.disableAll) return super.visitCall(expression)
       try {
         expression.symbol.owner.parent.let {
           if (it.kotlinFqName == FqName("io.github.oshai.kotlinlogging.KLogger")) {
@@ -209,11 +187,8 @@ class KotlinLoggingIrGenerationExtension(
         return super.visitCall(expression)
       } catch (e: Exception) {
         messageCollector.report(
-          CompilerMessageSeverity.INFO,
-          "Error while processing call: ${e.message}",
-        )
-        messageCollector.report(
-          severity = CompilerMessageSeverity.WARNING,
+          severity = CompilerMessageSeverity.ERROR,
+          location = sourceFile.getCompilerMessageLocation(expression),
           message =
             """Kotlin-logging IR plugin failed.
           Please report to https://github.com/oshai/kotlin-logging/issues and include the below information.
@@ -225,7 +200,7 @@ class KotlinLoggingIrGenerationExtension(
           """
               .trimIndent(),
         )
-        return expression
+        throw e
       }
     }
 
@@ -301,14 +276,22 @@ class KotlinLoggingIrGenerationExtension(
       } else {
         KLoggingCallCompilerData(
           messageTemplate = messageTemplate,
-          className = parentClass?.kotlinFqName?.asString() ?: sourceFile.defaultClassName(),
-          methodName = parentDeclaration?.kotlinFqName?.shortName()?.asString(),
+          className = getCurrentClassName() ?: sourceFile.defaultClassName(),
+          methodName = currentDeclarationParent?.kotlinFqName?.shortName()?.asString(),
           lineNumber =
             sourceFile.getSourceRangeInfo(expression).startLineNumber +
               1, // somehow, the line numbers are off by one in tests
           fileName = sourceFile.fileName(),
         )
       }
+
+    private fun getCurrentClassName(): String? {
+      val currentClass = currentClass
+      if (currentClass != null && currentClass.irElement is IrClass) {
+        return (currentClass.irElement as IrClass).kotlinFqName.asString()
+      }
+      return null
+    }
 
     data class KLoggingCallCompilerData(
       val messageTemplate: String? = null,
@@ -366,8 +349,8 @@ class KotlinLoggingIrGenerationExtension(
           originalLogExpression.endOffset,
         )
       val eventBuilderLambdaArgument = atCall.valueArguments.last() as IrFunctionExpression
-      val eventBuilderLambdaBody = eventBuilderLambdaArgument.function.body!!
-      (eventBuilderLambdaBody.statements as MutableList).add(
+      val eventBuilderLambdaBody = eventBuilderLambdaArgument.function.body!! as IrBlockBody
+      eventBuilderLambdaBody.statements.addFirst(
         builder.irCall(typesHelper.setInternalCompilerDataFunction.owner).apply {
           dispatchReceiver =
             IrGetValueImpl(
@@ -477,7 +460,7 @@ class KotlinLoggingIrGenerationExtension(
                       )
                       .apply { parent = this@createLambdaIrSimpleFunction }
                   returnType = typesHelper.unitType
-                  parent = parentDeclaration!!
+                  parent = currentDeclarationParent!!
                   body =
                     context.createIrBlockBody {
                       statements.add(
@@ -488,7 +471,7 @@ class KotlinLoggingIrGenerationExtension(
                               endOffset = UNDEFINED_OFFSET,
                               symbol = extensionReceiverParameter!!.symbol,
                             )
-                          parent = parentDeclaration!!
+                          parent = currentDeclarationParent!!
                           putValueArgument(0, loggingCallExpressions.messageExpression)
                         }
                       )
@@ -501,7 +484,7 @@ class KotlinLoggingIrGenerationExtension(
                                 endOffset = UNDEFINED_OFFSET,
                                 symbol = extensionReceiverParameter!!.symbol,
                               )
-                            parent = parentDeclaration!!
+                            parent = currentDeclarationParent!!
                             putValueArgument(0, loggingCallExpressions.causeExpression)
                           }
                         )
