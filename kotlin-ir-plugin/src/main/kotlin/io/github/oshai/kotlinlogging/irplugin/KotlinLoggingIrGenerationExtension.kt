@@ -350,7 +350,8 @@ class KotlinLoggingIrGenerationExtension(
         )
       val eventBuilderLambdaArgument = atCall.valueArguments.last() as IrFunctionExpression
       val eventBuilderLambdaBody = eventBuilderLambdaArgument.function.body!! as IrBlockBody
-      eventBuilderLambdaBody.statements.addFirst(
+      eventBuilderLambdaBody.statements.add(
+        0,
         builder.irCall(typesHelper.setInternalCompilerDataFunction.owner).apply {
           dispatchReceiver =
             IrGetValueImpl(
@@ -359,7 +360,7 @@ class KotlinLoggingIrGenerationExtension(
               symbol = eventBuilderLambdaArgument.function.extensionReceiverParameter!!.symbol,
             )
           putValueArgument(0, makeCompilerDataConstructorCall(compilerData, builder))
-        }
+        },
       )
     }
 
