@@ -132,7 +132,10 @@ class KotlinLoggingIrGenerationExtension(
     val toStringFunctionSymbol =
       context
         .referenceFunctions(
-          CallableId(packageName = FqName(PACKAGE_NAME_INTERNAL), Name.identifier("toStringSafe"))
+          CallableId(
+            packageName = FqName(PACKAGE_NAME_INTERNAL),
+            Name.identifier("hiddenToStringSafe"),
+          )
         )
         .single {
           it.owner.extensionReceiverParameter?.type?.classifierOrFail ==
@@ -144,7 +147,7 @@ class KotlinLoggingIrGenerationExtension(
         .referenceFunctions(
           CallableId(
             packageName = FqName(PACKAGE_NAME_INTERNAL),
-            Name.identifier("castToThrowable"),
+            Name.identifier("hiddenCastToThrowable"),
           )
         )
         .single {
