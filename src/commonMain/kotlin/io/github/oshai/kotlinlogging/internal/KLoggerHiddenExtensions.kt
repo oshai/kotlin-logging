@@ -8,6 +8,26 @@ import io.github.oshai.kotlinlogging.KLoggingEventBuilder
   level = DeprecationLevel.HIDDEN,
 )
 @Suppress("kotlin:S1133")
+public fun (() -> Any?).hiddenToStringSafe(): String = toStringSafe()
+
+@Deprecated(
+  message = "This is an internal API and should not be used by user code",
+  level = DeprecationLevel.HIDDEN,
+)
+@Suppress("kotlin:S1133")
+public fun Any?.hiddenCastToThrowable(): Throwable? {
+  return if (this is Throwable) {
+    this
+  } else {
+    null
+  }
+}
+
+@Deprecated(
+  message = "This is an internal API and should not be used by user code",
+  level = DeprecationLevel.HIDDEN,
+)
+@Suppress("kotlin:S1133")
 public fun KLoggingEventBuilder.hiddenInternalCompilerData(
   compilerData: KLoggingEventBuilder.InternalCompilerData
 ) {
