@@ -16,6 +16,11 @@ internal object DefaultErrorMessageProducer {
   fun getErrorLog(e: Exception): String = "Log message invocation failed: $e"
 }
 
+@Deprecated(
+  message = "This is an internal API and should not be used by user code",
+  level = DeprecationLevel.HIDDEN,
+)
+@Suppress("kotlin:S1133")
 public fun Any?.castToThrowable(): Throwable? {
   return if (this is Throwable) {
     this
