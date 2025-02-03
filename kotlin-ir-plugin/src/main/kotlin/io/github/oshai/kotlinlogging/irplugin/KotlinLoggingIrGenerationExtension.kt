@@ -97,9 +97,6 @@ class KotlinLoggingIrGenerationExtension(
     val setMessageFunction = eventBuilderClassSymbol.owner.getPropertySetter("message")!!
     @OptIn(UnsafeDuringIrConstructionAPI::class)
     val setCauseFunction = eventBuilderClassSymbol.owner.getPropertySetter("cause")!!
-    @OptIn(UnsafeDuringIrConstructionAPI::class)
-    val setInternalCompilerDataFunction =
-      eventBuilderClassSymbol.owner.getPropertySetter("internalCompilerData")!!
     val internalCompilerDataClassSymbol =
       context.referenceClass(
         ClassId(
@@ -108,6 +105,21 @@ class KotlinLoggingIrGenerationExtension(
           isLocal = false,
         )
       )!!
+    @OptIn(UnsafeDuringIrConstructionAPI::class)
+    val setHiddenInternalCompilerDataFunction =
+      context
+        .referenceFunctions(
+          CallableId(
+            packageName = FqName(PACKAGE_NAME_INTERNAL),
+            Name.identifier("hiddenInternalCompilerData"),
+          )
+        )
+        .single {
+          it.owner.extensionReceiverParameter?.type?.classifierOrFail ==
+            eventBuilderClassSymbol.defaultType.classifierOrFail &&
+            it.owner.valueParameters.first().type.classifierOrFail ==
+              internalCompilerDataClassSymbol.defaultType.classifierOrFail
+        }
     @OptIn(UnsafeDuringIrConstructionAPI::class)
     val internalCompilerDataConstructor = internalCompilerDataClassSymbol.owner.primaryConstructor!!
 
@@ -352,8 +364,8 @@ class KotlinLoggingIrGenerationExtension(
       val eventBuilderLambdaBody = eventBuilderLambdaArgument.function.body!! as IrBlockBody
       eventBuilderLambdaBody.statements.add(
         0,
-        builder.irCall(typesHelper.setInternalCompilerDataFunction.owner).apply {
-          dispatchReceiver =
+        builder.irCall(typesHelper.setHiddenInternalCompilerDataFunction.owner).apply {
+          extensionReceiver =
             IrGetValueImpl(
               startOffset = UNDEFINED_OFFSET,
               endOffset = UNDEFINED_OFFSET,
