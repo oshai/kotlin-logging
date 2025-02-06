@@ -24,7 +24,7 @@ plugins {
 apply("versions.gradle.kts")
 
 group = "io.github.oshai"
-version = "7.0.4"
+version = "7.0.5"
 
 repositories {
     google()
