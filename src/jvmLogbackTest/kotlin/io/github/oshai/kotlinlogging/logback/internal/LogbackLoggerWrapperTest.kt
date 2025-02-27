@@ -8,6 +8,7 @@ import ch.qos.logback.core.OutputStreamAppender
 import io.github.oshai.kotlinlogging.KLogger
 import io.github.oshai.kotlinlogging.KotlinLogging
 import java.io.ByteArrayOutputStream
+import kotlin.test.fail
 import net.logstash.logback.argument.StructuredArguments
 import net.logstash.logback.composite.loggingevent.ArgumentsJsonProvider
 import net.logstash.logback.composite.loggingevent.LoggingEventPatternJsonProvider
@@ -33,7 +34,8 @@ class LogbackLoggerWrapperTest {
     @BeforeAll
     @JvmStatic
     fun init() {
-      val loggerContext = LogbackLoggerFactory.getLoggerContext()
+      val loggerContext =
+        LogbackLoggerFactory.getLoggerContext() ?: fail("Logback logger context not found")
       loggerContext.reset()
       System.setProperty("kotlin-logging-to-logback", "true")
 
@@ -85,8 +87,7 @@ class LogbackLoggerWrapperTest {
     @JvmStatic
     fun teardown() {
       System.clearProperty("kotlin-logging-to-logback")
-      val loggerContext = LogbackLoggerFactory.getLoggerContext()
-      loggerContext.reset()
+      LogbackLoggerFactory.getLoggerContext()?.reset()
     }
   }
 
@@ -98,9 +99,9 @@ class LogbackLoggerWrapperTest {
 
   @Test
   fun testLogbackLogger() {
-    assertTrue(logger is LogbackLoggerWrapper)
-    assertTrue(warnLogger is LogbackLoggerWrapper)
-    assertTrue(errorLogger is LogbackLoggerWrapper)
+    assertTrue(logger.isLogbackLoggerWrapper())
+    assertTrue(warnLogger.isLogbackLoggerWrapper())
+    assertTrue(errorLogger.isLogbackLoggerWrapper())
     logger.info { "simple logback info message" }
     warnLogger.warn { "simple logback warn message" }
     errorLogger.error { "simple logback error message" }
@@ -139,3 +140,6 @@ class LogbackLoggerWrapperTest {
     assertEquals("""{"message":"msg","arg1":"val1","arg2":"val2"}""", jsonLines[0])
   }
 }
+
+fun KLogger.isLogbackLoggerWrapper() =
+  javaClass.name == "io.github.oshai.kotlinlogging.logback.internal.LogbackLoggerWrapper"

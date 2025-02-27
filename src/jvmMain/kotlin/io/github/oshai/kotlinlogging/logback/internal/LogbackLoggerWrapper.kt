@@ -1,7 +1,6 @@
 package io.github.oshai.kotlinlogging.logback.internal
 
 import ch.qos.logback.classic.Logger
-import ch.qos.logback.classic.spi.LogbackServiceProvider
 import io.github.oshai.kotlinlogging.DelegatingKLogger
 import io.github.oshai.kotlinlogging.KLogger
 import io.github.oshai.kotlinlogging.KLoggingEventBuilder
@@ -12,10 +11,8 @@ import io.github.oshai.kotlinlogging.logback.toLogbackLevel
 import io.github.oshai.kotlinlogging.slf4j.internal.LocationAwareKLogger
 import org.slf4j.event.KeyValuePair
 
-internal class LogbackLoggerWrapper(
-  override val underlyingLogger: Logger,
-  private val logbackServiceProvider: LogbackServiceProvider,
-) : KLogger, DelegatingKLogger<Logger> {
+internal class LogbackLoggerWrapper(override val underlyingLogger: Logger) :
+  KLogger, DelegatingKLogger<Logger> {
 
   override val name: String
     get() = underlyingLogger.name
@@ -32,7 +29,7 @@ internal class LogbackLoggerWrapper(
             level = level,
             kLoggingEvent = this,
           )
-        marker?.toLogback(logbackServiceProvider)?.let { logbackEvent.addMarker(it) }
+        marker?.toLogback()?.let { logbackEvent.addMarker(it) }
         payload?.forEach { (key, value) -> logbackEvent.addKeyValuePair(KeyValuePair(key, value)) }
         underlyingLogger.callAppenders(logbackEvent)
       }
@@ -40,5 +37,5 @@ internal class LogbackLoggerWrapper(
   }
 
   override fun isLoggingEnabledFor(level: Level, marker: Marker?) =
-    underlyingLogger.isEnabledFor(marker?.toLogback(logbackServiceProvider), level.toLogbackLevel())
+    underlyingLogger.isEnabledFor(marker?.toLogback(), level.toLogbackLevel())
 }
