@@ -34,11 +34,12 @@ internal actual object KLoggerNameResolver {
     // MyClass.<init>()     <- enclosing class
     if (
       callerLine + 2 >= stackTrace.size ||
-      !stackTrace[callerLine + 1].contains("$className$COMPANION_GET_INSTANCE_SUFFIX")
+        !stackTrace[callerLine + 1].contains("$className$COMPANION_GET_INSTANCE_SUFFIX")
     ) {
       return className
     }
-    val enclosingFound = CLASS_LEVEL_INIT_PROPERTIES_REGEX.find(stackTrace[callerLine + 2]) ?: return className
+    val enclosingFound =
+      CLASS_LEVEL_INIT_PROPERTIES_REGEX.find(stackTrace[callerLine + 2]) ?: return className
     return enclosingFound.groupValues[1]
   }
 }
