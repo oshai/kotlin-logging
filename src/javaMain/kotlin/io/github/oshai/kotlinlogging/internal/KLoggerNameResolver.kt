@@ -6,15 +6,20 @@ import java.lang.reflect.Modifier
 internal actual object KLoggerNameResolver {
 
   /** get class name for function by the package of the function */
-  internal actual fun name(func: () -> Unit): String {
-    val name = func.javaClass.name
-    val slicedName =
-      when {
-        name.contains("Kt$") -> name.substringBefore("Kt$")
-        name.contains("$") -> name.substringBefore("$")
-        else -> name
+  internal actual fun name(ref: Any): String {
+    return ref::class.java.name.toCleanClassName()
+  }
+
+  private val classNameEndings = listOf("Kt$", "$")
+
+  private fun String.toCleanClassName(): String {
+    classNameEndings.forEach { ending ->
+      val indexOfEnding = this.indexOf(ending)
+      if (indexOfEnding != -1) {
+        return this.substring(0, indexOfEnding)
       }
-    return slicedName
+    }
+    return this
   }
 
   /** get class name for java class (that usually represents kotlin class) */
