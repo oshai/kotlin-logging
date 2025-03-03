@@ -155,6 +155,8 @@ kotlin {
             implementation("org.slf4j:slf4j-api:${extra["slf4j_version"]}")
             implementation("ch.qos.logback:logback-classic:${extra["logback_version"]}")
             implementation("net.logstash.logback:logstash-logback-encoder:${extra["logstash_logback_encoder_version"]}")
+            implementation("com.fasterxml.jackson.core:jackson-core:${extra["jackson_version"]}")
+            implementation("com.fasterxml.jackson.module:jackson-module-kotlin:${extra["jackson_version"]}")
           }
         }
         val jvmTest by getting {
