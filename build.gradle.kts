@@ -52,6 +52,29 @@ kotlin {
     }
 
     jvm {
+      compilations {
+        val main by getting
+        val logbackTest by compilations.creating {
+          defaultSourceSet {
+            dependencies {
+              // Compile against the main compilation's compile classpath and outputs:
+              implementation(main.compileDependencyFiles + main.output.classesDirs)
+              implementation(kotlin("test-junit"))
+            }
+          }
+          val logbackTest = tasks.register<Test>("logbackTest") {
+            description = "Runs tests with Logback"
+            group = "verification"
+            // Run the tests with the classpath containing the compile dependencies (including 'main'),
+            // runtime dependencies, and the outputs of this compilation:
+            classpath = compileDependencyFiles + runtimeDependencyFiles + output.allOutputs
+
+            // Run only the tests from this compilation's outputs:
+            testClassesDirs = output.classesDirs
+          }
+          tasks["allTests"].dependsOn(logbackTest)
+        }
+      }
     }
     js {
         browser {
@@ -123,6 +146,19 @@ kotlin {
                 compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:${extra["coroutines_version"]}")
             }
         }
+        val jvmLogbackTest by getting {
+          dependencies {
+            implementation(kotlin("test"))
+            implementation("org.junit.jupiter:junit-jupiter-engine:${extra["junit_version"]}")
+            implementation("org.junit.jupiter:junit-jupiter-params:${extra["junit_version"]}")
+            implementation("org.mockito:mockito-core:${extra["mockito_version"]}")
+            implementation("org.slf4j:slf4j-api:${extra["slf4j_version"]}")
+            implementation("ch.qos.logback:logback-classic:${extra["logback_version"]}")
+            implementation("net.logstash.logback:logstash-logback-encoder:${extra["logstash_logback_encoder_version"]}")
+            implementation("com.fasterxml.jackson.core:jackson-core:${extra["jackson_version"]}")
+            implementation("com.fasterxml.jackson.module:jackson-module-kotlin:${extra["jackson_version"]}")
+          }
+        }
         val jvmTest by getting {
             dependencies {
                 implementation(kotlin("test"))
@@ -133,8 +169,6 @@ kotlin {
                 implementation("org.apache.logging.log4j:log4j-core:${extra["log4j_version"]}")
                 implementation("org.apache.logging.log4j:log4j-slf4j2-impl:${extra["log4j_version"]}")
                 implementation("org.slf4j:slf4j-api:${extra["slf4j_version"]}")
-                implementation("ch.qos.logback:logback-classic:${extra["logback_version"]}")
-                implementation("net.logstash.logback:logstash-logback-encoder:${extra["logstash_logback_encoder_version"]}")
 
                 // our jul test just forward the logs jul -> slf4j -> log4j
                 implementation("org.slf4j:jul-to-slf4j:${extra["slf4j_version"]}")
