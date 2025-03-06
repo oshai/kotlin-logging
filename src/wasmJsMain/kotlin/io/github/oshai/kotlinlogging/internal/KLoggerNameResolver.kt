@@ -1,25 +1,45 @@
 package io.github.oshai.kotlinlogging.internal
 
-private const val NO_CLASS = ""
-
 internal actual object KLoggerNameResolver {
-  private val kotlinLoggingRegex = Regex("\\.KotlinLogging\\.logger\\s")
-  private val topLevelPropertyRegex = Regex("<init properties (\\S+)\\.kt>")
-  private val classPropertyRegex = Regex("\\.(\\S+)\\.<init>")
+  private const val DEFAULT_LOGGER_NAME = "root-logger"
+  private const val LOGGER_FUNCTION_NAME = "KotlinLogging.logger"
+  private const val COMPANION_GET_INSTANCE_SUFFIX = "_getInstance"
+  private val TOP_LEVEL_INIT_PROPERTIES_REGEX = Regex("<init properties (\\S+)\\.kt>")
+  private val CLASS_LEVEL_INIT_PROPERTIES_REGEX = Regex("\\.([^.\\s]+)\\.<init>")
 
-  internal actual fun name(func: () -> Unit): String {
-    val stackTrace = Exception().stackTraceToString().split("\n")
-    val invokingClassLine = stackTrace.indexOfFirst(kotlinLoggingRegex::containsMatchIn) + 1
-    return if (invokingClassLine in 1 ..< stackTrace.size) {
-      getInvokingClass(stackTrace[invokingClassLine])
-    } else {
-      NO_CLASS
-    }
+  internal actual fun name(ref: Any): String {
+    return findLoggerCallerClassName() ?: DEFAULT_LOGGER_NAME
   }
 
-  private fun getInvokingClass(line: String): String {
-    return topLevelPropertyRegex.find(line)?.let { it.groupValues[1].split(".").last() }
-      ?: classPropertyRegex.find(line)?.let { it.groupValues[1].split(".").last() }
-      ?: NO_CLASS
+  private fun findLoggerCallerClassName(): String? {
+    val stackTrace = Throwable().stackTraceToString().split('\n')
+    val invokeLoggerLine = stackTrace.indexOfFirst { it.contains(LOGGER_FUNCTION_NAME) }
+    if (invokeLoggerLine == -1 || invokeLoggerLine + 1 >= stackTrace.size) return null
+    val callerLine = invokeLoggerLine + 1
+    return resolveAsTopLevelProperty(stackTrace, callerLine)
+      ?: resolveAsClassLevelProperty(stackTrace, callerLine)
+  }
+
+  private fun resolveAsTopLevelProperty(stackTrace: List<String>, callerLine: Int): String? {
+    val found = TOP_LEVEL_INIT_PROPERTIES_REGEX.find(stackTrace[callerLine]) ?: return null
+    return found.groupValues[1]
+  }
+
+  private fun resolveAsClassLevelProperty(stackTrace: List<String>, callerLine: Int): String? {
+    val found = CLASS_LEVEL_INIT_PROPERTIES_REGEX.find(stackTrace[callerLine]) ?: return null
+    val className = found.groupValues[1]
+    // find enclosing class in case of Companion object:
+    // MyCompanion.<init>() <- found class name
+    // MyCompanion_getInstance()
+    // MyClass.<init>()     <- enclosing class
+    if (
+      callerLine + 2 >= stackTrace.size ||
+        !stackTrace[callerLine + 1].contains("$className$COMPANION_GET_INSTANCE_SUFFIX")
+    ) {
+      return className
+    }
+    val enclosingFound =
+      CLASS_LEVEL_INIT_PROPERTIES_REGEX.find(stackTrace[callerLine + 2]) ?: return className
+    return enclosingFound.groupValues[1]
   }
 }
