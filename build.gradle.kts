@@ -10,7 +10,7 @@ plugins {
     kotlin("multiplatform") version "2.0.21"
     // This version is dependent on the maximum tested version
     // of this plugin within the Kotlin multiplatform library
-    id("com.android.library") version "8.8.2"
+    id("com.android.library") version "8.9.0"
 
     id("org.jetbrains.dokka") version "2.0.0"
 
