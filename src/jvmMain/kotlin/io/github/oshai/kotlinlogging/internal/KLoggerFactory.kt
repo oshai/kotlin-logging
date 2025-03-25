@@ -10,7 +10,8 @@ internal actual object KLoggerFactory {
 
   /** get logger by explicit name */
   internal actual fun logger(name: String): KLogger {
-    // Note: any changes here might have to be also applied to [Target_io_github_oshai_kotlinlogging_internal_KLoggerFactory].
+    // Note: any changes here might have to be also applied to
+    // [Target_io_github_oshai_kotlinlogging_internal_KLoggerFactory].
     if (System.getProperty("kotlin-logging-to-jul") != null) {
       return JulLoggerFactory.wrapJLogger(JulLoggerFactory.jLogger(name))
     } else if (System.getProperty("kotlin-logging-to-logback") == "true") {

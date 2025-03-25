@@ -9,10 +9,11 @@ import io.github.oshai.kotlinlogging.slf4j.internal.Slf4jLoggerFactory
 import java.util.function.BooleanSupplier
 
 /**
- * This class is a substitution class as described in [https://build-native-java-apps.cc/developer-guide/substitution/]. It
- * fixes an issue where the native build (GraalVM native-image) fails if Logback is not on the classpath. See
- * [https://github.com/oshai/kotlin-logging/issues/465].
- * The weird-looking class name is according to convention.
+ * This class is a substitution class as described in
+ * [https://build-native-java-apps.cc/developer-guide/substitution/]. It fixes an issue where the
+ * native build (GraalVM native-image) fails if Logback is not on the classpath. See
+ * [https://github.com/oshai/kotlin-logging/issues/465]. The weird-looking class name is according
+ * to convention.
  */
 @Suppress("unused")
 internal class Target_io_github_oshai_kotlinlogging_internal_KLoggerFactory {
