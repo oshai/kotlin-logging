@@ -144,6 +144,7 @@ kotlin {
                 compileOnly("org.slf4j:slf4j-api:${extra["slf4j_version"]}")
                 compileOnly("ch.qos.logback:logback-classic:${extra["logback_version"]}")
                 compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:${extra["coroutines_version"]}")
+                compileOnly("org.graalvm.sdk:nativeimage:${extra["nativeimage_version"]}")
             }
         }
         val jvmLogbackTest by getting {
