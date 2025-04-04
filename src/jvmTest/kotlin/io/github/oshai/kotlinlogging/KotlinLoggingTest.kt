@@ -1,6 +1,5 @@
 package io.github.oshai.kotlinlogging
 
-import io.github.oshai.kotlinlogging.slf4j.logger
 import io.github.oshai.kotlinlogging.slf4j.toKLogger
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
@@ -9,7 +8,7 @@ import org.slf4j.LoggerFactory
 
 private val logger = KotlinLogging.logger {}
 private val loggerFromSlf4j =
-  KotlinLogging.logger(LoggerFactory.getLogger("io.github.oshai.kotlinlogging.slf4jLogger"))
+  LoggerFactory.getLogger("io.github.oshai.kotlinlogging.slf4jLogger").toKLogger()
 private val loggerFromSlf4jExtension =
   LoggerFactory.getLogger("io.github.oshai.kotlinlogging.slf4jLoggerExtension").toKLogger()
 
