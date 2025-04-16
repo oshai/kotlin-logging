@@ -7,3 +7,4 @@ pluginManagement {
 }
 
 rootProject.name = "kotlin-logging"
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
