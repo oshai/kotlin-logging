@@ -1,6 +1,7 @@
 package io.github.oshai.kotlinlogging.internal
 
 import java.util.stream.Stream
+import kotlin.reflect.KClass
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.params.ParameterizedTest
@@ -12,43 +13,37 @@ class KLoggerNameResolverTest {
 
   @ParameterizedTest
   @MethodSource("testNames")
-  fun testNames(expectedName: String, clazz: Class<*>) {
+  fun testNames(expectedName: String, clazz: KClass<*>) {
     assertEquals(expectedName, KLoggerNameResolver.name(clazz))
   }
 
   private fun testNames(): Stream<Arguments> =
     Stream.of(
-      Arguments.of("io.github.oshai.kotlinlogging.internal.BaseClass", BaseClass::class.java),
-      Arguments.of("io.github.oshai.kotlinlogging.internal.ChildClass", ChildClass::class.java),
-      Arguments.of(
-        "io.github.oshai.kotlinlogging.internal.BaseClass",
-        BaseClass.Companion::class.java,
-      ),
+      Arguments.of("io.github.oshai.kotlinlogging.internal.BaseClass", BaseClass::class),
+      Arguments.of("io.github.oshai.kotlinlogging.internal.ChildClass", ChildClass::class),
+      Arguments.of("io.github.oshai.kotlinlogging.internal.BaseClass", BaseClass.Companion::class),
       Arguments.of(
         "io.github.oshai.kotlinlogging.internal.ChildClass",
-        ChildClass.Companion::class.java,
+        ChildClass.Companion::class,
       ),
-      Arguments.of("io.github.oshai.kotlinlogging.internal.Singleton", Singleton::class.java),
-      Arguments.of("io.github.oshai.kotlinlogging.internal.MyInterface", MyInterface::class.java),
-      Arguments.of("java.lang.Object", Any().javaClass),
+      Arguments.of("io.github.oshai.kotlinlogging.internal.Singleton", Singleton::class),
+      Arguments.of("io.github.oshai.kotlinlogging.internal.MyInterface", MyInterface::class),
+      Arguments.of("java.lang.Object", Any()::class),
       Arguments.of(
-        "io.github.oshai.kotlinlogging.internal.KLoggerNameResolverTest\$testNames$1",
-        object {}.javaClass,
+        "io.github.oshai.kotlinlogging.internal.KLoggerNameResolverTest",
+        object {}::class,
       ),
+      Arguments.of("io.github.oshai.kotlinlogging.internal.BaseClass", BaseClass.InnerClass::class),
       Arguments.of(
-        "io.github.oshai.kotlinlogging.internal.BaseClass\$InnerClass\$Obj",
-        BaseClass.InnerClass.Obj::class.java,
-      ),
-      Arguments.of(
-        "io.github.oshai.kotlinlogging.internal.BaseClass\$InnerClass\$Obj",
-        BaseClass.InnerClass.Obj.javaClass,
+        "io.github.oshai.kotlinlogging.internal.BaseClass",
+        BaseClass.InnerClass.Obj::class,
       ),
       Arguments.of(
-        "io.github.oshai.kotlinlogging.internal.BaseClass\$InnerClass",
-        BaseClass.InnerClass.CmpObj::class.java,
+        "io.github.oshai.kotlinlogging.internal.BaseClass",
+        BaseClass.InnerClass.CmpObj::class,
       ),
-      Arguments.of("io.github.oshai.kotlinlogging.internal.Foo\$Bar", Foo.Bar::class.java),
-      Arguments.of("io.github.oshai.kotlinlogging.internal.Foo\$Bar2", Foo.Bar3.javaClass),
+      Arguments.of("io.github.oshai.kotlinlogging.internal.Foo", Foo.Bar::class),
+      Arguments.of("io.github.oshai.kotlinlogging.internal.Foo", Foo.Bar3::class),
       Arguments.of(
         "io.github.oshai.kotlinlogging.internal.PrivateCompanion",
         PrivateCompanion().companionClass,
@@ -88,7 +83,7 @@ class Foo {
 }
 
 class PrivateCompanion {
-  val companionClass: Class<*> = Companion::class.java
+  val companionClass: KClass<*> = Companion::class
 
   private companion object
 }
