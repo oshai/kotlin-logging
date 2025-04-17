@@ -1,3 +1,4 @@
+// File: build.gradle.kts
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
 import org.gradle.jvm.tasks.Jar
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
@@ -7,24 +8,17 @@ import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("multiplatform") version "2.0.21"
-    // This version is dependent on the maximum tested version
-    // of this plugin within the Kotlin multiplatform library
-    id("com.android.library") version "8.8.0"
-
-    id("org.jetbrains.dokka") version "2.0.0"
-
-    id("com.diffplug.spotless") version "7.0.1"
-
-    id("io.github.gradle-nexus.publish-plugin") version "2.0.0"
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.dokka)
+    alias(libs.plugins.spotless)
+    alias(libs.plugins.nexus.publish.plugin)
     `maven-publish`
     signing
 }
 
-apply("versions.gradle.kts")
-
 group = "io.github.oshai"
-version = "7.0.5"
+version = "7.0.8"
 
 repositories {
     google()
@@ -52,6 +46,29 @@ kotlin {
     }
 
     jvm {
+      compilations {
+        val main by getting
+        val logbackTest by compilations.creating {
+          defaultSourceSet {
+            dependencies {
+              // Compile against the main compilation's compile classpath and outputs:
+              implementation(main.compileDependencyFiles + main.output.classesDirs)
+              implementation(kotlin("test-junit"))
+            }
+          }
+          val logbackTest = tasks.register<Test>("logbackTest") {
+            description = "Runs tests with Logback"
+            group = "verification"
+            // Run the tests with the classpath containing the compile dependencies (including 'main'),
+            // runtime dependencies, and the outputs of this compilation:
+            classpath = compileDependencyFiles + runtimeDependencyFiles + output.allOutputs
+
+            // Run only the tests from this compilation's outputs:
+            testClassesDirs = output.classesDirs
+          }
+          tasks["allTests"].dependsOn(logbackTest)
+        }
+      }
     }
     js {
         browser {
@@ -111,60 +128,72 @@ kotlin {
         val javaMain by creating {
             dependsOn(commonMain)
             dependencies {
-                compileOnly("org.slf4j:slf4j-api:${extra["slf4j_version"]}")
-                compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:${extra["coroutines_version"]}")
+                compileOnly(libs.slf4j.api)
+                compileOnly(libs.kotlinx.coroutines.slf4j)
             }
         }
         val jvmMain by getting {
             dependsOn(javaMain)
             dependencies {
-                compileOnly("org.slf4j:slf4j-api:${extra["slf4j_version"]}")
-                compileOnly("ch.qos.logback:logback-classic:${extra["logback_version"]}")
-                compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:${extra["coroutines_version"]}")
+                compileOnly(libs.slf4j.api)
+                compileOnly(libs.logback.classic)
+                compileOnly(libs.kotlinx.coroutines.slf4j)
+                compileOnly(libs.nativeimage)
+            }
+        }
+        val jvmLogbackTest by getting {
+            dependencies {
+                implementation(kotlin("test"))
+                implementation(libs.junit.jupiter.engine)
+                implementation(libs.junit.jupiter.params)
+                implementation(libs.mockito.core)
+                implementation(libs.slf4j.api)
+                implementation(libs.logback.classic)
+                implementation(libs.logstash.logback.encoder)
+                implementation(libs.jackson.core)
+                implementation(libs.jackson.module.kotlin)
             }
         }
         val jvmTest by getting {
             dependencies {
                 implementation(kotlin("test"))
-                implementation("org.junit.jupiter:junit-jupiter-engine:${extra["junit_version"]}")
-                implementation("org.junit.jupiter:junit-jupiter-params:${extra["junit_version"]}")
-                implementation("org.mockito:mockito-core:${extra["mockito_version"]}")
-                implementation("org.apache.logging.log4j:log4j-api:${extra["log4j_version"]}")
-                implementation("org.apache.logging.log4j:log4j-core:${extra["log4j_version"]}")
-                implementation("org.apache.logging.log4j:log4j-slf4j2-impl:${extra["log4j_version"]}")
-                implementation("org.slf4j:slf4j-api:${extra["slf4j_version"]}")
-                implementation("ch.qos.logback:logback-classic:${extra["logback_version"]}")
-                implementation("net.logstash.logback:logstash-logback-encoder:${extra["logstash_logback_encoder_version"]}")
+                implementation(libs.junit.jupiter.engine)
+                implementation(libs.junit.jupiter.params)
+                implementation(libs.mockito.core)
+                implementation(libs.log4j.api)
+                implementation(libs.log4j.core)
+                implementation(libs.log4j.slf4j2.impl)
+                implementation(libs.slf4j.api)
 
                 // our jul test just forward the logs jul -> slf4j -> log4j
-                implementation("org.slf4j:jul-to-slf4j:${extra["slf4j_version"]}")
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:${extra["coroutines_version"]}")
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${extra["coroutines_version"]}")
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:${extra["coroutines_version"]}")
+                implementation(libs.jul.to.slf4j)
+                implementation(libs.kotlinx.coroutines.slf4j)
+                implementation(libs.kotlinx.coroutines.core)
+                implementation(libs.kotlinx.coroutines.test)
             }
         }
         val androidMain by getting {
             dependsOn(javaMain)
             dependencies {
-                compileOnly("org.slf4j:slf4j-api:${extra["slf4j_version"]}")
-                compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:${extra["coroutines_version"]}")
+                compileOnly(libs.slf4j.api)
+                compileOnly(libs.kotlinx.coroutines.slf4j)
             }
         }
         val androidUnitTest by getting {
             dependencies {
                 implementation(kotlin("test"))
-                implementation("org.junit.jupiter:junit-jupiter-engine:${extra["junit_version"]}")
-                implementation("org.junit.jupiter:junit-jupiter-params:${extra["junit_version"]}")
-                implementation("org.mockito:mockito-core:${extra["mockito_version"]}")
-                implementation("org.apache.logging.log4j:log4j-api:${extra["log4j_version"]}")
-                implementation("org.apache.logging.log4j:log4j-core:${extra["log4j_version"]}")
-                implementation("org.apache.logging.log4j:log4j-slf4j2-impl:${extra["log4j_version"]}")
-                implementation("org.slf4j:slf4j-api:${extra["slf4j_version"]}")
+                implementation(libs.junit.jupiter.engine)
+                implementation(libs.junit.jupiter.params)
+                implementation(libs.mockito.core)
+                implementation(libs.log4j.api)
+                implementation(libs.log4j.core)
+                implementation(libs.log4j.slf4j2.impl)
+                implementation(libs.slf4j.api)
                 // our jul test just forward the logs jul -> slf4j -> log4j
-                implementation("org.slf4j:jul-to-slf4j:${extra["slf4j_version"]}")
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:${extra["coroutines_version"]}")
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${extra["coroutines_version"]}")
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:${extra["coroutines_version"]}")
+                implementation(libs.jul.to.slf4j)
+                implementation(libs.kotlinx.coroutines.slf4j)
+                implementation(libs.kotlinx.coroutines.core)
+                implementation(libs.kotlinx.coroutines.test)
             }
         }
         val directMain by creating {
@@ -290,8 +319,6 @@ nexusPublishing {
         }
     }
 }
-
-apply(plugin = "io.github.gradle-nexus.publish-plugin")
 
 publishing {
     publications.withType<MavenPublication> {
