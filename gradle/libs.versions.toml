@@ -12,7 +12,7 @@ logstash-logback-encoder = "8.1"
 coroutines = "1.10.2"
 junit = "5.9.2"
 mockito = "5.17.0"
-jackson = "2.18.3"
+jackson = "2.19.0"
 log4j = "2.24.3"
 nativeimage = "24.2.1"
 
