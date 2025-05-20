@@ -1,7 +1,7 @@
 [versions]
 
 kotlin = "2.1.21"
-android-gradle-plugin = "8.9.2"
+android-gradle-plugin = "8.10.0"
 dokka = "2.0.0"
 spotless = "7.0.3"
 nexus-publish-plugin = "2.0.0"
