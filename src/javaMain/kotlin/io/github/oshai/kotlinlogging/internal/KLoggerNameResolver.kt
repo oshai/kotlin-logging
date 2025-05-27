@@ -6,8 +6,8 @@ import kotlin.reflect.KClass
 internal actual object KLoggerNameResolver {
 
   /** get class name for function by the package of the function */
-  internal actual fun name(func: () -> Unit): String {
-    return name(func::class)
+  internal actual fun name(ref: Any): String {
+    return name(ref::class)
   }
 
   internal fun name(clazz: KClass<*>): String {
