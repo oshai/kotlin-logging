@@ -3,7 +3,7 @@
 kotlin = "2.1.21"
 android-gradle-plugin = "8.10.0"
 dokka = "2.0.0"
-spotless = "7.0.3"
+spotless = "7.0.4"
 nexus-publish-plugin = "2.0.0"
 
 slf4j = "2.0.17"
