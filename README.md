@@ -68,7 +68,7 @@ In version 5 users should also provide slf4j-api dependency.
 
 In short, if you just want to log statements to stdout, it's possible to add the following dependency: `org.slf4j:slf4j-simple:2.0.3`.
 
-### Maven
+### 
 ```xml
 <dependency>
   <groupId>io.github.oshai</groupId>
@@ -77,7 +77,7 @@ In short, if you just want to log statements to stdout, it's possible to add the
 </dependency>
 ```
 
-See the full example in [kotlin-logging-example-maven](https://github.com/oshai/kotlin-logging-example-maven).  
+See the full example in [kotlin-logging-example-maven](https://github.com/microutils/kotlin-logging-example-maven).  
 
 ### Gradle
 ```Groovy
