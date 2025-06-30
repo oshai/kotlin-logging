@@ -1,6 +1,6 @@
 [versions]
 
-kotlin = "2.1.21"
+kotlin = "2.2.0"
 android-gradle-plugin = "8.10.0"
 dokka = "2.0.0"
 spotless = "7.0.3"
