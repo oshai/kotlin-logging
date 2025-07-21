@@ -14,7 +14,7 @@ junit = "5.9.2"
 mockito = "5.18.0"
 jackson = "2.19.1"
 log4j = "2.25.1"
-nativeimage = "24.2.1"
+nativeimage = "24.2.2"
 
 [plugins]
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
