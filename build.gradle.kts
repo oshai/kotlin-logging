@@ -46,29 +46,29 @@ kotlin {
     }
 
     jvm {
-      compilations {
-        val main by getting
-        val logbackTest by compilations.creating {
-          defaultSourceSet {
-            dependencies {
-              // Compile against the main compilation's compile classpath and outputs:
-              implementation(main.compileDependencyFiles + main.output.classesDirs)
-              implementation(kotlin("test-junit"))
-            }
-          }
-          val logbackTest = tasks.register<Test>("logbackTest") {
-            description = "Runs tests with Logback"
-            group = "verification"
-            // Run the tests with the classpath containing the compile dependencies (including 'main'),
-            // runtime dependencies, and the outputs of this compilation:
-            classpath = compileDependencyFiles + runtimeDependencyFiles + output.allOutputs
+        compilations {
+            val main by getting
+            val logbackTest by compilations.creating {
+                defaultSourceSet {
+                    dependencies {
+                        // Compile against the main compilation's compile classpath and outputs:
+                        implementation(main.compileDependencyFiles + main.output.classesDirs)
+                        implementation(kotlin("test-junit"))
+                    }
+                }
+                val logbackTest = tasks.register<Test>("logbackTest") {
+                    description = "Runs tests with Logback"
+                    group = "verification"
+                    // Run the tests with the classpath containing the compile dependencies (including 'main'),
+                    // runtime dependencies, and the outputs of this compilation:
+                    classpath = compileDependencyFiles + runtimeDependencyFiles + output.allOutputs
 
-            // Run only the tests from this compilation's outputs:
-            testClassesDirs = output.classesDirs
-          }
-          tasks["allTests"].dependsOn(logbackTest)
+                    // Run only the tests from this compilation's outputs:
+                    testClassesDirs = output.classesDirs
+                }
+                tasks["allTests"].dependsOn(logbackTest)
+            }
         }
-      }
     }
     js {
         browser {
@@ -108,8 +108,10 @@ kotlin {
         iosArm64(),
         iosSimulatorArm64(),
         iosX64(),
+        watchosArm32(),
         watchosArm64(),
         watchosSimulatorArm64(),
+        watchosDeviceArm64(),
         watchosX64(),
         tvosArm64(),
         tvosSimulatorArm64(),
