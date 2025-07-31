@@ -21,7 +21,7 @@ jobs:
           distribution: 'temurin'
           java-version: 17
       - name: Publish
-        run: ./gradlew publishToSonatype closeAndReleaseSonatypeStagingRepository -no-daemon --no-parallel --stacktrace -DSONATYPE_USERNAME_2=$SONATYPE_USERNAME_2 -DSONATYPE_PASSWORD_2=$SONATYPE_PASSWORD_2 -DGPG_PRIVATE_PASSWORD=$GPG_PRIVATE_PASSWORD -DGPG_PRIVATE_KEY=$GPG_PRIVATE_KEY
+        run: ./gradlew publishToSonatype closeAndReleaseSonatypeStagingRepository -no-daemon --no-parallel --stacktrace -DGPG_PRIVATE_PASSWORD=$GPG_PRIVATE_PASSWORD -DGPG_PRIVATE_KEY=$GPG_PRIVATE_KEY
         env:
           SONATYPE_USERNAME_2: ${{ secrets.SONATYPE_USERNAME_2 }}
           SONATYPE_PASSWORD_2: ${{ secrets.SONATYPE_PASSWORD_2 }}
