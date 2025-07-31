@@ -313,9 +313,9 @@ spotless {
 
 nexusPublishing {
     repositories {
-        sonatype {  // only for users registered in Sonatype after 24 Feb 2021
-            nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
-            snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
+        sonatype {
+            nexusUrl.set(uri("https://ossrh-staging-api.central.sonatype.com/service/local/"))
+            snapshotRepositoryUrl.set(uri("https://ossrh-staging-api.central.sonatype.com/content/repositories/snapshots/"))
             username.set(System.getenv("SONATYPE_USERNAME_2")) // defaults to project.properties["myNexusUsername"]
             password.set(System.getenv("SONATYPE_PASSWORD_2")) // defaults to project.properties["myNexusPassword"]
         }
