@@ -293,6 +293,10 @@ dependencies {
     dokka(project(":"))
 }
 
+dokka {
+    moduleName.set("kotlin-logging")
+}
+
 
 // Tests
 
