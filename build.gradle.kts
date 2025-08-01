@@ -304,6 +304,9 @@ dokka {
             }
         }
     }
+    dokkaPublications.html {
+        outputDirectory.set(project.layout.buildDirectory.dir("dokka"))
+    }
 }
 
 
