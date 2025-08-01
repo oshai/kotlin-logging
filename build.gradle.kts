@@ -231,6 +231,12 @@ kotlin {
         val darwinMain by creating {
             dependsOn(commonMain)
         }
+        val darwinTest by creating {
+            dependsOn(commonTest)
+            dependencies {
+                implementation(kotlin("test"))
+            }
+        }
         linuxTargets.forEach {
             getByName("${it.targetName}Main") {
                 dependsOn(linuxMain)
@@ -239,6 +245,9 @@ kotlin {
         darwinTargets.forEach {
             getByName("${it.targetName}Main") {
                 dependsOn(darwinMain)
+            }
+            getByName("${it.targetName}Test") {
+                dependsOn(darwinTest)
             }
         }
     }

@@ -1,5 +1,7 @@
 #!/bin/sh
 
+export GRADLE_USER_HOME=~/.gradle-kotlin-logging
+export GRADLE_OPTS="-Dgradle.user.home=$GRADLE_USER_HOME"
 #
 # Copyright © 2015-2021 the original authors.
 #
