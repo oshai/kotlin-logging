@@ -1,7 +1,6 @@
 package io.github.oshai.kotlinlogging.slf4j
 
 import io.github.oshai.kotlinlogging.KLogger
-import io.github.oshai.kotlinlogging.KotlinLogging
 import io.github.oshai.kotlinlogging.Level
 import io.github.oshai.kotlinlogging.Marker
 import io.github.oshai.kotlinlogging.slf4j.internal.Slf4jLoggerFactory
@@ -27,8 +26,4 @@ public fun Level.toSlf4j(): org.slf4j.event.Level =
     Level.OFF -> throw IllegalArgumentException("OFF level is not supported")
   }
 
-@Suppress("UnusedReceiverParameter")
-public fun KotlinLogging.logger(underlyingLogger: Logger): KLogger =
-  Slf4jLoggerFactory.wrapJLogger(underlyingLogger)
-
-public fun Logger.toKLogger(): KLogger = KotlinLogging.logger(this)
+public fun Logger.toKLogger(): KLogger = Slf4jLoggerFactory.wrapJLogger(this)
