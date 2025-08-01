@@ -3,7 +3,7 @@ package io.github.oshai.kotlinlogging.internal
 internal actual object KLoggerNameResolver {
 
   internal actual fun name(func: () -> Unit): String {
-    // First, try to get the name using reflection. This works in most cases.
+    // First, try to get the name using reflection. This works in most cases (e.g., inside a class).
     val nameFromReflection = func::class.qualifiedName?.substringBeforeLast(".<anonymous>")
     if (!nameFromReflection.isNullOrBlank()) {
       return nameFromReflection
@@ -12,18 +12,24 @@ internal actual object KLoggerNameResolver {
     // As a fallback for Kotlin/Native top-level properties, inspect the call stack.
     val stackTrace = Throwable().stackTraceToString().lines()
 
-    // Find the first stack frame that is not part of the logging library itself.
-    // This should be the line of code where the logger was created.
-    val userCodeFrame = stackTrace.firstOrNull {
-        it.contains("kfun:") &&
-        !it.contains("io.github.oshai.kotlinlogging.KotlinLogging") &&
-        !it.contains("io.github.oshai.kotlinlogging.internal")
+    // The stack trace frame of interest is the one *after* the call to the logger factory.
+    val loggerFactoryCallIndex =
+      stackTrace.indexOfFirst { it.contains("io.github.oshai.kotlinlogging.KotlinLogging.logger") }
+
+    if (loggerFactoryCallIndex == -1 || loggerFactoryCallIndex + 1 >= stackTrace.size) {
+      return "UnknownLogger"
     }
 
-    // Extract the class/file name from the stack frame.
-    return userCodeFrame?.let {
-        val regex = Regex("""at kfun:([^.(<]+)""")
+    val callerFrame = stackTrace[loggerFactoryCallIndex + 1]
+
+    // Extract the fully qualified class/file name from the stack frame.
+    // A typical frame looks like: "at
+    // kfun:io.github.oshai.kotlinlogging.SimpleNativeTestKt.<clinit>()"
+    return callerFrame
+      .let {
+        val regex = Regex("""at kfun:([^#(<]+)""")
         regex.find(it)?.groupValues?.get(1)
-    } ?: "UnknownLogger" // Provide a sensible default if all else fails.
+      }
+      ?.trim() ?: "UnknownLogger" // Provide a sensible default if all else fails.
   }
 }

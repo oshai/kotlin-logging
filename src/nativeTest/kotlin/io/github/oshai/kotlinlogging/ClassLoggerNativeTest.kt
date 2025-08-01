@@ -9,7 +9,9 @@ class ClassLoggerNativeTest {
 
   @Test
   fun loggerNameIsCorrectlyInferredFromClass() {
-    println("Asserting logger name from class: Expected 'io.github.oshai.kotlinlogging.ClassLoggerNativeTest', was '${logger.name}'")
+    println(
+      "Asserting logger name from class: Expected 'io.github.oshai.kotlinlogging.ClassLoggerNativeTest', was '${logger.name}'"
+    )
     assertEquals("io.github.oshai.kotlinlogging.ClassLoggerNativeTest", logger.name)
   }
 }
