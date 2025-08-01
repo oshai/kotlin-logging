@@ -1,5 +1,6 @@
 package io.github.oshai.kotlinlogging.internal
 
+import io.github.oshai.kotlinlogging.KLoggingEventBuilder
 import kotlin.test.*
 
 class DarwinFormatterTest {

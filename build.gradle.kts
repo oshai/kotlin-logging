@@ -232,6 +232,7 @@ kotlin {
             dependsOn(commonMain)
         }
         val darwinTest by creating {
+            dependsOn(commonTest)
             dependencies {
                 implementation(kotlin("test"))
             }
