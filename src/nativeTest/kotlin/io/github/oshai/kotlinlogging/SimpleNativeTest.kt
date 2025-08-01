@@ -21,21 +21,50 @@ class SimpleNativeTest {
 
   @Test
   fun simpleNativeTest() {
-    assertEquals("SimpleNativeTest", logger.name)
+    assertEquals(
+      "SimpleNativeTest",
+      logger.name,
+      "Expected logger name to be 'SimpleNativeTest', but was '${logger.name}'",
+    )
     logger.info { "info msg" }
-    assertEquals("info msg", appender.lastMessage)
-    assertEquals("info", appender.lastLevel)
-    assertEquals("SimpleNativeTest", appender.lastLoggerName)
+    assertEquals(
+      "info msg",
+      appender.lastMessage,
+      "Expected last message to be 'info msg', but was '${appender.lastMessage}'",
+    )
+    assertEquals(
+      "info",
+      appender.lastLevel,
+      "Expected last level to be 'info', but was '${appender.lastLevel}'",
+    )
+    assertEquals(
+      "SimpleNativeTest",
+      appender.lastLoggerName,
+      "Expected last logger name to be 'SimpleNativeTest', but was '${appender.lastLoggerName}'",
+    )
   }
 
   @Test
   fun offLevelNativeTest() {
     KotlinLoggingConfiguration.logLevel = Level.OFF
-    assertTrue(logger.isLoggingOff())
+    val isLoggingOff = logger.isLoggingOff()
+    assertTrue(isLoggingOff, "Expected logging to be off, but was '$isLoggingOff'")
     logger.error { "error msg" }
-    assertEquals("NA", appender.lastMessage)
-    assertEquals("NA", appender.lastLevel)
-    assertEquals("NA", appender.lastLoggerName)
+    assertEquals(
+      "NA",
+      appender.lastMessage,
+      "Expected last message to be 'NA' when logging is off, but was '${appender.lastMessage}'",
+    )
+    assertEquals(
+      "NA",
+      appender.lastLevel,
+      "Expected last level to be 'NA' when logging is off, but was '${appender.lastLevel}'",
+    )
+    assertEquals(
+      "NA",
+      appender.lastLoggerName,
+      "Expected last logger name to be 'NA' when logging is off, but was '${appender.lastLoggerName}'",
+    )
   }
 
   private fun createAppender(): SimpleAppender = SimpleAppender()
