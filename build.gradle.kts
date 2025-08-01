@@ -295,6 +295,15 @@ dependencies {
 
 dokka {
     moduleName.set("kotlin-logging")
+    dokkaSourceSets {
+        configureEach {
+            sourceLink {
+                localDirectory.set(project.projectDir.resolve("src"))
+                remoteUrl.set(uri("https://github.com/oshai/kotlin-logging/tree/master/src"))
+                remoteLineSuffix.set("#L")
+            }
+        }
+    }
 }
 
 
