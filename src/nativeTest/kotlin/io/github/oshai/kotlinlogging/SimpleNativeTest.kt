@@ -23,31 +23,31 @@ class SimpleNativeTest {
   fun simpleNativeTest() {
     assertEquals("SimpleNativeTest", logger.name)
     logger.info { "info msg" }
-    assertEquals("info msg", appender.lastMessage)
-    assertEquals(Level.INFO, appender.lastLevel)
-    assertEquals("SimpleNativeTest", appender.lastLoggerName)
+    assertEquals("INFO: [SimpleNativeTest] info msg", appender.lastMessage)
+    assertEquals("info", appender.lastLevel)
+    assertEquals("info", appender.lastLoggerName)
   }
 
   @Test
   fun offLevelNativeTest() {
     KotlinLoggingConfiguration.logLevel = Level.OFF
-    assertTrue(logger.isLoggingOff)
+    assertTrue(logger.isLoggingOff())
     logger.error { "error msg" }
-    assertNull(appender.lastMessage)
-    assertNull(appender.lastLevel)
+    assertEquals("NA", appender.lastMessage)
+    assertEquals("NA", appender.lastLevel)
     assertEquals("NA", appender.lastLoggerName)
   }
 
   private fun createAppender(): SimpleAppender = SimpleAppender()
 
   class SimpleAppender : Appender {
-    var lastMessage: String? = null
-    var lastLevel: Level? = null
+    var lastMessage: String? = "NA"
+    var lastLevel: String = "NA"
     var lastLoggerName: String = "NA"
 
     override fun log(loggingEvent: KLoggingEvent) {
       lastMessage = loggingEvent.message
-      lastLevel = loggingEvent.level
+      lastLevel = loggingEvent.level.name.lowercase()
       lastLoggerName = loggingEvent.loggerName
     }
   }
