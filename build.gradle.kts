@@ -1,6 +1,8 @@
 // File: build.gradle.kts
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
 import org.gradle.jvm.tasks.Jar
+import org.jetbrains.dokka.gradle.DokkaTask
+import org.jetbrains.dokka.gradle.DokkaTaskPartial
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
@@ -285,13 +287,7 @@ tasks {
 
 // Docs
 
-tasks {
-    register<Jar>("dokkaJar") {
-        from(dokkaHtml)
-        dependsOn(dokkaHtml)
-        archiveClassifier.set("javadoc")
-    }
-}
+
 
 
 // Tests
@@ -357,7 +353,7 @@ publishing {
                 url.set("https://github.com/oshai/kotlin-logging/tree/master")
             }
         }
-        artifact(tasks["dokkaJar"])
+        
     }
 }
 
@@ -385,4 +381,27 @@ tasks.withType<AbstractPublishToMaven>().configureEach {
     val signingTasks = tasks.withType<Sign>()
     mustRunAfter(signingTasks)
 }
+tasks.withType<DokkaTaskPartial>().configureEach {
+    dokkaSourceSets.configureEach {
+        // We want to see all declarations, even if they are not explicitly documented.
+        reportUndocumented.set(true)
+    }
+}
+
+val dokkaHtmlPublication by tasks.creating(DokkaTask::class) {
+    outputDirectory.set(buildDir.resolve("dokka/html"))
+}
+
+val javadocJar by tasks.register<Jar>("javadocJar") {
+    dependsOn(dokkaHtmlPublication)
+    from(dokkaHtmlPublication.outputDirectory)
+    archiveClassifier.set("javadoc")
+}
+
+publishing {
+    publications.withType<MavenPublication> {
+        artifact(javadocJar)
+    }
+}
+
 //endregion
