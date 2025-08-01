@@ -245,6 +245,9 @@ kotlin {
             getByName("${it.targetName}Main") {
                 dependsOn(darwinMain)
             }
+            getByName("${it.targetName}Test") {
+                dependsOn(darwinTest)
+            }
         }
     }
 }
