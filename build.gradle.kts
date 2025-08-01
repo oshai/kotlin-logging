@@ -285,12 +285,12 @@ tasks {
 
 // Docs
 
-tasks {
-    register<Jar>("dokkaJar") {
-        from(dokkaHtml)
-        dependsOn(dokkaHtml)
-        archiveClassifier.set("javadoc")
-    }
+tasks.register("javadocJar", Jar::class) {
+    archiveClassifier.set("javadoc")
+}
+
+dependencies {
+    dokka(project(":"))
 }
 
 
@@ -357,7 +357,7 @@ publishing {
                 url.set("https://github.com/oshai/kotlin-logging/tree/master")
             }
         }
-        artifact(tasks["dokkaJar"])
+        
     }
 }
 
