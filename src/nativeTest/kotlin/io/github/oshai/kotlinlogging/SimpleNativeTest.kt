@@ -23,9 +23,9 @@ class SimpleNativeTest {
   fun simpleNativeTest() {
     assertEquals("SimpleNativeTest", logger.name)
     logger.info { "info msg" }
-    assertEquals("INFO: [SimpleNativeTest] info msg", appender.lastMessage)
+    assertEquals("info msg", appender.lastMessage)
     assertEquals("info", appender.lastLevel)
-    assertEquals("info", appender.lastLoggerName)
+    assertEquals("SimpleNativeTest", appender.lastLoggerName)
   }
 
   @Test
