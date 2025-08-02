@@ -23,23 +23,20 @@ internal actual object KLoggerNameResolver {
     // Fallback for top-level loggers: Parse the stack trace string array.
     val stackTrace: Array<String> = Throwable().getStackTrace()
 
-    // Find the call to the logger factory as a reliable anchor.
-    val loggerFactoryCallIndex =
-      stackTrace.indexOfFirst { it.contains("io.github.oshai.kotlinlogging.KotlinLogging#logger") }
+    // Find the call to this function as a reliable anchor.
+    val resolverCallIndex =
+      stackTrace.indexOfFirst {
+        it.contains("io.github.oshai.kotlinlogging.internal.KLoggerNameResolver#name")
+      }
 
-    // The caller is the next frame in the stack trace.
-    if (loggerFactoryCallIndex != -1 && loggerFactoryCallIndex + 1 < stackTrace.size) {
-      val callerFrame = stackTrace[loggerFactoryCallIndex + 1]
-
-      // This regex is tailored to the format from the diagnostic log:
-      // "kfun:io.github.oshai.kotlinlogging.SimpleTest#<init>()"
+    // The caller is two frames up from this function in the stack trace.
+    val callerFrameIndex = resolverCallIndex + 2
+    if (resolverCallIndex != -1 && callerFrameIndex < stackTrace.size) {
+      val callerFrame = stackTrace[callerFrameIndex]
       val regex = Regex("""kfun:([^#(<]+)""")
       val fqName = regex.find(callerFrame)?.groupValues?.get(1)?.trim()
-
-      return if (fqName != null) {
-        removeKtSuffix(fqName)
-      } else {
-        "UnknownLogger"
+      if (fqName != null) {
+        return removeKtSuffix(fqName)
       }
     }
     return "UnknownLogger"
