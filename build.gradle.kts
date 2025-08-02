@@ -45,6 +45,7 @@ kotlin {
     jvm {
         compilations {
             val main by getting
+            // logback tests are testing only direct logback dependency (not slf4j/log4j)
             val logbackTest by compilations.creating {
                 defaultSourceSet {
                     dependencies {
