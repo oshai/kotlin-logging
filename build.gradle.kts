@@ -53,18 +53,6 @@ kotlin {
                     dependencies {
                         // Compile against the main compilation's compile classpath and outputs:
                         implementation(main.compileDependencyFiles + main.output.classesDirs)
-
-                        implementation(kotlin("test"))
-                        implementation(project.dependencies.enforcedPlatform(libs.junit.bom))
-                        implementation(libs.junit.jupiter.engine)
-                        implementation(libs.junit.jupiter.params)
-                        implementation(libs.junit.platform.launcher)
-                        implementation(libs.mockito.core)
-                        implementation(libs.slf4j.api)
-                        implementation(libs.logback.classic)
-                        implementation(libs.logstash.logback.encoder)
-                        implementation(libs.jackson.core)
-                        implementation(libs.jackson.module.kotlin)
                     }
                 }
                 val logbackTest = tasks.register<Test>("logbackTest") {
@@ -155,7 +143,19 @@ kotlin {
             }
         }
         val jvmLogbackTest by getting {
-            // dependencies moved to the compilation block
+            dependencies {
+                implementation(kotlin("test"))
+                implementation(project.dependencies.enforcedPlatform(libs.junit.bom))
+                implementation(libs.junit.jupiter.engine)
+                implementation(libs.junit.jupiter.params)
+                implementation(libs.junit.platform.launcher)
+                implementation(libs.mockito.core)
+                implementation(libs.slf4j.api)
+                implementation(libs.logback.classic)
+                implementation(libs.logstash.logback.encoder)
+                implementation(libs.jackson.core)
+                implementation(libs.jackson.module.kotlin)
+            }
         }
         val jvmTest by getting {
             dependencies {
