@@ -1,35 +1,44 @@
 package io.github.oshai.kotlinlogging.internal
 
+import kotlin.experimental.ExperimentalNativeApi
+
 internal actual object KLoggerNameResolver {
 
+  private fun removeKtSuffix(fullyQualifiedName: String): String {
+    return if (fullyQualifiedName.endsWith("Kt")) {
+      fullyQualifiedName.substring(0, fullyQualifiedName.length - 2)
+    } else {
+      fullyQualifiedName
+    }
+  }
+
+  @OptIn(ExperimentalNativeApi::class)
   internal actual fun name(func: () -> Unit): String {
-    // First, try to get the name using reflection. This works in most cases (e.g., inside a class).
+    // Primary method: For loggers in classes, reflection returns the FQ name.
     val nameFromReflection = func::class.qualifiedName?.substringBeforeLast(".<anonymous>")
     if (!nameFromReflection.isNullOrBlank()) {
       return nameFromReflection
     }
 
-    // As a fallback for Kotlin/Native top-level properties, inspect the call stack.
-    val stackTrace = Throwable().stackTraceToString().lines()
+    // Fallback for top-level loggers: Parse the stack trace string array.
+    val stackTrace: Array<String> = Throwable().getStackTrace()
 
-    // The stack trace frame of interest is the one *after* the call to the logger factory.
-    val loggerFactoryCallIndex =
-      stackTrace.indexOfFirst { it.contains("io.github.oshai.kotlinlogging.KotlinLogging.logger") }
+    // Find the first frame outside the logging library's package.
+    val callerFrame = stackTrace.firstOrNull { !it.contains("io.github.oshai.kotlinlogging") }
 
-    if (loggerFactoryCallIndex == -1 || loggerFactoryCallIndex + 1 >= stackTrace.size) {
-      return "UnknownLogger"
-    }
+    if (callerFrame != null) {
+      // A typical frame string is: " at
+      // kfun:io.github.oshai.kotlinlogging.SimpleNativeTestKt.<clinit>()"
+      // This regex extracts the fully qualified name.
+      val regex = Regex("""kfun:([^#(<]+)""")
+      val fqName = regex.find(callerFrame)?.groupValues?.get(1)?.trim()
 
-    val callerFrame = stackTrace[loggerFactoryCallIndex + 1]
-
-    // Extract the fully qualified class/file name from the stack frame.
-    // A typical frame looks like: "at
-    // kfun:io.github.oshai.kotlinlogging.SimpleNativeTestKt.<clinit>()"
-    return callerFrame
-      .let {
-        val regex = Regex("""at kfun:([^#(<]+)""")
-        regex.find(it)?.groupValues?.get(1)
+      return if (fqName != null) {
+        removeKtSuffix(fqName)
+      } else {
+        "UnknownLogger"
       }
-      ?.trim() ?: "UnknownLogger" // Provide a sensible default if all else fails.
+    }
+    return "UnknownLogger"
   }
 }
