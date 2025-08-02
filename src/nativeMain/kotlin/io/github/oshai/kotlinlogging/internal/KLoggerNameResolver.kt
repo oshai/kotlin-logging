@@ -23,6 +23,12 @@ internal actual object KLoggerNameResolver {
     // Fallback for top-level loggers: Parse the stack trace string array.
     val stackTrace: Array<String> = Throwable().getStackTrace()
 
+    // START: Diagnostic code
+    println("--- KOTLIN-LOGGING DIAGNOSTIC: STACK TRACE ---")
+    stackTrace.forEach { println(it) }
+    println("--- END DIAGNOSTIC ---")
+    // END: Diagnostic code
+
     // Find the first frame outside of the logging framework's internal machinery.
     val callerFrame =
       stackTrace.firstOrNull {
