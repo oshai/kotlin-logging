@@ -20,6 +20,12 @@ internal actual object KLoggerNameResolver {
       return nameFromReflection
     }
 
+    // START: Diagnostic code
+    println("--- KOTLIN-LOGGING DIAGNOSTIC: STACK TRACE ---")
+    Throwable().getStackTrace().forEach { println(it) }
+    println("--- END DIAGNOSTIC ---")
+    // END: Diagnostic code
+
     // Fallback for top-level loggers: Parse the stack trace string array.
     val stackTrace: Array<String> = Throwable().getStackTrace()
 
