@@ -21,61 +21,73 @@ class SimpleNativeTest {
 
   @Test
   fun simpleNativeTest() {
-    assertEquals("SimpleNativeTest", logger.name)
+    println("Asserting logger name: Expected 'SimpleNativeTest', was '${logger.name}'")
+    assertEquals(
+      "io.github.oshai.kotlinlogging.SimpleNativeTest",
+      logger.name,
+      "Expected logger name to be 'io.github.oshai.kotlinlogging.SimpleNativeTest', was '${logger.name}'",
+    )
     logger.info { "info msg" }
-    assertEquals("INFO: [SimpleNativeTest] info msg", appender.lastMessage)
-    assertEquals("info", appender.lastLevel)
-    assertEquals("info", appender.lastLoggerName)
+    println("Asserting last message: Expected 'info msg', was '${appender.lastMessage}'")
+    assertEquals(
+      "info msg",
+      appender.lastMessage,
+      "Expected last message to be 'info msg', was '${appender.lastMessage}'",
+    )
+    println("Asserting last level: Expected 'info', was '${appender.lastLevel}'")
+    assertEquals(
+      "info",
+      appender.lastLevel,
+      "Expected last level to be 'info', was '${appender.lastLevel}'",
+    )
+    println(
+      "Asserting last logger name: Expected 'io.github.oshai.kotlinlogging.SimpleNativeTest', was '${appender.lastLoggerName}'"
+    )
+    assertEquals(
+      "io.github.oshai.kotlinlogging.SimpleNativeTest",
+      appender.lastLoggerName,
+      "Expected last logger name to be 'io.github.oshai.kotlinlogging.SimpleNativeTest', was '${appender.lastLoggerName}'",
+    )
   }
 
   @Test
   fun offLevelNativeTest() {
     KotlinLoggingConfiguration.logLevel = Level.OFF
-    assertTrue(logger.isLoggingOff)
+    val isLoggingOff = logger.isLoggingOff()
+    println("Asserting logging is off: Expected true, was '$isLoggingOff'")
+    assertTrue(isLoggingOff, "Expected logging to be off, was '$isLoggingOff'")
     logger.error { "error msg" }
-    assertEquals("NA", appender.lastMessage)
-    assertEquals("NA", appender.lastLevel)
-    assertEquals("NA", appender.lastLoggerName)
+    println("Asserting last message is 'NA': Expected 'NA', was '${appender.lastMessage}'")
+    assertEquals(
+      "NA",
+      appender.lastMessage,
+      "Expected last message to be 'NA' when logging is off, was '${appender.lastMessage}'",
+    )
+    println("Asserting last level is 'NA': Expected 'NA', was '${appender.lastLevel}'")
+    assertEquals(
+      "NA",
+      appender.lastLevel,
+      "Expected last level to be 'NA' when logging is off, was '${appender.lastLevel}'",
+    )
+    println("Asserting last logger name is 'NA': Expected 'NA', was '${appender.lastLoggerName}'")
+    assertEquals(
+      "NA",
+      appender.lastLoggerName,
+      "Expected last logger name to be 'NA' when logging is off, was '${appender.lastLoggerName}'",
+    )
   }
 
   private fun createAppender(): SimpleAppender = SimpleAppender()
 
   class SimpleAppender : Appender {
-    var lastMessage: String = "NA"
+    var lastMessage: String? = "NA"
     var lastLevel: String = "NA"
     var lastLoggerName: String = "NA"
 
-    override fun trace(loggerName: String, message: String) {
-      lastMessage = message
-      lastLevel = "trace"
-      lastLoggerName = loggerName
+    override fun log(loggingEvent: KLoggingEvent) {
+      lastMessage = loggingEvent.message
+      lastLevel = loggingEvent.level.name.lowercase()
+      lastLoggerName = loggingEvent.loggerName
     }
-
-    override fun debug(loggerName: String, message: String) {
-      lastMessage = message
-      lastLevel = "debug"
-      lastLoggerName = loggerName
-    }
-
-    override fun info(loggerName: String, message: String) {
-      lastMessage = message
-      lastLevel = "info"
-      lastLoggerName = loggerName
-    }
-
-    override fun warn(loggerName: String, message: String) {
-      lastMessage = message
-      lastLevel = "warn"
-      lastLoggerName = loggerName
-    }
-
-    override fun error(loggerName: String, message: String) {
-      lastMessage = message
-      lastLevel = "error"
-      lastLoggerName = loggerName
-    }
-
-    override val includePrefix: Boolean
-      get() = true
   }
 }
