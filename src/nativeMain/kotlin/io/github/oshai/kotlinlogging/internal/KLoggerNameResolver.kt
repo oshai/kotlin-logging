@@ -34,10 +34,10 @@ internal actual object KLoggerNameResolver {
       stackTrace.firstOrNull {
         !it.contains("kfun:kotlin.Throwable") &&
           !it.contains("io.github.oshai.kotlinlogging.internal") &&
-          !it.contains("io.github.oshai.kotlinlogging.KotlinLogging")
-        !it.contains("kfun:io.github.oshai.kotlinlogging.\$init_global#internal")
-        !it.contains("CallInitGlobalPossiblyLock")
-        !it.contains("kfun:io.github.oshai.kotlinlogging.<get-logger>#internal")
+          !it.contains("io.github.oshai.kotlinlogging.KotlinLogging") &&
+          !it.contains("kfun:io.github.oshai.kotlinlogging.\$init_global#internal") &&
+          !it.contains("CallInitGlobalPossiblyLock") &&
+          !it.contains("kfun:io.github.oshai.kotlinlogging.<get-logger>#internal")
       }
 
     if (callerFrame != null) {
