@@ -221,6 +221,7 @@ kotlin {
             dependsOn(directMain)
         }
         val nativeTest by creating {
+            dependsOn(commonTest)
             dependencies {
                 implementation(kotlin("test"))
             }
