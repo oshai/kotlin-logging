@@ -241,6 +241,9 @@ kotlin {
             getByName("${it.targetName}Main") {
                 dependsOn(linuxMain)
             }
+            getByName("${it.targetName}Test") {
+                dependsOn(nativeTest)
+            }
         }
         darwinTargets.forEach {
             getByName("${it.targetName}Main") {
