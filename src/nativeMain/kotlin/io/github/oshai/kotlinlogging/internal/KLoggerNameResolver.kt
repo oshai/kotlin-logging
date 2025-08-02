@@ -20,22 +20,19 @@ internal actual object KLoggerNameResolver {
       return nameFromReflection
     }
 
-    // START: Diagnostic code
-    println("--- KOTLIN-LOGGING DIAGNOSTIC: STACK TRACE ---")
-    Throwable().getStackTrace().forEach { println(it) }
-    println("--- END DIAGNOSTIC ---")
-    // END: Diagnostic code
-
     // Fallback for top-level loggers: Parse the stack trace string array.
     val stackTrace: Array<String> = Throwable().getStackTrace()
 
-    // Find the first frame outside the logging library's package.
-    val callerFrame = stackTrace.firstOrNull { !it.contains("io.github.oshai.kotlinlogging") }
+    // Find the call to the logger factory as a reliable anchor.
+    val loggerFactoryCallIndex =
+      stackTrace.indexOfFirst { it.contains("io.github.oshai.kotlinlogging.KotlinLogging#logger") }
 
-    if (callerFrame != null) {
-      // A typical frame string is: " at
-      // kfun:io.github.oshai.kotlinlogging.SimpleNativeTestKt.<clinit>()"
-      // This regex extracts the fully qualified name.
+    // The caller is the next frame in the stack trace.
+    if (loggerFactoryCallIndex != -1 && loggerFactoryCallIndex + 1 < stackTrace.size) {
+      val callerFrame = stackTrace[loggerFactoryCallIndex + 1]
+
+      // This regex is tailored to the format from the diagnostic log:
+      // "kfun:io.github.oshai.kotlinlogging.SimpleTest#<init>()"
       val regex = Regex("""kfun:([^#(<]+)""")
       val fqName = regex.find(callerFrame)?.groupValues?.get(1)?.trim()
 
