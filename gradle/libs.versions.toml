@@ -32,8 +32,10 @@ kotlinx-coroutines-slf4j = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
 
-junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
-junit-jupiter-params = { module = "org.junit.jupiter:junit-jupiter-params", version.ref = "junit" }
+junit-bom = { module = "org.junit:junit-bom", version.ref = "junit" }
+junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine" }
+junit-jupiter-params = { module = "org.junit.jupiter:junit-jupiter-params" }
+junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
 
 mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockito" }
 
