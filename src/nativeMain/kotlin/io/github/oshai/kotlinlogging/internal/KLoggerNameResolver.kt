@@ -23,16 +23,15 @@ internal actual object KLoggerNameResolver {
     // Fallback for top-level loggers: Parse the stack trace string array.
     val stackTrace: Array<String> = Throwable().getStackTrace()
 
-    // Find the call to this function as a reliable anchor.
-    val resolverCallIndex =
-      stackTrace.indexOfFirst {
-        it.contains("io.github.oshai.kotlinlogging.internal.KLoggerNameResolver#name")
+    // Find the first frame outside of the logging framework's internal machinery.
+    val callerFrame =
+      stackTrace.firstOrNull {
+        !it.contains("kfun:kotlin.Throwable") &&
+          !it.contains("io.github.oshai.kotlinlogging.internal") &&
+          !it.contains("io.github.oshai.kotlinlogging.KotlinLogging")
       }
 
-    // The caller is two frames up from this function in the stack trace.
-    val callerFrameIndex = resolverCallIndex + 2
-    if (resolverCallIndex != -1 && callerFrameIndex < stackTrace.size) {
-      val callerFrame = stackTrace[callerFrameIndex]
+    if (callerFrame != null) {
       val regex = Regex("""kfun:([^#(<]+)""")
       val fqName = regex.find(callerFrame)?.groupValues?.get(1)?.trim()
       if (fqName != null) {
