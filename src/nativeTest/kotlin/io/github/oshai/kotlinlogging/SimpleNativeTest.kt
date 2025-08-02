@@ -23,9 +23,9 @@ class SimpleNativeTest {
   fun simpleNativeTest() {
     println("Asserting logger name: Expected 'SimpleNativeTest', was '${logger.name}'")
     assertEquals(
-      "SimpleNativeTest",
+      "io.github.oshai.kotlinlogging.SimpleNativeTest",
       logger.name,
-      "Expected logger name to be 'SimpleNativeTest', was '${logger.name}'",
+      "Expected logger name to be 'io.github.oshai.kotlinlogging.SimpleNativeTest', was '${logger.name}'",
     )
     logger.info { "info msg" }
     println("Asserting last message: Expected 'info msg', was '${appender.lastMessage}'")
@@ -41,12 +41,12 @@ class SimpleNativeTest {
       "Expected last level to be 'info', was '${appender.lastLevel}'",
     )
     println(
-      "Asserting last logger name: Expected 'SimpleNativeTest', was '${appender.lastLoggerName}'"
+      "Asserting last logger name: Expected 'io.github.oshai.kotlinlogging.SimpleNativeTest', was '${appender.lastLoggerName}'"
     )
     assertEquals(
-      "SimpleNativeTest",
+      "io.github.oshai.kotlinlogging.SimpleNativeTest",
       appender.lastLoggerName,
-      "Expected last logger name to be 'SimpleNativeTest', was '${appender.lastLoggerName}'",
+      "Expected last logger name to be 'io.github.oshai.kotlinlogging.SimpleNativeTest', was '${appender.lastLoggerName}'",
     )
   }
 
