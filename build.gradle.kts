@@ -1,10 +1,8 @@
 // File: build.gradle.kts
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
 import org.gradle.jvm.tasks.Jar
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
-import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -34,7 +32,6 @@ tasks.withType<KotlinCompile> {
 kotlin {
     explicitApi()
 
-    @OptIn(ExperimentalKotlinGradlePluginApi::class)
     compilerOptions {
         // kotlin compiler compatibility options
         apiVersion.set(KotlinVersion.KOTLIN_2_0)
@@ -79,7 +76,7 @@ kotlin {
         }
         nodejs()
     }
-    @OptIn(ExperimentalWasmDsl::class)
+    @OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
     wasmJs {
         browser {
             testTask {
@@ -265,7 +262,6 @@ android {
     defaultConfig {
         minSdk = 21
     }
-    @Suppress("UnstableApiUsage")
     testOptions {
         unitTests.isReturnDefaultValues = true
     }
