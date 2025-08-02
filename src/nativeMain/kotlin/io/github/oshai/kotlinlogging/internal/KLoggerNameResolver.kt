@@ -24,9 +24,9 @@ internal actual object KLoggerNameResolver {
     val stackTrace: Array<String> = Throwable().getStackTrace()
 
     // START: Diagnostic code
-    println("--- KOTLIN-LOGGING DIAGNOSTIC: STACK TRACE ---")
-    stackTrace.forEach { println(it) }
-    println("--- END DIAGNOSTIC ---")
+    //    println("--- KOTLIN-LOGGING DIAGNOSTIC: STACK TRACE ---")
+    //    stackTrace.forEach { println(it) }
+    //    println("--- END DIAGNOSTIC ---")
     // END: Diagnostic code
 
     // Find the first frame outside of the logging framework's internal machinery.
