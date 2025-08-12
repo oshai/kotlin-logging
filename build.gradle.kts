@@ -87,6 +87,8 @@ kotlin {
             }
         }
     }
+    @OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
+    wasmWasi {}
     androidTarget {
         publishLibraryVariants("release", "debug")
     }
@@ -216,6 +218,14 @@ kotlin {
         val wasmJsTest by getting {
             dependencies {
                 implementation(kotlin("test-wasm-js"))
+            }
+        }
+        val wasmWasiMain by getting {
+            dependsOn(directMain)
+        }
+        val wasmWasiTest by getting {
+            dependencies {
+                implementation(kotlin("test-wasm-wasi"))
             }
         }
         val nativeMain by creating {
