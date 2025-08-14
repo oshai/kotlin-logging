@@ -37,11 +37,12 @@ class SimpleWasmWasiTest {
       assertEquals("SimpleWasmWasiTest", n)
     }
     anonymousFilePropLogger.info { "info msg" }
-    val expected = if (n.isNotEmpty()) {
-      "INFO: [SimpleWasmWasiTest] info msg"
-    } else {
-      "INFO: [] info msg"
-    }
+    val expected =
+      if (n.isNotEmpty()) {
+        "INFO: [SimpleWasmWasiTest] info msg"
+      } else {
+        "INFO: [] info msg"
+      }
     assertEquals(expected, appender.lastMessage)
   }
 
