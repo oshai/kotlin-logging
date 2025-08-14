@@ -87,6 +87,11 @@ kotlin {
             }
         }
     }
+    @OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
+    wasmWasi { // console based WASI target
+        // Use nodejs as runtime env for tests & distribution (WASI support via node --experimental-wasi-unstable-preview1)
+        nodejs()
+    }
     androidTarget {
         publishLibraryVariants("release", "debug")
     }
@@ -216,6 +221,14 @@ kotlin {
         val wasmJsTest by getting {
             dependencies {
                 implementation(kotlin("test-wasm-js"))
+            }
+        }
+        val wasmWasiMain by getting {
+            dependsOn(directMain)
+        }
+        val wasmWasiTest by getting {
+            dependencies {
+                implementation(kotlin("test-wasm-wasi"))
             }
         }
         val nativeMain by creating {
