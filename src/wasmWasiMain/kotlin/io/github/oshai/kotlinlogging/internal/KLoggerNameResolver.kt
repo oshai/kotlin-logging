@@ -3,23 +3,13 @@ package io.github.oshai.kotlinlogging.internal
 private const val NO_CLASS = ""
 
 internal actual object KLoggerNameResolver {
-  private val kotlinLoggingRegex = Regex("\\.KotlinLogging\\.logger\\s")
-  private val topLevelPropertyRegex = Regex("<init properties (\\S+)\\.kt>")
-  private val classPropertyRegex = Regex("\\.(\\S+)\\.<init>")
-
+  // In WASI the stacktrace is often empty; derive from lambda's synthetic class name when possible.
   internal actual fun name(func: () -> Unit): String {
-    val stackTrace = Exception().stackTraceToString().split("\n")
-    val invokingClassLine = stackTrace.indexOfFirst(kotlinLoggingRegex::containsMatchIn) + 1
-    return if (invokingClassLine in 1 ..< stackTrace.size) {
-      getInvokingClass(stackTrace[invokingClassLine])
-    } else {
-      NO_CLASS
-    }
-  }
-
-  private fun getInvokingClass(line: String): String {
-    return topLevelPropertyRegex.find(line)?.let { it.groupValues[1].split(".").last() }
-      ?: classPropertyRegex.find(line)?.let { it.groupValues[1].split(".").last() }
-      ?: NO_CLASS
+    val qn = func::class.qualifiedName ?: return NO_CLASS
+    // Examples:
+    //  - "SimpleWasmWasiTest$anonymousClassPropLogger$lambda" -> "SimpleWasmWasiTest"
+    //  - "anonymousFilePropLogger$lambda" -> unknown (return NO_CLASS)
+    val base = qn.substringBefore('$')
+    return if (base.isNotEmpty() && base != "anonymousFilePropLogger") base else NO_CLASS
   }
 }
