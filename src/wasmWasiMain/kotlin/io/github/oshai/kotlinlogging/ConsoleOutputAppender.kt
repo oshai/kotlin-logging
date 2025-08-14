@@ -4,7 +4,11 @@ package io.github.oshai.kotlinlogging
 public object ConsoleOutputAppender : FormattingAppender() {
   override fun logFormattedMessage(loggingEvent: KLoggingEvent, formattedMessage: Any?) {
     when (loggingEvent.level) {
-      Level.TRACE, Level.DEBUG, Level.INFO, Level.WARN, Level.ERROR -> println(formattedMessage)
+      Level.TRACE,
+      Level.DEBUG,
+      Level.INFO,
+      Level.WARN,
+      Level.ERROR -> println(formattedMessage)
       Level.OFF -> Unit
     }
   }
