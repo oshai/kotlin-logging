@@ -6,7 +6,7 @@ jobs:
   greeting:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/first-interaction@v2
+    - uses: actions/first-interaction@v3
       with:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
         issue-message: 'Thank you for reporting an issue. See the wiki for documentation and slack for questions.'
