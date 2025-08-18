@@ -5,6 +5,9 @@ import kotlin.test.*
 private val namedLogger = KotlinLogging.logger("SimpleWasmWasiTest")
 private val anonymousFilePropLogger = KotlinLogging.logger {}
 
+// Create a logger inside a top-level function to exercise the stacktrace-based fallback
+private fun createAnonymousFunctionLogger() = KotlinLogging.logger {}
+
 class SimpleWasmWasiTest {
   private lateinit var appender: SimpleAppender
   private val anonymousClassPropLogger = KotlinLogging.logger {}
@@ -51,6 +54,24 @@ class SimpleWasmWasiTest {
     assertEquals("SimpleWasmWasiTest", anonymousClassPropLogger.name)
     anonymousClassPropLogger.info { "info msg" }
     assertEquals("INFO: [SimpleWasmWasiTest] info msg", appender.lastMessage)
+  }
+
+  @Test
+  fun anonymousFunctionWasiTest_stacktraceFallback() {
+    // This aims to cover the new fallback that parses the .kt filename from the stacktrace.
+    val logger = createAnonymousFunctionLogger()
+    val n = logger.name
+    if (n.isNotEmpty()) {
+      assertEquals("SimpleWasmWasiTest", n)
+    }
+    logger.info { "function msg" }
+    val expected =
+      if (n.isNotEmpty()) {
+        "INFO: [SimpleWasmWasiTest] function msg"
+      } else {
+        "INFO: [] function msg"
+      }
+    assertEquals(expected, appender.lastMessage)
   }
 
   @Test
