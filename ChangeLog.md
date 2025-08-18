@@ -33,10 +33,6 @@ Below is a list of all versions, some history and note-worthy changes.
 
 # Version 7
 
-Unreleased changes (will be part of next 7.x release):
-
-- Add WebAssembly WASI (wasmWasi) target relying on directMain console output.
-
 Released on: Jun 14, 2024.  
 Full change log:
 [v.7](https://github.com/oshai/kotlin-logging/releases/tag/7.0.0).
