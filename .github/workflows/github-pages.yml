@@ -27,7 +27,7 @@ jobs:
     runs-on: macos-latest # For Kotlin/Native
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Configure JDK
         uses: actions/setup-java@v4
