@@ -2,7 +2,7 @@
 
 # kotlin version > 2.1.x do not support kotlin 2.0 competability
 # see https://github.com/oshai/kotlin-logging/issues/546
-kotlin = "2.1.21"
+kotlin = "2.2.20"
 android-gradle-plugin = "8.13.0"
 dokka = "2.0.0"
 spotless = "7.2.1"
