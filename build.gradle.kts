@@ -302,11 +302,27 @@ tasks {
 
 // Docs
 
-tasks {
-    register<Jar>("dokkaJar") {
-        from(dokkaHtml)
-        dependsOn(dokkaHtml)
-        archiveClassifier.set("javadoc")
+tasks.register("javadocJar", Jar::class) {
+    archiveClassifier.set("javadoc")
+}
+
+dependencies {
+    dokka(project(":"))
+}
+
+dokka {
+    moduleName.set("kotlin-logging")
+    dokkaSourceSets {
+        configureEach {
+            sourceLink {
+                localDirectory.set(project.projectDir.resolve("src"))
+                remoteUrl.set(uri("https://github.com/oshai/kotlin-logging/tree/master/src"))
+                remoteLineSuffix.set("#L")
+            }
+        }
+    }
+    dokkaPublications.html {
+        outputDirectory.set(project.layout.buildDirectory.dir("dokka"))
     }
 }
 
@@ -374,7 +390,7 @@ publishing {
                 url.set("https://github.com/oshai/kotlin-logging/tree/master")
             }
         }
-        artifact(tasks["dokkaJar"])
+        
     }
 }
 
