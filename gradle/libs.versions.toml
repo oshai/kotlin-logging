@@ -9,7 +9,7 @@ spotless = "8.0.0"
 nexus-publish-plugin = "2.0.0"
 
 slf4j = "2.0.17"
-logback = "1.5.19"
+logback = "1.5.20"
 logstash-logback-encoder = "8.1"
 coroutines = "1.10.2"
 junit = "5.13.4"
