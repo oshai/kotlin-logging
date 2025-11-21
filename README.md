@@ -1,4 +1,4 @@
-# [kotlin-logging](https://github.com/oshai/kotlin-logging) [![CI](https://github.com/oshai/kotlin-logging/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/oshai/kotlin-logging/actions/workflows/ci.yml) [![Slack channel](https://img.shields.io/badge/Chat-Slack-blue.svg)](https://kotlinlang.slack.com/messages/kotlin-logging/) [![Maven Central](https://img.shields.io/maven-central/v/io.github.oshai/kotlin-logging.svg)](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22io.github.oshai%22) [![Apache License V.2](https://img.shields.io/badge/license-Apache%20V.2-blue.svg)](https://github.com/oshai/kotlin-logging/blob/master/LICENSE)
+# [kotlin-logging](https://github.com/oshai/kotlin-logging) [![CI](https://github.com/oshai/kotlin-logging/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/oshai/kotlin-logging/actions/workflows/ci.yml) [![Slack channel](https://img.shields.io/badge/Chat-Slack-blue.svg)](https://kotlinlang.slack.com/messages/kotlin-logging/) [![Maven Central](https://img.shields.io/maven-central/v/io.github.oshai/kotlin-logging.svg)](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22io.github.oshai%22) [![Apache License V.2](https://img.shields.io/badge/license-Apache%20V.2-blue.svg)](https://github.com/oshai/kotlin-logging/blob/master/LICENSE) [![Kotlin](https://img.shields.io/badge/kotlin-multiplatform-7f52ff?logo=kotlin)](https://kotlinlang.org/) [![GitHub stars](https://img.shields.io/github/stars/oshai/kotlin-logging?style=social)](https://github.com/oshai/kotlin-logging) <img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/04d2c80d-934d-4d02-a3b2-32ad73cb8542" />
 
 Lightweight Multiplatform logging framework for Kotlin, written in 
 [![Pure Kotlin](https://img.shields.io/badge/100%25-kotlin-blue.svg)](https://kotlinlang.org/).  
@@ -166,10 +166,19 @@ It is possible to configure IntelliJ live templates. For file level logger confi
 ## Contributing
 
 Any contribution is appreciated.  
-See the contributors list in: https://github.com/oshai/kotlin-logging/graphs/contributors
 
 Pull requests are welcome! See instructions in https://github.com/oshai/kotlin-logging/blob/master/CONTRIBUTING.md.  
 
 [Show your ❤ with a ★](https://github.com/oshai/kotlin-logging/stargazers)
+
+Thank you to all the developers who have contributed to kotlin-logging!
+<a href="https://github.com/oshai/kotlin-logging/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=oshai/kotlin-logging" />
+</a>
+
+
+See the full contributors list in: https://github.com/oshai/kotlin-logging/graphs/contributors
+
+
 
 
