@@ -71,7 +71,8 @@ internal class LogbackLogEvent(
 
   override fun getMarkerList(): List<Marker> = markers
 
-  @Deprecated("Deprecated in ILoggingEvent") override fun getMarker(): Marker? = markers.firstOrNull()
+  @Deprecated("Deprecated in ILoggingEvent")
+  override fun getMarker(): Marker? = markers.firstOrNull()
 
   override fun hasCallerData(): Boolean =
     if (kLoggingEvent.internalCompilerData?.fileName != null) {
@@ -95,7 +96,7 @@ internal class LogbackLogEvent(
   }
 
   override fun toString(): String {
-      return "LogbackLogEvent(level=${level}, message=${message})"
+    return "LogbackLogEvent(level=${level}, message=${message})"
   }
 
   companion object {
