@@ -2,6 +2,7 @@ package io.github.oshai.kotlinlogging
 
 import io.github.oshai.kotlinlogging.internal.KLoggerFactory
 import io.github.oshai.kotlinlogging.internal.KLoggerNameResolver
+import kotlin.js.JsName
 
 public object KotlinLogging {
   /**
@@ -10,6 +11,7 @@ public object KotlinLogging {
    * private val logger = KotlinLogging.logger {}
    * ```
    */
+  @JsName("kotlinLoggerByFunc")
   public fun logger(func: () -> Unit): KLogger = logger(KLoggerNameResolver.name(func))
 
   /**
@@ -21,5 +23,6 @@ public object KotlinLogging {
    * In most cases the name represents the package notation of the file that the logger is defined
    * in.
    */
+  @JsName("kotlinLoggerByName")
   public fun logger(name: String): KLogger = KLoggerFactory.logger(name)
 }
