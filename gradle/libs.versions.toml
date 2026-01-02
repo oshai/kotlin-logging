@@ -10,7 +10,7 @@ nexus-publish-plugin = "2.0.0"
 
 slf4j = "2.0.17"
 logback = "1.5.19"
-logstash-logback-encoder = "8.1"
+logstash-logback-encoder = "9.0"
 coroutines = "1.10.2"
 junit = "5.13.4"
 mockito = "5.20.0"
