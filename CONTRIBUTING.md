@@ -38,3 +38,11 @@ To check formatting:
 To fix formatting:
 
 `./gradlew spotlessApply`
+
+## Troubleshooting Build
+
+If you encounter issues resolving dependencies (e.g., from `artifactory.apigee.net` or other internal repositories), you can force the use of Maven Central by using the provided init script:
+
+`./gradlew clean build -I fix_repo.gradle`
+
+This script (`fix_repo.gradle`) overrides repository configurations to ensure artifacts are resolved from Maven Central.

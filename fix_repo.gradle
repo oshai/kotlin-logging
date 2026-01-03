@@ -1,0 +1,20 @@
+allprojects {
+    buildscript {
+        repositories {
+            mavenCentral()
+            google()
+            gradlePluginPortal()
+        }
+    }
+    repositories {
+        mavenCentral()
+        google()
+    }
+}
+
+// Also try to override the root project's buildscript specifically if allprojects doesn't catch it early enough
+initscript {
+    repositories {
+        mavenCentral()
+    }
+}

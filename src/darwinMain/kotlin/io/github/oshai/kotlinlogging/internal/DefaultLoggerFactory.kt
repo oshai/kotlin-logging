@@ -2,19 +2,20 @@ package io.github.oshai.kotlinlogging.internal
 
 import io.github.oshai.kotlinlogging.DarwinKLogger
 import io.github.oshai.kotlinlogging.KLogger
+import io.github.oshai.kotlinlogging.KLoggerFactory
 import io.github.oshai.kotlinlogging.KotlinLoggingConfiguration
 import kotlin.concurrent.AtomicReference
 import platform.darwin.OS_LOG_DEFAULT
 import platform.darwin.os_log_create
 
 /** factory methods to obtain a [KLogger] */
-internal actual object KLoggerFactory {
+internal object DefaultLoggerFactory : KLoggerFactory {
 
   private val constantLogger: AtomicReference<KLogger?> = AtomicReference(null)
   private val constantOsDefaultLogger: KLogger = DarwinKLogger("", OS_LOG_DEFAULT)
 
   /** get logger by explicit name */
-  internal actual fun logger(name: String): KLogger {
+  override fun logger(name: String): KLogger {
     val subsystemConfigured = KotlinLoggingConfiguration.subsystem.value
     val categoryConfigured = KotlinLoggingConfiguration.category.value
     return when {

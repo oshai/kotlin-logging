@@ -1,8 +1,7 @@
 package io.github.oshai.kotlinlogging
 
+import io.github.oshai.kotlinlogging.internal.DirectLoggerFactory
 import kotlin.concurrent.AtomicReference
-
-public expect val DefaultAppender: Appender
 
 public actual object KotlinLoggingConfiguration {
   private val _logLevel = AtomicReference(Level.INFO)
@@ -24,5 +23,12 @@ public actual object KotlinLoggingConfiguration {
     get() = _formatter.value
     set(value) {
       _formatter.value = value
+    }
+
+  private val _logFactory = AtomicReference<KLoggerFactory>(DirectLoggerFactory)
+  public actual var LOG_FACTORY: KLoggerFactory
+    get() = _logFactory.value
+    set(value) {
+      _logFactory.value = value
     }
 }
