@@ -26,7 +26,7 @@ public actual object KotlinLoggingConfiguration {
     }
 
   private val _logFactory = AtomicReference<KLoggerFactory>(DirectLoggerFactory)
-  public actual var LOG_FACTORY: KLoggerFactory
+  public actual var logFactory: KLoggerFactory
     get() = _logFactory.value
     set(value) {
       _logFactory.value = value

@@ -21,5 +21,5 @@ public actual object KotlinLoggingConfiguration {
       logLevel = value
     }
 
-  public actual var LOG_FACTORY: KLoggerFactory = DirectLoggerFactory
+  public actual var logFactory: KLoggerFactory = DirectLoggerFactory
 }
