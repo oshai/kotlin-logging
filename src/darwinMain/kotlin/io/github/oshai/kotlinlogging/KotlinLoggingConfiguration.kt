@@ -1,6 +1,6 @@
 package io.github.oshai.kotlinlogging
 
-import io.github.oshai.kotlinlogging.internal.DefaultLoggerFactory
+import io.github.oshai.kotlinlogging.internal.DarwinLoggerFactory
 import kotlin.concurrent.AtomicReference
 
 public actual object KotlinLoggingConfiguration {
@@ -30,7 +30,7 @@ public actual object KotlinLoggingConfiguration {
       _appender.value = value
     }
 
-  private val _logFactory = AtomicReference<KLoggerFactory>(DefaultLoggerFactory)
+  private val _logFactory = AtomicReference<KLoggerFactory>(DarwinLoggerFactory)
   public actual var logFactory: KLoggerFactory
     get() = _logFactory.value
     set(value) {

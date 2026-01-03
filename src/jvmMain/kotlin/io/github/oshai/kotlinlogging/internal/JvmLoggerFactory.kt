@@ -7,7 +7,7 @@ import io.github.oshai.kotlinlogging.logback.internal.LogbackLoggerFactory
 import io.github.oshai.kotlinlogging.slf4j.internal.Slf4jLoggerFactory
 
 /** factory methods to obtain a [KLogger] */
-internal object DefaultLoggerFactory : KLoggerFactory {
+internal object JvmLoggerFactory : KLoggerFactory {
 
   /** get logger by explicit name */
   override fun logger(name: String): KLogger {

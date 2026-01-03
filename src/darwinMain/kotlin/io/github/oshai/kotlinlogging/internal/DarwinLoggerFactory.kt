@@ -9,7 +9,7 @@ import platform.darwin.OS_LOG_DEFAULT
 import platform.darwin.os_log_create
 
 /** factory methods to obtain a [KLogger] */
-internal object DefaultLoggerFactory : KLoggerFactory {
+internal object DarwinLoggerFactory : KLoggerFactory {
 
   private val constantLogger: AtomicReference<KLogger?> = AtomicReference(null)
   private val constantOsDefaultLogger: KLogger = DarwinKLogger("", OS_LOG_DEFAULT)
