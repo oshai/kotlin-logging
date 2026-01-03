@@ -1,11 +1,11 @@
 package io.github.oshai.kotlinlogging.internal
 
 import io.github.oshai.kotlinlogging.KLogger
+import io.github.oshai.kotlinlogging.KLoggerFactory
 import io.github.oshai.kotlinlogging.slf4j.internal.Slf4jLoggerFactory
 
-internal actual object KLoggerFactory {
-
-  internal actual fun logger(name: String): KLogger {
+internal object DefaultLoggerFactory : KLoggerFactory {
+  override fun logger(name: String): KLogger {
     if (System.getProperty("kotlin-logging-to-android-native") != null) {
       return KLoggerAndroid(name)
     }

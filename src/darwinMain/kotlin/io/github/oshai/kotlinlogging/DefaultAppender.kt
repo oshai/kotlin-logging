@@ -1,3 +1,3 @@
 package io.github.oshai.kotlinlogging
 
-public val DefaultAppender: Appender = ConsoleOutputAppender()
+public val DefaultAppender: Appender = ConsoleOutputAppender
