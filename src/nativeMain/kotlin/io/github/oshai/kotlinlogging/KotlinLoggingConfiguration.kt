@@ -25,10 +25,10 @@ public actual object KotlinLoggingConfiguration {
       _formatter.value = value
     }
 
-  private val _logFactory = AtomicReference<KLoggerFactory>(DirectLoggerFactory)
-  public actual var logFactory: KLoggerFactory
-    get() = _logFactory.value
+  private val _loggerFactory = AtomicReference<KLoggerFactory>(DirectLoggerFactory)
+  public actual var loggerFactory: KLoggerFactory
+    get() = _loggerFactory.value
     set(value) {
-      _logFactory.value = value
+      _loggerFactory.value = value
     }
 }

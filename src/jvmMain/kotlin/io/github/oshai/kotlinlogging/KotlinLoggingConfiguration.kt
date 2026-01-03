@@ -8,7 +8,7 @@ public actual object KotlinLoggingConfiguration {
    * logging implementation (e.g., to [io.github.oshai.kotlinlogging.internal.DirectLoggerFactory]
    * on JVM/Darwin).
    */
-  @Volatile public actual var logFactory: KLoggerFactory = InternalKLoggerFactory
+  @Volatile public actual var loggerFactory: KLoggerFactory = InternalKLoggerFactory
 
   @Volatile public actual var logLevel: Level = Level.INFO
   @Volatile public actual var formatter: Formatter = DefaultMessageFormatter(includePrefix = true)

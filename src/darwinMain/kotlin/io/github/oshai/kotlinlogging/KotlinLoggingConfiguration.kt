@@ -30,10 +30,10 @@ public actual object KotlinLoggingConfiguration {
       _appender.value = value
     }
 
-  private val _logFactory = AtomicReference<KLoggerFactory>(DarwinLoggerFactory)
-  public actual var logFactory: KLoggerFactory
-    get() = _logFactory.value
+  private val _loggerFactory = AtomicReference<KLoggerFactory>(DarwinLoggerFactory)
+  public actual var loggerFactory: KLoggerFactory
+    get() = _loggerFactory.value
     set(value) {
-      _logFactory.value = value
+      _loggerFactory.value = value
     }
 }

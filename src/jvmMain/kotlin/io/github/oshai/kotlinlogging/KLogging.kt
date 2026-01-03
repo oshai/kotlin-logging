@@ -33,8 +33,9 @@ public interface KLoggable {
   public val logger: KLogger
 
   /** get logger for the class */
-  public fun logger(): KLogger = KotlinLoggingConfiguration.logFactory.logger(this::class.java.name)
+  public fun logger(): KLogger =
+    KotlinLoggingConfiguration.loggerFactory.logger(this::class.java.name)
 
   /** get logger by explicit name */
-  public fun logger(name: String): KLogger = KotlinLoggingConfiguration.logFactory.logger(name)
+  public fun logger(name: String): KLogger = KotlinLoggingConfiguration.loggerFactory.logger(name)
 }
