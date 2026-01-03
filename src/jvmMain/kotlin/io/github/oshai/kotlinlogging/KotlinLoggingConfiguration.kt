@@ -5,7 +5,8 @@ import io.github.oshai.kotlinlogging.internal.JvmLoggerFactory as InternalKLogge
 public actual object KotlinLoggingConfiguration {
   /**
    * The global logger factory used by `KotlinLogging.logger`. Change this to swap the underlying
-   * logging implementation (e.g., to [io.github.oshai.kotlinlogging.internal.DirectLoggerFactory] on JVM/Darwin).
+   * logging implementation (e.g., to [io.github.oshai.kotlinlogging.internal.DirectLoggerFactory]
+   * on JVM/Darwin).
    */
   @Volatile public actual var logFactory: KLoggerFactory = InternalKLoggerFactory
 
