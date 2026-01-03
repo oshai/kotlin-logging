@@ -2,8 +2,8 @@ package io.github.oshai.kotlinlogging.jul.internal
 
 import io.github.oshai.kotlinlogging.AppenderWithWriter
 import io.github.oshai.kotlinlogging.KLogger
-import io.github.oshai.kotlinlogging.KotlinLoggingConfiguration
 import io.github.oshai.kotlinlogging.KotlinLogging
+import io.github.oshai.kotlinlogging.KotlinLoggingConfiguration
 import io.github.oshai.kotlinlogging.addAppender
 import io.github.oshai.kotlinlogging.removeAppender
 import io.github.oshai.kotlinlogging.slf4j.internal.Slf4jLoggerFactory
