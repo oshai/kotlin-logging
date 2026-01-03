@@ -2,7 +2,6 @@ package io.github.oshai.kotlinlogging
 
 import io.github.oshai.kotlinlogging.internal.DefaultLoggerFactory
 
-
 public actual object KotlinLoggingConfiguration {
   @Volatile public actual var logLevel: Level = Level.INFO
   @Volatile public actual var formatter: Formatter = DefaultMessageFormatter(includePrefix = true)
