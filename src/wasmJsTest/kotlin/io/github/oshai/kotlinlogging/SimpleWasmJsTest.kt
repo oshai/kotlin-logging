@@ -12,13 +12,13 @@ class SimpleWasmJsTest {
   @BeforeTest
   fun setup() {
     appender = createAppender()
-    KotlinLoggingConfiguration.appender = appender
+    KotlinLoggingConfiguration.direct.appender = appender
   }
 
   @AfterTest
   fun cleanup() {
-    KotlinLoggingConfiguration.appender = ConsoleOutputAppender()
-    KotlinLoggingConfiguration.logLevel = Level.INFO
+    KotlinLoggingConfiguration.direct.appender = ConsoleOutputAppender()
+    KotlinLoggingConfiguration.direct.logLevel = Level.INFO
   }
 
   @Test
@@ -45,7 +45,7 @@ class SimpleWasmJsTest {
 
   @Test
   fun offLevelWasmJsTest() {
-    KotlinLoggingConfiguration.logLevel = Level.OFF
+    KotlinLoggingConfiguration.direct.logLevel = Level.OFF
     assertTrue(namedLogger.isLoggingOff())
     namedLogger.error { "error msg" }
     assertEquals("NA", appender.lastMessage)

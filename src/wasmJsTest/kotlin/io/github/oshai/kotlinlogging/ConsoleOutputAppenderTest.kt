@@ -14,24 +14,24 @@ class ConsoleOutputAppenderTest {
 
   @BeforeTest
   fun setup() {
-    defaultLogLevel = KotlinLoggingConfiguration.logLevel
-    defaultFormatter = KotlinLoggingConfiguration.formatter
-    defaultAppender = KotlinLoggingConfiguration.appender
+    defaultLogLevel = KotlinLoggingConfiguration.direct.logLevel
+    defaultFormatter = KotlinLoggingConfiguration.direct.formatter
+    defaultAppender = KotlinLoggingConfiguration.direct.appender
 
     testAppender = ConsoleOutputAppender()
 
-    KotlinLoggingConfiguration.logLevel = Level.TRACE
-    KotlinLoggingConfiguration.formatter = TestFormatter()
-    KotlinLoggingConfiguration.appender = testAppender
+    KotlinLoggingConfiguration.direct.logLevel = Level.TRACE
+    KotlinLoggingConfiguration.direct.formatter = TestFormatter()
+    KotlinLoggingConfiguration.direct.appender = testAppender
 
     setupConsole()
   }
 
   @AfterTest
   fun cleanup() {
-    KotlinLoggingConfiguration.logLevel = defaultLogLevel
-    KotlinLoggingConfiguration.formatter = defaultFormatter
-    KotlinLoggingConfiguration.appender = defaultAppender
+    KotlinLoggingConfiguration.direct.logLevel = defaultLogLevel
+    KotlinLoggingConfiguration.direct.formatter = defaultFormatter
+    KotlinLoggingConfiguration.direct.appender = defaultAppender
 
     cleanupConsole()
   }
