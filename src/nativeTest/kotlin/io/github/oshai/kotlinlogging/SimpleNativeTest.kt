@@ -10,13 +10,13 @@ class SimpleNativeTest {
   @BeforeTest
   fun setup() {
     appender = createAppender()
-    KotlinLoggingConfiguration.appender = appender
+    KotlinLoggingConfiguration.direct.appender = appender
   }
 
   @AfterTest
   fun cleanup() {
-    KotlinLoggingConfiguration.appender = ConsoleOutputAppender
-    KotlinLoggingConfiguration.logLevel = Level.INFO
+    KotlinLoggingConfiguration.direct.appender = DefaultAppender
+    KotlinLoggingConfiguration.direct.logLevel = Level.INFO
   }
 
   @Test
@@ -52,7 +52,7 @@ class SimpleNativeTest {
 
   @Test
   fun offLevelNativeTest() {
-    KotlinLoggingConfiguration.logLevel = Level.OFF
+    KotlinLoggingConfiguration.direct.logLevel = Level.OFF
     val isLoggingOff = logger.isLoggingOff()
     println("Asserting logging is off: Expected true, was '$isLoggingOff'")
     assertTrue(isLoggingOff, "Expected logging to be off, was '$isLoggingOff'")
