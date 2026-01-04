@@ -13,6 +13,9 @@ public enum class Level(private val levelInt: Int, private val levelStr: String)
     return levelInt
   }
 
+  public fun isLoggingEnabled(): Boolean =
+    this.compareTo(KotlinLoggingConfiguration.direct.logLevel) >= 0
+
   /** Returns the string representation of this Level. */
   override fun toString(): String {
     return levelStr

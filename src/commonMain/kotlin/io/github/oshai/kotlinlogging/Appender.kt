@@ -8,7 +8,7 @@ public abstract class FormattingAppender : Appender {
   public abstract fun logFormattedMessage(loggingEvent: KLoggingEvent, formattedMessage: Any?)
 
   override fun log(loggingEvent: KLoggingEvent) {
-    KotlinLoggingConfiguration.formatter.formatMessage(loggingEvent).let {
+    KotlinLoggingConfiguration.direct.formatter.formatMessage(loggingEvent).let {
       logFormattedMessage(loggingEvent, it)
     }
   }

@@ -3,8 +3,10 @@ package io.github.oshai.kotlinlogging.jul.internal
 import io.github.oshai.kotlinlogging.AppenderWithWriter
 import io.github.oshai.kotlinlogging.KLogger
 import io.github.oshai.kotlinlogging.KotlinLogging
+import io.github.oshai.kotlinlogging.KotlinLoggingConfiguration
 import io.github.oshai.kotlinlogging.addAppender
 import io.github.oshai.kotlinlogging.removeAppender
+import io.github.oshai.kotlinlogging.slf4j.internal.Slf4jLoggerFactory
 import java.util.logging.Level
 import java.util.logging.Logger
 import org.junit.jupiter.api.AfterAll
@@ -29,6 +31,7 @@ class JulLoggerWrapperTest {
       SLF4JBridgeHandler.install()
       Logger.getLogger("").level = Level.FINEST
       System.setProperty("kotlin-logging-to-jul", "true")
+      KotlinLoggingConfiguration.loggerFactory = JulLoggerFactory
       addAppender(appenderWithWriter.appender)
       logger = KotlinLogging.logger {}
       warnLogger = KotlinLogging.logger("warnLogger")
@@ -41,6 +44,7 @@ class JulLoggerWrapperTest {
     @JvmStatic
     fun teardown() {
       System.clearProperty("kotlin-logging-to-jul")
+      KotlinLoggingConfiguration.loggerFactory = Slf4jLoggerFactory
       removeAppender(appenderWithWriter.appender)
     }
   }

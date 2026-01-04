@@ -1,7 +1,5 @@
 package io.github.oshai.kotlinlogging
 
-import io.github.oshai.kotlinlogging.internal.KLoggerFactory
-
 /**
  * A class with logging capabilities usage example:
  * ```
@@ -35,8 +33,9 @@ public interface KLoggable {
   public val logger: KLogger
 
   /** get logger for the class */
-  public fun logger(): KLogger = KLoggerFactory.logger(this::class.java.name)
+  public fun logger(): KLogger =
+    KotlinLoggingConfiguration.loggerFactory.logger(this::class.java.name)
 
   /** get logger by explicit name */
-  public fun logger(name: String): KLogger = KLoggerFactory.logger(name)
+  public fun logger(name: String): KLogger = KotlinLoggingConfiguration.loggerFactory.logger(name)
 }

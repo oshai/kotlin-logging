@@ -2,9 +2,12 @@ package io.github.oshai.kotlinlogging.logback.internal
 
 import ch.qos.logback.classic.LoggerContext
 import io.github.oshai.kotlinlogging.KLogger
+import io.github.oshai.kotlinlogging.KLoggerFactory
 import org.slf4j.LoggerFactory
 
-public object LogbackLoggerFactory {
+public object LogbackLoggerFactory : KLoggerFactory {
+
+  override fun logger(name: String): KLogger = logbackLogger(name)
 
   /** Get a Logback logger by name. Logback relies on SLF4J logger factory */
   internal fun logbackLogger(name: String): KLogger {
