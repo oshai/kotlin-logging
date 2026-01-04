@@ -7,8 +7,7 @@ import io.github.oshai.kotlinlogging.slf4j.internal.Slf4jLoggerFactory
 public actual object KotlinLoggingConfiguration {
   /**
    * The global logger factory used by `KotlinLogging.logger`. Change this to swap the underlying
-   * logging implementation (e.g., to [io.github.oshai.kotlinlogging.internal.DirectLoggerFactory]
-   * on JVM/Darwin).
+   * logging implementation (e.g., to [DirectLoggerFactory] on JVM/Darwin).
    */
   @Volatile public actual var loggerFactory: KLoggerFactory = detectLogger()
 

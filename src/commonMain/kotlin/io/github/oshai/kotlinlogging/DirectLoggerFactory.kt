@@ -3,7 +3,7 @@ package io.github.oshai.kotlinlogging
 import io.github.oshai.kotlinlogging.internal.KLoggerDirect
 
 /**
- * A [KLoggerFactory] that creates [io.github.oshai.kotlinlogging.internal.KLoggerDirect] instances.
+ * A [KLoggerFactory] that creates direct logger instances.
  *
  * "Direct" logging means that log events are sent directly to the configured
  * [io.github.oshai.kotlinlogging.KotlinLoggingConfiguration.direct], which defaults to writing to
@@ -15,7 +15,7 @@ import io.github.oshai.kotlinlogging.internal.KLoggerDirect
  */
 public object DirectLoggerFactory : KLoggerFactory {
 
-  /** Returns a [io.github.oshai.kotlinlogging.internal.KLoggerDirect] with the given [name]. */
+  /** Returns a direct logger with the given [name]. */
   override fun logger(name: String): KLogger {
     return KLoggerDirect(name)
   }
