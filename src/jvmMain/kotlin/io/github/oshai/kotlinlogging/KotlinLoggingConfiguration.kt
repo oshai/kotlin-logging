@@ -1,6 +1,5 @@
 package io.github.oshai.kotlinlogging
 
-import io.github.oshai.kotlinlogging.internal.DirectLoggerFactory
 import io.github.oshai.kotlinlogging.jul.internal.JulLoggerFactory
 import io.github.oshai.kotlinlogging.logback.internal.LogbackLoggerFactory
 import io.github.oshai.kotlinlogging.slf4j.internal.Slf4jLoggerFactory
@@ -13,9 +12,49 @@ public actual object KotlinLoggingConfiguration {
    */
   @Volatile public actual var loggerFactory: KLoggerFactory = detectLogger()
 
-  @Volatile public actual var logLevel: Level = Level.INFO
-  @Volatile public actual var formatter: Formatter = DefaultMessageFormatter(includePrefix = true)
-  @Volatile public actual var appender: Appender = DefaultAppender
+  public actual val direct: DirectLoggingConfiguration =
+    object : DirectLoggingConfiguration {
+      @Volatile
+      override var logLevel: Level = Level.INFO
+        set(value) {
+          field = value
+          checkFactory("logLevel")
+        }
+
+      @Volatile
+      override var formatter: Formatter = DefaultMessageFormatter(includePrefix = true)
+        set(value) {
+          field = value
+          checkFactory("formatter")
+        }
+
+      @Volatile
+      override var appender: Appender = DefaultAppender
+        set(value) {
+          field = value
+          checkFactory("appender")
+        }
+
+      private fun checkFactory(name: String) {
+        if (loggerFactory != DirectLoggerFactory) {
+          println(
+            "kotlin-logging: [WARN] configuring 'direct.$name' but the active logger factory is not 'DirectLoggerFactory' (active: ${loggerFactory::class.simpleName}). This config might be ignored."
+          )
+        }
+      }
+    }
+
+  public actual interface DirectLoggingConfiguration {
+    public actual var logLevel: Level
+    public actual var formatter: Formatter
+    public actual var appender: Appender
+  }
+
+  init {
+    println(
+      "kotlin-logging: initializing... active logger factory: ${loggerFactory::class.simpleName}"
+    )
+  }
 
   private fun detectLogger(): KLoggerFactory {
     if (System.getProperty("kotlin-logging-to-jul") != null) {

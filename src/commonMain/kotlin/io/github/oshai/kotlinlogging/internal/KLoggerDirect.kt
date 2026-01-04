@@ -16,7 +16,8 @@ internal class KLoggerDirect(override val name: String) : KLogger {
       KLoggingEventBuilder().apply(block).run {
         when (level) {
           OFF -> Unit
-          else -> KotlinLoggingConfiguration.appender.log(KLoggingEvent(level, marker, name, this))
+          else ->
+            KotlinLoggingConfiguration.direct.appender.log(KLoggingEvent(level, marker, name, this))
         }
       }
     }

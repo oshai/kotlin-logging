@@ -9,24 +9,24 @@ public expect object KotlinLoggingConfiguration {
   public var loggerFactory: KLoggerFactory
 
   /**
-   * Configuration for the **Direct Logging** implementation. On JVM/Android/Darwin, this ONLY
-   * applies if [loggerFactory] is set to use
+   * Configuration for the **Direct Logging** implementation.
+   *
+   * On JVM/Android/Darwin, this ONLY applies if [loggerFactory] is set to use
    * [io.github.oshai.kotlinlogging.internal.DirectLoggerFactory]. On Native/JS/Wasm, this is the
    * default mechanism.
    */
-  public var logLevel: Level
+  public val direct: DirectLoggingConfiguration
 
   /**
-   * Configuration for the **Direct Logging** implementation. On JVM/Android/Darwin, this ONLY
-   * applies if [loggerFactory] is set to use
-   * [io.github.oshai.kotlinlogging.internal.DirectLoggerFactory].
+   * Configuration for the **Direct Logging** implementation.
+   *
+   * These settings only apply when the [KotlinLoggingConfiguration.loggerFactory] is set to
+   * [io.github.oshai.kotlinlogging.internal.DirectLoggerFactory], which is the default on Native,
+   * JS, and Wasm, and can be opted-into on JVM, Android, and Darwin.
    */
-  public var formatter: Formatter
-
-  /**
-   * Configuration for the **Direct Logging** implementation. On JVM/Android/Darwin, this ONLY
-   * applies if [loggerFactory] is set to use
-   * [io.github.oshai.kotlinlogging.internal.DirectLoggerFactory].
-   */
-  public var appender: Appender
+  public interface DirectLoggingConfiguration {
+    public var logLevel: Level
+    public var formatter: Formatter
+    public var appender: Appender
+  }
 }

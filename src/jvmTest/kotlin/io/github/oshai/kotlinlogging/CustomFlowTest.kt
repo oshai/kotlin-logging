@@ -1,6 +1,5 @@
 package io.github.oshai.kotlinlogging
 
-import io.github.oshai.kotlinlogging.internal.DirectLoggerFactory
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
@@ -11,30 +10,32 @@ import org.junit.jupiter.api.Test
  *
  * This test suite demonstrates and specifically tests the ability for users to customize:
  * 1. The [KLoggerFactory] used (e.g., swapping SLF4J for [DirectLoggerFactory] or a custom one).
- * 2. The [Appender] used when using [DirectLoggerFactory].
- * 3. The [Formatter] used when using [DirectLoggerFactory].
+ * 2. The [Appender] used when using [DirectLoggerFactory] (via
+ *    [KotlinLoggingConfiguration.direct]).
+ * 3. The [Formatter] used when using [DirectLoggerFactory] (via
+ *    [KotlinLoggingConfiguration.direct]).
  */
 class CustomFlowTest {
 
   private val originalFactory = KotlinLoggingConfiguration.loggerFactory
-  private val originalAppender = KotlinLoggingConfiguration.appender
-  private val originalFormatter = KotlinLoggingConfiguration.formatter
-  private val originalLevel = KotlinLoggingConfiguration.logLevel
+  private val originalAppender = KotlinLoggingConfiguration.direct.appender
+  private val originalFormatter = KotlinLoggingConfiguration.direct.formatter
+  private val originalLevel = KotlinLoggingConfiguration.direct.logLevel
 
   @BeforeEach
   fun setup() {
     KotlinLoggingConfiguration.loggerFactory = originalFactory
-    KotlinLoggingConfiguration.appender = originalAppender
-    KotlinLoggingConfiguration.formatter = originalFormatter
-    KotlinLoggingConfiguration.logLevel = originalLevel
+    KotlinLoggingConfiguration.direct.appender = originalAppender
+    KotlinLoggingConfiguration.direct.formatter = originalFormatter
+    KotlinLoggingConfiguration.direct.logLevel = originalLevel
   }
 
   @AfterEach
   fun tearDown() {
     KotlinLoggingConfiguration.loggerFactory = originalFactory
-    KotlinLoggingConfiguration.appender = originalAppender
-    KotlinLoggingConfiguration.formatter = originalFormatter
-    KotlinLoggingConfiguration.logLevel = originalLevel
+    KotlinLoggingConfiguration.direct.appender = originalAppender
+    KotlinLoggingConfiguration.direct.formatter = originalFormatter
+    KotlinLoggingConfiguration.direct.logLevel = originalLevel
   }
 
   /**
@@ -48,11 +49,11 @@ class CustomFlowTest {
     val customAppender =
       object : Appender {
         override fun log(loggingEvent: KLoggingEvent) {
-          val formatted = KotlinLoggingConfiguration.formatter.formatMessage(loggingEvent)
+          val formatted = KotlinLoggingConfiguration.direct.formatter.formatMessage(loggingEvent)
           capturedEvents.add(formatted)
         }
       }
-    KotlinLoggingConfiguration.appender = customAppender
+    KotlinLoggingConfiguration.direct.appender = customAppender
 
     val customFormatter =
       object : Formatter {
@@ -60,7 +61,7 @@ class CustomFlowTest {
           return "[CUSTOM] ${loggingEvent.message}"
         }
       }
-    KotlinLoggingConfiguration.formatter = customFormatter
+    KotlinLoggingConfiguration.direct.formatter = customFormatter
 
     val logger = KotlinLogging.logger("MyLogger")
     logger.info { "Hello Direct World" }

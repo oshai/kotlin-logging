@@ -1,24 +1,31 @@
 package io.github.oshai.kotlinlogging
 
-import io.github.oshai.kotlinlogging.internal.DirectLoggerFactory
-
 public actual object KotlinLoggingConfiguration {
-  public actual var logLevel: Level = Level.INFO
-  public actual var formatter: Formatter = DefaultMessageFormatter(includePrefix = true)
-  public actual var appender: Appender = ConsoleOutputAppender()
-
-  @Deprecated("Use appender instead", ReplaceWith("appender"))
-  public var APPENDER: Appender
-    get() = appender
-    set(value) {
-      appender = value
+  public actual val direct: DirectLoggingConfiguration =
+    object : DirectLoggingConfiguration {
+      override var logLevel: Level = Level.INFO
+      override var formatter: Formatter = DefaultMessageFormatter(includePrefix = true)
+      override var appender: Appender = ConsoleOutputAppender()
     }
 
-  @Deprecated("Use logLevel instead", ReplaceWith("logLevel"))
-  public var LOG_LEVEL: Level
-    get() = logLevel
+  public actual interface DirectLoggingConfiguration {
+    public actual var logLevel: Level
+    public actual var formatter: Formatter
+    public actual var appender: Appender
+  }
+
+  @Deprecated("Use direct.appender instead", ReplaceWith("direct.appender"))
+  public var APPENDER: Appender
+    get() = direct.appender
     set(value) {
-      logLevel = value
+      direct.appender = value
+    }
+
+  @Deprecated("Use direct.logLevel instead", ReplaceWith("direct.logLevel"))
+  public var LOG_LEVEL: Level
+    get() = direct.logLevel
+    set(value) {
+      direct.logLevel = value
     }
 
   public actual var loggerFactory: KLoggerFactory = DirectLoggerFactory
