@@ -7,7 +7,6 @@ import io.github.oshai.kotlinlogging.KotlinLoggingConfiguration
 import io.github.oshai.kotlinlogging.Level
 import io.github.oshai.kotlinlogging.Level.OFF
 import io.github.oshai.kotlinlogging.Marker
-import io.github.oshai.kotlinlogging.isLoggingEnabled
 
 internal class KLoggerDirect(override val name: String) : KLogger {
 
