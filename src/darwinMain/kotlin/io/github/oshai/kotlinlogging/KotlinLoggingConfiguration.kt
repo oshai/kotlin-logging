@@ -50,16 +50,16 @@ public actual object KotlinLoggingConfiguration {
     public actual var appender: Appender
   }
 
-  init {
-    println(
-      "kotlin-logging: initializing... active logger factory: ${loggerFactory::class.simpleName}"
-    )
-  }
-
   private val _loggerFactory = AtomicReference<KLoggerFactory>(DarwinLoggerFactory)
   public actual var loggerFactory: KLoggerFactory
     get() = _loggerFactory.value
     set(value) {
       _loggerFactory.value = value
     }
+
+  init {
+    println(
+      "kotlin-logging: initializing... active logger factory: ${loggerFactory::class.simpleName}"
+    )
+  }
 }
