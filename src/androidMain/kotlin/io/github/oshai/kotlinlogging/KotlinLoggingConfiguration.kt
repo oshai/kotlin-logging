@@ -44,11 +44,7 @@ public actual object KotlinLoggingConfiguration {
 
   @Volatile public actual var loggerFactory: KLoggerFactory = detectLogger()
 
-  init {
-    println(
-      "kotlin-logging: initializing... active logger factory: ${loggerFactory::class.simpleName}"
-    )
-  }
+
 
   private fun detectLogger(): KLoggerFactory {
     if (System.getProperty("kotlin-logging-to-android-native") != null) {

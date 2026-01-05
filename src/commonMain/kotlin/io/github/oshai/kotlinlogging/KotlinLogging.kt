@@ -21,4 +21,9 @@ public object KotlinLogging {
    * in.
    */
   public fun logger(name: String): KLogger = KotlinLoggingConfiguration.loggerFactory.logger(name)
+
+  init {
+    val factory = KotlinLoggingConfiguration.loggerFactory
+    println("kotlin-logging: initializing... active logger factory: ${factory::class.simpleName}")
+  }
 }

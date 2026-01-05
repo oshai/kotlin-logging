@@ -57,9 +57,5 @@ public actual object KotlinLoggingConfiguration {
       _loggerFactory.value = value
     }
 
-  init {
-    println(
-      "kotlin-logging: initializing... active logger factory: ${loggerFactory::class.simpleName}"
-    )
-  }
+
 }

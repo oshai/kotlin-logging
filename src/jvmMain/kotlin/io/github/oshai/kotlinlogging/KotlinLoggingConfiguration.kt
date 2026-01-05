@@ -49,11 +49,7 @@ public actual object KotlinLoggingConfiguration {
     public actual var appender: Appender
   }
 
-  init {
-    println(
-      "kotlin-logging: initializing... active logger factory: ${loggerFactory::class.simpleName}"
-    )
-  }
+
 
   private fun detectLogger(): KLoggerFactory {
     if (System.getProperty("kotlin-logging-to-jul") != null) {
