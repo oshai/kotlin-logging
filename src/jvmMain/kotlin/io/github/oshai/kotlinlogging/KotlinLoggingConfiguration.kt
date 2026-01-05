@@ -17,30 +17,22 @@ public actual object KotlinLoggingConfiguration {
       override var logLevel: Level = Level.INFO
         set(value) {
           field = value
-          checkFactory("logLevel")
+          internalCheckFactory("logLevel", loggerFactory)
         }
 
       @Volatile
       override var formatter: Formatter = DefaultMessageFormatter(includePrefix = true)
         set(value) {
           field = value
-          checkFactory("formatter")
+          internalCheckFactory("formatter", loggerFactory)
         }
 
       @Volatile
       override var appender: Appender = DefaultAppender
         set(value) {
           field = value
-          checkFactory("appender")
+          internalCheckFactory("appender", loggerFactory)
         }
-
-      private fun checkFactory(name: String) {
-        if (loggerFactory != DirectLoggerFactory) {
-          println(
-            "kotlin-logging: [WARN] configuring 'direct.$name' but the active logger factory is not 'DirectLoggerFactory' (active: ${loggerFactory::class.simpleName}). This config might be ignored."
-          )
-        }
-      }
     }
 
   public actual interface DirectLoggingConfiguration {
@@ -48,8 +40,6 @@ public actual object KotlinLoggingConfiguration {
     public actual var formatter: Formatter
     public actual var appender: Appender
   }
-
-
 
   private fun detectLogger(): KLoggerFactory {
     if (System.getProperty("kotlin-logging-to-jul") != null) {

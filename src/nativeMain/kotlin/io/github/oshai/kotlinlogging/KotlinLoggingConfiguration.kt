@@ -10,6 +10,7 @@ public actual object KotlinLoggingConfiguration {
         get() = _logLevel.value
         set(value) {
           _logLevel.value = value
+          internalCheckFactory("logLevel", loggerFactory)
         }
 
       private val _appender = AtomicReference(DefaultAppender)
@@ -17,6 +18,7 @@ public actual object KotlinLoggingConfiguration {
         get() = _appender.value
         set(value) {
           _appender.value = value
+          internalCheckFactory("appender", loggerFactory)
         }
 
       private val _formatter =
@@ -25,6 +27,7 @@ public actual object KotlinLoggingConfiguration {
         get() = _formatter.value
         set(value) {
           _formatter.value = value
+          internalCheckFactory("formatter", loggerFactory)
         }
     }
 

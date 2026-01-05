@@ -22,3 +22,11 @@ public expect object KotlinLoggingConfiguration {
     public var appender: Appender
   }
 }
+
+internal fun internalCheckFactory(name: String, loggerFactory: KLoggerFactory) {
+  if (loggerFactory != DirectLoggerFactory) {
+    println(
+      "kotlin-logging: [WARN] configuring 'direct.$name' but the active logger factory is not 'DirectLoggerFactory' (active: ${loggerFactory::class.simpleName}). This config might be ignored."
+    )
+  }
+}

@@ -56,6 +56,4 @@ public actual object KotlinLoggingConfiguration {
     set(value) {
       _loggerFactory.value = value
     }
-
-
 }
