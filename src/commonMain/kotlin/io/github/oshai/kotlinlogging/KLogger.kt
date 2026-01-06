@@ -74,41 +74,6 @@ public interface KLogger {
       this.cause = throwable
     }
 
-  /** Lazy add a log message if isTraceEnabled is true */
-  public fun trace(throwable: Throwable?, marker: Marker?, message: () -> Any?): Unit =
-    at(Level.TRACE, marker) {
-      this.message = message.toStringSafe()
-      this.cause = throwable
-    }
-
-  /** Lazy add a log message if isDebugEnabled is true */
-  public fun debug(throwable: Throwable?, marker: Marker?, message: () -> Any?): Unit =
-    at(Level.DEBUG, marker) {
-      this.message = message.toStringSafe()
-      this.cause = throwable
-    }
-
-  /** Lazy add a log message if isInfoEnabled is true */
-  public fun info(throwable: Throwable?, marker: Marker?, message: () -> Any?): Unit =
-    at(Level.INFO, marker) {
-      this.message = message.toStringSafe()
-      this.cause = throwable
-    }
-
-  /** Lazy add a log message if isWarnEnabled is true */
-  public fun warn(throwable: Throwable?, marker: Marker?, message: () -> Any?): Unit =
-    at(Level.WARN, marker) {
-      this.message = message.toStringSafe()
-      this.cause = throwable
-    }
-
-  /** Lazy add a log message if isErrorEnabled is true */
-  public fun error(throwable: Throwable?, marker: Marker?, message: () -> Any?): Unit =
-    at(Level.ERROR, marker) {
-      this.message = message.toStringSafe()
-      this.cause = throwable
-    }
-
   /** Lazy add a log message with throwable payload if isTraceEnabled is true */
   public fun atTrace(marker: Marker?, block: KLoggingEventBuilder.() -> Unit): Unit =
     at(Level.TRACE, marker, block)
@@ -236,32 +201,52 @@ public interface KLogger {
   public fun isLoggingEnabledFor(level: Level, marker: Marker? = null): Boolean
 
   /** Lazy add a log message with a marker if isTraceEnabled is true */
-  public fun trace(marker: Marker?, msg: () -> Any?): Unit = trace(null as Throwable?, marker, msg)
+  public fun trace(marker: Marker?, msg: () -> Any?): Unit = trace(marker, null, msg)
 
   /** Lazy add a log message with a marker if isDebugEnabled is true */
-  public fun debug(marker: Marker?, msg: () -> Any?): Unit = debug(null as Throwable?, marker, msg)
+  public fun debug(marker: Marker?, msg: () -> Any?): Unit = debug(marker, null, msg)
 
   /** Lazy add a log message with a marker if isInfoEnabled is true */
-  public fun info(marker: Marker?, msg: () -> Any?): Unit = info(null as Throwable?, marker, msg)
+  public fun info(marker: Marker?, msg: () -> Any?): Unit = info(marker, null, msg)
 
   /** Lazy add a log message with a marker if isWarnEnabled is true */
-  public fun warn(marker: Marker?, msg: () -> Any?): Unit = warn(null as Throwable?, marker, msg)
+  public fun warn(marker: Marker?, msg: () -> Any?): Unit = warn(marker, null, msg)
 
   /** Lazy add a log message with a marker if isErrorEnabled is true */
-  public fun error(marker: Marker?, msg: () -> Any?): Unit = error(null as Throwable?, marker, msg)
+  public fun error(marker: Marker?, msg: () -> Any?): Unit = error(marker, null, msg)
 
-  /** Lazy add a log message with a marker if isTraceEnabled is true */
-  public fun trace(marker: Marker?, t: Throwable?, msg: () -> Any?): Unit = trace(t, marker, msg)
+  /** Lazy add a log message with a marker and throwable if isTraceEnabled is true */
+  public fun trace(marker: Marker?, t: Throwable?, msg: () -> Any?): Unit =
+    at(Level.TRACE, marker) {
+      this.message = msg.toStringSafe()
+      this.cause = t
+    }
 
-  /** Lazy add a log message with a marker if isDebugEnabled is true */
-  public fun debug(marker: Marker?, t: Throwable?, msg: () -> Any?): Unit = debug(t, marker, msg)
+  /** Lazy add a log message with a marker and throwable if isDebugEnabled is true */
+  public fun debug(marker: Marker?, t: Throwable?, msg: () -> Any?): Unit =
+    at(Level.DEBUG, marker) {
+      this.message = msg.toStringSafe()
+      this.cause = t
+    }
 
-  /** Lazy add a log message with a marker if isInfoEnabled is true */
-  public fun info(marker: Marker?, t: Throwable?, msg: () -> Any?): Unit = info(t, marker, msg)
+  /** Lazy add a log message with a marker and throwable if isInfoEnabled is true */
+  public fun info(marker: Marker?, t: Throwable?, msg: () -> Any?): Unit =
+    at(Level.INFO, marker) {
+      this.message = msg.toStringSafe()
+      this.cause = t
+    }
 
-  /** Lazy add a log message with a marker if isWarnEnabled is true */
-  public fun warn(marker: Marker?, t: Throwable?, msg: () -> Any?): Unit = warn(t, marker, msg)
+  /** Lazy add a log message with a marker and throwable if isWarnEnabled is true */
+  public fun warn(marker: Marker?, t: Throwable?, msg: () -> Any?): Unit =
+    at(Level.WARN, marker) {
+      this.message = msg.toStringSafe()
+      this.cause = t
+    }
 
-  /** Lazy add a log message with a marker if isErrorEnabled is true */
-  public fun error(marker: Marker?, t: Throwable?, msg: () -> Any?): Unit = error(t, marker, msg)
+  /** Lazy add a log message with a marker and throwable if isErrorEnabled is true */
+  public fun error(marker: Marker?, t: Throwable?, msg: () -> Any?): Unit =
+    at(Level.ERROR, marker) {
+      this.message = msg.toStringSafe()
+      this.cause = t
+    }
 }
