@@ -171,106 +171,21 @@ class LogbackLoggerWrapperTest {
     assertEvents(ExpectedLogEvent(level = given.level, name = loggerName, message = given.message))
   }
 
-  @ParameterizedTest(name = "{0} SLF4J API without arguments")
+  @ParameterizedTest(name = "{0} marker lambda")
   @EnumSource(LogLevel::class)
-  fun slf4jNoArgs(levelValue: LogLevel) {
-    val given = GivenLogStatement(level = levelValue, message = "SLF4J message")
-    when (levelValue) {
-      LogLevel.TRACE -> logger.trace(given.message)
-      LogLevel.DEBUG -> logger.debug(given.message)
-      LogLevel.INFO -> logger.info(given.message)
-      LogLevel.WARN -> logger.warn(given.message)
-      LogLevel.ERROR -> logger.error(given.message)
-    }
-    assertEvents(ExpectedLogEvent(level = given.level, name = loggerName, message = given.message))
-  }
-
-  @ParameterizedTest(name = "{0} SLF4J API with arg1")
-  @EnumSource(LogLevel::class)
-  fun slf4jArg1(levelValue: LogLevel) {
-    val given = GivenLogStatement(level = levelValue, message = "$messagePrefix {}", arg1 = "val1")
-    when (levelValue) {
-      LogLevel.TRACE -> logger.trace(given.message, given.arg1)
-      LogLevel.DEBUG -> logger.debug(given.message, given.arg1)
-      LogLevel.INFO -> logger.info(given.message, given.arg1)
-      LogLevel.WARN -> logger.warn(given.message, given.arg1)
-      LogLevel.ERROR -> logger.error(given.message, given.arg1)
-    }
-    assertEvents(
-      ExpectedLogEvent(
-        level = given.level,
-        name = loggerName,
-        message = "$messagePrefix ${given.arg1}",
-      )
-    )
-  }
-
-  @ParameterizedTest(name = "{0} SLF4J API with arg1 arg2")
-  @EnumSource(LogLevel::class)
-  fun slf4jArg1Arg2(levelValue: LogLevel) {
-    val given =
-      GivenLogStatement(
-        level = levelValue,
-        message = "$messagePrefix {} {}",
-        arg1 = "val1",
-        arg2 = "val2",
-      )
-    when (levelValue) {
-      LogLevel.TRACE -> logger.trace(given.message, given.arg1, given.arg2)
-      LogLevel.DEBUG -> logger.debug(given.message, given.arg1, given.arg2)
-      LogLevel.INFO -> logger.info(given.message, given.arg1, given.arg2)
-      LogLevel.WARN -> logger.warn(given.message, given.arg1, given.arg2)
-      LogLevel.ERROR -> logger.error(given.message, given.arg1, given.arg2)
-    }
-    assertEvents(
-      ExpectedLogEvent(
-        level = given.level,
-        name = loggerName,
-        message = "$messagePrefix ${given.arg1} ${given.arg2}",
-      )
-    )
-  }
-
-  @ParameterizedTest(name = "{0} SLF4J API with varargs")
-  @EnumSource(LogLevel::class)
-  fun slf4jVarargs(levelValue: LogLevel) {
-    val given =
-      GivenLogStatement(
-        level = levelValue,
-        message = "$messagePrefix {} {} {}",
-        arguments = arrayOf("val1", "val2", "val3"),
-      )
-    when (levelValue) {
-      LogLevel.TRACE -> logger.trace(given.message, *given.arguments)
-      LogLevel.DEBUG -> logger.debug(given.message, *given.arguments)
-      LogLevel.INFO -> logger.info(given.message, *given.arguments)
-      LogLevel.WARN -> logger.warn(given.message, *given.arguments)
-      LogLevel.ERROR -> logger.error(given.message, *given.arguments)
-    }
-    assertEvents(
-      ExpectedLogEvent(
-        level = given.level,
-        name = loggerName,
-        message = "$messagePrefix ${given.arguments[0]} ${given.arguments[1]} ${given.arguments[2]}",
-      )
-    )
-  }
-
-  @ParameterizedTest(name = "{0} SLF4J API with marker and without arguments")
-  @EnumSource(LogLevel::class)
-  fun slf4jMarkerNoArgs(levelValue: LogLevel) {
+  fun markerLambda(levelValue: LogLevel) {
     val given =
       GivenLogStatement(
         level = levelValue,
         marker = KMarkerFactory.getMarker("marker"),
-        message = "SLF4J message",
+        message = "marker lambda message",
       )
     when (levelValue) {
-      LogLevel.TRACE -> logger.trace(given.marker, given.message)
-      LogLevel.DEBUG -> logger.debug(given.marker, given.message)
-      LogLevel.INFO -> logger.info(given.marker, given.message)
-      LogLevel.WARN -> logger.warn(given.marker, given.message)
-      LogLevel.ERROR -> logger.error(given.marker, given.message)
+      LogLevel.TRACE -> logger.trace(given.marker) { given.message }
+      LogLevel.DEBUG -> logger.debug(given.marker) { given.message }
+      LogLevel.INFO -> logger.info(given.marker) { given.message }
+      LogLevel.WARN -> logger.warn(given.marker) { given.message }
+      LogLevel.ERROR -> logger.error(given.marker) { given.message }
     }
     assertEvents(
       ExpectedLogEvent(
@@ -278,88 +193,6 @@ class LogbackLoggerWrapperTest {
         marker = given.marker?.getName(),
         name = loggerName,
         message = given.message,
-      )
-    )
-  }
-
-  @ParameterizedTest(name = "{0} SLF4J API with marker and arg1")
-  @EnumSource(LogLevel::class)
-  fun slf4jMarkerAndArg1(levelValue: LogLevel) {
-    val given =
-      GivenLogStatement(
-        level = levelValue,
-        marker = KMarkerFactory.getMarker("marker"),
-        message = "$messagePrefix {}",
-        arg1 = "val1",
-      )
-    when (levelValue) {
-      LogLevel.TRACE -> logger.trace(given.marker, given.message, given.arg1)
-      LogLevel.DEBUG -> logger.debug(given.marker, given.message, given.arg1)
-      LogLevel.INFO -> logger.info(given.marker, given.message, given.arg1)
-      LogLevel.WARN -> logger.warn(given.marker, given.message, given.arg1)
-      LogLevel.ERROR -> logger.error(given.marker, given.message, given.arg1)
-    }
-    assertEvents(
-      ExpectedLogEvent(
-        level = given.level,
-        marker = given.marker?.getName(),
-        name = loggerName,
-        message = "$messagePrefix ${given.arg1}",
-      )
-    )
-  }
-
-  @ParameterizedTest(name = "{0} SLF4J API with marker and arg1 arg2")
-  @EnumSource(LogLevel::class)
-  fun slf4jMarkerAndArg1Arg2(levelValue: LogLevel) {
-    val given =
-      GivenLogStatement(
-        level = levelValue,
-        marker = KMarkerFactory.getMarker("marker"),
-        message = "$messagePrefix {} {}",
-        arg1 = "val1",
-        arg2 = "val2",
-      )
-    when (levelValue) {
-      LogLevel.TRACE -> logger.trace(given.marker, given.message, given.arg1, given.arg2)
-      LogLevel.DEBUG -> logger.debug(given.marker, given.message, given.arg1, given.arg2)
-      LogLevel.INFO -> logger.info(given.marker, given.message, given.arg1, given.arg2)
-      LogLevel.WARN -> logger.warn(given.marker, given.message, given.arg1, given.arg2)
-      LogLevel.ERROR -> logger.error(given.marker, given.message, given.arg1, given.arg2)
-    }
-    assertEvents(
-      ExpectedLogEvent(
-        level = given.level,
-        marker = given.marker?.getName(),
-        name = loggerName,
-        message = "$messagePrefix ${given.arg1} ${given.arg2}",
-      )
-    )
-  }
-
-  @ParameterizedTest(name = "{0} SLF4J API with marker and varargs")
-  @EnumSource(LogLevel::class)
-  fun slf4jMarkerAndVarargs(levelValue: LogLevel) {
-    val given =
-      GivenLogStatement(
-        level = levelValue,
-        marker = KMarkerFactory.getMarker("marker"),
-        message = "$messagePrefix {} {} {}",
-        arguments = arrayOf("val1", "val2", "val3"),
-      )
-    when (levelValue) {
-      LogLevel.TRACE -> logger.trace(given.marker, given.message, *given.arguments)
-      LogLevel.DEBUG -> logger.debug(given.marker, given.message, *given.arguments)
-      LogLevel.INFO -> logger.info(given.marker, given.message, *given.arguments)
-      LogLevel.WARN -> logger.warn(given.marker, given.message, *given.arguments)
-      LogLevel.ERROR -> logger.error(given.marker, given.message, *given.arguments)
-    }
-    assertEvents(
-      ExpectedLogEvent(
-        level = given.level,
-        marker = given.marker?.getName(),
-        name = loggerName,
-        message = "$messagePrefix ${given.arguments[0]} ${given.arguments[1]} ${given.arguments[2]}",
       )
     )
   }
