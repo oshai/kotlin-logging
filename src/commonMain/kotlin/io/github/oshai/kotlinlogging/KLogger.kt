@@ -74,36 +74,31 @@ public interface KLogger {
       this.cause = throwable
     }
 
-  /** Lazy add a log message if isTraceEnabled is true */
-  public fun trace(throwable: Throwable? = null, marker: Marker?, message: () -> Any?): Unit =
+  public fun trace(throwable: Throwable?, marker: Marker?, message: () -> Any?): Unit =
     at(Level.TRACE, marker) {
       this.message = message.toStringSafe()
       this.cause = throwable
     }
 
-  /** Lazy add a log message if isDebugEnabled is true */
-  public fun debug(throwable: Throwable? = null, marker: Marker?, message: () -> Any?): Unit =
+  public fun debug(throwable: Throwable?, marker: Marker?, message: () -> Any?): Unit =
     at(Level.DEBUG, marker) {
       this.message = message.toStringSafe()
       this.cause = throwable
     }
 
-  /** Lazy add a log message if isInfoEnabled is true */
-  public fun info(throwable: Throwable? = null, marker: Marker?, message: () -> Any?): Unit =
+  public fun info(throwable: Throwable?, marker: Marker?, message: () -> Any?): Unit =
     at(Level.INFO, marker) {
       this.message = message.toStringSafe()
       this.cause = throwable
     }
 
-  /** Lazy add a log message if isWarnEnabled is true */
-  public fun warn(throwable: Throwable? = null, marker: Marker?, message: () -> Any?): Unit =
+  public fun warn(throwable: Throwable?, marker: Marker?, message: () -> Any?): Unit =
     at(Level.WARN, marker) {
       this.message = message.toStringSafe()
       this.cause = throwable
     }
 
-  /** Lazy add a log message if isErrorEnabled is true */
-  public fun error(throwable: Throwable? = null, marker: Marker?, message: () -> Any?): Unit =
+  public fun error(throwable: Throwable?, marker: Marker?, message: () -> Any?): Unit =
     at(Level.ERROR, marker) {
       this.message = message.toStringSafe()
       this.cause = throwable
@@ -235,38 +230,28 @@ public interface KLogger {
 
   public fun isLoggingEnabledFor(level: Level, marker: Marker? = null): Boolean
 
-  @Deprecated("use trace instead", ReplaceWith("trace(null, marker, msg)"))
   public fun trace(marker: Marker?, msg: () -> Any?): Unit = trace(null as Throwable?, marker, msg)
 
   /** Lazy add a log message with a marker if isDebugEnabled is true */
-  @Deprecated("use debug instead", ReplaceWith("debug(null, marker, msg)"))
   public fun debug(marker: Marker?, msg: () -> Any?): Unit = debug(null as Throwable?, marker, msg)
 
   /** Lazy add a log message with a marker if isInfoEnabled is true */
-  @Deprecated("use info instead", ReplaceWith("info(null, marker, msg)"))
   public fun info(marker: Marker?, msg: () -> Any?): Unit = info(null as Throwable?, marker, msg)
 
   /** Lazy add a log message with a marker if isWarnEnabled is true */
-  @Deprecated("use warn instead", ReplaceWith("warn(null, marker, msg)"))
   public fun warn(marker: Marker?, msg: () -> Any?): Unit = warn(null as Throwable?, marker, msg)
 
   /** Lazy add a log message with a marker if isErrorEnabled is true */
-  @Deprecated("use error instead", ReplaceWith("error(null, marker, msg)"))
   public fun error(marker: Marker?, msg: () -> Any?): Unit = error(null as Throwable?, marker, msg)
 
-  @Deprecated("use trace instead", ReplaceWith("trace(t, marker, msg)"))
   public fun trace(marker: Marker?, t: Throwable?, msg: () -> Any?): Unit = trace(t, marker, msg)
 
-  @Deprecated("use debug instead", ReplaceWith("debug(t, marker, msg)"))
   public fun debug(marker: Marker?, t: Throwable?, msg: () -> Any?): Unit = debug(t, marker, msg)
 
-  @Deprecated("use info instead", ReplaceWith("info(t, marker, msg)"))
   public fun info(marker: Marker?, t: Throwable?, msg: () -> Any?): Unit = info(t, marker, msg)
 
-  @Deprecated("use warn instead", ReplaceWith("warn(t, marker, msg)"))
   public fun warn(marker: Marker?, t: Throwable?, msg: () -> Any?): Unit = warn(t, marker, msg)
 
-  @Deprecated("use error instead", ReplaceWith("error(t, marker, msg)"))
   public fun error(marker: Marker?, t: Throwable?, msg: () -> Any?): Unit = error(t, marker, msg)
 
   @Deprecated("Use isTraceEnabled() instead", ReplaceWith("isTraceEnabled()"))
