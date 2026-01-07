@@ -24,6 +24,8 @@ public object KotlinLogging {
 
   init {
     val factory = KotlinLoggingConfiguration.loggerFactory
-    println("kotlin-logging: initializing... active logger factory: ${factory::class.simpleName}")
+    if (KotlinLoggingConfiguration.logStartupMessage) {
+      println("kotlin-logging: initializing... active logger factory: ${factory::class.simpleName}")
+    }
   }
 }

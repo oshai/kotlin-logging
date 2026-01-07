@@ -8,6 +8,11 @@ public expect object KotlinLoggingConfiguration {
   public var loggerFactory: KLoggerFactory
 
   /**
+   * If true, print the "kotlin-logging: initializing..." message during startup. Default is true.
+   */
+  public var logStartupMessage: Boolean
+
+  /**
    * Configuration for the **Direct Logging** implementation.
    *
    * On JVM/Android/Darwin, this ONLY applies if [loggerFactory] is set to use

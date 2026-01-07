@@ -11,6 +11,8 @@ public actual object KotlinLoggingConfiguration {
    */
   @Volatile public actual var loggerFactory: KLoggerFactory = detectLogger()
 
+  public actual var logStartupMessage: Boolean = true
+
   public actual val direct: DirectLoggingConfiguration =
     object : DirectLoggingConfiguration {
       @Volatile

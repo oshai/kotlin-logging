@@ -35,4 +35,6 @@ public actual object KotlinLoggingConfiguration {
   }
 
   public actual var loggerFactory: KLoggerFactory = DirectLoggerFactory
+
+  public actual var logStartupMessage: Boolean = true
 }

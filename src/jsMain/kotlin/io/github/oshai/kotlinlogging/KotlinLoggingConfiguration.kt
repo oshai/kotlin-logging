@@ -1,6 +1,8 @@
 package io.github.oshai.kotlinlogging
 
 public actual object KotlinLoggingConfiguration {
+  public actual var logStartupMessage: Boolean = true
+
   public actual val direct: DirectLoggingConfiguration =
     object : DirectLoggingConfiguration {
       private var _logLevel: Level = Level.INFO

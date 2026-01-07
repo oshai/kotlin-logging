@@ -7,6 +7,13 @@ public actual object KotlinLoggingConfiguration {
   public var subsystem: AtomicReference<String?> = AtomicReference(null)
   public var category: AtomicReference<String?> = AtomicReference(null)
 
+  private val _logStartupMessage = AtomicReference(true)
+  public actual var logStartupMessage: Boolean
+    get() = _logStartupMessage.value
+    set(value) {
+      _logStartupMessage.value = value
+    }
+
   // Common properties
   public actual val direct: DirectLoggingConfiguration =
     object : DirectLoggingConfiguration {

@@ -31,6 +31,13 @@ public actual object KotlinLoggingConfiguration {
         }
     }
 
+  private val _logStartupMessage = AtomicReference(true)
+  public actual var logStartupMessage: Boolean
+    get() = _logStartupMessage.value
+    set(value) {
+      _logStartupMessage.value = value
+    }
+
   public actual interface DirectLoggingConfiguration {
     public actual var logLevel: Level
     public actual var formatter: Formatter

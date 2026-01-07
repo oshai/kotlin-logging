@@ -36,6 +36,8 @@ public actual object KotlinLoggingConfiguration {
 
   @Volatile public actual var loggerFactory: KLoggerFactory = detectLogger()
 
+  public actual var logStartupMessage: Boolean = true
+
   private fun detectLogger(): KLoggerFactory {
     if (System.getProperty("kotlin-logging-to-android-native") != null) {
       return AndroidNativeLoggerFactory
