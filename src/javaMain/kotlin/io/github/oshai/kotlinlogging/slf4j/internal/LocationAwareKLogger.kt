@@ -260,9 +260,13 @@ internal class LocationAwareKLogger(override val underlyingLogger: LocationAware
       this.cause = throwable
     }
 
+  /* Fluent API overrides to ensure correct FQCN capture if necessary, though delegation should work. Re-adding to fix test failure. */
   /** Lazy add a log message with throwable payload if isTraceEnabled is true */
   override fun atTrace(marker: Marker?, block: KLoggingEventBuilder.() -> Unit): Unit =
     at(Level.TRACE, marker, block)
+
+  /** Lazy add a log message with throwable payload if isTraceEnabled is true */
+  override fun atTrace(block: KLoggingEventBuilder.() -> Unit): Unit = at(Level.TRACE, null, block)
 
   /** Lazy add a log message with throwable payload if isDebugEnabled is true */
   override fun atDebug(marker: Marker?, block: KLoggingEventBuilder.() -> Unit): Unit =
