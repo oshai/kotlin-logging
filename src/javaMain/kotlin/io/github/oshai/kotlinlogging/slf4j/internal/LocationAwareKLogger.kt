@@ -176,24 +176,54 @@ internal class LocationAwareKLogger(override val underlyingLogger: LocationAware
   }
 
   /** Lazy add a log message if isTraceEnabled is true */
-  override fun trace(message: () -> Any?): Unit =
-    at(Level.TRACE, null) { this.message = message.toStringSafe() }
+  override fun trace(message: () -> Any?): Unit = trace(null, null, message)
 
   /** Lazy add a log message if isDebugEnabled is true */
-  override fun debug(message: () -> Any?): Unit =
-    at(Level.DEBUG, null) { this.message = message.toStringSafe() }
+  override fun debug(message: () -> Any?): Unit = debug(null, null, message)
 
   /** Lazy add a log message if isInfoEnabled is true */
-  override fun info(message: () -> Any?): Unit =
-    at(Level.INFO, null) { this.message = message.toStringSafe() }
+  override fun info(message: () -> Any?): Unit = info(null, null, message)
 
   /** Lazy add a log message if isWarnEnabled is true */
-  override fun warn(message: () -> Any?): Unit =
-    at(Level.WARN, null) { this.message = message.toStringSafe() }
+  override fun warn(message: () -> Any?): Unit = warn(null, null, message)
 
   /** Lazy add a log message if isErrorEnabled is true */
-  override fun error(message: () -> Any?): Unit =
-    at(Level.ERROR, null) { this.message = message.toStringSafe() }
+  override fun error(message: () -> Any?): Unit = error(null, null, message)
+
+  /** Lazy add a log message if isTraceEnabled is true */
+  override fun trace(throwable: Throwable?, message: () -> Any?): Unit =
+    trace(null, throwable, message)
+
+  /** Lazy add a log message if isDebugEnabled is true */
+  override fun debug(throwable: Throwable?, message: () -> Any?): Unit =
+    debug(null, throwable, message)
+
+  /** Lazy add a log message if isInfoEnabled is true */
+  override fun info(throwable: Throwable?, message: () -> Any?): Unit =
+    info(null, throwable, message)
+
+  /** Lazy add a log message if isWarnEnabled is true */
+  override fun warn(throwable: Throwable?, message: () -> Any?): Unit =
+    warn(null, throwable, message)
+
+  /** Lazy add a log message if isErrorEnabled is true */
+  override fun error(throwable: Throwable?, message: () -> Any?): Unit =
+    error(null, throwable, message)
+
+  /** Lazy add a log message if isTraceEnabled is true */
+  override fun trace(marker: Marker?, message: () -> Any?): Unit = trace(marker, null, message)
+
+  /** Lazy add a log message if isDebugEnabled is true */
+  override fun debug(marker: Marker?, message: () -> Any?): Unit = debug(marker, null, message)
+
+  /** Lazy add a log message if isInfoEnabled is true */
+  override fun info(marker: Marker?, message: () -> Any?): Unit = info(marker, null, message)
+
+  /** Lazy add a log message if isWarnEnabled is true */
+  override fun warn(marker: Marker?, message: () -> Any?): Unit = warn(marker, null, message)
+
+  /** Lazy add a log message if isErrorEnabled is true */
+  override fun error(marker: Marker?, message: () -> Any?): Unit = error(marker, null, message)
 
   /** Lazy add a log message if isTraceEnabled is true */
   override fun trace(marker: Marker?, throwable: Throwable?, message: () -> Any?): Unit =

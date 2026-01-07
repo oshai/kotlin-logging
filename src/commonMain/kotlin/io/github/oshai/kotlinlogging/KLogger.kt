@@ -20,59 +20,37 @@ public interface KLogger {
   public val name: String
 
   /** Lazy add a log message if isTraceEnabled is true */
-  public fun trace(message: () -> Any?): Unit =
-    at(Level.TRACE) { this.message = message.toStringSafe() }
+  public fun trace(message: () -> Any?): Unit = trace(null, null, message)
 
   /** Lazy add a log message if isDebugEnabled is true */
-  public fun debug(message: () -> Any?): Unit =
-    at(Level.DEBUG) { this.message = message.toStringSafe() }
+  public fun debug(message: () -> Any?): Unit = debug(null, null, message)
 
   /** Lazy add a log message if isInfoEnabled is true */
-  public fun info(message: () -> Any?): Unit =
-    at(Level.INFO) { this.message = message.toStringSafe() }
+  public fun info(message: () -> Any?): Unit = info(null, null, message)
 
   /** Lazy add a log message if isWarnEnabled is true */
-  public fun warn(message: () -> Any?): Unit =
-    at(Level.WARN) { this.message = message.toStringSafe() }
+  public fun warn(message: () -> Any?): Unit = warn(null, null, message)
 
   /** Lazy add a log message if isErrorEnabled is true */
-  public fun error(message: () -> Any?): Unit =
-    at(Level.ERROR) { this.message = message.toStringSafe() }
+  public fun error(message: () -> Any?): Unit = error(null, null, message)
 
   /** Lazy add a log message if isTraceEnabled is true */
   public fun trace(throwable: Throwable?, message: () -> Any?): Unit =
-    at(Level.TRACE) {
-      this.message = message.toStringSafe()
-      this.cause = throwable
-    }
+    trace(null, throwable, message)
 
   /** Lazy add a log message if isDebugEnabled is true */
   public fun debug(throwable: Throwable?, message: () -> Any?): Unit =
-    at(Level.DEBUG) {
-      this.message = message.toStringSafe()
-      this.cause = throwable
-    }
+    debug(null, throwable, message)
 
   /** Lazy add a log message if isInfoEnabled is true */
-  public fun info(throwable: Throwable?, message: () -> Any?): Unit =
-    at(Level.INFO) {
-      this.message = message.toStringSafe()
-      this.cause = throwable
-    }
+  public fun info(throwable: Throwable?, message: () -> Any?): Unit = info(null, throwable, message)
 
   /** Lazy add a log message if isWarnEnabled is true */
-  public fun warn(throwable: Throwable?, message: () -> Any?): Unit =
-    at(Level.WARN) {
-      this.message = message.toStringSafe()
-      this.cause = throwable
-    }
+  public fun warn(throwable: Throwable?, message: () -> Any?): Unit = warn(null, throwable, message)
 
   /** Lazy add a log message if isErrorEnabled is true */
   public fun error(throwable: Throwable?, message: () -> Any?): Unit =
-    at(Level.ERROR) {
-      this.message = message.toStringSafe()
-      this.cause = throwable
-    }
+    error(null, throwable, message)
 
   /** Lazy add a log message with throwable payload if isTraceEnabled is true */
   public fun atTrace(marker: Marker?, block: KLoggingEventBuilder.() -> Unit): Unit =
