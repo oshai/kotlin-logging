@@ -26,6 +26,9 @@ public class DarwinKLogger(override val name: String, override val underlyingLog
           __dso_handle.ptr,
           underlyingLogger,
           level.toDarwinLevel(),
+          // Use %{public}s to prevent redaction of the log message in historical logs (log show)
+          // See https://github.com/oshai/kotlin-logging/issues/588
+          "%{public}s",
           formattedMessage,
         )
       }
