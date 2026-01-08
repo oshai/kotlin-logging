@@ -9,5 +9,5 @@ jobs:
     - uses: actions/first-interaction@v3
       with:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
-        issue-message: 'Thank you for reporting an issue. See the wiki for documentation and slack for questions.'
-        pr-message: 'Thanks for the contribution! If you haven''t done so it is usually better to discuss your intentions either by opening a new issue or in our slack channel.'
+        issue_message: 'Thank you for reporting an issue. See the wiki for documentation and slack for questions.'
+        pr_message: 'Thanks for the contribution! If you haven''t done so it is usually better to discuss your intentions either by opening a new issue or in our slack channel.'
