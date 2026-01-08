@@ -292,9 +292,28 @@ tasks {
         )
     }
 
+    val compileJava9 = register<JavaCompile>("compileJava9") {
+        source("src/jvmMain/java9")
+        classpath = files()
+        
+        val jvmMain = kotlin.targets.getByName<org.jetbrains.kotlin.gradle.targets.jvm.KotlinJvmTarget>("jvm").compilations["main"]
+        classpath = jvmMain.compileDependencyFiles + jvmMain.output.classesDirs
+        destinationDirectory.set(layout.buildDirectory.dir("classes/java9/main"))
+        
+        options.release.set(9)
+        options.compilerArgs = listOf(
+            "--module-path", classpath.asPath,
+            "--patch-module", "io.github.oshai.kotlinlogging=${jvmMain.output.classesDirs.asPath}"
+        )
+    }
+
     val jvmJar by getting(Jar::class) {
         manifest {
             attributes("Automatic-Module-Name" to "io.github.oshai.kotlinlogging")
+            attributes("Multi-Release" to "true")
+        }
+        into("META-INF/versions/9") {
+            from(compileJava9)
         }
     }
 }
