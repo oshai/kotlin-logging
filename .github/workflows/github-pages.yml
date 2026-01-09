@@ -36,7 +36,7 @@ jobs:
           java-version: 17
 
       - name: Generate Dokka HTML docs
-        run: ./gradlew :dokkaHtml
+        run: ./gradlew :dokkaGenerate
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
