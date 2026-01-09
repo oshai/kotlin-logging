@@ -2,9 +2,9 @@
 
 package io.github.oshai.kotlinlogging
 
+import io.github.oshai.kotlinlogging.cinterop.kotlin_logging_os_log
 import io.github.oshai.kotlinlogging.internal.DarwinFormatter
 import kotlinx.cinterop.ExperimentalForeignApi
-import kotlinx.cinterop.ptr
 import platform.darwin.OS_LOG_TYPE_DEBUG
 import platform.darwin.OS_LOG_TYPE_DEFAULT
 import platform.darwin.OS_LOG_TYPE_ERROR
@@ -21,14 +21,17 @@ public class DarwinKLogger(override val name: String, override val underlyingLog
   override fun at(level: Level, marker: Marker?, block: KLoggingEventBuilder.() -> Unit) {
     if (isLoggingEnabledFor(level, marker)) {
       KLoggingEventBuilder().apply(block).run {
-        val formattedMessage: String = DarwinFormatter.getFormattedMessage(this, marker)
-        _os_log_internal(
-          __dso_handle.ptr,
+        val message = DarwinFormatter.getFormattedMessage(this, marker)
+        val formattedMessage = if (marker != null) {
+          // Separating marker and message because OSLog doesn't have a way to pass marker as a separate argument
+          // formatting manually to string for now
+          marker.toString() + " " + message
+        } else {
+          message
+        }
+        kotlin_logging_os_log(
           underlyingLogger,
           level.toDarwinLevel(),
-          // Use %{public}s to prevent redaction of the log message in historical logs (log show)
-          // See https://github.com/oshai/kotlin-logging/issues/588
-          "%{public}s",
           formattedMessage,
         )
       }

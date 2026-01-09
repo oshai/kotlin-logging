@@ -271,6 +271,10 @@ kotlin {
             getByName("${it.targetName}Test") {
                 dependsOn(darwinTest)
             }
+            val main by it.compilations.getting
+            val oslog by main.cinterops.creating {
+                defFile(project.file("src/darwinMain/cinterop/oslog.def"))
+            }
         }
     }
 }
