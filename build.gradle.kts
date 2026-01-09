@@ -412,8 +412,10 @@ tasks.withType<AbstractPublishToMaven>().configureEach {
 }
 //endregion
 
-// Fix implicit dependency issue for androidNative*MetadataElements
-// "Declare an explicit dependency on ':commonizeCInterop' from ':androidNative*MetadataElements' using Task#dependsOn"
-tasks.matching { it.name.startsWith("androidNative") && it.name.endsWith("MetadataElements") }.configureEach {
+// Fix implicit dependency issue for native MetadataElements tasks
+// "Declare an explicit dependency on ':commonizeCInterop' from ':*MetadataElements' using Task#dependsOn"
+tasks.matching {
+    it.name.matches("^(linux|mingw|androidNative|macos|ios|watchos|tvos).*MetadataElements$".toRegex())
+}.configureEach {
     dependsOn("commonizeCInterop")
 }
