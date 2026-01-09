@@ -2,4 +2,4 @@ package io.github.oshai.kotlinlogging.internal
 
 import kotlin.system.getTimeMillis
 
-public actual fun getCurrentTime(): Long = getTimeMillis()
+@Suppress("DEPRECATION") public actual fun getCurrentTime(): Long = getTimeMillis()

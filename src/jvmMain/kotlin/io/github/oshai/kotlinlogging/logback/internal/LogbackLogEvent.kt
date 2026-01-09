@@ -41,6 +41,7 @@ internal class LogbackLogEvent(
   override fun getMessage(): String =
     kLoggingEvent.internalCompilerData?.messageTemplate ?: kLoggingEvent.message ?: ""
 
+  @Suppress("UNCHECKED_CAST")
   override fun getArgumentArray(): Array<Object>? = kLoggingEvent.arguments as? Array<Object>
 
   override fun getFormattedMessage(): String? = kLoggingEvent.message

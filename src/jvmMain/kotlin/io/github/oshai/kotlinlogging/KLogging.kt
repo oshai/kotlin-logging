@@ -12,12 +12,14 @@ package io.github.oshai.kotlinlogging
  * ```
  */
 @Deprecated("Use KLogger instead", ReplaceWith("KLogger", "io.github.oshai.kotlinlogging.KLogger"))
+@Suppress("DEPRECATION")
 public open class KLogging : KLoggable {
   override val logger: KLogger = logger()
 }
 
 /** A class with logging capabilities and explicit logger name */
 @Deprecated("Use KLogger instead", ReplaceWith("KLogger", "io.github.oshai.kotlinlogging.KLogger"))
+@Suppress("DEPRECATION")
 public open class NamedKLogging(name: String) : KLoggable {
   override val logger: KLogger = logger(name)
 }
