@@ -1,8 +1,7 @@
 package io.github.oshai.kotlinlogging
 
-import platform.Foundation.NSUUID
 import kotlin.test.Test
-import kotlin.test.assertTrue
+import platform.Foundation.NSUUID
 
 class Issue588Test {
   @Test
@@ -12,6 +11,5 @@ class Issue588Test {
 
     logger.info { "Test message execution $uuid" }
     logger.error { "Test error execution $uuid" }
-  }
   }
 }

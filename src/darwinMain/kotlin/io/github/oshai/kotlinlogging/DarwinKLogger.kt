@@ -9,8 +9,6 @@ import platform.darwin.OS_LOG_TYPE_DEBUG
 import platform.darwin.OS_LOG_TYPE_DEFAULT
 import platform.darwin.OS_LOG_TYPE_ERROR
 import platform.darwin.OS_LOG_TYPE_INFO
-import platform.darwin.__dso_handle
-import platform.darwin._os_log_internal
 import platform.darwin.os_log_t
 import platform.darwin.os_log_type_enabled
 import platform.darwin.os_log_type_t
@@ -22,18 +20,16 @@ public class DarwinKLogger(override val name: String, override val underlyingLog
     if (isLoggingEnabledFor(level, marker)) {
       KLoggingEventBuilder().apply(block).run {
         val message = DarwinFormatter.getFormattedMessage(this, marker)
-        val formattedMessage = if (marker != null) {
-          // Separating marker and message because OSLog doesn't have a way to pass marker as a separate argument
-          // formatting manually to string for now
-          marker.toString() + " " + message
-        } else {
-          message
-        }
-        kotlin_logging_os_log(
-          underlyingLogger,
-          level.toDarwinLevel(),
-          formattedMessage,
-        )
+        val formattedMessage =
+          if (marker != null) {
+            // Separating marker and message because OSLog doesn't have a way to pass marker as a
+            // separate argument
+            // formatting manually to string for now
+            "$marker $message"
+          } else {
+            message
+          }
+        kotlin_logging_os_log(underlyingLogger, level.toDarwinLevel(), formattedMessage)
       }
     }
   }
