@@ -1,33 +1,9 @@
-name: CD
-
-on:
-  push:
-    branches:
-      - github-release
-      - github-release-4.x
-      - github-release-5.x
-      - github-release-6.x
-      - github-release-7.x
-      - github-release-8.x
-
-jobs:
-  release:
-    runs-on: macos-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v5
-      - name: Configure JDK
-        uses: actions/setup-java@v5
-        with:
-          distribution: 'temurin'
-          java-version: 17
-      - name: Publish
-        run: ./gradlew publishToSonatype closeAndReleaseSonatypeStagingRepository -no-daemon --no-parallel --stacktrace -DGPG_PRIVATE_PASSWORD=$GPG_PRIVATE_PASSWORD -DGPG_PRIVATE_KEY=$GPG_PRIVATE_KEY
-        env:
-          SONATYPE_USERNAME_2: ${{ secrets.SONATYPE_USERNAME_2 }}
-          SONATYPE_PASSWORD_2: ${{ secrets.SONATYPE_PASSWORD_2 }}
-          SONATYPE_REPOSITORY_ID: ${{ needs.create_staging_repository.outputs.repository_id }}
-          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
-          GPG_PRIVATE_PASSWORD: ${{ secrets.GPG_PRIVATE_PASSWORD }}
-          ORG_GRADLE_PROJECT_sonatypePassword: ${{ secrets.SONATYPE_PASSWORD_2 }}
-          ORG_GRADLE_PROJECT_sonatypeUsername: ${{ secrets.SONATYPE_USERNAME_2 }}
+Image(
+    painter = painterResource(id = dish.imageResource),
+    // Better for accessibility:
+    contentDescription = "Photo of ${dish.name}", 
+    modifier = Modifier
+        .fillMaxWidth()
+        .clip(RoundedCornerShape(8.dp)), // Optional: adds nice rounded corners
+    contentScale = ContentScale.FillWidth
+)
