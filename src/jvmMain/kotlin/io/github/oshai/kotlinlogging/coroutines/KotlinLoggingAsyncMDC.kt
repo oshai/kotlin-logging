@@ -29,7 +29,7 @@ public suspend inline fun <T> withLoggingContextAsync(
 /**
  * Use a pair inheriting coroutine context but not current MDC Context. Example:
  * ```
- * withLoggingContextAsync("userId" to userId) {
+ * withCoroutineLoggingContext("userId" to userId) {
  *   doSomething()
  * }
  * ```

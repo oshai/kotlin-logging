@@ -243,7 +243,7 @@ class KotlinLoggingAsyncMDCTest {
         withCoroutineLoggingContext("foo" to "bar") {
           requestBDuringBlock.complete(MDC.getCopyOfContextMap())
         }
-        // Capture MDC state immediately after Request B's block, will NOT be empty due to the bug
+        // will also be empty
         requestBAfterBlock.complete(MDC.getCopyOfContextMap())
         requestBDone.complete(Unit)
       }
