@@ -173,13 +173,16 @@ class KotlinLoggingAsyncMDCTest {
     val requestAStarted = CompletableDeferred<Unit>()
     val requestBDone = CompletableDeferred<Unit>()
 
+    val requestADuringBlock = CompletableDeferred<Map<String, String>?>()
     val requestAAfterBlock = CompletableDeferred<Map<String, String>?>()
+    val requestBDuringBlock = CompletableDeferred<Map<String, String>?>()
     val requestBAfterBlock = CompletableDeferred<Map<String, String>?>()
 
     val jobA =
       launch(dispatcher) {
         withLoggingContextAsync("foo" to "original") {
           requestAStarted.complete(Unit)
+          requestADuringBlock.complete(MDC.getCopyOfContextMap())
           requestBDone.await() // Suspend while B runs
         }
         // will be empty
@@ -189,7 +192,9 @@ class KotlinLoggingAsyncMDCTest {
     val jobB =
       launch(dispatcher) {
         requestAStarted.await()
-        withLoggingContextAsync("foo" to "bar") {}
+        withLoggingContextAsync("foo" to "bar") {
+          requestBDuringBlock.complete(MDC.getCopyOfContextMap())
+        }
         // Capture MDC state immediately after Request B's block, will NOT be empty due to the bug
         requestBAfterBlock.complete(MDC.getCopyOfContextMap())
         requestBDone.complete(Unit)
@@ -198,7 +203,9 @@ class KotlinLoggingAsyncMDCTest {
     jobA.join()
     jobB.join()
 
+    assertEquals(mapOf("foo" to "original"), requestADuringBlock.await())
     assertEquals(emptyMap(), requestAAfterBlock.await())
+    assertEquals(mapOf("foo" to "bar"), requestBDuringBlock.await())
     // THIS IS THE BUG: Request B sees "original" after its own block exits
     // It should be null (no context) but it's leaking Request A's value
     assertEquals(mapOf("foo" to "original"), requestBAfterBlock.await())
@@ -214,13 +221,16 @@ class KotlinLoggingAsyncMDCTest {
     val requestAStarted = CompletableDeferred<Unit>()
     val requestBDone = CompletableDeferred<Unit>()
 
+    val requestADuringBlock = CompletableDeferred<Map<String, String>?>()
     val requestAAfterBlock = CompletableDeferred<Map<String, String>?>()
+    val requestBDuringBlock = CompletableDeferred<Map<String, String>?>()
     val requestBAfterBlock = CompletableDeferred<Map<String, String>?>()
 
     val jobA =
       launch(dispatcher) {
         withCoroutineLoggingContext("foo" to "original") {
           requestAStarted.complete(Unit)
+          requestADuringBlock.complete(MDC.getCopyOfContextMap())
           requestBDone.await() // Suspend while B runs
         }
         // will be empty
@@ -230,7 +240,9 @@ class KotlinLoggingAsyncMDCTest {
     val jobB =
       launch(dispatcher) {
         requestAStarted.await()
-        withCoroutineLoggingContext("foo" to "bar") {}
+        withCoroutineLoggingContext("foo" to "bar") {
+          requestBDuringBlock.complete(MDC.getCopyOfContextMap())
+        }
         // Capture MDC state immediately after Request B's block, will NOT be empty due to the bug
         requestBAfterBlock.complete(MDC.getCopyOfContextMap())
         requestBDone.complete(Unit)
@@ -239,7 +251,9 @@ class KotlinLoggingAsyncMDCTest {
     jobA.join()
     jobB.join()
 
+    assertEquals(mapOf("foo" to "original"), requestADuringBlock.await())
     assertEquals(emptyMap(), requestAAfterBlock.await())
+    assertEquals(mapOf("foo" to "bar"), requestBDuringBlock.await())
     assertEquals(emptyMap(), requestBAfterBlock.await())
   }
 
