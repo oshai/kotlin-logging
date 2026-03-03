@@ -1,12 +1,17 @@
 package io.github.oshai.kotlinlogging.coroutines
 
+import kotlinx.coroutines.CompletableDeferred
 import kotlin.test.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.asCoroutineDispatcher
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runTest
 import org.apache.logging.log4j.*
 import org.apache.logging.log4j.core.config.*
 import org.junit.jupiter.api.BeforeEach
 import org.slf4j.*
+import java.util.concurrent.Executors
 
 @ExperimentalCoroutinesApi
 class KotlinLoggingAsyncMDCTest {
@@ -157,5 +162,43 @@ class KotlinLoggingAsyncMDCTest {
     assertEquals("g", MDC.get("e"))
     assertNull(MDC.get("f"))
     assertEquals("l", MDC.get("k"))
+  }
+
+  @Test
+  fun `withLoggingContextAsync leaks context across coroutines`() = runTest {
+    val dispatcher = Executors.newFixedThreadPool(1).asCoroutineDispatcher()
+    // establish order of events with deferreds:
+    // 1. request A will start, set its context, and then wait for request B (before exiting withLoggingContextAsync)
+    // 2. request B will start, set its context, and then capture the MDC
+    val requestAStarted = CompletableDeferred<Unit>()
+    val requestBDone = CompletableDeferred<Unit>()
+
+    val requestAAfterBlock = CompletableDeferred<Map<String, String>?>()
+    val requestBAfterBlock = CompletableDeferred<Map<String, String>?>()
+
+    val jobA = launch(dispatcher) {
+      withLoggingContextAsync("foo" to "original") {
+        requestAStarted.complete(Unit)
+        requestBDone.await() // Suspend while B runs
+      }
+      // will be empty
+      requestAAfterBlock.complete(MDC.getCopyOfContextMap())
+    }
+
+    val jobB = launch(dispatcher) {
+      requestAStarted.await()
+      withLoggingContextAsync("foo" to "bar") { }
+      // Capture MDC state immediately after Request B's block, will NOT be empty due to the bug
+      requestBAfterBlock.complete(MDC.getCopyOfContextMap())
+      requestBDone.complete(Unit)
+    }
+
+    jobA.join()
+    jobB.join()
+
+    assertEquals(emptyMap(), requestAAfterBlock.await())
+    // THIS IS THE BUG: Request B sees "AAA" after its own block exits
+    // It should be null (no context) but it's leaking Request A's value
+    assertEquals(mapOf("foo" to "original"), requestBAfterBlock.await()) // This will FAIL
   }
 }
