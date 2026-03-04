@@ -20,9 +20,9 @@ withLoggingContextAsync("userId" to "ANOTHER_USER_ID", restorePrevious = false) 
 
 ## Coroutine-Safe wrappers
 
-If you prefer to leverage coroutine context instead of thread local storage, you can use the `withCoroutineLoggingContext` wrapper.
-This will NOT inherit the current MDC set prior, but will carry existing coroutine context within nested declarations, restoring previous context
-at the logical coroutine level rather than thread level.
+If you prefer to leverage coroutine context to propogate MDC safely across suspensions, you can use the `withCoroutineLoggingContext` wrapper.
+This will NOT inherit the current MDC set on the calling thread, but will carry the logging context established by outer `withCoroutineLoggingContext` calls
+within nested declarations, restoring previous MDC for the current coroutine when the block completes.
 
 ```kotlin
 MDC.put("foo", "bar")

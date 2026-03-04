@@ -104,7 +104,15 @@ public suspend inline fun <T> withCoroutineLoggingContext(
   crossinline body: suspend () -> T,
 ): T {
   val parent = currentCoroutineContext()[MDCContext]?.contextMap ?: emptyMap()
-  val merged = (parent + map.filterValues { it != null }).mapValues { it.value!! }
+  val merged = parent.toMutableMap().apply {
+    for((key, value) in map) {
+      if (value == null) {
+        remove(key)
+      } else {
+        put(key, value)
+      }
+    }
+  }
 
   return withContext(MDCContext(merged)) { body() }
 }
