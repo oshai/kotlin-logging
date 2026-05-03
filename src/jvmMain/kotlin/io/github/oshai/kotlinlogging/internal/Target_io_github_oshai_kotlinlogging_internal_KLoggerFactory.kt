@@ -19,7 +19,7 @@ import java.util.function.BooleanSupplier
 internal class Target_io_github_oshai_kotlinlogging_internal_KLoggerFactory {
   @TargetClass(
     className = "io.github.oshai.kotlinlogging.internal.KLoggerFactory",
-    onlyWith = [LogbackNotOnClasspath::class],
+    onlyWith = [KLoggerFactoryExistsAndLogbackNotOnClasspath::class],
   )
   companion object {
     @Substitute
@@ -35,8 +35,25 @@ internal class Target_io_github_oshai_kotlinlogging_internal_KLoggerFactory {
   }
 }
 
-internal class LogbackNotOnClasspath : BooleanSupplier {
+/**
+ * Condition that returns true only when:
+ * 1. The substitution target class (`io.github.oshai.kotlinlogging.internal.KLoggerFactory`)
+ *    actually exists on the classpath (it was removed in v8.x), AND
+ * 2. Logback is not on the classpath.
+ *
+ * This prevents a GraalVM native image build error when the target class no longer exists. See
+ * [https://github.com/oshai/kotlin-logging/issues/385].
+ */
+internal class KLoggerFactoryExistsAndLogbackNotOnClasspath : BooleanSupplier {
   override fun getAsBoolean(): Boolean {
+    // First check if the substitution target class exists (it doesn't in v8.x+).
+    // If it doesn't exist, the substitution must be inactive to avoid a native build error.
+    try {
+      Class.forName("io.github.oshai.kotlinlogging.internal.KLoggerFactory")
+    } catch (_: ClassNotFoundException) {
+      return false
+    }
+    // Target class exists; only apply substitution when Logback is not on the classpath.
     try {
       Class.forName("ch.qos.logback.classic.LoggerContext")
       return false
