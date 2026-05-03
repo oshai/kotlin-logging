@@ -3,6 +3,7 @@ package io.github.oshai.kotlinlogging.internal
 import com.oracle.svm.core.annotate.Substitute
 import com.oracle.svm.core.annotate.TargetClass
 import com.oracle.svm.core.annotate.TargetElement
+import io.github.oshai.kotlinlogging.DirectLoggerFactory
 import io.github.oshai.kotlinlogging.KLoggerFactory
 import io.github.oshai.kotlinlogging.jul.internal.JulLoggerFactory
 import io.github.oshai.kotlinlogging.slf4j.internal.Slf4jLoggerFactory
@@ -27,6 +28,8 @@ internal class Target_io_github_oshai_kotlinlogging_KotlinLoggingConfiguration {
     fun detectLogger(): KLoggerFactory {
       if (System.getProperty("kotlin-logging-to-jul") != null) {
         return JulLoggerFactory
+      } else if (System.getProperty("kotlin-logging-to-direct") == "true") {
+        return DirectLoggerFactory
       }
       // Intentionally leave out the logback branch as logback is not on the classpath.
       // default to SLF4J
