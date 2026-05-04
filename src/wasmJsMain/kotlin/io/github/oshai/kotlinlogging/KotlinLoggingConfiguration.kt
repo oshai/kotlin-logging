@@ -1,5 +1,23 @@
 package io.github.oshai.kotlinlogging
 
+private fun resolveStartupMessageDefault(): Boolean {
+  try {
+    val disabledInWindow = js("typeof window !== 'undefined' && (window.KOTLIN_LOGGING_STARTUP_MESSAGE === 'false' || window.KOTLIN_LOGGING_STARTUP_MESSAGE === false)") as Boolean
+    if (disabledInWindow) {
+      return false
+    }
+    
+    val disabledInEnv = js("typeof process !== 'undefined' && process.env && (process.env.KOTLIN_LOGGING_STARTUP_MESSAGE === 'false' || process.env.KOTLIN_LOGGING_STARTUP_MESSAGE === false)") as Boolean
+    if (disabledInEnv) {
+      return false
+    }
+    
+    return true
+  } catch (e: Throwable) {
+    return true
+  }
+}
+
 public actual object KotlinLoggingConfiguration {
   public actual val direct: DirectLoggingConfiguration =
     object : DirectLoggingConfiguration {
@@ -36,5 +54,5 @@ public actual object KotlinLoggingConfiguration {
 
   public actual var loggerFactory: KLoggerFactory = DirectLoggerFactory
 
-  public actual var logStartupMessage: Boolean = true
+  public actual var logStartupMessage: Boolean = resolveStartupMessageDefault()
 }

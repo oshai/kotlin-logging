@@ -1,13 +1,22 @@
 package io.github.oshai.kotlinlogging
 
 import kotlin.concurrent.AtomicReference
+import platform.posix.getenv
+import kotlinx.cinterop.toKString
+import kotlinx.cinterop.ExperimentalForeignApi
+
+@OptIn(ExperimentalForeignApi::class)
+private fun getEnv(name: String): String? {
+  return getenv(name)?.toKString()
+}
+
 
 public actual object KotlinLoggingConfiguration {
   // Existing Darwin-specific properties
   public var subsystem: AtomicReference<String?> = AtomicReference(null)
   public var category: AtomicReference<String?> = AtomicReference(null)
 
-  private val _logStartupMessage = AtomicReference(true)
+  private val _logStartupMessage = AtomicReference(getEnv("KOTLIN_LOGGING_STARTUP_MESSAGE")?.toBoolean() ?: true)
   public actual var logStartupMessage: Boolean
     get() = _logStartupMessage.value
     set(value) {
