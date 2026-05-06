@@ -1,17 +1,17 @@
 package io.github.oshai.kotlinlogging
 
-private fun startupMessageDisabledInWindow(): Boolean =
+private val startupMessageDisabledInWindow: Boolean =
   js("typeof window !== 'undefined' && (window.KOTLIN_LOGGING_STARTUP_MESSAGE === 'false' || window.KOTLIN_LOGGING_STARTUP_MESSAGE === false)") as Boolean
 
-private fun startupMessageDisabledInEnv(): Boolean =
+private val startupMessageDisabledInEnv: Boolean =
   js("typeof process !== 'undefined' && process.env && (process.env.KOTLIN_LOGGING_STARTUP_MESSAGE === 'false' || process.env.KOTLIN_LOGGING_STARTUP_MESSAGE === false)") as Boolean
 
 private fun resolveStartupMessageDefault(): Boolean {
   try {
-    if (startupMessageDisabledInWindow()) {
+    if (startupMessageDisabledInWindow) {
       return false
     }
-    if (startupMessageDisabledInEnv()) {
+    if (startupMessageDisabledInEnv) {
       return false
     }
     return true
