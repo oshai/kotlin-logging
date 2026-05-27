@@ -27,6 +27,19 @@ public suspend inline fun <T> withLoggingContextAsync(
   }
 
 /**
+ * Use a pair inheriting coroutine context but not current MDC Context. Example:
+ * ```
+ * withCoroutineLoggingContext("userId" to userId) {
+ *   doSomething()
+ * }
+ * ```
+ */
+public suspend inline fun <T> withCoroutineLoggingContext(
+  pair: Pair<String, String?>,
+  crossinline body: suspend () -> T,
+): T = withCoroutineLoggingContext(mapOf(pair), body)
+
+/**
  * Use a varying number of pairs in an asynchronous MDC context. Example:
  * ```
  * withLoggingContextAsync("userId" to userId) {
@@ -42,6 +55,19 @@ public suspend inline fun <T> withLoggingContextAsync(
   withLoggingContext(*pair, restorePrevious = restorePrevious) {
     withContext(MDCContext()) { body() }
   }
+
+/**
+ * Use a varying number of pairs inheriting coroutine context but not current MDC Context. Example:
+ * ```
+ * withCoroutineLoggingContext("userId" to userId) {
+ *   doSomething()
+ * }
+ * ```
+ */
+public suspend inline fun <T> withCoroutineLoggingContext(
+  vararg pair: Pair<String, String?>,
+  crossinline body: suspend () -> T,
+): T = withCoroutineLoggingContext(pair.toMap(), body)
 
 /**
  * Use a map in an asynchronous MDC context. Example:
@@ -64,3 +90,29 @@ public suspend inline fun <T> withLoggingContextAsync(
   withLoggingContext(map, restorePrevious = restorePrevious) {
     withContext(MDCContext()) { body() }
   }
+
+/**
+ * Use a map inheriting coroutine context but not current MDC Context. Example:
+ * ```
+ * withCoroutineLoggingContext(mapOf("userId" to userId)) {
+ *   doSomething()
+ * }
+ * ```
+ */
+public suspend inline fun <T> withCoroutineLoggingContext(
+  map: Map<String, String?>,
+  crossinline body: suspend () -> T,
+): T {
+  val parent = currentCoroutineContext()[MDCContext]?.contextMap ?: emptyMap()
+  val merged = parent.toMutableMap().apply {
+    for((key, value) in map) {
+      if (value == null) {
+        remove(key)
+      } else {
+        put(key, value)
+      }
+    }
+  }
+
+  return withContext(MDCContext(merged)) { body() }
+}
