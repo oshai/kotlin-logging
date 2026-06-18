@@ -4,7 +4,7 @@
 # see https://github.com/oshai/kotlin-logging/issues/546
 kotlin = "2.1.21"
 android-gradle-plugin = "8.13.0"
-dokka = "2.0.0"
+dokka = "2.1.0"
 spotless = "8.0.0"
 nexus-publish-plugin = "2.0.0"
 
