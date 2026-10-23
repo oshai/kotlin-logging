@@ -1,7 +1,15 @@
 package io.github.oshai.kotlinlogging.coroutines
 
+import java.util.concurrent.Executors
+import kotlin.coroutines.resume
 import kotlin.test.*
+import kotlinx.coroutines.CancellableContinuation
+import kotlinx.coroutines.CoroutineStart
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.async
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.test.runTest
 import org.apache.logging.log4j.*
 import org.apache.logging.log4j.core.config.*
@@ -157,5 +165,125 @@ class KotlinLoggingAsyncMDCTest {
     assertEquals("g", MDC.get("e"))
     assertNull(MDC.get("f"))
     assertEquals("l", MDC.get("k"))
+  }
+
+  @Test
+  fun `entries do not stay on the thread the block started on`() {
+    runAcrossThreads { hop ->
+      withLoggingContextAsync("a" to "b") {
+        hop()
+        assertEquals("b", MDC.get("a"))
+      }
+    }
+    assertNull(MDC.get("a"))
+  }
+
+  @Test
+  fun `entries do not stay on the thread the block started on (restorePrevious=false)`() {
+    runAcrossThreads { hop ->
+      withLoggingContextAsync("a" to "b", restorePrevious = false) {
+        hop()
+        assertEquals("b", MDC.get("a"))
+      }
+    }
+    assertNull(MDC.get("a"))
+  }
+
+  @Test
+  fun `a previous value is restored on the thread the block started on only`() {
+    MDC.put("a", "x")
+
+    runAcrossThreads { hop ->
+      withLoggingContextAsync("a" to "b") {
+        hop()
+        assertEquals("b", MDC.get("a"))
+      }
+    }
+
+    assertEquals("x", MDC.get("a"))
+  }
+
+  @Test
+  fun `pair withLoggingContext keeps a key whose new value is null (restorePrevious=false)`() =
+    runTest {
+      MDC.put("a", "x")
+
+      withLoggingContextAsync("a" to null, restorePrevious = false) {
+        assertEquals("x", MDC.get("a"))
+      }
+
+      assertEquals("x", MDC.get("a"))
+    }
+
+  @Test
+  fun `entries do not stay on either thread when the block throws`() {
+    val failure =
+      assertFailsWith<IllegalStateException> {
+        runAcrossThreads { hop ->
+          withLoggingContextAsync("a" to "b") {
+            hop()
+            error("failed inside the block")
+          }
+        }
+      }
+    assertEquals("failed inside the block", failure.message)
+    assertNull(MDC.get("a"))
+  }
+
+  @Test
+  fun `a key is removed when the block throws (restorePrevious=false)`() {
+    MDC.put("a", "x")
+
+    assertFailsWith<IllegalStateException> {
+      runBlocking {
+        withLoggingContextAsync("a" to "b", restorePrevious = false) { error("failed") }
+      }
+    }
+
+    assertNull(MDC.get("a"))
+  }
+
+  @Test
+  fun `map withLoggingContext removes a key whose new value is null (restorePrevious=false)`() =
+    runTest {
+      MDC.put("e", "g")
+
+      withLoggingContextAsync(mapOf("e" to null), restorePrevious = false) {
+        assertEquals("g", MDC.get("e"))
+      }
+
+      assertNull(MDC.get("e"))
+    }
+
+  /**
+   * Runs [block] on this thread until it calls `hop` once, then continues it on another thread. The
+   * other thread resumes it only after it has suspended, so the thread always changes. Both threads
+   * must end with an empty MDC.
+   */
+  private fun runAcrossThreads(block: suspend (hop: suspend () -> Unit) -> Unit) {
+    val executor = Executors.newSingleThreadExecutor()
+    val leftOnExecutor =
+      try {
+        var parked: CancellableContinuation<Unit>? = null
+        runBlocking(Dispatchers.Unconfined) {
+          val result =
+            async(start = CoroutineStart.UNDISPATCHED) {
+              block {
+                val suspendedOn = Thread.currentThread()
+                suspendCancellableCoroutine { parked = it }
+                assertNotSame(suspendedOn, Thread.currentThread())
+              }
+            }
+          val continuation = checkNotNull(parked) { "the block finished without calling hop" }
+          executor.execute { continuation.resume(Unit) }
+          result.await()
+        }
+        // read on the test thread: after the hop, the code after await() runs on the executor, so
+        // get() there would wait for itself
+        executor.submit<Map<String, String>?> { MDC.getCopyOfContextMap() }.get()
+      } finally {
+        executor.shutdown()
+      }
+    assertEquals(emptyMap(), leftOnExecutor.orEmpty())
   }
 }
