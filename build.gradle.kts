@@ -315,10 +315,23 @@ tasks {
 
 // Docs
 
+dokka {
+    moduleName.set("kotlin-logging")
+    dokkaSourceSets.configureEach {
+        sourceLink {
+            localDirectory.set(projectDir.resolve("src"))
+            remoteUrl("https://github.com/oshai/kotlin-logging/tree/master/src")
+            remoteLineSuffix.set("#L")
+        }
+    }
+    dokkaPublications.html {
+        outputDirectory.set(layout.buildDirectory.dir("dokka/html"))
+    }
+}
+
 tasks {
     register<Jar>("dokkaJar") {
-        from(dokkaHtml)
-        dependsOn(dokkaHtml)
+        from(named("dokkaGeneratePublicationHtml"))
         archiveClassifier.set("javadoc")
     }
 }
