@@ -25,7 +25,12 @@ repositories {
 
 tasks.withType<KotlinCompile> {
     compilerOptions {
-        jvmTarget = JvmTarget.JVM_1_8
+        jvmTarget =
+            if (name == "compileTestKotlinJvm" || name == "compileLogbackTestKotlinJvm") {
+                JvmTarget.JVM_17
+            } else {
+                JvmTarget.JVM_1_8
+            }
     }
 }
 
