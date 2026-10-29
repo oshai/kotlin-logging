@@ -1,8 +1,8 @@
 package io.github.oshai.kotlinlogging.coroutines
 
-import io.github.oshai.kotlinlogging.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.slf4j.*
+import org.slf4j.MDC
 
 /**
  * Use a pair in an asynchronous MDC context. Example:
@@ -17,14 +17,17 @@ import kotlinx.coroutines.slf4j.*
  * }
  * ```
  */
-public suspend inline fun <T> withLoggingContextAsync(
+public suspend fun <T> withLoggingContextAsync(
   pair: Pair<String, String?>,
   restorePrevious: Boolean = true,
-  crossinline body: suspend () -> T,
+  body: suspend () -> T,
 ): T =
-  withLoggingContext(pair, restorePrevious = restorePrevious) {
-    withContext(MDCContext()) { body() }
-  }
+  withMdcContext(
+    listOf(pair),
+    restorePrevious = restorePrevious,
+    removeNullValuedKeys = false,
+    body = body,
+  )
 
 /**
  * Use a varying number of pairs in an asynchronous MDC context. Example:
@@ -34,14 +37,17 @@ public suspend inline fun <T> withLoggingContextAsync(
  * }
  * ```
  */
-public suspend inline fun <T> withLoggingContextAsync(
+public suspend fun <T> withLoggingContextAsync(
   vararg pair: Pair<String, String?>,
   restorePrevious: Boolean = true,
-  crossinline body: suspend () -> T,
+  body: suspend () -> T,
 ): T =
-  withLoggingContext(*pair, restorePrevious = restorePrevious) {
-    withContext(MDCContext()) { body() }
-  }
+  withMdcContext(
+    pair.asList(),
+    restorePrevious = restorePrevious,
+    removeNullValuedKeys = false,
+    body = body,
+  )
 
 /**
  * Use a map in an asynchronous MDC context. Example:
@@ -56,11 +62,36 @@ public suspend inline fun <T> withLoggingContextAsync(
  * }
  * ```
  */
-public suspend inline fun <T> withLoggingContextAsync(
+public suspend fun <T> withLoggingContextAsync(
   map: Map<String, String?>,
   restorePrevious: Boolean = true,
-  crossinline body: suspend () -> T,
+  body: suspend () -> T,
 ): T =
-  withLoggingContext(map, restorePrevious = restorePrevious) {
-    withContext(MDCContext()) { body() }
+  withMdcContext(
+    map.toList(),
+    restorePrevious = restorePrevious,
+    // withLoggingContext(map, restorePrevious = false) removes keys whose value is null as well
+    removeNullValuedKeys = true,
+    body = body,
+  )
+
+/**
+ * Puts the [entries] with a value into an [MDCContext] only. Writing them to the MDC of the current
+ * thread first would leave them there when [body] suspends and resumes on another thread.
+ */
+private suspend fun <T> withMdcContext(
+  entries: List<Pair<String, String?>>,
+  restorePrevious: Boolean,
+  removeNullValuedKeys: Boolean,
+  body: suspend () -> T,
+): T {
+  val added = entries.mapNotNull { (key, value) -> value?.let { key to it } }.toMap()
+  try {
+    return withContext(MDCContext(MDC.getCopyOfContextMap().orEmpty() + added)) { body() }
+  } finally {
+    if (!restorePrevious) {
+      val removed = if (removeNullValuedKeys) entries.map { it.first } else added.keys
+      removed.forEach(MDC::remove)
+    }
   }
+}
