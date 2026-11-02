@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Wiki Documentation
+    url: https://github.com/oshai/kotlin-logging/wiki
+    about: Usage guides, multiplatform setup, and examples.
+  - name: Kotlin Slack (#kotlin-logging)
+    url: https://kotlinlang.slack.com/messages/kotlin-logging
+    about: Ask questions and discuss proposed changes with maintainers.
+  - name: Stack Overflow (kotlin-logging)
+    url: https://stackoverflow.com/tags/kotlin-logging/info
+    about: Usage and configuration Q&A tagged with kotlin-logging.
