@@ -4,6 +4,13 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    ignore:
+      # Pinned to Kotlin 2.1.x for Kotlin 2.0 consumer compatibility (Issue #546)
+      - dependency-name: "org.jetbrains.kotlin*"
+        versions: [">= 2.2.0"]
+      # kotlinx-coroutines >= 1.11.0 is compiled with Kotlin 2.2+ (KLIB ABI 2.2.0)
+      - dependency-name: "org.jetbrains.kotlinx:kotlinx-coroutines*"
+        versions: [">= 1.11.0"]
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
