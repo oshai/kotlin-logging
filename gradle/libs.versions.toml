@@ -8,7 +8,7 @@ dokka = "2.2.0"
 spotless = "8.0.0"
 nexus-publish-plugin = "2.0.0"
 
-slf4j = "2.0.17"
+slf4j = "2.0.20"
 logback = "1.6.6"
 logstash-logback-encoder = "8.1"
 coroutines = "1.10.2"
