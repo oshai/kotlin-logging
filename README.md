@@ -136,6 +136,7 @@ And many more... (add your name above)
 - Is location logging possible? Yes, location awareness was added in kotlin-logging 1.4.
 - When I do `logger.debug`, my IntelliJ IDEA run console doesn't show any output. Do you know how I could set the console logger to debug or trace levels? Is this an IDE setting, or can it be set in the call to KLogging()? Setting log level is done per implementation. kotlin-logging and slf4j are just facades for the underlying logging lib (log4j, logback etc') more details [here](http://stackoverflow.com/questions/43146977/how-to-configure-kotlin-logging-logger).
 - Can I access the actual logger? In platforms available yes, via `DelegatingKLogger.underlyingLogger` property.
+- Why does `KotlinLogging.logger {}` inside a nested or inner class use the outer class name on JVM? On JVM and Android, logger name resolution strips everything from the first `$` in the binary class name so lambdas and `Companion` objects resolve to the enclosing class. To use a separate logger name for a nested or inner class, pass it explicitly: `KotlinLogging.logger(Outer.Inner::class.java.name)` (or `KotlinLogging.logger("package.Outer.Inner")`).
 
 ## Usage
 
