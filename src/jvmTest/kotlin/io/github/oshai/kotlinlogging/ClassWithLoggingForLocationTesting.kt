@@ -38,6 +38,13 @@ class ClassWithLoggingForLocationTesting {
   }
 
   fun logAt(level: Level = INFO) {
-    logger.at(level) { this.message = "test" }
+    logger.at(level) { message = "test" }
+  }
+
+  fun logAtWithPayload(level: Level = INFO) {
+    logger.at(level) {
+      message = "test"
+      payload = mapOf("key" to "value")
+    }
   }
 }

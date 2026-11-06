@@ -61,6 +61,15 @@ class LoggingWithLocationTest {
   }
 
   @Test
+  fun testAtLoggingWithLocationAndPayload() {
+    ClassWithLoggingForLocationTesting().logAtWithPayload()
+    assertEquals(
+      "INFO ClassWithLoggingForLocationTesting.logAtWithPayload(45) - test",
+      appenderWithWriter.writer.toString().trim(),
+    )
+  }
+
+  @Test
   fun testNullLoggingWithLocation() {
     ClassWithLoggingForLocationTesting().logNull()
     assertEquals(
