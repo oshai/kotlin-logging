@@ -365,6 +365,15 @@ public interface KLogger {
    * Lazy add a log message if level enabled
    *
    * @param level The level to log
+   * @param block The block to log
+   */
+  public fun at(level: Level, block: KLoggingEventBuilder.() -> Unit): Unit =
+    at(level = level, marker = null, block = block)
+
+  /**
+   * Lazy add a log message if level enabled
+   *
+   * @param level The level to log
    * @param marker The marker to log
    * @param block The block to log
    */
@@ -377,7 +386,7 @@ public interface KLogger {
    *
    * @param arguments The arguments to log
    */
-  public fun entry(vararg arguments: Any?): Unit = trace { "entry(${arguments.joinToString() })" }
+  public fun entry(vararg arguments: Any?): Unit = trace { "entry(${arguments.joinToString()})" }
 
   /** Add log message indicating exit of a method */
   public fun exit(): Unit = trace { "exit" }

@@ -38,6 +38,10 @@ internal class LocationAwareKLogger(override val underlyingLogger: LocationAware
     return isLoggingEnabledFor(underlyingLogger, level, marker)
   }
 
+  override fun at(level: Level, block: KLoggingEventBuilder.() -> Unit) {
+    at(level = level, marker = null, block = block)
+  }
+
   override fun at(level: Level, marker: Marker?, block: KLoggingEventBuilder.() -> Unit) {
     if (isLoggingEnabledFor(level, marker)) {
       KLoggingEventBuilder().apply(block).run {
