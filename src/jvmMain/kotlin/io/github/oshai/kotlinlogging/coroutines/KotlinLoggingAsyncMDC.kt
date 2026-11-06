@@ -11,23 +11,23 @@ import org.slf4j.MDC
  *   doSomething()
  * }
  * ```
- * ```
- * withLoggingContextAsync("userId" to userId, restorePrevious = false) {
- *   doSomething()
- * }
- * ```
  */
 public suspend fun <T> withLoggingContextAsync(
   pair: Pair<String, String?>,
-  restorePrevious: Boolean = true,
   body: suspend () -> T,
-): T =
-  withMdcContext(
-    listOf(pair),
-    restorePrevious = restorePrevious,
-    removeNullValuedKeys = false,
-    body = body,
-  )
+): T = withMdcContext(listOf(pair), body)
+
+/** Use a pair in an asynchronous MDC context. */
+@Deprecated(
+  message =
+    "restorePrevious is deprecated and ignored in coroutines; MDC propagation is scoped to the coroutine context.",
+  replaceWith = ReplaceWith("withLoggingContextAsync(pair, body = body)"),
+)
+public suspend fun <T> withLoggingContextAsync(
+  pair: Pair<String, String?>,
+  @Suppress("UNUSED_PARAMETER") restorePrevious: Boolean,
+  body: suspend () -> T,
+): T = withLoggingContextAsync(pair, body)
 
 /**
  * Use a varying number of pairs in an asynchronous MDC context. Example:
@@ -39,15 +39,20 @@ public suspend fun <T> withLoggingContextAsync(
  */
 public suspend fun <T> withLoggingContextAsync(
   vararg pair: Pair<String, String?>,
-  restorePrevious: Boolean = true,
   body: suspend () -> T,
-): T =
-  withMdcContext(
-    pair.asList(),
-    restorePrevious = restorePrevious,
-    removeNullValuedKeys = false,
-    body = body,
-  )
+): T = withMdcContext(pair.asList(), body)
+
+/** Use a varying number of pairs in an asynchronous MDC context. */
+@Deprecated(
+  message =
+    "restorePrevious is deprecated and ignored in coroutines; MDC propagation is scoped to the coroutine context.",
+  replaceWith = ReplaceWith("withLoggingContextAsync(*pair, body = body)"),
+)
+public suspend fun <T> withLoggingContextAsync(
+  vararg pair: Pair<String, String?>,
+  @Suppress("UNUSED_PARAMETER") restorePrevious: Boolean,
+  body: suspend () -> T,
+): T = withLoggingContextAsync(*pair, body = body)
 
 /**
  * Use a map in an asynchronous MDC context. Example:
@@ -56,24 +61,23 @@ public suspend fun <T> withLoggingContextAsync(
  *   doSomething()
  * }
  * ```
- * ```
- * withLoggingContextAsync(mapOf("userId" to userId), restorePrevious = true) {
- *   doSomething()
- * }
- * ```
  */
 public suspend fun <T> withLoggingContextAsync(
   map: Map<String, String?>,
-  restorePrevious: Boolean = true,
   body: suspend () -> T,
-): T =
-  withMdcContext(
-    map.toList(),
-    restorePrevious = restorePrevious,
-    // withLoggingContext(map, restorePrevious = false) removes keys whose value is null as well
-    removeNullValuedKeys = true,
-    body = body,
-  )
+): T = withMdcContext(map.toList(), body)
+
+/** Use a map in an asynchronous MDC context. */
+@Deprecated(
+  message =
+    "restorePrevious is deprecated and ignored in coroutines; MDC propagation is scoped to the coroutine context.",
+  replaceWith = ReplaceWith("withLoggingContextAsync(map, body = body)"),
+)
+public suspend fun <T> withLoggingContextAsync(
+  map: Map<String, String?>,
+  @Suppress("UNUSED_PARAMETER") restorePrevious: Boolean,
+  body: suspend () -> T,
+): T = withLoggingContextAsync(map, body)
 
 /**
  * Puts the [entries] with a value into an [MDCContext] only. Writing them to the MDC of the current
@@ -81,17 +85,8 @@ public suspend fun <T> withLoggingContextAsync(
  */
 private suspend fun <T> withMdcContext(
   entries: List<Pair<String, String?>>,
-  restorePrevious: Boolean,
-  removeNullValuedKeys: Boolean,
   body: suspend () -> T,
 ): T {
   val added = entries.mapNotNull { (key, value) -> value?.let { key to it } }.toMap()
-  try {
-    return withContext(MDCContext(MDC.getCopyOfContextMap().orEmpty() + added)) { body() }
-  } finally {
-    if (!restorePrevious) {
-      val removed = if (removeNullValuedKeys) entries.map { it.first } else added.keys
-      removed.forEach(MDC::remove)
-    }
-  }
+  return withContext(MDCContext(MDC.getCopyOfContextMap().orEmpty() + added)) { body() }
 }

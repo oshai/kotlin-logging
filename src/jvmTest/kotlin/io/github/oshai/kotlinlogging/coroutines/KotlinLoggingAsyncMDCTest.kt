@@ -40,12 +40,13 @@ class KotlinLoggingAsyncMDCTest {
   }
 
   @Test
-  fun `simple pair withLoggingContext (restorePrevious=false)`() = runTest {
+  @Suppress("DEPRECATION")
+  fun `simple pair withLoggingContext ignores deprecated restorePrevious=false`() = runTest {
     withLoggingContextAsync("a" to "c") {
       withLoggingContextAsync("a" to "b", restorePrevious = false) {
         assertEquals("b", MDC.get("a"))
       }
-      assertNull(MDC.get("a"))
+      assertEquals("c", MDC.get("a"))
     }
     assertNull(MDC.get("a"))
 
@@ -101,6 +102,7 @@ class KotlinLoggingAsyncMDCTest {
   }
 
   @Test
+  @Suppress("DEPRECATION")
   fun `multiple pair withLoggingContext (restorePrevious=false)`() = runTest {
     MDC.put("f", "g")
 
@@ -179,6 +181,7 @@ class KotlinLoggingAsyncMDCTest {
   }
 
   @Test
+  @Suppress("DEPRECATION")
   fun `entries do not stay on the thread the block started on (restorePrevious=false)`() {
     runAcrossThreads { hop ->
       withLoggingContextAsync("a" to "b", restorePrevious = false) {
@@ -204,6 +207,7 @@ class KotlinLoggingAsyncMDCTest {
   }
 
   @Test
+  @Suppress("DEPRECATION")
   fun `pair withLoggingContext keeps a key whose new value is null (restorePrevious=false)`() =
     runTest {
       MDC.put("a", "x")
@@ -231,7 +235,8 @@ class KotlinLoggingAsyncMDCTest {
   }
 
   @Test
-  fun `a key is removed when the block throws (restorePrevious=false)`() {
+  @Suppress("DEPRECATION")
+  fun `outer MDC is preserved when the block throws (restorePrevious=false)`() {
     MDC.put("a", "x")
 
     assertFailsWith<IllegalStateException> {
@@ -240,20 +245,20 @@ class KotlinLoggingAsyncMDCTest {
       }
     }
 
-    assertNull(MDC.get("a"))
+    assertEquals("x", MDC.get("a"))
   }
 
   @Test
-  fun `map withLoggingContext removes a key whose new value is null (restorePrevious=false)`() =
-    runTest {
-      MDC.put("e", "g")
+  @Suppress("DEPRECATION")
+  fun `outer MDC is preserved when map value is null (restorePrevious=false)`() = runTest {
+    MDC.put("e", "g")
 
-      withLoggingContextAsync(mapOf("e" to null), restorePrevious = false) {
-        assertEquals("g", MDC.get("e"))
-      }
-
-      assertNull(MDC.get("e"))
+    withLoggingContextAsync(mapOf("e" to null), restorePrevious = false) {
+      assertEquals("g", MDC.get("e"))
     }
+
+    assertEquals("g", MDC.get("e"))
+  }
 
   /**
    * Runs [block] on this thread until it calls `hop` once, then continues it on another thread. The
