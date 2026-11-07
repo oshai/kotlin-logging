@@ -19,6 +19,16 @@ class ForKotlinLoggingTest {
   companion object {
     val loggerInCompanion = KotlinLogging.logger {}
   }
+
+  class InnerClass {
+    val loggerInInnerClass = KotlinLogging.logger {}
+
+    private companion object {
+      val loggerInInnerCompanion = KotlinLogging.logger {}
+    }
+
+    val innerCompanionLoggerName: String = loggerInInnerCompanion.name
+  }
 }
 
 class KotlinLoggingTest {
@@ -37,6 +47,18 @@ class KotlinLoggingTest {
         assertEquals(
           "io.github.oshai.kotlinlogging.ForKotlinLoggingTest",
           ForKotlinLoggingTest.loggerInCompanion.name,
+        )
+      },
+      {
+        assertEquals(
+          "io.github.oshai.kotlinlogging.ForKotlinLoggingTest",
+          ForKotlinLoggingTest.InnerClass().loggerInInnerClass.name,
+        )
+      },
+      {
+        assertEquals(
+          "io.github.oshai.kotlinlogging.ForKotlinLoggingTest",
+          ForKotlinLoggingTest.InnerClass().innerCompanionLoggerName,
         )
       },
       { assertEquals("io.github.oshai.kotlinlogging.slf4jLogger", loggerFromSlf4j.name) },

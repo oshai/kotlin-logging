@@ -28,7 +28,7 @@ class LoggingWithLocationTest {
   fun testLoggingWithLocation() {
     ClassWithLoggingForLocationTesting().log()
     assertEquals(
-      "INFO ClassWithLoggingForLocationTesting.log(8) - test",
+      "INFO ClassWithLoggingForLocationTesting.log(10) - test",
       appenderWithWriter.writer.toString().trim(),
     )
   }
@@ -37,7 +37,7 @@ class LoggingWithLocationTest {
   fun testLazyLoggingWithLocation() {
     ClassWithLoggingForLocationTesting().logLazy()
     assertEquals(
-      "INFO ClassWithLoggingForLocationTesting.logLazy(12) - test",
+      "INFO ClassWithLoggingForLocationTesting.logLazy(14) - test",
       appenderWithWriter.writer.toString().trim(),
     )
   }
@@ -46,7 +46,25 @@ class LoggingWithLocationTest {
   fun testFluentLoggingWithLocation() {
     ClassWithLoggingForLocationTesting().logFluentWithPayload()
     assertEquals(
-      "INFO ClassWithLoggingForLocationTesting.logFluentWithPayload(32) - test",
+      "INFO ClassWithLoggingForLocationTesting.logFluentWithPayload(34) - test",
+      appenderWithWriter.writer.toString().trim(),
+    )
+  }
+
+  @Test
+  fun testAtLoggingWithLocation() {
+    ClassWithLoggingForLocationTesting().logAt()
+    assertEquals(
+      "INFO ClassWithLoggingForLocationTesting.logAt(41) - test",
+      appenderWithWriter.writer.toString().trim(),
+    )
+  }
+
+  @Test
+  fun testAtLoggingWithLocationAndPayload() {
+    ClassWithLoggingForLocationTesting().logAtWithPayload()
+    assertEquals(
+      "INFO ClassWithLoggingForLocationTesting.logAtWithPayload(45) - test",
       appenderWithWriter.writer.toString().trim(),
     )
   }
@@ -55,7 +73,7 @@ class LoggingWithLocationTest {
   fun testNullLoggingWithLocation() {
     ClassWithLoggingForLocationTesting().logNull()
     assertEquals(
-      "INFO ClassWithLoggingForLocationTesting.logNull(16) - null",
+      "INFO ClassWithLoggingForLocationTesting.logNull(18) - null",
       appenderWithWriter.writer.toString().trim(),
     )
   }
@@ -65,13 +83,13 @@ class LoggingWithLocationTest {
     ClassWithLoggingForLocationTesting().logEntry()
     @Suppress("MaxLineLength")
     assertEquals(
-      "TRACE ClassWithLoggingForLocationTesting.logEntry(20) - entry with (1, 2)" +
+      "TRACE ClassWithLoggingForLocationTesting.logEntry(22) - entry with (1, 2)" +
         System.lineSeparator() +
         "INFO " +
-        "ClassWithLoggingForLocationTesting.logEntry(21) - log entry body" +
+        "ClassWithLoggingForLocationTesting.logEntry(23) - log entry body" +
         System.lineSeparator() +
         "TRACE " +
-        "ClassWithLoggingForLocationTesting.logEntry(22) - exit with ((2, 1))",
+        "ClassWithLoggingForLocationTesting.logEntry(24) - exit with ((2, 1))",
       appenderWithWriter.writer.toString().trim(),
     )
   }
@@ -80,11 +98,11 @@ class LoggingWithLocationTest {
   fun testNullLoggingWithLocationEntryExitOpt() {
     ClassWithLoggingForLocationTesting().logExitOpt()
     assertEquals(
-      "TRACE ClassWithLoggingForLocationTesting.logExitOpt(26) - entry with (1, 2)" +
+      "TRACE ClassWithLoggingForLocationTesting.logExitOpt(28) - entry with (1, 2)" +
         System.lineSeparator() +
-        "INFO ClassWithLoggingForLocationTesting.logExitOpt(27) - log entry body" +
+        "INFO ClassWithLoggingForLocationTesting.logExitOpt(29) - log entry body" +
         System.lineSeparator() +
-        "TRACE ClassWithLoggingForLocationTesting.logExitOpt(28) - exit with (null)",
+        "TRACE ClassWithLoggingForLocationTesting.logExitOpt(30) - exit with (null)",
       appenderWithWriter.writer.toString().trim(),
     )
   }

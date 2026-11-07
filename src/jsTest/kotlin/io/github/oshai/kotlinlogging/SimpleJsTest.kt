@@ -23,13 +23,13 @@ class SimpleJsTest {
   @BeforeTest
   fun setup() {
     appender = createAppender()
-    KotlinLoggingConfiguration.APPENDER = appender
+    KotlinLoggingConfiguration.direct.appender = appender
   }
 
   @AfterTest
   fun cleanup() {
-    KotlinLoggingConfiguration.APPENDER = ConsoleOutputAppender()
-    KotlinLoggingConfiguration.LOG_LEVEL = Level.INFO
+    KotlinLoggingConfiguration.direct.appender = ConsoleOutputAppender()
+    KotlinLoggingConfiguration.direct.logLevel = Level.INFO
   }
 
   // TODO: use parameterized test?
@@ -184,7 +184,7 @@ class SimpleJsTest {
   }
 
   private fun checkLoggerOffLevel(logger: KLogger) {
-    KotlinLoggingConfiguration.LOG_LEVEL = Level.OFF
+    KotlinLoggingConfiguration.direct.logLevel = Level.OFF
     assertTrue(logger.isLoggingOff())
     logger.error { "error msg" }
     assertEquals("NA", appender.lastMessage)

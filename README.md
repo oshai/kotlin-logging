@@ -1,4 +1,4 @@
-# [kotlin-logging](https://github.com/oshai/kotlin-logging) [![CI](https://github.com/oshai/kotlin-logging/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/oshai/kotlin-logging/actions/workflows/ci.yml) [![Slack channel](https://img.shields.io/badge/Chat-Slack-blue.svg)](https://kotlinlang.slack.com/messages/kotlin-logging/) [![Maven Central](https://img.shields.io/maven-central/v/io.github.oshai/kotlin-logging.svg)](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22io.github.oshai%22) [![Apache License V.2](https://img.shields.io/badge/license-Apache%20V.2-blue.svg)](https://github.com/oshai/kotlin-logging/blob/master/LICENSE)
+# [kotlin-logging](https://github.com/oshai/kotlin-logging) [![CI](https://github.com/oshai/kotlin-logging/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/oshai/kotlin-logging/actions/workflows/ci.yml) [![Slack channel](https://img.shields.io/badge/Chat-Slack-blue.svg)](https://kotlinlang.slack.com/messages/kotlin-logging/) [![Maven Central](https://img.shields.io/maven-central/v/io.github.oshai/kotlin-logging.svg)](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22io.github.oshai%22) [![Apache License V.2](https://img.shields.io/badge/license-Apache%20V.2-blue.svg)](https://github.com/oshai/kotlin-logging/blob/master/LICENSE) [![Kotlin](https://img.shields.io/badge/kotlin-multiplatform-7f52ff?logo=kotlin)](https://kotlinlang.org/) [![GitHub stars](https://img.shields.io/github/stars/oshai/kotlin-logging?style=social)](https://github.com/oshai/kotlin-logging) <img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/04d2c80d-934d-4d02-a3b2-32ad73cb8542" />
 
 Lightweight Multiplatform logging framework for Kotlin, written in 
 [![Pure Kotlin](https://img.shields.io/badge/100%25-kotlin-blue.svg)](https://kotlinlang.org/).  
@@ -68,20 +68,20 @@ In version 5 users should also provide slf4j-api dependency.
 
 In short, if you just want to log statements to stdout, it's possible to add the following dependency: `org.slf4j:slf4j-simple:2.0.3`.
 
-### Maven
+### 
 ```xml
 <dependency>
   <groupId>io.github.oshai</groupId>
   <artifactId>kotlin-logging-jvm</artifactId>
-  <version>7.0.3</version>
+  <version>8.0.6</version>
 </dependency>
 ```
 
-See the full example in [kotlin-logging-example-maven](https://github.com/oshai/kotlin-logging-example-maven).  
+See the full example in [kotlin-logging-example-maven](https://github.com/microutils/kotlin-logging-example-maven).  
 
 ### Gradle
 ```Groovy
-implementation 'io.github.oshai:kotlin-logging-jvm:7.0.3'
+implementation 'io.github.oshai:kotlin-logging-jvm:8.0.6'
 ```
 
 
@@ -136,6 +136,7 @@ And many more... (add your name above)
 - Is location logging possible? Yes, location awareness was added in kotlin-logging 1.4.
 - When I do `logger.debug`, my IntelliJ IDEA run console doesn't show any output. Do you know how I could set the console logger to debug or trace levels? Is this an IDE setting, or can it be set in the call to KLogging()? Setting log level is done per implementation. kotlin-logging and slf4j are just facades for the underlying logging lib (log4j, logback etc') more details [here](http://stackoverflow.com/questions/43146977/how-to-configure-kotlin-logging-logger).
 - Can I access the actual logger? In platforms available yes, via `DelegatingKLogger.underlyingLogger` property.
+- Why does `KotlinLogging.logger {}` inside a nested or inner class use the outer class name on JVM? On JVM and Android, logger name resolution strips everything from the first `$` in the binary class name so lambdas and `Companion` objects resolve to the enclosing class. To use a separate logger name for a nested or inner class, pass it explicitly: `KotlinLogging.logger(Outer.Inner::class.java.name)` (or `KotlinLogging.logger("package.Outer.Inner")`).
 
 ## Usage
 
@@ -166,10 +167,19 @@ It is possible to configure IntelliJ live templates. For file level logger confi
 ## Contributing
 
 Any contribution is appreciated.  
-See the contributors list in: https://github.com/oshai/kotlin-logging/graphs/contributors
 
 Pull requests are welcome! See instructions in https://github.com/oshai/kotlin-logging/blob/master/CONTRIBUTING.md.  
 
 [Show your ❤ with a ★](https://github.com/oshai/kotlin-logging/stargazers)
+
+Thank you to all the developers who have contributed to kotlin-logging!
+<a href="https://github.com/oshai/kotlin-logging/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=oshai/kotlin-logging" />
+</a>
+
+
+See the full contributors list in: https://github.com/oshai/kotlin-logging/graphs/contributors
+
+
 
 

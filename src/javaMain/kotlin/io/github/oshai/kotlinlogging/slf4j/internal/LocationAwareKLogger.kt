@@ -38,6 +38,10 @@ internal class LocationAwareKLogger(override val underlyingLogger: LocationAware
     return isLoggingEnabledFor(underlyingLogger, level, marker)
   }
 
+  override fun at(level: Level, block: KLoggingEventBuilder.() -> Unit) {
+    at(level = level, marker = null, block = block)
+  }
+
   override fun at(level: Level, marker: Marker?, block: KLoggingEventBuilder.() -> Unit) {
     if (isLoggingEnabledFor(level, marker)) {
       KLoggingEventBuilder().apply(block).run {
@@ -176,98 +180,97 @@ internal class LocationAwareKLogger(override val underlyingLogger: LocationAware
   }
 
   /** Lazy add a log message if isTraceEnabled is true */
-  override fun trace(message: () -> Any?): Unit =
-    at(Level.TRACE, null) { this.message = message.toStringSafe() }
+  override fun trace(message: () -> Any?): Unit = trace(null, null, message)
 
   /** Lazy add a log message if isDebugEnabled is true */
-  override fun debug(message: () -> Any?): Unit =
-    at(Level.DEBUG, null) { this.message = message.toStringSafe() }
+  override fun debug(message: () -> Any?): Unit = debug(null, null, message)
 
   /** Lazy add a log message if isInfoEnabled is true */
-  override fun info(message: () -> Any?): Unit =
-    at(Level.INFO, null) { this.message = message.toStringSafe() }
+  override fun info(message: () -> Any?): Unit = info(null, null, message)
 
   /** Lazy add a log message if isWarnEnabled is true */
-  override fun warn(message: () -> Any?): Unit =
-    at(Level.WARN, null) { this.message = message.toStringSafe() }
+  override fun warn(message: () -> Any?): Unit = warn(null, null, message)
 
   /** Lazy add a log message if isErrorEnabled is true */
-  override fun error(message: () -> Any?): Unit =
-    at(Level.ERROR, null) { this.message = message.toStringSafe() }
+  override fun error(message: () -> Any?): Unit = error(null, null, message)
 
   /** Lazy add a log message if isTraceEnabled is true */
   override fun trace(throwable: Throwable?, message: () -> Any?): Unit =
-    at(Level.TRACE) {
-      this.message = message.toStringSafe()
-      this.cause = throwable
-    }
+    trace(null, throwable, message)
 
   /** Lazy add a log message if isDebugEnabled is true */
   override fun debug(throwable: Throwable?, message: () -> Any?): Unit =
-    at(Level.DEBUG, null) {
-      this.message = message.toStringSafe()
-      this.cause = throwable
-    }
+    debug(null, throwable, message)
 
   /** Lazy add a log message if isInfoEnabled is true */
   override fun info(throwable: Throwable?, message: () -> Any?): Unit =
-    at(Level.INFO, null) {
-      this.message = message.toStringSafe()
-      this.cause = throwable
-    }
+    info(null, throwable, message)
 
   /** Lazy add a log message if isWarnEnabled is true */
   override fun warn(throwable: Throwable?, message: () -> Any?): Unit =
-    at(Level.WARN, null) {
-      this.message = message.toStringSafe()
-      this.cause = throwable
-    }
+    warn(null, throwable, message)
 
   /** Lazy add a log message if isErrorEnabled is true */
   override fun error(throwable: Throwable?, message: () -> Any?): Unit =
-    at(Level.ERROR, null) {
-      this.message = message.toStringSafe()
-      this.cause = throwable
-    }
+    error(null, throwable, message)
 
   /** Lazy add a log message if isTraceEnabled is true */
-  override fun trace(throwable: Throwable?, marker: Marker?, message: () -> Any?): Unit =
+  override fun trace(marker: Marker?, message: () -> Any?): Unit = trace(marker, null, message)
+
+  /** Lazy add a log message if isDebugEnabled is true */
+  override fun debug(marker: Marker?, message: () -> Any?): Unit = debug(marker, null, message)
+
+  /** Lazy add a log message if isInfoEnabled is true */
+  override fun info(marker: Marker?, message: () -> Any?): Unit = info(marker, null, message)
+
+  /** Lazy add a log message if isWarnEnabled is true */
+  override fun warn(marker: Marker?, message: () -> Any?): Unit = warn(marker, null, message)
+
+  /** Lazy add a log message if isErrorEnabled is true */
+  override fun error(marker: Marker?, message: () -> Any?): Unit = error(marker, null, message)
+
+  /** Lazy add a log message if isTraceEnabled is true */
+  override fun trace(marker: Marker?, throwable: Throwable?, message: () -> Any?): Unit =
     at(Level.TRACE, marker) {
       this.message = message.toStringSafe()
       this.cause = throwable
     }
 
   /** Lazy add a log message if isDebugEnabled is true */
-  override fun debug(throwable: Throwable?, marker: Marker?, message: () -> Any?): Unit =
+  override fun debug(marker: Marker?, throwable: Throwable?, message: () -> Any?): Unit =
     at(Level.DEBUG, marker) {
       this.message = message.toStringSafe()
       this.cause = throwable
     }
 
   /** Lazy add a log message if isInfoEnabled is true */
-  override fun info(throwable: Throwable?, marker: Marker?, message: () -> Any?): Unit =
+  override fun info(marker: Marker?, throwable: Throwable?, message: () -> Any?): Unit =
     at(Level.INFO, marker) {
       this.message = message.toStringSafe()
       this.cause = throwable
     }
 
   /** Lazy add a log message if isWarnEnabled is true */
-  override fun warn(throwable: Throwable?, marker: Marker?, message: () -> Any?): Unit =
+  override fun warn(marker: Marker?, throwable: Throwable?, message: () -> Any?): Unit =
     at(Level.WARN, marker) {
       this.message = message.toStringSafe()
       this.cause = throwable
     }
 
   /** Lazy add a log message if isErrorEnabled is true */
-  override fun error(throwable: Throwable?, marker: Marker?, message: () -> Any?): Unit =
+  override fun error(marker: Marker?, throwable: Throwable?, message: () -> Any?): Unit =
     at(Level.ERROR, marker) {
       this.message = message.toStringSafe()
       this.cause = throwable
     }
 
+  /* Fluent API overrides to ensure correct FQCN capture if necessary, though delegation should work. Re-adding to fix test failure. */
   /** Lazy add a log message with throwable payload if isTraceEnabled is true */
   override fun atTrace(marker: Marker?, block: KLoggingEventBuilder.() -> Unit): Unit =
     at(Level.TRACE, marker, block)
+
+  /** Lazy add a log message with throwable payload if isTraceEnabled is true */
+  override fun atTrace(block: KLoggingEventBuilder.() -> Unit): Unit = at(Level.TRACE, null, block)
 
   /** Lazy add a log message with throwable payload if isDebugEnabled is true */
   override fun atDebug(marker: Marker?, block: KLoggingEventBuilder.() -> Unit): Unit =

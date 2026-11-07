@@ -1,28 +1,62 @@
 package io.github.oshai.kotlinlogging
 
 import kotlin.concurrent.AtomicReference
+import kotlinx.cinterop.ExperimentalForeignApi
+import kotlinx.cinterop.toKString
+import platform.posix.getenv
 
-public expect val DefaultAppender: Appender
+@OptIn(ExperimentalForeignApi::class)
+private fun getEnv(name: String): String? {
+  return getenv(name)?.toKString()
+}
 
 public actual object KotlinLoggingConfiguration {
-  private val _logLevel = AtomicReference(Level.INFO)
-  public actual var logLevel: Level
-    get() = _logLevel.value
-    set(value) {
-      _logLevel.value = value
+  public actual val direct: DirectLoggingConfiguration =
+    object : DirectLoggingConfiguration {
+      private val _logLevel = AtomicReference(Level.INFO)
+      override var logLevel: Level
+        get() = _logLevel.value
+        set(value) {
+          _logLevel.value = value
+          internalCheckFactory("logLevel", loggerFactory)
+        }
+
+      private val _appender = AtomicReference(DefaultAppender)
+      override var appender: Appender
+        get() = _appender.value
+        set(value) {
+          _appender.value = value
+          internalCheckFactory("appender", loggerFactory)
+        }
+
+      private val _formatter =
+        AtomicReference<Formatter>(DefaultMessageFormatter(includePrefix = true))
+      override var formatter: Formatter
+        get() = _formatter.value
+        set(value) {
+          _formatter.value = value
+          internalCheckFactory("formatter", loggerFactory)
+        }
     }
 
-  private val _appender = AtomicReference(DefaultAppender)
-  public actual var appender: Appender
-    get() = _appender.value
+  private val _logStartupMessage =
+    AtomicReference(getEnv("KOTLIN_LOGGING_STARTUP_MESSAGE")?.toBoolean() ?: true)
+  public actual var logStartupMessage: Boolean
+    get() = _logStartupMessage.value
     set(value) {
-      _appender.value = value
+      _logStartupMessage.value = value
     }
 
-  private val _formatter = AtomicReference<Formatter>(DefaultMessageFormatter(includePrefix = true))
-  public actual var formatter: Formatter
-    get() = _formatter.value
+  public actual interface DirectLoggingConfiguration {
+    public actual var logLevel: Level
+    public actual var formatter: Formatter
+    public actual var appender: Appender
+  }
+
+  private val _loggerFactory = AtomicReference<KLoggerFactory>(DirectLoggerFactory)
+  public actual var loggerFactory: KLoggerFactory
+    get() = _loggerFactory.value
     set(value) {
-      _formatter.value = value
+      _loggerFactory.value = value
     }
 }

@@ -1,20 +1,22 @@
 [versions]
 
-kotlin = "2.1.20"
-android-gradle-plugin = "8.9.1"
-dokka = "2.0.0"
-spotless = "7.0.3"
+# kotlin version > 2.1.x do not support kotlin 2.0 competability
+# see https://github.com/oshai/kotlin-logging/issues/546
+kotlin = "2.1.21"
+android-gradle-plugin = "8.13.0"
+dokka = "2.2.0"
+spotless = "8.0.0"
 nexus-publish-plugin = "2.0.0"
 
-slf4j = "2.0.13"
-logback = "1.5.11"
-logstash-logback-encoder = "8.0"
-coroutines = "1.8.0"
-junit = "5.9.2"
-mockito = "4.11.0"
-jackson = "2.18.3"
-log4j = "2.22.0"
-nativeimage = "24.2.0"
+slf4j = "2.0.20"
+logback = "1.6.6"
+logstash-logback-encoder = "8.1"
+coroutines = "1.10.2"
+junit = "6.1.3"
+mockito = "5.20.0"
+jackson = "2.22.4"
+log4j = "2.26.1"
+nativeimage = "25.4.4.1.1"
 
 [plugins]
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
@@ -32,8 +34,10 @@ kotlinx-coroutines-slf4j = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
 
-junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
-junit-jupiter-params = { module = "org.junit.jupiter:junit-jupiter-params", version.ref = "junit" }
+junit-bom = { module = "org.junit:junit-bom", version.ref = "junit" }
+junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine" }
+junit-jupiter-params = { module = "org.junit.jupiter:junit-jupiter-params" }
+junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
 
 mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockito" }
 

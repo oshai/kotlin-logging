@@ -1,5 +1,7 @@
 package io.github.oshai.kotlinlogging
 
+import io.github.oshai.kotlinlogging.Level.INFO
+
 private val logger = KotlinLogging.logger {}
 
 class ClassWithLoggingForLocationTesting {
@@ -30,6 +32,17 @@ class ClassWithLoggingForLocationTesting {
 
   fun logFluentWithPayload() {
     logger.atInfo {
+      message = "test"
+      payload = mapOf("key" to "value")
+    }
+  }
+
+  fun logAt(level: Level = INFO) {
+    logger.at(level) { message = "test" }
+  }
+
+  fun logAtWithPayload(level: Level = INFO) {
+    logger.at(level) {
       message = "test"
       payload = mapOf("key" to "value")
     }

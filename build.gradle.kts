@@ -1,10 +1,8 @@
 // File: build.gradle.kts
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
 import org.gradle.jvm.tasks.Jar
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
-import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -18,7 +16,7 @@ plugins {
 }
 
 group = "io.github.oshai"
-version = "7.0.8"
+version = "8.0.7"
 
 repositories {
     google()
@@ -27,14 +25,18 @@ repositories {
 
 tasks.withType<KotlinCompile> {
     compilerOptions {
-        jvmTarget = JvmTarget.JVM_1_8
+        jvmTarget =
+            if (name == "compileTestKotlinJvm" || name == "compileLogbackTestKotlinJvm") {
+                JvmTarget.JVM_17
+            } else {
+                JvmTarget.JVM_1_8
+            }
     }
 }
 
 kotlin {
     explicitApi()
 
-    @OptIn(ExperimentalKotlinGradlePluginApi::class)
     compilerOptions {
         // kotlin compiler compatibility options
         apiVersion.set(KotlinVersion.KOTLIN_2_0)
@@ -46,29 +48,33 @@ kotlin {
     }
 
     jvm {
-      compilations {
-        val main by getting
-        val logbackTest by compilations.creating {
-          defaultSourceSet {
-            dependencies {
-              // Compile against the main compilation's compile classpath and outputs:
-              implementation(main.compileDependencyFiles + main.output.classesDirs)
-              implementation(kotlin("test-junit"))
+        compilations {
+            val main by getting
+            tasks.named<JavaCompile>("compileJvmMainJava") {
+                options.compilerArgs.add("--patch-module")
+                options.compilerArgs.add("io.github.oshai.kotlinlogging=${main.output.classesDirs.asPath}")
             }
-          }
-          val logbackTest = tasks.register<Test>("logbackTest") {
-            description = "Runs tests with Logback"
-            group = "verification"
-            // Run the tests with the classpath containing the compile dependencies (including 'main'),
-            // runtime dependencies, and the outputs of this compilation:
-            classpath = compileDependencyFiles + runtimeDependencyFiles + output.allOutputs
+            // logback tests are testing only direct logback dependency (not slf4j/log4j)
+            val logbackTest by compilations.creating {
+                defaultSourceSet {
+                    dependencies {
+                        // Compile against the main compilation's compile classpath and outputs:
+                        implementation(main.compileDependencyFiles + main.output.classesDirs)
+                    }
+                }
+                val logbackTest = tasks.register<Test>("logbackTest") {
+                    description = "Runs tests with Logback"
+                    group = "verification"
+                    // Run the tests with the classpath containing the compile dependencies (including 'main'),
+                    // runtime dependencies, and the outputs of this compilation:
+                    classpath = compileDependencyFiles + runtimeDependencyFiles + output.allOutputs
 
-            // Run only the tests from this compilation's outputs:
-            testClassesDirs = output.classesDirs
-          }
-          tasks["allTests"].dependsOn(logbackTest)
+                    // Run only the tests from this compilation's outputs:
+                    testClassesDirs = output.classesDirs
+                }
+                tasks["allTests"].dependsOn(logbackTest)
+            }
         }
-      }
     }
     js {
         browser {
@@ -80,7 +86,7 @@ kotlin {
         }
         nodejs()
     }
-    @OptIn(ExperimentalWasmDsl::class)
+    @OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
     wasmJs {
         browser {
             testTask {
@@ -89,6 +95,11 @@ kotlin {
                 }
             }
         }
+    }
+    @OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
+    wasmWasi { // console based WASI target
+        // Use nodejs as runtime env for tests & distribution (WASI support via node --experimental-wasi-unstable-preview1)
+        nodejs()
     }
     androidTarget {
         publishLibraryVariants("release", "debug")
@@ -108,8 +119,10 @@ kotlin {
         iosArm64(),
         iosSimulatorArm64(),
         iosX64(),
+        watchosArm32(),
         watchosArm64(),
         watchosSimulatorArm64(),
+        watchosDeviceArm64(),
         watchosX64(),
         tvosArm64(),
         tvosSimulatorArm64(),
@@ -144,8 +157,10 @@ kotlin {
         val jvmLogbackTest by getting {
             dependencies {
                 implementation(kotlin("test"))
+                implementation(project.dependencies.enforcedPlatform(libs.junit.bom))
                 implementation(libs.junit.jupiter.engine)
                 implementation(libs.junit.jupiter.params)
+                implementation(libs.junit.platform.launcher)
                 implementation(libs.mockito.core)
                 implementation(libs.slf4j.api)
                 implementation(libs.logback.classic)
@@ -157,6 +172,7 @@ kotlin {
         val jvmTest by getting {
             dependencies {
                 implementation(kotlin("test"))
+                implementation(project.dependencies.enforcedPlatform(libs.junit.bom))
                 implementation(libs.junit.jupiter.engine)
                 implementation(libs.junit.jupiter.params)
                 implementation(libs.mockito.core)
@@ -182,6 +198,7 @@ kotlin {
         val androidUnitTest by getting {
             dependencies {
                 implementation(kotlin("test"))
+                implementation(project.dependencies.enforcedPlatform(libs.junit.bom))
                 implementation(libs.junit.jupiter.engine)
                 implementation(libs.junit.jupiter.params)
                 implementation(libs.mockito.core)
@@ -215,10 +232,19 @@ kotlin {
                 implementation(kotlin("test-wasm-js"))
             }
         }
+        val wasmWasiMain by getting {
+            dependsOn(directMain)
+        }
+        val wasmWasiTest by getting {
+            dependencies {
+                implementation(kotlin("test-wasm-wasi"))
+            }
+        }
         val nativeMain by creating {
             dependsOn(directMain)
         }
         val nativeTest by creating {
+            dependsOn(commonTest)
             dependencies {
                 implementation(kotlin("test"))
             }
@@ -229,14 +255,30 @@ kotlin {
         val darwinMain by creating {
             dependsOn(commonMain)
         }
+        val darwinTest by creating {
+            dependsOn(commonTest)
+            dependencies {
+                implementation(kotlin("test"))
+            }
+        }
         linuxTargets.forEach {
             getByName("${it.targetName}Main") {
                 dependsOn(linuxMain)
+            }
+            getByName("${it.targetName}Test") {
+                dependsOn(nativeTest)
             }
         }
         darwinTargets.forEach {
             getByName("${it.targetName}Main") {
                 dependsOn(darwinMain)
+            }
+            getByName("${it.targetName}Test") {
+                dependsOn(darwinTest)
+            }
+            val main by it.compilations.getting
+            val oslog by main.cinterops.creating {
+                defFile(project.file("src/darwinMain/cinterop/oslog.def"))
             }
         }
     }
@@ -248,7 +290,6 @@ android {
     defaultConfig {
         minSdk = 21
     }
-    @Suppress("UnstableApiUsage")
     testOptions {
         unitTests.isReturnDefaultValues = true
     }
@@ -274,10 +315,23 @@ tasks {
 
 // Docs
 
+dokka {
+    moduleName.set("kotlin-logging")
+    dokkaSourceSets.configureEach {
+        sourceLink {
+            localDirectory.set(projectDir.resolve("src"))
+            remoteUrl("https://github.com/oshai/kotlin-logging/tree/master/src")
+            remoteLineSuffix.set("#L")
+        }
+    }
+    dokkaPublications.html {
+        outputDirectory.set(layout.buildDirectory.dir("dokka/html"))
+    }
+}
+
 tasks {
     register<Jar>("dokkaJar") {
-        from(dokkaHtml)
-        dependsOn(dokkaHtml)
+        from(named("dokkaGeneratePublicationHtml"))
         archiveClassifier.set("javadoc")
     }
 }
@@ -311,9 +365,9 @@ spotless {
 
 nexusPublishing {
     repositories {
-        sonatype {  // only for users registered in Sonatype after 24 Feb 2021
-            nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
-            snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
+        sonatype {
+            nexusUrl.set(uri("https://ossrh-staging-api.central.sonatype.com/service/local/"))
+            snapshotRepositoryUrl.set(uri("https://ossrh-staging-api.central.sonatype.com/content/repositories/snapshots/"))
             username.set(System.getenv("SONATYPE_USERNAME_2")) // defaults to project.properties["myNexusUsername"]
             password.set(System.getenv("SONATYPE_PASSWORD_2")) // defaults to project.properties["myNexusPassword"]
         }
@@ -375,3 +429,11 @@ tasks.withType<AbstractPublishToMaven>().configureEach {
     mustRunAfter(signingTasks)
 }
 //endregion
+
+// Fix implicit dependency issue for native MetadataElements tasks
+// "Declare an explicit dependency on ':commonizeCInterop' from ':*MetadataElements' using Task#dependsOn"
+tasks.matching {
+    it.name.matches("^(linux|mingw|androidNative|macos|ios|watchos|tvos).*MetadataElements$".toRegex())
+}.configureEach {
+    dependsOn("commonizeCInterop")
+}
