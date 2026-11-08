@@ -8,6 +8,7 @@ val topLevelLambdaLogger = KotlinLogging.logger {}
 class MyClass {
   val classNamedLogger = KotlinLogging.logger("MyClass")
   val classLambdaLogger = KotlinLogging.logger {}
+  val classPropertyDelegateLogger by KotlinLogging.logger()
 
   // check with non default "Companion" name also
   companion object MyCompanion {
@@ -18,6 +19,16 @@ class MyClass {
 
 @Suppress("DEPRECATION")
 class SimpleJsTest {
+  private val loggers = listOf(
+    topLevelNamedLogger to "topLevelNamedLogger",
+    topLevelLambdaLogger to "SimpleJsTest",
+    MyClass().classNamedLogger to "MyClass",
+    MyClass().classLambdaLogger to "MyClass",
+    MyClass().classPropertyDelegateLogger to "MyClass",
+    MyClass.companionNamedLogger to "MyClassCompanion",
+    MyClass.companionLambdaLogger to "MyClass"
+  )
+
   private lateinit var appender: SimpleAppender
 
   @BeforeTest
@@ -32,132 +43,32 @@ class SimpleJsTest {
     KotlinLoggingConfiguration.direct.logLevel = Level.INFO
   }
 
-  // TODO: use parameterized test?
-
-  // TopLevelNamedLogger
   @Test
-  fun checkTopLevelNamedLoggerName() {
-    checkLoggerName(topLevelNamedLogger, "topLevelNamedLogger")
+  fun checkLoggerName() {
+    loggers.forEach { (logger, name) ->
+      checkLoggerName(logger, name)
+    }
   }
 
   @Test
-  fun checkTopLevelNamedLoggerInfoMessage() {
-    checkLoggerInfoMessage(topLevelNamedLogger)
+  fun checkLoggerInfoMessage() {
+    loggers.forEach { (logger, _) ->
+      checkLoggerInfoMessage(logger)
+    }
   }
 
   @Test
-  fun checkTopLevelNamedLoggerErrorMessage() {
-    checkLoggerErrorMessage(topLevelNamedLogger)
+  fun checkLoggerErrorMessage() {
+    loggers.forEach { (logger, _) ->
+      checkLoggerErrorMessage(logger)
+    }
   }
 
   @Test
-  fun checkTopLevelNamedLoggerOffLevel() {
-    checkLoggerOffLevel(topLevelNamedLogger)
-  }
-
-  // TopLevelLambdaLogger
-  @Test
-  fun checkTopLevelLambdaLoggerName() {
-    checkLoggerName(topLevelLambdaLogger, "SimpleJsTest")
-  }
-
-  @Test
-  fun checkTopLevelLambdaLoggerInfoMessage() {
-    checkLoggerInfoMessage(topLevelLambdaLogger)
-  }
-
-  @Test
-  fun checkTopLevelLambdaLoggerErrorMessage() {
-    checkLoggerErrorMessage(topLevelLambdaLogger)
-  }
-
-  @Test
-  fun checkTopLevelLambdaLoggerOffLevel() {
-    checkLoggerOffLevel(topLevelLambdaLogger)
-  }
-
-  // ClassNamedLogger
-  @Test
-  fun checkClassNamedLoggerName() {
-    checkLoggerName(MyClass().classNamedLogger, "MyClass")
-  }
-
-  @Test
-  fun checkClassNamedLoggerInfoMessage() {
-    checkLoggerInfoMessage(MyClass().classNamedLogger)
-  }
-
-  @Test
-  fun checkClassNamedLoggerErrorMessage() {
-    checkLoggerErrorMessage(MyClass().classNamedLogger)
-  }
-
-  @Test
-  fun checkClassNamedLoggerOffLevel() {
-    checkLoggerOffLevel(MyClass().classNamedLogger)
-  }
-
-  // ClassLambdaLogger
-  @Test
-  fun checkClassLambdaLoggerName() {
-    checkLoggerName(MyClass().classLambdaLogger, "MyClass")
-  }
-
-  @Test
-  fun checkClassLambdaLoggerInfoMessage() {
-    checkLoggerInfoMessage(MyClass().classLambdaLogger)
-  }
-
-  @Test
-  fun checkClassLambdaLoggerErrorMessage() {
-    checkLoggerErrorMessage(MyClass().classLambdaLogger)
-  }
-
-  @Test
-  fun checkClassLambdaLoggerOffLevel() {
-    checkLoggerOffLevel(MyClass().classLambdaLogger)
-  }
-
-  // CompanionNamedLogger
-  @Test
-  fun checkCompanionNamedLoggerName() {
-    checkLoggerName(MyClass.MyCompanion.companionNamedLogger, "MyClassCompanion")
-  }
-
-  @Test
-  fun checkCompanionNamedLoggerInfoMessage() {
-    checkLoggerInfoMessage(MyClass.MyCompanion.companionNamedLogger)
-  }
-
-  @Test
-  fun checkCompanionNamedLoggerErrorMessage() {
-    checkLoggerErrorMessage(MyClass.MyCompanion.companionNamedLogger)
-  }
-
-  @Test
-  fun checkCompanionNamedLoggerOffLevel() {
-    checkLoggerOffLevel(MyClass.MyCompanion.companionNamedLogger)
-  }
-
-  // CompanionLambdaLogger
-  @Test
-  fun checkCompanionLambdaLoggerName() {
-    checkLoggerName(MyClass.MyCompanion.companionLambdaLogger, "MyClass")
-  }
-
-  @Test
-  fun checkCompanionLambdaLoggerInfoMessage() {
-    checkLoggerInfoMessage(MyClass.MyCompanion.companionLambdaLogger)
-  }
-
-  @Test
-  fun checkCompanionLambdaLoggerErrorMessage() {
-    checkLoggerErrorMessage(MyClass.MyCompanion.companionLambdaLogger)
-  }
-
-  @Test
-  fun checkCompanionLambdaLoggerOffLevel() {
-    checkLoggerOffLevel(MyClass.MyCompanion.companionLambdaLogger)
+  fun checkLoggerOffLevel() {
+    loggers.forEach { (logger, _) ->
+      checkLoggerOffLevel(logger)
+    }
   }
 
   // use cases
