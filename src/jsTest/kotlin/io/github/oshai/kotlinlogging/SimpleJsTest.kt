@@ -19,15 +19,16 @@ class MyClass {
 
 @Suppress("DEPRECATION")
 class SimpleJsTest {
-  private val loggers = listOf(
-    topLevelNamedLogger to "topLevelNamedLogger",
-    topLevelLambdaLogger to "SimpleJsTest",
-    MyClass().classNamedLogger to "MyClass",
-    MyClass().classLambdaLogger to "MyClass",
-    MyClass().classPropertyDelegateLogger to "MyClass",
-    MyClass.companionNamedLogger to "MyClassCompanion",
-    MyClass.companionLambdaLogger to "MyClass"
-  )
+  private val loggers =
+    listOf(
+      topLevelNamedLogger to "topLevelNamedLogger",
+      topLevelLambdaLogger to "SimpleJsTest",
+      MyClass().classNamedLogger to "MyClass",
+      MyClass().classLambdaLogger to "MyClass",
+      MyClass().classPropertyDelegateLogger to "MyClass",
+      MyClass.companionNamedLogger to "MyClassCompanion",
+      MyClass.companionLambdaLogger to "MyClass",
+    )
 
   private lateinit var appender: SimpleAppender
 
@@ -45,30 +46,22 @@ class SimpleJsTest {
 
   @Test
   fun checkLoggerName() {
-    loggers.forEach { (logger, name) ->
-      checkLoggerName(logger, name)
-    }
+    loggers.forEach { (logger, name) -> checkLoggerName(logger, name) }
   }
 
   @Test
   fun checkLoggerInfoMessage() {
-    loggers.forEach { (logger, _) ->
-      checkLoggerInfoMessage(logger)
-    }
+    loggers.forEach { (logger, _) -> checkLoggerInfoMessage(logger) }
   }
 
   @Test
   fun checkLoggerErrorMessage() {
-    loggers.forEach { (logger, _) ->
-      checkLoggerErrorMessage(logger)
-    }
+    loggers.forEach { (logger, _) -> checkLoggerErrorMessage(logger) }
   }
 
   @Test
   fun checkLoggerOffLevel() {
-    loggers.forEach { (logger, _) ->
-      checkLoggerOffLevel(logger)
-    }
+    loggers.forEach { (logger, _) -> checkLoggerOffLevel(logger) }
   }
 
   // use cases

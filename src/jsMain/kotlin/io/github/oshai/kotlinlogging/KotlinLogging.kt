@@ -15,7 +15,7 @@ import kotlin.reflect.KProperty
 @Deprecated(
   message = "This workaround is no longer needed and will be removed in the upcoming versions.",
   replaceWith = ReplaceWith("KotlinLogging.logger {}"),
-  level = DeprecationLevel.WARNING
+  level = DeprecationLevel.WARNING,
 )
 public fun KotlinLogging.logger(): ReadOnlyProperty<Any?, KLogger> = LoggerDelegate()
 
