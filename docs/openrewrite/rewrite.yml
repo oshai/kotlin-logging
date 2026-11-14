@@ -1,0 +1,71 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: io.github.oshai.kotlinlogging.UpgradeToKotlinLogging8
+displayName: Migrate from microutils kotlin-logging to oshai kotlin-logging 8.x
+description: Migrates Maven and Gradle dependencies from io.github.microutils to io.github.oshai 8.x and rewrites package imports and type references from mu to io.github.oshai.kotlinlogging.
+recipeList:
+  - org.openrewrite.java.dependencies.ChangeDependency:
+      oldGroupId: io.github.microutils
+      oldArtifactId: kotlin-logging-jvm
+      newGroupId: io.github.oshai
+      newArtifactId: kotlin-logging-jvm
+      newVersion: 8.0.7
+  - org.openrewrite.java.dependencies.ChangeDependency:
+      oldGroupId: io.github.microutils
+      oldArtifactId: kotlin-logging
+      newGroupId: io.github.oshai
+      newArtifactId: kotlin-logging
+      newVersion: 8.0.7
+  - org.openrewrite.java.dependencies.ChangeDependency:
+      oldGroupId: io.github.microutils
+      oldArtifactId: kotlin-logging-js
+      newGroupId: io.github.oshai
+      newArtifactId: kotlin-logging-js
+      newVersion: 8.0.7
+  - org.openrewrite.java.dependencies.ChangeDependency:
+      oldGroupId: io.github.microutils
+      oldArtifactId: kotlin-logging-linuxx64
+      newGroupId: io.github.oshai
+      newArtifactId: kotlin-logging-linuxx64
+      newVersion: 8.0.7
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: mu.KotlinLogging
+      newFullyQualifiedTypeName: io.github.oshai.kotlinlogging.KotlinLogging
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: mu.KLogger
+      newFullyQualifiedTypeName: io.github.oshai.kotlinlogging.KLogger
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: mu.KLogging
+      newFullyQualifiedTypeName: io.github.oshai.kotlinlogging.KLogging
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: mu.NamedKLogging
+      newFullyQualifiedTypeName: io.github.oshai.kotlinlogging.NamedKLogging
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: mu.KLoggable
+      newFullyQualifiedTypeName: io.github.oshai.kotlinlogging.KLoggable
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: mu.Marker
+      newFullyQualifiedTypeName: io.github.oshai.kotlinlogging.Marker
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: mu.KMarkerFactory
+      newFullyQualifiedTypeName: io.github.oshai.kotlinlogging.KMarkerFactory
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: mu.KotlinLoggingConfiguration
+      newFullyQualifiedTypeName: io.github.oshai.kotlinlogging.KotlinLoggingConfiguration
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: mu.Appender
+      newFullyQualifiedTypeName: io.github.oshai.kotlinlogging.Appender
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: mu.Formatter
+      newFullyQualifiedTypeName: io.github.oshai.kotlinlogging.Formatter
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: mu
+      newPackageName: io.github.oshai.kotlinlogging
+      recursive: true
+  - org.openrewrite.text.FindAndReplace:
+      find: "^(\\s*import\\s+(?:static\\s+)?)mu\\.([A-Za-z0-9_*]+(?:\\.[A-Za-z0-9_*]+)*)"
+      replace: "$1io.github.oshai.kotlinlogging.$2"
+      regex: true
+      caseSensitive: true
+      multiline: true
+      filePattern: "**/*.{kt,kts,java}"

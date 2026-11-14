@@ -36,6 +36,9 @@ jobs:
       - name: Generate Dokka HTML docs
         run: ./gradlew :dokkaGeneratePublicationHtml
 
+      - name: Copy llms.txt to Pages output
+        run: cp llms.txt build/dokka/html/llms.txt
+
       - name: Setup Pages
         uses: actions/configure-pages@v6
 

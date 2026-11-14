@@ -99,13 +99,16 @@ Switch back to `master`, update documentation snippets to the newly released `X.
    git checkout master
    ```
 
-2. Update [`README.md`](README.md) Maven (`<version>X.Y.Z</version>`) and Gradle (`io.github.oshai:kotlin-logging-jvm:X.Y.Z`) examples to `X.Y.Z`.
+2. Update released version examples to `X.Y.Z` across:
+   - [`README.md`](README.md) (Gradle Kotlin DSL, Version Catalog `libs.versions.toml`, Multiplatform `commonMain`, Groovy, and Maven `<version>X.Y.Z</version>` snippets)
+   - [`llms.txt`](llms.txt) (`8.x` dependency coordinate snippets)
+   - [`docs/openrewrite/rewrite.yml`](docs/openrewrite/rewrite.yml) (`newVersion: X.Y.Z`) and [`docs/openrewrite/README.md`](docs/openrewrite/README.md)
 3. Update [`build.gradle.kts`](build.gradle.kts) `version = "NEXT_VERSION"`.
 4. Commit and push to `origin/master`:
 
    ```bash
-   git add build.gradle.kts README.md
-   git commit -m "chore: bump version to NEXT_VERSION and update README to X.Y.Z"
+   git add build.gradle.kts README.md llms.txt docs/openrewrite/rewrite.yml docs/openrewrite/README.md
+   git commit -m "chore: bump version to NEXT_VERSION and update docs to X.Y.Z"
    git push origin master
    ```
 
