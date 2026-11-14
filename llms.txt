@@ -1,0 +1,133 @@
+# kotlin-logging
+
+> Lightweight, idiomatic, lazy-evaluated logging facade for Kotlin Multiplatform (`io.github.oshai:kotlin-logging`). Wraps SLF4J (with optional direct Logback / JUL backends) on JVM, SLF4J or native `android.util.Log` on Android, Apple Unified Logging (`os_log`) on macOS/iOS/watchOS/tvOS, and configurable console/direct logging across JS, WebAssembly (`wasmJs`, `wasmWasi`), Linux, Windows, and Android Native.
+
+## Critical Rules for Code Generation
+
+- **Canonical coordinates & package (`5.0.0+` / `8.x`)**: Always use Maven group ID `io.github.oshai` and package `io.github.oshai.kotlinlogging`. **Never** use the legacy `3.x` group ID `io.github.microutils` or `import mu.*` (`mu.KotlinLogging`, `mu.KLogger`, `mu.withLoggingContext`).
+- **Lazy `{}` lambdas or fluent builders only (`8.0.0+`)**: All non-lambda `String?` overloads on `KLogger` (including `logger.info("msg")`, `logger.error("msg", ex)`, and `logger.info("msg {}", arg)`) were removed in `8.0.0`. Every log call in `8.x` must use a trailing `{}` lambda (`logger.info { "msg" }`, `logger.error(ex) { "msg" }`) or a fluent builder (`logger.atInfo { ... }`).
+- **Explicit SLF4J runtime on JVM**: `kotlin-logging-jvm` declares `org.slf4j:slf4j-api` as `compileOnly` so applications can choose SLF4J `2.x` or `1.7.x`. Always add an SLF4J backend (such as `ch.qos.logback:logback-classic` or `org.slf4j:slf4j-simple:2.0.20`) in JVM applications.
+- **Avoid deprecated APIs**: Declare a file-level `private val logger = KotlinLogging.logger {}` instead of inheriting from deprecated `KLogging()` / `KLoggable`, and do not pass the deprecated `restorePrevious` parameter to `withLoggingContextAsync`.
+
+## Dependencies (`8.0.7`)
+
+### Gradle (Kotlin DSL — JVM)
+
+```kotlin
+dependencies {
+    implementation("io.github.oshai:kotlin-logging-jvm:8.0.7")
+    runtimeOnly("org.slf4j:slf4j-simple:2.0.20") // or ch.qos.logback:logback-classic
+}
+```
+
+### Kotlin Multiplatform (`commonMain`)
+
+```kotlin
+kotlin {
+    sourceSets {
+        commonMain.dependencies {
+            implementation("io.github.oshai:kotlin-logging:8.0.7")
+        }
+    }
+}
+```
+
+### Android
+
+```kotlin
+dependencies {
+    implementation("io.github.oshai:kotlin-logging-android:8.0.7")
+}
+```
+
+Set `System.setProperty("kotlin-logging-to-android-native", "true")` once before first logger initialization to route logs directly to `android.util.Log` without SLF4J.
+
+### Coroutines MDC (`jvmMain`)
+
+```kotlin
+dependencies {
+    implementation("io.github.oshai:kotlin-logging-jvm:8.0.7")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:1.10.2")
+}
+```
+
+## Idiomatic `8.x` Usage
+
+### Obtaining a Logger & Lazy Logging
+
+```kotlin
+import io.github.oshai.kotlinlogging.KotlinLogging
+
+private val logger = KotlinLogging.logger {}
+
+class OrderService {
+    fun process(orderId: String) {
+        logger.debug { "Starting order $orderId" }
+        try {
+            logger.info { "Completed order $orderId" }
+        } catch (e: Exception) {
+            // Throwable is always the FIRST argument; message lambda is LAST
+            logger.error(e) { "Failed processing order $orderId" }
+            throw e
+        }
+    }
+}
+```
+
+- On JVM/Android, `KotlinLogging.logger {}` inside nested or inner classes resolves to the enclosing top-level class name; pass `KotlinLogging.logger(Outer.Inner::class.java.name)` when a distinct nested logger name is needed.
+- On Kotlin/JS, `private val logger by KotlinLogging.logger()` is also available inside classes.
+
+### Fluent Structured Logging (`atTrace` / `atDebug` / `atInfo` / `atWarn` / `atError`)
+
+```kotlin
+logger.atInfo {
+    message = "Order processed"
+    cause = optionalException
+    payload = mapOf(
+        "orderId" to orderId,
+        "items" to itemCount,
+    )
+}
+```
+
+On SLF4J 2.0 and direct Logback backends, `payload` entries are forwarded as structured key-value pairs.
+
+### Synchronous MDC (`withLoggingContext` — JVM)
+
+```kotlin
+import io.github.oshai.kotlinlogging.withLoggingContext
+
+withLoggingContext("requestId" to requestId, "userId" to userId) {
+    logger.info { "Handling request" }
+}
+```
+
+### Coroutines MDC (`withLoggingContextAsync` — JVM + `kotlinx-coroutines-slf4j`)
+
+```kotlin
+import io.github.oshai.kotlinlogging.coroutines.withLoggingContextAsync
+
+suspend fun handleRequest(requestId: String) {
+    withLoggingContextAsync("requestId" to requestId) {
+        logger.info { "MDC preserved across suspension points" }
+    }
+}
+```
+
+### Multiplatform Direct Logger Configuration (JS, Wasm, Native)
+
+```kotlin
+import io.github.oshai.kotlinlogging.KotlinLoggingConfiguration
+import io.github.oshai.kotlinlogging.Level
+
+KotlinLoggingConfiguration.direct.logLevel = Level.DEBUG
+```
+
+## Documentation
+
+- [API Reference (Dokka)](https://oshai.github.io/kotlin-logging/): Multiplatform KDoc API documentation for `commonMain`, `jvmMain`, `androidMain`, `darwinMain`, `jsMain`, `wasmJsMain`, `wasmWasiMain`, and `nativeMain`.
+- [README](https://github.com/oshai/kotlin-logging/blob/master/README.md): Project overview, installation snippets, multiplatform target list, and FAQ.
+- [OpenRewrite Migration Guide](https://github.com/oshai/kotlin-logging/blob/master/docs/openrewrite/README.md): Automated migration recipe (`io.github.oshai.kotlinlogging.UpgradeToKotlinLogging8`) for upgrading from `io.github.microutils` (`mu.*`) to `io.github.oshai` `8.x`.
+- [OpenRewrite Recipe YAML](https://github.com/oshai/kotlin-logging/blob/master/docs/openrewrite/rewrite.yml): Declarative OpenRewrite recipe definition.
+- [Multiplatform Support Wiki](https://github.com/oshai/kotlin-logging/wiki/Multiplatform-support): Platform-specific configuration for JVM, Android, JS, WebAssembly, Apple (`os_log`), Linux, and Windows.
+- [Changelog & Major Versions](https://github.com/oshai/kotlin-logging/blob/master/ChangeLog.md): Summary of breaking changes across versions `1.x` through `8.x`.
