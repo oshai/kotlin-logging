@@ -11,6 +11,7 @@ plugins {
     alias(libs.plugins.dokka)
     alias(libs.plugins.spotless)
     alias(libs.plugins.nexus.publish.plugin)
+    alias(libs.plugins.binary.compatibility.validator)
     `maven-publish`
     signing
 }

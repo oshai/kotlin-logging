@@ -7,6 +7,7 @@ android-gradle-plugin = "8.13.0"
 dokka = "2.3.0"
 spotless = "8.11.0"
 nexus-publish-plugin = "2.0.0"
+binary-compatibility-validator = "0.18.2"
 
 slf4j = "2.0.20"
 logback = "1.6.6"
@@ -24,6 +25,7 @@ android-library = { id = "com.android.library", version.ref = "android-gradle-pl
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 nexus-publish-plugin = { id = "io.github.gradle-nexus.publish-plugin", version.ref = "nexus-publish-plugin" }
+binary-compatibility-validator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "binary-compatibility-validator" }
 
 [libraries]
 slf4j-api = { module = "org.slf4j:slf4j-api", version.ref = "slf4j" }
