@@ -1,6 +1,7 @@
 package io.github.oshai.kotlinlogging
 
 import io.github.oshai.kotlinlogging.internal.KLoggerNameResolver
+import kotlin.js.JsName
 
 public object KotlinLogging {
   /**
@@ -14,6 +15,7 @@ public object KotlinLogging {
    * use the enclosing top-level class name. To use a distinct logger name for a nested class, pass
    * it explicitly via `KotlinLogging.logger(Outer.Inner::class.java.name)`.
    */
+  @JsName("kotlinLoggerByFunc")
   public fun logger(func: () -> Unit): KLogger = logger(KLoggerNameResolver.name(func))
 
   /**
@@ -25,6 +27,7 @@ public object KotlinLogging {
    * In most cases the name represents the package notation of the file that the logger is defined
    * in.
    */
+  @JsName("kotlinLoggerByName")
   public fun logger(name: String): KLogger = KotlinLoggingConfiguration.loggerFactory.logger(name)
 
   init {

@@ -2,10 +2,34 @@ package io.github.oshai.kotlinlogging
 
 import kotlin.test.*
 
-private val logger = KotlinLogging.logger("SimpleJsTest")
+val topLevelNamedLogger = KotlinLogging.logger("topLevelNamedLogger")
+val topLevelLambdaLogger = KotlinLogging.logger {}
+
+class MyClass {
+  val classNamedLogger = KotlinLogging.logger("MyClass")
+  val classLambdaLogger = KotlinLogging.logger {}
+  val classPropertyDelegateLogger by KotlinLogging.logger()
+
+  // check with non default "Companion" name also
+  companion object MyCompanion {
+    val companionNamedLogger = KotlinLogging.logger("MyClassCompanion")
+    val companionLambdaLogger = KotlinLogging.logger {}
+  }
+}
 
 @Suppress("DEPRECATION")
 class SimpleJsTest {
+  private val loggers =
+    listOf(
+      topLevelNamedLogger to "topLevelNamedLogger",
+      topLevelLambdaLogger to "SimpleJsTest",
+      MyClass().classNamedLogger to "MyClass",
+      MyClass().classLambdaLogger to "MyClass",
+      MyClass().classPropertyDelegateLogger to "MyClass",
+      MyClass.companionNamedLogger to "MyClassCompanion",
+      MyClass.companionLambdaLogger to "MyClass",
+    )
+
   private lateinit var appender: SimpleAppender
 
   @BeforeTest
@@ -21,38 +45,54 @@ class SimpleJsTest {
   }
 
   @Test
-  fun simpleJsTest() {
-    assertEquals("SimpleJsTest", logger.name)
-    logger.info { "info msg" }
-    assertEquals("INFO: [SimpleJsTest] info msg", appender.lastMessage)
-    assertEquals("info", appender.lastLevel)
+  fun checkLoggerName() {
+    loggers.forEach { (logger, name) -> checkLoggerName(logger, name) }
   }
 
   @Test
-  fun logThrowableTest() {
+  fun checkLoggerInfoMessage() {
+    loggers.forEach { (logger, _) -> checkLoggerInfoMessage(logger) }
+  }
+
+  @Test
+  fun checkLoggerErrorMessage() {
+    loggers.forEach { (logger, _) -> checkLoggerErrorMessage(logger) }
+  }
+
+  @Test
+  fun checkLoggerOffLevel() {
+    loggers.forEach { (logger, _) -> checkLoggerOffLevel(logger) }
+  }
+
+  // use cases
+  private fun checkLoggerName(logger: KLogger, expected: String) {
+    assertEquals(expected, logger.name)
+  }
+
+  private fun checkLoggerInfoMessage(logger: KLogger) {
+    logger.info { "info msg" }
+    assertEquals("INFO: [${logger.name}] info msg", appender.lastMessage)
+    assertEquals("info", appender.lastLevel)
+  }
+
+  private fun checkLoggerErrorMessage(logger: KLogger) {
     val errorLog = "Something Bad Happened"
     val outerMessage = "Outer Message"
     val innerMessage = "Inner Message"
     val throwable = Throwable(message = outerMessage, cause = Throwable(message = innerMessage))
     logger.error(throwable) { errorLog }
     assertEquals(
-      "ERROR: [SimpleJsTest] $errorLog, Caused by: '$outerMessage', Caused by: '$innerMessage'",
+      "ERROR: [${logger.name}] $errorLog, Caused by: '$outerMessage', Caused by: '$innerMessage'",
       appender.lastMessage,
     )
   }
 
-  @Test
-  fun offLevelJsTest() {
+  private fun checkLoggerOffLevel(logger: KLogger) {
     KotlinLoggingConfiguration.direct.logLevel = Level.OFF
     assertTrue(logger.isLoggingOff())
     logger.error { "error msg" }
     assertEquals("NA", appender.lastMessage)
     assertEquals("NA", appender.lastLevel)
-  }
-
-  @Test
-  fun loggerNameTest() {
-    assertEquals("MyClass", MyClass().logger2.name)
   }
 
   private fun createAppender(): SimpleAppender = SimpleAppender()
@@ -66,8 +106,4 @@ class SimpleJsTest {
       lastLevel = loggingEvent.level.name.toLowerCase()
     }
   }
-}
-
-class MyClass {
-  val logger2 by KotlinLogging.logger()
 }
