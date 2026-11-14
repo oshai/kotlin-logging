@@ -11,6 +11,11 @@ updates:
       # kotlinx-coroutines >= 1.11.0 is compiled with Kotlin 2.2+ (KLIB ABI 2.2.0)
       - dependency-name: "org.jetbrains.kotlinx:kotlinx-coroutines*"
         versions: [">= 1.11.0"]
+      # Gradle 9.x and AGP 9.x require Kotlin 2.2+ (Issue #546)
+      - dependency-name: "gradle-wrapper"
+        versions: [">= 9.0.0"]
+      - dependency-name: "com.android.library"
+        versions: [">= 9.0.0"]
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
