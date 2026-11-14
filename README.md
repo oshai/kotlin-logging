@@ -110,7 +110,7 @@ implementation 'io.github.oshai:kotlin-logging-jvm:8.0.7'
 </dependency>
 ```
 
-See the full example in [kotlin-logging-example-maven](https://github.com/microutils/kotlin-logging-example-maven).
+See the full example in [kotlin-logging-example-maven](https://github.com/MicroUtils/kotlin-logging-example-maven).
 
 Alternatively, download the JAR from [GitHub Releases](https://github.com/oshai/kotlin-logging/releases/latest) or [Maven Central](https://central.sonatype.com/namespace/io.github.oshai).
 
@@ -156,9 +156,8 @@ and in the [change log](https://github.com/oshai/kotlin-logging/blob/master/Chan
 ## Who is using it
 
 - https://www.jetbrains.com/youtrack/ (https://www.jetbrains.com/help/youtrack/standalone/Third-Party-Software-Used-by-YouTrack.html)
-- https://github.com/DiUS/pact-jvm
-- https://github.com/AsynkronIT/protoactor-kotlin
-- https://github.com/square/misk
+- https://github.com/pact-foundation/pact-jvm
+- https://github.com/cashapp/misk
 - https://github.com/openrndr/openrndr
 - https://github.com/JetBrains/xodus
 
@@ -192,6 +191,10 @@ It is possible to configure IntelliJ live templates. For file level logger confi
 
 ## More links
 
+- [Kotlin Logger: Idiomatic Logging with Structured Logging and MDC Support](https://proandroiddev.com/kotlin-logger-idiomatic-logging-with-structured-logging-and-mdc-support-a1fbcf49d5c5)
+- [Guide to Kotlin-Logging (Baeldung)](https://www.baeldung.com/kotlin/kotlin-logging)
+
+Older `1.x` articles (note: `5.x+` uses Maven group `io.github.oshai` and package `io.github.oshai.kotlinlogging`):
 - https://medium.com/@OhadShai/logging-in-kotlin-95a4e76388f2
 - [kotlin-logging vs AnkoLogger for Android](https://medium.com/@OhadShai/logging-in-android-ankologger-vs-kotlin-logging-bb693671442a)
 - [How kotlin-logging was published](https://medium.com/@OhadShai/no-forks-one-star-now-what-how-i-published-my-open-source-projects-8a5b5ae35d2c#.e3ygj6uf3)
@@ -199,7 +202,6 @@ It is possible to configure IntelliJ live templates. For file level logger confi
 - [DropWizard + Kotlin = Project Kronslott](https://medium.com/@davideriksson_91895/dropwizard-kotlin-project-kronslott-e2aa51b277b8)
 - [Logging in Kotlin – the right approach](https://amarszalek.net/blog/2018/05/13/logging-in-kotlin-right-approach/)
 - https://bednarek.wroclaw.pl/log4j-in-kotlin/
-- https://jaxenter.com/kotlin-logging-168814.html
 
 ## Contributing
 
