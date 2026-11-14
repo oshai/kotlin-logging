@@ -16,6 +16,11 @@ permissions:
 jobs:
   release:
     runs-on: macos-latest
+    permissions:
+      contents: read
+      id-token: write
+      attestations: write
+      artifact-metadata: write
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -34,3 +39,7 @@ jobs:
           GPG_PRIVATE_PASSWORD: ${{ secrets.GPG_PRIVATE_PASSWORD }}
           ORG_GRADLE_PROJECT_sonatypePassword: ${{ secrets.SONATYPE_PASSWORD_2 }}
           ORG_GRADLE_PROJECT_sonatypeUsername: ${{ secrets.SONATYPE_USERNAME_2 }}
+      - name: Attest build provenance
+        uses: actions/attest@v4
+        with:
+          subject-path: build/libs/*.jar
