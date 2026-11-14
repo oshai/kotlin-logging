@@ -10,6 +10,9 @@ on:
       - github-release-7.x
       - github-release-8.x
 
+permissions:
+  contents: read
+
 jobs:
   release:
     runs-on: macos-latest

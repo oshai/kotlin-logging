@@ -1,7 +1,6 @@
 ## Reporting security issues
 
-Please report security issues related to the project to the
-following email address:
+Please report security vulnerabilities privately via [GitHub Security Advisories](https://github.com/oshai/kotlin-logging/security/advisories/new) or by email to:
 
    ohadshai(at)gmail.com
 
@@ -16,7 +15,7 @@ suffix.
 
 ### 2.1.14 +
 
-To ensure the integrity and authenticity of [Software Name], follow these steps to verify its digital signature:
+To ensure the integrity and authenticity of `kotlin-logging`, follow these steps to verify its digital signature:
 
 **1. Download and Import the Public Key:**
 
@@ -47,20 +46,20 @@ gpg --fingerprint 47EB6836245D2D40E89DFB4136D4E9618F3ADAB5
 
 **3. Download the Files:**
 
-Download both the file you want to verify (e.g., `kotlin-logging-jvm-7.0.3.jar`) and its corresponding signature file (e.g., `kotlin-logging-jvm-7.0.3.jar.asc`) from [maven central](https://repo.maven.apache.org/maven2/io/github/oshai).
+Download both the file you want to verify (e.g., `kotlin-logging-jvm-8.0.7.jar`) and its corresponding signature file (e.g., `kotlin-logging-jvm-8.0.7.jar.asc`) from [maven central](https://repo.maven.apache.org/maven2/io/github/oshai).
 
 **4. Verify the Signature:**
 
 Navigate to the directory where you downloaded the files and run the following command, replacing the file names with the actual names of the downloaded files:
 
 ```bash
-gpg --verify kotlin-logging-jvm-7.0.3.jar.asc kotlin-logging-jvm-7.0.3.jar
+gpg --verify kotlin-logging-jvm-8.0.7.jar.asc kotlin-logging-jvm-8.0.7.jar
 ```
 
-You should see output similar to this if the verification is successful:
+You should see example output similar to this if the verification is successful:
 
 ```bash
-$ gpg --verify kotlin-logging-jvm-7.0.3.jar.asc kotlin-logging-jvm-7.0.3.jar
+$ gpg --verify kotlin-logging-jvm-8.0.7.jar.asc kotlin-logging-jvm-8.0.7.jar
 gpg:                using RSA key 36D4E9618F3ADAB5
 gpg: Good signature from "Ohad Shai <ohadshai@gmail.com>" [unknown]
 gpg: WARNING: This key is not certified with a trusted signature!
