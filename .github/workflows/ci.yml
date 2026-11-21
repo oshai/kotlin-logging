@@ -13,44 +13,20 @@ jobs:
       - uses: actions/checkout@v7
       - uses: gradle/actions/wrapper-validation@v6
   build:
-    name: Build on ${{ matrix.os.runner }}
-    runs-on: ${{ matrix.os.runner }}
+    name: Build on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
     defaults:
       run:
-        shell: ${{ matrix.os.shell }}
+        shell: bash
     strategy:
       fail-fast: false
       matrix:
         os:
-          - runner: macos-latest
-            shell: bash
-          - runner: windows-latest
-            shell: msys2 {0}
-          - runner: ubuntu-latest
-            shell: bash
+          - macos-latest
+          - windows-latest
+          - ubuntu-latest
     steps:
-      - uses: msys2/setup-msys2@v2
-        if: ${{ runner.os == 'Windows' }}
-        with:
-          msystem: MINGW64
-          update: true
-          path-type: inherit
-          install: >-
-            tar
-            make
-            mingw-w64-x86_64-gcc
-            mingw-w64-x86_64-cmake
-            mingw-w64-x86_64-extra-cmake-modules
-            mingw64/mingw-w64-x86_64-cyrus-sasl
       - uses: actions/checkout@v7
-
-      - name: Restore native cache
-        id: cache-native
-        uses: actions/cache@v6.1.0
-        with:
-          path: |
-            scripts/build
-          key: ${{ runner.os }}-native-${{ hashFiles('./scripts/*') }}
 
       - uses: actions/setup-java@v6
         with:
