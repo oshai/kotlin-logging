@@ -10,7 +10,7 @@ nexus-publish-plugin = "2.0.0"
 binary-compatibility-validator = "0.18.2"
 
 slf4j = "2.0.20"
-logback = "1.6.6"
+logback = "1.6.7"
 logstash-logback-encoder = "8.1"
 coroutines = "1.10.2"
 junit = "6.1.3"
